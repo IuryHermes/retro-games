@@ -6,13 +6,13 @@
     <title>NeoTerminalRoom</title>
     <link rel="icon" type="image/gif" href="assets/imagens-videos/logo-discord.gif?v=2">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
-      
+       
     <style>
         /* VARIÁVEIS DE CORES */
         :root {
             --bg-color: #f4f4f9;
             --sidebar-bg: #ffffff;
-            --accent-color: #009933;    
+            --accent-color: #009933;     
             --text-color: #1a1a1a;
             --text-muted: #555;
             --border-color: #cccccc;
@@ -22,7 +22,7 @@
             --grid-glow: rgba(0, 153, 51, 0.15);
             --grid-line: rgba(0, 153, 51, 0.1);
             --scroll-btn-bg: rgba(255,255,255,0.7);
-              
+               
             --sidebar-collapsed-width: 65px;
             --sidebar-expanded-width: 300px;
             --card-width-desktop: 260px;
@@ -45,10 +45,10 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-          
+           
         body {
             background-color: var(--bg-color);
-            background-image:    
+            background-image:     
                 radial-gradient(circle at 50% 50%, var(--grid-glow) 0%, transparent 80%),
                 linear-gradient(var(--grid-line) 1px, transparent 1px),
                 linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
@@ -70,7 +70,7 @@
         .spinner { width: 50px; height: 50px; border: 5px solid var(--border-color); border-top: 5px solid var(--accent-color); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-          
+           
         #lockscreen { position: fixed; inset: 0; z-index: 99999; background: var(--sidebar-bg); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: transform 0.8s ease-in-out; padding: 20px; text-align: center; }
         #lockscreen.unlocked { transform: translateY(-100%); }
         #lockscreen h1 { color: var(--accent-color); font-family: 'Press Start 2P'; margin-bottom: 30px; font-size: clamp(16px, 5vw, 40px); line-height: 1.5; }
@@ -86,6 +86,50 @@
         .disc-btn:hover, .disc-btn.gamepad-focus { background: #fff; box-shadow: 0 0 15px #fff; transform: scale(1.02); }
         .cancel-btn { background: #333; color: #fff; border: 1px solid #555; margin-top: 20px; }
         .cancel-btn:hover, .cancel-btn.gamepad-focus { background: #555; color: #fff; box-shadow: 0 0 15px #555; transform: scale(1.02); border-color: #fff; }
+
+        /* TELA DE ABERTURA ANIMADA (SPLASH SCREEN) */
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000000;
+            transition: opacity 0.8s ease-out, visibility 0.8s;
+        }
+        .splash-logo {
+            font-family: 'Press Start 2P', monospace;
+            font-size: clamp(20px, 4vw, 40px);
+            color: var(--accent-color);
+            display: flex;
+            align-items: flex-end;
+            white-space: nowrap;
+        }
+        .initial { font-weight: bold; }
+        .reveal {
+            display: inline-block;
+            max-width: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-width 1.5s ease-in-out, opacity 1.5s ease-in-out;
+            vertical-align: bottom;
+            font-size: clamp(16px, 3.5vw, 32px); /* Letras secundárias levemente menores */
+            margin-bottom: 2px;
+        }
+        .cursor {
+            animation: blink-cursor 1s step-end infinite;
+            margin-left: 5px;
+        }
+        @keyframes blink-cursor { 50% { opacity: 0; } }
+        .splash-logo.animate .reveal {
+            max-width: 300px; 
+            opacity: 1;
+        }
+        #splash-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
 
         /* SIDEBAR */
         .sidebar { width: var(--sidebar-collapsed-width); background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; position: fixed; height: 100%; z-index: 5000; padding: 10px 5px; transition: width 0.3s ease, background 0.4s; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
@@ -109,7 +153,7 @@
 
         /* CHAT BASE */
         .sidebar-chat { background: var(--bg-color); border: 1px solid var(--accent-color); padding: 10px; border-radius: 4px; height: 350px; min-height: 350px; display: none; flex-direction: column; width: 100%; flex-shrink: 0; margin-bottom: 20px; margin-top: auto; position: relative; }
-        .close-chat-btn { display: none; }    
+        .close-chat-btn { display: none; }     
         #terminal-output { flex: 1; overflow-y: auto; font-family: monospace; font-size: 10px; color: var(--accent-color); margin-bottom: 10px; word-wrap: break-word; overflow-x: hidden; }
         .chat-time { color: var(--text-muted); font-size: 8px; margin-right: 5px; }
         .chat-controls { display: flex; gap: 5px; width: 100%; box-sizing: border-box; }
@@ -120,20 +164,20 @@
 
         /* MAIN CONTENT */
         .main-content { margin-left: var(--sidebar-collapsed-width); padding: 0 0 50px 0; position: relative; z-index: 1; transition: margin-left 0.3s ease; }
-          
+           
         /* TOPO FIXO E BUSCA */
         .top-bar { position: sticky; top: 0; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 8000; background: var(--top-bar-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 204, 68, 0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: background 0.4s; }
         @keyframes brand-glow { 0% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } 50% { text-shadow: 0 0 2px var(--accent-color), 0 0 5px var(--accent-color); transform: scale(1.02); } 100% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } }
         .brand { font-family: 'Press Start 2P'; color: var(--accent-color); font-size: 18px; animation: brand-glow 2.5s infinite ease-in-out; }
         .top-bar-controls { display: flex; align-items: center; gap: 20px; }
-          
+           
         .search-container { background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: flex; padding: 8px 15px; width: 350px; border-radius: 4px; position: relative; }
         #global-search { background: transparent; border: none; color: var(--text-color); outline: none; width: 100%; font-family: monospace; }
         #search-results { position: absolute; top: 100%; right: -1px; width: calc(100% + 2px); background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: none; flex-direction: column; z-index: 9999; max-height: 400px; overflow-y: auto; border-radius: 0 0 4px 4px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
         .search-item { padding: 10px; border-bottom: 1px solid var(--border-color); cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; }
         .search-item:hover, .search-item.gamepad-focus { background: var(--card-bg); border-left: 3px solid var(--accent-color); outline: none; }
         .search-item img { width: 40px; height: 40px; object-fit: fill; border-radius: 3px; }
-          
+           
         .theme-container { display: flex; align-items: center; gap: 10px; }
         .theme-label { font-family: 'Press Start 2P', cursive; font-size: 8px; color: var(--text-color); transition: color 0.4s; }
         .theme-switch { position: relative; display: inline-block; width: 46px; height: 24px; flex-shrink: 0; }
@@ -184,7 +228,7 @@
         .card-media { width: 100%; height: 140px; position: relative; background: var(--card-bg); overflow: hidden; border-radius: 5px 5px 0 0; }
         .card-media img { width: 100%; height: 100%; object-fit: fill; position: absolute; top: 0; left: 0; transition: opacity 0.8s ease-in-out; }
         .static-thumb { z-index: 2; opacity: 1; }
-        .active-gif { z-index: 3; opacity: 0; display: none; }    
+        .active-gif { z-index: 3; opacity: 0; display: none; }     
         .card-title { position: absolute; top: 140px; left: 0; width: 100%; min-height: 40px; background: var(--card-bg); color: var(--text-color); display: flex; align-items: center; justify-content: center; padding: 5px; transition: background 0.3s, color 0.3s; border-radius: 0 0 5px 5px; z-index: 5; border-top: 1px solid var(--border-color); }
         .card-title span { font-family: 'Press Start 2P', cursive; font-size: 8px; line-height: 1.4; text-align: center; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .game-card:hover .card-title, .game-card.mobile-active .card-title, .game-card.gamepad-focus .card-title { background: var(--sidebar-bg); color: var(--accent-color); height: auto; border: 1px solid var(--accent-color); border-top: none; left: -1px; width: calc(100% + 2px); border-radius: 0 0 6px 6px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
@@ -195,7 +239,7 @@
         .discord-float img { width: 45px; height: 45px; border-radius: 50%; }
 
         @media (max-width: 768px) {
-            .sidebar { top: auto; bottom: 0; left: 0; width: 100% !important; height: 65px; flex-direction: row; border-right: none; border-top: 1px solid var(--accent-color); padding: 5px 0; transform: none !important; z-index: 9000; background: var(--top-bar-bg); backdrop-filter: blur(10px); box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }    
+            .sidebar { top: auto; bottom: 0; left: 0; width: 100% !important; height: 65px; flex-direction: row; border-right: none; border-top: 1px solid var(--accent-color); padding: 5px 0; transform: none !important; z-index: 9000; background: var(--top-bar-bg); backdrop-filter: blur(10px); box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }     
             .sidebar-header, #chat-collapsed-label { display: none !important; }
             .nav-list { flex-direction: row; margin-top: 0; gap: 0; overflow-x: hidden; justify-content: space-around; padding: 0 5px; width: 100%; align-items: center; }
             .nav-item { flex-direction: column; padding: 2px 0; flex: 1; gap: 4px; justify-content: center; border-radius: 4px; }
@@ -211,15 +255,15 @@
             .scroll-btn { width: 30px; font-size: 20px; opacity: 1; z-index: 10; }
             .left-btn { left: 0; } .right-btn { right: 0; }
             .catalog { padding: 0 10px; }
-            .game-carousel { gap: 8px; padding: 30px 10px; }    
-            .game-card { width: 78px; height: 110px; margin: 0; border-radius: 4px; }    
+            .game-carousel { gap: 8px; padding: 30px 10px; }     
+            .game-card { width: 78px; height: 110px; margin: 0; border-radius: 4px; }     
             .card-media { height: 75px; border-radius: 3px 3px 0 0; }
-            .card-title { min-height: 35px; top: 75px; border-radius: 0 0 3px 3px; padding: 2px; border-top:none; }    
+            .card-title { min-height: 35px; top: 75px; border-radius: 0 0 3px 3px; padding: 2px; border-top:none; }     
             .card-title span { font-size: 6px; }
             .game-card:hover { transform: none; box-shadow: none; border-color: var(--border-color); z-index: 1; }
             .game-card.mobile-active { transform: scale(1.30); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0,204,68,0.6); z-index: 100; }
             .discord-text { display: none; }
-              
+               
             .top-bar { flex-direction: column; align-items: center; padding: 15px 10px; margin: 0; text-align: center; }
             .brand { width: 100%; text-align: center; }
             .top-bar-controls { width: 95%; margin-top: 15px; justify-content: space-between; gap: 10px; }
@@ -227,7 +271,7 @@
             .row-header { justify-content: space-between; padding-right: 15px; }
             #lockscreen h1 { font-size: 20px; padding: 0 10px; }
             .view-all-btn { font-size: 8px; padding: 6px 10px; }
-              
+               
             .hero-section { height: 400px; min-height: auto; max-height: none; }
             .hero-bg-media { object-fit: cover; object-position: right center; }
             .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
@@ -237,6 +281,15 @@
     </style>
 </head>
 <body>
+    <div id="splash-screen">
+        <h1 class="splash-logo">
+            <span class="initial">N</span><span class="reveal">eo</span>
+            <span class="initial">T</span><span class="reveal">erminal</span>
+            <span class="initial">R</span><span class="reveal">oom</span>
+            <span class="cursor">_</span>
+        </h1>
+    </div>
+
     <a href="https://discord.com/invite/6sqENZGFqB" class="discord-float" target="_blank">
         <div class="discord-text">Junte-se a nós<br><strong>DISCORD</strong></div>
         <img src="assets/imagens-videos/discord.gif?v=3" alt="Discord">
@@ -258,7 +311,7 @@
             <p>Este jogo possui múltiplos discos. Qual você deseja carregar?</p>
             <div id="disc-buttons-container" style="display: flex; flex-direction: column; margin-top: 20px;">
                 </div>
-              
+               
             <div style="margin-top: 25px; font-size: 11px; color: #ccc; text-align: left; background: #222; padding: 15px; border-left: 3px solid var(--accent-color); border-radius: 4px; line-height: 1.6;">
                 <strong style="color: #fff; font-size: 12px;">⚠ COMO TROCAR DE DISCO:</strong><br><br>
                 1. Chegue no fim do CD atual e <b>salve o jogo no Memory Card</b> (não use o Save State do emulador).<br>
@@ -275,9 +328,9 @@
             <div class="sidebar-header">
                 <img src="assets/imagens-videos/logo-discord.gif?v=2" onclick="window.scrollTo(0,0);" title="Voltar ao Topo">
             </div>
-              
+               
             <div class="nav-list" id="nav-list"></div>
-              
+               
             <div class="sidebar-chat" id="chat-container">
                 <button class="close-chat-btn" onclick="closeMobileChat()">X</button>
                 <div style="font-size:10px; color:var(--accent-color); text-align:center; margin-bottom:5px;">CHAT GLOBAL</div>
@@ -293,14 +346,14 @@
         <main class="main-content">
             <header class="top-bar">
                 <div class="brand">NEOTERMINALROOM</div>
-                  
+                   
                 <div class="top-bar-controls">
                     <div class="search-container">
                         <span style="color:var(--accent-color); margin-right:10px;">#</span>
                         <input type="text" id="global-search" placeholder="buscar jogo..." autocomplete="off">
                         <div id="search-results"></div>
                     </div>
-                      
+                       
                     <div class="theme-container">
                         <span class="theme-label">TEMA</span>
                         <label class="theme-switch" title="Mudar Tema">
@@ -310,7 +363,7 @@
                     </div>
                 </div>
             </header>
-              
+               
             <section class="hero-section" id="hero-slider">
                 <div class="hero-indicators" id="hero-indicators"></div>
             </section>
@@ -320,15 +373,30 @@
     </div>
 
 <script type="module">
+    // LÓGICA DA SPLASH SCREEN (Deve rodar assim que a tela carregar)
+    document.addEventListener("DOMContentLoaded", () => {
+        const splash = document.getElementById("splash-screen");
+        const logo = document.querySelector(".splash-logo");
+        
+        // Espera meio segundo e começa a revelar as letras
+        setTimeout(() => logo.classList.add("animate"), 500);
+        
+        // Remove a tela de splash após a animação e revela o seu sistema
+        setTimeout(() => {
+            splash.classList.add("fade-out");
+            setTimeout(() => splash.remove(), 800); 
+        }, 3000);
+    });
+
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
     // ==========================================
     // INÍCIO DAS CONEXÕES R2 CLOUDFLARE
     // ==========================================
-    // SUBSTITUA A LINHA ABAIXO COM A SUA URL DE TESTE R2. 
+    // SUBSTITUA A LINHA ABAIXO COM A SUA URL DE TESTE R2.  
     // Mantenha a barra "/" no final. Exemplo: "https://pub-xxxxxx.r2.dev/"
-    const R2_URL = "https://COLOQUE-SUA-URL-AQUI.r2.dev/"; 
+    const R2_URL = "https://COLOQUE-SUA-URL-AQUI.r2.dev/";  
 
     const themeToggle = document.getElementById('theme-toggle');
     if (localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-theme'); themeToggle.checked = true; }
@@ -337,10 +405,10 @@
         else { document.body.classList.remove('dark-theme'); localStorage.setItem('theme', 'light'); }
     });
 
-    const firebaseConfig = {   
-        apiKey: "AIzaSyCx_OllbDYkua9BbMOj2oJP5V1UcbxmnbI",   
-        databaseURL: "https://neoterminalroom-default-rtdb.firebaseio.com",   
-        projectId: "neoterminalroom"   
+    const firebaseConfig = {    
+        apiKey: "AIzaSyCx_OllbDYkua9BbMOj2oJP5V1UcbxmnbI",    
+        databaseURL: "https://neoterminalroom-default-rtdb.firebaseio.com",    
+        projectId: "neoterminalroom"    
     };
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
@@ -361,26 +429,26 @@
         if (url.includes('.m3u')) {
             const baseUrl = url.split('?game=')[1].split('&')[0];
             const coreParam = url.split('&core=')[1] || 'psx';
-              
+               
             fetch(`${baseUrl}?v=${new Date().getTime()}`)
                 .then(response => response.text())
                 .then(text => {
                     const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0 && !l.startsWith('#'));
-                      
+                       
                     const discContainer = document.getElementById('disc-buttons-container');
                     discContainer.innerHTML = '';   
-                      
+                       
                     if (lines.length > 0) {
                         lines.forEach((line, index) => {
                             let discFile = line;
                             if (discFile.endsWith('.cue')) {
                                 discFile = discFile.replace('.cue', '.bin');
                             }
-                              
+                               
                             const basePath = baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1);
-                             
-                            const finalUrl = `player-universal.html?nocache=${Date.now()}&game=${basePath}${discFile}&core=${coreParam}`;
                               
+                            const finalUrl = `player-universal.html?nocache=${Date.now()}&game=${basePath}${discFile}&core=${coreParam}`;
+                               
                             const btn = document.createElement('button');
                             btn.className = 'disc-btn selectable-item';   
                             btn.innerText = `INICIAR DISCO ${index + 1}`;
@@ -390,7 +458,7 @@
                             };
                             discContainer.appendChild(btn);
                         });
-                          
+                           
                         const cancelBtn = document.createElement('button');
                         cancelBtn.className = 'disc-btn cancel-btn selectable-item';
                         cancelBtn.innerText = 'CANCELAR';
@@ -402,7 +470,7 @@
 
                         const modal = document.getElementById('m3u-modal');
                         modal.style.display = 'flex';
-                          
+                           
                         setTimeout(() => {   
                             updateGamepadFocusList();
                             const firstBtn = discContainer.querySelector('.disc-btn');
@@ -436,9 +504,9 @@
         const btn = document.getElementById(`btn-${sysId}`);
         const lBtn = document.querySelector(`#section-${sysId} .left-btn`);
         const rBtn = document.querySelector(`#section-${sysId} .right-btn`);
-          
+           
         car.classList.toggle('grid-view');
-          
+           
         if(car.classList.contains('grid-view')) {
             btn.innerHTML = "⊞ VOLTAR";
             if(lBtn) lBtn.style.display = 'none';
@@ -509,9 +577,9 @@
         const slide = document.createElement('div');
         slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
         slide.id = `hero-slide-${index}`;
-          
+           
         const coreToUse = coreMap[game.sysId] || 'snes';
-         
+          
         // ADICIONADO R2_URL AQUI
         const playUrl = `player-universal.html?nocache=${Date.now()}&game=${R2_URL}${game.path}${game.rom}&core=${coreToUse}`;
         // O Wallpaper se mantém local (puxado do GitHub Pages)
@@ -540,10 +608,10 @@
     function goToSlide(index) {
         document.querySelectorAll('.hero-slide').forEach(s => s.classList.remove('active'));
         document.querySelectorAll('.indicator').forEach(d => d.classList.remove('active'));
-          
+           
         document.getElementById(`hero-slide-${index}`).classList.add('active');
         document.querySelectorAll('.indicator')[index].classList.add('active');
-          
+           
         currentHeroIndex = index;
         resetHeroTimer();
 
@@ -575,14 +643,14 @@
 
     const catalog = document.getElementById("catalog-area");
     const nav = document.getElementById("nav-list");
-    let indexData = []; 
+    let indexData = [];  
     let fetchPromises = [];
 
     systems.forEach(sys => {
         const item = document.createElement("div");
         item.className = "nav-item";
         item.innerHTML = `<img src="${sys.icon}"><span class="nav-text">${sys.name}</span>`;
-          
+           
         item.onclick = () => {
             const section = document.getElementById(`section-${sys.id}`);
             const car = document.getElementById(`carousel-${sys.id}`);
@@ -597,7 +665,7 @@
         const wrapper = document.createElement("div");
         wrapper.className = "row-wrapper";
         wrapper.id = `section-${sys.id}`;
-          
+           
         wrapper.innerHTML = `
             <div class="row-header">
                 <span class="row-title-text">${sys.name}</span>
@@ -619,17 +687,17 @@
             const car = document.getElementById(`carousel-${sys.id}`);
             games.forEach(g => {
                 indexData.push({...g, sysPath: sys.path, sysName: sys.name, sysId: sys.id});
-                  
+                   
                 const card = document.createElement("div");
                 card.className = "game-card selectable-item";
-                  
+                   
                 const gifName = g.id.replace(/\.[^/.]+$/, "") + ".gif";
-                
+                 
                 // ADICIONADO R2_URL AQUI
                 const gifPath = `${R2_URL}${sys.path}previews/${gifName}`;
                 const imgPath = `${R2_URL}${sys.path}${g.capa}`;
                 const coreToUse = coreMap[sys.id] || 'snes';   
-                
+                 
                 // ADICIONADO R2_URL AQUI
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${R2_URL}${sys.path}${g.rom}&core=${coreToUse}`;
 
@@ -644,7 +712,7 @@
                         <span>${g.nome}</span>
                     </div>
                 `;
-                  
+                   
                 let hoverTimeout;
                 const playGifWithDelay = (cardElement) => {
                     const s = cardElement.querySelector('.static-thumb');
@@ -692,7 +760,7 @@
     searchInput.addEventListener('input', (e) => {
         const val = e.target.value.toLowerCase().replace('#', '').trim();
         searchResults.innerHTML = '';  
-          
+           
         if(!val) {   
             searchResults.style.display = 'none';   
             updateGamepadFocusList();   
@@ -700,27 +768,27 @@
         }
 
         const hits = indexData.filter(g => g.nome && g.nome.toLowerCase().includes(val));
-          
+           
         if(hits.length > 0) {
             searchResults.style.display = 'flex';
             hits.slice(0, 10).forEach(h => {
                 const div = document.createElement('div');
                 div.className = 'search-item selectable-item';   
-                
+                 
                 // ADICIONADO R2_URL AQUI
                 div.innerHTML = `
                     <img src="${R2_URL}${h.sysPath}${h.capa}">   
                     <span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>
                 `;
-                  
+                   
                 const coreToUse = coreMap[h.sysId] || 'snes';
-                
+                 
                 // ADICIONADO R2_URL AQUI
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${R2_URL}${h.sysPath}${h.rom}&core=${coreToUse}`;
-                  
+                   
                 div.dataset.url = playUrl;
                 div.onclick = () => window.startGame(playUrl);
-                  
+                   
                 searchResults.appendChild(div);
             });
             updateGamepadFocusList();   
@@ -755,7 +823,7 @@
 
     function findNextFocus(direction) {
         if (currentFocusIndex === -1 || !selectableItems[currentFocusIndex]) return 0;
-          
+           
         const curRect = selectableItems[currentFocusIndex].getBoundingClientRect();
         const curX = curRect.left + curRect.width / 2;
         const curY = curRect.top + curRect.height / 2;
@@ -794,7 +862,7 @@
 
     function focusItem(index) {
         if(selectableItems.length === 0) return;
-          
+           
         if(currentFocusIndex >= 0 && currentFocusIndex < selectableItems.length) {
             selectableItems[currentFocusIndex].classList.remove('gamepad-focus');
             if(selectableItems[currentFocusIndex].classList.contains('game-card')) selectableItems[currentFocusIndex].dispatchEvent(new Event('mouseleave'));
@@ -832,7 +900,7 @@
                     let moved = false;
                     if (dpadUp || yAxis < -0.5) { let next = findNextFocus('up'); if (next !== currentFocusIndex) { focusItem(next); moved = true; } }
                     else if (dpadDown || yAxis > 0.5) { let next = findNextFocus('down'); if (next !== currentFocusIndex) { focusItem(next); moved = true; } }
-                      
+                       
                     if(moved) {
                         axisCooldown = true;
                         setTimeout(() => { axisCooldown = false; }, 200);   
