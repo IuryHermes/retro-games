@@ -1,0 +1,7 @@
+# Ignorar arquivos pesados de todas as pastas de sistemas
+systems/*/roms/
+systems/*/capas/
+systems/*/previews/
+
+# Ignorar o macOS lixo se houver
+.DS_Store

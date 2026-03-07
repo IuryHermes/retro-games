@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@emulatorjs/core-pcsx_rearmed": "^4.2.3"
+  }
+}

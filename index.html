@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NeoTerminalRoom</title>
+    <link rel="icon" type="image/gif" href="assets/imagens-videos/logo-discord.gif?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+      
+    <style>
+        /* VARIÁVEIS DE CORES */
+        :root {
+            --bg-color: #f4f4f9;
+            --sidebar-bg: #ffffff;
+            --accent-color: #009933;    
+            --text-color: #1a1a1a;
+            --text-muted: #555;
+            --border-color: #cccccc;
+            --card-bg: #e6e6e6;
+            --input-bg: #f0f0f0;
+            --top-bar-bg: rgba(255, 255, 255, 0.85);
+            --grid-glow: rgba(0, 153, 51, 0.15);
+            --grid-line: rgba(0, 153, 51, 0.1);
+            --scroll-btn-bg: rgba(255,255,255,0.7);
+              
+            --sidebar-collapsed-width: 65px;
+            --sidebar-expanded-width: 300px;
+            --card-width-desktop: 260px;
+            --card-height-desktop: 180px;
+        }
+
+        body.dark-theme {
+            --bg-color: #0a0a0c;
+            --sidebar-bg: #000000;
+            --accent-color: #00cc44;
+            --text-color: #e0e0e0;
+            --text-muted: #aaa;
+            --border-color: #333;
+            --card-bg: #111;
+            --input-bg: #222;
+            --top-bar-bg: rgba(10, 10, 12, 0.85);
+            --grid-glow: rgba(0, 204, 68, 0.08);
+            --grid-line: rgba(0, 204, 68, 0.05);
+            --scroll-btn-bg: rgba(0,0,0,0.7);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+          
+        body {
+            background-color: var(--bg-color);
+            background-image:    
+                radial-gradient(circle at 50% 50%, var(--grid-glow) 0%, transparent 80%),
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 100vw 100vh, 30px 30px, 30px 30px;
+            background-position: center center, center center, center center;
+            background-attachment: fixed;
+            color: var(--text-color);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.4s, color 0.4s;
+        }
+
+        /* MODAIS E TELAS SOBREPOSTAS */
+        #loader-overlay { position: fixed; inset: 0; background: var(--sidebar-bg); z-index: 100000; display: none; flex-direction: column; justify-content: center; align-items: center; }
+        .loader-text { color: var(--accent-color); font-family: 'Press Start 2P'; margin-top: 20px; animation: blink 1s infinite; text-align: center; line-height: 1.5; padding: 0 10px; }
+        .spinner { width: 50px; height: 50px; border: 5px solid var(--border-color); border-top: 5px solid var(--accent-color); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+          
+        #lockscreen { position: fixed; inset: 0; z-index: 99999; background: var(--sidebar-bg); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: transform 0.8s ease-in-out; padding: 20px; text-align: center; }
+        #lockscreen.unlocked { transform: translateY(-100%); }
+        #lockscreen h1 { color: var(--accent-color); font-family: 'Press Start 2P'; margin-bottom: 30px; font-size: clamp(16px, 5vw, 40px); line-height: 1.5; }
+        #enter-btn { padding: 15px 20px; background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); cursor: pointer; font-size: 14px; max-width: 90%; font-family: 'Press Start 2P', monospace; transition: 0.3s; }
+        #enter-btn:hover { background: var(--accent-color); color: var(--sidebar-bg); }
+
+        /* NOVO MODAL: SELETOR DE DISCOS */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100000; justify-content: center; align-items: center; backdrop-filter: blur(5px); padding: 20px; }
+        .modal-content { background: #111; border: 2px solid var(--accent-color); padding: 30px; border-radius: 8px; width: 100%; max-width: 500px; color: #e0e0e0; font-family: monospace; box-shadow: 0 0 30px rgba(0,204,68,0.5); text-align: center; }
+        .modal-content h2 { color: var(--accent-color); margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 10px; font-family: 'Press Start 2P', monospace; font-size: 14px; line-height: 1.5;}
+        .modal-content p { line-height: 1.6; font-size: 13px; margin-top: 15px; color: #ccc;}
+        .disc-btn { background: var(--accent-color); color: #000; border: none; padding: 12px 20px; font-weight: bold; font-size: 14px; cursor: pointer; font-family: 'Press Start 2P', monospace; border-radius: 3px; width: 100%; transition: 0.3s; outline: none; margin-top: 10px; }
+        .disc-btn:hover, .disc-btn.gamepad-focus { background: #fff; box-shadow: 0 0 15px #fff; transform: scale(1.02); }
+        .cancel-btn { background: #333; color: #fff; border: 1px solid #555; margin-top: 20px; }
+        .cancel-btn:hover, .cancel-btn.gamepad-focus { background: #555; color: #fff; box-shadow: 0 0 15px #555; transform: scale(1.02); border-color: #fff; }
+
+        /* SIDEBAR */
+        .sidebar { width: var(--sidebar-collapsed-width); background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; position: fixed; height: 100%; z-index: 5000; padding: 10px 5px; transition: width 0.3s ease, background 0.4s; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
+        .sidebar::-webkit-scrollbar { display: none; }
+        @media(min-width: 769px) {
+            .sidebar:hover { width: var(--sidebar-expanded-width); box-shadow: 10px 0 50px rgba(0,0,0,0.5); }
+            .sidebar:hover .nav-text { display: inline-block; opacity: 1; transition: 0.3s; }
+            .sidebar:hover .menu-label { opacity: 0; }
+            .sidebar:hover .sidebar-chat { display: flex; }
+        }
+        .sidebar-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; flex-shrink: 0; }
+        .sidebar-header img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-color); cursor: pointer; }
+        .menu-label { font-family: 'Press Start 2P'; font-size: 8px; color: var(--text-color); margin-top: 8px; text-align: center; display: block; transition: 0.2s; cursor: pointer; }
+        .nav-list { display: flex; flex-direction: column; gap: 10px; flex: 1; margin-top: 10px; }
+        .nav-item { display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-muted); justify-content: center; flex-shrink: 0; transition: 0.3s; }
+        @media(min-width: 769px) { .nav-item { justify-content: flex-start; } }
+        .nav-item:hover { background: rgba(0, 204, 68, 0.2); color: var(--text-color); }
+        .nav-item img { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; image-rendering: pixelated; }
+        .nav-text { display: none; opacity: 0; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
+        .mobile-chat-btn { display: none !important; }
+
+        /* CHAT BASE */
+        .sidebar-chat { background: var(--bg-color); border: 1px solid var(--accent-color); padding: 10px; border-radius: 4px; height: 350px; min-height: 350px; display: none; flex-direction: column; width: 100%; flex-shrink: 0; margin-bottom: 20px; margin-top: auto; position: relative; }
+        .close-chat-btn { display: none; }    
+        #terminal-output { flex: 1; overflow-y: auto; font-family: monospace; font-size: 10px; color: var(--accent-color); margin-bottom: 10px; word-wrap: break-word; overflow-x: hidden; }
+        .chat-time { color: var(--text-muted); font-size: 8px; margin-right: 5px; }
+        .chat-controls { display: flex; gap: 5px; width: 100%; box-sizing: border-box; }
+        #chat-nick { width: 70px; min-width: 0; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 5px; font-size: 10px; border-radius: 3px; outline: none; }
+        #chat-msg { flex: 1; min-width: 0; background: var(--sidebar-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 5px; font-size: 11px; border-radius: 3px; outline: none; }
+        #chat-msg:disabled { background: var(--card-bg); cursor: not-allowed; opacity: 0.5; }
+        #send-btn { width: 30px; flex-shrink: 0; background: var(--accent-color); border: none; cursor: pointer; color: #fff; font-weight: bold; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+
+        /* MAIN CONTENT */
+        .main-content { margin-left: var(--sidebar-collapsed-width); padding: 0 0 50px 0; position: relative; z-index: 1; transition: margin-left 0.3s ease; }
+          
+        /* TOPO FIXO E BUSCA */
+        .top-bar { position: sticky; top: 0; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 8000; background: var(--top-bar-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 204, 68, 0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: background 0.4s; }
+        @keyframes brand-glow { 0% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } 50% { text-shadow: 0 0 2px var(--accent-color), 0 0 5px var(--accent-color); transform: scale(1.02); } 100% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } }
+        .brand { font-family: 'Press Start 2P'; color: var(--accent-color); font-size: 18px; animation: brand-glow 2.5s infinite ease-in-out; }
+        .top-bar-controls { display: flex; align-items: center; gap: 20px; }
+          
+        .search-container { background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: flex; padding: 8px 15px; width: 350px; border-radius: 4px; position: relative; }
+        #global-search { background: transparent; border: none; color: var(--text-color); outline: none; width: 100%; font-family: monospace; }
+        #search-results { position: absolute; top: 100%; right: -1px; width: calc(100% + 2px); background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: none; flex-direction: column; z-index: 9999; max-height: 400px; overflow-y: auto; border-radius: 0 0 4px 4px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .search-item { padding: 10px; border-bottom: 1px solid var(--border-color); cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; }
+        .search-item:hover, .search-item.gamepad-focus { background: var(--card-bg); border-left: 3px solid var(--accent-color); outline: none; }
+        .search-item img { width: 40px; height: 40px; object-fit: fill; border-radius: 3px; }
+          
+        .theme-container { display: flex; align-items: center; gap: 10px; }
+        .theme-label { font-family: 'Press Start 2P', cursive; font-size: 8px; color: var(--text-color); transition: color 0.4s; }
+        .theme-switch { position: relative; display: inline-block; width: 46px; height: 24px; flex-shrink: 0; }
+        .theme-switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--input-bg); transition: .4s; border-radius: 34px; border: 1px solid var(--accent-color); }
+        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: var(--accent-color); transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #222; }
+        input:checked + .slider:before { transform: translateX(22px); }
+
+        /* HERO BANNER */
+        .hero-section { position: relative; width: 100%; height: 800px; background: #000; overflow: hidden; display: flex; align-items: center; }
+        .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; display: flex; align-items: center; z-index: 1; }
+        .hero-slide.active { opacity: 1; z-index: 2; }
+        .hero-bg-blur { position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; object-fit: cover; filter: blur(25px) brightness(0.5); z-index: 1; pointer-events: none; }
+        .hero-bg-media { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: fill; z-index: 2; pointer-events: none; }
+        .hero-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 60%, transparent 100%), linear-gradient(to top, var(--bg-color) 0%, transparent 40%); z-index: 3; transition: background 0.4s; pointer-events: none; }
+        .hero-content { position: relative; z-index: 4; padding: 0 50px; max-width: 800px; display: flex; flex-direction: column; gap: 15px; pointer-events: auto; }
+        .hero-title { font-family: 'Press Start 2P', cursive; font-size: clamp(20px, 4vw, 45px); color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); line-height: 1.2; margin-bottom: 10px; }
+        .hero-categories { font-size: 14px; color: #ccc; font-weight: bold; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); letter-spacing: 1px; }
+        .hero-categories span { color: var(--accent-color); margin: 0 5px; }
+        .hero-play-btn { display: inline-flex; align-items: center; justify-content: center; background: #fff; color: #000; font-family: 'Roboto', sans-serif; font-weight: bold; font-size: 18px; padding: 12px 30px; border-radius: 4px; border: none; cursor: pointer; width: fit-content; margin-top: 10px; transition: 0.3s; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); position: relative; pointer-events: auto; }
+        .hero-play-btn:hover { background: var(--accent-color); color: #fff; transform: scale(1.05); }
+        .hero-play-btn.gamepad-focus { background: var(--accent-color); color: #fff; outline: 3px solid #fff; box-shadow: 0 0 20px var(--accent-color); transform: scale(1.05); }
+        .hero-indicators { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; pointer-events: auto; }
+        .indicator { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
+        .indicator.active { background: var(--accent-color); transform: scale(1.3); }
+
+        /* CARROSSEL E CARDS */
+        .catalog { padding: 0 40px; }
+        .row-wrapper { margin-top: 30px; margin-bottom: 25px; position: relative; z-index: 5; }
+        .row-header { display: flex; align-items: center; justify-content: flex-start; gap: 20px; margin-bottom: 10px; border-left: 3px solid var(--accent-color); padding-left: 10px; }
+        .row-title-text { font-family: 'Press Start 2P'; font-size: 12px; color: var(--text-color); }
+        .view-all-btn { background: rgba(0, 204, 68, 0.1); border: 1px solid var(--accent-color); color: var(--accent-color); font-family: 'Press Start 2P', cursive; font-size: 8px; padding: 6px 12px; cursor: pointer; border-radius: 2px; transition: 0.3s; text-transform: uppercase; box-shadow: 0 0 5px rgba(0, 204, 68, 0.3); }
+        .view-all-btn:hover, .view-all-btn.gamepad-focus { background: var(--accent-color); color: #fff; box-shadow: 0 0 15px var(--accent-color); outline: 2px solid #fff; transform: scale(1.05); }
+        .row-container { position: relative; display: flex; align-items: center; }
+        .game-carousel { display: flex; gap: 10px; overflow-x: auto; scroll-behavior: smooth; padding: 40px 10px; margin-top: -20px; margin-bottom: -20px; width: 100%; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .game-carousel::-webkit-scrollbar { display: none; }
+        .game-carousel.grid-view { flex-wrap: wrap; overflow-x: visible; justify-content: center; padding: 20px 0; margin: 0; }
+        .game-carousel.grid-view .game-card { margin-bottom: 20px; }
+        .scroll-btn { position: absolute; top: 0; bottom: 0; width: 50px; background: var(--scroll-btn-bg); border: none; color: var(--accent-color); font-size: 30px; cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
+        .row-container:hover .scroll-btn { opacity: 1; }
+        .left-btn { left: 0; } .right-btn { right: 0; }
+        .scroll-btn:hover { background: var(--accent-color); color: #fff; }
+
+        .game-card { width: var(--card-width-desktop); height: var(--card-height-desktop); background: transparent; border: 1px solid var(--border-color); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s; cursor: pointer; border-radius: 6px; flex-shrink: 0; display: flex; flex-direction: column; position: relative; }
+        .game-card:hover, .game-card.mobile-active, .game-card.gamepad-focus { transform: scale(1.3); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0, 204, 68, 0.4); z-index: 100; }
+        .game-card.gamepad-focus { outline: 3px solid var(--accent-color); outline-offset: 2px; }
+        .card-media { width: 100%; height: 140px; position: relative; background: var(--card-bg); overflow: hidden; border-radius: 5px 5px 0 0; }
+        .card-media img { width: 100%; height: 100%; object-fit: fill; position: absolute; top: 0; left: 0; transition: opacity 0.8s ease-in-out; }
+        .static-thumb { z-index: 2; opacity: 1; }
+        .active-gif { z-index: 3; opacity: 0; display: none; }    
+        .card-title { position: absolute; top: 140px; left: 0; width: 100%; min-height: 40px; background: var(--card-bg); color: var(--text-color); display: flex; align-items: center; justify-content: center; padding: 5px; transition: background 0.3s, color 0.3s; border-radius: 0 0 5px 5px; z-index: 5; border-top: 1px solid var(--border-color); }
+        .card-title span { font-family: 'Press Start 2P', cursive; font-size: 8px; line-height: 1.4; text-align: center; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .game-card:hover .card-title, .game-card.mobile-active .card-title, .game-card.gamepad-focus .card-title { background: var(--sidebar-bg); color: var(--accent-color); height: auto; border: 1px solid var(--accent-color); border-top: none; left: -1px; width: calc(100% + 2px); border-radius: 0 0 6px 6px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .game-card:hover .card-title span, .game-card.mobile-active .card-title span, .game-card.gamepad-focus .card-title span { display: block; overflow: visible; }
+
+        .discord-float { position: fixed; bottom: 20px; right: 20px; display: flex; align-items: center; gap: 12px; background: rgba(0,0,0,0.8); padding: 8px 16px; border-radius: 50px; border: 1px solid #5865f2; text-decoration: none; z-index: 9999; backdrop-filter: blur(5px); transition: bottom 0.3s ease; }
+        .discord-text { font-family: monospace; color: #fff; font-size: 12px; text-align: right; }
+        .discord-float img { width: 45px; height: 45px; border-radius: 50%; }
+
+        @media (max-width: 768px) {
+            .sidebar { top: auto; bottom: 0; left: 0; width: 100% !important; height: 65px; flex-direction: row; border-right: none; border-top: 1px solid var(--accent-color); padding: 5px 0; transform: none !important; z-index: 9000; background: var(--top-bar-bg); backdrop-filter: blur(10px); box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }    
+            .sidebar-header, #chat-collapsed-label { display: none !important; }
+            .nav-list { flex-direction: row; margin-top: 0; gap: 0; overflow-x: hidden; justify-content: space-around; padding: 0 5px; width: 100%; align-items: center; }
+            .nav-item { flex-direction: column; padding: 2px 0; flex: 1; gap: 4px; justify-content: center; border-radius: 4px; }
+            .nav-item img { width: 22px; height: 22px; margin: 0; border-radius: 0 !important; }
+            .nav-text { display: block !important; opacity: 1 !important; font-size: 6px !important; text-align: center; white-space: normal !important; line-height: 1.1; word-break: break-word; }
+            .mobile-chat-btn { display: flex !important; }
+            .sidebar-chat.chat-modal-mobile { display: flex !important; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 75%; max-height: 500px; background: var(--top-bar-bg); border: 2px solid var(--accent-color); z-index: 100000 !important; box-shadow: 0 0 40px rgba(0, 204, 68, 0.4); margin: 0; border-radius: 8px; padding-top: 35px; backdrop-filter: blur(10px); }
+            .close-chat-btn { display: block; position: absolute; top: 8px; right: 10px; background: transparent; color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 14px; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-weight: bold; }
+            #chat-nick, #chat-msg { font-size: 16px; padding: 8px; }
+            #send-btn { font-size: 16px; }
+            .main-content { margin-left: 0 !important; padding: 0 0 80px 0 !important; }
+            .discord-float { bottom: 80px; right: 15px; }
+            .scroll-btn { width: 30px; font-size: 20px; opacity: 1; z-index: 10; }
+            .left-btn { left: 0; } .right-btn { right: 0; }
+            .catalog { padding: 0 10px; }
+            .game-carousel { gap: 8px; padding: 30px 10px; }    
+            .game-card { width: 78px; height: 110px; margin: 0; border-radius: 4px; }    
+            .card-media { height: 75px; border-radius: 3px 3px 0 0; }
+            .card-title { min-height: 35px; top: 75px; border-radius: 0 0 3px 3px; padding: 2px; border-top:none; }    
+            .card-title span { font-size: 6px; }
+            .game-card:hover { transform: none; box-shadow: none; border-color: var(--border-color); z-index: 1; }
+            .game-card.mobile-active { transform: scale(1.30); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0,204,68,0.6); z-index: 100; }
+            .discord-text { display: none; }
+              
+            .top-bar { flex-direction: column; align-items: center; padding: 15px 10px; margin: 0; text-align: center; }
+            .brand { width: 100%; text-align: center; }
+            .top-bar-controls { width: 95%; margin-top: 15px; justify-content: space-between; gap: 10px; }
+            .search-container { flex: 1; width: auto; }
+            .row-header { justify-content: space-between; padding-right: 15px; }
+            #lockscreen h1 { font-size: 20px; padding: 0 10px; }
+            .view-all-btn { font-size: 8px; padding: 6px 10px; }
+              
+            .hero-section { height: 400px; min-height: auto; max-height: none; }
+            .hero-bg-media { object-fit: cover; object-position: right center; }
+            .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
+            .hero-content { padding: 0 20px; margin-top: auto; margin-bottom: 40px; }
+            .hero-title { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="https://discord.com/invite/6sqENZGFqB" class="discord-float" target="_blank">
+        <div class="discord-text">Junte-se a nós<br><strong>DISCORD</strong></div>
+        <img src="assets/imagens-videos/discord.gif?v=3" alt="Discord">
+    </a>
+
+    <div id="loader-overlay">
+        <div class="spinner"></div>
+        <div class="loader-text">INICIALIZANDO SISTEMA...</div>
+    </div>
+
+    <div id="lockscreen">
+        <h1>NEOTERMINALROOM</h1>
+        <button id="enter-btn">ACESSAR SISTEMA</button>
+    </div>
+
+    <div id="m3u-modal" class="modal">
+        <div class="modal-content">
+            <h2>💿 SELECIONE O DISCO</h2>
+            <p>Este jogo possui múltiplos discos. Qual você deseja carregar?</p>
+            <div id="disc-buttons-container" style="display: flex; flex-direction: column; margin-top: 20px;">
+                </div>
+              
+            <div style="margin-top: 25px; font-size: 11px; color: #ccc; text-align: left; background: #222; padding: 15px; border-left: 3px solid var(--accent-color); border-radius: 4px; line-height: 1.6;">
+                <strong style="color: #fff; font-size: 12px;">⚠ COMO TROCAR DE DISCO:</strong><br><br>
+                1. Chegue no fim do CD atual e <b>salve o jogo no Memory Card</b> (não use o Save State do emulador).<br>
+                2. Na barra inferior do emulador, clique em <b>Exportar Save</b> para baixar o arquivo para o seu aparelho.<br>
+                3. Volte ao site e inicie o <b>Próximo Disco</b>.<br>
+                4. Na barra inferior, clique em <b>Importar Save</b> e envie o arquivo que você baixou.<br>
+                5. Vá em "Load Game" no menu do jogo e continue sua jornada!
+            </div>
+        </div>
+    </div>
+
+    <div class="app-container" id="app-container">
+        <nav class="sidebar" id="main-sidebar">
+            <div class="sidebar-header">
+                <img src="assets/imagens-videos/logo-discord.gif?v=2" onclick="window.scrollTo(0,0);" title="Voltar ao Topo">
+            </div>
+              
+            <div class="nav-list" id="nav-list"></div>
+              
+            <div class="sidebar-chat" id="chat-container">
+                <button class="close-chat-btn" onclick="closeMobileChat()">X</button>
+                <div style="font-size:10px; color:var(--accent-color); text-align:center; margin-bottom:5px;">CHAT GLOBAL</div>
+                <div id="terminal-output"></div>
+                <div class="chat-controls">
+                    <input id="chat-nick" placeholder="Nick" maxlength="10">
+                    <input id="chat-msg" placeholder="Mensagem..." disabled>
+                    <button id="send-btn">➤</button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="brand">NEOTERMINALROOM</div>
+                  
+                <div class="top-bar-controls">
+                    <div class="search-container">
+                        <span style="color:var(--accent-color); margin-right:10px;">#</span>
+                        <input type="text" id="global-search" placeholder="buscar jogo..." autocomplete="off">
+                        <div id="search-results"></div>
+                    </div>
+                      
+                    <div class="theme-container">
+                        <span class="theme-label">TEMA</span>
+                        <label class="theme-switch" title="Mudar Tema">
+                            <input type="checkbox" id="theme-toggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </header>
+              
+            <section class="hero-section" id="hero-slider">
+                <div class="hero-indicators" id="hero-indicators"></div>
+            </section>
+
+            <section class="catalog" id="catalog-area"></section>
+        </main>
+    </div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+    // ==========================================
+    // INÍCIO DAS CONEXÕES R2 CLOUDFLARE
+    // ==========================================
+    // SUBSTITUA A LINHA ABAIXO COM A SUA URL DE TESTE R2. 
+    // Mantenha a barra "/" no final. Exemplo: "https://pub-xxxxxx.r2.dev/"
+    const R2_URL = "https://COLOQUE-SUA-URL-AQUI.r2.dev/"; 
+
+    const themeToggle = document.getElementById('theme-toggle');
+    if (localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-theme'); themeToggle.checked = true; }
+    themeToggle.addEventListener('change', () => {
+        if (themeToggle.checked) { document.body.classList.add('dark-theme'); localStorage.setItem('theme', 'dark'); }   
+        else { document.body.classList.remove('dark-theme'); localStorage.setItem('theme', 'light'); }
+    });
+
+    const firebaseConfig = {   
+        apiKey: "AIzaSyCx_OllbDYkua9BbMOj2oJP5V1UcbxmnbI",   
+        databaseURL: "https://neoterminalroom-default-rtdb.firebaseio.com",   
+        projectId: "neoterminalroom"   
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const chatRef = ref(db, 'mensagens');
+
+    if (sessionStorage.getItem("visited") === "true") { document.getElementById("lockscreen").style.display = "none"; document.body.style.overflow = "auto"; }
+
+    document.getElementById("enter-btn").onclick = () => {
+        document.getElementById("lockscreen").classList.add("unlocked");
+        document.body.style.overflow = "auto";
+        sessionStorage.setItem("visited", "true");
+    };
+
+    // ==========================================
+    // LÓGICA DE INÍCIO DE JOGO E M3U
+    // ==========================================
+    window.startGame = (url) => {
+        if (url.includes('.m3u')) {
+            const baseUrl = url.split('?game=')[1].split('&')[0];
+            const coreParam = url.split('&core=')[1] || 'psx';
+              
+            fetch(`${baseUrl}?v=${new Date().getTime()}`)
+                .then(response => response.text())
+                .then(text => {
+                    const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0 && !l.startsWith('#'));
+                      
+                    const discContainer = document.getElementById('disc-buttons-container');
+                    discContainer.innerHTML = '';   
+                      
+                    if (lines.length > 0) {
+                        lines.forEach((line, index) => {
+                            let discFile = line;
+                            if (discFile.endsWith('.cue')) {
+                                discFile = discFile.replace('.cue', '.bin');
+                            }
+                              
+                            const basePath = baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1);
+                             
+                            const finalUrl = `player-universal.html?nocache=${Date.now()}&game=${basePath}${discFile}&core=${coreParam}`;
+                              
+                            const btn = document.createElement('button');
+                            btn.className = 'disc-btn selectable-item';   
+                            btn.innerText = `INICIAR DISCO ${index + 1}`;
+                            btn.onclick = () => {
+                                document.getElementById('m3u-modal').style.display = 'none';
+                                triggerLoad(finalUrl);
+                            };
+                            discContainer.appendChild(btn);
+                        });
+                          
+                        const cancelBtn = document.createElement('button');
+                        cancelBtn.className = 'disc-btn cancel-btn selectable-item';
+                        cancelBtn.innerText = 'CANCELAR';
+                        cancelBtn.onclick = () => {
+                            document.getElementById('m3u-modal').style.display = 'none';
+                            updateGamepadFocusList();   
+                        };
+                        discContainer.appendChild(cancelBtn);
+
+                        const modal = document.getElementById('m3u-modal');
+                        modal.style.display = 'flex';
+                          
+                        setTimeout(() => {   
+                            updateGamepadFocusList();
+                            const firstBtn = discContainer.querySelector('.disc-btn');
+                            if(firstBtn) {
+                                currentFocusIndex = selectableItems.indexOf(firstBtn);
+                                focusItem(currentFocusIndex);
+                            }
+                        }, 100);
+
+                    } else {
+                        triggerLoad(url);   
+                    }
+                })
+                .catch(err => {
+                    console.error("Erro ao ler M3U", err);
+                    triggerLoad(url);
+                });
+        } else {
+            triggerLoad(url);
+        }
+    };
+
+    function triggerLoad(url) {
+        const loader = document.getElementById('loader-overlay');
+        loader.style.display = 'flex';
+        setTimeout(() => { window.location.href = url; }, 1500);
+    }
+
+    window.toggleGrid = (sysId) => {
+        const car = document.getElementById(`carousel-${sysId}`);
+        const btn = document.getElementById(`btn-${sysId}`);
+        const lBtn = document.querySelector(`#section-${sysId} .left-btn`);
+        const rBtn = document.querySelector(`#section-${sysId} .right-btn`);
+          
+        car.classList.toggle('grid-view');
+          
+        if(car.classList.contains('grid-view')) {
+            btn.innerHTML = "⊞ VOLTAR";
+            if(lBtn) lBtn.style.display = 'none';
+            if(rBtn) rBtn.style.display = 'none';
+        } else {
+            btn.innerHTML = "⊞ VER TODOS";
+            if(lBtn) lBtn.style.display = 'flex';
+            if(rBtn) rBtn.style.display = 'flex';
+        }
+    };
+
+    window.closeMobileChat = () => {
+        const chat = document.getElementById('chat-container');
+        chat.classList.remove('chat-modal-mobile');
+        document.getElementById('main-sidebar').appendChild(chat);
+    };
+
+    const out = document.getElementById("terminal-output");
+    const nickInput = document.getElementById("chat-nick");
+    const msgInput = document.getElementById("chat-msg");
+    const sendBtn = document.getElementById("send-btn");
+
+    if(localStorage.getItem("neo_nick")) { nickInput.value = localStorage.getItem("neo_nick"); msgInput.disabled = false; }
+    nickInput.oninput = () => { msgInput.disabled = (nickInput.value.trim().length === 0); };
+
+    onChildAdded(chatRef, (snap) => {
+        const d = snap.val();
+        const timeDisplay = d.time ? `<span class="chat-time">[${d.time}]</span>` : '';
+        out.innerHTML += `<div>${timeDisplay}<strong style="color:var(--text-color)">${d.user}:</strong> ${d.text}</div>`;
+        out.scrollTop = out.scrollHeight;
+    });
+
+    function sendMessage() {
+        const user = nickInput.value.trim();
+        const text = msgInput.value.trim();
+        if(!user) { alert("Digite um Nick primeiro!"); return; }
+        if(!text) return;
+        const now = new Date();
+        const timeStr = now.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: '2-digit' }) + ' ' + now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+        localStorage.setItem("neo_nick", user);
+        push(chatRef, {user, text, time: timeStr});
+        msgInput.value = "";
+    }
+    sendBtn.onclick = sendMessage;
+    msgInput.onkeydown = (e) => { if(e.key === "Enter") sendMessage(); }
+
+    const coreMap = { 'nes': 'nes', 'snes': 'snes', 'gba': 'gba', 'n64': 'n64', 'megadrive': 'segaMD', 'ps1': 'psx' };
+
+    const top10Games = [
+        { id: 'super_mario_world', nome: 'Super Mario World', sysId: 'snes', path: 'systems/snes/', rom: 'roms/Super Mario World (USA).zip', cats: 'Aventura <span>•</span> Plataforma <span>•</span> SNES' },
+        { id: 'sonic-the-hedgehog', nome: 'Sonic the Hedgehog', sysId: 'megadrive', path: 'systems/megadrive/', rom: 'roms/Sonic The Hedgehog (USA, Europe).md', cats: 'Ação <span>•</span> Velocidade <span>•</span> Mega Drive' },
+        { id: 'street_fighter_ii', nome: 'Street Fighter II', sysId: 'snes', path: 'systems/snes/', rom: 'roms/Street Fighter II (USA).zip', cats: 'Luta <span>•</span> Arcade <span>•</span> SNES' },
+        { id: 'international_super_star_soccer_deluxe_-_futebol_brasileiro_2008', nome: 'Futebol Brasileiro (ISSD)', sysId: 'snes', path: 'systems/snes/', rom: 'roms/International Super Star Soccer Deluxe - Futebol Brasileiro 2008.zip', cats: 'Esporte <span>•</span> Futebol <span>•</span> SNES' },
+        { id: 'pokemon-fire-red', nome: 'Pokémon FireRed', sysId: 'gba', path: 'systems/gba/', rom: 'roms/pokemon-fire-red.gba', cats: 'RPG <span>•</span> Captura <span>•</span> GBA' },
+        { id: 'top_gear', nome: 'Top Gear', sysId: 'snes', path: 'systems/snes/', rom: 'roms/Top Gear (USA).zip', cats: 'Corrida <span>•</span> Clássico <span>•</span> SNES' },
+        { id: 'donkey_kong_country', nome: 'Donkey Kong Country', sysId: 'snes', path: 'systems/snes/', rom: 'roms/Donkey Kong Country (USA).zip', cats: 'Plataforma <span>•</span> Macacos <span>•</span> SNES' },
+        { id: 'legend_of_zelda,_the_-_a_link_to_the_past', nome: 'Zelda: A Link to the Past', sysId: 'snes', path: 'systems/snes/', rom: 'roms/Legend of Zelda, The - A Link to the Past (USA).zip', cats: 'RPG <span>•</span> Aventura <span>•</span> SNES' },
+        { id: 'streets-of-rage-2', nome: 'Streets of Rage 2', sysId: 'megadrive', path: 'systems/megadrive/', rom: 'roms/Streets of Rage 2 (USA).md', cats: 'Beat \'em up <span>•</span> Luta <span>•</span> Mega Drive' },
+        { id: 'mega_man_x', nome: 'Mega Man X', sysId: 'snes', path: 'systems/snes/', rom: 'roms/Mega Man X (USA).zip', cats: 'Ação <span>•</span> Tiro <span>•</span> SNES' }
+    ];
+
+    const heroSlider = document.getElementById('hero-slider');
+    const heroIndicators = document.getElementById('hero-indicators');
+    let currentHeroIndex = 0;
+    let heroTimer;
+
+    top10Games.forEach((game, index) => {
+        const slide = document.createElement('div');
+        slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
+        slide.id = `hero-slide-${index}`;
+          
+        const coreToUse = coreMap[game.sysId] || 'snes';
+         
+        // ADICIONADO R2_URL AQUI
+        const playUrl = `player-universal.html?nocache=${Date.now()}&game=${R2_URL}${game.path}${game.rom}&core=${coreToUse}`;
+        // O Wallpaper se mantém local (puxado do GitHub Pages)
+        const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
+
+        slide.innerHTML = `
+            <img src="${wallpaperPath}" class="hero-bg-blur" alt="Background Preenchimento">
+            <img src="${wallpaperPath}" class="hero-bg-media" alt="Wallpaper HD">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">${game.nome}</h1>
+                <div class="hero-categories">${game.cats}</div>
+                <button class="hero-play-btn selectable-item" data-url="${playUrl}" onclick="window.startGame('${playUrl}')">
+                    <span>▶</span> JOGAR
+                </button>
+            </div>
+        `;
+        heroSlider.appendChild(slide);
+
+        const dot = document.createElement('div');
+        dot.className = `indicator ${index === 0 ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(index);
+        heroIndicators.appendChild(dot);
+    });
+
+    function goToSlide(index) {
+        document.querySelectorAll('.hero-slide').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.indicator').forEach(d => d.classList.remove('active'));
+          
+        document.getElementById(`hero-slide-${index}`).classList.add('active');
+        document.querySelectorAll('.indicator')[index].classList.add('active');
+          
+        currentHeroIndex = index;
+        resetHeroTimer();
+
+        const wasHeroFocused = selectableItems[currentFocusIndex] && selectableItems[currentFocusIndex].classList.contains('hero-play-btn');
+        updateGamepadFocusList();
+        if (wasHeroFocused) {
+            const newIndex = selectableItems.findIndex(el => el.classList.contains('hero-play-btn') && el.closest('.hero-slide.active'));
+            if (newIndex !== -1) { currentFocusIndex = newIndex; selectableItems[currentFocusIndex].classList.add('gamepad-focus'); }
+        }
+    }
+
+    function nextSlide() { goToSlide((currentHeroIndex + 1) % top10Games.length); }
+    function prevSlide() { goToSlide((currentHeroIndex - 1 + top10Games.length) % top10Games.length); }
+
+    function resetHeroTimer() {
+        clearInterval(heroTimer);
+        heroTimer = setInterval(nextSlide, 5000);   
+    }
+    resetHeroTimer();
+
+    const systems = [
+        { id: 'nes', name: 'NINTENDINHO', icon: 'assets/imagens-videos/imagens do menu/nitendinho.png', path:'systems/nes/'},
+        { id: 'snes', name: 'SUPER NINTENDO', icon: 'assets/imagens-videos/imagens do menu/supernitendo.png', path:'systems/snes/'},
+        { id: 'n64', name: 'NINTENDO 64', icon: 'assets/imagens-videos/imagens do menu/n64.png', path: 'systems/n64/' },
+        { id: 'gba', name: 'GAME BOY ADV', icon: 'assets/imagens-videos/imagens do menu/gba.png', path: 'systems/gba/' },
+        { id: 'megadrive', name: 'MEGA DRIVE', icon: 'assets/imagens-videos/imagens do menu/megadrive.png', path: 'systems/megadrive/' },
+        { id: 'ps1', name: 'PLAYSTATION 1', icon: 'assets/imagens-videos/imagens do menu/ps1.png', path: 'systems/ps1/' }
+    ];
+
+    const catalog = document.getElementById("catalog-area");
+    const nav = document.getElementById("nav-list");
+    let indexData = []; 
+    let fetchPromises = [];
+
+    systems.forEach(sys => {
+        const item = document.createElement("div");
+        item.className = "nav-item";
+        item.innerHTML = `<img src="${sys.icon}"><span class="nav-text">${sys.name}</span>`;
+          
+        item.onclick = () => {
+            const section = document.getElementById(`section-${sys.id}`);
+            const car = document.getElementById(`carousel-${sys.id}`);
+            if(section) {
+                if (!car.classList.contains('grid-view')) toggleGrid(sys.id);
+                const y = section.getBoundingClientRect().top + window.scrollY - 100;
+                window.scrollTo({top: y, behavior: 'smooth'});
+            }
+        };
+        nav.appendChild(item);
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "row-wrapper";
+        wrapper.id = `section-${sys.id}`;
+          
+        wrapper.innerHTML = `
+            <div class="row-header">
+                <span class="row-title-text">${sys.name}</span>
+                <button class="view-all-btn selectable-item" id="btn-${sys.id}" onclick="toggleGrid('${sys.id}')">⊞ VER TODOS</button>
+            </div>
+            <div class="row-container">
+                <button class="scroll-btn left-btn" onclick="document.getElementById('carousel-${sys.id}').scrollBy(-300,0)">❮</button>
+                <div class="game-carousel" id="carousel-${sys.id}"></div>
+                <button class="scroll-btn right-btn" onclick="document.getElementById('carousel-${sys.id}').scrollBy(300,0)">❯</button>
+            </div>
+        `;
+        catalog.appendChild(wrapper);
+
+        // O FETCH CONTINUA PUXANDO O JSON LOCAL (que vai pro Github)
+        let p = fetch(`${sys.path}games.json?v=${new Date().getTime()}`).then(r => {
+            if(!r.ok) throw new Error("JSON não encontrado");
+            return r.json();
+        }).then(games => {
+            const car = document.getElementById(`carousel-${sys.id}`);
+            games.forEach(g => {
+                indexData.push({...g, sysPath: sys.path, sysName: sys.name, sysId: sys.id});
+                  
+                const card = document.createElement("div");
+                card.className = "game-card selectable-item";
+                  
+                const gifName = g.id.replace(/\.[^/.]+$/, "") + ".gif";
+                
+                // ADICIONADO R2_URL AQUI
+                const gifPath = `${R2_URL}${sys.path}previews/${gifName}`;
+                const imgPath = `${R2_URL}${sys.path}${g.capa}`;
+                const coreToUse = coreMap[sys.id] || 'snes';   
+                
+                // ADICIONADO R2_URL AQUI
+                const playUrl = `player-universal.html?nocache=${Date.now()}&game=${R2_URL}${sys.path}${g.rom}&core=${coreToUse}`;
+
+                card.dataset.url = playUrl;
+
+                card.innerHTML = `
+                    <div class="card-media">
+                        <img src="${imgPath}" class="static-thumb" loading="lazy">
+                        <img src="" class="active-gif">
+                    </div>
+                    <div class="card-title">
+                        <span>${g.nome}</span>
+                    </div>
+                `;
+                  
+                let hoverTimeout;
+                const playGifWithDelay = (cardElement) => {
+                    const s = cardElement.querySelector('.static-thumb');
+                    const a = cardElement.querySelector('.active-gif');
+                    clearTimeout(hoverTimeout);   
+                    const showCoverAndWait = () => { s.style.opacity = '1'; a.style.opacity = '0'; setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 800); hoverTimeout = setTimeout(showGifAndWait, 3000); };
+                    const showGifAndWait = () => { a.src = gifPath; a.style.display = 'block'; setTimeout(() => { s.style.opacity = '0'; a.style.opacity = '1'; }, 50); hoverTimeout = setTimeout(showCoverAndWait, 4000); };
+                    hoverTimeout = setTimeout(() => { const tester = new Image(); tester.src = gifPath; tester.onload = showGifAndWait; }, 1000);   
+                };
+                const resetGif = (cardElement) => {
+                    clearTimeout(hoverTimeout);   
+                    const s = cardElement.querySelector('.static-thumb');
+                    const a = cardElement.querySelector('.active-gif');
+                    s.style.opacity = '1'; a.style.opacity = '0';
+                    setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 800);
+                };
+
+                if (window.innerWidth <= 768) {
+                    card.onclick = (e) => {
+                        if (card.classList.contains('mobile-active')) { window.startGame(playUrl); return; }
+                        document.querySelectorAll('.game-card').forEach(c => { c.classList.remove('mobile-active'); resetGif(c); });
+                        card.classList.add('mobile-active');
+                        playGifWithDelay(card);
+                    };
+                } else {
+                    card.onmouseenter = () => playGifWithDelay(card);
+                    card.onmouseleave = () => resetGif(card);
+                    card.onclick = () => window.startGame(playUrl);
+                }
+                car.appendChild(card);
+            });
+        }).catch(err => {
+            wrapper.style.display = "none";
+            item.style.display = "none";   
+        });
+        fetchPromises.push(p);
+    });
+
+    // =========================================================================
+    // LÓGICA DA BARRA DE BUSCA COM R2
+    // =========================================================================
+    const searchInput = document.getElementById('global-search');
+    const searchResults = document.getElementById('search-results');
+
+    searchInput.addEventListener('input', (e) => {
+        const val = e.target.value.toLowerCase().replace('#', '').trim();
+        searchResults.innerHTML = '';  
+          
+        if(!val) {   
+            searchResults.style.display = 'none';   
+            updateGamepadFocusList();   
+            return;   
+        }
+
+        const hits = indexData.filter(g => g.nome && g.nome.toLowerCase().includes(val));
+          
+        if(hits.length > 0) {
+            searchResults.style.display = 'flex';
+            hits.slice(0, 10).forEach(h => {
+                const div = document.createElement('div');
+                div.className = 'search-item selectable-item';   
+                
+                // ADICIONADO R2_URL AQUI
+                div.innerHTML = `
+                    <img src="${R2_URL}${h.sysPath}${h.capa}">   
+                    <span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>
+                `;
+                  
+                const coreToUse = coreMap[h.sysId] || 'snes';
+                
+                // ADICIONADO R2_URL AQUI
+                const playUrl = `player-universal.html?nocache=${Date.now()}&game=${R2_URL}${h.sysPath}${h.rom}&core=${coreToUse}`;
+                  
+                div.dataset.url = playUrl;
+                div.onclick = () => window.startGame(playUrl);
+                  
+                searchResults.appendChild(div);
+            });
+            updateGamepadFocusList();   
+        } else {
+            searchResults.style.display = 'none';
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.search-container')) {
+            searchResults.style.display = 'none';
+        }
+    });
+
+    // =========================================================================
+    // NAVEGAÇÃO ESPACIAL POR GAMEPAD  
+    // =========================================================================
+    let selectableItems = [];
+    let currentFocusIndex = -1;
+    let gamepadConnected = false;
+    let axisCooldown = false;
+
+    function updateGamepadFocusList() {
+        selectableItems = Array.from(document.querySelectorAll('.selectable-item')).filter(el => {
+            if (el.classList.contains('hero-play-btn')) return el.closest('.hero-slide').classList.contains('active');
+            const rect = el.getBoundingClientRect();
+            return rect.width > 0 && window.getComputedStyle(el).display !== 'none';
+        });
+    }
+
+    Promise.all(fetchPromises).then(() => { updateGamepadFocusList(); });
+
+    function findNextFocus(direction) {
+        if (currentFocusIndex === -1 || !selectableItems[currentFocusIndex]) return 0;
+          
+        const curRect = selectableItems[currentFocusIndex].getBoundingClientRect();
+        const curX = curRect.left + curRect.width / 2;
+        const curY = curRect.top + curRect.height / 2;
+
+        let bestIdx = currentFocusIndex;
+        let minDistance = Infinity;
+
+        for (let i = 0; i < selectableItems.length; i++) {
+            if (i === currentFocusIndex) continue;
+            const rect = selectableItems[i].getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+
+            let dx = x - curX;
+            let dy = y - curY;
+            let isCandidate = false;
+
+            if (direction === 'left' && dx < -10 && Math.abs(dy) < curRect.height * 1.5) isCandidate = true;
+            if (direction === 'right' && dx > 10 && Math.abs(dy) < curRect.height * 1.5) isCandidate = true;
+            if (direction === 'up' && dy < -10) isCandidate = true;
+            if (direction === 'down' && dy > 10) isCandidate = true;
+
+            if (isCandidate) {
+                let dist = (direction === 'left' || direction === 'right')   
+                    ? Math.abs(dx) + Math.abs(dy) * 10   
+                    : Math.abs(dy) + Math.abs(dx) * 0.1;
+
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    bestIdx = i;
+                }
+            }
+        }
+        return bestIdx;
+    }
+
+    function focusItem(index) {
+        if(selectableItems.length === 0) return;
+          
+        if(currentFocusIndex >= 0 && currentFocusIndex < selectableItems.length) {
+            selectableItems[currentFocusIndex].classList.remove('gamepad-focus');
+            if(selectableItems[currentFocusIndex].classList.contains('game-card')) selectableItems[currentFocusIndex].dispatchEvent(new Event('mouseleave'));
+        }
+
+        currentFocusIndex = index;
+        const target = selectableItems[currentFocusIndex];
+        target.classList.add('gamepad-focus');
+        target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+
+        if(target.classList.contains('game-card')) target.dispatchEvent(new Event('mouseenter'));
+    }
+
+    window.addEventListener("gamepadconnected", (e) => {
+        gamepadConnected = true;
+        updateGamepadFocusList();
+        if(currentFocusIndex === -1 && selectableItems.length > 0) focusItem(0);
+        pollGamepad();
+    });
+    window.addEventListener("gamepaddisconnected", () => { gamepadConnected = false; });
+
+    function pollGamepad() {
+        if (!gamepadConnected) return;
+        const gp = navigator.getGamepads()[0];
+
+        if (gp) {
+            const dpadUp = gp.buttons[12]?.pressed; const dpadDown = gp.buttons[13]?.pressed;
+            const dpadLeft = gp.buttons[14]?.pressed; const dpadRight = gp.buttons[15]?.pressed;
+            const xAxis = gp.axes[0]; const yAxis = gp.axes[1];
+            const confirmBtn = gp.buttons[0]?.pressed;  
+
+            const m3uModal = document.getElementById('m3u-modal');
+            if (m3uModal.style.display === 'flex') {
+                if(!axisCooldown) {
+                    let moved = false;
+                    if (dpadUp || yAxis < -0.5) { let next = findNextFocus('up'); if (next !== currentFocusIndex) { focusItem(next); moved = true; } }
+                    else if (dpadDown || yAxis > 0.5) { let next = findNextFocus('down'); if (next !== currentFocusIndex) { focusItem(next); moved = true; } }
+                      
+                    if(moved) {
+                        axisCooldown = true;
+                        setTimeout(() => { axisCooldown = false; }, 200);   
+                    }
+                }
+
+                if (confirmBtn && !window.confirmBtnPressed) {
+                    window.confirmBtnPressed = true;
+                    if(currentFocusIndex >= 0 && selectableItems[currentFocusIndex]) {
+                        selectableItems[currentFocusIndex].click();
+                    }
+                } else if (!confirmBtn) {
+                    window.confirmBtnPressed = false;
+                }
+                requestAnimationFrame(pollGamepad);
+                return;   
+            }
+
+            if(!axisCooldown) {
+                let moved = false;
+                let currentEl = selectableItems[currentFocusIndex];
+
+                if (dpadLeft || xAxis < -0.5) {
+                    if (currentEl && currentEl.classList.contains('hero-play-btn')) { prevSlide(); moved = true; }   
+                    else { let next = findNextFocus('left'); if (next !== currentFocusIndex) { focusItem(next); moved = true; } }
+                }
+                else if (dpadRight || xAxis > 0.5) {
+                    if (currentEl && currentEl.classList.contains('hero-play-btn')) { nextSlide(); moved = true; }   
+                    else { let next = findNextFocus('right'); if (next !== currentFocusIndex) { focusItem(next); moved = true; } }
+                }
+                else if (dpadUp || yAxis < -0.5) {
+                    let next = findNextFocus('up'); if (next !== currentFocusIndex) { focusItem(next); moved = true; }
+                }
+                else if (dpadDown || yAxis > 0.5) {
+                    let next = findNextFocus('down'); if (next !== currentFocusIndex) { focusItem(next); moved = true; }
+                }
+
+                if(moved) {
+                    axisCooldown = true;
+                    setTimeout(() => { axisCooldown = false; }, 200);   
+                }
+            }
+
+            if (confirmBtn && !window.confirmBtnPressed) {
+                window.confirmBtnPressed = true;   
+                if(currentFocusIndex >= 0 && selectableItems[currentFocusIndex]) {
+                    const target = selectableItems[currentFocusIndex];
+                    if(target.dataset.url) window.startGame(target.dataset.url);
+                    else target.click();   
+                }
+            } else if (!confirmBtn) {
+                window.confirmBtnPressed = false;
+            }
+        }
+        requestAnimationFrame(pollGamepad);
+    }
+</script>
+</body>
+</html>
