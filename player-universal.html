@@ -435,7 +435,7 @@ ve e continue.
 
            } else {
 
-               window.EJS_gameUrl = baseUrl + game.trim();   
+               if (game.startsWith("http")) { window.EJS_gameUrl = game.trim(); } else { window.EJS_gameUrl = baseUrl + game.trim(); }   
 
            }
 
