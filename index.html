@@ -427,7 +427,9 @@
     // ==========================================
     window.startGame = (url) => {
         if (url.includes('.m3u')) {
-            const baseUrl = url.split('?game=')[1].split('&')[0];
+            // Decodifica a URL para que o fetch consiga encontrar o arquivo M3U
+            const rawGameParam = url.split('?game=')[1].split('&')[0];
+            const baseUrl = decodeURIComponent(rawGameParam);
             const coreParam = url.split('&core=')[1] || 'psx';
                 
             fetch(`${baseUrl}?v=${new Date().getTime()}`)
@@ -446,8 +448,9 @@
                             }
                                 
                             const basePath = baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1);
-                              
-                            const finalUrl = `player-universal.html?nocache=${Date.now()}&game=${basePath}${discFile}&core=${coreParam}`;
+                            
+                            // Aplica encodeURIComponent no caminho do disco
+                            const finalUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(basePath + discFile)}&core=${coreParam}`;
                                 
                             const btn = document.createElement('button');
                             btn.className = 'disc-btn selectable-item';   
@@ -579,8 +582,9 @@
         slide.id = `hero-slide-${index}`;
             
         const coreToUse = coreMap[game.sysId] || 'snes';
-          
-        const playUrl = `player-universal.html?nocache=${Date.now()}&game=${R2_URL}${game.path}${game.rom}&core=${coreToUse}`;
+        
+        // Aplica encodeURIComponent na URL
+        const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + game.path + game.rom)}&core=${coreToUse}`;
         const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
 
         slide.innerHTML = `
@@ -692,7 +696,8 @@
                 const imgPath = g.capa;
                 const coreToUse = coreMap[sys.id] || 'snes';   
                  
-                const playUrl = `player-universal.html?nocache=${Date.now()}&game=${g.rom}&core=${coreToUse}`;
+                // Aplica encodeURIComponent na URL
+                const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(g.rom)}&core=${coreToUse}`;
 
                 card.dataset.url = playUrl;
 
@@ -775,7 +780,8 @@
                     
                 const coreToUse = coreMap[h.sysId] || 'snes';
                  
-                const playUrl = `player-universal.html?nocache=${Date.now()}&game=${h.rom}&core=${coreToUse}`;
+                // Aplica encodeURIComponent na URL da busca
+                const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(h.rom)}&core=${coreToUse}`;
                     
                 div.dataset.url = playUrl;
                 div.onclick = () => window.startGame(playUrl);
