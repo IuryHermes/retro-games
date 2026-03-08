@@ -74,9 +74,10 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
             
-        /* NOVO MODAL: SELETOR DE DISCOS */
+        /* NOVO MODAL: SELETOR DE DISCOS (COM BARRA DE ROLAGEM) */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100000; justify-content: center; align-items: center; backdrop-filter: blur(5px); padding: 20px; }
-        .modal-content { background: #111; border: 2px solid var(--accent-color); padding: 30px; border-radius: 8px; width: 100%; max-width: 500px; color: #e0e0e0; font-family: monospace; box-shadow: 0 0 30px rgba(0,204,68,0.5); text-align: center; }
+        .modal-content { background: #111; border: 2px solid var(--accent-color); padding: 25px; border-radius: 8px; width: 100%; max-width: 500px; color: #e0e0e0; font-family: monospace; box-shadow: 0 0 30px rgba(0,204,68,0.5); text-align: center; max-height: 90dvh; overflow-y: auto; scrollbar-width: none; }
+        .modal-content::-webkit-scrollbar { display: none; }
         .modal-content h2 { color: var(--accent-color); margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 10px; font-family: 'Press Start 2P', monospace; font-size: 14px; line-height: 1.5;}
         .modal-content p { line-height: 1.6; font-size: 13px; margin-top: 15px; color: #ccc;}
         .disc-btn { background: var(--accent-color); color: #000; border: none; padding: 12px 20px; font-weight: bold; font-size: 14px; cursor: pointer; font-family: 'Press Start 2P', monospace; border-radius: 3px; width: 100%; transition: 0.3s; outline: none; margin-top: 10px; }
@@ -111,7 +112,7 @@
             overflow: hidden;
             transition: max-width 1.5s ease-in-out, opacity 1.5s ease-in-out;
             vertical-align: bottom;
-            font-size: clamp(16px, 3.5vw, 32px); /* Letras secundárias levemente menores */
+            font-size: clamp(16px, 3.5vw, 32px);
             margin-bottom: 2px;
         }
         .cursor {
@@ -298,18 +299,31 @@
 
     <div id="m3u-modal" class="modal">
         <div class="modal-content">
-            <h2>💿 SELECIONE O DISCO</h2>
+            <h2>
+                <img src="assets/imagens-videos/menu/interrogacao.png" alt="?" style="width: 22px; vertical-align: middle; margin-right: 8px; image-rendering: pixelated;" onerror="this.style.display='none'">
+                SELECIONE O DISCO
+            </h2>
             <p>Este jogo possui múltiplos discos. Qual você deseja carregar?</p>
-            <div id="disc-buttons-container" style="display: flex; flex-direction: column; margin-top: 20px;">
+            <div id="disc-buttons-container" style="display: flex; flex-direction: column; margin-top: 15px; gap: 8px;">
+                </div>
+            
+            <div style="margin-top: 20px; font-size: 11px; text-align: left; background: rgba(0, 255, 68, 0.05); padding: 15px; border-radius: 8px; border: 1px solid #004411; color: #eee; line-height: 1.5;">
+                <strong style="color: var(--accent-color); font-size: 12px; display: block; text-align: center; margin-bottom: 15px;">⚠ COMO TROCAR DE DISCO</strong>
+                
+                <div style="background: rgba(0,0,0,0.5); padding: 10px; border-radius: 6px; margin-bottom: 15px;">
+                    <div style="margin-bottom: 8px;"><strong>💻 No Computador:</strong> Arraste o mouse para a parte de baixo da tela.</div>
+                    <div><strong>📱 No Celular:</strong> Toque no ícone <img src="assets/imagens-videos/menu/icone_menu.png" style="height: 16px; vertical-align: middle; margin: 0 4px; image-rendering: pixelated;" alt="Menu" onerror="this.alt='[MENU]'; this.style.display='none';"> para abrir o painel.</div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px; background: #111; padding: 10px; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+                    <img src="assets/imagens-videos/menu/disquete.png" style="width: 24px; image-rendering: pixelated;" onerror="this.style.display='none'">
+                    <div>Chegue no fim do CD e <b>salve no Memory Card</b> (não use Save State). Clique em <b>Exportar Save</b>.</div>
                 </div>
                 
-            <div style="margin-top: 25px; font-size: 11px; color: #ccc; text-align: left; background: #222; padding: 15px; border-left: 3px solid var(--accent-color); border-radius: 4px; line-height: 1.6;">
-                <strong style="color: #fff; font-size: 12px;">⚠ COMO TROCAR DE DISCO:</strong><br><br>
-                1. Chegue no fim do CD atual e <b>salve o jogo no Memory Card</b> (não use o Save State do emulador).<br>
-                2. Na barra inferior do emulador, clique em <b>Exportar Save</b> para baixar o arquivo para o seu aparelho.<br>
-                3. Volte ao site e inicie o <b>Próximo Disco</b>.<br>
-                4. Na barra inferior, clique em <b>Importar Save</b> e envie o arquivo que você baixou.<br>
-                5. Vá em "Load Game" no menu do jogo e continue sua jornada!
+                <div style="display: flex; align-items: center; gap: 10px; background: #111; padding: 10px; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+                    <img src="assets/imagens-videos/menu/pasta.png" style="width: 24px; image-rendering: pixelated;" onerror="this.style.display='none'">
+                    <div>Volte aqui, inicie o <b>Próximo Disco</b> e clique em <b>Importar Save</b>. Depois é só dar Load Game!</div>
+                </div>
             </div>
         </div>
     </div>
