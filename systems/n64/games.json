@@ -2,161 +2,161 @@
     {
         "id": "007_goldeneye.z64",
         "nome": "007 Goldeneye",
-        "rom": "roms/007_goldeneye.z64",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/007_goldeneye.z64",
         "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/007_goldeneye.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/007_goldeneye.z64.gif"
     },
     {
         "id": "automobili_lamborghini.z64",
         "nome": "Automobili Lamborghini",
-        "rom": "roms/automobili_lamborghini.z64",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/automobili_lamborghini.png",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/automobili_lamborghini.z64",
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/automobili_lamborghini.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/automobili_lamborghini.z64.gif"
     },
     {
         "id": "banjo-kazooie.n64",
         "nome": "Banjo-Kazooie",
-        "rom": "roms/banjo-kazooie.n64",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/banjo-kazooie.png",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/banjo-kazooie.n64",
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/banjo-kazooie.n64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/banjo-kazooie.n64.gif"
     },
     {
         "id": "cruisn_exotica.z64",
         "nome": "Cruisn Exotica",
-        "rom": "roms/cruisn_exotica.z64",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/cruisn_exotica.z64",
         "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/cruisn_exotica.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/cruisn_exotica.z64.gif"
     },
     {
         "id": "diddy_kong_racing.z64",
         "nome": "Diddy Kong Racing",
-        "rom": "roms/diddy_kong_racing.z64",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/diddy_kong_racing.png",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/diddy_kong_racing.z64",
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/diddy_kong_racing.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/diddy_kong_racing.z64.gif"
     },
     {
         "id": "donald_duck_goin_quackers.z64",
         "nome": "Donald Duck Goin Quackers",
-        "rom": "roms/donald_duck_goin_quackers.z64",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/donald_duck_goin_quackers.z64",
         "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/donald_duck_goin_quackers.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/donald_duck_goin_quackers.z64.gif"
     },
     {
         "id": "doom_64.z64",
         "nome": "Doom 64",
-        "rom": "roms/doom_64.z64",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/doom_64.png",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/doom_64.z64",
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/doom_64.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/doom_64.z64.gif"
     },
     {
         "id": "fifa_99.n64",
         "nome": "Fifa 99",
-        "rom": "roms/fifa_99.n64",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/fifa_99.jpg",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/fifa_99.n64",
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/fifa_99.n64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/fifa_99.n64.gif"
     },
     {
         "id": "gex_3_deep_cover_gecko.z64",
         "nome": "Gex 3 Deep Cover Gecko",
-        "rom": "roms/gex_3_deep_cover_gecko.z64",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/gex_3_deep_cover_gecko.z64",
         "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/gex_3_deep_cover_gecko.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/gex_3_deep_cover_gecko.z64.gif"
     },
     {
         "id": "jet_force_gemini.z64",
         "nome": "Jet Force Gemini",
-        "rom": "roms/jet_force_gemini.z64",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/jet_force_gemini.png",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/jet_force_gemini.z64",
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/jet_force_gemini.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/jet_force_gemini.z64.gif"
     },
     {
         "id": "mario_kart_64.v64",
         "nome": "Mario Kart 64",
-        "rom": "roms/mario_kart_64.v64",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/mario_kart_64.v64",
         "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/mario_kart_64.v64.png",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/mario_kart_64.v64.gif"
     },
     {
         "id": "paper_mario.z64",
         "nome": "Paper Mario",
-        "rom": "roms/paper_mario.z64",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/paper_mario.png",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/paper_mario.z64",
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/paper_mario.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/paper_mario.z64.gif"
     },
     {
         "id": "perfect_dark.z64",
         "nome": "Perfect Dark",
-        "rom": "roms/perfect_dark.z64",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/perfect_dark.png",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/perfect_dark.z64",
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/perfect_dark.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/perfect_dark.z64.gif"
     },
     {
         "id": "pokemon_stadium.z64",
         "nome": "Pokemon Stadium",
-        "rom": "roms/pokemon_stadium.z64",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/pokemon_stadium.png",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/pokemon_stadium.z64",
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/pokemon_stadium.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/pokemon_stadium.z64.gif"
     },
     {
         "id": "shadow_man.v64",
         "nome": "Shadow Man",
-        "rom": "roms/shadow_man.v64",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/shadow_man.v64",
         "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/shadow_man.v64.png",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/shadow_man.v64.gif"
     },
     {
         "id": "south_park.z64",
         "nome": "South Park",
-        "rom": "roms/south_park.z64",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/south_park.png",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/south_park.z64",
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/south_park.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/south_park.z64.gif"
     },
     {
         "id": "space_station_silicon_valley.n64",
         "nome": "Space Station Silicon Valley",
-        "rom": "roms/space_station_silicon_valley.n64",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/space_station_silicon_valley.jpg",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/space_station_silicon_valley.n64",
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/space_station_silicon_valley.n64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/space_station_silicon_valley.n64.gif"
     },
     {
         "id": "star_fox_64.z64",
         "nome": "Star Fox 64",
-        "rom": "roms/star_fox_64.z64",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/star_fox_64.png",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/star_fox_64.z64",
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/star_fox_64.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/star_fox_64.z64.gif"
     },
     {
         "id": "super_mario_64.z64",
         "nome": "Super Mario 64",
-        "rom": "roms/super_mario_64.z64",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/super_mario_64.png",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/super_mario_64.z64",
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/super_mario_64.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/super_mario_64.z64.gif"
     },
     {
         "id": "the_legend_of_zelda_-_majoras_mask.z64",
         "nome": "The Legend Of Zelda - Majoras Mask",
-        "rom": "roms/the_legend_of_zelda_-_majoras_mask.z64",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/the_legend_of_zelda_-_majoras_mask.z64",
         "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/the_legend_of_zelda_-_majoras_mask.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/the_legend_of_zelda_-_majoras_mask.z64.gif"
     },
     {
         "id": "the_legend_of_zelda_-_ocarina_of_time.z64",
         "nome": "The Legend Of Zelda - Ocarina Of Time",
-        "rom": "roms/the_legend_of_zelda_-_ocarina_of_time.z64",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/the_legend_of_zelda_-_ocarina_of_time.z64",
         "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/the_legend_of_zelda_-_ocarina_of_time.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/the_legend_of_zelda_-_ocarina_of_time.z64.gif"
     },
     {
         "id": "turok_2_-_seeds_of_evil.z64",
         "nome": "Turok 2 - Seeds Of Evil",
-        "rom": "roms/turok_2_-_seeds_of_evil.z64",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/turok_2_-_seeds_of_evil.z64",
         "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/turok_2_-_seeds_of_evil.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/turok_2_-_seeds_of_evil.z64.gif"
     },
     {
         "id": "turok_3_-_shadow_of_oblivion.z64",
         "nome": "Turok 3 - Shadow Of Oblivion",
-        "rom": "roms/turok_3_-_shadow_of_oblivion.z64",
+        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/roms/turok_3_-_shadow_of_oblivion.z64",
         "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/turok_3_-_shadow_of_oblivion.z64.jpg",
         "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/previews/turok_3_-_shadow_of_oblivion.z64.gif"
     }
