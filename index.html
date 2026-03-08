@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>NeoTerminalRoom</title>
     <link rel="icon" type="image/gif" href="assets/imagens-videos/logo-discord.gif?v=2">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
-       
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Press+Start+2P&display=block" rel="stylesheet">
+        
     <style>
         /* VARIÁVEIS DE CORES */
         :root {
@@ -22,7 +25,7 @@
             --grid-glow: rgba(0, 153, 51, 0.15);
             --grid-line: rgba(0, 153, 51, 0.1);
             --scroll-btn-bg: rgba(255,255,255,0.7);
-               
+                
             --sidebar-collapsed-width: 65px;
             --sidebar-expanded-width: 300px;
             --card-width-desktop: 260px;
@@ -45,7 +48,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-           
+            
         body {
             background-color: var(--bg-color);
             background-image:     
@@ -70,13 +73,7 @@
         .spinner { width: 50px; height: 50px; border: 5px solid var(--border-color); border-top: 5px solid var(--accent-color); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-           
-        #lockscreen { position: fixed; inset: 0; z-index: 99999; background: var(--sidebar-bg); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: transform 0.8s ease-in-out; padding: 20px; text-align: center; }
-        #lockscreen.unlocked { transform: translateY(-100%); }
-        #lockscreen h1 { color: var(--accent-color); font-family: 'Press Start 2P'; margin-bottom: 30px; font-size: clamp(16px, 5vw, 40px); line-height: 1.5; }
-        #enter-btn { padding: 15px 20px; background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); cursor: pointer; font-size: 14px; max-width: 90%; font-family: 'Press Start 2P', monospace; transition: 0.3s; }
-        #enter-btn:hover { background: var(--accent-color); color: var(--sidebar-bg); }
-
+            
         /* NOVO MODAL: SELETOR DE DISCOS */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100000; justify-content: center; align-items: center; backdrop-filter: blur(5px); padding: 20px; }
         .modal-content { background: #111; border: 2px solid var(--accent-color); padding: 30px; border-radius: 8px; width: 100%; max-width: 500px; color: #e0e0e0; font-family: monospace; box-shadow: 0 0 30px rgba(0,204,68,0.5); text-align: center; }
@@ -164,20 +161,20 @@
 
         /* MAIN CONTENT */
         .main-content { margin-left: var(--sidebar-collapsed-width); padding: 0 0 50px 0; position: relative; z-index: 1; transition: margin-left 0.3s ease; }
-           
+            
         /* TOPO FIXO E BUSCA */
         .top-bar { position: sticky; top: 0; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 8000; background: var(--top-bar-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 204, 68, 0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: background 0.4s; }
         @keyframes brand-glow { 0% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } 50% { text-shadow: 0 0 2px var(--accent-color), 0 0 5px var(--accent-color); transform: scale(1.02); } 100% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } }
         .brand { font-family: 'Press Start 2P'; color: var(--accent-color); font-size: 18px; animation: brand-glow 2.5s infinite ease-in-out; }
         .top-bar-controls { display: flex; align-items: center; gap: 20px; }
-           
+            
         .search-container { background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: flex; padding: 8px 15px; width: 350px; border-radius: 4px; position: relative; }
         #global-search { background: transparent; border: none; color: var(--text-color); outline: none; width: 100%; font-family: monospace; }
         #search-results { position: absolute; top: 100%; right: -1px; width: calc(100% + 2px); background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: none; flex-direction: column; z-index: 9999; max-height: 400px; overflow-y: auto; border-radius: 0 0 4px 4px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
         .search-item { padding: 10px; border-bottom: 1px solid var(--border-color); cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; }
         .search-item:hover, .search-item.gamepad-focus { background: var(--card-bg); border-left: 3px solid var(--accent-color); outline: none; }
         .search-item img { width: 40px; height: 40px; object-fit: fill; border-radius: 3px; }
-           
+            
         .theme-container { display: flex; align-items: center; gap: 10px; }
         .theme-label { font-family: 'Press Start 2P', cursive; font-size: 8px; color: var(--text-color); transition: color 0.4s; }
         .theme-switch { position: relative; display: inline-block; width: 46px; height: 24px; flex-shrink: 0; }
@@ -263,15 +260,14 @@
             .game-card:hover { transform: none; box-shadow: none; border-color: var(--border-color); z-index: 1; }
             .game-card.mobile-active { transform: scale(1.30); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0,204,68,0.6); z-index: 100; }
             .discord-text { display: none; }
-               
+                
             .top-bar { flex-direction: column; align-items: center; padding: 15px 10px; margin: 0; text-align: center; }
             .brand { width: 100%; text-align: center; }
             .top-bar-controls { width: 95%; margin-top: 15px; justify-content: space-between; gap: 10px; }
             .search-container { flex: 1; width: auto; }
             .row-header { justify-content: space-between; padding-right: 15px; }
-            #lockscreen h1 { font-size: 20px; padding: 0 10px; }
             .view-all-btn { font-size: 8px; padding: 6px 10px; }
-               
+                
             .hero-section { height: 400px; min-height: auto; max-height: none; }
             .hero-bg-media { object-fit: cover; object-position: right center; }
             .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
@@ -300,18 +296,13 @@
         <div class="loader-text">INICIALIZANDO SISTEMA...</div>
     </div>
 
-    <div id="lockscreen">
-        <h1>NEOTERMINALROOM</h1>
-        <button id="enter-btn">ACESSAR SISTEMA</button>
-    </div>
-
     <div id="m3u-modal" class="modal">
         <div class="modal-content">
             <h2>💿 SELECIONE O DISCO</h2>
             <p>Este jogo possui múltiplos discos. Qual você deseja carregar?</p>
             <div id="disc-buttons-container" style="display: flex; flex-direction: column; margin-top: 20px;">
                 </div>
-               
+                
             <div style="margin-top: 25px; font-size: 11px; color: #ccc; text-align: left; background: #222; padding: 15px; border-left: 3px solid var(--accent-color); border-radius: 4px; line-height: 1.6;">
                 <strong style="color: #fff; font-size: 12px;">⚠ COMO TROCAR DE DISCO:</strong><br><br>
                 1. Chegue no fim do CD atual e <b>salve o jogo no Memory Card</b> (não use o Save State do emulador).<br>
@@ -328,9 +319,9 @@
             <div class="sidebar-header">
                 <img src="assets/imagens-videos/logo-discord.gif?v=2" onclick="window.scrollTo(0,0);" title="Voltar ao Topo">
             </div>
-               
+                
             <div class="nav-list" id="nav-list"></div>
-               
+                
             <div class="sidebar-chat" id="chat-container">
                 <button class="close-chat-btn" onclick="closeMobileChat()">X</button>
                 <div style="font-size:10px; color:var(--accent-color); text-align:center; margin-bottom:5px;">CHAT GLOBAL</div>
@@ -346,14 +337,14 @@
         <main class="main-content">
             <header class="top-bar">
                 <div class="brand">NEOTERMINALROOM</div>
-                   
+                    
                 <div class="top-bar-controls">
                     <div class="search-container">
                         <span style="color:var(--accent-color); margin-right:10px;">#</span>
                         <input type="text" id="global-search" placeholder="buscar jogo..." autocomplete="off">
                         <div id="search-results"></div>
                     </div>
-                       
+                        
                     <div class="theme-container">
                         <span class="theme-label">TEMA</span>
                         <label class="theme-switch" title="Mudar Tema">
@@ -363,7 +354,7 @@
                     </div>
                 </div>
             </header>
-               
+                
             <section class="hero-section" id="hero-slider">
                 <div class="hero-indicators" id="hero-indicators"></div>
             </section>
@@ -373,10 +364,13 @@
     </div>
 
 <script type="module">
-    // LÓGICA DA SPLASH SCREEN (Deve rodar assim que a tela carregar)
+    // LÓGICA DA SPLASH SCREEN E CONTROLE DE SCROLL
     document.addEventListener("DOMContentLoaded", () => {
         const splash = document.getElementById("splash-screen");
         const logo = document.querySelector(".splash-logo");
+        
+        // Impede que a pessoa role a página enquanto a abertura acontece
+        document.body.style.overflow = "hidden";
         
         // Espera meio segundo e começa a revelar as letras
         setTimeout(() => logo.classList.add("animate"), 500);
@@ -384,6 +378,8 @@
         // Remove a tela de splash após a animação e revela o seu sistema
         setTimeout(() => {
             splash.classList.add("fade-out");
+            // Libera a rolagem do site novamente
+            document.body.style.overflow = "auto";
             setTimeout(() => splash.remove(), 800); 
         }, 3000);
     });
@@ -394,8 +390,6 @@
     // ==========================================
     // INÍCIO DAS CONEXÕES R2 CLOUDFLARE
     // ==========================================
-    // SUBSTITUA A LINHA ABAIXO COM A SUA URL DE TESTE R2.  
-    // Mantenha a barra "/" no final. Exemplo: "https://pub-xxxxxx.r2.dev/"
     const R2_URL = "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/";  
 
     const themeToggle = document.getElementById('theme-toggle');
@@ -414,14 +408,6 @@
     const db = getDatabase(app);
     const chatRef = ref(db, 'mensagens');
 
-    if (sessionStorage.getItem("visited") === "true") { document.getElementById("lockscreen").style.display = "none"; document.body.style.overflow = "auto"; }
-
-    document.getElementById("enter-btn").onclick = () => {
-        document.getElementById("lockscreen").classList.add("unlocked");
-        document.body.style.overflow = "auto";
-        sessionStorage.setItem("visited", "true");
-    };
-
     // ==========================================
     // LÓGICA DE INÍCIO DE JOGO E M3U
     // ==========================================
@@ -429,26 +415,26 @@
         if (url.includes('.m3u')) {
             const baseUrl = url.split('?game=')[1].split('&')[0];
             const coreParam = url.split('&core=')[1] || 'psx';
-               
+                
             fetch(`${baseUrl}?v=${new Date().getTime()}`)
                 .then(response => response.text())
                 .then(text => {
                     const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0 && !l.startsWith('#'));
-                       
+                        
                     const discContainer = document.getElementById('disc-buttons-container');
                     discContainer.innerHTML = '';   
-                       
+                        
                     if (lines.length > 0) {
                         lines.forEach((line, index) => {
                             let discFile = line;
                             if (discFile.endsWith('.cue')) {
                                 discFile = discFile.replace('.cue', '.bin');
                             }
-                               
+                                
                             const basePath = baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1);
                               
                             const finalUrl = `player-universal.html?nocache=${Date.now()}&game=${basePath}${discFile}&core=${coreParam}`;
-                               
+                                
                             const btn = document.createElement('button');
                             btn.className = 'disc-btn selectable-item';   
                             btn.innerText = `INICIAR DISCO ${index + 1}`;
@@ -458,7 +444,7 @@
                             };
                             discContainer.appendChild(btn);
                         });
-                           
+                            
                         const cancelBtn = document.createElement('button');
                         cancelBtn.className = 'disc-btn cancel-btn selectable-item';
                         cancelBtn.innerText = 'CANCELAR';
@@ -470,7 +456,7 @@
 
                         const modal = document.getElementById('m3u-modal');
                         modal.style.display = 'flex';
-                           
+                            
                         setTimeout(() => {   
                             updateGamepadFocusList();
                             const firstBtn = discContainer.querySelector('.disc-btn');
@@ -504,9 +490,9 @@
         const btn = document.getElementById(`btn-${sysId}`);
         const lBtn = document.querySelector(`#section-${sysId} .left-btn`);
         const rBtn = document.querySelector(`#section-${sysId} .right-btn`);
-           
+            
         car.classList.toggle('grid-view');
-           
+            
         if(car.classList.contains('grid-view')) {
             btn.innerHTML = "⊞ VOLTAR";
             if(lBtn) lBtn.style.display = 'none';
@@ -577,12 +563,10 @@
         const slide = document.createElement('div');
         slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
         slide.id = `hero-slide-${index}`;
-           
+            
         const coreToUse = coreMap[game.sysId] || 'snes';
           
-        // ADICIONADO R2_URL AQUI
         const playUrl = `player-universal.html?nocache=${Date.now()}&game=${R2_URL}${game.path}${game.rom}&core=${coreToUse}`;
-        // O Wallpaper se mantém local (puxado do GitHub Pages)
         const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
 
         slide.innerHTML = `
@@ -608,10 +592,10 @@
     function goToSlide(index) {
         document.querySelectorAll('.hero-slide').forEach(s => s.classList.remove('active'));
         document.querySelectorAll('.indicator').forEach(d => d.classList.remove('active'));
-           
+            
         document.getElementById(`hero-slide-${index}`).classList.add('active');
         document.querySelectorAll('.indicator')[index].classList.add('active');
-           
+            
         currentHeroIndex = index;
         resetHeroTimer();
 
@@ -650,7 +634,7 @@
         const item = document.createElement("div");
         item.className = "nav-item";
         item.innerHTML = `<img src="${sys.icon}"><span class="nav-text">${sys.name}</span>`;
-           
+            
         item.onclick = () => {
             const section = document.getElementById(`section-${sys.id}`);
             const car = document.getElementById(`carousel-${sys.id}`);
@@ -665,7 +649,7 @@
         const wrapper = document.createElement("div");
         wrapper.className = "row-wrapper";
         wrapper.id = `section-${sys.id}`;
-           
+            
         wrapper.innerHTML = `
             <div class="row-header">
                 <span class="row-title-text">${sys.name}</span>
@@ -679,7 +663,6 @@
         `;
         catalog.appendChild(wrapper);
 
-        // O FETCH CONTINUA PUXANDO O JSON LOCAL (que vai pro Github)
         let p = fetch(`${sys.path}games.json?v=${new Date().getTime()}`).then(r => {
             if(!r.ok) throw new Error("JSON não encontrado");
             return r.json();
@@ -687,18 +670,14 @@
             const car = document.getElementById(`carousel-${sys.id}`);
             games.forEach(g => {
                 indexData.push({...g, sysPath: sys.path, sysName: sys.name, sysId: sys.id});
-                   
+                    
                 const card = document.createElement("div");
                 card.className = "game-card selectable-item";
-                   
-                const gifName = g.id.replace(/\.[^/.]+$/, "") + ".gif";
-                 
-                // ADICIONADO R2_URL AQUI
+                    
                 const gifPath = g.preview;
                 const imgPath = g.capa;
                 const coreToUse = coreMap[sys.id] || 'snes';   
                  
-                // ADICIONADO R2_URL AQUI
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${g.rom}&core=${coreToUse}`;
 
                 card.dataset.url = playUrl;
@@ -712,7 +691,7 @@
                         <span>${g.nome}</span>
                     </div>
                 `;
-                   
+                    
                 let hoverTimeout;
                 const playGifWithDelay = (cardElement) => {
                     const s = cardElement.querySelector('.static-thumb');
@@ -760,7 +739,7 @@
     searchInput.addEventListener('input', (e) => {
         const val = e.target.value.toLowerCase().replace('#', '').trim();
         searchResults.innerHTML = '';  
-           
+            
         if(!val) {   
             searchResults.style.display = 'none';   
             updateGamepadFocusList();   
@@ -768,27 +747,25 @@
         }
 
         const hits = indexData.filter(g => g.nome && g.nome.toLowerCase().includes(val));
-           
+            
         if(hits.length > 0) {
             searchResults.style.display = 'flex';
             hits.slice(0, 10).forEach(h => {
                 const div = document.createElement('div');
                 div.className = 'search-item selectable-item';   
                  
-                // ADICIONADO R2_URL AQUI
                 div.innerHTML = `
-                    <img src="${R2_URL}${h.sysPath}${h.capa}">   
+                    <img src="${h.capa}">   
                     <span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>
                 `;
-                   
+                    
                 const coreToUse = coreMap[h.sysId] || 'snes';
                  
-                // ADICIONADO R2_URL AQUI
-                const playUrl = `player-universal.html?nocache=${Date.now()}&game=${R2_URL}${h.sysPath}${h.rom}&core=${coreToUse}`;
-                   
+                const playUrl = `player-universal.html?nocache=${Date.now()}&game=${h.rom}&core=${coreToUse}`;
+                    
                 div.dataset.url = playUrl;
                 div.onclick = () => window.startGame(playUrl);
-                   
+                    
                 searchResults.appendChild(div);
             });
             updateGamepadFocusList();   
@@ -823,7 +800,7 @@
 
     function findNextFocus(direction) {
         if (currentFocusIndex === -1 || !selectableItems[currentFocusIndex]) return 0;
-           
+            
         const curRect = selectableItems[currentFocusIndex].getBoundingClientRect();
         const curX = curRect.left + curRect.width / 2;
         const curY = curRect.top + curRect.height / 2;
@@ -862,7 +839,7 @@
 
     function focusItem(index) {
         if(selectableItems.length === 0) return;
-           
+            
         if(currentFocusIndex >= 0 && currentFocusIndex < selectableItems.length) {
             selectableItems[currentFocusIndex].classList.remove('gamepad-focus');
             if(selectableItems[currentFocusIndex].classList.contains('game-card')) selectableItems[currentFocusIndex].dispatchEvent(new Event('mouseleave'));
@@ -900,7 +877,7 @@
                     let moved = false;
                     if (dpadUp || yAxis < -0.5) { let next = findNextFocus('up'); if (next !== currentFocusIndex) { focusItem(next); moved = true; } }
                     else if (dpadDown || yAxis > 0.5) { let next = findNextFocus('down'); if (next !== currentFocusIndex) { focusItem(next); moved = true; } }
-                       
+                        
                     if(moved) {
                         axisCooldown = true;
                         setTimeout(() => { axisCooldown = false; }, 200);   
