@@ -3,1260 +3,1470 @@
         "id": "2006-fifa-world-cup",
         "nome": "2006 Fifa World Cup",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/2006-fifa-world-cup-germany-2006.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/2006-fifa-world-cup.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/2006-fifa-world-cup.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "asterix-obelix",
         "nome": "Asterix & Obelix Xxl",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/2-in-1-asterix-obelix-bash-them-all-asterix-obelix-xxl.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/asterix-obelix.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/asterix-obelix.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "advance-wars-2",
         "nome": "Advance Wars 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/advance-wars-2-black-hole-rising.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/advance-wars-2.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/advance-wars-2.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "advance-wars",
         "nome": "Advance Wars",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/advance-wars.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/advance-wars.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/advance-wars.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "agent-hugo",
         "nome": "Agent Hugo Roborumble",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/agent-hugo-roborumble.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/agent-hugo.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/agent-hugo.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "aggressive-inline",
         "nome": "Aggressive Inline",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/aggressive-inline.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/aggressive-inline.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/aggressive-inline.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "alienators",
         "nome": "Alienators Evolution",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/alienators-evolution-continues.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/alienators.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/alienators.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "altered-beast",
         "nome": "Altered Beast",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/altered-beast-guardian-of-the-realms.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/altered-beast.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/altered-beast.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "army-men",
         "nome": "Army Men Advance",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/army-men-advance.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/army-men.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/army-men.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "avatar",
         "nome": "Avatar: The Last Airbender",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/avatar-the-last-airbender.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/avatar.png"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/avatar.png",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "banjo-kazooie",
         "nome": "Banjo-Kazooie",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/banjo-kazooie-grunty-s-revenge.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/banjo-kazooie.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/banjo-kazooie.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "batman-begins",
         "nome": "Batman Begins",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/batman-begins.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/batman-begins.png"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/batman-begins.png",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "batman-sin-tzu",
         "nome": "Batman: Rise Of Sin Tzu",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/batman-rise-of-sin-tzu.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/batman-sin-tzu.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/batman-sin-tzu.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "beyblade",
         "nome": "Beyblade V-Force",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/beyblade-v-force-ultimate-blader-jam.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/beyblade.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/beyblade.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "blackthorne",
         "nome": "Blackthorne",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/blackthorne.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/blackthorne.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/blackthorne.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "boktai-2",
         "nome": "Boktai 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/boktai-2-solar-boy-django.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/boktai-2.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/boktai-2.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "boktai",
         "nome": "Boktai",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/boktai-the-sun-is-in-your-hand.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/boktai.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/boktai.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "bomberman",
         "nome": "Bomberman Tournament",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/bomberman-tournament.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/bomberman.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/bomberman.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "bof-2",
         "nome": "Breath Of Fire 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/breath-of-fire-2.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/bof-2.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/bof-2.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "bof",
         "nome": "Breath Of Fire",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/breath-of-fire.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/bof.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/bof.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "care-bears",
         "nome": "Care Bears",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/care-bears-the-care-quests.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/care-bears.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/care-bears.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "cars",
         "nome": "Cars",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/cars.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/cars.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/cars.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "cn-speedway",
         "nome": "Cn Speedway",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/cartoon-network-speedway.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/cn-speedway.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/cn-speedway.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "casper",
         "nome": "Casper",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/casper.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/casper.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/casper.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "castlevania-aria",
         "nome": "Castlevania: Aria Of Sorrow",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/castlevania-aria-of-sorrow.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/castlevania-aria.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/castlevania-aria.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "castlevania-circle",
         "nome": "Castlevania: Circle Of The Moon",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/castlevania-circle-of-the-moon.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/castlevania-circle.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/castlevania-circle.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "castlevania-harmony",
         "nome": "Castlevania: Harmony Of Dissonance",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/castlevania-harmony-of-dissonance.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/castlevania-harmony.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/castlevania-harmony.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "celeste",
         "nome": "Celeste Classic",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/celeste.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/celeste.png"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/celeste.png",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "contra",
         "nome": "Contra Advance",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/contra-advance-the-alien-wars-ex.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/contra.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/contra.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "crash-2",
         "nome": "Crash Bandicoot 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/crash-bandicoot-2-n-tranced.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/crash-2.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/crash-2.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "crash-purple",
         "nome": "Crash Purple",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/crash-bandicoot-purple-ripto-s-rampage.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/crash-purple.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/crash-purple.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "crash-huge",
         "nome": "Crash: Huge Adventure",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/crash-bandicoot-the-huge-adventure.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/crash-huge.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/crash-huge.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "crash-nitro",
         "nome": "Crash Nitro Kart",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/crash-nitro-kart.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/crash-nitro.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/crash-nitro.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "crazy-chase",
         "nome": "Crazy Chase",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/crazy-chase.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/crazy-chase.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/crazy-chase.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "crazy-frog",
         "nome": "Crazy Frog Racer",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/crazy-frog-racer.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/crazy-frog.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/crazy-frog.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "crazy-taxi",
         "nome": "Crazy Taxi",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/crazy-taxi-catch-a-ride.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/crazy-taxi.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/crazy-taxi.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "danny-phantom",
         "nome": "Danny Phantom",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/danny-phantom-the-ultimate-enemy.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/danny-phantom.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/danny-phantom.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "dead-to-rights",
         "nome": "Dead To Rights",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/dead-to-rights.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/dead-to-rights.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/dead-to-rights.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "dinotopia",
         "nome": "Dinotopia",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/dinotopia-the-timestone-pirates.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/dinotopia.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/dinotopia.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "dkc3",
         "nome": "Donkey Kong Country 3",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/donkey-kong-country-3.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/dkc3.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/dkc3.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "dkc",
         "nome": "Donkey Kong Country",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/donkey-kong-country.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/dkc.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/dkc.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "db-advanced",
         "nome": "Dragon Ball Advanced",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/dragon-ball-advanced-adventure.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/db-advanced.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/db-advanced.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "dbgt",
         "nome": "Dragon Ball Gt",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/dragon-ball-gt-transformation.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/dbgt.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/dbgt.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "dbz-taiketsu",
         "nome": "Dbz Taiketsu",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/dragon-ball-z-taiketsu.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/dbz-taiketsu.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/dbz-taiketsu.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "dbz-legacy-2",
         "nome": "Dbz Legacy Of Goku 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/dragon-ball-z-the-legacy-of-goku-ii.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/dbz-legacy-2.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/dbz-legacy-2.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "dbz-legacy",
         "nome": "Dbz Legacy Of Goku",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/dragon-ball-z-the-legacy-of-goku.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/dbz-legacy.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/dbz-legacy.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "extreme-ghostbusters",
         "nome": "Extreme Ghostbusters",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/extreme-ghostbusters-code-ecto-1.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/extreme-ghostbusters.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/extreme-ghostbusters.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "fairly-oddparents",
         "nome": "Fairly Oddparents",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/fairly-oddparents-the-enter-the-cleft.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/fairly-oddparents.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/fairly-oddparents.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "fifa-2004",
         "nome": "Fifa Soccer 2004",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/fifa-soccer-2004.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/fifa-2004.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/fifa-2004.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "ff-1-2",
         "nome": "Final Fantasy 1 & 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/final-fantasy-i-ii-dawn-of-souls-br.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/ff-1-2.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/ff-1-2.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "ff-tactics",
         "nome": "Final Fantasy Tactics",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/final-fantasy-tactics-advance.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/ff-tactics.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/ff-tactics.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "ff-vi",
         "nome": "Final Fantasy 6",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/final-fantasy-vi-advance.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/ff-vi.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/ff-vi.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "fire-emblem",
         "nome": "Fire Emblem Sacred Stones",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/fire-emblem-8-the-sacred-stones.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/fire-emblem.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/fire-emblem.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "franklin",
         "nome": "Franklin's Adventure",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/franklin-s-great-adventures.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/franklin.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/franklin.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "f-zero",
         "nome": "F-Zero Max Velocity",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/f-zero-maximum-velocity.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/f-zero.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/f-zero.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "gekido",
         "nome": "Gekido Advance",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/gekido-advance-kintaro-s-revenge.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/gekido.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/gekido.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "ghost-rider",
         "nome": "Ghost Rider",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/ghost-rider.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/ghost-rider.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/ghost-rider.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "golden-sun-lost-age",
         "nome": "Golden Sun: Lost Age",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/golden-sun-the-lost-age.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/golden-sun-lost-age.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/golden-sun-lost-age.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "golden-sun",
         "nome": "Golden Sun",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/golden-sun.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/golden-sun.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/golden-sun.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "gta",
         "nome": "Grand Theft Auto",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/grand-theft-auto-advance.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/gta.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/gta.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "gremlins",
         "nome": "Gremlins",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/gremlins-stripe-vs-gizmo.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/gremlins.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/gremlins.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "billy-mandy",
         "nome": "Billy & Mandy",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/grim-adventures-of-billy-mandy-the.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/billy-mandy.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/billy-mandy.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "gunstar",
         "nome": "Gunstar Super Heroes",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/gunstar-super-heroes.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/gunstar.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/gunstar.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "hp-chamber",
         "nome": "Hp: Chamber Of Secrets",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/harry-potter-and-the-chamber-of-secrets.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/hp-chamber.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/hp-chamber.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "hp-phoenix",
         "nome": "Hp: Order Of The Phoenix",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/harry-potter-and-the-order-of-the-phoenix.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/hp-phoenix.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/hp-phoenix.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "hp-stone",
         "nome": "Hp: Sorcerer's Stone",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/harry-potter-and-the-sorcerer-s-stone.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/hp-stone.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/hp-stone.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "harvest-moon",
         "nome": "Harvest Moon: Fomt",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/harvest-moon-friends-of-mineral-town.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/harvest-moon.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/harvest-moon.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "hugo-bukkazoom",
         "nome": "Hugo Bukkazoom",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/hugo-bukkazoom.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/hugo-bukkazoom.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/hugo-bukkazoom.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "hugo-mirror",
         "nome": "Hugo: Evil Mirror",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/hugo-the-evil-mirror-advance.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/hugo-mirror.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/hugo-mirror.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "ice-nine",
         "nome": "Ice Nine",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/ice-nine.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/ice-nine.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/ice-nine.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "iridion",
         "nome": "Iridion 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/iridion-ii.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/iridion.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/iridion.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "james-pond",
         "nome": "James Pond",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/james-pond-codename-robocod.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/james-pond.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/james-pond.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "jl-flash",
         "nome": "Justice League: The Flash",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/justice-league-heroes-the-flash.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/jl-flash.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/jl-flash.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "jl-injustice",
         "nome": "Justice League",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/justice-league-injustice-for-all.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/jl-injustice.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/jl-injustice.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "kingdom-hearts",
         "nome": "Kingdom Hearts: Com",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/kingdom-hearts-chain-of-memories.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/kingdom-hearts.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/kingdom-hearts.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "king-kong",
         "nome": "King Kong",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/king-kong-the-8th-wonder-of-the-world.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/king-kong.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/king-kong.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "kirby",
         "nome": "Kirby & Amazing Mirror",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/kirby-and-the-amazing-mirror.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/kirby.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/kirby.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "koala",
         "nome": "Koala Brothers",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/koala-brothers-outback-adventures.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/koala.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/koala.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "kong",
         "nome": "Kong: Animated Series",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/kong-the-animated-series.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/kong.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/kong.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "lady-sia",
         "nome": "Lady Sia",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/lady-sia-br.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/lady-sia.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/lady-sia.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "tomb-raider-legend",
         "nome": "Tomb Raider: Legend",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/lara-croft-tomb-raider-legend.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tomb-raider-legend.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tomb-raider-legend.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "tomb-raider-prophecy",
         "nome": "Tomb Raider: Prophecy",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/lara-croft-tomb-raider-the-prophecy.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tomb-raider-prophecy.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tomb-raider-prophecy.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "lilo-stitch-2",
         "nome": "Lilo & Stitch 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/lilo-stitch-2-haemsterviel-havoc.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/lilo-stitch-2.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/lilo-stitch-2.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "lilo-stitch",
         "nome": "Lilo & Stitch",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/lilo-stitch.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/lilo-stitch.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/lilo-stitch.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "lion-king",
         "nome": "The Lion King",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/lion-king-the.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/lion-king.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/lion-king.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "love-hina",
         "nome": "Love Hina Advance",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/love-hina-advance.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/love-hina.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/love-hina.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "madagascar",
         "nome": "Madagascar",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/madagascar.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/madagascar.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/madagascar.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "mario-luigi",
         "nome": "Mario & Luigi: Superstar",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/mario-luigi-superstar-saga.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/mario-luigi.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/mario-luigi.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "mario-vs-dk",
         "nome": "Mario Vs. Donkey Kong",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/mario-vs.-donkey-kong.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/mario-vs-dk.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/mario-vs-dk.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "marvel-alliance",
         "nome": "Marvel Ultimate Alliance",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/marvel-ultimate-alliance.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/marvel-alliance.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/marvel-alliance.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "max-payne",
         "nome": "Max Payne",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/max-payne-gba.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/max-payne.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/max-payne.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "medabots-metabee",
         "nome": "Medabots Ax Metabee",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/medabots-ax-metabee-version.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/medabots-metabee.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/medabots-metabee.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "medabots-rokusho",
         "nome": "Medabots Ax Rokusho",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/medabots-ax-rokusho-version.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/medabots-rokusho.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/medabots-rokusho.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "moh-infiltrator",
         "nome": "Moh: Infiltrator",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/medal-of-honor-infiltrator.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/moh-infiltrator.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/moh-infiltrator.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "moh-underground",
         "nome": "Moh: Underground",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/medal-of-honor-underground.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/moh-underground.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/moh-underground.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "megaman-bass",
         "nome": "Mega Man & Bass",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/mega-man-bass.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/megaman-bass.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/megaman-bass.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "megaman-bn",
         "nome": "Mega Man Battle Network",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/mega-man-battle-network.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/megaman-bn.png"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/megaman-bn.png",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "megaman-zero2",
         "nome": "Mega Man Zero 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/mega-man-zero-2.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/megaman-zero2.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/megaman-zero2.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "megaman-zero3",
         "nome": "Mega Man Zero 3",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/mega-man-zero-3.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/megaman-zero3.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/megaman-zero3.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "megaman-zero4",
         "nome": "Mega Man Zero 4",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/mega-man-zero-4.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/megaman-zero4.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/megaman-zero4.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "megaman-zero",
         "nome": "Mega Man Zero",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/mega-man-zero.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/megaman-zero.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/megaman-zero.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "metal-slug",
         "nome": "Metal Slug Advance",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/metal-slug-advance.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/metal-slug.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/metal-slug.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "metroid-fusion",
         "nome": "Metroid Fusion",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/metroid-fusion.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/metroid-fusion.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/metroid-fusion.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "metroid-zero",
         "nome": "Metroid Zero Mission",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/metroid-zero-mission.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/metroid-zero.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/metroid-zero.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "mortal-kombat",
         "nome": "Mortal Kombat Da",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/mortal-kombat-deadly-alliance.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/mortal-kombat.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/mortal-kombat.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "mother-1-2",
         "nome": "Mother 1+2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/mother-1-2.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/mother-1-2.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/mother-1-2.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "mother-3",
         "nome": "Mother 3",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/mother-3.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/mother-3.png"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/mother-3.png",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "motoracer",
         "nome": "Motoracer Advance",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/motoracer-advance.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/motoracer.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/motoracer.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "naruto",
         "nome": "Naruto Ninja Council 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/naruto-ninja-council-2.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/naruto.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/naruto.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "nfs-mw",
         "nome": "Need For Speed: Mw",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/need-for-speed-most-wanted.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/nfs-mw.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/nfs-mw.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "next-gen-tennis",
         "nome": "Next Gen Tennis",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/next-generation-tennis.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/next-gen-tennis.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/next-gen-tennis.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "nicktoons-attack",
         "nome": "Nicktoons: Attack",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/nicktoons-attack-of-the-toybots.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/nicktoons-attack.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/nicktoons-attack.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "nicktoons-unite",
         "nome": "Nicktoons Unite!",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/nicktoons-unite.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/nicktoons-unite.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/nicktoons-unite.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "ninja-five-0",
         "nome": "Ninja Five-o",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/ninja-five-0.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/ninja-five-0.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/ninja-five-0.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "noddy",
         "nome": "Noddy In Toyland",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/noddy-a-day-in-toyland.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/noddy.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/noddy.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "one-piece",
         "nome": "One Piece",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/one-piece.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/one-piece.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/one-piece.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "open-season",
         "nome": "Open Season",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/open-season.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/open-season.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/open-season.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pirates-caribbean",
         "nome": "Pirates Of Caribbean",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pirates-of-the-caribbean-the-curse-of-the-black-pearl.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pirates-caribbean.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pirates-caribbean.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "planet-apes",
         "nome": "Planet Of The Apes",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/planet-of-the-apes.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/planet-apes.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/planet-apes.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-ashgray",
         "nome": "Pokemon Ashgray",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-ashgray-4.5.3.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-ashgray.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-ashgray.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-dark-fire",
         "nome": "Pokemon Dark Fire",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-dark-fire.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-dark-fire.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-dark-fire.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-dark-pearl",
         "nome": "Pokemon Dark Pearl",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-dark-pearl.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-dark-pearl.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-dark-pearl.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-emerald",
         "nome": "Pokemon Emerald",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-emerald-version.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-emerald.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-emerald.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-fire-red",
         "nome": "Pokemon Firered",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-fire-red-version.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-fire-red.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-fire-red.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-leaf-green",
         "nome": "Pokemon Leafgreen",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-leaf-green-version.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-leaf-green.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-leaf-green.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-light-platinum",
         "nome": "Pokemon Light Platinum",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-light-platinum.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-light-platinum.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-light-platinum.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-lunares",
         "nome": "Pokemon Lunares",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-lunares-br.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-lunares.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-lunares.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-my-ass",
         "nome": "Pokemon My Ass",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-my-ass.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-my-ass.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-my-ass.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-mystery",
         "nome": "Pokemon Mystery Dungeon",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-mystery-dungeon-red-rescue-team.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-mystery.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-mystery.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-new-hoenn",
         "nome": "Pokemon New Hoenn",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-new-hoenn.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-new-hoenn.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-new-hoenn.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-omega-ruby",
         "nome": "Pokemon Omega Ruby",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-omega-ruby-v1.8.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-omega-ruby.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-omega-ruby.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-resolute",
         "nome": "Pokemon Resolute",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-resolute-version.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-resolute.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-resolute.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-ribeirao",
         "nome": "Pokemon Ribeirao Pires",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-ribeirao-pires.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-ribeirao.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-ribeirao.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-ruby",
         "nome": "Pokemon Ruby",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-ruby.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-ruby.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-ruby.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-sapphire",
         "nome": "Pokemon Sapphire",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-sapphire-version.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-sapphire.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-sapphire.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-shadow",
         "nome": "Pokemon Shadow Force",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-shadow-force.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-shadow.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-shadow.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-stone",
         "nome": "Pokemon Stone Dragon",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-stone-dragon.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-stone.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-stone.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-volcano",
         "nome": "Pokemon Volcano",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-volcano.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-volcano.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-volcano.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-water-blue",
         "nome": "Pokemon Water Blue",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pokemon-water-blue.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-water-blue.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-water-blue.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-blue-stars",
         "nome": "Pokemon Blue Stars 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pok-mon-blue-stars-2.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-blue-stars.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-blue-stars.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "pokemon-legendary",
         "nome": "Pokemon Legendary",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pok-mon-legendary.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-legendary.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/pokemon-legendary.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "prince-persia",
         "nome": "Prince Of Persia",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/prince-of-persia-the-sands-of-time.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/prince-persia.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/prince-persia.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "princess-natasha",
         "nome": "Princess Natasha",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/princess-natasha-student-secret-agent-princess.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/princess-natasha.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/princess-natasha.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "beach-soccer",
         "nome": "Pro Beach Soccer",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/pro-beach-soccer.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/beach-soccer.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/beach-soccer.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "ratatouille",
         "nome": "Ratatouille",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/ratatouille.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/ratatouille.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/ratatouille.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "rayman-3",
         "nome": "Rayman 3",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/rayman-3.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/rayman-3.png"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/rayman-3.png",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "rayman-advance",
         "nome": "Rayman Advance",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/rayman-advance.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/rayman-advance.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/rayman-advance.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "robotech",
         "nome": "Robotech",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/robotech-the-macross-saga.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/robotech.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/robotech.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "robot-wars",
         "nome": "Robot Wars",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/robot-wars-advanced-destruction.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/robot-wars.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/robot-wars.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "rocket-power",
         "nome": "Rocket Power",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/rocket-power-dream-scheme.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/rocket-power.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/rocket-power.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "rtype-iii",
         "nome": "R-Type 3",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/r-type-iii-the-third-lightning.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/rtype-iii.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/rtype-iii.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "samurai-jack",
         "nome": "Samurai Jack",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/samurai-jack-the-amulet-of-time.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/samurai-jack.png"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/samurai-jack.png",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "scooby-doo",
         "nome": "Scooby-Doo 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/scooby-doo-2-monsters-unleashed.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/scooby-doo.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/scooby-doo.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "shaman-king-2",
         "nome": "Shaman King 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/shaman-king-master-of-spirits-2.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/shaman-king-2.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/shaman-king-2.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "shaman-king",
         "nome": "Shaman King",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/shaman-king-master-of-spirits.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/shaman-king.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/shaman-king.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "shining-force",
         "nome": "Shining Force",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/shining-force-resurrection-of-the-dark-dragon.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/shining-force.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/shining-force.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "shining-soul-ii",
         "nome": "Shining Soul 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/shining-soul-ii.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/shining-soul-ii.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/shining-soul-ii.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "shining-soul",
         "nome": "Shining Soul",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/shining-soul.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/shining-soul.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/shining-soul.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "shrek-2",
         "nome": "Shrek 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/shrek-2-beg-for-mercy.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/shrek-2.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/shrek-2.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "sim-city",
         "nome": "Sim City 2000",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/sim-city-2000.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/sim-city.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/sim-city.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "sonic-battle",
         "nome": "Sonic Battle",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/sonic-battle.com.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/sonic-battle.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/sonic-battle.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "spiderman-2",
         "nome": "Spider-Man 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/spider-man-2.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/spiderman-2.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/spiderman-2.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "spiderman-3",
         "nome": "Spider-Man 3",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/spider-man-3.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/spiderman-3.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/spiderman-3.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "spiderman-ny",
         "nome": "Spider-Man: Ny",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/spider-man-battle-for-new-york.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/spiderman-ny.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/spiderman-ny.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "spiderman-mysterio",
         "nome": "Spider-Man: Mysterio",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/spider-man-mysterio-s-menace.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/spiderman-mysterio.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/spiderman-mysterio.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "spongebob-toybots",
         "nome": "Spongebob Toybots",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/spongebob-and-friends-attack-of-the-toybots.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/spongebob-toybots.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/spongebob-toybots.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "spongebob-supersponge",
         "nome": "Spongebob Supersponge",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/spongebob-squarepants-supersponge-br.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/spongebob-supersponge.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/spongebob-supersponge.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "spyro-orange",
         "nome": "Spyro Orange",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/spyro-orange-the-cortex-conspiracy.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/spyro-orange.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/spyro-orange.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "star-wars-2",
         "nome": "Star Wars Ep 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/star-wars-episode-ii-attack-of-the-clones.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/star-wars-2.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/star-wars-2.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "star-wars-3",
         "nome": "Star Wars Ep 3",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/star-wars-episode-iii-revenge-of-the-sith.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/star-wars-3.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/star-wars-3.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "strawberry-shortcake",
         "nome": "Strawberry Shortcake",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/strawberry-shortcake-ice-cream-island-riding-camp.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/strawberry-shortcake.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/strawberry-shortcake.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "super-bubble-pop",
         "nome": "Super Bubble Pop",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/super-bubble-pop.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/super-bubble-pop.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/super-bubble-pop.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "super-ghouls",
         "nome": "Super Ghouls'n Ghosts",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/super-ghouls-n-ghosts.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/super-ghouls.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/super-ghouls.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "super-mario-world",
         "nome": "Super Mario World",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/super-mario-advance-2-super-mario-world.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/super-mario-world.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/super-mario-world.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "super-mario-advance",
         "nome": "Super Mario Advance",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/super-mario-advance.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/super-mario-advance.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/super-mario-advance.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "super-robot-taisen",
         "nome": "Super Robot Taisen",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/super-robot-taisen-original-generation-2.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/super-robot-taisen.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/super-robot-taisen.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "sword-of-mana",
         "nome": "Sword Of Mana",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/sword-of-mana.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/sword-of-mana.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/sword-of-mana.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "tactics-ogre",
         "nome": "Tactics Ogre",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/tactics-ogre-the-knight-of-lodis.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tactics-ogre.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tactics-ogre.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "tak",
         "nome": "Tak: Great Juju",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/tak-the-great-juju-challenge.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tak.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tak.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "tales-of-phantasia",
         "nome": "Tales Of Phantasia",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/tales-of-phantasia.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tales-of-phantasia.png"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tales-of-phantasia.png",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "tmnt-2",
         "nome": "Tmnt 2",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/teenage-mutant-ninja-turtles-2-battle-nexus.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tmnt-2.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tmnt-2.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "tmnt",
         "nome": "Tmnt",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/teenage-mutant-ninja-turtles.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tmnt.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tmnt.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "tekken",
         "nome": "Tekken Advance",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/tekken-advance.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tekken.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tekken.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "tennis",
         "nome": "Tennis Masters 2003",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/tennis-masters-series-2003.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tennis.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tennis.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "hobbit",
         "nome": "The Hobbit",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/the-hobbit.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/hobbit.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/hobbit.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "incredibles",
         "nome": "The Incredibles",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/the-incredibles.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/incredibles.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/incredibles.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "incredibles-underminer",
         "nome": "The Incredibles: Underminer",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/the-incredibles-rise-of-the-underminer.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/incredibles-underminer.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/incredibles-underminer.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "land-before-time",
         "nome": "Land Before Time",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/the-land-before-time.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/land-before-time.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/land-before-time.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "zelda-four-swords",
         "nome": "Zelda: Four Swords",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/the-legend-of-zelda-a-link-to-the-past-four-swords.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/zelda-four-swords.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/zelda-four-swords.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "zelda-minish",
         "nome": "Zelda: Minish Cap",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/the-legend-of-zelda-the-minish-cap.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/zelda-minish.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/zelda-minish.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "lotr",
         "nome": "Lord Of The Rings",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/the-lord-of-the-rings-the-fellowship-of-the-ring.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/lotr.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/lotr.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "powerpuff",
         "nome": "Powerpuff Girls",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/the-powerpuff-girls-mojo-jojo-a-go-go.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/powerpuff.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/powerpuff.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "shinobi",
         "nome": "Revenge Of Shinobi",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/the-revenge-of-shinobi.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/shinobi.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/shinobi.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "scorpion-king",
         "nome": "The Scorpion King",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/the-scorpion-king-sword-of-osiris.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/scorpion-king.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/scorpion-king.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "rainbow-six",
         "nome": "Rainbow Six",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/tom-clancy-s-rainbow-six-rogue-spear.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/rainbow-six.png"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/rainbow-six.png",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "splinter-cell",
         "nome": "Splinter Cell",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/tom-clancy-s-splinter-cell.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/splinter-cell.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/splinter-cell.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "splinter-cell-pandora",
         "nome": "Splinter Cell: Pandora",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/tom-clancy-s-splinter-cell-pandora-tomorrow.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/splinter-cell-pandora.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/splinter-cell-pandora.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "tony-hawk",
         "nome": "Tony Hawk American Sk8land",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/tony-hawk-s-american-sk8land.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tony-hawk.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/tony-hawk.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "totally-spies",
         "nome": "Totally Spies!",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/totally-spies.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/totally-spies.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/totally-spies.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "van-helsing",
         "nome": "Van Helsing",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/van-helsing.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/van-helsing.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/van-helsing.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "wario-land-4",
         "nome": "Wario Land 4",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/wario-land-4.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/wario-land-4.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/wario-land-4.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "wolverine",
         "nome": "X2: Wolverine's Revenge",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/x2-wolverine-s-revenge.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/wolverine.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/wolverine.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "xmen-apocalypse",
         "nome": "X-Men Apocalypse",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/x-men-reign-of-apocalypse.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/xmen-apocalypse.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/xmen-apocalypse.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "xmen-official",
         "nome": "X-Men Official Game",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/x-men-the-official-game.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/xmen-official.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/xmen-official.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "yugioh-7-trials",
         "nome": "Yu-Gi-Oh! 7 Trials",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/yu-gi-oh-7-trials-to-glory-world-championship-tournament-2005.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/yugioh-7-trials.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/yugioh-7-trials.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "yugioh-eternal",
         "nome": "Yu-Gi-Oh! Eternal Duelist",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/yu-gi-oh-the-eternal-duelist-soul.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/yugioh-eternal.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/yugioh-eternal.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "yugioh-sacred",
         "nome": "Yu-Gi-Oh! Sacred Cards",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/yu-gi-oh-the-sacred-cards.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/yugioh-sacred.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/yugioh-sacred.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "yuyu-spirit",
         "nome": "Yu Yu Hakusho: Spirit",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/yu-yu-hakusho-ghostfiles-spirit-detective.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/yuyu-spirit.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/yuyu-spirit.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "yuyu-tactics",
         "nome": "Yu Yu Hakusho: Tactics",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/yu-yu-hakusho-ghostfiles-tournament-tactics.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/yuyu-tactics.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/yuyu-tactics.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     },
     {
         "id": "zatchbell",
         "nome": "Zatch Bell!",
         "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/roms/zatchbell-electric-arena.gba",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/zatchbell.jpg"
+        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/capas/zatchbell.jpg",
+        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/gba/previews/
     }
 ]
