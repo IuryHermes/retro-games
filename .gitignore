@@ -5,3 +5,5 @@ systems/*/previews/
 
 # Ignorar o macOS lixo se houver
 .DS_Store
+.r2_credentials
+r2_credentials
