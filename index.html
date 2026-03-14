@@ -84,47 +84,15 @@
         .cancel-btn:hover, .cancel-btn.gamepad-focus { background: #555; color: #fff; box-shadow: 0 0 15px #555; transform: scale(1.02); border-color: #fff; }
 
         #splash-screen {
-            position: fixed;
-            inset: 0;
-            background-color: var(--bg-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000000;
-            transition: opacity 0.8s ease-out, visibility 0.8s;
+            position: fixed; inset: 0; background-color: var(--bg-color); display: flex; justify-content: center; align-items: center; z-index: 1000000; transition: opacity 0.8s ease-out, visibility 0.8s;
         }
-        .splash-logo {
-            font-family: 'Press Start 2P', monospace;
-            font-size: clamp(20px, 4vw, 40px);
-            color: var(--accent-color);
-            display: flex;
-            align-items: flex-end;
-            white-space: nowrap;
-        }
+        .splash-logo { font-family: 'Press Start 2P', monospace; font-size: clamp(20px, 4vw, 40px); color: var(--accent-color); display: flex; align-items: flex-end; white-space: nowrap; }
         .initial { font-weight: bold; }
-        .reveal {
-            display: inline-block;
-            max-width: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: max-width 1.5s ease-in-out, opacity 1.5s ease-in-out;
-            vertical-align: bottom;
-            font-size: clamp(16px, 3.5vw, 32px);
-            margin-bottom: 2px;
-        }
-        .cursor {
-            animation: blink-cursor 1s step-end infinite;
-            margin-left: 5px;
-        }
+        .reveal { display: inline-block; max-width: 0; opacity: 0; overflow: hidden; transition: max-width 1.5s ease-in-out, opacity 1.5s ease-in-out; vertical-align: bottom; font-size: clamp(16px, 3.5vw, 32px); margin-bottom: 2px; }
+        .cursor { animation: blink-cursor 1s step-end infinite; margin-left: 5px; }
         @keyframes blink-cursor { 50% { opacity: 0; } }
-        .splash-logo.animate .reveal {
-            max-width: 300px; 
-            opacity: 1;
-        }
-        #splash-screen.fade-out {
-            opacity: 0;
-            visibility: hidden;
-        }
+        .splash-logo.animate .reveal { max-width: 300px; opacity: 1; }
+        #splash-screen.fade-out { opacity: 0; visibility: hidden; }
 
         .sidebar { width: var(--sidebar-collapsed-width); background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; position: fixed; height: 100%; z-index: 5000; padding: 10px 5px; transition: width 0.3s ease, background 0.4s; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
         .sidebar::-webkit-scrollbar { display: none; }
@@ -136,7 +104,6 @@
         }
         .sidebar-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; flex-shrink: 0; }
         .sidebar-header img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-color); cursor: pointer; }
-        .menu-label { font-family: 'Press Start 2P'; font-size: 8px; color: var(--text-color); margin-top: 8px; text-align: center; display: block; transition: 0.2s; cursor: pointer; }
         .nav-list { display: flex; flex-direction: column; gap: 10px; flex: 1; margin-top: 10px; }
         .nav-item { display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-muted); justify-content: center; flex-shrink: 0; transition: 0.3s; }
         @media(min-width: 769px) { .nav-item { justify-content: flex-start; } }
@@ -411,6 +378,17 @@
     const chatRef = ref(db, 'mensagens');
 
     // ==========================================
+    // FUNÇÃO MASTER PARA ACHAR OS NOMES DAS CAPAS
+    // ==========================================
+    // Essa função transforma o nome bizarro do json ("1943_-_the_battle_(usa).nes") 
+    // no nome exato que o Cloudflare tem salvo ("1943---the-battle-usa.jpg")
+    function getCleanName(romPath) {
+        if (!romPath) return "";
+        let base = romPath.split('/').pop().replace(/\.[^/.]+$/, "");
+        return base.replace(/[()',!.]/g, '').replace(/&/g, '').replace(/_/g, '-');
+    }
+
+    // ==========================================
     // LÓGICA DE INÍCIO DE JOGO E M3U
     // ==========================================
     window.startGame = (url) => {
@@ -577,11 +555,16 @@
             <div class="hero-content">
                 <h1 class="hero-title">${game.nome}</h1>
                 <div class="hero-categories">${game.cats}</div>
-                <button class="hero-play-btn selectable-item" data-url="${playUrl}" onclick="window.startGame('${playUrl}')">
+                <button class="hero-play-btn selectable-item" data-url="${playUrl}">
                     <span>▶</span> JOGAR
                 </button>
             </div>
         `;
+        
+        // CORREÇÃO: Adicionando o evento de clique pelo JS para evitar bugs de aspas na string
+        const playBtn = slide.querySelector('.hero-play-btn');
+        playBtn.onclick = () => window.startGame(playUrl);
+
         heroSlider.appendChild(slide);
 
         const dot = document.createElement('div');
@@ -675,12 +658,14 @@
                 const card = document.createElement("div");
                 card.className = "game-card selectable-item";
                     
-                const romBaseName = g.rom.split('/').pop().replace(/\.[^/.]+$/, ""); 
-                const safeName = romBaseName.replace(/_/g, '-').replace(/[()]/g, '').replace(/&/g, '').replace(/-+/g, '-');
-                const imgTry1 = `${R2_URL}${sys.path}capas/${romBaseName}.jpg`;
-                const imgTry2 = `${R2_URL}${sys.path}capas/${safeName}.jpg`;
-                const gifTry1 = `${R2_URL}${sys.path}previews/${romBaseName}.gif`;
-                const gifTry2 = `${R2_URL}${sys.path}previews/${safeName}.gif`;
+                // A MÁGICA ACONTECE AQUI: Acha a capa exata no Cloudflare R2
+                const safeName = getCleanName(g.rom);
+                const r2Img = `${R2_URL}${sys.path}capas/${safeName}.jpg`;
+                const r2Gif = `${R2_URL}${sys.path}previews/${safeName}.gif`;
+                
+                // Fallbacks locais (caso falhe, ele tenta pegar do GitHub)
+                const fallbackImg = g.capa;
+                const fallbackGif = g.preview;
 
                 const coreToUse = coreMap[sys.id] || 'snes';   
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
@@ -689,8 +674,8 @@
 
                 card.innerHTML = `
                     <div class="card-media">
-                        <img src="${imgTry1}" onerror="this.onerror=null; this.src='${imgTry2}';" class="static-thumb" loading="lazy">
-                        <img src="" data-gif1="${gifTry1}" data-gif2="${gifTry2}" class="active-gif">
+                        <img src="${r2Img}" onerror="this.onerror=null; this.src='${fallbackImg}';" class="static-thumb" loading="lazy">
+                        <img src="" data-gif1="${r2Gif}" data-gif2="${fallbackGif}" class="active-gif">
                     </div>
                     <div class="card-title">
                         <span>${g.nome}</span>
@@ -729,7 +714,7 @@
                 car.appendChild(card);
             });
         }).catch(err => {
-            console.log("Erro no sistema:", sys.id, err);
+            console.error("Erro ao ler JSON", err);
             wrapper.style.display = "none";
             item.style.display = "none";   
         });
@@ -757,13 +742,11 @@
                 const div = document.createElement('div');
                 div.className = 'search-item selectable-item';   
                  
-                const romBaseName = h.rom.split('/').pop().replace(/\.[^/.]+$/, ""); 
-                const safeName = romBaseName.replace(/_/g, '-').replace(/[()]/g, '').replace(/&/g, '').replace(/-+/g, '-');
-                const imgTry1 = `${R2_URL}${h.sysPath}capas/${romBaseName}.jpg`;
-                const imgTry2 = `${R2_URL}${h.sysPath}capas/${safeName}.jpg`;
+                const safeName = getCleanName(h.rom);
+                const r2Img = `${R2_URL}${h.sysPath}capas/${safeName}.jpg`;
 
                 div.innerHTML = `
-                    <img src="${imgTry1}" onerror="this.onerror=null; this.src='${imgTry2}';">   
+                    <img src="${r2Img}" onerror="this.onerror=null; this.src='${h.capa}';">   
                     <span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>
                 `;
                     
