@@ -588,8 +588,9 @@
         const coreToUse = coreMap[game.sysId] || 'snes';
         
         // Aplica encodeURIComponent na URL
-        const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + game.path + game.rom)}&core=${coreToUse}`;
-        const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
+        // O segredo está em somar o R2_URL + sys.path + g.rom
+	const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
+	const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
 
         slide.innerHTML = `
             <img src="${wallpaperPath}" class="hero-bg-blur" alt="Background Preenchimento">
