@@ -136,7 +136,6 @@
         }
         .sidebar-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; flex-shrink: 0; }
         .sidebar-header img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-color); cursor: pointer; }
-        .menu-label { font-family: 'Press Start 2P'; font-size: 8px; color: var(--text-color); margin-top: 8px; text-align: center; display: block; transition: 0.2s; cursor: pointer; }
         .nav-list { display: flex; flex-direction: column; gap: 10px; flex: 1; margin-top: 10px; }
         .nav-item { display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-muted); justify-content: center; flex-shrink: 0; transition: 0.3s; }
         @media(min-width: 769px) { .nav-item { justify-content: flex-start; } }
@@ -567,6 +566,7 @@
         slide.id = `hero-slide-${index}`;
             
         const coreToUse = coreMap[game.sysId] || 'snes';
+        // CORREÇÃO: Usando 'game.path' e 'game.rom' aqui para evitar ReferenceError
         const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + game.path + game.rom)}&core=${coreToUse}`;
         const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
 
@@ -679,6 +679,7 @@
                 const imgPath = g.capa;
                 const coreToUse = coreMap[sys.id] || 'snes';   
                  
+                // CORREÇÃO: R2_URL + sys.path + g.rom
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
 
                 card.dataset.url = playUrl;
@@ -758,6 +759,7 @@
                 `;
                     
                 const coreToUse = coreMap[h.sysId] || 'snes';
+                // CORREÇÃO: R2_URL + h.sysPath + h.rom
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + h.sysPath + h.rom)}&core=${coreToUse}`;
                     
                 div.dataset.url = playUrl;
@@ -777,6 +779,9 @@
         }
     });
 
+    // =========================================================================
+    // NAVEGAÇÃO ESPACIAL POR GAMEPAD  
+    // =========================================================================
     let selectableItems = [];
     let currentFocusIndex = -1;
     let gamepadConnected = false;
