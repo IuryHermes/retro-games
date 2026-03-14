@@ -84,47 +84,15 @@
         .cancel-btn:hover, .cancel-btn.gamepad-focus { background: #555; color: #fff; box-shadow: 0 0 15px #555; transform: scale(1.02); border-color: #fff; }
 
         #splash-screen {
-            position: fixed;
-            inset: 0;
-            background-color: var(--bg-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000000;
-            transition: opacity 0.8s ease-out, visibility 0.8s;
+            position: fixed; inset: 0; background-color: var(--bg-color); display: flex; justify-content: center; align-items: center; z-index: 1000000; transition: opacity 0.8s ease-out, visibility 0.8s;
         }
-        .splash-logo {
-            font-family: 'Press Start 2P', monospace;
-            font-size: clamp(20px, 4vw, 40px);
-            color: var(--accent-color);
-            display: flex;
-            align-items: flex-end;
-            white-space: nowrap;
-        }
+        .splash-logo { font-family: 'Press Start 2P', monospace; font-size: clamp(20px, 4vw, 40px); color: var(--accent-color); display: flex; align-items: flex-end; white-space: nowrap; }
         .initial { font-weight: bold; }
-        .reveal {
-            display: inline-block;
-            max-width: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: max-width 1.5s ease-in-out, opacity 1.5s ease-in-out;
-            vertical-align: bottom;
-            font-size: clamp(16px, 3.5vw, 32px);
-            margin-bottom: 2px;
-        }
-        .cursor {
-            animation: blink-cursor 1s step-end infinite;
-            margin-left: 5px;
-        }
+        .reveal { display: inline-block; max-width: 0; opacity: 0; overflow: hidden; transition: max-width 1.5s ease-in-out, opacity 1.5s ease-in-out; vertical-align: bottom; font-size: clamp(16px, 3.5vw, 32px); margin-bottom: 2px; }
+        .cursor { animation: blink-cursor 1s step-end infinite; margin-left: 5px; }
         @keyframes blink-cursor { 50% { opacity: 0; } }
-        .splash-logo.animate .reveal {
-            max-width: 300px; 
-            opacity: 1;
-        }
-        #splash-screen.fade-out {
-            opacity: 0;
-            visibility: hidden;
-        }
+        .splash-logo.animate .reveal { max-width: 300px; opacity: 1; }
+        #splash-screen.fade-out { opacity: 0; visibility: hidden; }
 
         .sidebar { width: var(--sidebar-collapsed-width); background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; position: fixed; height: 100%; z-index: 5000; padding: 10px 5px; transition: width 0.3s ease, background 0.4s; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
         .sidebar::-webkit-scrollbar { display: none; }
@@ -567,7 +535,8 @@
         slide.id = `hero-slide-${index}`;
             
         const coreToUse = coreMap[game.sysId] || 'snes';
-        // AQUI FOI CORRIGIDO: Usa game.path e game.rom para não dar erro "sys is not defined"
+        
+        // APONTANDO A ROM PARA O CLOUDFLARE
         const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + game.path + game.rom)}&core=${coreToUse}`;
         const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
 
@@ -676,12 +645,20 @@
                 const card = document.createElement("div");
                 card.className = "game-card selectable-item";
                     
-                // AQUI FOI CORRIGIDO: Mantém g.preview e g.capa normais (do GitHub)
-                const gifPath = g.preview;
-                const imgPath = g.capa;
+                // TRAVA DE SEGURANÇA PARA AS IMAGENS: Se a imagem não tiver a URL completa e nem o caminho da pasta, nós adicionamos.
+                let imgPath = g.capa;
+                if (imgPath && !imgPath.startsWith('http') && !imgPath.startsWith('assets') && !imgPath.startsWith('systems')) {
+                    imgPath = sys.path + imgPath;
+                }
+                
+                let gifPath = g.preview;
+                if (gifPath && !gifPath.startsWith('http') && !gifPath.startsWith('assets') && !gifPath.startsWith('systems')) {
+                    gifPath = sys.path + gifPath;
+                }
+
                 const coreToUse = coreMap[sys.id] || 'snes';   
                  
-                // AQUI FOI CORRIGIDO: O jogo busca no R2
+                // AQUI FOI CORRIGIDO: Apenas o jogo (ROM) aponta para o R2
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
 
                 card.dataset.url = playUrl;
@@ -755,13 +732,20 @@
                 const div = document.createElement('div');
                 div.className = 'search-item selectable-item';   
                  
+                // TRAVA DE SEGURANÇA PARA A CAPA NA BUSCA
+                let capaBusca = h.capa;
+                if (capaBusca && !capaBusca.startsWith('http') && !capaBusca.startsWith('assets') && !capaBusca.startsWith('systems')) {
+                    capaBusca = h.sysPath + capaBusca;
+                }
+
                 div.innerHTML = `
-                    <img src="${h.capa}">   
+                    <img src="${capaBusca}">   
                     <span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>
                 `;
                     
                 const coreToUse = coreMap[h.sysId] || 'snes';
-                // AQUI FOI CORRIGIDO: O jogo da busca busca no R2
+                
+                // O JOGO DA BUSCA APONTA PRO R2
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + h.sysPath + h.rom)}&core=${coreToUse}`;
                     
                 div.dataset.url = playUrl;
