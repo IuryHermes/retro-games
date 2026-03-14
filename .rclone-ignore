@@ -1,0 +1,8 @@
+jsonupdate.py
+leitor_roms.py
+testeps1.py
+limpar_roms.sh
+r2_credentials
+.git/
+*.swp
+*.py
