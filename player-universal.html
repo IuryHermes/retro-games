@@ -53,8 +53,8 @@
             <div class="instructions">
                 <div class="platform-box"><strong>💻 No Computador:</strong> Arraste o mouse para a parte de baixo da tela.</div>
                 <div class="platform-box">
-                    <strong>📱 No Celular:</strong> Toque no ícone  
-                    <img src="assets/imagens-videos/imagens do menu/menu_110986.png" style="height: 16px; vertical-align: middle; margin: 0 4px; image-rendering: pixelated;" alt="Menu" onerror="this.alt='[MENU]'; this.style.display='none';">  
+                    <strong>📱 No Celular:</strong> Toque no ícone   
+                    <img src="assets/imagens-videos/imagens do menu/menu_110986.png" style="height: 16px; vertical-align: middle; margin: 0 4px; image-rendering: pixelated;" alt="Menu" onerror="this.alt='[MENU]'; this.style.display='none';">   
                     para abrir o painel.
                 </div>
                 <hr style="border:0; border-top:1px solid #004411; margin: 10px 0;">
@@ -111,13 +111,13 @@
         }, 300);
 
         const params = new URLSearchParams(window.location.search);
-        const core = params.get("core");  
+        const core = params.get("core");   
         const game = params.get("game");
 
         if (core && game) {
             const baseUrl = window.location.origin + '/';
             window.EJS_player = '#game';
-            window.EJS_core = core;  
+            window.EJS_core = core;   
             window.EJS_backgroundColor = "#000000";
 
             try {
@@ -156,7 +156,23 @@
             window.EJS_loadStateOnStart = false;    
 
             window.EJS_buttons = { save_state: true, load_state: true, full_screen: true, fast_forward: true };
-            window.EJS_VirtualGamepadSettings = { opacity: 0.5, hideOnKeyboardInfo: false, buttonStyle: "modern" };
+            
+            // 🔥 CORREÇÃO DOS CONTROLES AQUI 🔥
+            // Se for PS1, força o layout de gamepad do PlayStation
+            if (core === 'psx' || core === 'pcsx_rearmed') {
+                window.EJS_VirtualGamepadSettings = { 
+                    opacity: 0.5, 
+                    hideOnKeyboardInfo: false, 
+                    buttonStyle: "playstation" // Força o layout de botões de PS1
+                };
+            } else {
+                // Para os outros (SNES, NES, Mega Drive, GBA), mantém o modern
+                window.EJS_VirtualGamepadSettings = { 
+                    opacity: 0.5, 
+                    hideOnKeyboardInfo: false, 
+                    buttonStyle: "modern" 
+                };
+            }
 
             // 🔥 FORÇA O VSYNC DESATIVADO POR PADRÃO (Salva o áudio no iOS/iPhone) 🔥
             window.EJS_defaultOptions = {
