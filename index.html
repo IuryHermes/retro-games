@@ -136,12 +136,14 @@
         }
         .sidebar-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; flex-shrink: 0; }
         .sidebar-header img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-color); cursor: pointer; }
+        .menu-label { font-family: 'Press Start 2P'; font-size: 8px; color: var(--text-color); margin-top: 8px; text-align: center; display: block; transition: 0.2s; cursor: pointer; }
         .nav-list { display: flex; flex-direction: column; gap: 10px; flex: 1; margin-top: 10px; }
         .nav-item { display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-muted); justify-content: center; flex-shrink: 0; transition: 0.3s; }
         @media(min-width: 769px) { .nav-item { justify-content: flex-start; } }
         .nav-item:hover { background: rgba(0, 204, 68, 0.2); color: var(--text-color); }
         .nav-item img { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; image-rendering: pixelated; }
         .nav-text { display: none; opacity: 0; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
+        .mobile-chat-btn { display: none !important; }
 
         .sidebar-chat { background: var(--bg-color); border: 1px solid var(--accent-color); padding: 10px; border-radius: 4px; height: 350px; min-height: 350px; display: none; flex-direction: column; width: 100%; flex-shrink: 0; margin-bottom: 20px; margin-top: auto; position: relative; }
         .close-chat-btn { display: none; }     
@@ -176,6 +178,7 @@
         input:checked + .slider { background-color: #222; }
         input:checked + .slider:before { transform: translateX(22px); }
 
+        /* HERO BANNER */
         .hero-section { position: relative; width: 100%; height: 800px; background: #000; overflow: hidden; display: flex; align-items: center; }
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; display: flex; align-items: center; z-index: 1; }
         .hero-slide.active { opacity: 1; z-index: 2; }
@@ -193,6 +196,7 @@
         .indicator { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
         .indicator.active { background: var(--accent-color); transform: scale(1.3); }
 
+        /* CARROSSEL E CARDS */
         .catalog { padding: 0 40px; }
         .row-wrapper { margin-top: 30px; margin-bottom: 25px; position: relative; z-index: 5; }
         .row-header { display: flex; align-items: center; justify-content: flex-start; gap: 20px; margin-bottom: 10px; border-left: 3px solid var(--accent-color); padding-left: 10px; }
@@ -232,6 +236,7 @@
             .nav-item { flex-direction: column; padding: 2px 0; flex: 1; gap: 4px; justify-content: center; border-radius: 4px; }
             .nav-item img { width: 22px; height: 22px; margin: 0; border-radius: 0 !important; }
             .nav-text { display: block !important; opacity: 1 !important; font-size: 6px !important; text-align: center; white-space: normal !important; line-height: 1.1; word-break: break-word; }
+            .mobile-chat-btn { display: flex !important; }
             .sidebar-chat.chat-modal-mobile { display: flex !important; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 75%; max-height: 500px; background: var(--top-bar-bg); border: 2px solid var(--accent-color); z-index: 100000 !important; box-shadow: 0 0 40px rgba(0, 204, 68, 0.4); margin: 0; border-radius: 8px; padding-top: 35px; backdrop-filter: blur(10px); }
             .close-chat-btn { display: block; position: absolute; top: 8px; right: 10px; background: transparent; color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 14px; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-weight: bold; }
             #chat-nick, #chat-msg { font-size: 16px; padding: 8px; }
@@ -566,7 +571,8 @@
         slide.id = `hero-slide-${index}`;
             
         const coreToUse = coreMap[game.sysId] || 'snes';
-        // CORREÇÃO: Usando 'game.path' e 'game.rom' aqui para evitar ReferenceError
+        
+        // CORREÇÃO: Variáveis game.path e game.rom no Hero Slider
         const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + game.path + game.rom)}&core=${coreToUse}`;
         const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
 
@@ -664,8 +670,9 @@
         `;
         catalog.appendChild(wrapper);
 
-        let p = fetch(`${sys.path}games.json?v=${new Date().getTime()}`).then(r => {
-            if(!r.ok) throw new Error("JSON não encontrado");
+        // Busca o JSON no R2
+        let p = fetch(`${R2_URL}${sys.path}games.json?v=${new Date().getTime()}`).then(r => {
+            if(!r.ok) throw new Error("JSON não encontrado no R2");
             return r.json();
         }).then(games => {
             const car = document.getElementById(`carousel-${sys.id}`);
@@ -675,11 +682,12 @@
                 const card = document.createElement("div");
                 card.className = "game-card selectable-item";
                     
-                const gifPath = g.preview;
-                const imgPath = g.capa;
+                // CORREÇÃO: Capas e GIFs apontando para o R2
+                const gifPath = R2_URL + sys.path + g.preview;
+                const imgPath = R2_URL + sys.path + g.capa;
                 const coreToUse = coreMap[sys.id] || 'snes';   
                  
-                // CORREÇÃO: R2_URL + sys.path + g.rom
+                // CORREÇÃO: Link do jogo apontando para o R2
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
 
                 card.dataset.url = playUrl;
@@ -726,6 +734,7 @@
                 car.appendChild(card);
             });
         }).catch(err => {
+            console.error("Erro ao carregar o catálogo:", err);
             wrapper.style.display = "none";
             item.style.display = "none";   
         });
@@ -753,13 +762,17 @@
                 const div = document.createElement('div');
                 div.className = 'search-item selectable-item';   
                  
+                // CORREÇÃO: Capa na busca apontando para o R2
+                const capaBusca = R2_URL + h.sysPath + h.capa;
+
                 div.innerHTML = `
-                    <img src="${h.capa}">   
+                    <img src="${capaBusca}">   
                     <span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>
                 `;
                     
                 const coreToUse = coreMap[h.sysId] || 'snes';
-                // CORREÇÃO: R2_URL + h.sysPath + h.rom
+                
+                // CORREÇÃO: Jogo na busca apontando para o R2
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + h.sysPath + h.rom)}&core=${coreToUse}`;
                     
                 div.dataset.url = playUrl;
