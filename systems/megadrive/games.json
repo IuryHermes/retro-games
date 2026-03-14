@@ -1,1479 +1,1057 @@
 [
     {
-        "id": "10-super-jogos",
         "nome": "10 Super Jogos",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/10_super_jogos.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/10-super-jogos.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/10-super-jogos.gif"
+        "rom": "roms/10_super_jogos.md",
+        "capa": "assets/capas/megadrive/10_super_jogos.jpg"
     },
     {
-        "id": "a-lenda-de-thor-o-sucessor-da-luz",
         "nome": "A Lenda De Thor O Sucessor Da Luz",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/a_lenda_de_thor_o_sucessor_da_luz.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/a-lenda-de-thor-o-sucessor-da-luz.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/a-lenda-de-thor-o-sucessor-da-luz.gif"
+        "rom": "roms/a_lenda_de_thor_o_sucessor_da_luz.md",
+        "capa": "assets/capas/megadrive/a_lenda_de_thor_o_sucessor_da_luz.jpg"
     },
     {
-        "id": "addams-family,-the",
         "nome": "Addams Family, The",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/addams_family_the_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/addams-family,-the.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/addams-family,-the.gif"
+        "rom": "roms/addams_family,_the_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/addams_family,_the_(usa,_europe).jpg"
     },
     {
-        "id": "adventures-of-batman-and-robin,-the",
         "nome": "Adventures Of Batman & Robin, The",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/adventures_of_batman_&_robin_the_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/adventures-of-batman-and-robin,-the.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/adventures-of-batman-and-robin,-the.gif"
+        "rom": "roms/adventures_of_batman_&_robin,_the_(usa).md",
+        "capa": "assets/capas/megadrive/adventures_of_batman_&_robin,_the_(usa).jpg"
     },
     {
-        "id": "aero-the-acro-bat",
-        "nome": "Aero The Acro-Bat",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/aero_the_acro-bat_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/aero-the-acro-bat.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/aero-the-acro-bat.gif"
+        "nome": "Aero The Acro Bat",
+        "rom": "roms/aero_the_acro-bat_(usa).md",
+        "capa": "assets/capas/megadrive/aero_the_acro-bat_(usa).jpg"
     },
     {
-        "id": "aero-the-acro-bat-2",
-        "nome": "Aero The Acro-Bat 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/aero_the_acro-bat_2_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/aero-the-acro-bat-2.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/aero-the-acro-bat-2.gif"
+        "nome": "Aero The Acro Bat 2",
+        "rom": "roms/aero_the_acro-bat_2_(usa).md",
+        "capa": "assets/capas/megadrive/aero_the_acro-bat_2_(usa).jpg"
     },
     {
-        "id": "after-burner-ii",
-        "nome": "After Burner 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/after_burner_ii_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/after-burner-ii.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/after-burner-ii.gif"
+        "nome": "After Burner Ii",
+        "rom": "roms/after_burner_ii_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/after_burner_ii_(usa,_europe).jpg"
     },
     {
-        "id": "aladdin",
         "nome": "Aladdin",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/aladdin_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/aladdin.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/aladdin.gif"
+        "rom": "roms/aladdin_(usa).md",
+        "capa": "assets/capas/megadrive/aladdin_(usa).jpg"
     },
     {
-        "id": "alex-kidd-in-the-enchanted-castle",
         "nome": "Alex Kidd In The Enchanted Castle",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/alex_kidd_in_the_enchanted_castle_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/alex-kidd-in-the-enchanted-castle.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/alex-kidd-in-the-enchanted-castle.gif"
+        "rom": "roms/alex_kidd_in_the_enchanted_castle_(usa).md",
+        "capa": "assets/capas/megadrive/alex_kidd_in_the_enchanted_castle_(usa).jpg"
     },
     {
-        "id": "alien-3",
         "nome": "Alien 3",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/alien_3_usa_europe_rev_a.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/alien-3.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/alien-3.gif"
+        "rom": "roms/alien_3_(usa,_europe)_(rev_a).md",
+        "capa": "assets/capas/megadrive/alien_3_(usa,_europe)_(rev_a).jpg"
     },
     {
-        "id": "alien-soldier",
         "nome": "Alien Soldier",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/alien_soldier_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/alien-soldier.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/alien-soldier.gif"
+        "rom": "roms/alien_soldier_(europe).md",
+        "capa": "assets/capas/megadrive/alien_soldier_(europe).jpg"
     },
     {
-        "id": "alien-storm",
         "nome": "Alien Storm",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/alien_storm_world.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/alien-storm.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/alien-storm.gif"
+        "rom": "roms/alien_storm_(world).md",
+        "capa": "assets/capas/megadrive/alien_storm_(world).jpg"
     },
     {
-        "id": "altered-beast",
         "nome": "Altered Beast",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/altered_beast_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/altered-beast.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/altered-beast.gif"
+        "rom": "roms/altered_beast_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/altered_beast_(usa,_europe).jpg"
     },
     {
-        "id": "atomic-robo-kid",
-        "nome": "Atomic Robo-Kid",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/atomic_robo-kid_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/atomic-robo-kid.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/atomic-robo-kid.gif"
+        "nome": "Atomic Robo Kid",
+        "rom": "roms/atomic_robo-kid_(usa).md",
+        "capa": "assets/capas/megadrive/atomic_robo-kid_(usa).jpg"
     },
     {
-        "id": "atomic-runner",
         "nome": "Atomic Runner",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/atomic_runner_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/atomic-runner.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/atomic-runner.gif"
+        "rom": "roms/atomic_runner_(usa).md",
+        "capa": "assets/capas/megadrive/atomic_runner_(usa).jpg"
     },
     {
-        "id": "ayrton-sennas-super-monaco-gp-ii",
-        "nome": "Ayrton Senna's Super Monaco Gp 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/ayrton_sennas_super_monaco_gp_ii_usa_enja.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/ayrton-sennas-super-monaco-gp-ii.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/ayrton-sennas-super-monaco-gp-ii.gif"
+        "nome": "Ayrton Senna'S Super Monaco Gp Ii",
+        "rom": "roms/ayrton_senna's_super_monaco_gp_ii_(usa)_(en,ja).md",
+        "capa": "assets/capas/megadrive/ayrton_senna's_super_monaco_gp_ii_(usa)_(en,ja).jpg"
     },
     {
-        "id": "batman---revenge-of-the-joker",
-        "nome": "Batman - Revenge Of The Joker",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/batman_-_revenge_of_the_joker_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/batman---revenge-of-the-joker.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/batman---revenge-of-the-joker.gif"
+        "nome": "Batman Revenge Of The Joker",
+        "rom": "roms/batman_-_revenge_of_the_joker_(usa).md",
+        "capa": "assets/capas/megadrive/batman_-_revenge_of_the_joker_(usa).jpg"
     },
     {
-        "id": "battle-mania-daiginjou",
         "nome": "Battle Mania Daiginjou",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/battle_mania_daiginjou_japan_korea_translated_en.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/battle-mania-daiginjou.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/battle-mania-daiginjou.gif"
+        "rom": "roms/battle_mania_daiginjou_(japan,_korea)_(translated_en).md",
+        "capa": "assets/capas/megadrive/battle_mania_daiginjou_(japan,_korea)_(translated_en).jpg"
     },
     {
-        "id": "battle-squadron",
         "nome": "Battle Squadron",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/battle_squadron_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/battle-squadron.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/battle-squadron.gif"
+        "rom": "roms/battle_squadron_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/battle_squadron_(usa,_europe).jpg"
     },
     {
-        "id": "battletoads",
         "nome": "Battletoads",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/battletoads_world.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/battletoads.png",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/battletoads.gif"
+        "rom": "roms/battletoads_(world).md",
+        "capa": "assets/capas/megadrive/battletoads_(world).jpg"
     },
     {
-        "id": "beauty-and-the-beast---roar-of-the-beast",
-        "nome": "Beauty And The Beast - Roar Of The Beast",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/beauty_and_the_beast_-_roar_of_the_beast_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/beauty-and-the-beast---roar-of-the-beast.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/beauty-and-the-beast---roar-of-the-beast.gif"
+        "nome": "Beauty And The Beast Roar Of The Beast",
+        "rom": "roms/beauty_and_the_beast_-_roar_of_the_beast_(usa).md",
+        "capa": "assets/capas/megadrive/beauty_and_the_beast_-_roar_of_the_beast_(usa).jpg"
     },
     {
-        "id": "beyond-oasis",
         "nome": "Beyond Oasis",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/beyond_oasis_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/beyond-oasis.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/beyond-oasis.gif"
+        "rom": "roms/beyond_oasis_(usa).md",
+        "capa": "assets/capas/megadrive/beyond_oasis_(usa).jpg"
     },
     {
-        "id": "bio-hazard-battle",
         "nome": "Bio Hazard Battle",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/bio_hazard_battle_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/bio-hazard-battle.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/bio-hazard-battle.gif"
+        "rom": "roms/bio_hazard_battle_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/bio_hazard_battle_(usa,_europe).jpg"
     },
     {
-        "id": "bishoujo-senshi-sailor-moon",
         "nome": "Bishoujo Senshi Sailor Moon",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/bishoujo_senshi_sailor_moon_japan.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/bishoujo-senshi-sailor-moon.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/bishoujo-senshi-sailor-moon.gif"
+        "rom": "roms/bishoujo_senshi_sailor_moon_(japan).md",
+        "capa": "assets/capas/megadrive/bishoujo_senshi_sailor_moon_(japan).jpg"
     },
     {
-        "id": "body-count",
         "nome": "Body Count",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/body_count_europe_enfrdeesit.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/body-count.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/body-count.gif"
+        "rom": "roms/body_count_(europe)_(en,fr,de,es,it).md",
+        "capa": "assets/capas/megadrive/body_count_(europe)_(en,fr,de,es,it).jpg"
     },
     {
-        "id": "caliber50",
         "nome": "Caliber.50",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/caliber.50_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/caliber50.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/caliber50.gif"
+        "rom": "roms/caliber.50_(usa).md",
+        "capa": "assets/capas/megadrive/caliber.50_(usa).jpg"
     },
     {
-        "id": "california-games",
         "nome": "California Games",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/california_games_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/california-games.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/california-games.gif"
+        "rom": "roms/california_games_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/california_games_(usa,_europe).jpg"
     },
     {
-        "id": "captain-planet-and-the-planeteers",
         "nome": "Captain Planet And The Planeteers",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/captain_planet_and_the_planeteers_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/captain-planet-and-the-planeteers.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/captain-planet-and-the-planeteers.gif"
+        "rom": "roms/captain_planet_and_the_planeteers_(europe).md",
+        "capa": "assets/capas/megadrive/captain_planet_and_the_planeteers_(europe).jpg"
     },
     {
-        "id": "castle-of-illusion-starring-mickey-mouse",
         "nome": "Castle Of Illusion Starring Mickey Mouse",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/castle_of_illusion_starring_mickey_mouse_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/castle-of-illusion-starring-mickey-mouse.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/castle-of-illusion-starring-mickey-mouse.gif"
+        "rom": "roms/castle_of_illusion_starring_mickey_mouse_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/castle_of_illusion_starring_mickey_mouse_(usa,_europe).jpg"
     },
     {
-        "id": "castlevania---bloodlines",
-        "nome": "Castlevania - Bloodlines",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/castlevania_-_bloodlines_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/castlevania---bloodlines.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/castlevania---bloodlines.gif"
+        "nome": "Castlevania Bloodlines",
+        "rom": "roms/castlevania_-_bloodlines_(usa).md",
+        "capa": "assets/capas/megadrive/castlevania_-_bloodlines_(usa).jpg"
     },
     {
-        "id": "chakan",
         "nome": "Chakan",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/chakan_usa_europe_1992-10-06_sega_channel.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/chakan.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/chakan.gif"
+        "rom": "roms/chakan_(usa,_europe)_(1992-10-06)_(sega_channel).md",
+        "capa": "assets/capas/megadrive/chakan_(usa,_europe)_(1992-10-06)_(sega_channel).jpg"
     },
     {
-        "id": "chip-n-dale---rescue-rangers",
-        "nome": "Chip 'n Dale - Rescue Rangers",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/chip_n_dale_-_rescue_rangers.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/chip-n-dale---rescue-rangers.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/chip-n-dale---rescue-rangers.gif"
+        "nome": "Chip 'N Dale Rescue Rangers",
+        "rom": "roms/chip_'n_dale_-_rescue_rangers.md",
+        "capa": "assets/capas/megadrive/chip_'n_dale_-_rescue_rangers.jpg"
     },
     {
-        "id": "chuck-rock",
         "nome": "Chuck Rock",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/chuck_rock_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/chuck-rock.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/chuck-rock.gif"
+        "rom": "roms/chuck_rock_(usa).md",
+        "capa": "assets/capas/megadrive/chuck_rock_(usa).jpg"
     },
     {
-        "id": "chuck-rock-ii---son-of-chuck",
-        "nome": "Chuck Rock 2 - Son Of Chuck",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/chuck_rock_ii_-_son_of_chuck_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/chuck-rock-ii---son-of-chuck.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/chuck-rock-ii---son-of-chuck.gif"
+        "nome": "Chuck Rock Ii Son Of Chuck",
+        "rom": "roms/chuck_rock_ii_-_son_of_chuck_(usa).md",
+        "capa": "assets/capas/megadrive/chuck_rock_ii_-_son_of_chuck_(usa).jpg"
     },
     {
-        "id": "comix-zone",
         "nome": "Comix Zone",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/comix_zone_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/comix-zone.png",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/comix-zone.gif"
+        "rom": "roms/comix_zone_(usa).md",
+        "capa": "assets/capas/megadrive/comix_zone_(usa).jpg"
     },
     {
-        "id": "contra---hard-corps",
-        "nome": "Contra - Hard Corps",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/contra_-_hard_corps_usa_korea.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/contra---hard-corps.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/contra---hard-corps.gif"
+        "nome": "Contra Hard Corps",
+        "rom": "roms/contra_-_hard_corps_(usa,_korea).md",
+        "capa": "assets/capas/megadrive/contra_-_hard_corps_(usa,_korea).jpg"
     },
     {
-        "id": "crusader-of-centy",
         "nome": "Crusader Of Centy",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/crusader_of_centy_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/crusader-of-centy.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/crusader-of-centy.gif"
+        "rom": "roms/crusader_of_centy_(usa).md",
+        "capa": "assets/capas/megadrive/crusader_of_centy_(usa).jpg"
     },
     {
-        "id": "decapattack",
-        "nome": "Decapattack",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/decapattack_usa_europe_korea.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/decapattack.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/decapattack.gif"
-    },
-    {
-        "id": "dj-boy",
-        "nome": "Dj Boy",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/dj_boy_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/dj-boy.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/dj-boy.gif"
-    },
-    {
-        "id": "danan-the-jungle-fighter",
         "nome": "Danan The Jungle Fighter",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/danan_the_jungle_fighter.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/danan-the-jungle-fighter.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/danan-the-jungle-fighter.gif"
+        "rom": "roms/danan_the_jungle_fighter.md",
+        "capa": "assets/capas/megadrive/danan_the_jungle_fighter.jpg"
     },
     {
-        "id": "desert-strike---return-to-the-gulf",
-        "nome": "Desert Strike - Return To The Gulf",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/desert_strike_-_return_to_the_gulf_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/desert-strike---return-to-the-gulf.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/desert-strike---return-to-the-gulf.gif"
+        "nome": "Decapattack",
+        "rom": "roms/decapattack_(usa,_europe,_korea).md",
+        "capa": "assets/capas/megadrive/decapattack_(usa,_europe,_korea).jpg"
     },
     {
-        "id": "dinosaurs-tale,-a",
-        "nome": "Dinosaur's Tale, A",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/dinosaurs_tale_a_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/dinosaurs-tale,-a.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/dinosaurs-tale,-a.gif"
+        "nome": "Desert Strike Return To The Gulf",
+        "rom": "roms/desert_strike_-_return_to_the_gulf_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/desert_strike_-_return_to_the_gulf_(usa,_europe).jpg"
     },
     {
-        "id": "donald-in-maui-mallard",
+        "nome": "Dinosaur'S Tale, A",
+        "rom": "roms/dinosaur's_tale,_a_(usa).md",
+        "capa": "assets/capas/megadrive/dinosaur's_tale,_a_(usa).jpg"
+    },
+    {
+        "nome": "Dj Boy",
+        "rom": "roms/dj_boy_(usa).md",
+        "capa": "assets/capas/megadrive/dj_boy_(usa).jpg"
+    },
+    {
         "nome": "Donald In Maui Mallard",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/donald_in_maui_mallard_europe_rev_a.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/donald-in-maui-mallard.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/donald-in-maui-mallard.gif"
+        "rom": "roms/donald_in_maui_mallard_(europe)_(rev_a).md",
+        "capa": "assets/capas/megadrive/donald_in_maui_mallard_(europe)_(rev_a).jpg"
     },
     {
-        "id": "dragon---the-bruce-lee-story",
-        "nome": "Dragon - The Bruce Lee Story",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/dragon_-_the_bruce_lee_story_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/dragon---the-bruce-lee-story.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/dragon---the-bruce-lee-story.gif"
+        "nome": "Dragon The Bruce Lee Story",
+        "rom": "roms/dragon_-_the_bruce_lee_story_(usa).md",
+        "capa": "assets/capas/megadrive/dragon_-_the_bruce_lee_story_(usa).jpg"
     },
     {
-        "id": "duke-nukem-3d",
-        "nome": "Duke Nukem 3d",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/duke_nukem_3d_brazil.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/duke-nukem-3d.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/duke-nukem-3d.gif"
+        "nome": "Duke Nukem 3D",
+        "rom": "roms/duke_nukem_3d_(brazil).md",
+        "capa": "assets/capas/megadrive/duke_nukem_3d_(brazil).jpg"
     },
     {
-        "id": "dynamite-duke",
         "nome": "Dynamite Duke",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/dynamite_duke_world_rev_a.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/dynamite-duke.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/dynamite-duke.gif"
+        "rom": "roms/dynamite_duke_(world)_(rev_a).md",
+        "capa": "assets/capas/megadrive/dynamite_duke_(world)_(rev_a).jpg"
     },
     {
-        "id": "eswat---city-under-siege",
-        "nome": "Eswat - City Under Siege",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/eswat_-_city_under_siege_usa_europe_rev_a.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/eswat---city-under-siege.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/eswat---city-under-siege.gif"
-    },
-    {
-        "id": "earnest-evans",
         "nome": "Earnest Evans",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/earnest_evans_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/earnest-evans.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/earnest-evans.gif"
+        "rom": "roms/earnest_evans_(usa).md",
+        "capa": "assets/capas/megadrive/earnest_evans_(usa).jpg"
     },
     {
-        "id": "ecco-the-dolphin",
         "nome": "Ecco The Dolphin",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/ecco_the_dolphin_usa_europe_korea.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/ecco-the-dolphin.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/ecco-the-dolphin.gif"
+        "rom": "roms/ecco_the_dolphin_(usa,_europe,_korea).md",
+        "capa": "assets/capas/megadrive/ecco_the_dolphin_(usa,_europe,_korea).jpg"
     },
     {
-        "id": "elviento",
-        "nome": "El Viento",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/el.viento_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/elviento.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/elviento.gif"
+        "nome": "El.Viento",
+        "rom": "roms/el.viento_(usa).md",
+        "capa": "assets/capas/megadrive/el.viento_(usa).jpg"
     },
     {
-        "id": "elementalmaster",
-        "nome": "Elemental Master",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/elementalmaster.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/elementalmaster.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/elementalmaster.gif"
+        "nome": "Elementalmaster",
+        "rom": "roms/elementalmaster.md",
+        "capa": "assets/capas/megadrive/elementalmaster.jpg"
     },
     {
-        "id": "fifa-international-soccer",
-        "nome": "Fifa International Soccer",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/fifa_international_soccer_usa_europe_enfrdees.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/fifa-international-soccer.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/fifa-international-soccer.gif"
+        "nome": "Eswat City Under Siege",
+        "rom": "roms/eswat_-_city_under_siege_(usa,_europe)_(rev_a).md",
+        "capa": "assets/capas/megadrive/eswat_-_city_under_siege_(usa,_europe)_(rev_a).jpg"
     },
     {
-        "id": "fifa-soccer-2000-gold-edition",
-        "nome": "Fifa Soccer 2000 Gold Edition",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/fifa_soccer_2000_gold_edition.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/fifa-soccer-2000-gold-edition.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/fifa-soccer-2000-gold-edition.gif"
-    },
-    {
-        "id": "felix-the-cat",
         "nome": "Felix The Cat",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/felix_the_cat.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/felix-the-cat.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/felix-the-cat.gif"
+        "rom": "roms/felix_the_cat.md",
+        "capa": "assets/capas/megadrive/felix_the_cat.jpg"
     },
     {
-        "id": "ferias-frustradas-do-pica-pau",
-        "nome": "Ferias Frustradas Do Pica-Pau",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/ferias_frustradas_do_pica-pau.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/ferias-frustradas-do-pica-pau.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/ferias-frustradas-do-pica-pau.gif"
+        "nome": "Ferias Frustradas Do Pica Pau",
+        "rom": "roms/ferias_frustradas_do_pica-pau.md",
+        "capa": "assets/capas/megadrive/ferias_frustradas_do_pica-pau.jpg"
     },
     {
-        "id": "fighting-masters",
+        "nome": "Fifa International Soccer",
+        "rom": "roms/fifa_international_soccer_(usa,_europe)_(en,fr,de,es).md",
+        "capa": "assets/capas/megadrive/fifa_international_soccer_(usa,_europe)_(en,fr,de,es).jpg"
+    },
+    {
+        "nome": "Fifa Soccer 2000 Gold Edition",
+        "rom": "roms/fifa_soccer_2000_gold_edition.md",
+        "capa": "assets/capas/megadrive/fifa_soccer_2000_gold_edition.jpg"
+    },
+    {
         "nome": "Fighting Masters",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/fighting_masters_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/fighting-masters.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/fighting-masters.gif"
+        "rom": "roms/fighting_masters_(usa).md",
+        "capa": "assets/capas/megadrive/fighting_masters_(usa).jpg"
     },
     {
-        "id": "final-zone",
         "nome": "Final Zone",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/final_zone.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/final-zone.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/final-zone.gif"
+        "rom": "roms/final_zone.md",
+        "capa": "assets/capas/megadrive/final_zone.jpg"
     },
     {
-        "id": "flashback---the-quest-for-identity",
-        "nome": "Flashback - The Quest For Identity",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/flashback_-_the_quest_for_identity_usa_enfr.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/flashback---the-quest-for-identity.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/flashback---the-quest-for-identity.gif"
+        "nome": "Flashback The Quest For Identity",
+        "rom": "roms/flashback_-_the_quest_for_identity_(usa)_(en,fr).md",
+        "capa": "assets/capas/megadrive/flashback_-_the_quest_for_identity_(usa)_(en,fr).jpg"
     },
     {
-        "id": "flintstones,-the",
         "nome": "Flintstones, The",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/flintstones_the_usa_taito.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/flintstones,-the.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/flintstones,-the.gif"
+        "rom": "roms/flintstones,_the_(usa)_(taito).md",
+        "capa": "assets/capas/megadrive/flintstones,_the_(usa)_(taito).jpg"
     },
     {
-        "id": "fushigi-no-umi-no-nadia",
         "nome": "Fushigi No Umi No Nadia",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/fushigi_no_umi_no_nadia_japan_translated_en.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/fushigi-no-umi-no-nadia.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/fushigi-no-umi-no-nadia.gif"
+        "rom": "roms/fushigi_no_umi_no_nadia_(japan)_(translated_en).md",
+        "capa": "assets/capas/megadrive/fushigi_no_umi_no_nadia_(japan)_(translated_en).jpg"
     },
     {
-        "id": "gaiares",
         "nome": "Gaiares",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/gaiares_japan_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/gaiares.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/gaiares.gif"
+        "rom": "roms/gaiares_(japan,_usa).md",
+        "capa": "assets/capas/megadrive/gaiares_(japan,_usa).jpg"
     },
     {
-        "id": "gargoyles",
         "nome": "Gargoyles",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/gargoyles_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/gargoyles.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/gargoyles.gif"
+        "rom": "roms/gargoyles_(usa).md",
+        "capa": "assets/capas/megadrive/gargoyles_(usa).jpg"
     },
     {
-        "id": "generations-lost",
         "nome": "Generations Lost",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/generations_lost_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/generations-lost.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/generations-lost.gif"
+        "rom": "roms/generations_lost_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/generations_lost_(usa,_europe).jpg"
     },
     {
-        "id": "ghouls-n-ghosts",
         "nome": "Ghouls 'N Ghosts",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/ghouls_n_ghosts_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/ghouls-n-ghosts.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/ghouls-n-ghosts.gif"
+        "rom": "roms/ghouls_'n_ghosts_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/ghouls_'n_ghosts_(usa,_europe).jpg"
     },
     {
-        "id": "gods",
         "nome": "Gods",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/gods_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/gods.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/gods.gif"
+        "rom": "roms/gods_(usa).md",
+        "capa": "assets/capas/megadrive/gods_(usa).jpg"
     },
     {
-        "id": "golden-axe",
         "nome": "Golden Axe",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/golden_axe_world_rev_a.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/golden-axe.png",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/golden-axe.gif"
+        "rom": "roms/golden_axe_(world)_(rev_a).md",
+        "capa": "assets/capas/megadrive/golden_axe_(world)_(rev_a).jpg"
     },
     {
-        "id": "golden-axe-ii",
-        "nome": "Golden Axe 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/golden_axe_ii_world.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/golden-axe-ii.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/golden-axe-ii.gif"
+        "nome": "Golden Axe Ii",
+        "rom": "roms/golden_axe_ii_(world).md",
+        "capa": "assets/capas/megadrive/golden_axe_ii_(world).jpg"
     },
     {
-        "id": "golden-axe-iii",
-        "nome": "Golden Axe 3",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/golden_axe_iii_japan_en.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/golden-axe-iii.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/golden-axe-iii.gif"
+        "nome": "Golden Axe Iii",
+        "rom": "roms/golden_axe_iii_(japan)_(en).md",
+        "capa": "assets/capas/megadrive/golden_axe_iii_(japan)_(en).jpg"
     },
     {
-        "id": "goofys-hysterical-history-tour",
-        "nome": "Goofy's Hysterical History Tour",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/goofys_hysterical_history_tour_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/goofys-hysterical-history-tour.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/goofys-hysterical-history-tour.gif"
+        "nome": "Goofy'S Hysterical History Tour",
+        "rom": "roms/goofy's_hysterical_history_tour_(usa).md",
+        "capa": "assets/capas/megadrive/goofy's_hysterical_history_tour_(usa).jpg"
     },
     {
-        "id": "greendog---the-beached-surfer-dude!",
-        "nome": "Greendog - The Beached Surfer Dude!",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/greendog_-_the_beached_surfer_dude!_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/greendog---the-beached-surfer-dude!.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/greendog---the-beached-surfer-dude!.gif"
+        "nome": "Greendog The Beached Surfer Dude!",
+        "rom": "roms/greendog_-_the_beached_surfer_dude!_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/greendog_-_the_beached_surfer_dude!_(usa,_europe).jpg"
     },
     {
-        "id": "griels-quest-for-the-holy",
         "nome": "Griels Quest For The Holy",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/griels_quest_for_the_holy.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/griels-quest-for-the-holy.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/griels-quest-for-the-holy.gif"
+        "rom": "roms/griels_quest_for_the_holy.md",
+        "capa": "assets/capas/megadrive/griels_quest_for_the_holy.jpg"
     },
     {
-        "id": "haunting-starring-polterguy",
         "nome": "Haunting Starring Polterguy",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/haunting_starring_polterguy.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/haunting-starring-polterguy.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/haunting-starring-polterguy.gif"
+        "rom": "roms/haunting_starring_polterguy.md",
+        "capa": "assets/capas/megadrive/haunting_starring_polterguy.jpg"
     },
     {
-        "id": "insector-x",
         "nome": "Insector X",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/insector_x_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/insector-x.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/insector-x.gif"
+        "rom": "roms/insector_x_(usa).md",
+        "capa": "assets/capas/megadrive/insector_x_(usa).jpg"
     },
     {
-        "id": "james-bond-007---the-duel",
-        "nome": "James Bond 007 - The Duel",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/james_bond_007_-_the_duel_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/james-bond-007---the-duel.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/james-bond-007---the-duel.gif"
+        "nome": "James Bond 007 The Duel",
+        "rom": "roms/james_bond_007_-_the_duel_(usa).md",
+        "capa": "assets/capas/megadrive/james_bond_007_-_the_duel_(usa).jpg"
     },
     {
-        "id": "james-pond---underwater-agent",
-        "nome": "James Pond - Underwater Agent",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/james_pond_-_underwater_agent_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/james-pond---underwater-agent.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/james-pond---underwater-agent.gif"
+        "nome": "James Pond Underwater Agent",
+        "rom": "roms/james_pond_-_underwater_agent_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/james_pond_-_underwater_agent_(usa,_europe).jpg"
     },
     {
-        "id": "james-pond-3",
         "nome": "James Pond 3",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/james_pond_3_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/james-pond-3.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/james-pond-3.gif"
+        "rom": "roms/james_pond_3_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/james_pond_3_(usa,_europe).jpg"
     },
     {
-        "id": "james-pond-ii---codename---robocod",
-        "nome": "James Pond 2 - Codename - Robocod",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/james_pond_ii_-_codename_-_robocod_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/james-pond-ii---codename---robocod.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/james-pond-ii---codename---robocod.gif"
+        "nome": "James Pond Ii Codename Robocod",
+        "rom": "roms/james_pond_ii_-_codename_-_robocod_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/james_pond_ii_-_codename_-_robocod_(usa,_europe).jpg"
     },
     {
-        "id": "jewel-master",
         "nome": "Jewel Master",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/jewel_master_japan.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/jewel-master.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/jewel-master.gif"
+        "rom": "roms/jewel_master_(japan).md",
+        "capa": "assets/capas/megadrive/jewel_master_(japan).jpg"
     },
     {
-        "id": "joe-and-mac",
         "nome": "Joe & Mac",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/joe_&_mac_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/joe-and-mac.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/joe-and-mac.gif"
+        "rom": "roms/joe_&_mac_(usa).md",
+        "capa": "assets/capas/megadrive/joe_&_mac_(usa).jpg"
     },
     {
-        "id": "journey-from-darkness---strider-returns",
-        "nome": "Journey From Darkness - Strider Returns",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/journey_from_darkness_-_strider_returns_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/journey-from-darkness---strider-returns.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/journey-from-darkness---strider-returns.gif"
+        "nome": "Journey From Darkness Strider Returns",
+        "rom": "roms/journey_from_darkness_-_strider_returns_(usa).md",
+        "capa": "assets/capas/megadrive/journey_from_darkness_-_strider_returns_(usa).jpg"
     },
     {
-        "id": "juju-densetsu",
         "nome": "Juju Densetsu",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/juju_densetsu.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/juju-densetsu.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/juju-densetsu.gif"
+        "rom": "roms/juju_densetsu.md",
+        "capa": "assets/capas/megadrive/juju_densetsu.jpg"
     },
     {
-        "id": "jungle-strike",
         "nome": "Jungle Strike",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/jungle_strike_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/jungle-strike.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/jungle-strike.gif"
+        "rom": "roms/jungle_strike_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/jungle_strike_(usa,_europe).jpg"
     },
     {
-        "id": "justice-league-task-force",
         "nome": "Justice League Task Force",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/justice_league_task_force_world.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/justice-league-task-force.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/justice-league-task-force.gif"
+        "rom": "roms/justice_league_task_force_(world).md",
+        "capa": "assets/capas/megadrive/justice_league_task_force_(world).jpg"
     },
     {
-        "id": "kid-chameleon",
         "nome": "Kid Chameleon",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/kid_chameleon_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/kid-chameleon.png",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/kid-chameleon.gif"
+        "rom": "roms/kid_chameleon_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/kid_chameleon_(usa,_europe).jpg"
     },
     {
-        "id": "landstalker",
         "nome": "Landstalker",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/landstalker_usa_1993-07-13_sega_channel.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/landstalker.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/landstalker.gif"
+        "rom": "roms/landstalker_(usa)_(1993-07-13)_(sega_channel).md",
+        "capa": "assets/capas/megadrive/landstalker_(usa)_(1993-07-13)_(sega_channel).jpg"
     },
     {
-        "id": "legend-of-wukong",
         "nome": "Legend Of Wukong",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/legend_of_wukong.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/legend-of-wukong.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/legend-of-wukong.gif"
+        "rom": "roms/legend_of_wukong.md",
+        "capa": "assets/capas/megadrive/legend_of_wukong.jpg"
     },
     {
-        "id": "lemmings",
         "nome": "Lemmings",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/lemmings_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/lemmings.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/lemmings.gif"
+        "rom": "roms/lemmings_(usa).md",
+        "capa": "assets/capas/megadrive/lemmings_(usa).jpg"
     },
     {
-        "id": "light-crusader",
         "nome": "Light Crusader",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/light_crusader_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/light-crusader.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/light-crusader.gif"
+        "rom": "roms/light_crusader_(usa).md",
+        "capa": "assets/capas/megadrive/light_crusader_(usa).jpg"
     },
     {
-        "id": "lightening-force---quest-for-the-darkstar",
-        "nome": "Lightening Force - Quest For The Darkstar",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/lightening_force_-_quest_for_the_darkstar_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/lightening-force---quest-for-the-darkstar.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/lightening-force---quest-for-the-darkstar.gif"
+        "nome": "Lightening Force Quest For The Darkstar",
+        "rom": "roms/lightening_force_-_quest_for_the_darkstar_(usa).md",
+        "capa": "assets/capas/megadrive/lightening_force_-_quest_for_the_darkstar_(usa).jpg"
     },
     {
-        "id": "lost-world,-the---jurassic-park",
-        "nome": "Lost World, The - Jurassic Park",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/lost_world_the_-_jurassic_park_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/lost-world,-the---jurassic-park.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/lost-world,-the---jurassic-park.gif"
+        "nome": "Lost World, The Jurassic Park",
+        "rom": "roms/lost_world,_the_-_jurassic_park_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/lost_world,_the_-_jurassic_park_(usa,_europe).jpg"
     },
     {
-        "id": "musha---metallic-uniframe-super-hybrid-armor",
-        "nome": "Musha - Metallic Uniframe Super Hybrid Armor",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/musha_-_metallic_uniframe_super_hybrid_armor_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/musha---metallic-uniframe-super-hybrid-armor.png",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/musha---metallic-uniframe-super-hybrid-armor.gif"
-    },
-    {
-        "id": "mario-and-battle-city",
         "nome": "Mario & Battle City",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/mario_&_battle_city.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/mario-and-battle-city.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/mario-and-battle-city.gif"
+        "rom": "roms/mario_&_battle_city.md",
+        "capa": "assets/capas/megadrive/mario_&_battle_city.jpg"
     },
     {
-        "id": "marsupilami",
         "nome": "Marsupilami",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/marsupilami_usa_enfrdeesit.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/marsupilami.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/marsupilami.gif"
+        "rom": "roms/marsupilami_(usa)_(en,fr,de,es,it).md",
+        "capa": "assets/capas/megadrive/marsupilami_(usa)_(en,fr,de,es,it).jpg"
     },
     {
-        "id": "mcdonalds-treasure-land-adventure",
-        "nome": "Mcdonald's Treasure Land Adventure",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/mcdonalds_treasure_land_adventure_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/mcdonalds-treasure-land-adventure.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/mcdonalds-treasure-land-adventure.gif"
+        "nome": "Mcdonald'S Treasure Land Adventure",
+        "rom": "roms/mcdonald's_treasure_land_adventure_(usa).md",
+        "capa": "assets/capas/megadrive/mcdonald's_treasure_land_adventure_(usa).jpg"
     },
     {
-        "id": "mega-man---the-wily-wars",
-        "nome": "Mega Man - The Wily Wars",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/mega_man_-_the_wily_wars_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/mega-man---the-wily-wars.png",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/mega-man---the-wily-wars.gif"
+        "nome": "Mega Man The Wily Wars",
+        "rom": "roms/mega_man_-_the_wily_wars_(europe).md",
+        "capa": "assets/capas/megadrive/mega_man_-_the_wily_wars_(europe).jpg"
     },
     {
-        "id": "mega-turrican",
         "nome": "Mega Turrican",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/mega_turrican_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/mega-turrican.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/mega-turrican.gif"
+        "rom": "roms/mega_turrican_(usa).md",
+        "capa": "assets/capas/megadrive/mega_turrican_(usa).jpg"
     },
     {
-        "id": "mercs",
         "nome": "Mercs",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/mercs_world.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/mercs.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/mercs.gif"
+        "rom": "roms/mercs_(world).md",
+        "capa": "assets/capas/megadrive/mercs_(world).jpg"
     },
     {
-        "id": "michael-jacksons-moonwalker",
-        "nome": "Michael Jackson's Moonwalker",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/michael_jacksons_moonwalker_japan_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/michael-jacksons-moonwalker.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/michael-jacksons-moonwalker.gif"
+        "nome": "Michael Jackson'S Moonwalker",
+        "rom": "roms/michael_jackson's_moonwalker_(japan,_usa).md",
+        "capa": "assets/capas/megadrive/michael_jackson's_moonwalker_(japan,_usa).jpg"
     },
     {
-        "id": "micro-machines---military",
-        "nome": "Micro Machines - Military",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/micro_machines_-_military_europe_j-cart.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/micro-machines---military.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/micro-machines---military.gif"
+        "nome": "Micro Machines Military",
+        "rom": "roms/micro_machines_-_military_(europe)_(j-cart).md",
+        "capa": "assets/capas/megadrive/micro_machines_-_military_(europe)_(j-cart).jpg"
     },
     {
-        "id": "micro-machines---turbo-tournament-96",
-        "nome": "Micro Machines - Turbo Tournament 96",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/micro_machines_-_turbo_tournament_96_europe_rev_1_j-cart.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/micro-machines---turbo-tournament-96.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/micro-machines---turbo-tournament-96.gif"
+        "nome": "Micro Machines Turbo Tournament 96",
+        "rom": "roms/micro_machines_-_turbo_tournament_96_(europe)_(rev_1)_(j-cart).md",
+        "capa": "assets/capas/megadrive/micro_machines_-_turbo_tournament_96_(europe)_(rev_1)_(j-cart).jpg"
     },
     {
-        "id": "midnight-resistance",
         "nome": "Midnight Resistance",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/midnight_resistance_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/midnight-resistance.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/midnight-resistance.gif"
+        "rom": "roms/midnight_resistance_(usa).md",
+        "capa": "assets/capas/megadrive/midnight_resistance_(usa).jpg"
     },
     {
-        "id": "monster-world-iv",
-        "nome": "Monster World 4",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/monster_world_iv_usa_genesis_mini.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/monster-world-iv.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/monster-world-iv.gif"
+        "nome": "Monster World Iv",
+        "rom": "roms/monster_world_iv_(usa)_(genesis_mini).md",
+        "capa": "assets/capas/megadrive/monster_world_iv_(usa)_(genesis_mini).jpg"
     },
     {
-        "id": "mortal-kombat",
         "nome": "Mortal Kombat",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/mortal_kombat_world.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/mortal-kombat.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/mortal-kombat.gif"
+        "rom": "roms/mortal_kombat_(world).md",
+        "capa": "assets/capas/megadrive/mortal_kombat_(world).jpg"
     },
     {
-        "id": "mystic-defender",
+        "nome": "Musha Metallic Uniframe Super Hybrid Armor",
+        "rom": "roms/musha_-_metallic_uniframe_super_hybrid_armor_(usa).md",
+        "capa": "assets/capas/megadrive/musha_-_metallic_uniframe_super_hybrid_armor_(usa).jpg"
+    },
+    {
         "nome": "Mystic Defender",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/mystic_defender_usa_europe_rev_a.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/mystic-defender.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/mystic-defender.gif"
+        "rom": "roms/mystic_defender_(usa,_europe)_(rev_a).md",
+        "capa": "assets/capas/megadrive/mystic_defender_(usa,_europe)_(rev_a).jpg"
     },
     {
-        "id": "new-zealand-story,-the",
         "nome": "New Zealand Story, The",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/new_zealand_story_the_japan.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/new-zealand-story,-the.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/new-zealand-story,-the.gif"
+        "rom": "roms/new_zealand_story,_the_(japan).md",
+        "capa": "assets/capas/megadrive/new_zealand_story,_the_(japan).jpg"
     },
     {
-        "id": "nightmare-circus",
         "nome": "Nightmare Circus",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/nightmare_circus_brazil.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/nightmare-circus.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/nightmare-circus.gif"
+        "rom": "roms/nightmare_circus_(brazil).md",
+        "capa": "assets/capas/megadrive/nightmare_circus_(brazil).jpg"
     },
     {
-        "id": "outrun",
         "nome": "Outrun",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/outrun_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/outrun.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/outrun.gif"
+        "rom": "roms/outrun_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/outrun_(usa,_europe).jpg"
     },
     {
-        "id": "outrun-2019",
         "nome": "Outrun 2019",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/outrun_2019_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/outrun-2019.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/outrun-2019.gif"
+        "rom": "roms/outrun_2019_(usa).md",
+        "capa": "assets/capas/megadrive/outrun_2019_(usa).jpg"
     },
     {
-        "id": "outrunners",
         "nome": "Outrunners",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/outrunners_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/outrunners.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/outrunners.gif"
+        "rom": "roms/outrunners_(usa).md",
+        "capa": "assets/capas/megadrive/outrunners_(usa).jpg"
     },
     {
-        "id": "pac-mania",
-        "nome": "Pac-Mania",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/pac-mania_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/pac-mania.png",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/pac-mania.gif"
+        "nome": "Pac Mania",
+        "rom": "roms/pac-mania_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/pac-mania_(usa,_europe).jpg"
     },
     {
-        "id": "paperboy",
         "nome": "Paperboy",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/paperboy_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/paperboy.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/paperboy.gif"
+        "rom": "roms/paperboy_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/paperboy_(usa,_europe).jpg"
     },
     {
-        "id": "phantasy-star---the-end-of-the-millenium",
-        "nome": "Phantasy Star - The End Of The Millenium",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/phantasy_star_-_the_end_of_the_millenium.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/phantasy-star---the-end-of-the-millenium.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/phantasy-star---the-end-of-the-millenium.gif"
+        "nome": "Phantasy Star The End Of The Millenium",
+        "rom": "roms/phantasy_star_-_the_end_of_the_millenium.md",
+        "capa": "assets/capas/megadrive/phantasy_star_-_the_end_of_the_millenium.jpg"
     },
     {
-        "id": "phantasy-star-ii",
-        "nome": "Phantasy Star 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/phantasy_star_ii_usa_europe_rev_a.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/phantasy-star-ii.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/phantasy-star-ii.gif"
+        "nome": "Phantasy Star Ii",
+        "rom": "roms/phantasy_star_ii_(usa,_europe)_(rev_a).md",
+        "capa": "assets/capas/megadrive/phantasy_star_ii_(usa,_europe)_(rev_a).jpg"
     },
     {
-        "id": "phantasy-star-iii---generations-of-doom",
-        "nome": "Phantasy Star 3 - Generations Of Doom",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/phantasy_star_iii_-_generations_of_doom_usa_europe_korea.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/phantasy-star-iii---generations-of-doom.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/phantasy-star-iii---generations-of-doom.gif"
+        "nome": "Phantasy Star Iii Generations Of Doom",
+        "rom": "roms/phantasy_star_iii_-_generations_of_doom_(usa,_europe,_korea).md",
+        "capa": "assets/capas/megadrive/phantasy_star_iii_-_generations_of_doom_(usa,_europe,_korea).jpg"
     },
     {
-        "id": "phantasy-star-iv",
-        "nome": "Phantasy Star 4",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/phantasy_star_iv_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/phantasy-star-iv.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/phantasy-star-iv.gif"
+        "nome": "Phantasy Star Iv",
+        "rom": "roms/phantasy_star_iv_(usa).md",
+        "capa": "assets/capas/megadrive/phantasy_star_iv_(usa).jpg"
     },
     {
-        "id": "phelios",
         "nome": "Phelios",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/phelios_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/phelios.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/phelios.gif"
+        "rom": "roms/phelios_(usa).md",
+        "capa": "assets/capas/megadrive/phelios_(usa).jpg"
     },
     {
-        "id": "pier-solar-and-the-great-architects",
         "nome": "Pier Solar And The Great Architects",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/pier_solar_and_the_great_architects_usa_unl.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/pier-solar-and-the-great-architects.png",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/pier-solar-and-the-great-architects.gif"
+        "rom": "roms/pier_solar_and_the_great_architects_(usa)_(unl).md",
+        "capa": "assets/capas/megadrive/pier_solar_and_the_great_architects_(usa)_(unl).jpg"
     },
     {
-        "id": "pink-goes-to-hollywood",
         "nome": "Pink Goes To Hollywood",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/pink_goes_to_hollywood_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/pink-goes-to-hollywood.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/pink-goes-to-hollywood.gif"
+        "rom": "roms/pink_goes_to_hollywood_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/pink_goes_to_hollywood_(usa,_europe).jpg"
     },
     {
-        "id": "pinocchio",
         "nome": "Pinocchio",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/pinocchio_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/pinocchio.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/pinocchio.gif"
+        "rom": "roms/pinocchio_(usa).md",
+        "capa": "assets/capas/megadrive/pinocchio_(usa).jpg"
     },
     {
-        "id": "pirates-of-dark-water,-the",
         "nome": "Pirates Of Dark Water, The",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/pirates_of_dark_water_the_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/pirates-of-dark-water,-the.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/pirates-of-dark-water,-the.gif"
+        "rom": "roms/pirates_of_dark_water,_the_(usa).md",
+        "capa": "assets/capas/megadrive/pirates_of_dark_water,_the_(usa).jpg"
     },
     {
-        "id": "pit-fighter",
-        "nome": "Pit-Fighter",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/pit-fighter_world_enja.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/pit-fighter.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/pit-fighter.gif"
+        "nome": "Pit Fighter",
+        "rom": "roms/pit-fighter_(world)_(en,ja).md",
+        "capa": "assets/capas/megadrive/pit-fighter_(world)_(en,ja).jpg"
     },
     {
-        "id": "pocahontas",
         "nome": "Pocahontas",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/pocahontas_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/pocahontas.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/pocahontas.gif"
+        "rom": "roms/pocahontas_(usa).md",
+        "capa": "assets/capas/megadrive/pocahontas_(usa).jpg"
     },
     {
-        "id": "power-drive",
         "nome": "Power Drive",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/power_drive_europe_enfrdeespt.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/power-drive.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/power-drive.gif"
+        "rom": "roms/power_drive_(europe)_(en,fr,de,es,pt).md",
+        "capa": "assets/capas/megadrive/power_drive_(europe)_(en,fr,de,es,pt).jpg"
     },
     {
-        "id": "predator-2",
         "nome": "Predator 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/predator_2_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/predator-2.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/predator-2.gif"
+        "rom": "roms/predator_2_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/predator_2_(usa,_europe).jpg"
     },
     {
-        "id": "pulseman",
         "nome": "Pulseman",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/pulseman.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/pulseman.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/pulseman.gif"
+        "rom": "roms/pulseman.md",
+        "capa": "assets/capas/megadrive/pulseman.jpg"
     },
     {
-        "id": "punisher,-the",
         "nome": "Punisher, The",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/punisher_the_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/punisher,-the.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/punisher,-the.gif"
+        "rom": "roms/punisher,_the_(usa).md",
+        "capa": "assets/capas/megadrive/punisher,_the_(usa).jpg"
     },
     {
-        "id": "quackshot-starring-donald-duck-~-quackshot---i-love-donald-duck---guruzia-ou-no-hihou",
-        "nome": "Quackshot Starring Donald Duck ~ Quackshot - I Love Donald Duck - Guruzia Ou No Hihou",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/quackshot_starring_donald_duck_~_quackshot_-_i_love_donald_duck_-_guruzia_ou_no_hihou_world_rev_a.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/quackshot-starring-donald-duck-~-quackshot---i-love-donald-duck---guruzia-ou-no-hihou.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/quackshot-starring-donald-duck-~-quackshot---i-love-donald-duck---guruzia-ou-no-hihou.gif"
+        "nome": "Quackshot Starring Donald Duck ~ Quackshot I Love Donald Duck Guruzia Ou No Hihou",
+        "rom": "roms/quackshot_starring_donald_duck_~_quackshot_-_i_love_donald_duck_-_guruzia_ou_no_hihou_(world)_(rev_a).md",
+        "capa": "assets/capas/megadrive/quackshot_starring_donald_duck_~_quackshot_-_i_love_donald_duck_-_guruzia_ou_no_hihou_(world)_(rev_a).jpg"
     },
     {
-        "id": "raiden-densetsu-~-raiden-trad",
         "nome": "Raiden Densetsu ~ Raiden Trad",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/raiden_densetsu_~_raiden_trad_japan_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/raiden-densetsu-~-raiden-trad.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/raiden-densetsu-~-raiden-trad.gif"
+        "rom": "roms/raiden_densetsu_~_raiden_trad_(japan,_usa).md",
+        "capa": "assets/capas/megadrive/raiden_densetsu_~_raiden_trad_(japan,_usa).jpg"
     },
     {
-        "id": "rambo-iii",
-        "nome": "Rambo 3",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/rambo_iii_usa_europe_korea_rev_a.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/rambo-iii.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/rambo-iii.gif"
+        "nome": "Rambo Iii",
+        "rom": "roms/rambo_iii_(usa,_europe,_korea)_(rev_a).md",
+        "capa": "assets/capas/megadrive/rambo_iii_(usa,_europe,_korea)_(rev_a).jpg"
     },
     {
-        "id": "ranger-x",
         "nome": "Ranger X",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/ranger_x_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/ranger-x.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/ranger-x.gif"
+        "rom": "roms/ranger_x_(usa).md",
+        "capa": "assets/capas/megadrive/ranger_x_(usa).jpg"
     },
     {
-        "id": "revenge-of-shinobi,-the",
         "nome": "Revenge Of Shinobi, The",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/revenge_of_shinobi_the_usa_europe_rev_b.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/revenge-of-shinobi,-the.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/revenge-of-shinobi,-the.gif"
+        "rom": "roms/revenge_of_shinobi,_the_(usa,_europe)_(rev_b).md",
+        "capa": "assets/capas/megadrive/revenge_of_shinobi,_the_(usa,_europe)_(rev_b).jpg"
     },
     {
-        "id": "ristar",
         "nome": "Ristar",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/ristar_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/ristar.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/ristar.gif"
+        "rom": "roms/ristar_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/ristar_(usa,_europe).jpg"
     },
     {
-        "id": "road-rash",
         "nome": "Road Rash",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/road_rash_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/road-rash.png",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/road-rash.gif"
+        "rom": "roms/road_rash_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/road_rash_(usa,_europe).jpg"
     },
     {
-        "id": "road-rash-ii",
-        "nome": "Road Rash 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/road_rash_ii_usa_europe_rr206.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/road-rash-ii.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/road-rash-ii.gif"
+        "nome": "Road Rash Ii",
+        "rom": "roms/road_rash_ii_(usa,_europe)_(rr206).md",
+        "capa": "assets/capas/megadrive/road_rash_ii_(usa,_europe)_(rr206).jpg"
     },
     {
-        "id": "robocop-3",
         "nome": "Robocop 3",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/robocop_3_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/robocop-3.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/robocop-3.gif"
+        "rom": "roms/robocop_3_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/robocop_3_(usa,_europe).jpg"
     },
     {
-        "id": "robocop-versus-the-terminator",
         "nome": "Robocop Versus The Terminator",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/robocop_versus_the_terminator_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/robocop-versus-the-terminator.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/robocop-versus-the-terminator.gif"
+        "rom": "roms/robocop_versus_the_terminator_(usa).md",
+        "capa": "assets/capas/megadrive/robocop_versus_the_terminator_(usa).jpg"
     },
     {
-        "id": "rocket-knight-adventures",
         "nome": "Rocket Knight Adventures",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/rocket_knight_adventures_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/rocket-knight-adventures.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/rocket-knight-adventures.gif"
+        "rom": "roms/rocket_knight_adventures_(usa).md",
+        "capa": "assets/capas/megadrive/rocket_knight_adventures_(usa).jpg"
     },
     {
-        "id": "rolling-thunder-2",
         "nome": "Rolling Thunder 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/rolling_thunder_2_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/rolling-thunder-2.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/rolling-thunder-2.gif"
+        "rom": "roms/rolling_thunder_2_(usa).md",
+        "capa": "assets/capas/megadrive/rolling_thunder_2_(usa).jpg"
     },
     {
-        "id": "rolling-thunder-3",
         "nome": "Rolling Thunder 3",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/rolling_thunder_3_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/rolling-thunder-3.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/rolling-thunder-3.gif"
+        "rom": "roms/rolling_thunder_3_(usa).md",
+        "capa": "assets/capas/megadrive/rolling_thunder_3_(usa).jpg"
     },
     {
-        "id": "ronaldinho-98",
         "nome": "Ronaldinho '98",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/ronaldinho_98.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/ronaldinho-98.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/ronaldinho-98.gif"
+        "rom": "roms/ronaldinho_'98.md",
+        "capa": "assets/capas/megadrive/ronaldinho_'98.jpg"
     },
     {
-        "id": "sagaia",
         "nome": "Sagaia",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/sagaia_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/sagaia.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/sagaia.gif"
+        "rom": "roms/sagaia_(usa).md",
+        "capa": "assets/capas/megadrive/sagaia_(usa).jpg"
     },
     {
-        "id": "scooby-doo-mystery",
-        "nome": "Scooby-Doo Mystery",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/scooby-doo_mystery_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/scooby-doo-mystery.png",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/scooby-doo-mystery.gif"
+        "nome": "Scooby Doo Mystery",
+        "rom": "roms/scooby-doo_mystery_(usa).md",
+        "capa": "assets/capas/megadrive/scooby-doo_mystery_(usa).jpg"
     },
     {
-        "id": "second-samurai",
         "nome": "Second Samurai",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/second_samurai_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/second-samurai.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/second-samurai.gif"
+        "rom": "roms/second_samurai_(europe).md",
+        "capa": "assets/capas/megadrive/second_samurai_(europe).jpg"
     },
     {
-        "id": "sega-top-five",
         "nome": "Sega Top Five",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/sega_top_five.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/sega-top-five.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/sega-top-five.gif"
+        "rom": "roms/sega_top_five.md",
+        "capa": "assets/capas/megadrive/sega_top_five.jpg"
     },
     {
-        "id": "shadow-dancer---the-secret-of-shinobi",
-        "nome": "Shadow Dancer - The Secret Of Shinobi",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/shadow_dancer_-_the_secret_of_shinobi_world.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/shadow-dancer---the-secret-of-shinobi.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/shadow-dancer---the-secret-of-shinobi.gif"
+        "nome": "Shadow Dancer The Secret Of Shinobi",
+        "rom": "roms/shadow_dancer_-_the_secret_of_shinobi_(world).md",
+        "capa": "assets/capas/megadrive/shadow_dancer_-_the_secret_of_shinobi_(world).jpg"
     },
     {
-        "id": "shadow-of-the-beast",
         "nome": "Shadow Of The Beast",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/shadow_of_the_beast_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/shadow-of-the-beast.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/shadow-of-the-beast.gif"
+        "rom": "roms/shadow_of_the_beast_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/shadow_of_the_beast_(usa,_europe).jpg"
     },
     {
-        "id": "shadow-of-the-beast-ii",
-        "nome": "Shadow Of The Beast 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/shadow_of_the_beast_ii_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/shadow-of-the-beast-ii.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/shadow-of-the-beast-ii.gif"
+        "nome": "Shadow Of The Beast Ii",
+        "rom": "roms/shadow_of_the_beast_ii_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/shadow_of_the_beast_ii_(usa,_europe).jpg"
     },
     {
-        "id": "shining-force",
         "nome": "Shining Force",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/shining_force_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/shining-force.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/shining-force.gif"
+        "rom": "roms/shining_force_(usa).md",
+        "capa": "assets/capas/megadrive/shining_force_(usa).jpg"
     },
     {
-        "id": "shining-force-ii",
-        "nome": "Shining Force 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/shining_force_ii_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/shining-force-ii.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/shining-force-ii.gif"
+        "nome": "Shining Force Ii",
+        "rom": "roms/shining_force_ii_(usa).md",
+        "capa": "assets/capas/megadrive/shining_force_ii_(usa).jpg"
     },
     {
-        "id": "shining-in-the-darkness",
         "nome": "Shining In The Darkness",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/shining_in_the_darkness_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/shining-in-the-darkness.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/shining-in-the-darkness.gif"
+        "rom": "roms/shining_in_the_darkness_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/shining_in_the_darkness_(usa,_europe).jpg"
     },
     {
-        "id": "shinobi-iii---return-of-the-ninja-master",
-        "nome": "Shinobi 3 - Return Of The Ninja Master",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/shinobi_iii_-_return_of_the_ninja_master_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/shinobi-iii---return-of-the-ninja-master.png",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/shinobi-iii---return-of-the-ninja-master.gif"
+        "nome": "Shinobi Iii Return Of The Ninja Master",
+        "rom": "roms/shinobi_iii_-_return_of_the_ninja_master_(usa).md",
+        "capa": "assets/capas/megadrive/shinobi_iii_-_return_of_the_ninja_master_(usa).jpg"
     },
     {
-        "id": "shove-it!-the-warehouse-game",
         "nome": "Shove It! ...The Warehouse Game",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/shove_it!_...the_warehouse_game_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/shove-it!-the-warehouse-game.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/shove-it!-the-warehouse-game.gif"
+        "rom": "roms/shove_it!_...the_warehouse_game_(usa).md",
+        "capa": "assets/capas/megadrive/shove_it!_...the_warehouse_game_(usa).jpg"
     },
     {
-        "id": "show-do-milhao---vol-1",
-        "nome": "Show Do Milhao - Vol. 1",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/show_do_milhao_-_vol._1.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/show-do-milhao---vol-1.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/show-do-milhao---vol-1.gif"
+        "nome": "Show Do Milhao Vol. 1",
+        "rom": "roms/show_do_milhao_-_vol._1.md",
+        "capa": "assets/capas/megadrive/show_do_milhao_-_vol._1.jpg"
     },
     {
-        "id": "show-do-milhao---vol-2",
-        "nome": "Show Do Milhao - Vol. 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/show_do_milhao_-_vol._2.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/show-do-milhao---vol-2.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/show-do-milhao---vol-2.gif"
+        "nome": "Show Do Milhao Vol. 2",
+        "rom": "roms/show_do_milhao_-_vol._2.md",
+        "capa": "assets/capas/megadrive/show_do_milhao_-_vol._2.jpg"
     },
     {
-        "id": "shui-hu---feng-yun-zhuan",
-        "nome": "Shui Hu - Feng Yun Zhuan",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/shui_hu_-_feng_yun_zhuan_china_unl.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/shui-hu---feng-yun-zhuan.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/shui-hu---feng-yun-zhuan.gif"
+        "nome": "Shui Hu Feng Yun Zhuan",
+        "rom": "roms/shui_hu_-_feng_yun_zhuan_(china)_(unl).md",
+        "capa": "assets/capas/megadrive/shui_hu_-_feng_yun_zhuan_(china)_(unl).jpg"
     },
     {
-        "id": "simpsons,-the---bart-vs-the-space-mutants",
-        "nome": "Simpsons, The - Bart Vs. The Space Mutants",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/simpsons_the_-_bart_vs._the_space_mutants_usa_europe_rev_a.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/simpsons,-the---bart-vs-the-space-mutants.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/simpsons,-the---bart-vs-the-space-mutants.gif"
+        "nome": "Simpsons, The Bart'S Nightmare",
+        "rom": "roms/simpsons,_the_-_bart's_nightmare_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/simpsons,_the_-_bart's_nightmare_(usa,_europe).jpg"
     },
     {
-        "id": "simpsons,-the---barts-nightmare",
-        "nome": "Simpsons, The - Bart's Nightmare",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/simpsons_the_-_barts_nightmare_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/simpsons,-the---barts-nightmare.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/simpsons,-the---barts-nightmare.gif"
+        "nome": "Simpsons, The Bart Vs. The Space Mutants",
+        "rom": "roms/simpsons,_the_-_bart_vs._the_space_mutants_(usa,_europe)_(rev_a).md",
+        "capa": "assets/capas/megadrive/simpsons,_the_-_bart_vs._the_space_mutants_(usa,_europe)_(rev_a).jpg"
     },
     {
-        "id": "skeleton-krew",
         "nome": "Skeleton Krew",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/skeleton_krew_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/skeleton-krew.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/skeleton-krew.gif"
+        "rom": "roms/skeleton_krew_(usa).md",
+        "capa": "assets/capas/megadrive/skeleton_krew_(usa).jpg"
     },
     {
-        "id": "sonic-3d-blast",
-        "nome": "Sonic 3d Blast",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/sonic_3d_blast_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/sonic-3d-blast.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/sonic-3d-blast.gif"
+        "nome": "Sonic 3D Blast",
+        "rom": "roms/sonic_3d_blast_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/sonic_3d_blast_(usa,_europe).jpg"
     },
     {
-        "id": "sonic-3d-blast-~-sonic-3d-flickies-island",
-        "nome": "Sonic 3d Blast ~ Sonic 3d Flickies' Island",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/sonic_3d_blast_~_sonic_3d_flickies_island_usa_europe_korea.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/sonic-3d-blast-~-sonic-3d-flickies-island.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/sonic-3d-blast-~-sonic-3d-flickies-island.gif"
+        "nome": "Sonic 3D Blast ~ Sonic 3D Flickies' Island",
+        "rom": "roms/sonic_3d_blast_~_sonic_3d_flickies'_island_(usa,_europe,_korea).md",
+        "capa": "assets/capas/megadrive/sonic_3d_blast_~_sonic_3d_flickies'_island_(usa,_europe,_korea).jpg"
     },
     {
-        "id": "sonic-the-hedgehog",
         "nome": "Sonic The Hedgehog",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/sonic_the_hedgehog_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/sonic-the-hedgehog.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/sonic-the-hedgehog.gif"
+        "rom": "roms/sonic_the_hedgehog_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/sonic_the_hedgehog_(usa,_europe).jpg"
     },
     {
-        "id": "spider-man--venom---maximum-carnage",
-        "nome": "Spider-Man & Venom - Maximum Carnage",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/spider-man_._venom_-_maximum_carnage_world.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/spider-man--venom---maximum-carnage.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/spider-man--venom---maximum-carnage.gif"
+        "nome": "Spider Man . Venom Maximum Carnage",
+        "rom": "roms/spider-man_._venom_-_maximum_carnage_(world).md",
+        "capa": "assets/capas/megadrive/spider-man_._venom_-_maximum_carnage_(world).jpg"
     },
     {
-        "id": "spider-man-vs-the-kingpin-[!]",
-        "nome": "Spider-Man Vs The Kingpin",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/spider-man_vs_the_kingpin_w_!.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/spider-man-vs-the-kingpin-[!].png",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/spider-man-vs-the-kingpin-[!].gif"
+        "nome": "Spider Man Vs The Kingpin",
+        "rom": "roms/spider-man_vs_the_kingpin_(w)_[!].md",
+        "capa": "assets/capas/megadrive/spider-man_vs_the_kingpin_(w)_[!].jpg"
     },
     {
-        "id": "splatterhouse-3",
         "nome": "Splatterhouse 3",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/splatterhouse_3_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/splatterhouse-3.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/splatterhouse-3.gif"
+        "rom": "roms/splatterhouse_3_(usa).md",
+        "capa": "assets/capas/megadrive/splatterhouse_3_(usa).jpg"
     },
     {
-        "id": "sport-games",
         "nome": "Sport Games",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/sport_games.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/sport-games.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/sport-games.gif"
+        "rom": "roms/sport_games.md",
+        "capa": "assets/capas/megadrive/sport_games.jpg"
     },
     {
-        "id": "stargate",
         "nome": "Stargate",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/stargate_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/stargate.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/stargate.gif"
+        "rom": "roms/stargate_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/stargate_(usa,_europe).jpg"
     },
     {
-        "id": "story-of-thor,-the",
         "nome": "Story Of Thor, The",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/story_of_thor_the_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/story-of-thor,-the.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/story-of-thor,-the.gif"
+        "rom": "roms/story_of_thor,_the_(europe).md",
+        "capa": "assets/capas/megadrive/story_of_thor,_the_(europe).jpg"
     },
     {
-        "id": "streets-of-rage",
         "nome": "Streets Of Rage",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/streets_of_rage_world.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/streets-of-rage.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/streets-of-rage.gif"
+        "rom": "roms/streets_of_rage_(world).md",
+        "capa": "assets/capas/megadrive/streets_of_rage_(world).jpg"
     },
     {
-        "id": "streets-of-rage-2",
         "nome": "Streets Of Rage 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/streets_of_rage_2_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/streets-of-rage-2.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/streets-of-rage-2.gif"
+        "rom": "roms/streets_of_rage_2_(usa).md",
+        "capa": "assets/capas/megadrive/streets_of_rage_2_(usa).jpg"
     },
     {
-        "id": "streets-of-rage-3",
         "nome": "Streets Of Rage 3",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/streets_of_rage_3_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/streets-of-rage-3.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/streets-of-rage-3.gif"
+        "rom": "roms/streets_of_rage_3_(usa).md",
+        "capa": "assets/capas/megadrive/streets_of_rage_3_(usa).jpg"
     },
     {
-        "id": "strider",
         "nome": "Strider",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/strider_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/strider.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/strider.gif"
+        "rom": "roms/strider_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/strider_(usa,_europe).jpg"
     },
     {
-        "id": "strider-2",
         "nome": "Strider 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/strider_2.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/strider-2.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/strider-2.gif"
+        "rom": "roms/strider_2.md",
+        "capa": "assets/capas/megadrive/strider_2.jpg"
     },
     {
-        "id": "super-mario-bros",
         "nome": "Super Mario Bros.",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/super_mario_bros..md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/super-mario-bros.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/super-mario-bros.gif"
+        "rom": "roms/super_mario_bros..md",
+        "capa": "assets/capas/megadrive/super_mario_bros..jpg"
     },
     {
-        "id": "super-monaco-gp",
         "nome": "Super Monaco Gp",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/super_monaco_gp_japan_usa_enja.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/super-monaco-gp.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/super-monaco-gp.gif"
+        "rom": "roms/super_monaco_gp_(japan,_usa)_(en,ja).md",
+        "capa": "assets/capas/megadrive/super_monaco_gp_(japan,_usa)_(en,ja).jpg"
     },
     {
-        "id": "super-street-fighter-ii---the-new-challengers",
-        "nome": "Super Street Fighter 2 - The New Challengers",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/super_street_fighter_ii_-_the_new_challengers_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/super-street-fighter-ii---the-new-challengers.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/super-street-fighter-ii---the-new-challengers.gif"
+        "nome": "Super Street Fighter Ii The New Challengers",
+        "rom": "roms/super_street_fighter_ii_-_the_new_challengers_(usa).md",
+        "capa": "assets/capas/megadrive/super_street_fighter_ii_-_the_new_challengers_(usa).jpg"
     },
     {
-        "id": "syd-of-valis",
         "nome": "Syd Of Valis",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/syd_of_valis_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/syd-of-valis.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/syd-of-valis.gif"
+        "rom": "roms/syd_of_valis_(usa).md",
+        "capa": "assets/capas/megadrive/syd_of_valis_(usa).jpg"
     },
     {
-        "id": "tatsujin-~-truxton",
         "nome": "Tatsujin ~ Truxton",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/tatsujin_~_truxton_world.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/tatsujin-~-truxton.png",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/tatsujin-~-truxton.gif"
+        "rom": "roms/tatsujin_~_truxton_(world).md",
+        "capa": "assets/capas/megadrive/tatsujin_~_truxton_(world).jpg"
     },
     {
-        "id": "taz-in-escape-from-mars",
+        "nome": "Taz Mania",
+        "rom": "roms/taz-mania_(world).md",
+        "capa": "assets/capas/megadrive/taz-mania_(world).jpg"
+    },
+    {
         "nome": "Taz In Escape From Mars",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/taz_in_escape_from_mars_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/taz-in-escape-from-mars.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/taz-in-escape-from-mars.gif"
+        "rom": "roms/taz_in_escape_from_mars_(usa).md",
+        "capa": "assets/capas/megadrive/taz_in_escape_from_mars_(usa).jpg"
     },
     {
-        "id": "taz-mania",
-        "nome": "Taz-Mania",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/taz-mania_world.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/taz-mania.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/taz-mania.gif"
-    },
-    {
-        "id": "terminator,-the",
         "nome": "Terminator, The",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/terminator_the_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/terminator,-the.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/terminator,-the.gif"
+        "rom": "roms/terminator,_the_(usa).md",
+        "capa": "assets/capas/megadrive/terminator,_the_(usa).jpg"
     },
     {
-        "id": "the-amazing-spider-man-vs-the-kingpin",
-        "nome": "The Amazing Spider-Man Vs. The Kingpin",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/the_amazing_spider-man_vs._the_kingpin.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/the-amazing-spider-man-vs-the-kingpin.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/the-amazing-spider-man-vs-the-kingpin.gif"
+        "nome": "The Amazing Spider Man Vs. The Kingpin",
+        "rom": "roms/the_amazing_spider-man_vs._the_kingpin.md",
+        "capa": "assets/capas/megadrive/the_amazing_spider-man_vs._the_kingpin.jpg"
     },
     {
-        "id": "thunder-force-ii",
-        "nome": "Thunder Force 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/thunder_force_ii_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/thunder-force-ii.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/thunder-force-ii.gif"
+        "nome": "Thunder Force Ii",
+        "rom": "roms/thunder_force_ii_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/thunder_force_ii_(usa,_europe).jpg"
     },
     {
-        "id": "thunder-force-iii",
-        "nome": "Thunder Force 3",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/thunder_force_iii_japan_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/thunder-force-iii.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/thunder-force-iii.gif"
+        "nome": "Thunder Force Iii",
+        "rom": "roms/thunder_force_iii_(japan,_usa).md",
+        "capa": "assets/capas/megadrive/thunder_force_iii_(japan,_usa).jpg"
     },
     {
-        "id": "thunder-force-iv",
-        "nome": "Thunder Force 4",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/thunder_force_iv.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/thunder-force-iv.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/thunder-force-iv.gif"
+        "nome": "Thunder Force Iv",
+        "rom": "roms/thunder_force_iv.md",
+        "capa": "assets/capas/megadrive/thunder_force_iv.jpg"
     },
     {
-        "id": "thunder-fox",
         "nome": "Thunder Fox",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/thunder_fox_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/thunder-fox.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/thunder-fox.gif"
+        "rom": "roms/thunder_fox_(usa).md",
+        "capa": "assets/capas/megadrive/thunder_fox_(usa).jpg"
     },
     {
-        "id": "tinhead",
         "nome": "Tinhead",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/tinhead_usa_spectrum_holobyte_october_1995.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/tinhead.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/tinhead.gif"
+        "rom": "roms/tinhead_(usa)_(spectrum_holobyte)_(october,_1995).md",
+        "capa": "assets/capas/megadrive/tinhead_(usa)_(spectrum_holobyte)_(october,_1995).jpg"
     },
     {
-        "id": "tintin-in-tibet",
         "nome": "Tintin In Tibet",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/tintin_in_tibet_europe_enfrdeesnlsv.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/tintin-in-tibet.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/tintin-in-tibet.gif"
+        "rom": "roms/tintin_in_tibet_(europe)_(en,fr,de,es,nl,sv).md",
+        "capa": "assets/capas/megadrive/tintin_in_tibet_(europe)_(en,fr,de,es,nl,sv).jpg"
     },
     {
-        "id": "toejam-and-earl",
         "nome": "Toejam & Earl",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/toejam_&_earl_usa_europe_korea.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/toejam-and-earl.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/toejam-and-earl.gif"
+        "rom": "roms/toejam_&_earl_(usa,_europe,_korea).md",
+        "capa": "assets/capas/megadrive/toejam_&_earl_(usa,_europe,_korea).jpg"
     },
     {
-        "id": "toki---going-ape-spit",
-        "nome": "Toki - Going Ape Spit",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/toki_-_going_ape_spit_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/toki---going-ape-spit.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/toki---going-ape-spit.gif"
+        "nome": "Toki Going Ape Spit",
+        "rom": "roms/toki_-_going_ape_spit_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/toki_-_going_ape_spit_(usa,_europe).jpg"
     },
     {
-        "id": "toy-story",
         "nome": "Toy Story",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/toy_story_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/toy-story.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/toy-story.gif"
+        "rom": "roms/toy_story_(usa).md",
+        "capa": "assets/capas/megadrive/toy_story_(usa).jpg"
     },
     {
-        "id": "trouble-shooter",
         "nome": "Trouble Shooter",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/trouble_shooter_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/trouble-shooter.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/trouble-shooter.gif"
+        "rom": "roms/trouble_shooter_(usa).md",
+        "capa": "assets/capas/megadrive/trouble_shooter_(usa).jpg"
     },
     {
-        "id": "truxton",
         "nome": "Truxton",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/truxton_world.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/truxton.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/truxton.gif"
+        "rom": "roms/truxton_(world).md",
+        "capa": "assets/capas/megadrive/truxton_(world).jpg"
     },
     {
-        "id": "turbo-outrun",
         "nome": "Turbo Outrun",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/turbo_outrun_japan_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/turbo-outrun.png",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/turbo-outrun.gif"
+        "rom": "roms/turbo_outrun_(japan,_europe).md",
+        "capa": "assets/capas/megadrive/turbo_outrun_(japan,_europe).jpg"
     },
     {
-        "id": "turma-da-monica-na-terra-dos-monstros",
         "nome": "Turma Da Monica Na Terra Dos Monstros",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/turma_da_monica_na_terra_dos_monstros.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/turma-da-monica-na-terra-dos-monstros.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/turma-da-monica-na-terra-dos-monstros.gif"
+        "rom": "roms/turma_da_monica_na_terra_dos_monstros.md",
+        "capa": "assets/capas/megadrive/turma_da_monica_na_terra_dos_monstros.jpg"
     },
     {
-        "id": "twinkle-tale",
         "nome": "Twinkle Tale",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/twinkle_tale_japan_translated_en.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/twinkle-tale.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/twinkle-tale.gif"
+        "rom": "roms/twinkle_tale_(japan)_(translated_en).md",
+        "capa": "assets/capas/megadrive/twinkle_tale_(japan)_(translated_en).jpg"
     },
     {
-        "id": "two-crude-dudes",
         "nome": "Two Crude Dudes",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/two_crude_dudes_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/two-crude-dudes.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/two-crude-dudes.gif"
+        "rom": "roms/two_crude_dudes_(usa).md",
+        "capa": "assets/capas/megadrive/two_crude_dudes_(usa).jpg"
     },
     {
-        "id": "valis",
         "nome": "Valis",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/valis_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/valis.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/valis.gif"
+        "rom": "roms/valis_(usa).md",
+        "capa": "assets/capas/megadrive/valis_(usa).jpg"
     },
     {
-        "id": "valis-iii",
-        "nome": "Valis 3",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/valis_iii_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/valis-iii.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/valis-iii.gif"
+        "nome": "Valis Iii",
+        "rom": "roms/valis_iii_(usa).md",
+        "capa": "assets/capas/megadrive/valis_iii_(usa).jpg"
     },
     {
-        "id": "vectorman",
         "nome": "Vectorman",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/vectorman_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/vectorman.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/vectorman.gif"
+        "rom": "roms/vectorman_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/vectorman_(usa,_europe).jpg"
     },
     {
-        "id": "vectorman-2",
         "nome": "Vectorman 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/vectorman_2_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/vectorman-2.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/vectorman-2.gif"
+        "rom": "roms/vectorman_2_(usa).md",
+        "capa": "assets/capas/megadrive/vectorman_2_(usa).jpg"
     },
     {
-        "id": "warsong",
         "nome": "Warsong",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/warsong_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/warsong.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/warsong.gif"
+        "rom": "roms/warsong_(usa).md",
+        "capa": "assets/capas/megadrive/warsong_(usa).jpg"
     },
     {
-        "id": "water-margin---the-tales-of-clouds-and-winds",
-        "nome": "Water Margin - The Tales Of Clouds And Winds",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/water_margin_-_the_tales_of_clouds_and_winds.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/water-margin---the-tales-of-clouds-and-winds.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/water-margin---the-tales-of-clouds-and-winds.gif"
+        "nome": "Water Margin The Tales Of Clouds And Winds",
+        "rom": "roms/water_margin_-_the_tales_of_clouds_and_winds.md",
+        "capa": "assets/capas/megadrive/water_margin_-_the_tales_of_clouds_and_winds.jpg"
     },
     {
-        "id": "where-in-time-is-carmen-sandiego",
-        "nome": "Where In Time Is Carmen Sandiego",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/where_in_time_is_carmen_sandiego_usa_europe_enfrdeesit.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/where-in-time-is-carmen-sandiego.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/where-in-time-is-carmen-sandiego.gif"
-    },
-    {
-        "id": "where-in-the-world-is-carmen-sandiego",
         "nome": "Where In The World Is Carmen Sandiego",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/where_in_the_world_is_carmen_sandiego_usa_europe_enfrdeesit.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/where-in-the-world-is-carmen-sandiego.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/where-in-the-world-is-carmen-sandiego.gif"
+        "rom": "roms/where_in_the_world_is_carmen_sandiego_(usa,_europe)_(en,fr,de,es,it).md",
+        "capa": "assets/capas/megadrive/where_in_the_world_is_carmen_sandiego_(usa,_europe)_(en,fr,de,es,it).jpg"
     },
     {
-        "id": "wonder-boy-in-monster-world",
+        "nome": "Where In Time Is Carmen Sandiego",
+        "rom": "roms/where_in_time_is_carmen_sandiego_(usa,_europe)_(en,fr,de,es,it).md",
+        "capa": "assets/capas/megadrive/where_in_time_is_carmen_sandiego_(usa,_europe)_(en,fr,de,es,it).jpg"
+    },
+    {
         "nome": "Wonder Boy In Monster World",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/wonder_boy_in_monster_world_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/wonder-boy-in-monster-world.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/wonder-boy-in-monster-world.gif"
+        "rom": "roms/wonder_boy_in_monster_world_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/wonder_boy_in_monster_world_(usa,_europe).jpg"
     },
     {
-        "id": "world-of-illusion-starring-mickey-mouse-and-donald-duck",
         "nome": "World Of Illusion Starring Mickey Mouse And Donald Duck",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/world_of_illusion_starring_mickey_mouse_and_donald_duck_usa_korea.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/world-of-illusion-starring-mickey-mouse-and-donald-duck.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/world-of-illusion-starring-mickey-mouse-and-donald-duck.gif"
+        "rom": "roms/world_of_illusion_starring_mickey_mouse_and_donald_duck_(usa,_korea).md",
+        "capa": "assets/capas/megadrive/world_of_illusion_starring_mickey_mouse_and_donald_duck_(usa,_korea).jpg"
     },
     {
-        "id": "x-men-2---clone-wars",
-        "nome": "X-Men 2 - Clone Wars",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/x-men_2_-_clone_wars_usa_europe.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/x-men-2---clone-wars.png",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/x-men-2---clone-wars.gif"
+        "nome": "X Men 2 Clone Wars",
+        "rom": "roms/x-men_2_-_clone_wars_(usa,_europe).md",
+        "capa": "assets/capas/megadrive/x-men_2_-_clone_wars_(usa,_europe).jpg"
     },
     {
-        "id": "yu-yu-hakusho-sunset-fighters",
         "nome": "Yu Yu Hakusho Sunset Fighters",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/yu_yu_hakusho_sunset_fighters.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/yu-yu-hakusho-sunset-fighters.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/yu-yu-hakusho-sunset-fighters.gif"
+        "rom": "roms/yu_yu_hakusho_sunset_fighters.md",
+        "capa": "assets/capas/megadrive/yu_yu_hakusho_sunset_fighters.jpg"
     },
     {
-        "id": "zero-tolerance",
-        "nome": "Zero Tolerance",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/zero_tolerance_usa_europe_rev_a.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/zero-tolerance.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/zero-tolerance.gif"
-    },
-    {
-        "id": "zero-the-kamikaze-squirrel",
         "nome": "Zero The Kamikaze Squirrel",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/zero_the_kamikaze_squirrel_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/zero-the-kamikaze-squirrel.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/zero-the-kamikaze-squirrel.gif"
+        "rom": "roms/zero_the_kamikaze_squirrel_(usa).md",
+        "capa": "assets/capas/megadrive/zero_the_kamikaze_squirrel_(usa).jpg"
     },
     {
-        "id": "zool---ninja-of-the-nth-dimension",
-        "nome": "Zool - Ninja Of The 'Nth' Dimension",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/roms/zool_-_ninja_of_the_nth_dimension_usa.md",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/zool---ninja-of-the-nth-dimension.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/previews/zool---ninja-of-the-nth-dimension.gif"
+        "nome": "Zero Tolerance",
+        "rom": "roms/zero_tolerance_(usa,_europe)_(rev_a).md",
+        "capa": "assets/capas/megadrive/zero_tolerance_(usa,_europe)_(rev_a).jpg"
+    },
+    {
+        "nome": "Zool Ninja Of The 'Nth' Dimension",
+        "rom": "roms/zool_-_ninja_of_the_'nth'_dimension_(usa).md",
+        "capa": "assets/capas/megadrive/zool_-_ninja_of_the_'nth'_dimension_(usa).jpg"
     }
 ]

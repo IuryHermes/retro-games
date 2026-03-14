@@ -1,1388 +1,1012 @@
 [
     {
-        "id": "1943---the-battle-of-midway-usa",
-        "nome": "1943 - The Battle Of Midway",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/1943_-_the_battle_of_midway_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/1943---the-battle-of-midway-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/1943---the-battle-of-midway-usa.gif"
+        "nome": "1943 The Battle Of Midway",
+        "rom": "roms/1943_-_the_battle_of_midway_(usa).nes",
+        "capa": "assets/capas/nes/1943_-_the_battle_of_midway_(usa).jpg"
     },
     {
-        "id": "8-eyes-usa",
         "nome": "8 Eyes",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/8_eyes_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/8-eyes-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/8-eyes-usa.gif"
+        "rom": "roms/8_eyes_(usa).nes",
+        "capa": "assets/capas/nes/8_eyes_(usa).jpg"
     },
     {
-        "id": "abadox---the-deadly-inner-war-usa",
-        "nome": "Abadox - The Deadly Inner War",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/abadox_-_the_deadly_inner_war_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/abadox---the-deadly-inner-war-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/abadox---the-deadly-inner-war-usa.gif"
+        "nome": "Abadox The Deadly Inner War",
+        "rom": "roms/abadox_-_the_deadly_inner_war_(usa).nes",
+        "capa": "assets/capas/nes/abadox_-_the_deadly_inner_war_(usa).jpg"
     },
     {
-        "id": "addams-family-the-usa",
         "nome": "Addams Family, The",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/addams_family_the_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/addams-family-the-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/addams-family-the-usa.gif"
+        "rom": "roms/addams_family,_the_(usa).nes",
+        "capa": "assets/capas/nes/addams_family,_the_(usa).jpg"
     },
     {
-        "id": "advanced-dungeons--dragons---dragonstrike-usa",
-        "nome": "Advanced Dungeons & Dragons - Dragonstrike",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/advanced_dungeons_&_dragons_-_dragonstrike_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/advanced-dungeons--dragons---dragonstrike-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/advanced-dungeons--dragons---dragonstrike-usa.gif"
+        "nome": "Advanced Dungeons & Dragons Dragonstrike",
+        "rom": "roms/advanced_dungeons_&_dragons_-_dragonstrike_(usa).nes",
+        "capa": "assets/capas/nes/advanced_dungeons_&_dragons_-_dragonstrike_(usa).jpg"
     },
     {
-        "id": "adventures-of-lolo-3-usa",
         "nome": "Adventures Of Lolo 3",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/adventures_of_lolo_3_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/adventures-of-lolo-3-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/adventures-of-lolo-3-usa.gif"
+        "rom": "roms/adventures_of_lolo_3_(usa).nes",
+        "capa": "assets/capas/nes/adventures_of_lolo_3_(usa).jpg"
     },
     {
-        "id": "akumajou-densetsu-j",
         "nome": "Akumajou Densetsu",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/akumajou_densetsu_j.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/akumajou-densetsu-j.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/akumajou-densetsu-j.gif"
+        "rom": "roms/akumajou_densetsu_(j).nes",
+        "capa": "assets/capas/nes/akumajou_densetsu_(j).jpg"
     },
     {
-        "id": "amagon-usa",
         "nome": "Amagon",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/amagon_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/amagon-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/amagon-usa.gif"
+        "rom": "roms/amagon_(usa).nes",
+        "capa": "assets/capas/nes/amagon_(usa).jpg"
     },
     {
-        "id": "archon-usa",
         "nome": "Archon",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/archon_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/archon-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/archon-usa.gif"
+        "rom": "roms/archon_(usa).nes",
+        "capa": "assets/capas/nes/archon_(usa).jpg"
     },
     {
-        "id": "argos-no-senshi",
         "nome": "Argos No Senshi",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/argos_no_senshi.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/argos-no-senshi.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/argos-no-senshi.gif"
+        "rom": "roms/argos_no_senshi.nes",
+        "capa": "assets/capas/nes/argos_no_senshi.jpg"
     },
     {
-        "id": "arkanoid-usa",
         "nome": "Arkanoid",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/arkanoid_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/arkanoid-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/arkanoid-usa.gif"
+        "rom": "roms/arkanoid_(usa).nes",
+        "capa": "assets/capas/nes/arkanoid_(usa).jpg"
     },
     {
-        "id": "armadillo",
         "nome": "Armadillo",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/armadillo.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/armadillo.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/armadillo.gif"
+        "rom": "roms/armadillo.nes",
+        "capa": "assets/capas/nes/armadillo.jpg"
     },
     {
-        "id": "astyanax-usa",
         "nome": "Astyanax",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/astyanax_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/astyanax-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/astyanax-usa.gif"
+        "rom": "roms/astyanax_(usa).nes",
+        "capa": "assets/capas/nes/astyanax_(usa).jpg"
     },
     {
-        "id": "balloon-fight-usa",
         "nome": "Balloon Fight",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/balloon_fight_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/balloon-fight-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/balloon-fight-usa.gif"
+        "rom": "roms/balloon_fight_(usa).nes",
+        "capa": "assets/capas/nes/balloon_fight_(usa).jpg"
     },
     {
-        "id": "batman---return-of-the-joker-usa",
-        "nome": "Batman - Return Of The Joker",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/batman_-_return_of_the_joker_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/batman---return-of-the-joker-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/batman---return-of-the-joker-usa.gif"
+        "nome": "Batman Return Of The Joker",
+        "rom": "roms/batman_-_return_of_the_joker_(usa).nes",
+        "capa": "assets/capas/nes/batman_-_return_of_the_joker_(usa).jpg"
     },
     {
-        "id": "batman---the-video-game-usa",
-        "nome": "Batman - The Video Game",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/batman_-_the_video_game_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/batman---the-video-game-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/batman---the-video-game-usa.gif"
+        "nome": "Batman The Video Game",
+        "rom": "roms/batman_-_the_video_game_(usa).nes",
+        "capa": "assets/capas/nes/batman_-_the_video_game_(usa).jpg"
     },
     {
-        "id": "batman-returns-usa",
         "nome": "Batman Returns",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/batman_returns_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/batman-returns-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/batman-returns-usa.gif"
+        "rom": "roms/batman_returns_(usa).nes",
+        "capa": "assets/capas/nes/batman_returns_(usa).jpg"
     },
     {
-        "id": "battle-city",
         "nome": "Battle City",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/battle_city.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/battle-city.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/battle-city.gif"
+        "rom": "roms/battle_city.nes",
+        "capa": "assets/capas/nes/battle_city.jpg"
     },
     {
-        "id": "battleship-usa",
         "nome": "Battleship",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/battleship_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/battleship-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/battleship-usa.gif"
+        "rom": "roms/battleship_(usa).nes",
+        "capa": "assets/capas/nes/battleship_(usa).jpg"
     },
     {
-        "id": "battletoads-usa",
         "nome": "Battletoads",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/battletoads_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/battletoads-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/battletoads-usa.gif"
+        "rom": "roms/battletoads_(usa).nes",
+        "capa": "assets/capas/nes/battletoads_(usa).jpg"
     },
     {
-        "id": "binary-land",
         "nome": "Binary Land",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/binary_land.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/binary-land.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/binary-land.gif"
+        "rom": "roms/binary_land.nes",
+        "capa": "assets/capas/nes/binary_land.jpg"
     },
     {
-        "id": "bionic-commando-usa",
         "nome": "Bionic Commando",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/bionic_commando_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/bionic-commando-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/bionic-commando-usa.gif"
+        "rom": "roms/bionic_commando_(usa).nes",
+        "capa": "assets/capas/nes/bionic_commando_(usa).jpg"
     },
     {
-        "id": "blaster-master-usa",
         "nome": "Blaster Master",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/blaster_master_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/blaster-master-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/blaster-master-usa.gif"
+        "rom": "roms/blaster_master_(usa).nes",
+        "capa": "assets/capas/nes/blaster_master_(usa).jpg"
     },
     {
-        "id": "bomber-king-j",
         "nome": "Bomber King",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/bomber_king_j.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/bomber-king-j.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/bomber-king-j.gif"
+        "rom": "roms/bomber_king_(j).nes",
+        "capa": "assets/capas/nes/bomber_king_(j).jpg"
     },
     {
-        "id": "bomberman-usa",
         "nome": "Bomberman",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/bomberman_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/bomberman-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/bomberman-usa.gif"
+        "rom": "roms/bomberman_(usa).nes",
+        "capa": "assets/capas/nes/bomberman_(usa).jpg"
     },
     {
-        "id": "bomberman-ii-usa",
-        "nome": "Bomberman 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/bomberman_ii_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/bomberman-ii-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/bomberman-ii-usa.gif"
+        "nome": "Bomberman Ii",
+        "rom": "roms/bomberman_ii_(usa).nes",
+        "capa": "assets/capas/nes/bomberman_ii_(usa).jpg"
     },
     {
-        "id": "bram-stokers-dracula-usa",
-        "nome": "Bram Stoker's Dracula",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/bram_stokers_dracula_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/bram-stokers-dracula-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/bram-stokers-dracula-usa.gif"
+        "nome": "Bram Stoker'S Dracula",
+        "rom": "roms/bram_stoker's_dracula_(usa).nes",
+        "capa": "assets/capas/nes/bram_stoker's_dracula_(usa).jpg"
     },
     {
-        "id": "bubble-bobble-part-2-usa",
         "nome": "Bubble Bobble Part 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/bubble_bobble_part_2_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/bubble-bobble-part-2-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/bubble-bobble-part-2-usa.gif"
+        "rom": "roms/bubble_bobble_part_2_(usa).nes",
+        "capa": "assets/capas/nes/bubble_bobble_part_2_(usa).jpg"
     },
     {
-        "id": "bucky-ohare-usa",
         "nome": "Bucky O'Hare",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/bucky_ohare_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/bucky-ohare-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/bucky-ohare-usa.gif"
+        "rom": "roms/bucky_o'hare_(usa).nes",
+        "capa": "assets/capas/nes/bucky_o'hare_(usa).jpg"
     },
     {
-        "id": "captain-america-and-the-avengers-usa",
         "nome": "Captain America And The Avengers",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/captain_america_and_the_avengers_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/captain-america-and-the-avengers-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/captain-america-and-the-avengers-usa.gif"
+        "rom": "roms/captain_america_and_the_avengers_(usa).nes",
+        "capa": "assets/capas/nes/captain_america_and_the_avengers_(usa).jpg"
     },
     {
-        "id": "captain-comic---the-adventure-usa-unl",
-        "nome": "Captain Comic - The Adventure (Unl)",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/captain_comic_-_the_adventure_usa_unl.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/captain-comic---the-adventure-usa-unl.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/captain-comic---the-adventure-usa-unl.gif"
+        "nome": "Captain Comic The Adventure",
+        "rom": "roms/captain_comic_-_the_adventure_(usa)_(unl).nes",
+        "capa": "assets/capas/nes/captain_comic_-_the_adventure_(usa)_(unl).jpg"
     },
     {
-        "id": "captain-planet-and-the-planeteers-usa",
         "nome": "Captain Planet And The Planeteers",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/captain_planet_and_the_planeteers_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/captain-planet-and-the-planeteers-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/captain-planet-and-the-planeteers-usa.gif"
+        "rom": "roms/captain_planet_and_the_planeteers_(usa).nes",
+        "capa": "assets/capas/nes/captain_planet_and_the_planeteers_(usa).jpg"
     },
     {
-        "id": "castlevania-usa",
         "nome": "Castlevania",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/castlevania_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/castlevania-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/castlevania-usa.gif"
+        "rom": "roms/castlevania_(usa).nes",
+        "capa": "assets/capas/nes/castlevania_(usa).jpg"
     },
     {
-        "id": "castlevania-ii---simons-quest-usa",
-        "nome": "Castlevania 2 - Simon's Quest",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/castlevania_ii_-_simons_quest_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/castlevania-ii---simons-quest-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/castlevania-ii---simons-quest-usa.gif"
+        "nome": "Castlevania Ii Simon'S Quest",
+        "rom": "roms/castlevania_ii_-_simon's_quest_(usa).nes",
+        "capa": "assets/capas/nes/castlevania_ii_-_simon's_quest_(usa).jpg"
     },
     {
-        "id": "castlevania-iii---draculas-curse-usa",
-        "nome": "Castlevania 3 - Dracula's Curse",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/castlevania_iii_-_draculas_curse_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/castlevania-iii---draculas-curse-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/castlevania-iii---draculas-curse-usa.gif"
+        "nome": "Castlevania Iii Dracula'S Curse",
+        "rom": "roms/castlevania_iii_-_dracula's_curse_(usa).nes",
+        "capa": "assets/capas/nes/castlevania_iii_-_dracula's_curse_(usa).jpg"
     },
     {
-        "id": "challenger-usa",
         "nome": "Challenger",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/challenger_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/challenger-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/challenger-usa.gif"
+        "rom": "roms/challenger_(usa).nes",
+        "capa": "assets/capas/nes/challenger_(usa).jpg"
     },
     {
-        "id": "chip-n-dale---rescue-rangers-usa",
-        "nome": "Chip 'n Dale - Rescue Rangers",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/chip_n_dale_-_rescue_rangers_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/chip-n-dale---rescue-rangers-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/chip-n-dale---rescue-rangers-usa.gif"
+        "nome": "Chip 'N Dale Rescue Rangers",
+        "rom": "roms/chip_'n_dale_-_rescue_rangers_(usa).nes",
+        "capa": "assets/capas/nes/chip_'n_dale_-_rescue_rangers_(usa).jpg"
     },
     {
-        "id": "circus-charlie-usa",
         "nome": "Circus Charlie",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/circus_charlie_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/circus-charlie-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/circus-charlie-usa.gif"
+        "rom": "roms/circus_charlie_(usa).nes",
+        "capa": "assets/capas/nes/circus_charlie_(usa).jpg"
     },
     {
-        "id": "clash-at-demonhead-usa",
         "nome": "Clash At Demonhead",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/clash_at_demonhead_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/clash-at-demonhead-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/clash-at-demonhead-usa.gif"
+        "rom": "roms/clash_at_demonhead_(usa).nes",
+        "capa": "assets/capas/nes/clash_at_demonhead_(usa).jpg"
     },
     {
-        "id": "clu-clu-land-world",
         "nome": "Clu Clu Land",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/clu_clu_land_world.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/clu-clu-land-world.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/clu-clu-land-world.gif"
+        "rom": "roms/clu_clu_land_(world).nes",
+        "capa": "assets/capas/nes/clu_clu_land_(world).jpg"
     },
     {
-        "id": "code-name---viper-usa",
-        "nome": "Code Name - Viper",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/code_name_-_viper_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/code-name---viper-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/code-name---viper-usa.gif"
+        "nome": "Code Name Viper",
+        "rom": "roms/code_name_-_viper_(usa).nes",
+        "capa": "assets/capas/nes/code_name_-_viper_(usa).jpg"
     },
     {
-        "id": "commando-usa",
         "nome": "Commando",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/commando_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/commando-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/commando-usa.gif"
+        "rom": "roms/commando_(usa).nes",
+        "capa": "assets/capas/nes/commando_(usa).jpg"
     },
     {
-        "id": "conquest-of-the-crystal-palace-usa",
         "nome": "Conquest Of The Crystal Palace",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/conquest_of_the_crystal_palace_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/conquest-of-the-crystal-palace-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/conquest-of-the-crystal-palace-usa.gif"
+        "rom": "roms/conquest_of_the_crystal_palace_(usa).nes",
+        "capa": "assets/capas/nes/conquest_of_the_crystal_palace_(usa).jpg"
     },
     {
-        "id": "contra-usa",
         "nome": "Contra",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/contra_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/contra-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/contra-usa.gif"
+        "rom": "roms/contra_(usa).nes",
+        "capa": "assets/capas/nes/contra_(usa).jpg"
     },
     {
-        "id": "contra-force-usa",
         "nome": "Contra Force",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/contra_force_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/contra-force-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/contra-force-usa.gif"
+        "rom": "roms/contra_force_(usa).nes",
+        "capa": "assets/capas/nes/contra_force_(usa).jpg"
     },
     {
-        "id": "crisis-force-usa",
         "nome": "Crisis Force",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/crisis_force_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/crisis-force-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/crisis-force-usa.gif"
+        "rom": "roms/crisis_force_(usa).nes",
+        "capa": "assets/capas/nes/crisis_force_(usa).jpg"
     },
     {
-        "id": "cross-fire-usa",
         "nome": "Cross Fire",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/cross_fire_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/cross-fire-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/cross-fire-usa.gif"
+        "rom": "roms/cross_fire_(usa).nes",
+        "capa": "assets/capas/nes/cross_fire_(usa).jpg"
     },
     {
-        "id": "crystalis-usa",
         "nome": "Crystalis",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/crystalis_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/crystalis-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/crystalis-usa.gif"
+        "rom": "roms/crystalis_(usa).nes",
+        "capa": "assets/capas/nes/crystalis_(usa).jpg"
     },
     {
-        "id": "darkwing-duck-usa",
         "nome": "Darkwing Duck",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/darkwing_duck_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/darkwing-duck-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/darkwing-duck-usa.gif"
+        "rom": "roms/darkwing_duck_(usa).nes",
+        "capa": "assets/capas/nes/darkwing_duck_(usa).jpg"
     },
     {
-        "id": "dig-dug-usa",
         "nome": "Dig Dug",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/dig_dug_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/dig-dug-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/dig-dug-usa.gif"
+        "rom": "roms/dig_dug_(usa).nes",
+        "capa": "assets/capas/nes/dig_dug_(usa).jpg"
     },
     {
-        "id": "donkey-kong-world",
         "nome": "Donkey Kong",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/donkey_kong_world.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/donkey-kong-world.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/donkey-kong-world.gif"
+        "rom": "roms/donkey_kong_(world).nes",
+        "capa": "assets/capas/nes/donkey_kong_(world).jpg"
     },
     {
-        "id": "donkey-kong-jr-world",
         "nome": "Donkey Kong Jr.",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/donkey_kong_jr._world.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/donkey-kong-jr-world.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/donkey-kong-jr-world.gif"
+        "rom": "roms/donkey_kong_jr._(world).nes",
+        "capa": "assets/capas/nes/donkey_kong_jr._(world).jpg"
     },
     {
-        "id": "double-dragon-usa",
         "nome": "Double Dragon",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/double_dragon_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/double-dragon-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/double-dragon-usa.gif"
+        "rom": "roms/double_dragon_(usa).nes",
+        "capa": "assets/capas/nes/double_dragon_(usa).jpg"
     },
     {
-        "id": "double-dragon-ii---the-revenge-usa",
-        "nome": "Double Dragon 2 - The Revenge",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/double_dragon_ii_-_the_revenge_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/double-dragon-ii---the-revenge-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/double-dragon-ii---the-revenge-usa.gif"
+        "nome": "Double Dragon Ii The Revenge",
+        "rom": "roms/double_dragon_ii_-_the_revenge_(usa).nes",
+        "capa": "assets/capas/nes/double_dragon_ii_-_the_revenge_(usa).jpg"
     },
     {
-        "id": "double-dragon-iii---the-sacred-stones-usa",
-        "nome": "Double Dragon 3 - The Sacred Stones",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/double_dragon_iii_-_the_sacred_stones_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/double-dragon-iii---the-sacred-stones-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/double-dragon-iii---the-sacred-stones-usa.gif"
+        "nome": "Double Dragon Iii The Sacred Stones",
+        "rom": "roms/double_dragon_iii_-_the_sacred_stones_(usa).nes",
+        "capa": "assets/capas/nes/double_dragon_iii_-_the_sacred_stones_(usa).jpg"
     },
     {
-        "id": "dr-mario-japan-usa",
-        "nome": "Dr. Mario (Japan, Usa)",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/dr._mario_japan_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/dr-mario-japan-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/dr-mario-japan-usa.gif"
+        "nome": "Dr. Mario",
+        "rom": "roms/dr._mario_(japan,_usa).nes",
+        "capa": "assets/capas/nes/dr._mario_(japan,_usa).jpg"
     },
     {
-        "id": "dragon-ball---shen-long-no-nazo-j",
-        "nome": "Dragon Ball - Shen Long No Nazo",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/dragon_ball_-_shen_long_no_nazo_j.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/dragon-ball---shen-long-no-nazo-j.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/dragon-ball---shen-long-no-nazo-j.gif"
+        "nome": "Dragon Ball Shen Long No Nazo",
+        "rom": "roms/dragon_ball_-_shen_long_no_nazo_(j).nes",
+        "capa": "assets/capas/nes/dragon_ball_-_shen_long_no_nazo_(j).jpg"
     },
     {
-        "id": "dragon-ball-z---kyoushuu-saiya-jin-j",
-        "nome": "Dragon Ball Z - Kyoushuu! Saiya Jin",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/dragon_ball_z_-_kyoushuu!_saiya_jin_j.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/dragon-ball-z---kyoushuu-saiya-jin-j.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/dragon-ball-z---kyoushuu-saiya-jin-j.gif"
+        "nome": "Dragon Ball Z Kyoushuu! Saiya Jin",
+        "rom": "roms/dragon_ball_z_-_kyoushuu!_saiya_jin_(j).nes",
+        "capa": "assets/capas/nes/dragon_ball_z_-_kyoushuu!_saiya_jin_(j).jpg"
     },
     {
-        "id": "dragon-ninja-usa",
         "nome": "Dragon Ninja",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/dragon_ninja_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/dragon-ninja-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/dragon-ninja-usa.gif"
+        "rom": "roms/dragon_ninja_(usa).nes",
+        "capa": "assets/capas/nes/dragon_ninja_(usa).jpg"
     },
     {
-        "id": "dragon-spirit---the-new-legend-usa",
-        "nome": "Dragon Spirit - The New Legend",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/dragon_spirit_-_the_new_legend_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/dragon-spirit---the-new-legend-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/dragon-spirit---the-new-legend-usa.gif"
+        "nome": "Dragon Spirit The New Legend",
+        "rom": "roms/dragon_spirit_-_the_new_legend_(usa).nes",
+        "capa": "assets/capas/nes/dragon_spirit_-_the_new_legend_(usa).jpg"
     },
     {
-        "id": "dragon-warrior-usa",
         "nome": "Dragon Warrior",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/dragon_warrior_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/dragon-warrior-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/dragon-warrior-usa.gif"
+        "rom": "roms/dragon_warrior_(usa).nes",
+        "capa": "assets/capas/nes/dragon_warrior_(usa).jpg"
     },
     {
-        "id": "dragon-warrior-iii-usa",
-        "nome": "Dragon Warrior 3",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/dragon_warrior_iii_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/dragon-warrior-iii-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/dragon-warrior-iii-usa.gif"
+        "nome": "Dragon Warrior Iii",
+        "rom": "roms/dragon_warrior_iii_(usa).nes",
+        "capa": "assets/capas/nes/dragon_warrior_iii_(usa).jpg"
     },
     {
-        "id": "ducktales-usa",
         "nome": "Ducktales",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/ducktales_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/ducktales-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/ducktales-usa.gif"
+        "rom": "roms/ducktales_(usa).nes",
+        "capa": "assets/capas/nes/ducktales_(usa).jpg"
     },
     {
-        "id": "ducktales-2-usa",
         "nome": "Ducktales 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/ducktales_2_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/ducktales-2-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/ducktales-2-usa.gif"
+        "rom": "roms/ducktales_2_(usa).nes",
+        "capa": "assets/capas/nes/ducktales_2_(usa).jpg"
     },
     {
-        "id": "excitebike-japan-usa",
-        "nome": "Excitebike (Japan, Usa)",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/excitebike_japan_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/excitebike-japan-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/excitebike-japan-usa.gif"
+        "nome": "Excitebike",
+        "rom": "roms/excitebike_(japan,_usa).nes",
+        "capa": "assets/capas/nes/excitebike_(japan,_usa).jpg"
     },
     {
-        "id": "faxanadu-usa",
         "nome": "Faxanadu",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/faxanadu_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/faxanadu-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/faxanadu-usa.gif"
+        "rom": "roms/faxanadu_(usa).nes",
+        "capa": "assets/capas/nes/faxanadu_(usa).jpg"
     },
     {
-        "id": "felix-the-cat-usa",
         "nome": "Felix The Cat",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/felix_the_cat_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/felix-the-cat-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/felix-the-cat-usa.gif"
+        "rom": "roms/felix_the_cat_(usa).nes",
+        "capa": "assets/capas/nes/felix_the_cat_(usa).jpg"
     },
     {
-        "id": "final-fantasy-usa",
         "nome": "Final Fantasy",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/final_fantasy_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/final-fantasy-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/final-fantasy-usa.gif"
+        "rom": "roms/final_fantasy_(usa).nes",
+        "capa": "assets/capas/nes/final_fantasy_(usa).jpg"
     },
     {
-        "id": "final-fantasy-3-j",
         "nome": "Final Fantasy 3",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/final_fantasy_3_j.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/final-fantasy-3-j.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/final-fantasy-3-j.gif"
+        "rom": "roms/final_fantasy_3_(j).nes",
+        "capa": "assets/capas/nes/final_fantasy_3_(j).jpg"
     },
     {
-        "id": "final-fantasy-ii-usa",
-        "nome": "Final Fantasy 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/final_fantasy_ii_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/final-fantasy-ii-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/final-fantasy-ii-usa.gif"
+        "nome": "Final Fantasy Ii",
+        "rom": "roms/final_fantasy_ii_(usa).nes",
+        "capa": "assets/capas/nes/final_fantasy_ii_(usa).jpg"
     },
     {
-        "id": "final-mission-usa",
         "nome": "Final Mission",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/final_mission_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/final-mission-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/final-mission-usa.gif"
+        "rom": "roms/final_mission_(usa).nes",
+        "capa": "assets/capas/nes/final_mission_(usa).jpg"
     },
     {
-        "id": "fire-emblem---ankoku-ryuu-to-hikari-no-tsurugi",
-        "nome": "Fire Emblem - Ankoku Ryuu To Hikari No Tsurugi",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/fire_emblem_-_ankoku_ryuu_to_hikari_no_tsurugi.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/fire-emblem---ankoku-ryuu-to-hikari-no-tsurugi.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/fire-emblem---ankoku-ryuu-to-hikari-no-tsurugi.gif"
+        "nome": "Fire Emblem Ankoku Ryuu To Hikari No Tsurugi",
+        "rom": "roms/fire_emblem_-_ankoku_ryuu_to_hikari_no_tsurugi.nes",
+        "capa": "assets/capas/nes/fire_emblem_-_ankoku_ryuu_to_hikari_no_tsurugi.jpg"
     },
     {
-        "id": "flintstones-the---the-rescue-of-dino--hoppy-usa",
-        "nome": "Flintstones, The - The Rescue Of Dino & Hoppy",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/flintstones_the_-_the_rescue_of_dino_&_hoppy_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/flintstones-the---the-rescue-of-dino--hoppy-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/flintstones-the---the-rescue-of-dino--hoppy-usa.gif"
+        "nome": "Flintstones, The The Rescue Of Dino & Hoppy",
+        "rom": "roms/flintstones,_the_-_the_rescue_of_dino_&_hoppy_(usa).nes",
+        "capa": "assets/capas/nes/flintstones,_the_-_the_rescue_of_dino_&_hoppy_(usa).jpg"
     },
     {
-        "id": "flintstones-the---the-surprise-at-dinosaur-peak-usa",
-        "nome": "Flintstones, The - The Surprise At Dinosaur Peak!",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/flintstones_the_-_the_surprise_at_dinosaur_peak!_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/flintstones-the---the-surprise-at-dinosaur-peak-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/flintstones-the---the-surprise-at-dinosaur-peak-usa.gif"
+        "nome": "Flintstones, The The Surprise At Dinosaur Peak!",
+        "rom": "roms/flintstones,_the_-_the_surprise_at_dinosaur_peak!_(usa).nes",
+        "capa": "assets/capas/nes/flintstones,_the_-_the_surprise_at_dinosaur_peak!_(usa).jpg"
     },
     {
-        "id": "frankenstein---the-monster-returns-usa",
-        "nome": "Frankenstein - The Monster Returns",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/frankenstein_-_the_monster_returns_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/frankenstein---the-monster-returns-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/frankenstein---the-monster-returns-usa.gif"
+        "nome": "Frankenstein The Monster Returns",
+        "rom": "roms/frankenstein_-_the_monster_returns_(usa).nes",
+        "capa": "assets/capas/nes/frankenstein_-_the_monster_returns_(usa).jpg"
     },
     {
-        "id": "fuzzical-fighter-j",
         "nome": "Fuzzical Fighter",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/fuzzical_fighter_j.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/fuzzical-fighter-j.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/fuzzical-fighter-j.gif"
+        "rom": "roms/fuzzical_fighter_(j).nes",
+        "capa": "assets/capas/nes/fuzzical_fighter_(j).jpg"
     },
     {
-        "id": "gi-joe---a-real-american-hero-usa",
-        "nome": "G.I. Joe - A Real American Hero",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/g.i._joe_-_a_real_american_hero_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/gi-joe---a-real-american-hero-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/gi-joe---a-real-american-hero-usa.gif"
+        "nome": "G.I. Joe A Real American Hero",
+        "rom": "roms/g.i._joe_-_a_real_american_hero_(usa).nes",
+        "capa": "assets/capas/nes/g.i._joe_-_a_real_american_hero_(usa).jpg"
     },
     {
-        "id": "gi-joe---the-atlantis-factor-usa",
-        "nome": "G.I. Joe - The Atlantis Factor",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/g.i._joe_-_the_atlantis_factor_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/gi-joe---the-atlantis-factor-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/gi-joe---the-atlantis-factor-usa.gif"
+        "nome": "G.I. Joe The Atlantis Factor",
+        "rom": "roms/g.i._joe_-_the_atlantis_factor_(usa).nes",
+        "capa": "assets/capas/nes/g.i._joe_-_the_atlantis_factor_(usa).jpg"
     },
     {
-        "id": "galaga---demons-of-death-usa",
-        "nome": "Galaga - Demons Of Death",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/galaga_-_demons_of_death_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/galaga---demons-of-death-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/galaga---demons-of-death-usa.gif"
+        "nome": "Galaga Demons Of Death",
+        "rom": "roms/galaga_-_demons_of_death_(usa).nes",
+        "capa": "assets/capas/nes/galaga_-_demons_of_death_(usa).jpg"
     },
     {
-        "id": "galaxian",
         "nome": "Galaxian",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/galaxian.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/galaxian.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/galaxian.gif"
+        "rom": "roms/galaxian.nes",
+        "capa": "assets/capas/nes/galaxian.jpg"
     },
     {
-        "id": "ghostsn-goblins-usa",
-        "nome": "Ghosts'n Goblins",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/ghostsn_goblins_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/ghostsn-goblins-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/ghostsn-goblins-usa.gif"
+        "nome": "Ghosts'N Goblins",
+        "rom": "roms/ghosts'n_goblins_(usa).nes",
+        "capa": "assets/capas/nes/ghosts'n_goblins_(usa).jpg"
     },
     {
-        "id": "gradius-usa",
         "nome": "Gradius",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/gradius_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/gradius-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/gradius-usa.gif"
+        "rom": "roms/gradius_(usa).nes",
+        "capa": "assets/capas/nes/gradius_(usa).jpg"
     },
     {
-        "id": "gradius-ii-usa",
-        "nome": "Gradius 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/gradius_ii_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/gradius-ii-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/gradius-ii-usa.gif"
+        "nome": "Gradius Ii",
+        "rom": "roms/gradius_ii_(usa).nes",
+        "capa": "assets/capas/nes/gradius_ii_(usa).jpg"
     },
     {
-        "id": "gun-nac-usa",
-        "nome": "Gun Nac",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/gun_nac_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/gun-nac-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/gun-nac-usa.gif"
-    },
-    {
-        "id": "gunsmoke-usa",
         "nome": "Gun.Smoke",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/gun.smoke_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/gunsmoke-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/gunsmoke-usa.gif"
+        "rom": "roms/gun.smoke_(usa).nes",
+        "capa": "assets/capas/nes/gun.smoke_(usa).jpg"
     },
     {
-        "id": "gyruss-usa",
+        "nome": "Gun Nac",
+        "rom": "roms/gun_nac_(usa).nes",
+        "capa": "assets/capas/nes/gun_nac_(usa).jpg"
+    },
+    {
         "nome": "Gyruss",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/gyruss_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/gyruss-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/gyruss-usa.gif"
+        "rom": "roms/gyruss_(usa).nes",
+        "capa": "assets/capas/nes/gyruss_(usa).jpg"
     },
     {
-        "id": "hokuto-no-ken-2",
-        "nome": "Hokuto No Ken 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/hokuto_no_ken_2.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/hokuto-no-ken-2.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/hokuto-no-ken-2.gif"
-    },
-    {
-        "id": "hokuto-no-ken",
         "nome": "Hokuto No Ken",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/hokuto_no_ken.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/hokuto-no-ken.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/hokuto-no-ken.gif"
+        "rom": "roms/hokuto_no_ken.nes",
+        "capa": "assets/capas/nes/hokuto_no_ken.jpg"
     },
     {
-        "id": "honoo-no-toukyuuji---dodge-danpei",
-        "nome": "Honoo No Toukyuuji - Dodge Danpei",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/honoo_no_toukyuuji_-_dodge_danpei.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/honoo-no-toukyuuji---dodge-danpei.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/honoo-no-toukyuuji---dodge-danpei.gif"
+        "nome": "Hokuto No Ken 2",
+        "rom": "roms/hokuto_no_ken_2.nes",
+        "capa": "assets/capas/nes/hokuto_no_ken_2.jpg"
     },
     {
-        "id": "hudson-hawk-usa",
+        "nome": "Honoo No Toukyuuji Dodge Danpei",
+        "rom": "roms/honoo_no_toukyuuji_-_dodge_danpei.nes",
+        "capa": "assets/capas/nes/honoo_no_toukyuuji_-_dodge_danpei.jpg"
+    },
+    {
+        "nome": "Hudson'S Adventure Island",
+        "rom": "roms/hudson's_adventure_island_(usa).nes",
+        "capa": "assets/capas/nes/hudson's_adventure_island_(usa).jpg"
+    },
+    {
+        "nome": "Hudson'S Adventure Island Ii",
+        "rom": "roms/hudson's_adventure_island_ii_(usa).nes",
+        "capa": "assets/capas/nes/hudson's_adventure_island_ii_(usa).jpg"
+    },
+    {
         "nome": "Hudson Hawk",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/hudson_hawk_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/hudson-hawk-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/hudson-hawk-usa.gif"
+        "rom": "roms/hudson_hawk_(usa).nes",
+        "capa": "assets/capas/nes/hudson_hawk_(usa).jpg"
     },
     {
-        "id": "hudsons-adventure-island-usa",
-        "nome": "Hudson's Adventure Island",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/hudsons_adventure_island_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/hudsons-adventure-island-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/hudsons-adventure-island-usa.gif"
+        "nome": "Ice Climber",
+        "rom": "roms/ice_climber_(usa,_europe).nes",
+        "capa": "assets/capas/nes/ice_climber_(usa,_europe).jpg"
     },
     {
-        "id": "hudsons-adventure-island-ii-usa",
-        "nome": "Hudson's Adventure Island 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/hudsons_adventure_island_ii_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/hudsons-adventure-island-ii-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/hudsons-adventure-island-ii-usa.gif"
-    },
-    {
-        "id": "ice-climber-usa-europe",
-        "nome": "Ice Climber (Usa, Europe)",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/ice_climber_usa_europe.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/ice-climber-usa-europe.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/ice-climber-usa-europe.gif"
-    },
-    {
-        "id": "immortal-the-usa",
         "nome": "Immortal, The",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/immortal_the_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/immortal-the-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/immortal-the-usa.gif"
+        "rom": "roms/immortal,_the_(usa).nes",
+        "capa": "assets/capas/nes/immortal,_the_(usa).jpg"
     },
     {
-        "id": "jleague-winning-goal-brasileirão",
-        "nome": "J.League Winning Goal (Brasileirão)",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/j.league_winning_goal_brasileirão.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/jleague-winning-goal-brasileirão.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/jleague-winning-goal-brasileirão.gif"
+        "nome": "J.League Winning Goal",
+        "rom": "roms/j.league_winning_goal_(brasileirão).nes",
+        "capa": "assets/capas/nes/j.league_winning_goal_(brasileirão).jpg"
     },
     {
-        "id": "jackal-usa",
         "nome": "Jackal",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/jackal_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/jackal-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/jackal-usa.gif"
+        "rom": "roms/jackal_(usa).nes",
+        "capa": "assets/capas/nes/jackal_(usa).jpg"
     },
     {
-        "id": "jackie-chans-action-kung-fu-usa",
-        "nome": "Jackie Chan's Action Kung Fu",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/jackie_chans_action_kung_fu_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/jackie-chans-action-kung-fu-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/jackie-chans-action-kung-fu-usa.gif"
+        "nome": "Jackie Chan'S Action Kung Fu",
+        "rom": "roms/jackie_chan's_action_kung_fu_(usa).nes",
+        "capa": "assets/capas/nes/jackie_chan's_action_kung_fu_(usa).jpg"
     },
     {
-        "id": "jetsons-the---cogswells-caper-usa",
-        "nome": "Jetsons, The - Cogswell's Caper",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/jetsons_the_-_cogswells_caper_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/jetsons-the---cogswells-caper-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/jetsons-the---cogswells-caper-usa.gif"
+        "nome": "Jetsons, The Cogswell'S Caper",
+        "rom": "roms/jetsons,_the_-_cogswell's_caper_(usa).nes",
+        "capa": "assets/capas/nes/jetsons,_the_-_cogswell's_caper_(usa).jpg"
     },
     {
-        "id": "journey-to-silius-usa",
         "nome": "Journey To Silius",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/journey_to_silius_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/journey-to-silius-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/journey-to-silius-usa.gif"
+        "rom": "roms/journey_to_silius_(usa).nes",
+        "capa": "assets/capas/nes/journey_to_silius_(usa).jpg"
     },
     {
-        "id": "jurassic-park-usa",
         "nome": "Jurassic Park",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/jurassic_park_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/jurassic-park-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/jurassic-park-usa.gif"
+        "rom": "roms/jurassic_park_(usa).nes",
+        "capa": "assets/capas/nes/jurassic_park_(usa).jpg"
     },
     {
-        "id": "juuouki-j",
         "nome": "Juuouki",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/juuouki_j.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/juuouki-j.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/juuouki-j.gif"
+        "rom": "roms/juuouki_(j).nes",
+        "capa": "assets/capas/nes/juuouki_(j).jpg"
     },
     {
-        "id": "kabuki---quantum-fighter-usa",
-        "nome": "Kabuki - Quantum Fighter",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/kabuki_-_quantum_fighter_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/kabuki---quantum-fighter-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/kabuki---quantum-fighter-usa.gif"
+        "nome": "Kabuki Quantum Fighter",
+        "rom": "roms/kabuki_-_quantum_fighter_(usa).nes",
+        "capa": "assets/capas/nes/kabuki_-_quantum_fighter_(usa).jpg"
     },
     {
-        "id": "kid-icarus-usa-europe",
-        "nome": "Kid Icarus (Usa, Europe)",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/kid_icarus_usa_europe.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/kid-icarus-usa-europe.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/kid-icarus-usa-europe.gif"
+        "nome": "Kid Icarus",
+        "rom": "roms/kid_icarus_(usa,_europe).nes",
+        "capa": "assets/capas/nes/kid_icarus_(usa,_europe).jpg"
     },
     {
-        "id": "krion-conquest-the-usa",
         "nome": "Krion Conquest, The",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/krion_conquest_the_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/krion-conquest-the-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/krion-conquest-the-usa.gif"
+        "rom": "roms/krion_conquest,_the_(usa).nes",
+        "capa": "assets/capas/nes/krion_conquest,_the_(usa).jpg"
     },
     {
-        "id": "kung-fu-japan-usa",
-        "nome": "Kung Fu (Japan, Usa)",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/kung_fu_japan_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/kung-fu-japan-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/kung-fu-japan-usa.gif"
+        "nome": "Kung Fu",
+        "rom": "roms/kung_fu_(japan,_usa).nes",
+        "capa": "assets/capas/nes/kung_fu_(japan,_usa).jpg"
     },
     {
-        "id": "legend-of-zelda-the-usa",
         "nome": "Legend Of Zelda, The",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/legend_of_zelda_the_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/legend-of-zelda-the-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/legend-of-zelda-the-usa.gif"
+        "rom": "roms/legend_of_zelda,_the_(usa).nes",
+        "capa": "assets/capas/nes/legend_of_zelda,_the_(usa).jpg"
     },
     {
-        "id": "little-mermaid-the-usa",
         "nome": "Little Mermaid, The",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/little_mermaid_the_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/little-mermaid-the-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/little-mermaid-the-usa.gif"
+        "rom": "roms/little_mermaid,_the_(usa).nes",
+        "capa": "assets/capas/nes/little_mermaid,_the_(usa).jpg"
     },
     {
-        "id": "little-nemo---the-dream-master-usa",
-        "nome": "Little Nemo - The Dream Master",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/little_nemo_-_the_dream_master_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/little-nemo---the-dream-master-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/little-nemo---the-dream-master-usa.gif"
+        "nome": "Little Nemo The Dream Master",
+        "rom": "roms/little_nemo_-_the_dream_master_(usa).nes",
+        "capa": "assets/capas/nes/little_nemo_-_the_dream_master_(usa).jpg"
     },
     {
-        "id": "lunar-pool-usa",
+        "nome": "Lode Runner",
+        "rom": "roms/lode_runner_(usa).nes",
+        "capa": "assets/capas/nes/lode_runner_(usa).jpg"
+    },
+    {
         "nome": "Lunar Pool",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/lunar_pool_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/lunar-pool-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/lunar-pool-usa.gif"
+        "rom": "roms/lunar_pool_(usa).nes",
+        "capa": "assets/capas/nes/lunar_pool_(usa).jpg"
     },
     {
-        "id": "mach-rider-japan-usa",
-        "nome": "Mach Rider (Japan, Usa)",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/mach_rider_japan_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/mach-rider-japan-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/mach-rider-japan-usa.gif"
+        "nome": "Mach Rider",
+        "rom": "roms/mach_rider_(japan,_usa).nes",
+        "capa": "assets/capas/nes/mach_rider_(japan,_usa).jpg"
     },
     {
-        "id": "mappy-usa",
+        "nome": "Mappy Land",
+        "rom": "roms/mappy-land_(usa).nes",
+        "capa": "assets/capas/nes/mappy-land_(usa).jpg"
+    },
+    {
         "nome": "Mappy",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/mappy_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/mappy-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/mappy-usa.gif"
+        "rom": "roms/mappy_(usa).nes",
+        "capa": "assets/capas/nes/mappy_(usa).jpg"
     },
     {
-        "id": "mappy-land-usa",
-        "nome": "Mappy-Land",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/mappy-land_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/mappy-land-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/mappy-land-usa.gif"
-    },
-    {
-        "id": "mario-runner-2",
-        "nome": "Mario Runner 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/mario_runner_2.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/mario-runner-2.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/mario-runner-2.gif"
-    },
-    {
-        "id": "mario-runner",
         "nome": "Mario Runner",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/mario_runner.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/mario-runner.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/mario-runner.gif"
+        "rom": "roms/mario_runner.nes",
+        "capa": "assets/capas/nes/mario_runner.jpg"
     },
     {
-        "id": "mega-man-usa",
+        "nome": "Mario Runner 2",
+        "rom": "roms/mario_runner_2.nes",
+        "capa": "assets/capas/nes/mario_runner_2.jpg"
+    },
+    {
         "nome": "Mega Man",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/mega_man_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/mega-man-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/mega-man-usa.gif"
+        "rom": "roms/mega_man_(usa).nes",
+        "capa": "assets/capas/nes/mega_man_(usa).jpg"
     },
     {
-        "id": "mega-man-2-usa",
         "nome": "Mega Man 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/mega_man_2_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/mega-man-2-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/mega-man-2-usa.gif"
+        "rom": "roms/mega_man_2_(usa).nes",
+        "capa": "assets/capas/nes/mega_man_2_(usa).jpg"
     },
     {
-        "id": "mega-man-3-usa",
         "nome": "Mega Man 3",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/mega_man_3_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/mega-man-3-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/mega-man-3-usa.gif"
+        "rom": "roms/mega_man_3_(usa).nes",
+        "capa": "assets/capas/nes/mega_man_3_(usa).jpg"
     },
     {
-        "id": "mega-man-4-usa",
         "nome": "Mega Man 4",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/mega_man_4_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/mega-man-4-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/mega-man-4-usa.gif"
+        "rom": "roms/mega_man_4_(usa).nes",
+        "capa": "assets/capas/nes/mega_man_4_(usa).jpg"
     },
     {
-        "id": "mega-man-5-usa",
         "nome": "Mega Man 5",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/mega_man_5_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/mega-man-5-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/mega-man-5-usa.gif"
+        "rom": "roms/mega_man_5_(usa).nes",
+        "capa": "assets/capas/nes/mega_man_5_(usa).jpg"
     },
     {
-        "id": "mega-man-6-usa",
         "nome": "Mega Man 6",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/mega_man_6_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/mega-man-6-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/mega-man-6-usa.gif"
+        "rom": "roms/mega_man_6_(usa).nes",
+        "capa": "assets/capas/nes/mega_man_6_(usa).jpg"
     },
     {
-        "id": "metal-gear-usa",
         "nome": "Metal Gear",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/metal_gear_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/metal-gear-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/metal-gear-usa.gif"
+        "rom": "roms/metal_gear_(usa).nes",
+        "capa": "assets/capas/nes/metal_gear_(usa).jpg"
     },
     {
-        "id": "metroid-usa",
         "nome": "Metroid",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/metroid_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/metroid-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/metroid-usa.gif"
+        "rom": "roms/metroid_(usa).nes",
+        "capa": "assets/capas/nes/metroid_(usa).jpg"
     },
     {
-        "id": "mighty-final-fight-usa",
         "nome": "Mighty Final Fight",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/mighty_final_fight_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/mighty-final-fight-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/mighty-final-fight-usa.gif"
+        "rom": "roms/mighty_final_fight_(usa).nes",
+        "capa": "assets/capas/nes/mighty_final_fight_(usa).jpg"
     },
     {
-        "id": "mike-tysons-punch-out-japan-usa",
-        "nome": "Mike Tyson's Punch-Out!! (Japan, Usa)",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/mike_tysons_punch-out!!_japan_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/mike-tysons-punch-out-japan-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/mike-tysons-punch-out-japan-usa.gif"
+        "nome": "Mike Tyson'S Punch Out!!",
+        "rom": "roms/mike_tyson's_punch-out!!_(japan,_usa).nes",
+        "capa": "assets/capas/nes/mike_tyson's_punch-out!!_(japan,_usa).jpg"
     },
     {
-        "id": "mitsume-ga-tooru",
         "nome": "Mitsume Ga Tooru",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/mitsume_ga_tooru.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/mitsume-ga-tooru.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/mitsume-ga-tooru.gif"
+        "rom": "roms/mitsume_ga_tooru.nes",
+        "capa": "assets/capas/nes/mitsume_ga_tooru.jpg"
     },
     {
-        "id": "monster-in-my-pocket-usa",
         "nome": "Monster In My Pocket",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/monster_in_my_pocket_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/monster-in-my-pocket-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/monster-in-my-pocket-usa.gif"
+        "rom": "roms/monster_in_my_pocket_(usa).nes",
+        "capa": "assets/capas/nes/monster_in_my_pocket_(usa).jpg"
     },
     {
-        "id": "moon-crystal-j",
         "nome": "Moon Crystal",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/moon_crystal_j.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/moon-crystal-j.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/moon-crystal-j.gif"
+        "rom": "roms/moon_crystal_(j).nes",
+        "capa": "assets/capas/nes/moon_crystal_(j).jpg"
     },
     {
-        "id": "ms-pac-man-usa",
-        "nome": "Ms. Pac-Man",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/ms._pac-man_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/ms-pac-man-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/ms-pac-man-usa.gif"
+        "nome": "Ms. Pac Man",
+        "rom": "roms/ms._pac-man_(usa).nes",
+        "capa": "assets/capas/nes/ms._pac-man_(usa).jpg"
     },
     {
-        "id": "nightmare-on-elm-street-a-usa",
         "nome": "Nightmare On Elm Street, A",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/nightmare_on_elm_street_a_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/nightmare-on-elm-street-a-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/nightmare-on-elm-street-a-usa.gif"
+        "rom": "roms/nightmare_on_elm_street,_a_(usa).nes",
+        "capa": "assets/capas/nes/nightmare_on_elm_street,_a_(usa).jpg"
     },
     {
-        "id": "nightshade-usa",
         "nome": "Nightshade",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/nightshade_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/nightshade-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/nightshade-usa.gif"
+        "rom": "roms/nightshade_(usa).nes",
+        "capa": "assets/capas/nes/nightshade_(usa).jpg"
     },
     {
-        "id": "ninja-crusaders-usa",
         "nome": "Ninja Crusaders",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/ninja_crusaders_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/ninja-crusaders-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/ninja-crusaders-usa.gif"
+        "rom": "roms/ninja_crusaders_(usa).nes",
+        "capa": "assets/capas/nes/ninja_crusaders_(usa).jpg"
     },
     {
-        "id": "ninja-gaiden-usa",
         "nome": "Ninja Gaiden",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/ninja_gaiden_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/ninja-gaiden-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/ninja-gaiden-usa.gif"
+        "rom": "roms/ninja_gaiden_(usa).nes",
+        "capa": "assets/capas/nes/ninja_gaiden_(usa).jpg"
     },
     {
-        "id": "ninja-gaiden-ii---the-dark-sword-of-chaos-usa",
-        "nome": "Ninja Gaiden 2 - The Dark Sword Of Chaos",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/ninja_gaiden_ii_-_the_dark_sword_of_chaos_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/ninja-gaiden-ii---the-dark-sword-of-chaos-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/ninja-gaiden-ii---the-dark-sword-of-chaos-usa.gif"
+        "nome": "Ninja Gaiden Ii The Dark Sword Of Chaos",
+        "rom": "roms/ninja_gaiden_ii_-_the_dark_sword_of_chaos_(usa).nes",
+        "capa": "assets/capas/nes/ninja_gaiden_ii_-_the_dark_sword_of_chaos_(usa).jpg"
     },
     {
-        "id": "ninja-gaiden-iii---the-ancient-ship-of-doom-usa",
-        "nome": "Ninja Gaiden 3 - The Ancient Ship Of Doom",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/ninja_gaiden_iii_-_the_ancient_ship_of_doom_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/ninja-gaiden-iii---the-ancient-ship-of-doom-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/ninja-gaiden-iii---the-ancient-ship-of-doom-usa.gif"
+        "nome": "Ninja Gaiden Iii The Ancient Ship Of Doom",
+        "rom": "roms/ninja_gaiden_iii_-_the_ancient_ship_of_doom_(usa).nes",
+        "capa": "assets/capas/nes/ninja_gaiden_iii_-_the_ancient_ship_of_doom_(usa).jpg"
     },
     {
-        "id": "nuts--milk",
         "nome": "Nuts & Milk",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/nuts_&_milk.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/nuts--milk.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/nuts--milk.gif"
+        "rom": "roms/nuts_&_milk.nes",
+        "capa": "assets/capas/nes/nuts_&_milk.jpg"
     },
     {
-        "id": "othello-usa",
         "nome": "Othello",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/othello_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/othello-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/othello-usa.gif"
+        "rom": "roms/othello_(usa).nes",
+        "capa": "assets/capas/nes/othello_(usa).jpg"
     },
     {
-        "id": "pow---prisoners-of-war-usa",
-        "nome": "P.O.W. - Prisoners Of War",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/p.o.w._-_prisoners_of_war_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/pow---prisoners-of-war-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/pow---prisoners-of-war-usa.gif"
+        "nome": "P.O.W. Prisoners Of War",
+        "rom": "roms/p.o.w._-_prisoners_of_war_(usa).nes",
+        "capa": "assets/capas/nes/p.o.w._-_prisoners_of_war_(usa).jpg"
     },
     {
-        "id": "pac-man-usa",
-        "nome": "Pac-Man",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/pac-man_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/pac-man-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/pac-man-usa.gif"
+        "nome": "Pac Man",
+        "rom": "roms/pac-man_(usa).nes",
+        "capa": "assets/capas/nes/pac-man_(usa).jpg"
     },
     {
-        "id": "pipe-dream-usa",
         "nome": "Pipe Dream",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/pipe_dream_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/pipe-dream-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/pipe-dream-usa.gif"
+        "rom": "roms/pipe_dream_(usa).nes",
+        "capa": "assets/capas/nes/pipe_dream_(usa).jpg"
     },
     {
-        "id": "pooyan",
         "nome": "Pooyan",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/pooyan.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/pooyan.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/pooyan.gif"
+        "rom": "roms/pooyan.nes",
+        "capa": "assets/capas/nes/pooyan.jpg"
     },
     {
-        "id": "power-blade-2-usa",
         "nome": "Power Blade 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/power_blade_2_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/power-blade-2-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/power-blade-2-usa.gif"
+        "rom": "roms/power_blade_2_(usa).nes",
+        "capa": "assets/capas/nes/power_blade_2_(usa).jpg"
     },
     {
-        "id": "power-blazer-j",
         "nome": "Power Blazer",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/power_blazer_j.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/power-blazer-j.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/power-blazer-j.gif"
+        "rom": "roms/power_blazer_(j).nes",
+        "capa": "assets/capas/nes/power_blazer_(j).jpg"
     },
     {
-        "id": "predator-usa",
         "nome": "Predator",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/predator_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/predator-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/predator-usa.gif"
+        "rom": "roms/predator_(usa).nes",
+        "capa": "assets/capas/nes/predator_(usa).jpg"
     },
     {
-        "id": "q-bert-usa",
-        "nome": "Q-Bert",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/q-bert_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/q-bert-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/q-bert-usa.gif"
+        "nome": "Q Bert",
+        "rom": "roms/q-bert_(usa).nes",
+        "capa": "assets/capas/nes/q-bert_(usa).jpg"
     },
     {
-        "id": "river-city-ransom-usa",
         "nome": "River City Ransom",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/river_city_ransom_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/river-city-ransom-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/river-city-ransom-usa.gif"
+        "rom": "roms/river_city_ransom_(usa).nes",
+        "capa": "assets/capas/nes/river_city_ransom_(usa).jpg"
     },
     {
-        "id": "road-fighter-europe",
         "nome": "Road Fighter",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/road_fighter_europe.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/road-fighter-europe.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/road-fighter-europe.gif"
+        "rom": "roms/road_fighter_(europe).nes",
+        "capa": "assets/capas/nes/road_fighter_(europe).jpg"
     },
     {
-        "id": "robocop-usa",
         "nome": "Robocop",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/robocop_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/robocop-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/robocop-usa.gif"
+        "rom": "roms/robocop_(usa).nes",
+        "capa": "assets/capas/nes/robocop_(usa).jpg"
     },
     {
-        "id": "rockin-kats-usa",
         "nome": "Rockin' Kats",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/rockin_kats_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/rockin-kats-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/rockin-kats-usa.gif"
+        "rom": "roms/rockin'_kats_(usa).nes",
+        "capa": "assets/capas/nes/rockin'_kats_(usa).jpg"
     },
     {
-        "id": "rollergames-usa",
         "nome": "Rollergames",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/rollergames_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/rollergames-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/rollergames-usa.gif"
+        "rom": "roms/rollergames_(usa).nes",
+        "capa": "assets/capas/nes/rollergames_(usa).jpg"
     },
     {
-        "id": "rolling-thunder-usa-unl",
-        "nome": "Rolling Thunder (Unl)",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/rolling_thunder_usa_unl.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/rolling-thunder-usa-unl.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/rolling-thunder-usa-unl.gif"
+        "nome": "Rolling Thunder",
+        "rom": "roms/rolling_thunder_(usa)_(unl).nes",
+        "capa": "assets/capas/nes/rolling_thunder_(usa)_(unl).jpg"
     },
     {
-        "id": "roto-runner-load-runner-hack",
-        "nome": "Roto Runner (Load Runner Hack)",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/roto_runner_load_runner_hack.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/roto-runner-load-runner-hack.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/roto-runner-load-runner-hack.gif"
+        "nome": "Roto Runner",
+        "rom": "roms/roto_runner_(load_runner_hack).nes",
+        "capa": "assets/capas/nes/roto_runner_(load_runner_hack).jpg"
     },
     {
-        "id": "rygar-usa",
         "nome": "Rygar",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/rygar_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/rygar-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/rygar-usa.gif"
+        "rom": "roms/rygar_(usa).nes",
+        "capa": "assets/capas/nes/rygar_(usa).jpg"
     },
     {
-        "id": "scat--special-cibernetic-attack-team-usa",
-        "nome": "Scat - Special Cibernetic Attack Team",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/scat_-special_cibernetic_attack_team_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/scat--special-cibernetic-attack-team-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/scat--special-cibernetic-attack-team-usa.gif"
+        "nome": "Saint Seiya Ougon Densetsu Kanketsu Hen",
+        "rom": "roms/saint_seiya_-_ougon_densetsu_kanketsu_hen.nes",
+        "capa": "assets/capas/nes/saint_seiya_-_ougon_densetsu_kanketsu_hen.jpg"
     },
     {
-        "id": "sd-hero-soukessen---taose-aku-no-gundan",
-        "nome": "SD Hero Soukessen - Taose! Aku No Gundan",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/sd_hero_soukessen_-_taose!_aku_no_gundan.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/sd-hero-soukessen---taose-aku-no-gundan.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/sd-hero-soukessen---taose-aku-no-gundan.gif"
+        "nome": "Scat Special Cibernetic Attack Team",
+        "rom": "roms/scat_-special_cibernetic_attack_team_(usa).nes",
+        "capa": "assets/capas/nes/scat_-special_cibernetic_attack_team_(usa).jpg"
     },
     {
-        "id": "shadow-of-the-ninja-usa",
+        "nome": "Sd Hero Soukessen Taose! Aku No Gundan",
+        "rom": "roms/sd_hero_soukessen_-_taose!_aku_no_gundan.nes",
+        "capa": "assets/capas/nes/sd_hero_soukessen_-_taose!_aku_no_gundan.jpg"
+    },
+    {
         "nome": "Shadow Of The Ninja",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/shadow_of_the_ninja_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/shadow-of-the-ninja-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/shadow-of-the-ninja-usa.gif"
+        "rom": "roms/shadow_of_the_ninja_(usa).nes",
+        "capa": "assets/capas/nes/shadow_of_the_ninja_(usa).jpg"
     },
     {
-        "id": "shadowgate-usa",
         "nome": "Shadowgate",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/shadowgate_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/shadowgate-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/shadowgate-usa.gif"
+        "rom": "roms/shadowgate_(usa).nes",
+        "capa": "assets/capas/nes/shadowgate_(usa).jpg"
     },
     {
-        "id": "shinobi-usa-unl",
-        "nome": "Shinobi (Unl)",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/shinobi_usa_unl.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/shinobi-usa-unl.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/shinobi-usa-unl.gif"
+        "nome": "Shinobi",
+        "rom": "roms/shinobi_(usa)_(unl).nes",
+        "capa": "assets/capas/nes/shinobi_(usa)_(unl).jpg"
     },
     {
-        "id": "silver-surfer-usa",
         "nome": "Silver Surfer",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/silver_surfer_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/silver-surfer-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/silver-surfer-usa.gif"
+        "rom": "roms/silver_surfer_(usa).nes",
+        "capa": "assets/capas/nes/silver_surfer_(usa).jpg"
     },
     {
-        "id": "soccer-world",
         "nome": "Soccer",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/soccer_world.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/soccer-world.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/soccer-world.gif"
+        "rom": "roms/soccer_(world).nes",
+        "capa": "assets/capas/nes/soccer_(world).jpg"
     },
     {
-        "id": "solstice---the-quest-for-the-staff-of-demnos-usa",
-        "nome": "Solstice - The Quest For The Staff Of Demnos",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/solstice_-_the_quest_for_the_staff_of_demnos_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/solstice---the-quest-for-the-staff-of-demnos-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/solstice---the-quest-for-the-staff-of-demnos-usa.gif"
+        "nome": "Solstice The Quest For The Staff Of Demnos",
+        "rom": "roms/solstice_-_the_quest_for_the_staff_of_demnos_(usa).nes",
+        "capa": "assets/capas/nes/solstice_-_the_quest_for_the_staff_of_demnos_(usa).jpg"
     },
     {
-        "id": "spelunker-usa",
         "nome": "Spelunker",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/spelunker_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/spelunker-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/spelunker-usa.gif"
+        "rom": "roms/spelunker_(usa).nes",
+        "capa": "assets/capas/nes/spelunker_(usa).jpg"
     },
     {
-        "id": "splatter-house---wanpaku-graffiti-j",
-        "nome": "Splatter House - Wanpaku Graffiti",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/splatter_house_-_wanpaku_graffiti_j.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/splatter-house---wanpaku-graffiti-j.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/splatter-house---wanpaku-graffiti-j.gif"
+        "nome": "Splatter House Wanpaku Graffiti",
+        "rom": "roms/splatter_house_-_wanpaku_graffiti_(j).nes",
+        "capa": "assets/capas/nes/splatter_house_-_wanpaku_graffiti_(j).jpg"
     },
     {
-        "id": "star-gate",
         "nome": "Star Gate",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/star_gate.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/star-gate.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/star-gate.gif"
+        "rom": "roms/star_gate.nes",
+        "capa": "assets/capas/nes/star_gate.jpg"
     },
     {
-        "id": "star-voyager-usa",
         "nome": "Star Voyager",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/star_voyager_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/star-voyager-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/star-voyager-usa.gif"
+        "rom": "roms/star_voyager_(usa).nes",
+        "capa": "assets/capas/nes/star_voyager_(usa).jpg"
     },
     {
-        "id": "star-wars-usa",
         "nome": "Star Wars",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/star_wars_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/star-wars-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/star-wars-usa.gif"
+        "rom": "roms/star_wars_(usa).nes",
+        "capa": "assets/capas/nes/star_wars_(usa).jpg"
     },
     {
-        "id": "street-fighter-2010---the-final-fight-usa",
-        "nome": "Street Fighter 2010 - The Final Fight",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/street_fighter_2010_-_the_final_fight_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/street-fighter-2010---the-final-fight-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/street-fighter-2010---the-final-fight-usa.gif"
+        "nome": "Street Fighter 2010 The Final Fight",
+        "rom": "roms/street_fighter_2010_-_the_final_fight_(usa).nes",
+        "capa": "assets/capas/nes/street_fighter_2010_-_the_final_fight_(usa).jpg"
     },
     {
-        "id": "strider-usa",
         "nome": "Strider",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/strider_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/strider-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/strider-usa.gif"
+        "rom": "roms/strider_(usa).nes",
+        "capa": "assets/capas/nes/strider_(usa).jpg"
     },
     {
-        "id": "super-arabian-j",
         "nome": "Super Arabian",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/super_arabian_j.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/super-arabian-j.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/super-arabian-j.gif"
+        "rom": "roms/super_arabian_(j).nes",
+        "capa": "assets/capas/nes/super_arabian_(j).jpg"
     },
     {
-        "id": "super-c-usa",
         "nome": "Super C",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/super_c_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/super-c-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/super-c-usa.gif"
+        "rom": "roms/super_c_(usa).nes",
+        "capa": "assets/capas/nes/super_c_(usa).jpg"
     },
     {
-        "id": "super-mario-bros-world",
         "nome": "Super Mario Bros.",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/super_mario_bros._world.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/super-mario-bros-world.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/super-mario-bros-world.gif"
+        "rom": "roms/super_mario_bros._(world).nes",
+        "capa": "assets/capas/nes/super_mario_bros._(world).jpg"
     },
     {
-        "id": "super-mario-bros-2-usa",
         "nome": "Super Mario Bros. 2",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/super_mario_bros._2_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/super-mario-bros-2-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/super-mario-bros-2-usa.gif"
+        "rom": "roms/super_mario_bros._2_(usa).nes",
+        "capa": "assets/capas/nes/super_mario_bros._2_(usa).jpg"
     },
     {
-        "id": "super-mario-bros-3-usa",
         "nome": "Super Mario Bros. 3",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/super_mario_bros._3_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/super-mario-bros-3-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/super-mario-bros-3-usa.gif"
+        "rom": "roms/super_mario_bros._3_(usa).nes",
+        "capa": "assets/capas/nes/super_mario_bros._3_(usa).jpg"
     },
     {
-        "id": "super-mario-kart-raider-unl",
-        "nome": "Super Mario Kart Raider (Unl)",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/super_mario_kart_raider_unl.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/super-mario-kart-raider-unl.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/super-mario-kart-raider-unl.gif"
+        "nome": "Super Mario Kart Raider",
+        "rom": "roms/super_mario_kart_raider_(unl).nes",
+        "capa": "assets/capas/nes/super_mario_kart_raider_(unl).jpg"
     },
     {
-        "id": "super-mario-usa",
-        "nome": "Super Mario USA",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/super_mario_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/super-mario-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/super-mario-usa.gif"
+        "nome": "Super Mario Usa",
+        "rom": "roms/super_mario_usa.nes",
+        "capa": "assets/capas/nes/super_mario_usa.jpg"
     },
     {
-        "id": "super-pitfall-usa",
         "nome": "Super Pitfall",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/super_pitfall_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/super-pitfall-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/super-pitfall-usa.gif"
+        "rom": "roms/super_pitfall_(usa).nes",
+        "capa": "assets/capas/nes/super_pitfall_(usa).jpg"
     },
     {
-        "id": "sweet-home-j",
         "nome": "Sweet Home",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/sweet_home_j.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/sweet-home-j.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/sweet-home-j.gif"
+        "rom": "roms/sweet_home_(j).nes",
+        "capa": "assets/capas/nes/sweet_home_(j).jpg"
     },
     {
-        "id": "tatakae-chou-robot-seimeitai-transformers---convoy-no-nazo",
-        "nome": "Tatakae! Chou Robot Seimeitai Transformers - Convoy No Nazo",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/tatakae!_chou_robot_seimeitai_transformers_-_convoy_no_nazo.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/tatakae-chou-robot-seimeitai-transformers---convoy-no-nazo.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/tatakae-chou-robot-seimeitai-transformers---convoy-no-nazo.gif"
+        "nome": "Tatakae! Chou Robot Seimeitai Transformers Convoy No Nazo",
+        "rom": "roms/tatakae!_chou_robot_seimeitai_transformers_-_convoy_no_nazo.nes",
+        "capa": "assets/capas/nes/tatakae!_chou_robot_seimeitai_transformers_-_convoy_no_nazo.jpg"
     },
     {
-        "id": "teenage-mutant-ninja-turtles-usa",
         "nome": "Teenage Mutant Ninja Turtles",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/teenage_mutant_ninja_turtles_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/teenage-mutant-ninja-turtles-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/teenage-mutant-ninja-turtles-usa.gif"
+        "rom": "roms/teenage_mutant_ninja_turtles_(usa).nes",
+        "capa": "assets/capas/nes/teenage_mutant_ninja_turtles_(usa).jpg"
     },
     {
-        "id": "teenage-mutant-ninja-turtles-ii---the-arcade-game-usa",
-        "nome": "Teenage Mutant Ninja Turtles 2 - The Arcade Game",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/teenage_mutant_ninja_turtles_ii_-_the_arcade_game_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/teenage-mutant-ninja-turtles-ii---the-arcade-game-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/teenage-mutant-ninja-turtles-ii---the-arcade-game-usa.gif"
+        "nome": "Teenage Mutant Ninja Turtles Ii The Arcade Game",
+        "rom": "roms/teenage_mutant_ninja_turtles_ii_-_the_arcade_game_(usa).nes",
+        "capa": "assets/capas/nes/teenage_mutant_ninja_turtles_ii_-_the_arcade_game_(usa).jpg"
     },
     {
-        "id": "teenage-mutant-ninja-turtles-iii---the-manhattan-project-usa",
-        "nome": "Teenage Mutant Ninja Turtles 3 - The Manhattan Project",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/teenage_mutant_ninja_turtles_iii_-_the_manhattan_project_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/teenage-mutant-ninja-turtles-iii---the-manhattan-project-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/teenage-mutant-ninja-turtles-iii---the-manhattan-project-usa.gif"
+        "nome": "Teenage Mutant Ninja Turtles Iii The Manhattan Project",
+        "rom": "roms/teenage_mutant_ninja_turtles_iii_-_the_manhattan_project_(usa).nes",
+        "capa": "assets/capas/nes/teenage_mutant_ninja_turtles_iii_-_the_manhattan_project_(usa).jpg"
     },
     {
-        "id": "tennis-japan-usa",
-        "nome": "Tennis (Japan, Usa)",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/tennis_japan_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/tennis-japan-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/tennis-japan-usa.gif"
+        "nome": "Tennis",
+        "rom": "roms/tennis_(japan,_usa).nes",
+        "capa": "assets/capas/nes/tennis_(japan,_usa).jpg"
     },
     {
-        "id": "terminator-2---judgment-day-usa",
-        "nome": "Terminator 2 - Judgment Day",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/terminator_2_-_judgment_day_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/terminator-2---judgment-day-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/terminator-2---judgment-day-usa.gif"
+        "nome": "Terminator 2 Judgment Day",
+        "rom": "roms/terminator_2_-_judgment_day_(usa).nes",
+        "capa": "assets/capas/nes/terminator_2_-_judgment_day_(usa).jpg"
     },
     {
-        "id": "tetris-usa",
         "nome": "Tetris",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/tetris_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/tetris-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/tetris-usa.gif"
+        "rom": "roms/tetris_(usa).nes",
+        "capa": "assets/capas/nes/tetris_(usa).jpg"
     },
     {
-        "id": "time-lord-usa",
         "nome": "Time Lord",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/time_lord_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/time-lord-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/time-lord-usa.gif"
+        "rom": "roms/time_lord_(usa).nes",
+        "capa": "assets/capas/nes/time_lord_(usa).jpg"
     },
     {
-        "id": "tiny-toon-adventures-usa",
         "nome": "Tiny Toon Adventures",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/tiny_toon_adventures_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/tiny-toon-adventures-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/tiny-toon-adventures-usa.gif"
+        "rom": "roms/tiny_toon_adventures_(usa).nes",
+        "capa": "assets/capas/nes/tiny_toon_adventures_(usa).jpg"
     },
     {
-        "id": "todos-contra-tcheco-20-by-macbee-rockin-kats-hack",
-        "nome": "Todos Contra Tcheco 2.0 By Macbee (Rockin' Kats Hack)",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/todos_contra_tcheco_2.0_by_macbee_rockin_kats_hack.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/todos-contra-tcheco-20-by-macbee-rockin-kats-hack.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/todos-contra-tcheco-20-by-macbee-rockin-kats-hack.gif"
+        "nome": "Todos Contra Tcheco 2.0 By Macbee",
+        "rom": "roms/todos_contra_tcheco_2.0_by_macbee_(rockin'_kats_hack).nes",
+        "capa": "assets/capas/nes/todos_contra_tcheco_2.0_by_macbee_(rockin'_kats_hack).jpg"
     },
     {
-        "id": "toki-usa",
         "nome": "Toki",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/toki_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/toki-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/toki-usa.gif"
+        "rom": "roms/toki_(usa).nes",
+        "capa": "assets/capas/nes/toki_(usa).jpg"
     },
     {
-        "id": "tokkyuu-shirei-solbrain",
         "nome": "Tokkyuu Shirei Solbrain",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/tokkyuu_shirei_solbrain.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/tokkyuu-shirei-solbrain.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/tokkyuu-shirei-solbrain.gif"
+        "rom": "roms/tokkyuu_shirei_solbrain.nes",
+        "capa": "assets/capas/nes/tokkyuu_shirei_solbrain.jpg"
     },
     {
-        "id": "totally-rad-usa",
         "nome": "Totally Rad",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/totally_rad_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/totally-rad-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/totally-rad-usa.gif"
+        "rom": "roms/totally_rad_(usa).nes",
+        "capa": "assets/capas/nes/totally_rad_(usa).jpg"
     },
     {
-        "id": "tower-of-druaga",
         "nome": "Tower Of Druaga",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/tower_of_druaga.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/tower-of-druaga.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/tower-of-druaga.gif"
+        "rom": "roms/tower_of_druaga.nes",
+        "capa": "assets/capas/nes/tower_of_druaga.jpg"
     },
     {
-        "id": "trojan-usa",
+        "nome": "Track & Field",
+        "rom": "roms/track_&_field_(usa).nes",
+        "capa": "assets/capas/nes/track_&_field_(usa).jpg"
+    },
+    {
+        "nome": "Track & Field Ii",
+        "rom": "roms/track_&_field_ii_(usa).nes",
+        "capa": "assets/capas/nes/track_&_field_ii_(usa).jpg"
+    },
+    {
         "nome": "Trojan",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/trojan_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/trojan-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/trojan-usa.gif"
+        "rom": "roms/trojan_(usa).nes",
+        "capa": "assets/capas/nes/trojan_(usa).jpg"
     },
     {
-        "id": "volleyball-usa-europe",
-        "nome": "Volleyball (Usa, Europe)",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/volleyball_usa_europe.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/volleyball-usa-europe.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/volleyball-usa-europe.gif"
+        "nome": "Volleyball",
+        "rom": "roms/volleyball_(usa,_europe).nes",
+        "capa": "assets/capas/nes/volleyball_(usa,_europe).jpg"
     },
     {
-        "id": "werewolf---the-last-warrior-usa",
-        "nome": "Werewolf - The Last Warrior",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/werewolf_-_the_last_warrior_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/werewolf---the-last-warrior-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/werewolf---the-last-warrior-usa.gif"
+        "nome": "Werewolf The Last Warrior",
+        "rom": "roms/werewolf_-_the_last_warrior_(usa).nes",
+        "capa": "assets/capas/nes/werewolf_-_the_last_warrior_(usa).jpg"
     },
     {
-        "id": "willow-usa",
         "nome": "Willow",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/willow_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/willow-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/willow-usa.gif"
+        "rom": "roms/willow_(usa).nes",
+        "capa": "assets/capas/nes/willow_(usa).jpg"
     },
     {
-        "id": "wolverine-usa",
         "nome": "Wolverine",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/wolverine_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/wolverine-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/wolverine-usa.gif"
+        "rom": "roms/wolverine_(usa).nes",
+        "capa": "assets/capas/nes/wolverine_(usa).jpg"
     },
     {
-        "id": "yo-noid-usa",
         "nome": "Yo! Noid",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/yo!_noid_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/yo-noid-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/yo-noid-usa.gif"
+        "rom": "roms/yo!_noid_(usa).nes",
+        "capa": "assets/capas/nes/yo!_noid_(usa).jpg"
     },
     {
-        "id": "zanac-usa",
         "nome": "Zanac",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/zanac_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/zanac-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/zanac-usa.gif"
+        "rom": "roms/zanac_(usa).nes",
+        "capa": "assets/capas/nes/zanac_(usa).jpg"
     },
     {
-        "id": "zelda-ii---the-adventure-of-link-usa",
-        "nome": "Zelda 2 - The Adventure Of Link",
-        "rom": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/roms/zelda_ii_-_the_adventure_of_link_usa.nes",
-        "capa": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/capas/zelda-ii---the-adventure-of-link-usa.jpg",
-        "preview": "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/nes/previews/zelda-ii---the-adventure-of-link-usa.gif"
+        "nome": "Zelda Ii The Adventure Of Link",
+        "rom": "roms/zelda_ii_-_the_adventure_of_link_(usa).nes",
+        "capa": "assets/capas/nes/zelda_ii_-_the_adventure_of_link_(usa).jpg"
     }
 ]
