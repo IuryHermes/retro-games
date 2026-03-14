@@ -83,24 +83,60 @@
         .cancel-btn { background: #333; color: #fff; border: 1px solid #555; margin-top: 20px; }
         .cancel-btn:hover, .cancel-btn.gamepad-focus { background: #555; color: #fff; box-shadow: 0 0 15px #555; transform: scale(1.02); border-color: #fff; }
 
-        #splash-screen { position: fixed; inset: 0; background-color: var(--bg-color); display: flex; justify-content: center; align-items: center; z-index: 1000000; transition: opacity 0.8s ease-out, visibility 0.8s; }
-        .splash-logo { font-family: 'Press Start 2P', monospace; font-size: clamp(20px, 4vw, 40px); color: var(--accent-color); display: flex; align-items: flex-end; white-space: nowrap; }
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000000;
+            transition: opacity 0.8s ease-out, visibility 0.8s;
+        }
+        .splash-logo {
+            font-family: 'Press Start 2P', monospace;
+            font-size: clamp(20px, 4vw, 40px);
+            color: var(--accent-color);
+            display: flex;
+            align-items: flex-end;
+            white-space: nowrap;
+        }
         .initial { font-weight: bold; }
-        .reveal { display: inline-block; max-width: 0; opacity: 0; overflow: hidden; transition: max-width 1.5s ease-in-out, opacity 1.5s ease-in-out; vertical-align: bottom; font-size: clamp(16px, 3.5vw, 32px); margin-bottom: 2px; }
-        .cursor { animation: blink-cursor 1s step-end infinite; margin-left: 5px; }
+        .reveal {
+            display: inline-block;
+            max-width: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-width 1.5s ease-in-out, opacity 1.5s ease-in-out;
+            vertical-align: bottom;
+            font-size: clamp(16px, 3.5vw, 32px);
+            margin-bottom: 2px;
+        }
+        .cursor {
+            animation: blink-cursor 1s step-end infinite;
+            margin-left: 5px;
+        }
         @keyframes blink-cursor { 50% { opacity: 0; } }
-        .splash-logo.animate .reveal { max-width: 300px; opacity: 1; }
-        #splash-screen.fade-out { opacity: 0; visibility: hidden; }
+        .splash-logo.animate .reveal {
+            max-width: 300px; 
+            opacity: 1;
+        }
+        #splash-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
 
         .sidebar { width: var(--sidebar-collapsed-width); background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; position: fixed; height: 100%; z-index: 5000; padding: 10px 5px; transition: width 0.3s ease, background 0.4s; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
         .sidebar::-webkit-scrollbar { display: none; }
         @media(min-width: 769px) {
             .sidebar:hover { width: var(--sidebar-expanded-width); box-shadow: 10px 0 50px rgba(0,0,0,0.5); }
             .sidebar:hover .nav-text { display: inline-block; opacity: 1; transition: 0.3s; }
+            .sidebar:hover .menu-label { opacity: 0; }
             .sidebar:hover .sidebar-chat { display: flex; }
         }
         .sidebar-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; flex-shrink: 0; }
         .sidebar-header img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-color); cursor: pointer; }
+        .menu-label { font-family: 'Press Start 2P'; font-size: 8px; color: var(--text-color); margin-top: 8px; text-align: center; display: block; transition: 0.2s; cursor: pointer; }
         .nav-list { display: flex; flex-direction: column; gap: 10px; flex: 1; margin-top: 10px; }
         .nav-item { display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-muted); justify-content: center; flex-shrink: 0; transition: 0.3s; }
         @media(min-width: 769px) { .nav-item { justify-content: flex-start; } }
@@ -507,7 +543,6 @@
 
     const coreMap = { 'nes': 'nes', 'snes': 'snes', 'gba': 'gba', 'n64': 'n64', 'megadrive': 'segaMD', 'ps1': 'psx' };
 
-    // CORREÇÃO 1: OS NOMES DAS ROMS PRECISAM SER EXATAMENTE OS DO R2 (TUDO MINÚSCULO)
     const top10Games = [
         { id: 'super_mario_world', nome: 'Super Mario World', sysId: 'snes', path: 'systems/snes/', rom: 'roms/super_mario_world_(usa).zip', cats: 'Aventura <span>•</span> Plataforma <span>•</span> SNES' },
         { id: 'sonic-the-hedgehog', nome: 'Sonic the Hedgehog', sysId: 'megadrive', path: 'systems/megadrive/', rom: 'roms/sonic_the_hedgehog_(usa,_europe).md', cats: 'Ação <span>•</span> Velocidade <span>•</span> Mega Drive' },
@@ -640,17 +675,12 @@
                 const card = document.createElement("div");
                 card.className = "game-card selectable-item";
                     
-                // CORREÇÃO 2: A ARMADURA PARA AS CAPAS
-                // O script em python salvou os nomes com "underline", mas suas imagens usam "hifens". 
-                // A lógica abaixo tenta achar a imagem, e se der erro, tenta o nome com hifens.
-                const romBase = g.rom.split('/').pop().replace(/\.[^/.]+$/, ""); // Tira o .zip/.nes
-                const safeName = romBase.replace(/_/g, '-').replace(/[()]/g, '').replace(/&/g, '').replace(/--/g, '-');
-                
-                const imgTry1 = `${sys.path}capas/${romBase}.jpg`;
-                const imgTry2 = `${sys.path}capas/${safeName}.jpg`;
-                
-                const gifTry1 = `${sys.path}previews/${romBase}.gif`;
-                const gifTry2 = `${sys.path}previews/${safeName}.gif`;
+                const romBaseName = g.rom.split('/').pop().replace(/\.[^/.]+$/, ""); 
+                const safeName = romBaseName.replace(/_/g, '-').replace(/[()]/g, '').replace(/&/g, '').replace(/-+/g, '-');
+                const imgTry1 = `${R2_URL}${sys.path}capas/${romBaseName}.jpg`;
+                const imgTry2 = `${R2_URL}${sys.path}capas/${safeName}.jpg`;
+                const gifTry1 = `${R2_URL}${sys.path}previews/${romBaseName}.gif`;
+                const gifTry2 = `${R2_URL}${sys.path}previews/${safeName}.gif`;
 
                 const coreToUse = coreMap[sys.id] || 'snes';   
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
@@ -699,6 +729,7 @@
                 car.appendChild(card);
             });
         }).catch(err => {
+            console.log("Erro no sistema:", sys.id, err);
             wrapper.style.display = "none";
             item.style.display = "none";   
         });
@@ -726,10 +757,10 @@
                 const div = document.createElement('div');
                 div.className = 'search-item selectable-item';   
                  
-                const romBase = h.rom.split('/').pop().replace(/\.[^/.]+$/, "");
-                const safeName = romBase.replace(/_/g, '-').replace(/[()]/g, '').replace(/&/g, '').replace(/--/g, '-');
-                const imgTry1 = `${h.sysPath}capas/${romBase}.jpg`;
-                const imgTry2 = `${h.sysPath}capas/${safeName}.jpg`;
+                const romBaseName = h.rom.split('/').pop().replace(/\.[^/.]+$/, ""); 
+                const safeName = romBaseName.replace(/_/g, '-').replace(/[()]/g, '').replace(/&/g, '').replace(/-+/g, '-');
+                const imgTry1 = `${R2_URL}${h.sysPath}capas/${romBaseName}.jpg`;
+                const imgTry2 = `${R2_URL}${h.sysPath}capas/${safeName}.jpg`;
 
                 div.innerHTML = `
                     <img src="${imgTry1}" onerror="this.onerror=null; this.src='${imgTry2}';">   
