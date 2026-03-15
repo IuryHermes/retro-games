@@ -1,0 +1,133 @@
+=== RELATÓRIO DE ERROS GBA E PS1 ===
+
+======================================
+SISTEMA: GBA
+======================================
+
+[X] CAPAS QUEBRADAS (32 encontrados):
+ - Jogo: 2 In 1 Asterix Obelix Bash Them All Asterix Obelix Xxl
+   Pede a capa: 2-in-1-asterix-obelix-bash-them-all-asterix-obelix-xxl.jpg
+   ROM original: roms/2-in-1-asterix-obelix-bash-them-all-asterix-obelix-xxl.gba
+
+ - Jogo: Boktai The Sun Is In Your Hand
+   Pede a capa: boktai-the-sun-is-in-your-hand.jpg
+   ROM original: roms/boktai-the-sun-is-in-your-hand.gba
+
+ - Jogo: Crash Bandicoot The Huge Adventure
+   Pede a capa: crash-bandicoot-the-huge-adventure.jpg
+   ROM original: roms/crash-bandicoot-the-huge-adventure.gba
+
+ - Jogo: Dinotopia The Timestone Pirates
+   Pede a capa: dinotopia-the-timestone-pirates.jpg
+   ROM original: roms/dinotopia-the-timestone-pirates.gba
+
+ - Jogo: Dragon Ball Gt Transformation
+   Pede a capa: dragon-ball-gt-transformation.jpg
+   ROM original: roms/dragon-ball-gt-transformation.gba
+
+ - Jogo: Dragon Ball Z The Legacy Of Goku Ii
+   Pede a capa: dragon-ball-z-the-legacy-of-goku-ii.jpg
+   ROM original: roms/dragon-ball-z-the-legacy-of-goku-ii.gba
+
+ - Jogo: F Zero Maximum Velocity
+   Pede a capa: f-zero-maximum-velocity.jpg
+   ROM original: roms/f-zero-maximum-velocity.gba
+
+ - Jogo: Final Fantasy I Ii Dawn Of Souls Br
+   Pede a capa: final-fantasy-i-ii-dawn-of-souls-br.jpg
+   ROM original: roms/final-fantasy-i-ii-dawn-of-souls-br.gba
+
+ - Jogo: Final Fantasy I Ii Dawn Of Souls
+   Pede a capa: final-fantasy-i-ii-dawn-of-souls.jpg
+   ROM original: roms/final-fantasy-i-ii-dawn-of-souls.gba
+
+ - Jogo: Harry Potter And The Chamber Of Secrets
+   Pede a capa: harry-potter-and-the-chamber-of-secrets.jpg
+   ROM original: roms/harry-potter-and-the-chamber-of-secrets.gba
+
+ - Jogo: Harry Potter And The Order Of The Phoenix
+   Pede a capa: harry-potter-and-the-order-of-the-phoenix.jpg
+   ROM original: roms/harry-potter-and-the-order-of-the-phoenix.gba
+
+ - Jogo: Harry Potter And The Sorcerer S Stone
+   Pede a capa: harry-potter-and-the-sorcerer-s-stone.jpg
+   ROM original: roms/harry-potter-and-the-sorcerer-s-stone.gba
+
+ - Jogo: Justice League Heroes The Flash
+   Pede a capa: justice-league-heroes-the-flash.jpg
+   ROM original: roms/justice-league-heroes-the-flash.gba
+
+ - Jogo: King Kong The 8Th Wonder Of The World
+   Pede a capa: king-kong-the-8th-wonder-of-the-world.jpg
+   ROM original: roms/king-kong-the-8th-wonder-of-the-world.gba
+
+ - Jogo: Kirby And The Amazing Mirror
+   Pede a capa: kirby-and-the-amazing-mirror.jpg
+   ROM original: roms/kirby-and-the-amazing-mirror.gba
+
+ - Jogo: Koala Brothers Outback Adventures
+   Pede a capa: koala-brothers-outback-adventures.jpg
+   ROM original: roms/koala-brothers-outback-adventures.gba
+
+ - Jogo: Kong The Animated Series
+   Pede a capa: kong-the-animated-series.jpg
+   ROM original: roms/kong-the-animated-series.gba
+
+ - Jogo: Naruto Ninja Council 2
+   Pede a capa: naruto-ninja-council-2.jpg
+   ROM original: roms/naruto-ninja-council-2.gba
+
+ - Jogo: R Type Iii The Third Lightning
+   Pede a capa: r-type-iii-the-third-lightning.jpg
+   ROM original: roms/r-type-iii-the-third-lightning.gba
+
+ - Jogo: Robot Wars Advanced Destruction
+   Pede a capa: robot-wars-advanced-destruction.jpg
+   ROM original: roms/robot-wars-advanced-destruction.gba
+
+   ... e mais.
+
+======================================
+SISTEMA: PS1
+======================================
+
+[!] JOGOS MULTI-DISCO (43 encontrados):
+ - A I T D 2024 Ch1N Com Br.M3U | ROM: roms/a_i_t_d_2024_ch1n_com_br.m3u
+ - A I T D 2024 Ch1N Com Br Cd1 | ROM: roms/a_i_t_d_2024_ch1n_com_br_cd1.bin
+ - A I T D 2024 Ch1N Com Br Cd2 | ROM: roms/a_i_t_d_2024_ch1n_com_br_cd2.bin
+ - Alone In The Dark.M3U | ROM: roms/alone_in_the_dark.m3u
+ - Amerzone The Explorer S Legacy.M3U | ROM: roms/amerzone_the_explorer_s_legacy.m3u
+ - Amerzone The Explorer S Legacy Cd1 | ROM: roms/amerzone_the_explorer_s_legacy_cd1.bin
+ - Amerzone The Explorer S Legacy Cd2 | ROM: roms/amerzone_the_explorer_s_legacy_cd2.bin
+ - Asterix The Gallic War Dublado Ch1N Com Br.M3U | ROM: roms/asterix_the_gallic_war_dublado_ch1n_com_br.m3u
+ - Chrono Cross Pt Br Ps1.M3U | ROM: roms/chrono_cross_pt_br_ps1.m3u
+ - Chrono Cross Pt Br Ps1 Cd1 | ROM: roms/chrono_cross_pt_br_ps1_cd1.bin
+ - Chrono Cross Pt Br Ps1 Cd2 | ROM: roms/chrono_cross_pt_br_ps1_cd2.bin
+ - Dracula A Ressurreicao.M3U | ROM: roms/dracula_a_ressurreicao.m3u
+ - Dracula A Ressurreicao Cd1 | ROM: roms/dracula_a_ressurreicao_cd1.bin
+ - Dracula A Ressurreicao Cd2 | ROM: roms/dracula_a_ressurreicao_cd2.bin
+ - Driver 2 Pt.M3U | ROM: roms/driver_2_pt.m3u
+ - Final Fantasy Ix Em Portugu S Pt Br.M3U | ROM: roms/final_fantasy_ix_em_portugu_s_pt_br.m3u
+ - Final Fantasy Ix Em Portugu S Pt Br Cd1 | ROM: roms/final_fantasy_ix_em_portugu_s_pt_br_cd1.bin
+ - Final Fantasy Ix Em Portugu S Pt Br Cd2 | ROM: roms/final_fantasy_ix_em_portugu_s_pt_br_cd2.bin
+ - Final Fantasy Vii Pt Br.M3U | ROM: roms/final_fantasy_vii_pt_br.m3u
+ - Final Fantasy Vii Pt Br Cd1 | ROM: roms/final_fantasy_vii_pt_br_cd1.bin
+   ... e mais.
+
+[X] CAPAS QUEBRADAS (4 encontrados):
+ - Jogo: A I T D 2024 Ch1N Com Br.M3U
+   Pede a capa: a_i_t_d_2024_ch1n_com_br.jpg
+   ROM original: roms/a_i_t_d_2024_ch1n_com_br.m3u
+
+ - Jogo: A I T D 2024 Ch1N Com Br Cd1
+   Pede a capa: a_i_t_d_2024_ch1n_com_br_cd1.jpg
+   ROM original: roms/a_i_t_d_2024_ch1n_com_br_cd1.bin
+
+ - Jogo: A I T D 2024 Ch1N Com Br Cd2
+   Pede a capa: a_i_t_d_2024_ch1n_com_br_cd2.jpg
+   ROM original: roms/a_i_t_d_2024_ch1n_com_br_cd2.bin
+
+ - Jogo: We2026
+   Pede a capa: we2026.jpg
+   ROM original: roms/we2026.bin
+

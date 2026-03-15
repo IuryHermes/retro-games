@@ -3,559 +3,652 @@
         "nome": "2 In 1 Asterix Obelix Bash Them All Asterix Obelix Xxl",
         "rom": "roms/2-in-1-asterix-obelix-bash-them-all-asterix-obelix-xxl.gba",
         "capa": "asterix-obelix.jpg",
-        "preview": "asterix-obelix.gif"
+        "preview": "asterix-obelix.gif",
+        "nota": "7.3"
     },
     {
         "nome": "2006 Fifa World Cup Germany 2006",
         "rom": "roms/2006-fifa-world-cup-germany-2006.gba",
         "capa": "2006-fifa-world-cup.jpg",
-        "preview": "2006-fifa-world-cup.gif"
+        "preview": "2006-fifa-world-cup.gif",
+        "nota": "7.8"
     },
     {
         "nome": "Advance Wars 2 Black Hole Rising",
         "rom": "roms/advance-wars-2-black-hole-rising.gba",
         "capa": "advance-wars-2.jpg",
-        "preview": "advance-wars-2.gif"
+        "preview": "advance-wars-2.gif",
+        "nota": "8.8"
     },
     {
         "nome": "Advance Wars",
         "rom": "roms/advance-wars.gba",
         "capa": "advance-wars.jpg",
-        "preview": "advance-wars.gif"
+        "preview": "advance-wars.gif",
+        "nota": "8.8"
     },
     {
         "nome": "Agent Hugo Roborumble",
         "rom": "roms/agent-hugo-roborumble.gba",
         "capa": "agent-hugo.jpg",
-        "preview": "agent-hugo.gif"
+        "preview": "agent-hugo.gif",
+        "nota": "7.4"
     },
     {
         "nome": "Aggressive Inline",
         "rom": "roms/aggressive-inline.gba",
         "capa": "aggressive-inline.jpg",
-        "preview": "aggressive-inline.gif"
+        "preview": "aggressive-inline.gif",
+        "nota": "6.7"
     },
     {
         "nome": "Alienators Evolution Continues",
         "rom": "roms/alienators-evolution-continues.gba",
         "capa": "alienators.jpg",
-        "preview": "alienators.gif"
+        "preview": "alienators.gif",
+        "nota": "6.2"
     },
     {
         "nome": "Altered Beast Guardian Of The Realms",
         "rom": "roms/altered-beast-guardian-of-the-realms.gba",
         "capa": "altered-beast.jpg",
-        "preview": "altered-beast.gif"
+        "preview": "altered-beast.gif",
+        "nota": "6.7"
     },
     {
         "nome": "Army Men Advance",
         "rom": "roms/army-men-advance.gba",
         "capa": "rayman-advance.jpg",
-        "preview": "rayman-advance.gif"
+        "preview": "rayman-advance.gif",
+        "nota": "7.2"
     },
     {
         "nome": "Avatar The Last Airbender",
         "rom": "roms/avatar-the-last-airbender.gba",
         "capa": "van-helsing.jpg",
-        "preview": "van-helsing.gif"
+        "preview": "van-helsing.gif",
+        "nota": "6.6"
     },
     {
         "nome": "Banjo Kazooie Grunty S Revenge",
         "rom": "roms/banjo-kazooie-grunty-s-revenge.gba",
         "capa": "banjo-kazooie.jpg",
-        "preview": "banjo-kazooie.gif"
+        "preview": "banjo-kazooie.gif",
+        "nota": "6.6"
     },
     {
         "nome": "Batman Begins",
         "rom": "roms/batman-begins.gba",
         "capa": "batman-begins.png",
-        "preview": "batman-begins.gif"
+        "preview": "batman-begins.gif",
+        "nota": "7.7"
     },
     {
         "nome": "Batman Rise Of Sin Tzu",
         "rom": "roms/batman-rise-of-sin-tzu.gba",
         "capa": "batman-sin-tzu.jpg",
-        "preview": "batman-sin-tzu.gif"
+        "preview": "batman-sin-tzu.gif",
+        "nota": "7.8"
     },
     {
         "nome": "Beyblade V Force Ultimate Blader Jam",
         "rom": "roms/beyblade-v-force-ultimate-blader-jam.gba",
         "capa": "land-before-time.jpg",
-        "preview": "land-before-time.gif"
+        "preview": "land-before-time.gif",
+        "nota": "8.1"
     },
     {
         "nome": "Blackthorne",
         "rom": "roms/blackthorne.gba",
         "capa": "blackthorne.jpg",
-        "preview": "blackthorne.gif"
+        "preview": "blackthorne.gif",
+        "nota": "8.0"
     },
     {
         "nome": "Boktai 2 Solar Boy Django",
         "rom": "roms/boktai-2-solar-boy-django.gba",
         "capa": "boktai-2.jpg",
-        "preview": "boktai-2.gif"
+        "preview": "boktai-2.gif",
+        "nota": "7.6"
     },
     {
         "nome": "Boktai The Sun Is In Your Hand",
         "rom": "roms/boktai-the-sun-is-in-your-hand.gba",
         "capa": "boktai.jpg",
-        "preview": "boktai.gif"
+        "preview": "boktai.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Bomberman Tournament",
         "rom": "roms/bomberman-tournament.gba",
         "capa": "bomberman.jpg",
-        "preview": "bomberman.gif"
+        "preview": "bomberman.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Breath Of Fire 2",
         "rom": "roms/breath-of-fire-2.gba",
         "capa": "blackthorne.jpg",
-        "preview": "blackthorne.gif"
+        "preview": "blackthorne.gif",
+        "nota": "7.9"
     },
     {
         "nome": "Breath Of Fire",
         "rom": "roms/breath-of-fire.gba",
         "capa": "blackthorne.jpg",
-        "preview": "blackthorne.gif"
+        "preview": "blackthorne.gif",
+        "nota": "7.9"
     },
     {
         "nome": "Care Bears The Care Quests",
         "rom": "roms/care-bears-the-care-quests.gba",
         "capa": "care-bears.jpg",
-        "preview": "care-bears.gif"
+        "preview": "care-bears.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Cars",
         "rom": "roms/cars.gba",
         "capa": "cars.jpg",
-        "preview": "cars.gif"
+        "preview": "cars.gif",
+        "nota": "5.4"
     },
     {
         "nome": "Cartoon Network Speedway",
         "rom": "roms/cartoon-network-speedway.gba",
         "capa": "cn-speedway.jpg",
-        "preview": "cn-speedway.gif"
+        "preview": "cn-speedway.gif",
+        "nota": "4.4"
     },
     {
         "nome": "Casper",
         "rom": "roms/casper.gba",
         "capa": "casper.jpg",
-        "preview": "casper.gif"
+        "preview": "casper.gif",
+        "nota": "6.7"
     },
     {
         "nome": "Castlevania Aria Of Sorrow",
         "rom": "roms/castlevania-aria-of-sorrow.gba",
         "capa": "castlevania-aria.jpg",
-        "preview": "castlevania-aria.gif"
+        "preview": "castlevania-aria.gif",
+        "nota": "8.8"
     },
     {
         "nome": "Castlevania Circle Of The Moon",
         "rom": "roms/castlevania-circle-of-the-moon.gba",
         "capa": "castlevania-circle.jpg",
-        "preview": "castlevania-circle.gif"
+        "preview": "castlevania-circle.gif",
+        "nota": "7.6"
     },
     {
         "nome": "Castlevania Harmony Of Dissonance",
         "rom": "roms/castlevania-harmony-of-dissonance.gba",
         "capa": "castlevania-harmony.jpg",
-        "preview": "castlevania-harmony.gif"
+        "preview": "castlevania-harmony.gif",
+        "nota": "7.9"
     },
     {
         "nome": "Celeste",
         "rom": "roms/celeste.gba",
         "capa": "celeste.png",
-        "preview": "celeste.gif"
+        "preview": "celeste.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Contra Advance The Alien Wars Ex",
         "rom": "roms/contra-advance-the-alien-wars-ex.gba",
         "capa": "advance-wars.jpg",
-        "preview": "advance-wars.gif"
+        "preview": "advance-wars.gif",
+        "nota": "8.1"
     },
     {
         "nome": "Crash Bandicoot 2 N Tranced",
         "rom": "roms/crash-bandicoot-2-n-tranced.gba",
         "capa": "crash-nitro.jpg",
-        "preview": "crash-nitro.gif"
+        "preview": "crash-nitro.gif",
+        "nota": "7.5"
     },
     {
         "nome": "Crash Bandicoot Purple Ripto S Rampage",
         "rom": "roms/crash-bandicoot-purple-ripto-s-rampage.gba",
         "capa": "crash-purple.jpg",
-        "preview": "crash-purple.gif"
+        "preview": "crash-purple.gif",
+        "nota": "6.4"
     },
     {
         "nome": "Crash Bandicoot The Huge Adventure",
         "rom": "roms/crash-bandicoot-the-huge-adventure.gba",
         "capa": "crash-huge.jpg",
-        "preview": "crash-huge.gif"
+        "preview": "crash-huge.gif",
+        "nota": "7.5"
     },
     {
         "nome": "Crash Nitro Kart",
         "rom": "roms/crash-nitro-kart.gba",
         "capa": "crash-nitro.jpg",
-        "preview": "crash-nitro.gif"
+        "preview": "crash-nitro.gif",
+        "nota": "7.8"
     },
     {
         "nome": "Crazy Chase",
         "rom": "roms/crazy-chase.gba",
         "capa": "crazy-chase.jpg",
-        "preview": "crazy-chase.gif"
+        "preview": "crazy-chase.gif",
+        "nota": "7.0"
     },
     {
         "nome": "Crazy Frog Racer",
         "rom": "roms/crazy-frog-racer.gba",
         "capa": "crazy-frog.jpg",
-        "preview": "crazy-frog.gif"
+        "preview": "crazy-frog.gif",
+        "nota": "5.9"
     },
     {
         "nome": "Crazy Taxi Catch A Ride",
         "rom": "roms/crazy-taxi-catch-a-ride.gba",
         "capa": "crazy-taxi.jpg",
-        "preview": "crazy-taxi.gif"
+        "preview": "crazy-taxi.gif",
+        "nota": "7.7"
     },
     {
         "nome": "Danny Phantom The Ultimate Enemy",
         "rom": "roms/danny-phantom-the-ultimate-enemy.gba",
         "capa": "danny-phantom.jpg",
-        "preview": "danny-phantom.gif"
+        "preview": "danny-phantom.gif",
+        "nota": "5.6"
     },
     {
         "nome": "Dead To Rights",
         "rom": "roms/dead-to-rights.gba",
         "capa": "dead-to-rights.jpg",
-        "preview": "dead-to-rights.gif"
+        "preview": "dead-to-rights.gif",
+        "nota": "6.9"
     },
     {
         "nome": "Dinotopia The Timestone Pirates",
         "rom": "roms/dinotopia-the-timestone-pirates.gba",
         "capa": "dinotopia.jpg",
-        "preview": "dinotopia.gif"
+        "preview": "dinotopia.gif",
+        "nota": "5.3"
     },
     {
         "nome": "Donkey Kong Country 3",
         "rom": "roms/donkey-kong-country-3.gba",
         "capa": "pokemon-legendary.jpg",
-        "preview": "pokemon-legendary.gif"
+        "preview": "pokemon-legendary.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Donkey Kong Country",
         "rom": "roms/donkey-kong-country.gba",
         "capa": "pokemon-legendary.jpg",
-        "preview": "pokemon-legendary.gif"
+        "preview": "pokemon-legendary.gif",
+        "nota": "8.8"
     },
     {
         "nome": "Dragon Ball Advanced Adventure",
         "rom": "roms/dragon-ball-advanced-adventure.gba",
         "capa": "db-advanced.jpg",
-        "preview": "db-advanced.gif"
+        "preview": "db-advanced.gif",
+        "nota": "8.5"
     },
     {
         "nome": "Dragon Ball Gt Transformation",
         "rom": "roms/dragon-ball-gt-transformation.gba",
         "capa": "dbgt.jpg",
-        "preview": "dbgt.gif"
+        "preview": "dbgt.gif",
+        "nota": "4.9"
     },
     {
         "nome": "Dragon Ball Z Taiketsu",
         "rom": "roms/dragon-ball-z-taiketsu.gba",
         "capa": "dbz-taiketsu.jpg",
-        "preview": "dbz-taiketsu.gif"
+        "preview": "dbz-taiketsu.gif",
+        "nota": "7.6"
     },
     {
         "nome": "Dragon Ball Z The Legacy Of Goku Ii",
         "rom": "roms/dragon-ball-z-the-legacy-of-goku-ii.gba",
         "capa": "dbz-legacy-2.jpg",
-        "preview": "dbz-legacy-2.gif"
+        "preview": "dbz-legacy-2.gif",
+        "nota": "8.2"
     },
     {
         "nome": "Dragon Ball Z The Legacy Of Goku",
         "rom": "roms/dragon-ball-z-the-legacy-of-goku.gba",
         "capa": "dbz-legacy.jpg",
-        "preview": "dbz-legacy.gif"
+        "preview": "dbz-legacy.gif",
+        "nota": "5.8"
     },
     {
         "nome": "Extreme Ghostbusters Code Ecto 1",
         "rom": "roms/extreme-ghostbusters-code-ecto-1.gba",
         "capa": "extreme-ghostbusters.jpg",
-        "preview": "extreme-ghostbusters.gif"
+        "preview": "extreme-ghostbusters.gif",
+        "nota": "5.6"
     },
     {
         "nome": "F Zero Maximum Velocity",
         "rom": "roms/f-zero-maximum-velocity.gba",
         "capa": "f-zero.jpg",
-        "preview": "f-zero.gif"
+        "preview": "f-zero.gif",
+        "nota": "6.3"
     },
     {
         "nome": "Fairly Oddparents The Enter The Cleft",
         "rom": "roms/fairly-oddparents-the-enter-the-cleft.gba",
         "capa": "fairly-oddparents.jpg",
-        "preview": "fairly-oddparents.gif"
+        "preview": "fairly-oddparents.gif",
+        "nota": "8.1"
     },
     {
         "nome": "Fifa Soccer 2004",
         "rom": "roms/fifa-soccer-2004.gba",
         "capa": "fifa-2004.jpg",
-        "preview": "fifa-2004.gif"
+        "preview": "fifa-2004.gif",
+        "nota": "7.5"
     },
     {
         "nome": "Final Fantasy I Ii Dawn Of Souls Br",
         "rom": "roms/final-fantasy-i-ii-dawn-of-souls-br.gba",
         "capa": "ff-1-2.jpg",
-        "preview": "ff-1-2.gif"
+        "preview": "ff-1-2.gif",
+        "nota": "7.1"
     },
     {
         "nome": "Final Fantasy I Ii Dawn Of Souls",
         "rom": "roms/final-fantasy-i-ii-dawn-of-souls.gba",
         "capa": "ff-1-2.jpg",
-        "preview": "ff-1-2.gif"
+        "preview": "ff-1-2.gif",
+        "nota": "7.1"
     },
     {
         "nome": "Final Fantasy Tactics Advance",
         "rom": "roms/final-fantasy-tactics-advance.gba",
         "capa": "ff-tactics.jpg",
-        "preview": "ff-tactics.gif"
+        "preview": "ff-tactics.gif",
+        "nota": "8.6"
     },
     {
         "nome": "Final Fantasy Vi Advance",
         "rom": "roms/final-fantasy-vi-advance.gba",
         "capa": "rayman-advance.jpg",
-        "preview": "rayman-advance.gif"
+        "preview": "rayman-advance.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Fire Emblem 8 The Sacred Stones",
         "rom": "roms/fire-emblem-8-the-sacred-stones.gba",
         "capa": "fire-emblem.jpg",
-        "preview": "fire-emblem.gif"
+        "preview": "fire-emblem.gif",
+        "nota": "8.5"
     },
     {
         "nome": "Franklin S Great Adventures",
         "rom": "roms/franklin-s-great-adventures.gba",
         "capa": "franklin.jpg",
-        "preview": "franklin.gif"
+        "preview": "franklin.gif",
+        "nota": "5.4"
     },
     {
         "nome": "Gekido Advance Kintaro S Revenge",
         "rom": "roms/gekido-advance-kintaro-s-revenge.gba",
         "capa": "advance-wars.jpg",
-        "preview": "advance-wars.gif"
+        "preview": "advance-wars.gif",
+        "nota": "8.8"
     },
     {
         "nome": "Ghost Rider",
         "rom": "roms/ghost-rider.gba",
         "capa": "ghost-rider.jpg",
-        "preview": "ghost-rider.gif"
+        "preview": "ghost-rider.gif",
+        "nota": "6.0"
     },
     {
         "nome": "Golden Sun The Lost Age",
         "rom": "roms/golden-sun-the-lost-age.gba",
         "capa": "golden-sun-lost-age.jpg",
-        "preview": "golden-sun-lost-age.gif"
+        "preview": "golden-sun-lost-age.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Golden Sun",
         "rom": "roms/golden-sun.gba",
         "capa": "golden-sun.jpg",
-        "preview": "golden-sun.gif"
+        "preview": "golden-sun.gif",
+        "nota": "8.8"
     },
     {
         "nome": "Grand Theft Auto Advance",
         "rom": "roms/grand-theft-auto-advance.gba",
         "capa": "rayman-advance.jpg",
-        "preview": "rayman-advance.gif"
+        "preview": "rayman-advance.gif",
+        "nota": "7.4"
     },
     {
         "nome": "Gremlins Stripe Vs Gizmo",
         "rom": "roms/gremlins-stripe-vs-gizmo.gba",
         "capa": "gremlins.jpg",
-        "preview": "gremlins.gif"
+        "preview": "gremlins.gif",
+        "nota": "7.3"
     },
     {
         "nome": "Grim Adventures Of Billy Mandy The",
         "rom": "roms/grim-adventures-of-billy-mandy-the.gba",
         "capa": "billy-mandy.jpg",
-        "preview": "billy-mandy.gif"
+        "preview": "billy-mandy.gif",
+        "nota": "6.6"
     },
     {
         "nome": "Gunstar Super Heroes",
         "rom": "roms/gunstar-super-heroes.gba",
         "capa": "gunstar.jpg",
-        "preview": "gunstar.gif"
+        "preview": "gunstar.gif",
+        "nota": "8.0"
     },
     {
         "nome": "Harry Potter And The Chamber Of Secrets",
         "rom": "roms/harry-potter-and-the-chamber-of-secrets.gba",
         "capa": "hp-chamber.jpg",
-        "preview": "hp-chamber.gif"
+        "preview": "hp-chamber.gif",
+        "nota": "8.2"
     },
     {
         "nome": "Harry Potter And The Order Of The Phoenix",
         "rom": "roms/harry-potter-and-the-order-of-the-phoenix.gba",
         "capa": "hp-phoenix.jpg",
-        "preview": "hp-phoenix.gif"
+        "preview": "hp-phoenix.gif",
+        "nota": "7.0"
     },
     {
         "nome": "Harry Potter And The Sorcerer S Stone",
         "rom": "roms/harry-potter-and-the-sorcerer-s-stone.gba",
         "capa": "hp-stone.jpg",
-        "preview": "hp-stone.gif"
+        "preview": "hp-stone.gif",
+        "nota": "8.0"
     },
     {
         "nome": "Harvest Moon Friends Of Mineral Town",
         "rom": "roms/harvest-moon-friends-of-mineral-town.gba",
         "capa": "harvest-moon.jpg",
-        "preview": "harvest-moon.gif"
+        "preview": "harvest-moon.gif",
+        "nota": "8.9"
     },
     {
         "nome": "Harvest Moon Mfomt",
         "rom": "roms/harvest-moon-mfomt.gba",
         "capa": "harvest-moon.jpg",
-        "preview": "harvest-moon.gif"
+        "preview": "harvest-moon.gif",
+        "nota": "8.3"
     },
     {
         "nome": "Hugo Bukkazoom",
         "rom": "roms/hugo-bukkazoom.gba",
         "capa": "hugo-bukkazoom.jpg",
-        "preview": "hugo-bukkazoom.gif"
+        "preview": "hugo-bukkazoom.gif",
+        "nota": "7.9"
     },
     {
         "nome": "Hugo The Evil Mirror Advance",
         "rom": "roms/hugo-the-evil-mirror-advance.gba",
         "capa": "hugo-mirror.jpg",
-        "preview": "hugo-mirror.gif"
+        "preview": "hugo-mirror.gif",
+        "nota": "7.4"
     },
     {
         "nome": "Ice Nine",
         "rom": "roms/ice-nine.gba",
         "capa": "ice-nine.jpg",
-        "preview": "ice-nine.gif"
+        "preview": "ice-nine.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Iridion Ii",
         "rom": "roms/iridion-ii.gba",
         "capa": "iridion.jpg",
-        "preview": "iridion.gif"
+        "preview": "iridion.gif",
+        "nota": "7.3"
     },
     {
         "nome": "James Pond Codename Robocod",
         "rom": "roms/james-pond-codename-robocod.gba",
         "capa": "james-pond.jpg",
-        "preview": "james-pond.gif"
+        "preview": "james-pond.gif",
+        "nota": "5.7"
     },
     {
         "nome": "Justice League Heroes The Flash",
         "rom": "roms/justice-league-heroes-the-flash.gba",
         "capa": "jl-flash.jpg",
-        "preview": "jl-flash.gif"
+        "preview": "jl-flash.gif",
+        "nota": "6.2"
     },
     {
         "nome": "Justice League Injustice For All",
         "rom": "roms/justice-league-injustice-for-all.gba",
         "capa": "jl-injustice.jpg",
-        "preview": "jl-injustice.gif"
+        "preview": "jl-injustice.gif",
+        "nota": "8.8"
     },
     {
         "nome": "King Kong The 8Th Wonder Of The World",
         "rom": "roms/king-kong-the-8th-wonder-of-the-world.gba",
         "capa": "king-kong.jpg",
-        "preview": "king-kong.gif"
+        "preview": "king-kong.gif",
+        "nota": "6.0"
     },
     {
         "nome": "Kingdom Hearts Chain Of Memories",
         "rom": "roms/kingdom-hearts-chain-of-memories.gba",
         "capa": "kingdom-hearts.jpg",
-        "preview": "kingdom-hearts.gif"
+        "preview": "kingdom-hearts.gif",
+        "nota": "7.3"
     },
     {
         "nome": "Kirby And The Amazing Mirror",
         "rom": "roms/kirby-and-the-amazing-mirror.gba",
         "capa": "kirby.jpg",
-        "preview": "kirby.gif"
+        "preview": "kirby.gif",
+        "nota": "8.4"
     },
     {
         "nome": "Koala Brothers Outback Adventures",
         "rom": "roms/koala-brothers-outback-adventures.gba",
         "capa": "koala.jpg",
-        "preview": "koala.gif"
+        "preview": "koala.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Kong The Animated Series",
         "rom": "roms/kong-the-animated-series.gba",
         "capa": "kong.jpg",
-        "preview": "kong.gif"
+        "preview": "kong.gif",
+        "nota": "7.4"
     },
     {
         "nome": "Lady Sia Br",
         "rom": "roms/lady-sia-br.gba",
         "capa": "lady-sia.jpg",
-        "preview": "lady-sia.gif"
+        "preview": "lady-sia.gif",
+        "nota": "2.7"
     },
     {
         "nome": "Lady Sia",
         "rom": "roms/lady-sia.gba",
         "capa": "lady-sia.jpg",
-        "preview": "lady-sia.gif"
+        "preview": "lady-sia.gif",
+        "nota": "2.7"
     },
     {
         "nome": "Lara Croft Tomb Raider Legend",
         "rom": "roms/lara-croft-tomb-raider-legend.gba",
         "capa": "tomb-raider-legend.jpg",
-        "preview": "tomb-raider-legend.gif"
+        "preview": "tomb-raider-legend.gif",
+        "nota": "7.8"
     },
     {
         "nome": "Lara Croft Tomb Raider The Prophecy",
         "rom": "roms/lara-croft-tomb-raider-the-prophecy.gba",
         "capa": "tomb-raider-prophecy.jpg",
-        "preview": "tomb-raider-prophecy.gif"
+        "preview": "tomb-raider-prophecy.gif",
+        "nota": "5.7"
     },
     {
         "nome": "Lilo Stitch 2 Haemsterviel Havoc",
         "rom": "roms/lilo-stitch-2-haemsterviel-havoc.gba",
         "capa": "lilo-stitch-2.jpg",
-        "preview": "lilo-stitch-2.gif"
+        "preview": "lilo-stitch-2.gif",
+        "nota": "7.1"
     },
     {
         "nome": "Lilo Stitch",
         "rom": "roms/lilo-stitch.gba",
         "capa": "lilo-stitch.jpg",
-        "preview": "lilo-stitch.gif"
+        "preview": "lilo-stitch.gif",
+        "nota": "7.1"
     },
     {
         "nome": "Lion King The",
         "rom": "roms/lion-king-the.gba",
         "capa": "lion-king.jpg",
-        "preview": "lion-king.gif"
+        "preview": "lion-king.gif",
+        "nota": "7.9"
     },
     {
         "nome": "Love Hina Advance",
         "rom": "roms/love-hina-advance.gba",
         "capa": "love-hina.jpg",
-        "preview": "love-hina.gif"
+        "preview": "love-hina.gif",
+        "nota": "8.8"
     },
     {
         "nome": "Madagascar",
         "rom": "roms/madagascar.gba",
         "capa": "madagascar.jpg",
-        "preview": "madagascar.gif"
+        "preview": "madagascar.gif",
+        "nota": "7.9"
     },
     {
         "nome": "Mario Luigi Superstar Saga",
         "rom": "roms/mario-luigi-superstar-saga.gba",
         "capa": "mario-luigi.jpg",
-        "preview": "mario-luigi.gif"
+        "preview": "mario-luigi.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Mario Vs. Donkey Kong",
         "rom": "roms/mario-vs.-donkey-kong.gba",
         "capa": "mario-vs-dk.jpg",
-        "preview": "mario-vs-dk.gif"
+        "preview": "mario-vs-dk.gif",
+        "nota": "7.4"
     },
     {
         "nome": "Marvel Ultimate Alliance",
         "rom": "roms/marvel-ultimate-alliance.gba",
         "capa": "marvel-alliance.jpg",
-        "preview": "marvel-alliance.gif"
+        "preview": "marvel-alliance.gif",
+        "nota": "7.9"
     },
     {
         "nome": "Max Payne Gba",

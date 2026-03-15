@@ -1,0 +1,301 @@
+=== RELATÓRIO DE MAPEAMENTO NEOTERMINALROOM ===
+
+======================================
+SISTEMA: nes
+======================================
+
+--> games.json (Amostra de 1 item):
+[
+    {
+        "nome": "1943 The Battle Of Midway",
+        "rom": "roms/1943_-_the_battle_of_midway_(usa).nes",
+        "capa": "assets/capas/nes/1943_-_the_battle_of_midway_(usa).jpg"
+    },
+    {
+        "nome": "8 Eyes",
+
+--> CAPAS (Amostra de 10 arquivos):
+1943---the-battle-of-midway-usa.jpg
+8-eyes-usa.jpg
+abadox---the-deadly-inner-war-usa.jpg
+addams-family-the-usa.jpg
+advanced-dungeons--dragons---dragonstrike-usa.jpg
+adventures-of-lolo-3-usa.jpg
+akumajou-densetsu-j.jpg
+amagon-usa.jpg
+archon-usa.jpg
+argos-no-senshi.jpg
+
+--> PREVIEWS (Amostra de 10 arquivos):
+1943---the-battle-of-midway-usa.gif
+8-eyes-usa.gif
+abadox---the-deadly-inner-war-usa.gif
+addams-family-the-usa.gif
+advanced-dungeons--dragons---dragonstrike-usa.gif
+adventures-of-lolo-3-usa.gif
+akumajou-densetsu-j.gif
+amagon-usa.gif
+archon-usa.gif
+argos-no-senshi.gif
+
+--> ROMS (Amostra de 10 arquivos):
+1943_-_the_battle_of_midway_(usa).nes
+8_eyes_(usa).nes
+abadox_-_the_deadly_inner_war_(usa).nes
+addams_family,_the_(usa).nes
+advanced_dungeons_&_dragons_-_dragonstrike_(usa).nes
+adventures_of_lolo_3_(usa).nes
+akumajou_densetsu_(j).nes
+amagon_(usa).nes
+archon_(usa).nes
+argos_no_senshi.nes
+
+======================================
+SISTEMA: snes
+======================================
+
+--> games.json (Amostra de 1 item):
+[
+    {
+        "nome": "3 Ninjas Kick Back",
+        "rom": "roms/3_ninjas_kick_back_(usa).zip",
+        "capa": "assets/capas/snes/3_ninjas_kick_back_(usa).jpg"
+    },
+    {
+        "nome": "7Th Saga, The",
+
+--> CAPAS (Amostra de 10 arquivos):
+3_ninjas_kick_back.jpg
+7th_saga,_the.jpg
+aaahh!!!_real_monsters.jpg
+actraiser_2.jpg
+actraiser.jpg
+addams_family,_the_-_pugsleys_scavenger_hunt.jpg
+addams_family_values.jpg
+adventures_of_dr_franken,_the.png
+aerobiz.jpg
+aero_fighters.jpg
+
+--> PREVIEWS (Amostra de 10 arquivos):
+3_ninjas_kick_back.gif
+7th_saga,_the.gif
+aaahh!!!_real_monsters.gif
+actraiser_2.gif
+actraiser.gif
+addams_family,_the_-_pugsleys_scavenger_hunt.gif
+addams_family_values.gif
+adventures_of_dr_franken,_the.gif
+aerobiz.gif
+aero_fighters.gif
+
+--> ROMS (Amostra de 10 arquivos):
+3_ninjas_kick_back_(usa).zip
+7th_saga,_the_(usa).zip
+aaahh!!!_real_monsters_(usa).zip
+actraiser_2_(usa).zip
+actraiser_(usa).zip
+addams_family,_the_-_pugsley's_scavenger_hunt_(usa).zip
+addams_family_values.zip
+adventures_of_dr._franken,_the_(usa).zip
+aerobiz_(usa).zip
+aero_fighters_(usa).zip
+
+======================================
+SISTEMA: n64
+======================================
+
+--> games.json (Amostra de 1 item):
+[
+    {
+        "nome": "007 Goldeneye",
+        "rom": "roms/007_goldeneye.z64",
+        "capa": "assets/capas/n64/007_goldeneye.jpg"
+    },
+    {
+        "nome": "Automobili Lamborghini",
+
+--> CAPAS (Amostra de 10 arquivos):
+007_goldeneye.jpg
+automobili_lamborghini.png
+banjo-kazooie.png
+cruisn_exotica.jpg
+diddy_kong_racing.png
+donald_duck_goin_quackers.jpg
+doom_64.png
+fifa_99.jpg
+gex_3_deep_cover_gecko.jpg
+jet_force_gemini.png
+
+--> PREVIEWS (Amostra de 10 arquivos):
+007_goldeneye.z64.gif
+automobili_lamborghini.gif
+banjo-kazooie.gif
+cruisn_exotica.z64.gif
+diddy_kong_racing.gif
+donald_duck_goin_quackers.z64.gif
+doom_64.gif
+fifa_99.gif
+gex_3_deep_cover_gecko.z64.gif
+jet_force_gemini.gif
+
+--> ROMS (Amostra de 10 arquivos):
+007_goldeneye.z64
+automobili_lamborghini.z64
+banjo-kazooie.n64
+cruisn_exotica.z64
+diddy_kong_racing.z64
+donald_duck_goin_quackers.z64
+doom_64.z64
+fifa_99.n64
+gex_3_deep_cover_gecko.z64
+jet_force_gemini.z64
+
+======================================
+SISTEMA: gba
+======================================
+
+--> games.json (Amostra de 1 item):
+[
+    {
+        "nome": "2 In 1 Asterix Obelix Bash Them All Asterix Obelix Xxl",
+        "rom": "roms/2-in-1-asterix-obelix-bash-them-all-asterix-obelix-xxl.gba",
+        "capa": "assets/capas/gba/2-in-1-asterix-obelix-bash-them-all-asterix-obelix-xxl.jpg"
+    },
+    {
+        "nome": "2006 Fifa World Cup Germany 2006",
+
+--> CAPAS (Amostra de 10 arquivos):
+2006-fifa-world-cup.jpg
+advance-wars-2.jpg
+advance-wars.jpg
+agent-hugo.jpg
+aggressive-inline.jpg
+alienators.jpg
+altered-beast.jpg
+army-men.jpg
+asterix-obelix.jpg
+avatar.png
+
+--> PREVIEWS (Amostra de 10 arquivos):
+2006-fifa-world-cup.gif
+advance-wars-2.gif
+advance-wars.gif
+agent-hugo.gif
+aggressive-inline.gif
+alienators.gif
+altered-beast.gif
+army-men.gif
+asterix-obelix.gif
+avatar.gif
+
+--> ROMS (Amostra de 10 arquivos):
+2006-fifa-world-cup-germany-2006.gba
+2-in-1-asterix-obelix-bash-them-all-asterix-obelix-xxl.gba
+advance-wars-2-black-hole-rising.gba
+advance-wars.gba
+agent-hugo-roborumble.gba
+aggressive-inline.gba
+alienators-evolution-continues.gba
+altered-beast-guardian-of-the-realms.gba
+army-men-advance.gba
+avatar-the-last-airbender.gba
+
+======================================
+SISTEMA: megadrive
+======================================
+
+--> games.json (Amostra de 1 item):
+[
+    {
+        "nome": "10 Super Jogos",
+        "rom": "roms/10_super_jogos.md",
+        "capa": "assets/capas/megadrive/10_super_jogos.jpg"
+    },
+    {
+        "nome": "A Lenda De Thor O Sucessor Da Luz",
+
+--> CAPAS (Amostra de 10 arquivos):
+10-super-jogos.jpg
+addams-family,-the.jpg
+adventures-of-batman-and-robin,-the.jpg
+aero-the-acro-bat-2.jpg
+aero-the-acro-bat.jpg
+after-burner-ii.jpg
+aladdin.jpg
+a-lenda-de-thor-o-sucessor-da-luz.jpg
+alex-kidd-in-the-enchanted-castle.jpg
+alien-3.jpg
+
+--> PREVIEWS (Amostra de 10 arquivos):
+10-super-jogos.gif
+addams-family,-the.gif
+adventures-of-batman-and-robin,-the.gif
+aero-the-acro-bat-2.gif
+aero-the-acro-bat.gif
+after-burner-ii.gif
+aladdin.gif
+a-lenda-de-thor-o-sucessor-da-luz.gif
+alex-kidd-in-the-enchanted-castle.gif
+alien-3.gif
+
+--> ROMS (Amostra de 10 arquivos):
+10_super_jogos.md
+addams_family,_the_(usa,_europe).md
+adventures_of_batman_&_robin,_the_(usa).md
+aero_the_acro-bat_2_(usa).md
+aero_the_acro-bat_(usa).md
+after_burner_ii_(usa,_europe).md
+aladdin_(usa).md
+a_lenda_de_thor_o_sucessor_da_luz.md
+alex_kidd_in_the_enchanted_castle_(usa).md
+alien_3_(usa,_europe)_(rev_a).md
+
+======================================
+SISTEMA: ps1
+======================================
+
+--> games.json (Amostra de 1 item):
+[
+    {
+        "nome": "A Bug S Life Ps1",
+        "rom": "roms/a_bug_s_life_ps1.bin",
+        "capa": "assets/capas/ps1/a_bug_s_life_ps1.jpg"
+    },
+    {
+        "nome": "A I T D 2024 Ch1N Com Br.M3U",
+
+--> CAPAS (Amostra de 10 arquivos):
+a-bug-s-life-ps1.jpg
+aladdin-in-nasira-s-revenge.jpg
+alien-trilogy-pt-br-ps1.jpg
+alone-in-the-dark.jpg
+amerzone-the-explorer-s-legacy.jpg
+apocalypse.png
+asterix-the-gallic-war-dublado-ch1n-com-br.jpg
+beyblade-pt-br-ps1.jpg
+bomberman-fantasy-race-em-portugu-s-playstation-1.jpg
+breath-of-fire-iii-pt-br-ps1.jpg
+
+--> PREVIEWS (Amostra de 10 arquivos):
+a-bug-s-life-ps1.gif
+aladdin-in-nasira-s-revenge.gif
+alien-trilogy-pt-br-ps1.gif
+alone-in-the-dark.gif
+amerzone-the-explorer-s-legacy.gif
+apocalypse.gif
+asterix-the-gallic-war-dublado-ch1n-com-br.gif
+beyblade-pt-br-ps1.gif
+bomberman-fantasy-race-em-portugu-s-playstation-1.gif
+breath-of-fire-iii-pt-br-ps1.gif
+
+--> ROMS (Amostra de 10 arquivos):
+a_bug_s_life_ps1.bin
+a_bug_s_life_ps1.cue
+a_i_t_d_2024_ch1n_com_br_cd1.bin
+a_i_t_d_2024_ch1n_com_br_cd1.cue
+a_i_t_d_2024_ch1n_com_br_cd2.bin
+a_i_t_d_2024_ch1n_com_br_cd2.cue
+a_i_t_d_2024_ch1n_com_br.m3u
+aladdin_in_nasira_s_revenge.bin
+aladdin_in_nasira_s_revenge.cue
+alien_trilogy_pt_br_ps1.bin

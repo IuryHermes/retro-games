@@ -228,8 +228,32 @@
             .nav-item img { width: 22px; height: 22px; margin: 0; border-radius: 0 !important; }
             .nav-text { display: block !important; opacity: 1 !important; font-size: 6px !important; text-align: center; white-space: normal !important; line-height: 1.1; word-break: break-word; }
             
-            .mobile-only-chat-btn { display: none !important; }
-            
+            /* Chat Trigger Mobile Trava */
+            .chat-trigger-mobile { 
+                display: flex !important; 
+                width: 35px !important; 
+                height: 35px !important; 
+                min-width: 35px !important; 
+                min-height: 35px !important; 
+                max-width: 35px !important; 
+                max-height: 35px !important; 
+                margin-right: 5px; 
+                flex-shrink: 0 !important; 
+                border: 1px solid var(--accent-color); 
+                border-radius: 6px; 
+                background: var(--sidebar-bg); 
+                align-items: center; justify-content: center; 
+                cursor: pointer; 
+            }
+            .chat-trigger-mobile img { 
+                width: 20px !important; 
+                height: 20px !important; 
+                max-width: 20px !important; 
+                max-height: 20px !important; 
+                object-fit: contain; 
+                image-rendering: pixelated; 
+            }
+
             .sidebar-chat.chat-modal-mobile { display: flex !important; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 75%; max-height: 500px; background: var(--top-bar-bg); border: 2px solid var(--accent-color); z-index: 100000 !important; box-shadow: 0 0 40px rgba(0, 204, 68, 0.4); margin: 0; border-radius: 8px; padding-top: 35px; backdrop-filter: blur(10px); }
             .close-chat-btn { display: block; position: absolute; top: 8px; right: 10px; background: transparent; color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 14px; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-weight: bold; }
             #chat-nick, #chat-msg { font-size: 16px; padding: 8px; }
@@ -248,10 +272,10 @@
             .game-card.mobile-active { transform: scale(1.30); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0,204,68,0.6); z-index: 100; }
             .discord-text { display: none; }
                 
-            .top-bar { flex-direction: column; align-items: center; padding: 15px 10px; margin: 0; text-align: center; }
-            .brand { width: 100%; text-align: center; }
-            .top-bar-controls { width: 95%; margin-top: 15px; justify-content: space-between; gap: 10px; }
-            .search-container { flex: 1; width: auto; }
+            .top-bar { flex-direction: column !important; align-items: center !important; padding: 10px 15px !important; margin: 0; text-align: center; gap: 10px; }
+            .brand { width: 100%; text-align: center; display: block !important; font-size: 16px !important; margin-bottom: 5px; }
+            .top-bar-controls { display: flex; width: 100%; justify-content: center; align-items: center; gap: 10px; }
+            .search-container { flex: 1; width: auto; max-width: none; }
             .row-header { justify-content: space-between; padding-right: 15px; }
             .view-all-btn { font-size: 8px; padding: 6px 10px; }
                 
@@ -260,6 +284,10 @@
             .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
             .hero-content { padding: 0 20px; margin-top: auto; margin-bottom: 40px; }
             .hero-title { font-size: 24px; }
+        }
+
+        @media (min-width: 769px) {
+            .chat-trigger-mobile { display: none !important; }
         }
     </style>
 </head>
@@ -303,7 +331,7 @@
                     <span id="modal-game-sys" style="color: #fff;">SISTEMA</span>
                     <span class="game-info-rating" id="modal-game-rating">⭐ 0.0 / 10</span>
                 </div>
-                <p class="game-info-desc" id="modal-game-desc">Uma aventura épica espera por você. (Em breve com sinopses reais da API do RAWG!)</p>
+                <p class="game-info-desc" id="modal-game-desc">Uma aventura épica espera por você.</p>
                 
                 <div class="affiliate-banner">
                     <span>🎮 Jogue como um Profissional: Compre Controles USB com Desconto!</span>
@@ -339,8 +367,11 @@
 
         <main class="main-content">
             <header class="top-bar">
-                <div class="brand">NEOTERMINALROOM</div>
+                <div class="brand" onclick="window.scrollTo(0,0)">NEOTERMINALROOM</div>
                 <div class="top-bar-controls">
+                    <div class="chat-trigger-mobile" onclick="openMobileChat()">
+                        <img src="assets/imagens-videos/imagens do menu/chat.png" alt="Chat">
+                    </div>
                     <div class="search-container">
                         <span style="color:var(--accent-color); margin-right:10px;">#</span>
                         <input type="text" id="global-search" placeholder="buscar jogo..." autocomplete="off">
@@ -363,14 +394,11 @@
     </div>
 
 <script type="module">
-    // LÓGICA DA SPLASH SCREEN E CONTROLE DE SCROLL
     document.addEventListener("DOMContentLoaded", () => {
         const splash = document.getElementById("splash-screen");
         const logo = document.querySelector(".splash-logo");
-        
         document.body.style.overflow = "hidden";
         setTimeout(() => logo.classList.add("animate"), 500);
-        
         setTimeout(() => {
             splash.classList.add("fade-out");
             document.body.style.overflow = "auto";
@@ -379,7 +407,7 @@
     });
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getDatabase, ref, push, onChildAdded, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
     const R2_URL = "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/";  
 
@@ -407,35 +435,32 @@
         setTimeout(() => { window.location.href = url; }, 1500);
     }
 
-    // LÓGICA DA VITRINE DE JOGOS E CRÍTICA
+    // VITRINE
     window.openGameModal = (gameObj, playUrl) => {
         let capaNome = gameObj.capa ? gameObj.capa.split('/').pop() : '';
         document.getElementById('modal-game-img').src = capaNome ? `${R2_URL}${gameObj.sysPath}capas/${capaNome}` : 'assets/imagens-videos/logo-discord.gif';
         document.getElementById('modal-game-title').innerText = gameObj.nome;
         document.getElementById('modal-game-sys').innerText = "SISTEMA: " + gameObj.sysId.toUpperCase();
         
-        // Gerador temporário de notas até criarmos o script Python
-        const nota = (Math.random() * (9.9 - 8.0) + 8.0).toFixed(1);
+        // Puxa a nota do JSON ou gera uma aleatória clássica
+        let nota = gameObj.nota;
+        if (!nota || nota === "N/A" || nota === "S/N") {
+            nota = (Math.random() * (9.5 - 7.5) + 7.5).toFixed(1);
+        }
         document.getElementById('modal-game-rating').innerHTML = `⭐ ${nota} / 10`;
         
         document.getElementById('modal-play-btn').onclick = () => {
             window.closeGameModal();
             window.startGame(playUrl);
         };
-        
         document.getElementById('game-info-modal').style.display = 'flex';
     };
 
-    window.closeGameModal = () => {
-        document.getElementById('game-info-modal').style.display = 'none';
-    };
+    window.closeGameModal = () => { document.getElementById('game-info-modal').style.display = 'none'; };
 
-    // Fechar ao clicar fora da janela
     window.onclick = function(event) {
         const modal = document.getElementById('game-info-modal');
-        if (event.target === modal) {
-            window.closeGameModal();
-        }
+        if (event.target === modal) window.closeGameModal();
     }
 
     window.toggleGrid = (sysId) => {
@@ -448,7 +473,6 @@
         else { btn.innerHTML = "⊞ VER TODOS"; if(lBtn) lBtn.style.display = 'flex'; if(rBtn) rBtn.style.display = 'flex'; }
     };
 
-    // ABRIR CHAT MOBILE
     window.openMobileChat = () => { document.getElementById('chat-container').classList.add('chat-modal-mobile'); };
     window.closeMobileChat = () => { const chat = document.getElementById('chat-container'); chat.classList.remove('chat-modal-mobile'); document.getElementById('main-sidebar').appendChild(chat); };
 
@@ -505,14 +529,16 @@
         const slide = document.createElement('div');
         slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
         slide.id = `hero-slide-${index}`;
-            
         const coreToUse = coreMap[game.sysId] || 'snes';
-        const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + game.path + game.rom)}&core=${coreToUse}`;
+        
+        // PLAYER LOGIC
+        const playerFile = game.sysId === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
+        const playUrl = `${playerFile}?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + game.path + game.rom)}&core=${coreToUse}`;
         const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
 
         slide.innerHTML = `
-            <img src="${wallpaperPath}" class="hero-bg-blur" alt="Background Preenchimento">
-            <img src="${wallpaperPath}" class="hero-bg-media" alt="Wallpaper HD">
+            <img src="${wallpaperPath}" class="hero-bg-blur" alt="BG">
+            <img src="${wallpaperPath}" class="hero-bg-media" alt="Wallpaper">
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1 class="hero-title">${game.nome}</h1>
@@ -523,7 +549,6 @@
             </div>
         `;
         heroSlider.appendChild(slide);
-
         const dot = document.createElement('div');
         dot.className = `indicator ${index === 0 ? 'active' : ''}`;
         dot.onclick = () => goToSlide(index);
@@ -538,7 +563,6 @@
         currentHeroIndex = index;
         resetHeroTimer();
     }
-
     function nextSlide() { goToSlide((currentHeroIndex + 1) % top10Games.length); }
     function resetHeroTimer() { clearInterval(heroTimer); heroTimer = setInterval(nextSlide, 5000); }
     resetHeroTimer();
@@ -571,10 +595,7 @@
         wrapper.className = "row-wrapper";
         wrapper.id = `section-${sys.id}`;
         wrapper.innerHTML = `
-            <div class="row-header">
-                <span class="row-title-text">${sys.name}</span>
-                <button class="view-all-btn selectable-item" id="btn-${sys.id}" onclick="toggleGrid('${sys.id}')">⊞ VER TODOS</button>
-            </div>
+            <div class="row-header"><span class="row-title-text">${sys.name}</span></div>
             <div class="row-container">
                 <button class="scroll-btn left-btn" onclick="document.getElementById('carousel-${sys.id}').scrollBy(-300,0)">❮</button>
                 <div class="game-carousel" id="carousel-${sys.id}"></div>
@@ -586,114 +607,65 @@
         let p = fetch(`${sys.path}games.json?v=${new Date().getTime()}`).then(r => r.json()).then(games => {
             const car = document.getElementById(`carousel-${sys.id}`);
             games.forEach(g => {
-                
-                // === O FILTRO DEFINITIVO DO PS1 MULTI-DISCO ===
                 if (sys.id === 'ps1') {
                     const textToSearch = ((g.rom || '') + ' ' + (g.nome || '')).toLowerCase();
                     const multiDiscRegex = /\.m3u|([._\-\s](cd|disc|disco)\s*0?[2-9])|([._\-\s](cd|disc|disco)\s*1[0-9])/i;
-                    if (multiDiscRegex.test(textToSearch)) {
-                        return; 
-                    }
+                    if (multiDiscRegex.test(textToSearch)) return; 
                 }
-                // ===============================================
-
                 const gameObjFull = {...g, sysPath: sys.path, sysName: sys.name, sysId: sys.id};
                 indexData.push(gameObjFull);
-                
                 const card = document.createElement("div");
                 card.className = "game-card selectable-item";
-                
                 let capaNome = g.capa ? g.capa.split('/').pop() : '';
                 let gifNome = g.preview ? g.preview.split('/').pop() : '';
-
                 const imgPath = capaNome ? `${R2_URL}${sys.path}capas/${capaNome}` : '';
                 const gifPath = gifNome ? `${R2_URL}${sys.path}previews/${gifNome}` : '';
-
                 const coreToUse = coreMap[sys.id] || 'snes';   
-                const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
-
-                card.dataset.url = playUrl;
+                
+                // PLAYER LOGIC
+                const playerFile = sys.id === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
+                const playUrl = `${playerFile}?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
 
                 card.innerHTML = `
                     <div class="card-media">
                         <img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';" class="static-thumb" loading="lazy">
                         <img src="" data-gif="${gifPath}" class="active-gif">
                     </div>
-                    <div class="card-title">
-                        <span>${g.nome}</span>
-                    </div>
+                    <div class="card-title"><span>${g.nome}</span></div>
                 `;
                     
-                // ==========================================
-                // LÓGICA DE GIFS CORRIGIDA (1.5s CAPA, 4S GIF)
-                // ==========================================
                 const playGifWithDelay = (cardElement) => {
-                    // Mobile Cleanup - Se tocar em outro jogo, mata o GIF do anterior imediatamente
                     if (window.innerWidth <= 768) {
                         document.querySelectorAll('.game-card.mobile-active').forEach(c => {
                             if (c !== cardElement) {
                                 c.classList.remove('mobile-active');
-                                const st = c.querySelector('.static-thumb');
-                                const ac = c.querySelector('.active-gif');
+                                const st = c.querySelector('.static-thumb'); const ac = c.querySelector('.active-gif');
                                 if (st) st.style.opacity = '1';
                                 if (ac) { ac.style.opacity = '0'; ac.style.display = 'none'; }
                                 clearTimeout(c.hoverTimeout); clearInterval(c.gifInterval);
                             }
                         });
                     }
-
-                    clearTimeout(cardElement.hoverTimeout);   
-                    clearInterval(cardElement.gifInterval);
-                    const s = cardElement.querySelector('.static-thumb');
-                    const a = cardElement.querySelector('.active-gif');
+                    clearTimeout(cardElement.hoverTimeout); clearInterval(cardElement.gifInterval);
+                    const s = cardElement.querySelector('.static-thumb'); const a = cardElement.querySelector('.active-gif');
                     if (!a || !a.dataset.gif) return; 
-                    
-                    const showCoverAndWait = () => { 
-                        s.style.opacity = '1'; a.style.opacity = '0'; 
-                        setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 200); 
-                    };
-                    const showGifAndWait = () => { 
-                        a.src = a.dataset.gif; a.style.display = 'block'; 
-                        setTimeout(() => { s.style.opacity = '0'; a.style.opacity = '1'; }, 50); 
-                    };
-
-                    // Início: Espera 1.5s na capa, mostra GIF, repete a cada 5.5s
-                    cardElement.hoverTimeout = setTimeout(() => { 
-                        showGifAndWait();
-                        cardElement.gifInterval = setInterval(() => {
-                            showCoverAndWait();
-                            setTimeout(showGifAndWait, 1500); // Fica 1.5s na capa antes do GIF voltar
-                        }, 5500); // Duração do GIF (4s) + Capa (1.5s)
-                    }, 1500);   
+                    const showCover = () => { s.style.opacity = '1'; a.style.opacity = '0'; setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 200); };
+                    const showGif = () => { a.src = a.dataset.gif; a.style.display = 'block'; setTimeout(() => { s.style.opacity = '0'; a.style.opacity = '1'; }, 50); };
+                    cardElement.hoverTimeout = setTimeout(() => { showGif(); cardElement.gifInterval = setInterval(() => { showCover(); setTimeout(showGif, 1500); }, 5500); }, 1500);   
                 };
-
-                const resetGif = (cardElement) => {
-                    clearTimeout(cardElement.hoverTimeout);   
-                    clearInterval(cardElement.gifInterval);
-                    const s = cardElement.querySelector('.static-thumb');
-                    const a = cardElement.querySelector('.active-gif');
-                    if(s) s.style.opacity = '1'; 
-                    if(a) { a.style.opacity = '0'; setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 200); }
-                };
+                const resetGif = (cardElement) => { clearTimeout(cardElement.hoverTimeout); clearInterval(cardElement.gifInterval); const s = cardElement.querySelector('.static-thumb'); const a = cardElement.querySelector('.active-gif'); if(s) s.style.opacity = '1'; if(a) { a.style.opacity = '0'; setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 200); } };
 
                 if (window.innerWidth <= 768) {
-                    card.onclick = (e) => {
-                        if (card.classList.contains('mobile-active')) { window.openGameModal(gameObjFull, playUrl); return; }
-                        card.classList.add('mobile-active');
-                        playGifWithDelay(card);
-                    };
+                    card.onclick = () => { if (card.classList.contains('mobile-active')) { window.openGameModal(gameObjFull, playUrl); return; } card.classList.add('mobile-active'); playGifWithDelay(card); };
                 } else {
-                    card.onmouseenter = () => playGifWithDelay(card);
-                    card.onmouseleave = () => resetGif(card);
-                    card.onclick = () => window.openGameModal(gameObjFull, playUrl);
+                    card.onmouseenter = () => playGifWithDelay(card); card.onmouseleave = () => resetGif(card); card.onclick = () => window.openGameModal(gameObjFull, playUrl);
                 }
                 car.appendChild(card);
             });
-        }).catch(err => { console.error("Erro no JSON:", sys.id); });
+        });
         fetchPromises.push(p);
     });
 
-    // INSERIR BOTÃO DE CHAT MOBILE NO FINAL DA BARRA DE BAIXO
     Promise.all(fetchPromises).then(() => {
         const chatBtnMobile = document.createElement("div");
         chatBtnMobile.className = "nav-item mobile-only-chat-btn";
@@ -704,43 +676,23 @@
 
     const searchInput = document.getElementById('global-search');
     const searchResults = document.getElementById('search-results');
-
     searchInput.addEventListener('input', (e) => {
         const val = e.target.value.toLowerCase().replace('#', '').trim();
-        searchResults.innerHTML = '';  
-        if(!val) { searchResults.style.display = 'none'; return; }
-
-        const hits = indexData.filter(g => {
-            if (!g.nome || !g.nome.toLowerCase().includes(val)) return false;
-            
-            // Filtro da busca (PS1 multi-disco escondido)
-            if (g.sysId === 'ps1') {
-                const textToSearch = ((g.rom || '') + ' ' + (g.nome || '')).toLowerCase();
-                if (/\.m3u|([._\-\s](cd|disc|disco)\s*0?[2-9])|([._\-\s](cd|disc|disco)\s*1[0-9])/i.test(textToSearch)) {
-                    return false;
-                }
-            }
-            return true;
-        });
-
+        searchResults.innerHTML = ''; if(!val) { searchResults.style.display = 'none'; return; }
+        const hits = indexData.filter(g => g.nome && g.nome.toLowerCase().includes(val)).slice(0, 10);
         if(hits.length > 0) {
             searchResults.style.display = 'flex';
-            hits.slice(0, 10).forEach(h => {
-                const div = document.createElement('div');
-                div.className = 'search-item selectable-item';   
-                 
-                let capaNomeBusca = h.capa ? h.capa.split('/').pop() : '';
-                const imgPath = capaNomeBusca ? `${R2_URL}${h.sysPath}capas/${capaNomeBusca}` : '';
-
-                div.innerHTML = `<img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';"><span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>`;
-                    
-                const coreToUse = coreMap[h.sysId] || 'snes';
-                const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + h.sysPath + h.rom)}&core=${coreToUse}`;
-                div.dataset.url = playUrl;
+            hits.forEach(h => {
+                const div = document.createElement('div'); div.className = 'search-item selectable-item';
+                let capaBusca = h.capa ? h.capa.split('/').pop() : '';
+                const imgBusca = capaBusca ? `${R2_URL}${h.sysPath}capas/${capaBusca}` : '';
+                div.innerHTML = `<img src="${imgBusca}"><span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>`;
+                const playerFile = h.sysId === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
+                const playUrl = `${playerFile}?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + h.sysPath + h.rom)}&core=${coreMap[h.sysId]}`;
                 div.onclick = () => window.openGameModal(h, playUrl);
                 searchResults.appendChild(div);
             });
-        } else { searchResults.style.display = 'none'; }
+        }
     });
 
     document.addEventListener('click', (e) => { if (!e.target.closest('.search-container')) searchResults.style.display = 'none'; });
@@ -748,60 +700,10 @@
     // GAMEPAD
     let selectableItems = [];
     let currentFocusIndex = -1;
-    let gamepadConnected = false;
-    let axisCooldown = false;
-
-    function updateGamepadFocusList() {
-        selectableItems = Array.from(document.querySelectorAll('.selectable-item')).filter(el => {
-            if (el.classList.contains('hero-play-btn')) return el.closest('.hero-slide').classList.contains('active');
-            const rect = el.getBoundingClientRect();
-            return rect.width > 0 && window.getComputedStyle(el).display !== 'none';
-        });
-    }
-
-    window.addEventListener("gamepadconnected", (e) => {
-        gamepadConnected = true;
-        updateGamepadFocusList();
-        if(currentFocusIndex === -1 && selectableItems.length > 0) focusItem(0);
-        pollGamepad();
-    });
-    window.addEventListener("gamepaddisconnected", () => { gamepadConnected = false; });
-
-    function focusItem(index) {
-        if(selectableItems.length === 0 || currentFocusIndex >= selectableItems.length) return;
-        if(currentFocusIndex >= 0) {
-            selectableItems[currentFocusIndex].classList.remove('gamepad-focus');
-            if(selectableItems[currentFocusIndex].classList.contains('game-card')) selectableItems[currentFocusIndex].dispatchEvent(new Event('mouseleave'));
-        }
-        currentFocusIndex = index;
-        const target = selectableItems[currentFocusIndex];
-        target.classList.add('gamepad-focus');
-        target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
-        if(target.classList.contains('game-card')) target.dispatchEvent(new Event('mouseenter'));
-    }
-
-    function pollGamepad() {
-        if (!gamepadConnected) return;
-        const gp = navigator.getGamepads()[0];
-        if (gp) {
-            const dpadUp = gp.buttons[12]?.pressed; const dpadDown = gp.buttons[13]?.pressed;
-            const dpadLeft = gp.buttons[14]?.pressed; const dpadRight = gp.buttons[15]?.pressed;
-            const confirmBtn = gp.buttons[0]?.pressed;  
-
-            if(!axisCooldown) {
-                let moved = false;
-                if (dpadLeft) { focusItem(Math.max(0, currentFocusIndex - 1)); moved = true; }
-                else if (dpadRight) { focusItem(Math.min(selectableItems.length - 1, currentFocusIndex + 1)); moved = true; }
-                
-                if(moved) { axisCooldown = true; setTimeout(() => { axisCooldown = false; }, 200); }
-            }
-            if (confirmBtn && !window.confirmBtnPressed) {
-                window.confirmBtnPressed = true;   
-                if(currentFocusIndex >= 0 && selectableItems[currentFocusIndex]) selectableItems[currentFocusIndex].click();
-            } else if (!confirmBtn) { window.confirmBtnPressed = false; }
-        }
-        requestAnimationFrame(pollGamepad);
-    }
+    function updateGamepadFocusList() { selectableItems = Array.from(document.querySelectorAll('.selectable-item')).filter(el => el.getBoundingClientRect().width > 0); }
+    window.addEventListener("gamepadconnected", () => { updateGamepadFocusList(); pollGamepad(); });
+    function focusItem(index) { if(currentFocusIndex >= 0) selectableItems[currentFocusIndex].classList.remove('gamepad-focus'); currentFocusIndex = index; selectableItems[currentFocusIndex].classList.add('gamepad-focus'); selectableItems[currentFocusIndex].scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    function pollGamepad() { const gp = navigator.getGamepads()[0]; if (gp) { if (gp.buttons[14].pressed) focusItem(Math.max(0, currentFocusIndex - 1)); if (gp.buttons[15].pressed) focusItem(Math.min(selectableItems.length - 1, currentFocusIndex + 1)); if (gp.buttons[0].pressed && currentFocusIndex >= 0) selectableItems[currentFocusIndex].click(); } requestAnimationFrame(pollGamepad); }
 </script>
 </body>
 </html>
