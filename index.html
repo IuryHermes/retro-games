@@ -110,6 +110,8 @@
         .nav-item img { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; image-rendering: pixelated; }
         .nav-text { display: none; opacity: 0; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 
+        .mobile-only-chat-btn { display: none !important; }
+
         .sidebar-chat { background: var(--bg-color); border: 1px solid var(--accent-color); padding: 10px; border-radius: 4px; height: 350px; min-height: 350px; display: none; flex-direction: column; width: 100%; flex-shrink: 0; margin-bottom: 20px; margin-top: auto; position: relative; }
         .close-chat-btn { display: none; }     
         #terminal-output { flex: 1; overflow-y: auto; font-family: monospace; font-size: 10px; color: var(--accent-color); margin-bottom: 10px; word-wrap: break-word; overflow-x: hidden; }
@@ -199,6 +201,9 @@
             .nav-item { flex-direction: column; padding: 2px 0; flex: 1; gap: 4px; justify-content: center; border-radius: 4px; }
             .nav-item img { width: 22px; height: 22px; margin: 0; border-radius: 0 !important; }
             .nav-text { display: block !important; opacity: 1 !important; font-size: 6px !important; text-align: center; white-space: normal !important; line-height: 1.1; word-break: break-word; }
+            
+            .mobile-only-chat-btn { display: flex !important; } /* AGORA SIM O BOTAO APARECE! */
+            
             .sidebar-chat.chat-modal-mobile { display: flex !important; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 75%; max-height: 500px; background: var(--top-bar-bg); border: 2px solid var(--accent-color); z-index: 100000 !important; box-shadow: 0 0 40px rgba(0, 204, 68, 0.4); margin: 0; border-radius: 8px; padding-top: 35px; backdrop-filter: blur(10px); }
             .close-chat-btn { display: block; position: absolute; top: 8px; right: 10px; background: transparent; color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 14px; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-weight: bold; }
             #chat-nick, #chat-msg { font-size: 16px; padding: 8px; }
@@ -254,36 +259,9 @@
 
     <div id="m3u-modal" class="modal">
         <div class="modal-content">
-            <h2>
-                <img src="assets/imagens-videos/menu/interrogacao.png" alt="?" style="width: 22px; vertical-align: middle; margin-right: 8px; image-rendering: pixelated;" onerror="this.style.display='none'">
-                SELECIONE O DISCO
-            </h2>
+            <h2><img src="assets/imagens-videos/menu/interrogacao.png" alt="?" style="width: 22px; vertical-align: middle; margin-right: 8px; image-rendering: pixelated;" onerror="this.style.display='none'">SELECIONE O DISCO</h2>
             <p>Este jogo possui múltiplos discos. Qual você deseja carregar?</p>
-            <div id="disc-buttons-container" style="display: flex; flex-direction: column; margin-top: 15px; gap: 8px;">
-                </div>
-            
-            <div style="margin-top: 20px; font-size: 11px; text-align: left; background: rgba(0, 255, 68, 0.05); padding: 15px; border-radius: 8px; border: 1px solid #004411; color: #eee; line-height: 1.5;">
-                <strong style="color: var(--accent-color); font-size: 12px; display: block; text-align: center; margin-bottom: 15px;">⚠ COMO TROCAR DE DISCO</strong>
-                
-                <div style="background: rgba(0,0,0,0.5); padding: 10px; border-radius: 6px; margin-bottom: 15px;">
-                    <div style="margin-bottom: 8px;"><strong>💻 No Computador:</strong> Arraste o mouse para a parte de baixo da tela.</div>
-                    <div>
-                        <strong>📱 No Celular:</strong> Toque no ícone 
-                        <img src="assets/imagens-videos/imagens do menu/menu_110986.png" style="height: 16px; vertical-align: middle; margin: 0 4px; image-rendering: pixelated;" alt="Menu" onerror="this.alt='[MENU]'; this.style.display='none';"> 
-                        para abrir o painel.
-                    </div>
-                </div>
-
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px; background: #111; padding: 10px; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-                    <img src="assets/imagens-videos/menu/disquete.png" style="width: 24px; image-rendering: pixelated;" onerror="this.style.display='none'">
-                    <div>Chegue no fim do CD e <b>salve no Memory Card</b> (não use Save State). Clique em <b>Exportar Save</b>.</div>
-                </div>
-                
-                <div style="display: flex; align-items: center; gap: 10px; background: #111; padding: 10px; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-                    <img src="assets/imagens-videos/menu/pasta.png" style="width: 24px; image-rendering: pixelated;" onerror="this.style.display='none'">
-                    <div>Volte aqui, inicie o <b>Próximo Disco</b> e clique em <b>Importar Save</b>. Depois é só dar Load Game!</div>
-                </div>
-            </div>
+            <div id="disc-buttons-container" style="display: flex; flex-direction: column; margin-top: 15px; gap: 8px;"></div>
         </div>
     </div>
 
@@ -292,9 +270,7 @@
             <div class="sidebar-header">
                 <img src="assets/imagens-videos/logo-discord.gif?v=2" onclick="window.scrollTo(0,0);" title="Voltar ao Topo">
             </div>
-                
             <div class="nav-list" id="nav-list"></div>
-                
             <div class="sidebar-chat" id="chat-container">
                 <button class="close-chat-btn" onclick="closeMobileChat()">X</button>
                 <div style="font-size:10px; color:var(--accent-color); text-align:center; margin-bottom:5px;">CHAT GLOBAL</div>
@@ -310,14 +286,12 @@
         <main class="main-content">
             <header class="top-bar">
                 <div class="brand">NEOTERMINALROOM</div>
-                    
                 <div class="top-bar-controls">
                     <div class="search-container">
                         <span style="color:var(--accent-color); margin-right:10px;">#</span>
                         <input type="text" id="global-search" placeholder="buscar jogo..." autocomplete="off">
                         <div id="search-results"></div>
                     </div>
-                        
                     <div class="theme-container">
                         <span class="theme-label">TEMA</span>
                         <label class="theme-switch" title="Mudar Tema">
@@ -327,11 +301,9 @@
                     </div>
                 </div>
             </header>
-                
             <section class="hero-section" id="hero-slider">
                 <div class="hero-indicators" id="hero-indicators"></div>
             </section>
-
             <section class="catalog" id="catalog-area"></section>
         </main>
     </div>
@@ -373,48 +345,7 @@
     const db = getDatabase(app);
     const chatRef = ref(db, 'mensagens');
 
-    window.startGame = (url) => {
-        if (url.includes('.m3u')) {
-            const rawGameParam = url.split('?game=')[1].split('&')[0];
-            const baseUrl = decodeURIComponent(rawGameParam);
-            const coreParam = url.split('&core=')[1] || 'psx';
-                
-            fetch(`${baseUrl}?v=${new Date().getTime()}`)
-                .then(response => response.text())
-                .then(text => {
-                    const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0 && !l.startsWith('#'));
-                    const discContainer = document.getElementById('disc-buttons-container');
-                    discContainer.innerHTML = '';   
-                        
-                    if (lines.length > 0) {
-                        lines.forEach((line, index) => {
-                            let discFile = line;
-                            if (discFile.endsWith('.cue')) { discFile = discFile.replace('.cue', '.bin'); }
-                            const basePath = baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1);
-                            const finalUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(basePath + discFile)}&core=${coreParam}`;
-                                
-                            const btn = document.createElement('button');
-                            btn.className = 'disc-btn selectable-item';   
-                            btn.innerText = `INICIAR DISCO ${index + 1}`;
-                            btn.onclick = () => { document.getElementById('m3u-modal').style.display = 'none'; triggerLoad(finalUrl); };
-                            discContainer.appendChild(btn);
-                        });
-                            
-                        const cancelBtn = document.createElement('button');
-                        cancelBtn.className = 'disc-btn cancel-btn selectable-item';
-                        cancelBtn.innerText = 'CANCELAR';
-                        cancelBtn.onclick = () => { document.getElementById('m3u-modal').style.display = 'none'; updateGamepadFocusList(); };
-                        discContainer.appendChild(cancelBtn);
-
-                        const modal = document.getElementById('m3u-modal');
-                        modal.style.display = 'flex';
-                            
-                        setTimeout(() => { updateGamepadFocusList(); const firstBtn = discContainer.querySelector('.disc-btn'); if(firstBtn) { currentFocusIndex = selectableItems.indexOf(firstBtn); focusItem(currentFocusIndex); } }, 100);
-                    } else { triggerLoad(url); }
-                })
-                .catch(err => { console.error("Erro M3U", err); triggerLoad(url); });
-        } else { triggerLoad(url); }
-    };
+    window.startGame = (url) => { triggerLoad(url); };
 
     function triggerLoad(url) {
         const loader = document.getElementById('loader-overlay');
@@ -432,6 +363,8 @@
         else { btn.innerHTML = "⊞ VER TODOS"; if(lBtn) lBtn.style.display = 'flex'; if(rBtn) rBtn.style.display = 'flex'; }
     };
 
+    // ABRIR CHAT MOBILE - FUNÇÃO NOVA!
+    window.openMobileChat = () => { document.getElementById('chat-container').classList.add('chat-modal-mobile'); };
     window.closeMobileChat = () => { const chat = document.getElementById('chat-container'); chat.classList.remove('chat-modal-mobile'); document.getElementById('main-sidebar').appendChild(chat); };
 
     const out = document.getElementById("terminal-output");
@@ -568,11 +501,21 @@
         let p = fetch(`${sys.path}games.json?v=${new Date().getTime()}`).then(r => r.json()).then(games => {
             const car = document.getElementById(`carousel-${sys.id}`);
             games.forEach(g => {
+                
+                // === O FILTRO DEFINITIVO DO PS1 MULTI-DISCO ===
+                if (sys.id === 'ps1') {
+                    const textToSearch = ((g.rom || '') + ' ' + (g.nome || '')).toLowerCase();
+                    const multiDiscRegex = /\.m3u|(cd|disc|disco)\s*0?[1-9]/;
+                    if (multiDiscRegex.test(textToSearch)) {
+                        return; // Pula este jogo! Ele existe no JSON, mas o site ignora.
+                    }
+                }
+                // ===============================================
+
                 indexData.push({...g, sysPath: sys.path, sysName: sys.name, sysId: sys.id});
                 const card = document.createElement("div");
                 card.className = "game-card selectable-item";
                 
-                // TRAVA MASTER: Pega SÓ o nome do arquivo limpo, ignorando qualquer sujeira que tenha ficado
                 let capaNome = g.capa ? g.capa.split('/').pop() : '';
                 let gifNome = g.preview ? g.preview.split('/').pop() : '';
 
@@ -631,6 +574,15 @@
         fetchPromises.push(p);
     });
 
+    // INSERIR BOTÃO DE CHAT MOBILE NO FINAL DA BARRA DE BAIXO
+    Promise.all(fetchPromises).then(() => {
+        const chatBtnMobile = document.createElement("div");
+        chatBtnMobile.className = "nav-item mobile-only-chat-btn";
+        chatBtnMobile.innerHTML = `<img src="assets/imagens-videos/logo-discord.gif?v=2" style="border-radius:50%; border: 1px solid var(--accent-color);"><span class="nav-text">CHAT</span>`;
+        chatBtnMobile.onclick = () => { window.openMobileChat(); };
+        nav.appendChild(chatBtnMobile);
+    });
+
     const searchInput = document.getElementById('global-search');
     const searchResults = document.getElementById('search-results');
 
@@ -639,7 +591,19 @@
         searchResults.innerHTML = '';  
         if(!val) { searchResults.style.display = 'none'; return; }
 
-        const hits = indexData.filter(g => g.nome && g.nome.toLowerCase().includes(val));
+        const hits = indexData.filter(g => {
+            if (!g.nome || !g.nome.toLowerCase().includes(val)) return false;
+            
+            // Filtro da busca (PS1 multi-disco escondido)
+            if (g.sysId === 'ps1') {
+                const textToSearch = ((g.rom || '') + ' ' + (g.nome || '')).toLowerCase();
+                if (/\.m3u|(cd|disc|disco)\s*0?[1-9]/.test(textToSearch)) {
+                    return false;
+                }
+            }
+            return true;
+        });
+
         if(hits.length > 0) {
             searchResults.style.display = 'flex';
             hits.slice(0, 10).forEach(h => {
