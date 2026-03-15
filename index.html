@@ -80,7 +80,9 @@
         .modal-content p { line-height: 1.6; font-size: 13px; margin-top: 15px; color: #ccc;}
         .disc-btn { background: var(--accent-color); color: #000; border: none; padding: 12px 20px; font-weight: bold; font-size: 14px; cursor: pointer; font-family: 'Press Start 2P', monospace; border-radius: 3px; width: 100%; transition: 0.3s; outline: none; margin-top: 10px; }
         .disc-btn:hover, .disc-btn.gamepad-focus { background: #fff; box-shadow: 0 0 15px #fff; transform: scale(1.02); }
-        
+        .cancel-btn { background: #333; color: #fff; border: 1px solid #555; margin-top: 20px; }
+        .cancel-btn:hover, .cancel-btn.gamepad-focus { background: #555; color: #fff; box-shadow: 0 0 15px #555; transform: scale(1.02); border-color: #fff; }
+
         /* MODAL DE INFORMAÇÕES DO JOGO E AFILIADOS (VITRINE) */
         #game-info-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100000; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 20px; }
         .game-info-content { background: var(--sidebar-bg); border: 2px solid var(--accent-color); border-radius: 8px; width: 100%; max-width: 600px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 0 30px rgba(0,204,68,0.5); position: relative; }
@@ -122,6 +124,7 @@
             .sidebar:hover { width: var(--sidebar-expanded-width); box-shadow: 10px 0 50px rgba(0,0,0,0.5); }
             .sidebar:hover .nav-text { display: inline-block; opacity: 1; transition: 0.3s; }
             .sidebar:hover .menu-label { opacity: 0; }
+            .sidebar:hover .sidebar-chat { display: flex; }
         }
         .sidebar-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; flex-shrink: 0; }
         .sidebar-header img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-color); cursor: pointer; }
@@ -133,26 +136,33 @@
         .nav-item img { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; image-rendering: pixelated; }
         .nav-text { display: none; opacity: 0; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 
+        .mobile-only-chat-btn { display: none !important; }
+
+        .sidebar-chat { background: var(--bg-color); border: 1px solid var(--accent-color); padding: 10px; border-radius: 4px; height: 350px; min-height: 350px; display: none; flex-direction: column; width: 100%; flex-shrink: 0; margin-bottom: 20px; margin-top: auto; position: relative; }
+        .close-chat-btn { display: none; }     
+        #terminal-output { flex: 1; overflow-y: auto; font-family: monospace; font-size: 10px; color: var(--accent-color); margin-bottom: 10px; word-wrap: break-word; overflow-x: hidden; }
+        .chat-time { color: var(--text-muted); font-size: 8px; margin-right: 5px; }
+        .chat-controls { display: flex; gap: 5px; width: 100%; box-sizing: border-box; }
+        #chat-nick { width: 70px; min-width: 0; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 5px; font-size: 10px; border-radius: 3px; outline: none; }
+        #chat-msg { flex: 1; min-width: 0; background: var(--sidebar-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 5px; font-size: 11px; border-radius: 3px; outline: none; }
+        #chat-msg:disabled { background: var(--card-bg); cursor: not-allowed; opacity: 0.5; }
+        #send-btn { width: 30px; flex-shrink: 0; background: var(--accent-color); border: none; cursor: pointer; color: #fff; font-weight: bold; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+
         .main-content { margin-left: var(--sidebar-collapsed-width); padding: 0 0 50px 0; position: relative; z-index: 1; transition: margin-left 0.3s ease; }
             
-        .top-bar { position: sticky; top: 0; padding: 15px 40px; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 8000; background: var(--top-bar-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 204, 68, 0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: background 0.4s; gap: 15px; }
+        .top-bar { position: sticky; top: 0; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 8000; background: var(--top-bar-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 204, 68, 0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: background 0.4s; }
         @keyframes brand-glow { 0% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } 50% { text-shadow: 0 0 2px var(--accent-color), 0 0 5px var(--accent-color); transform: scale(1.02); } 100% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } }
-        .brand { font-family: 'Press Start 2P'; color: var(--accent-color); font-size: 18px; animation: brand-glow 2.5s infinite ease-in-out; text-align: center; }
-        
-        .top-bar-controls { display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%; max-width: 600px; }
-        
-        .chat-trigger-mobile { display: flex; width: 40px; height: 40px; min-width: 40px; min-height: 40px; cursor: pointer; align-items: center; justify-content: center; border: 1px solid var(--accent-color); border-radius: 6px; background: var(--sidebar-bg); transition: 0.3s; flex-shrink: 0; }
-        .chat-trigger-mobile:hover { background: var(--accent-color); }
-        .chat-trigger-mobile img { width: 25px !important; height: 25px !important; max-width: 25px !important; max-height: 25px !important; object-fit: contain; image-rendering: pixelated; }
+        .brand { font-family: 'Press Start 2P'; color: var(--accent-color); font-size: 18px; animation: brand-glow 2.5s infinite ease-in-out; }
+        .top-bar-controls { display: flex; align-items: center; gap: 20px; }
             
-        .search-container { background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: flex; padding: 8px 15px; width: 100%; max-width: 400px; border-radius: 4px; position: relative; }
+        .search-container { background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: flex; padding: 8px 15px; width: 350px; border-radius: 4px; position: relative; }
         #global-search { background: transparent; border: none; color: var(--text-color); outline: none; width: 100%; font-family: monospace; }
         #search-results { position: absolute; top: 100%; right: -1px; width: calc(100% + 2px); background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: none; flex-direction: column; z-index: 9999; max-height: 400px; overflow-y: auto; border-radius: 0 0 4px 4px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
         .search-item { padding: 10px; border-bottom: 1px solid var(--border-color); cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; }
         .search-item:hover, .search-item.gamepad-focus { background: var(--card-bg); border-left: 3px solid var(--accent-color); outline: none; }
         .search-item img { width: 40px; height: 40px; object-fit: fill; border-radius: 3px; }
             
-        .theme-container { display: flex; align-items: center; gap: 10px; flex-shrink: 0;}
+        .theme-container { display: flex; align-items: center; gap: 10px; }
         .theme-label { font-family: 'Press Start 2P', cursive; font-size: 8px; color: var(--text-color); transition: color 0.4s; }
         .theme-switch { position: relative; display: inline-block; width: 46px; height: 24px; flex-shrink: 0; }
         .theme-switch input { opacity: 0; width: 0; height: 0; }
@@ -160,24 +170,6 @@
         .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: var(--accent-color); transition: .4s; border-radius: 50%; }
         input:checked + .slider { background-color: #222; }
         input:checked + .slider:before { transform: translateX(22px); }
-
-        /* CHAT MODAL (Com Emojis e Layout Corrigido) */
-        .chat-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
-        .chat-window { background: var(--sidebar-bg); border: 2px solid var(--accent-color); padding: 20px; border-radius: 8px; width: 90%; max-width: 450px; height: 75vh; max-height: 500px; display: flex; flex-direction: column; position: relative; box-shadow: 0 0 40px rgba(0, 204, 68, 0.5); }
-        .close-chat-btn { position: absolute; top: 10px; right: 10px; background: transparent; color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 16px; padding: 4px 12px; cursor: pointer; border-radius: 4px; font-weight: bold; transition: 0.3s; }
-        .close-chat-btn:hover { background: #ff3333; color: #fff; }
-        .chat-title { font-size: 16px; color: #00ff44; text-shadow: 0 0 8px rgba(0, 255, 68, 0.8); text-align: center; margin-bottom: 10px; font-weight: bold; font-family: 'Press Start 2P', monospace; padding-top: 10px; }
-        #terminal-output { flex: 1; overflow-y: auto; font-family: monospace; font-size: 12px; color: #00ff44; margin-bottom: 15px; border: 1px solid var(--border-color); padding: 10px; background: var(--bg-color); border-radius: 4px; word-wrap: break-word; }
-        .chat-controls { display: flex; gap: 8px; width: 100%; position: relative; }
-        #chat-nick { width: 80px; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px; font-size: 12px; border-radius: 4px; outline: none; }
-        #chat-msg { flex: 1; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px; font-size: 12px; border-radius: 4px; outline: none; }
-        #chat-msg:disabled { background: var(--card-bg); cursor: not-allowed; opacity: 0.5; }
-        #emoji-btn { background: var(--input-bg); border: 1px solid var(--border-color); cursor: pointer; padding: 0 10px; border-radius: 4px; font-size: 16px; transition: 0.2s; }
-        #emoji-btn:hover { background: var(--card-bg); }
-        #send-btn { width: 45px; background: var(--accent-color); border: none; cursor: pointer; color: #fff; font-weight: bold; border-radius: 4px; font-size: 16px; }
-        #emoji-picker { display: none; position: absolute; bottom: 50px; right: 50px; background: var(--sidebar-bg); border: 1px solid var(--accent-color); padding: 10px; border-radius: 6px; width: 200px; flex-wrap: wrap; gap: 10px; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.5); z-index: 100001; }
-        .emoji-item { cursor: pointer; font-size: 20px; transition: 0.2s; }
-        .emoji-item:hover { transform: scale(1.3); }
 
         .hero-section { position: relative; width: 100%; height: 800px; background: #000; overflow: hidden; display: flex; align-items: center; }
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; display: flex; align-items: center; z-index: 1; }
@@ -230,12 +222,18 @@
 
         @media (max-width: 768px) {
             .sidebar { top: auto; bottom: 0; left: 0; width: 100% !important; height: 65px; flex-direction: row; border-right: none; border-top: 1px solid var(--accent-color); padding: 5px 0; transform: none !important; z-index: 9000; background: var(--top-bar-bg); backdrop-filter: blur(10px); box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }      
-            .sidebar-header { display: none !important; }
+            .sidebar-header, #chat-collapsed-label { display: none !important; }
             .nav-list { flex-direction: row; margin-top: 0; gap: 0; overflow-x: hidden; justify-content: space-around; padding: 0 5px; width: 100%; align-items: center; }
             .nav-item { flex-direction: column; padding: 2px 0; flex: 1; gap: 4px; justify-content: center; border-radius: 4px; }
             .nav-item img { width: 22px; height: 22px; margin: 0; border-radius: 0 !important; }
             .nav-text { display: block !important; opacity: 1 !important; font-size: 6px !important; text-align: center; white-space: normal !important; line-height: 1.1; word-break: break-word; }
             
+            .mobile-only-chat-btn { display: none !important; }
+            
+            .sidebar-chat.chat-modal-mobile { display: flex !important; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 75%; max-height: 500px; background: var(--top-bar-bg); border: 2px solid var(--accent-color); z-index: 100000 !important; box-shadow: 0 0 40px rgba(0, 204, 68, 0.4); margin: 0; border-radius: 8px; padding-top: 35px; backdrop-filter: blur(10px); }
+            .close-chat-btn { display: block; position: absolute; top: 8px; right: 10px; background: transparent; color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 14px; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-weight: bold; }
+            #chat-nick, #chat-msg { font-size: 16px; padding: 8px; }
+            #send-btn { font-size: 16px; }
             .main-content { margin-left: 0 !important; padding: 0 0 80px 0 !important; }
             .discord-float { bottom: 80px; right: 15px; }
             .scroll-btn { width: 30px; font-size: 20px; opacity: 1; z-index: 10; }
@@ -250,10 +248,10 @@
             .game-card.mobile-active { transform: scale(1.30); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0,204,68,0.6); z-index: 100; }
             .discord-text { display: none; }
                 
-            .top-bar { flex-direction: column !important; align-items: center !important; padding: 10px 15px !important; margin: 0; text-align: center; gap: 10px; }
-            .brand { width: 100%; text-align: center; display: block !important; font-size: 16px !important; margin-bottom: 5px; }
-            .top-bar-controls { display: flex; width: 100%; justify-content: center; align-items: center; gap: 10px; }
-            .search-container { flex: 1; width: auto; max-width: none; }
+            .top-bar { flex-direction: column; align-items: center; padding: 15px 10px; margin: 0; text-align: center; }
+            .brand { width: 100%; text-align: center; }
+            .top-bar-controls { width: 95%; margin-top: 15px; justify-content: space-between; gap: 10px; }
+            .search-container { flex: 1; width: auto; }
             .row-header { justify-content: space-between; padding-right: 15px; }
             .view-all-btn { font-size: 8px; padding: 6px 10px; }
                 
@@ -262,32 +260,10 @@
             .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
             .hero-content { padding: 0 20px; margin-top: auto; margin-bottom: 40px; }
             .hero-title { font-size: 24px; }
-            
-            /* Chat Trigger Mobile Trava */
-            .chat-trigger-mobile { display: flex !important; width: 40px; height: 40px; min-width: 40px; min-height: 40px; margin-right: 5px; flex-shrink: 0; border: 1px solid var(--accent-color); border-radius: 6px; background: var(--sidebar-bg); align-items: center; justify-content: center; cursor: pointer; }
-            .chat-trigger-mobile img { width: 25px !important; height: 25px !important; max-width: 25px !important; max-height: 25px !important; object-fit: contain; image-rendering: pixelated; }
-
-            /* Chat Window Mobile */
-            .chat-modal-overlay .chat-window { width: 90% !important; max-width: 400px !important; height: 70% !important; max-height: 500px !important; padding: 40px 15px 15px 15px !important; }
-            .close-chat-btn { top: 10px !important; right: 10px !important; }
-        }
-        
-        @media (min-width: 769px) {
-            .chat-trigger-mobile { display: none !important; }
         }
     </style>
 </head>
 <body>
-
-    <script>
-        // SCRIPT DE ANÚNCIO (ADSTERRA)
-        function dispararAnuncio() {
-            console.log("Sistema: Disparando Anúncio Social Bar...");
-            // COLE O SCRIPT DE ANÚNCIO AQUI FUTURAMENTE
-        }
-        window.onload = function() { setTimeout(function() { dispararAnuncio(); }, 10000); };
-    </script>
-
     <div id="splash-screen">
         <h1 class="splash-logo">
             <span class="initial">N</span><span class="reveal">eo</span>
@@ -315,30 +291,7 @@
         </div>
     </div>
 
-    <div id="chat-modal-overlay" class="chat-modal-overlay">
-        <div class="chat-window">
-            <button class="close-chat-btn" onclick="closeMobileChat()">X</button>
-            <div class="chat-title">CHAT GLOBAL</div>
-            <div id="terminal-output"></div>
-            
-            <div class="chat-controls">
-                <input id="chat-nick" placeholder="Nick" maxlength="10">
-                <input id="chat-msg" placeholder="Mensagem..." disabled>
-                <button id="emoji-btn" title="Inserir Emoji">😀</button>
-                <button id="send-btn">➤</button>
-                
-                <div id="emoji-picker">
-                    <span class="emoji-item">😀</span> <span class="emoji-item">😂</span>
-                    <span class="emoji-item">😎</span> <span class="emoji-item">😍</span>
-                    <span class="emoji-item">🎮</span> <span class="emoji-item">👾</span>
-                    <span class="emoji-item">💀</span> <span class="emoji-item">🔥</span>
-                    <span class="emoji-item">👍</span> <span class="emoji-item">🚀</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="game-info-modal" class="modal">
+    <div id="game-info-modal">
         <div class="game-info-content">
             <button class="game-info-close" onclick="closeGameModal()">X</button>
             <div class="game-info-header">
@@ -372,32 +325,36 @@
                 <img src="assets/imagens-videos/logo-discord.gif?v=2" onclick="window.scrollTo(0,0);" title="Voltar ao Topo">
             </div>
             <div class="nav-list" id="nav-list"></div>
+            <div class="sidebar-chat" id="chat-container">
+                <button class="close-chat-btn" onclick="closeMobileChat()">X</button>
+                <div style="font-size:10px; color:var(--accent-color); text-align:center; margin-bottom:5px;">CHAT GLOBAL</div>
+                <div id="terminal-output"></div>
+                <div class="chat-controls">
+                    <input id="chat-nick" placeholder="Nick" maxlength="10">
+                    <input id="chat-msg" placeholder="Mensagem..." disabled>
+                    <button id="send-btn">➤</button>
+                </div>
+            </div>
         </nav>
 
         <main class="main-content">
             <header class="top-bar">
-                <div class="brand" onclick="window.scrollTo(0,0)">NEOTERMINALROOM</div>
+                <div class="brand">NEOTERMINALROOM</div>
                 <div class="top-bar-controls">
-                    
-                    <div class="chat-trigger-mobile" onclick="openMobileChat()">
-                        <img src="assets/imagens-videos/imagens do menu/chat.png" alt="Chat">
-                    </div>
-                    
                     <div class="search-container">
                         <span style="color:var(--accent-color); margin-right:10px;">#</span>
                         <input type="text" id="global-search" placeholder="buscar jogo..." autocomplete="off">
                         <div id="search-results"></div>
                     </div>
-                        
                     <div class="theme-container">
+                        <span class="theme-label">TEMA</span>
                         <label class="theme-switch" title="Mudar Tema">
-                            <input type="checkbox" id="theme-toggle" checked>
+                            <input type="checkbox" id="theme-toggle">
                             <span class="slider"></span>
                         </label>
                     </div>
                 </div>
             </header>
-            
             <section class="hero-section" id="hero-slider">
                 <div class="hero-indicators" id="hero-indicators"></div>
             </section>
@@ -422,7 +379,7 @@
     });
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, push, onChildAdded, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
     const R2_URL = "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/";  
 
@@ -445,7 +402,6 @@
     window.startGame = (url) => { triggerLoad(url); };
 
     function triggerLoad(url) {
-        if (typeof dispararAnuncio === "function") { dispararAnuncio(); }
         const loader = document.getElementById('loader-overlay');
         loader.style.display = 'flex';
         setTimeout(() => { window.location.href = url; }, 1500);
@@ -474,34 +430,27 @@
         document.getElementById('game-info-modal').style.display = 'none';
     };
 
-    // FECHAR MODAIS CLICANDO FORA
+    // Fechar ao clicar fora da janela
     window.onclick = function(event) {
-        const infoModal = document.getElementById('game-info-modal');
-        const chatOverlay = document.getElementById('chat-modal-overlay');
-        if (event.target === infoModal) { window.closeGameModal(); }
-        if (event.target === chatOverlay) { window.closeMobileChat(); }
+        const modal = document.getElementById('game-info-modal');
+        if (event.target === modal) {
+            window.closeGameModal();
+        }
+    }
+
+    window.toggleGrid = (sysId) => {
+        const car = document.getElementById(`carousel-${sysId}`);
+        const btn = document.getElementById(`btn-${sysId}`);
+        const lBtn = document.querySelector(`#section-${sysId} .left-btn`);
+        const rBtn = document.querySelector(`#section-${sysId} .right-btn`);
+        car.classList.toggle('grid-view');
+        if(car.classList.contains('grid-view')) { btn.innerHTML = "⊞ VOLTAR"; if(lBtn) lBtn.style.display = 'none'; if(rBtn) rBtn.style.display = 'none'; } 
+        else { btn.innerHTML = "⊞ VER TODOS"; if(lBtn) lBtn.style.display = 'flex'; if(rBtn) rBtn.style.display = 'flex'; }
     };
 
-    // LÓGICA DO CHAT MODAL
-    window.openMobileChat = () => { document.getElementById('chat-modal-overlay').style.display = 'flex'; };
-    window.closeMobileChat = () => { 
-        document.getElementById('chat-modal-overlay').style.display = 'none'; 
-        document.getElementById('emoji-picker').style.display = 'none';
-    };
-
-    // EMOJIS
-    document.getElementById('emoji-btn').onclick = () => {
-        const picker = document.getElementById('emoji-picker');
-        picker.style.display = picker.style.display === 'none' || picker.style.display === '' ? 'flex' : 'none';
-    };
-
-    document.querySelectorAll('.emoji-item').forEach(item => {
-        item.onclick = (e) => {
-            const msgInput = document.getElementById('chat-msg');
-            if(!msgInput.disabled) { msgInput.value += e.target.innerText; }
-            document.getElementById('emoji-picker').style.display = 'none';
-        };
-    });
+    // ABRIR CHAT MOBILE
+    window.openMobileChat = () => { document.getElementById('chat-container').classList.add('chat-modal-mobile'); };
+    window.closeMobileChat = () => { const chat = document.getElementById('chat-container'); chat.classList.remove('chat-modal-mobile'); document.getElementById('main-sidebar').appendChild(chat); };
 
     const out = document.getElementById("terminal-output");
     const nickInput = document.getElementById("chat-nick");
@@ -513,7 +462,8 @@
 
     onChildAdded(chatRef, (snap) => {
         const d = snap.val();
-        out.innerHTML += `<div><strong style="color:#fff;">[${d.user}]</strong>: <span style="color:#00ff44;">${d.text}</span></div>`;
+        const timeDisplay = d.time ? `<span class="chat-time">[${d.time}]</span>` : '';
+        out.innerHTML += `<div>${timeDisplay}<strong style="color:var(--text-color)">${d.user}:</strong> ${d.text}</div>`;
         out.scrollTop = out.scrollHeight;
     });
 
@@ -522,8 +472,10 @@
         const text = msgInput.value.trim();
         if(!user) { alert("Digite um Nick primeiro!"); return; }
         if(!text) return;
+        const now = new Date();
+        const timeStr = now.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: '2-digit' }) + ' ' + now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
         localStorage.setItem("neo_nick", user);
-        push(chatRef, {user, text, timestamp: serverTimestamp()});
+        push(chatRef, {user, text, time: timeStr});
         msgInput.value = "";
     }
     sendBtn.onclick = sendMessage;
@@ -621,6 +573,7 @@
         wrapper.innerHTML = `
             <div class="row-header">
                 <span class="row-title-text">${sys.name}</span>
+                <button class="view-all-btn selectable-item" id="btn-${sys.id}" onclick="toggleGrid('${sys.id}')">⊞ VER TODOS</button>
             </div>
             <div class="row-container">
                 <button class="scroll-btn left-btn" onclick="document.getElementById('carousel-${sys.id}').scrollBy(-300,0)">❮</button>
@@ -634,12 +587,15 @@
             const car = document.getElementById(`carousel-${sys.id}`);
             games.forEach(g => {
                 
-                // Filtro PS1
+                // === O FILTRO DEFINITIVO DO PS1 MULTI-DISCO ===
                 if (sys.id === 'ps1') {
                     const textToSearch = ((g.rom || '') + ' ' + (g.nome || '')).toLowerCase();
                     const multiDiscRegex = /\.m3u|([._\-\s](cd|disc|disco)\s*0?[2-9])|([._\-\s](cd|disc|disco)\s*1[0-9])/i;
-                    if (multiDiscRegex.test(textToSearch)) return; 
+                    if (multiDiscRegex.test(textToSearch)) {
+                        return; 
+                    }
                 }
+                // ===============================================
 
                 const gameObjFull = {...g, sysPath: sys.path, sysName: sys.name, sysId: sys.id};
                 indexData.push(gameObjFull);
@@ -649,10 +605,14 @@
                 
                 let capaNome = g.capa ? g.capa.split('/').pop() : '';
                 let gifNome = g.preview ? g.preview.split('/').pop() : '';
+
                 const imgPath = capaNome ? `${R2_URL}${sys.path}capas/${capaNome}` : '';
                 const gifPath = gifNome ? `${R2_URL}${sys.path}previews/${gifNome}` : '';
+
                 const coreToUse = coreMap[sys.id] || 'snes';   
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
+
+                card.dataset.url = playUrl;
 
                 card.innerHTML = `
                     <div class="card-media">
@@ -664,9 +624,11 @@
                     </div>
                 `;
                     
-                // LÓGICA CORRIGIDA DOS GIFS (1.5s Capa -> 4s GIF -> Volta Capa)
+                // ==========================================
+                // LÓGICA DE GIFS CORRIGIDA (1.5s CAPA, 4S GIF)
+                // ==========================================
                 const playGifWithDelay = (cardElement) => {
-                    // Mobile Cleanup
+                    // Mobile Cleanup - Se tocar em outro jogo, mata o GIF do anterior imediatamente
                     if (window.innerWidth <= 768) {
                         document.querySelectorAll('.game-card.mobile-active').forEach(c => {
                             if (c !== cardElement) {
@@ -682,7 +644,6 @@
 
                     clearTimeout(cardElement.hoverTimeout);   
                     clearInterval(cardElement.gifInterval);
-                    
                     const s = cardElement.querySelector('.static-thumb');
                     const a = cardElement.querySelector('.active-gif');
                     if (!a || !a.dataset.gif) return; 
@@ -715,7 +676,6 @@
                     if(a) { a.style.opacity = '0'; setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 200); }
                 };
 
-                // ABRIR VITRINE EM VEZ DE JOGAR DIRETO
                 if (window.innerWidth <= 768) {
                     card.onclick = (e) => {
                         if (card.classList.contains('mobile-active')) { window.openGameModal(gameObjFull, playUrl); return; }
@@ -733,6 +693,15 @@
         fetchPromises.push(p);
     });
 
+    // INSERIR BOTÃO DE CHAT MOBILE NO FINAL DA BARRA DE BAIXO
+    Promise.all(fetchPromises).then(() => {
+        const chatBtnMobile = document.createElement("div");
+        chatBtnMobile.className = "nav-item mobile-only-chat-btn";
+        chatBtnMobile.innerHTML = `<img src="assets/imagens-videos/logo-discord.gif?v=2" style="border-radius:50%; border: 1px solid var(--accent-color);"><span class="nav-text">CHAT</span>`;
+        chatBtnMobile.onclick = () => { window.openMobileChat(); };
+        nav.appendChild(chatBtnMobile);
+    });
+
     const searchInput = document.getElementById('global-search');
     const searchResults = document.getElementById('search-results');
 
@@ -743,9 +712,13 @@
 
         const hits = indexData.filter(g => {
             if (!g.nome || !g.nome.toLowerCase().includes(val)) return false;
+            
+            // Filtro da busca (PS1 multi-disco escondido)
             if (g.sysId === 'ps1') {
                 const textToSearch = ((g.rom || '') + ' ' + (g.nome || '')).toLowerCase();
-                if (/\.m3u|([._\-\s](cd|disc|disco)\s*0?[2-9])|([._\-\s](cd|disc|disco)\s*1[0-9])/i.test(textToSearch)) return false;
+                if (/\.m3u|([._\-\s](cd|disc|disco)\s*0?[2-9])|([._\-\s](cd|disc|disco)\s*1[0-9])/i.test(textToSearch)) {
+                    return false;
+                }
             }
             return true;
         });
@@ -755,12 +728,15 @@
             hits.slice(0, 10).forEach(h => {
                 const div = document.createElement('div');
                 div.className = 'search-item selectable-item';   
+                 
                 let capaNomeBusca = h.capa ? h.capa.split('/').pop() : '';
                 const imgPath = capaNomeBusca ? `${R2_URL}${h.sysPath}capas/${capaNomeBusca}` : '';
 
                 div.innerHTML = `<img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';"><span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>`;
+                    
                 const coreToUse = coreMap[h.sysId] || 'snes';
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + h.sysPath + h.rom)}&core=${coreToUse}`;
+                div.dataset.url = playUrl;
                 div.onclick = () => window.openGameModal(h, playUrl);
                 searchResults.appendChild(div);
             });
