@@ -3,1266 +3,1477 @@
         "nome": "10 Super Jogos",
         "rom": "roms/10_super_jogos.md",
         "capa": "10-super-jogos.jpg",
-        "preview": "10-super-jogos.gif"
+        "preview": "10-super-jogos.gif",
+        "nota": "3.1"
     },
     {
         "nome": "A Lenda De Thor O Sucessor Da Luz",
         "rom": "roms/a_lenda_de_thor_o_sucessor_da_luz.md",
         "capa": "a-lenda-de-thor-o-sucessor-da-luz.jpg",
-        "preview": "a-lenda-de-thor-o-sucessor-da-luz.gif"
+        "preview": "a-lenda-de-thor-o-sucessor-da-luz.gif",
+        "nota": "5.0"
     },
     {
         "nome": "Addams Family, The",
         "rom": "roms/addams_family,_the_(usa,_europe).md",
         "capa": "addams-family,-the.jpg",
-        "preview": "addams-family,-the.gif"
+        "preview": "addams-family,-the.gif",
+        "nota": "6.9"
     },
     {
         "nome": "Adventures Of Batman & Robin, The",
         "rom": "roms/adventures_of_batman_&_robin,_the_(usa).md",
         "capa": "adventures-of-batman-and-robin,-the.jpg",
-        "preview": "adventures-of-batman-and-robin,-the.gif"
+        "preview": "adventures-of-batman-and-robin,-the.gif",
+        "nota": "8.6"
     },
     {
         "nome": "Aero The Acro Bat",
         "rom": "roms/aero_the_acro-bat_(usa).md",
         "capa": "aero-the-acro-bat.jpg",
-        "preview": "aero-the-acro-bat.gif"
+        "preview": "aero-the-acro-bat.gif",
+        "nota": "6.4"
     },
     {
         "nome": "Aero The Acro Bat 2",
         "rom": "roms/aero_the_acro-bat_2_(usa).md",
         "capa": "aero-the-acro-bat-2.jpg",
-        "preview": "aero-the-acro-bat-2.gif"
+        "preview": "aero-the-acro-bat-2.gif",
+        "nota": "7.5"
     },
     {
         "nome": "After Burner Ii",
         "rom": "roms/after_burner_ii_(usa,_europe).md",
         "capa": "after-burner-ii.jpg",
-        "preview": "after-burner-ii.gif"
+        "preview": "after-burner-ii.gif",
+        "nota": "8.4"
     },
     {
         "nome": "Aladdin",
         "rom": "roms/aladdin_(usa).md",
         "capa": "aladdin.jpg",
-        "preview": "aladdin.gif"
+        "preview": "aladdin.gif",
+        "nota": "8.4"
     },
     {
         "nome": "Alex Kidd In The Enchanted Castle",
         "rom": "roms/alex_kidd_in_the_enchanted_castle_(usa).md",
         "capa": "alex-kidd-in-the-enchanted-castle.jpg",
-        "preview": "alex-kidd-in-the-enchanted-castle.gif"
+        "preview": "alex-kidd-in-the-enchanted-castle.gif",
+        "nota": "5.7"
     },
     {
         "nome": "Alien 3",
         "rom": "roms/alien_3_(usa,_europe)_(rev_a).md",
         "capa": "alien-3.jpg",
-        "preview": "alien-3.gif"
+        "preview": "alien-3.gif",
+        "nota": "6.9"
     },
     {
         "nome": "Alien Soldier",
         "rom": "roms/alien_soldier_(europe).md",
         "capa": "alien-soldier.jpg",
-        "preview": "alien-soldier.gif"
+        "preview": "alien-soldier.gif",
+        "nota": "8.1"
     },
     {
         "nome": "Alien Storm",
         "rom": "roms/alien_storm_(world).md",
         "capa": "alien-storm.jpg",
-        "preview": "alien-storm.gif"
+        "preview": "alien-storm.gif",
+        "nota": "8.0"
     },
     {
         "nome": "Altered Beast",
         "rom": "roms/altered_beast_(usa,_europe).md",
         "capa": "altered-beast.jpg",
-        "preview": "altered-beast.gif"
+        "preview": "altered-beast.gif",
+        "nota": "6.8"
     },
     {
         "nome": "Atomic Robo Kid",
         "rom": "roms/atomic_robo-kid_(usa).md",
         "capa": "atomic-robo-kid.jpg",
-        "preview": "atomic-robo-kid.gif"
+        "preview": "atomic-robo-kid.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Atomic Runner",
         "rom": "roms/atomic_runner_(usa).md",
         "capa": "atomic-runner.jpg",
-        "preview": "atomic-runner.gif"
+        "preview": "atomic-runner.gif",
+        "nota": "7.3"
     },
     {
         "nome": "Ayrton Senna'S Super Monaco Gp Ii",
         "rom": "roms/ayrton_senna's_super_monaco_gp_ii_(usa)_(en,ja).md",
         "capa": "ayrton-sennas-super-monaco-gp-ii.jpg",
-        "preview": "ayrton-sennas-super-monaco-gp-ii.gif"
+        "preview": "ayrton-sennas-super-monaco-gp-ii.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Batman Revenge Of The Joker",
         "rom": "roms/batman_-_revenge_of_the_joker_(usa).md",
         "capa": "batman---revenge-of-the-joker.jpg",
-        "preview": "batman---revenge-of-the-joker.gif"
+        "preview": "batman---revenge-of-the-joker.gif",
+        "nota": "7.8"
     },
     {
         "nome": "Battle Mania Daiginjou",
         "rom": "roms/battle_mania_daiginjou_(japan,_korea)_(translated_en).md",
         "capa": "battle-mania-daiginjou.jpg",
-        "preview": "battle-mania-daiginjou.gif"
+        "preview": "battle-mania-daiginjou.gif",
+        "nota": "7.2"
     },
     {
         "nome": "Battle Squadron",
         "rom": "roms/battle_squadron_(usa,_europe).md",
         "capa": "battle-squadron.jpg",
-        "preview": "battle-squadron.gif"
+        "preview": "battle-squadron.gif",
+        "nota": "7.0"
     },
     {
         "nome": "Battletoads",
         "rom": "roms/battletoads_(world).md",
         "capa": "battletoads.png",
-        "preview": "battletoads.gif"
+        "preview": "battletoads.gif",
+        "nota": "7.7"
     },
     {
         "nome": "Beauty And The Beast Roar Of The Beast",
         "rom": "roms/beauty_and_the_beast_-_roar_of_the_beast_(usa).md",
         "capa": "beauty-and-the-beast---roar-of-the-beast.jpg",
-        "preview": "beauty-and-the-beast---roar-of-the-beast.gif"
+        "preview": "beauty-and-the-beast---roar-of-the-beast.gif",
+        "nota": "8.0"
     },
     {
         "nome": "Beyond Oasis",
         "rom": "roms/beyond_oasis_(usa).md",
         "capa": "beyond-oasis.jpg",
-        "preview": "beyond-oasis.gif"
+        "preview": "beyond-oasis.gif",
+        "nota": "8.8"
     },
     {
         "nome": "Bio Hazard Battle",
         "rom": "roms/bio_hazard_battle_(usa,_europe).md",
         "capa": "bio-hazard-battle.jpg",
-        "preview": "bio-hazard-battle.gif"
+        "preview": "bio-hazard-battle.gif",
+        "nota": "7.3"
     },
     {
         "nome": "Bishoujo Senshi Sailor Moon",
         "rom": "roms/bishoujo_senshi_sailor_moon_(japan).md",
         "capa": "bishoujo-senshi-sailor-moon.jpg",
-        "preview": "bishoujo-senshi-sailor-moon.gif"
+        "preview": "bishoujo-senshi-sailor-moon.gif",
+        "nota": "8.2"
     },
     {
         "nome": "Body Count",
         "rom": "roms/body_count_(europe)_(en,fr,de,es,it).md",
         "capa": "body-count.jpg",
-        "preview": "body-count.gif"
+        "preview": "body-count.gif",
+        "nota": "7.1"
     },
     {
         "nome": "Caliber.50",
         "rom": "roms/caliber.50_(usa).md",
         "capa": "caliber50.jpg",
-        "preview": "caliber50.gif"
+        "preview": "caliber50.gif",
+        "nota": "5.2"
     },
     {
         "nome": "California Games",
         "rom": "roms/california_games_(usa,_europe).md",
         "capa": "california-games.jpg",
-        "preview": "california-games.gif"
+        "preview": "california-games.gif",
+        "nota": "7.7"
     },
     {
         "nome": "Captain Planet And The Planeteers",
         "rom": "roms/captain_planet_and_the_planeteers_(europe).md",
         "capa": "captain-planet-and-the-planeteers.jpg",
-        "preview": "captain-planet-and-the-planeteers.gif"
+        "preview": "captain-planet-and-the-planeteers.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Castle Of Illusion Starring Mickey Mouse",
         "rom": "roms/castle_of_illusion_starring_mickey_mouse_(usa,_europe).md",
         "capa": "castle-of-illusion-starring-mickey-mouse.jpg",
-        "preview": "castle-of-illusion-starring-mickey-mouse.gif"
+        "preview": "castle-of-illusion-starring-mickey-mouse.gif",
+        "nota": "7.6"
     },
     {
         "nome": "Castlevania Bloodlines",
         "rom": "roms/castlevania_-_bloodlines_(usa).md",
         "capa": "castlevania---bloodlines.jpg",
-        "preview": "castlevania---bloodlines.gif"
+        "preview": "castlevania---bloodlines.gif",
+        "nota": "8.2"
     },
     {
         "nome": "Chakan",
         "rom": "roms/chakan_(usa,_europe)_(1992-10-06)_(sega_channel).md",
         "capa": "chakan.jpg",
-        "preview": "chakan.gif"
+        "preview": "chakan.gif",
+        "nota": "6.5"
     },
     {
         "nome": "Chip 'N Dale Rescue Rangers",
         "rom": "roms/chip_'n_dale_-_rescue_rangers.md",
         "capa": "chip-n-dale---rescue-rangers.jpg",
-        "preview": "chip-n-dale---rescue-rangers.gif"
+        "preview": "chip-n-dale---rescue-rangers.gif",
+        "nota": "8.5"
     },
     {
         "nome": "Chuck Rock",
         "rom": "roms/chuck_rock_(usa).md",
         "capa": "chuck-rock.jpg",
-        "preview": "chuck-rock.gif"
+        "preview": "chuck-rock.gif",
+        "nota": "6.0"
     },
     {
         "nome": "Chuck Rock Ii Son Of Chuck",
         "rom": "roms/chuck_rock_ii_-_son_of_chuck_(usa).md",
         "capa": "chuck-rock-ii---son-of-chuck.jpg",
-        "preview": "chuck-rock-ii---son-of-chuck.gif"
+        "preview": "chuck-rock-ii---son-of-chuck.gif",
+        "nota": "3.8"
     },
     {
         "nome": "Comix Zone",
         "rom": "roms/comix_zone_(usa).md",
         "capa": "comix-zone.png",
-        "preview": "comix-zone.gif"
+        "preview": "comix-zone.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Contra Hard Corps",
         "rom": "roms/contra_-_hard_corps_(usa,_korea).md",
         "capa": "contra---hard-corps.jpg",
-        "preview": "contra---hard-corps.gif"
+        "preview": "contra---hard-corps.gif",
+        "nota": "8.8"
     },
     {
         "nome": "Crusader Of Centy",
         "rom": "roms/crusader_of_centy_(usa).md",
         "capa": "crusader-of-centy.jpg",
-        "preview": "crusader-of-centy.gif"
+        "preview": "crusader-of-centy.gif",
+        "nota": "8.2"
     },
     {
         "nome": "Danan The Jungle Fighter",
         "rom": "roms/danan_the_jungle_fighter.md",
         "capa": "danan-the-jungle-fighter.jpg",
-        "preview": "danan-the-jungle-fighter.gif"
+        "preview": "danan-the-jungle-fighter.gif",
+        "nota": "7.8"
     },
     {
         "nome": "Decapattack",
         "rom": "roms/decapattack_(usa,_europe,_korea).md",
         "capa": "decapattack.jpg",
-        "preview": "decapattack.gif"
+        "preview": "decapattack.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Desert Strike Return To The Gulf",
         "rom": "roms/desert_strike_-_return_to_the_gulf_(usa,_europe).md",
         "capa": "desert-strike---return-to-the-gulf.jpg",
-        "preview": "desert-strike---return-to-the-gulf.gif"
+        "preview": "desert-strike---return-to-the-gulf.gif",
+        "nota": "7.3"
     },
     {
         "nome": "Dinosaur'S Tale, A",
         "rom": "roms/dinosaur's_tale,_a_(usa).md",
         "capa": "dinosaurs-tale,-a.jpg",
-        "preview": "dinosaurs-tale,-a.gif"
+        "preview": "dinosaurs-tale,-a.gif",
+        "nota": "5.6"
     },
     {
         "nome": "Dj Boy",
         "rom": "roms/dj_boy_(usa).md",
         "capa": "dj-boy.jpg",
-        "preview": "dj-boy.gif"
+        "preview": "dj-boy.gif",
+        "nota": "7.7"
     },
     {
         "nome": "Donald In Maui Mallard",
         "rom": "roms/donald_in_maui_mallard_(europe)_(rev_a).md",
         "capa": "donald-in-maui-mallard.jpg",
-        "preview": "donald-in-maui-mallard.gif"
+        "preview": "donald-in-maui-mallard.gif",
+        "nota": "8.0"
     },
     {
         "nome": "Dragon The Bruce Lee Story",
         "rom": "roms/dragon_-_the_bruce_lee_story_(usa).md",
         "capa": "dragon---the-bruce-lee-story.jpg",
-        "preview": "dragon---the-bruce-lee-story.gif"
+        "preview": "dragon---the-bruce-lee-story.gif",
+        "nota": "6.9"
     },
     {
         "nome": "Duke Nukem 3D",
         "rom": "roms/duke_nukem_3d_(brazil).md",
         "capa": "duke-nukem-3d.jpg",
-        "preview": "duke-nukem-3d.gif"
+        "preview": "duke-nukem-3d.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Dynamite Duke",
         "rom": "roms/dynamite_duke_(world)_(rev_a).md",
         "capa": "dynamite-duke.jpg",
-        "preview": "dynamite-duke.gif"
+        "preview": "dynamite-duke.gif",
+        "nota": "7.8"
     },
     {
         "nome": "Earnest Evans",
         "rom": "roms/earnest_evans_(usa).md",
         "capa": "earnest-evans.jpg",
-        "preview": "earnest-evans.gif"
+        "preview": "earnest-evans.gif",
+        "nota": "7.0"
     },
     {
         "nome": "Ecco The Dolphin",
         "rom": "roms/ecco_the_dolphin_(usa,_europe,_korea).md",
         "capa": "ecco-the-dolphin.jpg",
-        "preview": "ecco-the-dolphin.gif"
+        "preview": "ecco-the-dolphin.gif",
+        "nota": "7.6"
     },
     {
         "nome": "El.Viento",
         "rom": "roms/el.viento_(usa).md",
         "capa": "elviento.jpg",
-        "preview": "elviento.gif"
+        "preview": "elviento.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Elementalmaster",
         "rom": "roms/elementalmaster.md",
         "capa": "elementalmaster.jpg",
-        "preview": "elementalmaster.gif"
+        "preview": "elementalmaster.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Eswat City Under Siege",
         "rom": "roms/eswat_-_city_under_siege_(usa,_europe)_(rev_a).md",
         "capa": "eswat---city-under-siege.jpg",
-        "preview": "eswat---city-under-siege.gif"
+        "preview": "eswat---city-under-siege.gif",
+        "nota": "6.6"
     },
     {
         "nome": "Felix The Cat",
         "rom": "roms/felix_the_cat.md",
         "capa": "felix-the-cat.jpg",
-        "preview": "felix-the-cat.gif"
+        "preview": "felix-the-cat.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Ferias Frustradas Do Pica Pau",
         "rom": "roms/ferias_frustradas_do_pica-pau.md",
         "capa": "ferias-frustradas-do-pica-pau.jpg",
-        "preview": "ferias-frustradas-do-pica-pau.gif"
+        "preview": "ferias-frustradas-do-pica-pau.gif",
+        "nota": "5.9"
     },
     {
         "nome": "Fifa International Soccer",
         "rom": "roms/fifa_international_soccer_(usa,_europe)_(en,fr,de,es).md",
         "capa": "fifa-international-soccer.jpg",
-        "preview": "fifa-international-soccer.gif"
+        "preview": "fifa-international-soccer.gif",
+        "nota": "7.9"
     },
     {
         "nome": "Fifa Soccer 2000 Gold Edition",
         "rom": "roms/fifa_soccer_2000_gold_edition.md",
         "capa": "fifa-soccer-2000-gold-edition.jpg",
-        "preview": "fifa-soccer-2000-gold-edition.gif"
+        "preview": "fifa-soccer-2000-gold-edition.gif",
+        "nota": "8.1"
     },
     {
         "nome": "Fighting Masters",
         "rom": "roms/fighting_masters_(usa).md",
         "capa": "fighting-masters.jpg",
-        "preview": "fighting-masters.gif"
+        "preview": "fighting-masters.gif",
+        "nota": "4.6"
     },
     {
         "nome": "Final Zone",
         "rom": "roms/final_zone.md",
         "capa": "final-zone.jpg",
-        "preview": "final-zone.gif"
+        "preview": "final-zone.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Flashback The Quest For Identity",
         "rom": "roms/flashback_-_the_quest_for_identity_(usa)_(en,fr).md",
         "capa": "flashback---the-quest-for-identity.jpg",
-        "preview": "flashback---the-quest-for-identity.gif"
+        "preview": "flashback---the-quest-for-identity.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Flintstones, The",
         "rom": "roms/flintstones,_the_(usa)_(taito).md",
         "capa": "flintstones,-the.jpg",
-        "preview": "flintstones,-the.gif"
+        "preview": "flintstones,-the.gif",
+        "nota": "7.9"
     },
     {
         "nome": "Fushigi No Umi No Nadia",
         "rom": "roms/fushigi_no_umi_no_nadia_(japan)_(translated_en).md",
         "capa": "fushigi-no-umi-no-nadia.jpg",
-        "preview": "fushigi-no-umi-no-nadia.gif"
+        "preview": "fushigi-no-umi-no-nadia.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Gaiares",
         "rom": "roms/gaiares_(japan,_usa).md",
         "capa": "gaiares.jpg",
-        "preview": "gaiares.gif"
+        "preview": "gaiares.gif",
+        "nota": "8.2"
     },
     {
         "nome": "Gargoyles",
         "rom": "roms/gargoyles_(usa).md",
         "capa": "gargoyles.jpg",
-        "preview": "gargoyles.gif"
+        "preview": "gargoyles.gif",
+        "nota": "8.1"
     },
     {
         "nome": "Generations Lost",
         "rom": "roms/generations_lost_(usa,_europe).md",
         "capa": "generations-lost.jpg",
-        "preview": "generations-lost.gif"
+        "preview": "generations-lost.gif",
+        "nota": "6.8"
     },
     {
         "nome": "Ghouls 'N Ghosts",
         "rom": "roms/ghouls_'n_ghosts_(usa,_europe).md",
         "capa": "ghouls-n-ghosts.jpg",
-        "preview": "ghouls-n-ghosts.gif"
+        "preview": "ghouls-n-ghosts.gif",
+        "nota": "7.4"
     },
     {
         "nome": "Gods",
         "rom": "roms/gods_(usa).md",
         "capa": "gods.jpg",
-        "preview": "gods.gif"
+        "preview": "gods.gif",
+        "nota": "7.5"
     },
     {
         "nome": "Golden Axe",
         "rom": "roms/golden_axe_(world)_(rev_a).md",
         "capa": "golden-axe.png",
-        "preview": "golden-axe.gif"
+        "preview": "golden-axe.gif",
+        "nota": "7.9"
     },
     {
         "nome": "Golden Axe Ii",
         "rom": "roms/golden_axe_ii_(world).md",
         "capa": "golden-axe-ii.jpg",
-        "preview": "golden-axe-ii.gif"
+        "preview": "golden-axe-ii.gif",
+        "nota": "8.0"
     },
     {
         "nome": "Golden Axe Iii",
         "rom": "roms/golden_axe_iii_(japan)_(en).md",
         "capa": "golden-axe-iii.jpg",
-        "preview": "golden-axe-iii.gif"
+        "preview": "golden-axe-iii.gif",
+        "nota": "8.5"
     },
     {
         "nome": "Goofy'S Hysterical History Tour",
         "rom": "roms/goofy's_hysterical_history_tour_(usa).md",
         "capa": "goofys-hysterical-history-tour.jpg",
-        "preview": "goofys-hysterical-history-tour.gif"
+        "preview": "goofys-hysterical-history-tour.gif",
+        "nota": "4.0"
     },
     {
         "nome": "Greendog The Beached Surfer Dude!",
         "rom": "roms/greendog_-_the_beached_surfer_dude!_(usa,_europe).md",
         "capa": "greendog---the-beached-surfer-dude!.jpg",
-        "preview": "greendog---the-beached-surfer-dude!.gif"
+        "preview": "greendog---the-beached-surfer-dude!.gif",
+        "nota": "7.4"
     },
     {
         "nome": "Griels Quest For The Holy",
         "rom": "roms/griels_quest_for_the_holy.md",
         "capa": "griels-quest-for-the-holy.jpg",
-        "preview": "griels-quest-for-the-holy.gif"
+        "preview": "griels-quest-for-the-holy.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Haunting Starring Polterguy",
         "rom": "roms/haunting_starring_polterguy.md",
         "capa": "haunting-starring-polterguy.jpg",
-        "preview": "haunting-starring-polterguy.gif"
+        "preview": "haunting-starring-polterguy.gif",
+        "nota": "8.6"
     },
     {
         "nome": "Insector X",
         "rom": "roms/insector_x_(usa).md",
         "capa": "insector-x.jpg",
-        "preview": "insector-x.gif"
+        "preview": "insector-x.gif",
+        "nota": "7.7"
     },
     {
         "nome": "James Bond 007 The Duel",
         "rom": "roms/james_bond_007_-_the_duel_(usa).md",
         "capa": "james-bond-007---the-duel.jpg",
-        "preview": "james-bond-007---the-duel.gif"
+        "preview": "james-bond-007---the-duel.gif",
+        "nota": "6.6"
     },
     {
         "nome": "James Pond Underwater Agent",
         "rom": "roms/james_pond_-_underwater_agent_(usa,_europe).md",
         "capa": "james-pond---underwater-agent.jpg",
-        "preview": "james-pond---underwater-agent.gif"
+        "preview": "james-pond---underwater-agent.gif",
+        "nota": "7.0"
     },
     {
         "nome": "James Pond 3",
         "rom": "roms/james_pond_3_(usa,_europe).md",
         "capa": "james-pond-3.jpg",
-        "preview": "james-pond-3.gif"
+        "preview": "james-pond-3.gif",
+        "nota": "7.5"
     },
     {
         "nome": "James Pond Ii Codename Robocod",
         "rom": "roms/james_pond_ii_-_codename_-_robocod_(usa,_europe).md",
         "capa": "james-pond-ii---codename---robocod.jpg",
-        "preview": "james-pond-ii---codename---robocod.gif"
+        "preview": "james-pond-ii---codename---robocod.gif",
+        "nota": "5.7"
     },
     {
         "nome": "Jewel Master",
         "rom": "roms/jewel_master_(japan).md",
         "capa": "jewel-master.jpg",
-        "preview": "jewel-master.gif"
+        "preview": "jewel-master.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Joe & Mac",
         "rom": "roms/joe_&_mac_(usa).md",
         "capa": "joe-and-mac.jpg",
-        "preview": "joe-and-mac.gif"
+        "preview": "joe-and-mac.gif",
+        "nota": "7.7"
     },
     {
         "nome": "Journey From Darkness Strider Returns",
         "rom": "roms/journey_from_darkness_-_strider_returns_(usa).md",
         "capa": "journey-from-darkness---strider-returns.jpg",
-        "preview": "journey-from-darkness---strider-returns.gif"
+        "preview": "journey-from-darkness---strider-returns.gif",
+        "nota": "6.6"
     },
     {
         "nome": "Juju Densetsu",
         "rom": "roms/juju_densetsu.md",
         "capa": "juju-densetsu.jpg",
-        "preview": "juju-densetsu.gif"
+        "preview": "juju-densetsu.gif",
+        "nota": "6.4"
     },
     {
         "nome": "Jungle Strike",
         "rom": "roms/jungle_strike_(usa,_europe).md",
         "capa": "jungle-strike.jpg",
-        "preview": "jungle-strike.gif"
+        "preview": "jungle-strike.gif",
+        "nota": "8.0"
     },
     {
         "nome": "Justice League Task Force",
         "rom": "roms/justice_league_task_force_(world).md",
         "capa": "justice-league-task-force.jpg",
-        "preview": "justice-league-task-force.gif"
+        "preview": "justice-league-task-force.gif",
+        "nota": "6.3"
     },
     {
         "nome": "Kid Chameleon",
         "rom": "roms/kid_chameleon_(usa,_europe).md",
         "capa": "kid-chameleon.png",
-        "preview": "kid-chameleon.gif"
+        "preview": "kid-chameleon.gif",
+        "nota": "7.4"
     },
     {
         "nome": "Landstalker",
         "rom": "roms/landstalker_(usa)_(1993-07-13)_(sega_channel).md",
         "capa": "landstalker.jpg",
-        "preview": "landstalker.gif"
+        "preview": "landstalker.gif",
+        "nota": "8.2"
     },
     {
         "nome": "Legend Of Wukong",
         "rom": "roms/legend_of_wukong.md",
         "capa": "legend-of-wukong.jpg",
-        "preview": "legend-of-wukong.gif"
+        "preview": "legend-of-wukong.gif",
+        "nota": "8.6"
     },
     {
         "nome": "Lemmings",
         "rom": "roms/lemmings_(usa).md",
         "capa": "lemmings.jpg",
-        "preview": "lemmings.gif"
+        "preview": "lemmings.gif",
+        "nota": "8.3"
     },
     {
         "nome": "Light Crusader",
         "rom": "roms/light_crusader_(usa).md",
         "capa": "light-crusader.jpg",
-        "preview": "light-crusader.gif"
+        "preview": "light-crusader.gif",
+        "nota": "7.8"
     },
     {
         "nome": "Lightening Force Quest For The Darkstar",
         "rom": "roms/lightening_force_-_quest_for_the_darkstar_(usa).md",
         "capa": "lightening-force---quest-for-the-darkstar.jpg",
-        "preview": "lightening-force---quest-for-the-darkstar.gif"
+        "preview": "lightening-force---quest-for-the-darkstar.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Lost World, The Jurassic Park",
         "rom": "roms/lost_world,_the_-_jurassic_park_(usa,_europe).md",
         "capa": "lost-world,-the---jurassic-park.jpg",
-        "preview": "lost-world,-the---jurassic-park.gif"
+        "preview": "lost-world,-the---jurassic-park.gif",
+        "nota": "7.6"
     },
     {
         "nome": "Mario & Battle City",
         "rom": "roms/mario_&_battle_city.md",
         "capa": "mario-and-battle-city.jpg",
-        "preview": "mario-and-battle-city.gif"
+        "preview": "mario-and-battle-city.gif",
+        "nota": "6.2"
     },
     {
         "nome": "Marsupilami",
         "rom": "roms/marsupilami_(usa)_(en,fr,de,es,it).md",
         "capa": "marsupilami.jpg",
-        "preview": "marsupilami.gif"
+        "preview": "marsupilami.gif",
+        "nota": "7.7"
     },
     {
         "nome": "Mcdonald'S Treasure Land Adventure",
         "rom": "roms/mcdonald's_treasure_land_adventure_(usa).md",
         "capa": "mcdonalds-treasure-land-adventure.jpg",
-        "preview": "mcdonalds-treasure-land-adventure.gif"
+        "preview": "mcdonalds-treasure-land-adventure.gif",
+        "nota": "6.6"
     },
     {
         "nome": "Mega Man The Wily Wars",
         "rom": "roms/mega_man_-_the_wily_wars_(europe).md",
         "capa": "mega-man---the-wily-wars.png",
-        "preview": "mega-man---the-wily-wars.gif"
+        "preview": "mega-man---the-wily-wars.gif",
+        "nota": "7.5"
     },
     {
         "nome": "Mega Turrican",
         "rom": "roms/mega_turrican_(usa).md",
         "capa": "mega-turrican.jpg",
-        "preview": "mega-turrican.gif"
+        "preview": "mega-turrican.gif",
+        "nota": "8.0"
     },
     {
         "nome": "Mercs",
         "rom": "roms/mercs_(world).md",
         "capa": "mercs.jpg",
-        "preview": "mercs.gif"
+        "preview": "mercs.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Michael Jackson'S Moonwalker",
         "rom": "roms/michael_jackson's_moonwalker_(japan,_usa).md",
         "capa": "michael-jacksons-moonwalker.jpg",
-        "preview": "michael-jacksons-moonwalker.gif"
+        "preview": "michael-jacksons-moonwalker.gif",
+        "nota": "7.7"
     },
     {
         "nome": "Micro Machines Military",
         "rom": "roms/micro_machines_-_military_(europe)_(j-cart).md",
         "capa": "micro-machines---military.jpg",
-        "preview": "micro-machines---military.gif"
+        "preview": "micro-machines---military.gif",
+        "nota": "8.1"
     },
     {
         "nome": "Micro Machines Turbo Tournament 96",
         "rom": "roms/micro_machines_-_turbo_tournament_96_(europe)_(rev_1)_(j-cart).md",
         "capa": "micro-machines---turbo-tournament-96.jpg",
-        "preview": "micro-machines---turbo-tournament-96.gif"
+        "preview": "micro-machines---turbo-tournament-96.gif",
+        "nota": "8.3"
     },
     {
         "nome": "Midnight Resistance",
         "rom": "roms/midnight_resistance_(usa).md",
         "capa": "midnight-resistance.jpg",
-        "preview": "midnight-resistance.gif"
+        "preview": "midnight-resistance.gif",
+        "nota": "7.0"
     },
     {
         "nome": "Monster World Iv",
         "rom": "roms/monster_world_iv_(usa)_(genesis_mini).md",
         "capa": "monster-world-iv.jpg",
-        "preview": "monster-world-iv.gif"
+        "preview": "monster-world-iv.gif",
+        "nota": "8.9"
     },
     {
         "nome": "Mortal Kombat",
         "rom": "roms/mortal_kombat_(world).md",
         "capa": "mortal-kombat.jpg",
-        "preview": "mortal-kombat.gif"
+        "preview": "mortal-kombat.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Musha Metallic Uniframe Super Hybrid Armor",
         "rom": "roms/musha_-_metallic_uniframe_super_hybrid_armor_(usa).md",
         "capa": "musha---metallic-uniframe-super-hybrid-armor.png",
-        "preview": "musha---metallic-uniframe-super-hybrid-armor.gif"
+        "preview": "musha---metallic-uniframe-super-hybrid-armor.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Mystic Defender",
         "rom": "roms/mystic_defender_(usa,_europe)_(rev_a).md",
         "capa": "mystic-defender.jpg",
-        "preview": "mystic-defender.gif"
+        "preview": "mystic-defender.gif",
+        "nota": "6.8"
     },
     {
         "nome": "New Zealand Story, The",
         "rom": "roms/new_zealand_story,_the_(japan).md",
         "capa": "new-zealand-story,-the.jpg",
-        "preview": "new-zealand-story,-the.gif"
+        "preview": "new-zealand-story,-the.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Nightmare Circus",
         "rom": "roms/nightmare_circus_(brazil).md",
         "capa": "nightmare-circus.jpg",
-        "preview": "nightmare-circus.gif"
+        "preview": "nightmare-circus.gif",
+        "nota": "5.5"
     },
     {
         "nome": "Outrun",
         "rom": "roms/outrun_(usa,_europe).md",
         "capa": "outrun.jpg",
-        "preview": "outrun.gif"
+        "preview": "outrun.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Outrun 2019",
         "rom": "roms/outrun_2019_(usa).md",
         "capa": "outrun-2019.jpg",
-        "preview": "outrun-2019.gif"
+        "preview": "outrun-2019.gif",
+        "nota": "7.6"
     },
     {
         "nome": "Outrunners",
         "rom": "roms/outrunners_(usa).md",
         "capa": "outrunners.jpg",
-        "preview": "outrunners.gif"
+        "preview": "outrunners.gif",
+        "nota": "7.6"
     },
     {
         "nome": "Pac Mania",
         "rom": "roms/pac-mania_(usa,_europe).md",
         "capa": "pac-mania.png",
-        "preview": "pac-mania.gif"
+        "preview": "pac-mania.gif",
+        "nota": "6.2"
     },
     {
         "nome": "Paperboy",
         "rom": "roms/paperboy_(usa,_europe).md",
         "capa": "paperboy.jpg",
-        "preview": "paperboy.gif"
+        "preview": "paperboy.gif",
+        "nota": "7.4"
     },
     {
         "nome": "Phantasy Star The End Of The Millenium",
         "rom": "roms/phantasy_star_-_the_end_of_the_millenium.md",
         "capa": "phantasy-star---the-end-of-the-millenium.jpg",
-        "preview": "phantasy-star---the-end-of-the-millenium.gif"
+        "preview": "phantasy-star---the-end-of-the-millenium.gif",
+        "nota": "8.1"
     },
     {
         "nome": "Phantasy Star Ii",
         "rom": "roms/phantasy_star_ii_(usa,_europe)_(rev_a).md",
         "capa": "phantasy-star-ii.jpg",
-        "preview": "phantasy-star-ii.gif"
+        "preview": "phantasy-star-ii.gif",
+        "nota": "7.6"
     },
     {
         "nome": "Phantasy Star Iii Generations Of Doom",
         "rom": "roms/phantasy_star_iii_-_generations_of_doom_(usa,_europe,_korea).md",
         "capa": "phantasy-star-iii---generations-of-doom.jpg",
-        "preview": "phantasy-star-iii---generations-of-doom.gif"
+        "preview": "phantasy-star-iii---generations-of-doom.gif",
+        "nota": "7.1"
     },
     {
         "nome": "Phantasy Star Iv",
         "rom": "roms/phantasy_star_iv_(usa).md",
         "capa": "phantasy-star-iv.jpg",
-        "preview": "phantasy-star-iv.gif"
+        "preview": "phantasy-star-iv.gif",
+        "nota": "8.1"
     },
     {
         "nome": "Phelios",
         "rom": "roms/phelios_(usa).md",
         "capa": "phelios.jpg",
-        "preview": "phelios.gif"
+        "preview": "phelios.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Pier Solar And The Great Architects",
         "rom": "roms/pier_solar_and_the_great_architects_(usa)_(unl).md",
         "capa": "pier-solar-and-the-great-architects.png",
-        "preview": "pier-solar-and-the-great-architects.gif"
+        "preview": "pier-solar-and-the-great-architects.gif",
+        "nota": "5.8"
     },
     {
         "nome": "Pink Goes To Hollywood",
         "rom": "roms/pink_goes_to_hollywood_(usa,_europe).md",
         "capa": "pink-goes-to-hollywood.jpg",
-        "preview": "pink-goes-to-hollywood.gif"
+        "preview": "pink-goes-to-hollywood.gif",
+        "nota": "6.6"
     },
     {
         "nome": "Pinocchio",
         "rom": "roms/pinocchio_(usa).md",
         "capa": "pinocchio.jpg",
-        "preview": "pinocchio.gif"
+        "preview": "pinocchio.gif",
+        "nota": "7.8"
     },
     {
         "nome": "Pirates Of Dark Water, The",
         "rom": "roms/pirates_of_dark_water,_the_(usa).md",
         "capa": "pirates-of-dark-water,-the.jpg",
-        "preview": "pirates-of-dark-water,-the.gif"
+        "preview": "pirates-of-dark-water,-the.gif",
+        "nota": "8.6"
     },
     {
         "nome": "Pit Fighter",
         "rom": "roms/pit-fighter_(world)_(en,ja).md",
         "capa": "pit-fighter.jpg",
-        "preview": "pit-fighter.gif"
+        "preview": "pit-fighter.gif",
+        "nota": "6.0"
     },
     {
         "nome": "Pocahontas",
         "rom": "roms/pocahontas_(usa).md",
         "capa": "pocahontas.jpg",
-        "preview": "pocahontas.gif"
+        "preview": "pocahontas.gif",
+        "nota": "8.4"
     },
     {
         "nome": "Power Drive",
         "rom": "roms/power_drive_(europe)_(en,fr,de,es,pt).md",
         "capa": "power-drive.jpg",
-        "preview": "power-drive.gif"
+        "preview": "power-drive.gif",
+        "nota": "6.9"
     },
     {
         "nome": "Predator 2",
         "rom": "roms/predator_2_(usa,_europe).md",
         "capa": "predator-2.jpg",
-        "preview": "predator-2.gif"
+        "preview": "predator-2.gif",
+        "nota": "7.4"
     },
     {
         "nome": "Pulseman",
         "rom": "roms/pulseman.md",
         "capa": "pulseman.jpg",
-        "preview": "pulseman.gif"
+        "preview": "pulseman.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Punisher, The",
         "rom": "roms/punisher,_the_(usa).md",
         "capa": "punisher,-the.jpg",
-        "preview": "punisher,-the.gif"
+        "preview": "punisher,-the.gif",
+        "nota": "8.1"
     },
     {
         "nome": "Quackshot Starring Donald Duck ~ Quackshot I Love Donald Duck Guruzia Ou No Hihou",
         "rom": "roms/quackshot_starring_donald_duck_~_quackshot_-_i_love_donald_duck_-_guruzia_ou_no_hihou_(world)_(rev_a).md",
         "capa": "quackshot-starring-donald-duck-~-quackshot---i-love-donald-duck---guruzia-ou-no-hihou.jpg",
-        "preview": "quackshot-starring-donald-duck-~-quackshot---i-love-donald-duck---guruzia-ou-no-hihou.gif"
+        "preview": "quackshot-starring-donald-duck-~-quackshot---i-love-donald-duck---guruzia-ou-no-hihou.gif",
+        "nota": "8.1"
     },
     {
         "nome": "Raiden Densetsu ~ Raiden Trad",
         "rom": "roms/raiden_densetsu_~_raiden_trad_(japan,_usa).md",
         "capa": "raiden-densetsu-~-raiden-trad.jpg",
-        "preview": "raiden-densetsu-~-raiden-trad.gif"
+        "preview": "raiden-densetsu-~-raiden-trad.gif",
+        "nota": "7.3"
     },
     {
         "nome": "Rambo Iii",
         "rom": "roms/rambo_iii_(usa,_europe,_korea)_(rev_a).md",
         "capa": "rambo-iii.jpg",
-        "preview": "rambo-iii.gif"
+        "preview": "rambo-iii.gif",
+        "nota": "7.3"
     },
     {
         "nome": "Ranger X",
         "rom": "roms/ranger_x_(usa).md",
         "capa": "ranger-x.jpg",
-        "preview": "ranger-x.gif"
+        "preview": "ranger-x.gif",
+        "nota": "6.0"
     },
     {
         "nome": "Revenge Of Shinobi, The",
         "rom": "roms/revenge_of_shinobi,_the_(usa,_europe)_(rev_b).md",
         "capa": "revenge-of-shinobi,-the.jpg",
-        "preview": "revenge-of-shinobi,-the.gif"
+        "preview": "revenge-of-shinobi,-the.gif",
+        "nota": "7.9"
     },
     {
         "nome": "Ristar",
         "rom": "roms/ristar_(usa,_europe).md",
         "capa": "ristar.jpg",
-        "preview": "ristar.gif"
+        "preview": "ristar.gif",
+        "nota": "8.4"
     },
     {
         "nome": "Road Rash",
         "rom": "roms/road_rash_(usa,_europe).md",
         "capa": "road-rash.png",
-        "preview": "road-rash.gif"
+        "preview": "road-rash.gif",
+        "nota": "8.3"
     },
     {
         "nome": "Road Rash Ii",
         "rom": "roms/road_rash_ii_(usa,_europe)_(rr206).md",
         "capa": "road-rash-ii.jpg",
-        "preview": "road-rash-ii.gif"
+        "preview": "road-rash-ii.gif",
+        "nota": "8.4"
     },
     {
         "nome": "Robocop 3",
         "rom": "roms/robocop_3_(usa,_europe).md",
         "capa": "robocop-3.jpg",
-        "preview": "robocop-3.gif"
+        "preview": "robocop-3.gif",
+        "nota": "7.8"
     },
     {
         "nome": "Robocop Versus The Terminator",
         "rom": "roms/robocop_versus_the_terminator_(usa).md",
         "capa": "robocop-versus-the-terminator.jpg",
-        "preview": "robocop-versus-the-terminator.gif"
+        "preview": "robocop-versus-the-terminator.gif",
+        "nota": "8.0"
     },
     {
         "nome": "Rocket Knight Adventures",
         "rom": "roms/rocket_knight_adventures_(usa).md",
         "capa": "rocket-knight-adventures.jpg",
-        "preview": "rocket-knight-adventures.gif"
+        "preview": "rocket-knight-adventures.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Rolling Thunder 2",
         "rom": "roms/rolling_thunder_2_(usa).md",
         "capa": "rolling-thunder-2.jpg",
-        "preview": "rolling-thunder-2.gif"
+        "preview": "rolling-thunder-2.gif",
+        "nota": "8.4"
     },
     {
         "nome": "Rolling Thunder 3",
         "rom": "roms/rolling_thunder_3_(usa).md",
         "capa": "rolling-thunder-3.jpg",
-        "preview": "rolling-thunder-3.gif"
+        "preview": "rolling-thunder-3.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Ronaldinho '98",
         "rom": "roms/ronaldinho_'98.md",
         "capa": "ronaldinho-98.jpg",
-        "preview": "ronaldinho-98.gif"
+        "preview": "ronaldinho-98.gif",
+        "nota": "8.6"
     },
     {
         "nome": "Sagaia",
         "rom": "roms/sagaia_(usa).md",
         "capa": "sagaia.jpg",
-        "preview": "sagaia.gif"
+        "preview": "sagaia.gif",
+        "nota": "8.3"
     },
     {
         "nome": "Scooby Doo Mystery",
         "rom": "roms/scooby-doo_mystery_(usa).md",
         "capa": "scooby-doo-mystery.png",
-        "preview": "scooby-doo-mystery.gif"
+        "preview": "scooby-doo-mystery.gif",
+        "nota": "7.5"
     },
     {
         "nome": "Second Samurai",
         "rom": "roms/second_samurai_(europe).md",
         "capa": "second-samurai.jpg",
-        "preview": "second-samurai.gif"
+        "preview": "second-samurai.gif",
+        "nota": "6.6"
     },
     {
         "nome": "Sega Top Five",
         "rom": "roms/sega_top_five.md",
         "capa": "sega-top-five.jpg",
-        "preview": "sega-top-five.gif"
+        "preview": "sega-top-five.gif",
+        "nota": "8.5"
     },
     {
         "nome": "Shadow Dancer The Secret Of Shinobi",
         "rom": "roms/shadow_dancer_-_the_secret_of_shinobi_(world).md",
         "capa": "shadow-dancer---the-secret-of-shinobi.jpg",
-        "preview": "shadow-dancer---the-secret-of-shinobi.gif"
+        "preview": "shadow-dancer---the-secret-of-shinobi.gif",
+        "nota": "8.2"
     },
     {
         "nome": "Shadow Of The Beast",
         "rom": "roms/shadow_of_the_beast_(usa,_europe).md",
         "capa": "shadow-of-the-beast.jpg",
-        "preview": "shadow-of-the-beast.gif"
+        "preview": "shadow-of-the-beast.gif",
+        "nota": "6.5"
     },
     {
         "nome": "Shadow Of The Beast Ii",
         "rom": "roms/shadow_of_the_beast_ii_(usa,_europe).md",
         "capa": "shadow-of-the-beast-ii.jpg",
-        "preview": "shadow-of-the-beast-ii.gif"
+        "preview": "shadow-of-the-beast-ii.gif",
+        "nota": "6.5"
     },
     {
         "nome": "Shining Force",
         "rom": "roms/shining_force_(usa).md",
         "capa": "shining-force.jpg",
-        "preview": "shining-force.gif"
+        "preview": "shining-force.gif",
+        "nota": "8.3"
     },
     {
         "nome": "Shining Force Ii",
         "rom": "roms/shining_force_ii_(usa).md",
         "capa": "shining-force-ii.jpg",
-        "preview": "shining-force-ii.gif"
+        "preview": "shining-force-ii.gif",
+        "nota": "8.8"
     },
     {
         "nome": "Shining In The Darkness",
         "rom": "roms/shining_in_the_darkness_(usa,_europe).md",
         "capa": "shining-in-the-darkness.jpg",
-        "preview": "shining-in-the-darkness.gif"
+        "preview": "shining-in-the-darkness.gif",
+        "nota": "7.5"
     },
     {
         "nome": "Shinobi Iii Return Of The Ninja Master",
         "rom": "roms/shinobi_iii_-_return_of_the_ninja_master_(usa).md",
         "capa": "shinobi-iii---return-of-the-ninja-master.png",
-        "preview": "shinobi-iii---return-of-the-ninja-master.gif"
+        "preview": "shinobi-iii---return-of-the-ninja-master.gif",
+        "nota": "8.6"
     },
     {
         "nome": "Shove It! ...The Warehouse Game",
         "rom": "roms/shove_it!_...the_warehouse_game_(usa).md",
         "capa": "shove-it!-the-warehouse-game.jpg",
-        "preview": "shove-it!-the-warehouse-game.gif"
+        "preview": "shove-it!-the-warehouse-game.gif",
+        "nota": "8.0"
     },
     {
         "nome": "Show Do Milhao Vol. 1",
         "rom": "roms/show_do_milhao_-_vol._1.md",
         "capa": "show-do-milhao---vol-1.jpg",
-        "preview": "show-do-milhao---vol-1.gif"
+        "preview": "show-do-milhao---vol-1.gif",
+        "nota": "7.1"
     },
     {
         "nome": "Show Do Milhao Vol. 2",
         "rom": "roms/show_do_milhao_-_vol._2.md",
         "capa": "show-do-milhao---vol-2.jpg",
-        "preview": "show-do-milhao---vol-2.gif"
+        "preview": "show-do-milhao---vol-2.gif",
+        "nota": "7.1"
     },
     {
         "nome": "Shui Hu Feng Yun Zhuan",
         "rom": "roms/shui_hu_-_feng_yun_zhuan_(china)_(unl).md",
         "capa": "shui-hu---feng-yun-zhuan.jpg",
-        "preview": "shui-hu---feng-yun-zhuan.gif"
+        "preview": "shui-hu---feng-yun-zhuan.gif",
+        "nota": "5.8"
     },
     {
         "nome": "Simpsons, The Bart'S Nightmare",
         "rom": "roms/simpsons,_the_-_bart's_nightmare_(usa,_europe).md",
         "capa": "simpsons,-the---barts-nightmare.jpg",
-        "preview": "simpsons,-the---barts-nightmare.gif"
+        "preview": "simpsons,-the---barts-nightmare.gif",
+        "nota": "6.7"
     },
     {
         "nome": "Simpsons, The Bart Vs. The Space Mutants",
         "rom": "roms/simpsons,_the_-_bart_vs._the_space_mutants_(usa,_europe)_(rev_a).md",
         "capa": "simpsons,-the---bart-vs-the-space-mutants.jpg",
-        "preview": "simpsons,-the---bart-vs-the-space-mutants.gif"
+        "preview": "simpsons,-the---bart-vs-the-space-mutants.gif",
+        "nota": "6.2"
     },
     {
         "nome": "Skeleton Krew",
         "rom": "roms/skeleton_krew_(usa).md",
         "capa": "skeleton-krew.jpg",
-        "preview": "skeleton-krew.gif"
+        "preview": "skeleton-krew.gif",
+        "nota": "8.3"
     },
     {
         "nome": "Sonic 3D Blast",
         "rom": "roms/sonic_3d_blast_(usa,_europe).md",
         "capa": "sonic-3d-blast.jpg",
-        "preview": "sonic-3d-blast.gif"
+        "preview": "sonic-3d-blast.gif",
+        "nota": "6.6"
     },
     {
         "nome": "Sonic 3D Blast ~ Sonic 3D Flickies' Island",
         "rom": "roms/sonic_3d_blast_~_sonic_3d_flickies'_island_(usa,_europe,_korea).md",
         "capa": "sonic-3d-blast-~-sonic-3d-flickies-island.jpg",
-        "preview": "sonic-3d-blast-~-sonic-3d-flickies-island.gif"
+        "preview": "sonic-3d-blast-~-sonic-3d-flickies-island.gif",
+        "nota": "6.6"
     },
     {
         "nome": "Sonic The Hedgehog",
         "rom": "roms/sonic_the_hedgehog_(usa,_europe).md",
         "capa": "sonic-the-hedgehog.jpg",
-        "preview": "sonic-the-hedgehog.gif"
+        "preview": "sonic-the-hedgehog.gif",
+        "nota": "5.0"
     },
     {
         "nome": "Spider Man . Venom Maximum Carnage",
         "rom": "roms/spider-man_._venom_-_maximum_carnage_(world).md",
         "capa": "spider-man--venom---maximum-carnage.jpg",
-        "preview": "spider-man--venom---maximum-carnage.gif"
+        "preview": "spider-man--venom---maximum-carnage.gif",
+        "nota": "7.9"
     },
     {
         "nome": "Spider Man Vs The Kingpin",
         "rom": "roms/spider-man_vs_the_kingpin_(w)_[!].md",
         "capa": "spider-man-vs-the-kingpin-[!].png",
-        "preview": "spider-man-vs-the-kingpin-[!].gif"
+        "preview": "spider-man-vs-the-kingpin-[!].gif",
+        "nota": "7.5"
     },
     {
         "nome": "Splatterhouse 3",
         "rom": "roms/splatterhouse_3_(usa).md",
         "capa": "splatterhouse-3.jpg",
-        "preview": "splatterhouse-3.gif"
+        "preview": "splatterhouse-3.gif",
+        "nota": "8.1"
     },
     {
         "nome": "Sport Games",
         "rom": "roms/sport_games.md",
         "capa": "sport-games.jpg",
-        "preview": "sport-games.gif"
+        "preview": "sport-games.gif",
+        "nota": "7.8"
     },
     {
         "nome": "Stargate",
         "rom": "roms/stargate_(usa,_europe).md",
         "capa": "stargate.jpg",
-        "preview": "stargate.gif"
+        "preview": "stargate.gif",
+        "nota": "7.3"
     },
     {
         "nome": "Story Of Thor, The",
         "rom": "roms/story_of_thor,_the_(europe).md",
         "capa": "story-of-thor,-the.jpg",
-        "preview": "story-of-thor,-the.gif"
+        "preview": "story-of-thor,-the.gif",
+        "nota": "8.8"
     },
     {
         "nome": "Streets Of Rage",
         "rom": "roms/streets_of_rage_(world).md",
         "capa": "streets-of-rage.jpg",
-        "preview": "streets-of-rage.gif"
+        "preview": "streets-of-rage.gif",
+        "nota": "8.6"
     },
     {
         "nome": "Streets Of Rage 2",
         "rom": "roms/streets_of_rage_2_(usa).md",
         "capa": "streets-of-rage-2.jpg",
-        "preview": "streets-of-rage-2.gif"
+        "preview": "streets-of-rage-2.gif",
+        "nota": "8.2"
     },
     {
         "nome": "Streets Of Rage 3",
         "rom": "roms/streets_of_rage_3_(usa).md",
         "capa": "streets-of-rage-3.jpg",
-        "preview": "streets-of-rage-3.gif"
+        "preview": "streets-of-rage-3.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Strider",
         "rom": "roms/strider_(usa,_europe).md",
         "capa": "strider.jpg",
-        "preview": "strider.gif"
+        "preview": "strider.gif",
+        "nota": "6.6"
     },
     {
         "nome": "Strider 2",
         "rom": "roms/strider_2.md",
         "capa": "strider-2.jpg",
-        "preview": "strider-2.gif"
+        "preview": "strider-2.gif",
+        "nota": "6.6"
     },
     {
         "nome": "Super Mario Bros.",
         "rom": "roms/super_mario_bros..md",
         "capa": "super-mario-bros.jpg",
-        "preview": "super-mario-bros.gif"
+        "preview": "super-mario-bros.gif",
+        "nota": "8.6"
     },
     {
         "nome": "Super Monaco Gp",
         "rom": "roms/super_monaco_gp_(japan,_usa)_(en,ja).md",
         "capa": "super-monaco-gp.jpg",
-        "preview": "super-monaco-gp.gif"
+        "preview": "super-monaco-gp.gif",
+        "nota": "8.0"
     },
     {
         "nome": "Super Street Fighter Ii The New Challengers",
         "rom": "roms/super_street_fighter_ii_-_the_new_challengers_(usa).md",
         "capa": "super-street-fighter-ii---the-new-challengers.jpg",
-        "preview": "super-street-fighter-ii---the-new-challengers.gif"
+        "preview": "super-street-fighter-ii---the-new-challengers.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Syd Of Valis",
         "rom": "roms/syd_of_valis_(usa).md",
         "capa": "syd-of-valis.jpg",
-        "preview": "syd-of-valis.gif"
+        "preview": "syd-of-valis.gif",
+        "nota": "6.2"
     },
     {
         "nome": "Tatsujin ~ Truxton",
         "rom": "roms/tatsujin_~_truxton_(world).md",
         "capa": "tatsujin-~-truxton.png",
-        "preview": "tatsujin-~-truxton.gif"
+        "preview": "tatsujin-~-truxton.gif",
+        "nota": "7.7"
     },
     {
         "nome": "Taz Mania",
         "rom": "roms/taz-mania_(world).md",
         "capa": "taz-mania.jpg",
-        "preview": "taz-mania.gif"
+        "preview": "taz-mania.gif",
+        "nota": "7.2"
     },
     {
         "nome": "Taz In Escape From Mars",
         "rom": "roms/taz_in_escape_from_mars_(usa).md",
         "capa": "taz-in-escape-from-mars.jpg",
-        "preview": "taz-in-escape-from-mars.gif"
+        "preview": "taz-in-escape-from-mars.gif",
+        "nota": "7.3"
     },
     {
         "nome": "Terminator, The",
         "rom": "roms/terminator,_the_(usa).md",
         "capa": "terminator,-the.jpg",
-        "preview": "terminator,-the.gif"
+        "preview": "terminator,-the.gif",
+        "nota": "7.0"
     },
     {
         "nome": "The Amazing Spider Man Vs. The Kingpin",
         "rom": "roms/the_amazing_spider-man_vs._the_kingpin.md",
         "capa": "the-amazing-spider-man-vs-the-kingpin.jpg",
-        "preview": "the-amazing-spider-man-vs-the-kingpin.gif"
+        "preview": "the-amazing-spider-man-vs-the-kingpin.gif",
+        "nota": "7.5"
     },
     {
         "nome": "Thunder Force Ii",
         "rom": "roms/thunder_force_ii_(usa,_europe).md",
         "capa": "thunder-force-ii.jpg",
-        "preview": "thunder-force-ii.gif"
+        "preview": "thunder-force-ii.gif",
+        "nota": "4.6"
     },
     {
         "nome": "Thunder Force Iii",
         "rom": "roms/thunder_force_iii_(japan,_usa).md",
         "capa": "thunder-force-iii.jpg",
-        "preview": "thunder-force-iii.gif"
+        "preview": "thunder-force-iii.gif",
+        "nota": "6.9"
     },
     {
         "nome": "Thunder Force Iv",
         "rom": "roms/thunder_force_iv.md",
         "capa": "thunder-force-iv.jpg",
-        "preview": "thunder-force-iv.gif"
+        "preview": "thunder-force-iv.gif",
+        "nota": "3.7"
     },
     {
         "nome": "Thunder Fox",
         "rom": "roms/thunder_fox_(usa).md",
         "capa": "thunder-fox.jpg",
-        "preview": "thunder-fox.gif"
+        "preview": "thunder-fox.gif",
+        "nota": "6.6"
     },
     {
         "nome": "Tinhead",
         "rom": "roms/tinhead_(usa)_(spectrum_holobyte)_(october,_1995).md",
         "capa": "tinhead.jpg",
-        "preview": "tinhead.gif"
+        "preview": "tinhead.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Tintin In Tibet",
         "rom": "roms/tintin_in_tibet_(europe)_(en,fr,de,es,nl,sv).md",
         "capa": "tintin-in-tibet.jpg",
-        "preview": "tintin-in-tibet.gif"
+        "preview": "tintin-in-tibet.gif",
+        "nota": "7.5"
     },
     {
         "nome": "Toejam & Earl",
         "rom": "roms/toejam_&_earl_(usa,_europe,_korea).md",
         "capa": "toejam-and-earl.jpg",
-        "preview": "toejam-and-earl.gif"
+        "preview": "toejam-and-earl.gif",
+        "nota": "8.4"
     },
     {
         "nome": "Toki Going Ape Spit",
         "rom": "roms/toki_-_going_ape_spit_(usa,_europe).md",
         "capa": "toki---going-ape-spit.jpg",
-        "preview": "toki---going-ape-spit.gif"
+        "preview": "toki---going-ape-spit.gif",
+        "nota": "5.7"
     },
     {
         "nome": "Toy Story",
         "rom": "roms/toy_story_(usa).md",
         "capa": "toy-story.jpg",
-        "preview": "toy-story.gif"
+        "preview": "toy-story.gif",
+        "nota": "6.9"
     },
     {
         "nome": "Trouble Shooter",
         "rom": "roms/trouble_shooter_(usa).md",
         "capa": "trouble-shooter.jpg",
-        "preview": "trouble-shooter.gif"
+        "preview": "trouble-shooter.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Truxton",
         "rom": "roms/truxton_(world).md",
         "capa": "truxton.jpg",
-        "preview": "truxton.gif"
+        "preview": "truxton.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Turbo Outrun",
         "rom": "roms/turbo_outrun_(japan,_europe).md",
         "capa": "turbo-outrun.png",
-        "preview": "turbo-outrun.gif"
+        "preview": "turbo-outrun.gif",
+        "nota": "7.6"
     },
     {
         "nome": "Turma Da Monica Na Terra Dos Monstros",
         "rom": "roms/turma_da_monica_na_terra_dos_monstros.md",
         "capa": "turma-da-monica-na-terra-dos-monstros.jpg",
-        "preview": "turma-da-monica-na-terra-dos-monstros.gif"
+        "preview": "turma-da-monica-na-terra-dos-monstros.gif",
+        "nota": "6.0"
     },
     {
         "nome": "Twinkle Tale",
         "rom": "roms/twinkle_tale_(japan)_(translated_en).md",
         "capa": "twinkle-tale.jpg",
-        "preview": "twinkle-tale.gif"
+        "preview": "twinkle-tale.gif",
+        "nota": "5.6"
     },
     {
         "nome": "Two Crude Dudes",
         "rom": "roms/two_crude_dudes_(usa).md",
         "capa": "two-crude-dudes.jpg",
-        "preview": "two-crude-dudes.gif"
+        "preview": "two-crude-dudes.gif",
+        "nota": "8.9"
     },
     {
         "nome": "Valis",
         "rom": "roms/valis_(usa).md",
         "capa": "valis.jpg",
-        "preview": "valis.gif"
+        "preview": "valis.gif",
+        "nota": "6.2"
     },
     {
         "nome": "Valis Iii",
         "rom": "roms/valis_iii_(usa).md",
         "capa": "valis-iii.jpg",
-        "preview": "valis-iii.gif"
+        "preview": "valis-iii.gif",
+        "nota": "6.2"
     },
     {
         "nome": "Vectorman",
         "rom": "roms/vectorman_(usa,_europe).md",
         "capa": "vectorman.jpg",
-        "preview": "vectorman.gif"
+        "preview": "vectorman.gif",
+        "nota": "8.0"
     },
     {
         "nome": "Vectorman 2",
         "rom": "roms/vectorman_2_(usa).md",
         "capa": "vectorman-2.jpg",
-        "preview": "vectorman-2.gif"
+        "preview": "vectorman-2.gif",
+        "nota": "8.6"
     },
     {
         "nome": "Warsong",
         "rom": "roms/warsong_(usa).md",
         "capa": "warsong.jpg",
-        "preview": "warsong.gif"
+        "preview": "warsong.gif",
+        "nota": "9.0"
     },
     {
         "nome": "Water Margin The Tales Of Clouds And Winds",
         "rom": "roms/water_margin_-_the_tales_of_clouds_and_winds.md",
         "capa": "water-margin---the-tales-of-clouds-and-winds.jpg",
-        "preview": "water-margin---the-tales-of-clouds-and-winds.gif"
+        "preview": "water-margin---the-tales-of-clouds-and-winds.gif",
+        "nota": "8.7"
     },
     {
         "nome": "Where In The World Is Carmen Sandiego",
         "rom": "roms/where_in_the_world_is_carmen_sandiego_(usa,_europe)_(en,fr,de,es,it).md",
         "capa": "where-in-the-world-is-carmen-sandiego.jpg",
-        "preview": "where-in-the-world-is-carmen-sandiego.gif"
+        "preview": "where-in-the-world-is-carmen-sandiego.gif",
+        "nota": "7.2"
     },
     {
         "nome": "Where In Time Is Carmen Sandiego",
         "rom": "roms/where_in_time_is_carmen_sandiego_(usa,_europe)_(en,fr,de,es,it).md",
         "capa": "where-in-time-is-carmen-sandiego.jpg",
-        "preview": "where-in-time-is-carmen-sandiego.gif"
+        "preview": "where-in-time-is-carmen-sandiego.gif",
+        "nota": "5.7"
     },
     {
         "nome": "Wonder Boy In Monster World",
         "rom": "roms/wonder_boy_in_monster_world_(usa,_europe).md",
         "capa": "wonder-boy-in-monster-world.jpg",
-        "preview": "wonder-boy-in-monster-world.gif"
+        "preview": "wonder-boy-in-monster-world.gif",
+        "nota": "6.0"
     },
     {
         "nome": "World Of Illusion Starring Mickey Mouse And Donald Duck",
         "rom": "roms/world_of_illusion_starring_mickey_mouse_and_donald_duck_(usa,_korea).md",
         "capa": "world-of-illusion-starring-mickey-mouse-and-donald-duck.jpg",
-        "preview": "world-of-illusion-starring-mickey-mouse-and-donald-duck.gif"
+        "preview": "world-of-illusion-starring-mickey-mouse-and-donald-duck.gif",
+        "nota": "8.3"
     },
     {
         "nome": "X Men 2 Clone Wars",
         "rom": "roms/x-men_2_-_clone_wars_(usa,_europe).md",
         "capa": "x-men-2---clone-wars.png",
-        "preview": "x-men-2---clone-wars.gif"
+        "preview": "x-men-2---clone-wars.gif",
+        "nota": "8.4"
     },
     {
         "nome": "Yu Yu Hakusho Sunset Fighters",
         "rom": "roms/yu_yu_hakusho_sunset_fighters.md",
         "capa": "yu-yu-hakusho-sunset-fighters.jpg",
-        "preview": "yu-yu-hakusho-sunset-fighters.gif"
+        "preview": "yu-yu-hakusho-sunset-fighters.gif",
+        "nota": "S/N"
     },
     {
         "nome": "Zero The Kamikaze Squirrel",
         "rom": "roms/zero_the_kamikaze_squirrel_(usa).md",
         "capa": "zero-the-kamikaze-squirrel.jpg",
-        "preview": "zero-the-kamikaze-squirrel.gif"
+        "preview": "zero-the-kamikaze-squirrel.gif",
+        "nota": "7.3"
     },
     {
         "nome": "Zero Tolerance",
         "rom": "roms/zero_tolerance_(usa,_europe)_(rev_a).md",
         "capa": "zero-tolerance.jpg",
-        "preview": "zero-tolerance.gif"
+        "preview": "zero-tolerance.gif",
+        "nota": "8.5"
     },
     {
         "nome": "Zool Ninja Of The 'Nth' Dimension",
         "rom": "roms/zool_-_ninja_of_the_'nth'_dimension_(usa).md",
         "capa": "zool---ninja-of-the-nth-dimension.jpg",
-        "preview": "zool---ninja-of-the-nth-dimension.gif"
+        "preview": "zool---ninja-of-the-nth-dimension.gif",
+        "nota": "8.3"
     }
 ]
