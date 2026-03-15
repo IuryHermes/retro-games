@@ -2,8 +2,8 @@
     {
         "nome": "2 In 1 Asterix Obelix Bash Them All Asterix Obelix Xxl",
         "rom": "roms/2-in-1-asterix-obelix-bash-them-all-asterix-obelix-xxl.gba",
-        "capa": "2-in-1-asterix-obelix-bash-them-all-asterix-obelix-xxl.jpg",
-        "preview": ""
+        "capa": "asterix-obelix.jpg",
+        "preview": "asterix-obelix.gif"
     },
     {
         "nome": "2006 Fifa World Cup Germany 2006",
@@ -98,8 +98,8 @@
     {
         "nome": "Boktai The Sun Is In Your Hand",
         "rom": "roms/boktai-the-sun-is-in-your-hand.gba",
-        "capa": "boktai-the-sun-is-in-your-hand.jpg",
-        "preview": ""
+        "capa": "boktai.jpg",
+        "preview": "boktai.gif"
     },
     {
         "nome": "Bomberman Tournament",
@@ -188,8 +188,8 @@
     {
         "nome": "Crash Bandicoot The Huge Adventure",
         "rom": "roms/crash-bandicoot-the-huge-adventure.gba",
-        "capa": "crash-bandicoot-the-huge-adventure.jpg",
-        "preview": ""
+        "capa": "crash-huge.jpg",
+        "preview": "crash-huge.gif"
     },
     {
         "nome": "Crash Nitro Kart",
@@ -230,8 +230,8 @@
     {
         "nome": "Dinotopia The Timestone Pirates",
         "rom": "roms/dinotopia-the-timestone-pirates.gba",
-        "capa": "dinotopia-the-timestone-pirates.jpg",
-        "preview": ""
+        "capa": "dinotopia.jpg",
+        "preview": "dinotopia.gif"
     },
     {
         "nome": "Donkey Kong Country 3",
@@ -254,8 +254,8 @@
     {
         "nome": "Dragon Ball Gt Transformation",
         "rom": "roms/dragon-ball-gt-transformation.gba",
-        "capa": "dragon-ball-gt-transformation.jpg",
-        "preview": ""
+        "capa": "dbgt.jpg",
+        "preview": "dbgt.gif"
     },
     {
         "nome": "Dragon Ball Z Taiketsu",
@@ -266,8 +266,8 @@
     {
         "nome": "Dragon Ball Z The Legacy Of Goku Ii",
         "rom": "roms/dragon-ball-z-the-legacy-of-goku-ii.gba",
-        "capa": "dragon-ball-z-the-legacy-of-goku-ii.jpg",
-        "preview": ""
+        "capa": "dbz-legacy-2.jpg",
+        "preview": "dbz-legacy-2.gif"
     },
     {
         "nome": "Dragon Ball Z The Legacy Of Goku",
@@ -284,8 +284,8 @@
     {
         "nome": "F Zero Maximum Velocity",
         "rom": "roms/f-zero-maximum-velocity.gba",
-        "capa": "f-zero-maximum-velocity.jpg",
-        "preview": ""
+        "capa": "f-zero.jpg",
+        "preview": "f-zero.gif"
     },
     {
         "nome": "Fairly Oddparents The Enter The Cleft",
@@ -302,14 +302,14 @@
     {
         "nome": "Final Fantasy I Ii Dawn Of Souls Br",
         "rom": "roms/final-fantasy-i-ii-dawn-of-souls-br.gba",
-        "capa": "final-fantasy-i-ii-dawn-of-souls-br.jpg",
-        "preview": ""
+        "capa": "ff-1-2.jpg",
+        "preview": "ff-1-2.gif"
     },
     {
         "nome": "Final Fantasy I Ii Dawn Of Souls",
         "rom": "roms/final-fantasy-i-ii-dawn-of-souls.gba",
-        "capa": "final-fantasy-i-ii-dawn-of-souls.jpg",
-        "preview": ""
+        "capa": "ff-1-2.jpg",
+        "preview": "ff-1-2.gif"
     },
     {
         "nome": "Final Fantasy Tactics Advance",
@@ -386,20 +386,20 @@
     {
         "nome": "Harry Potter And The Chamber Of Secrets",
         "rom": "roms/harry-potter-and-the-chamber-of-secrets.gba",
-        "capa": "harry-potter-and-the-chamber-of-secrets.jpg",
-        "preview": ""
+        "capa": "hp-chamber.jpg",
+        "preview": "hp-chamber.gif"
     },
     {
         "nome": "Harry Potter And The Order Of The Phoenix",
         "rom": "roms/harry-potter-and-the-order-of-the-phoenix.gba",
-        "capa": "harry-potter-and-the-order-of-the-phoenix.jpg",
-        "preview": ""
+        "capa": "hp-phoenix.jpg",
+        "preview": "hp-phoenix.gif"
     },
     {
         "nome": "Harry Potter And The Sorcerer S Stone",
         "rom": "roms/harry-potter-and-the-sorcerer-s-stone.gba",
-        "capa": "harry-potter-and-the-sorcerer-s-stone.jpg",
-        "preview": ""
+        "capa": "hp-stone.jpg",
+        "preview": "hp-stone.gif"
     },
     {
         "nome": "Harvest Moon Friends Of Mineral Town",
@@ -446,8 +446,8 @@
     {
         "nome": "Justice League Heroes The Flash",
         "rom": "roms/justice-league-heroes-the-flash.gba",
-        "capa": "justice-league-heroes-the-flash.jpg",
-        "preview": ""
+        "capa": "jl-flash.jpg",
+        "preview": "jl-flash.gif"
     },
     {
         "nome": "Justice League Injustice For All",
@@ -458,8 +458,8 @@
     {
         "nome": "King Kong The 8Th Wonder Of The World",
         "rom": "roms/king-kong-the-8th-wonder-of-the-world.gba",
-        "capa": "king-kong-the-8th-wonder-of-the-world.jpg",
-        "preview": ""
+        "capa": "king-kong.jpg",
+        "preview": "king-kong.gif"
     },
     {
         "nome": "Kingdom Hearts Chain Of Memories",
@@ -470,20 +470,20 @@
     {
         "nome": "Kirby And The Amazing Mirror",
         "rom": "roms/kirby-and-the-amazing-mirror.gba",
-        "capa": "kirby-and-the-amazing-mirror.jpg",
-        "preview": ""
+        "capa": "kirby.jpg",
+        "preview": "kirby.gif"
     },
     {
         "nome": "Koala Brothers Outback Adventures",
         "rom": "roms/koala-brothers-outback-adventures.gba",
-        "capa": "koala-brothers-outback-adventures.jpg",
-        "preview": ""
+        "capa": "koala.jpg",
+        "preview": "koala.gif"
     },
     {
         "nome": "Kong The Animated Series",
         "rom": "roms/kong-the-animated-series.gba",
-        "capa": "kong-the-animated-series.jpg",
-        "preview": ""
+        "capa": "kong.jpg",
+        "preview": "kong.gif"
     },
     {
         "nome": "Lady Sia Br",
@@ -680,8 +680,8 @@
     {
         "nome": "Naruto Ninja Council 2",
         "rom": "roms/naruto-ninja-council-2.gba",
-        "capa": "naruto-ninja-council-2.jpg",
-        "preview": ""
+        "capa": "naruto.jpg",
+        "preview": "naruto.gif"
     },
     {
         "nome": "Need For Speed Most Wanted",
@@ -908,8 +908,8 @@
     {
         "nome": "R Type Iii The Third Lightning",
         "rom": "roms/r-type-iii-the-third-lightning.gba",
-        "capa": "r-type-iii-the-third-lightning.jpg",
-        "preview": ""
+        "capa": "rtype-iii.jpg",
+        "preview": "rtype-iii.gif"
     },
     {
         "nome": "Ratatouille",
@@ -932,8 +932,8 @@
     {
         "nome": "Robot Wars Advanced Destruction",
         "rom": "roms/robot-wars-advanced-destruction.gba",
-        "capa": "robot-wars-advanced-destruction.jpg",
-        "preview": ""
+        "capa": "robot-wars.jpg",
+        "preview": "robot-wars.gif"
     },
     {
         "nome": "Robotech The Macross Saga",
