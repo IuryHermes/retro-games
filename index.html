@@ -98,6 +98,7 @@
             .sidebar:hover { width: var(--sidebar-expanded-width); box-shadow: 10px 0 50px rgba(0,0,0,0.5); }
             .sidebar:hover .nav-text { display: inline-block; opacity: 1; transition: 0.3s; }
             .sidebar:hover .menu-label { opacity: 0; }
+            .sidebar:hover .sidebar-chat { display: flex; }
         }
         .sidebar-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; flex-shrink: 0; }
         .sidebar-header img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-color); cursor: pointer; }
@@ -109,113 +110,85 @@
         .nav-item img { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; image-rendering: pixelated; }
         .nav-text { display: none; opacity: 0; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 
+        .mobile-only-chat-btn { display: none !important; }
+
+        .sidebar-chat { background: var(--bg-color); border: 1px solid var(--accent-color); padding: 10px; border-radius: 4px; height: 350px; min-height: 350px; display: none; flex-direction: column; width: 100%; flex-shrink: 0; margin-bottom: 20px; margin-top: auto; position: relative; }
+        .close-chat-btn { display: none; }     
+        #terminal-output { flex: 1; overflow-y: auto; font-family: monospace; font-size: 10px; color: var(--accent-color); margin-bottom: 10px; word-wrap: break-word; overflow-x: hidden; }
+        .chat-time { color: var(--text-muted); font-size: 8px; margin-right: 5px; }
+        .chat-controls { display: flex; gap: 5px; width: 100%; box-sizing: border-box; }
+        #chat-nick { width: 70px; min-width: 0; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 5px; font-size: 10px; border-radius: 3px; outline: none; }
+        #chat-msg { flex: 1; min-width: 0; background: var(--sidebar-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 5px; font-size: 11px; border-radius: 3px; outline: none; }
+        #chat-msg:disabled { background: var(--card-bg); cursor: not-allowed; opacity: 0.5; }
+        #send-btn { width: 30px; flex-shrink: 0; background: var(--accent-color); border: none; cursor: pointer; color: #fff; font-weight: bold; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+
         .main-content { margin-left: var(--sidebar-collapsed-width); padding: 0 0 50px 0; position: relative; z-index: 1; transition: margin-left 0.3s ease; }
             
-        /* ==========================================
-           TOP BAR (CORRIGIDA E BLINDADA CONTRA VAZAMENTO)
-           ========================================== */
-        .top-bar { 
-            position: sticky; top: 0; padding: 15px 20px; 
-            display: flex; flex-direction: column; 
-            align-items: center; gap: 15px; 
-            z-index: 8000; background: var(--top-bar-bg); 
-            backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 204, 68, 0.3); 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: background 0.4s; 
-        }
-        
-        @keyframes brand-glow { 0%, 100% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); } 50% { text-shadow: 0 0 2px var(--accent-color); } }
-        .brand { font-family: 'Press Start 2P'; color: var(--accent-color); font-size: clamp(14px, 3vw, 20px); cursor: pointer; text-align: center; animation: brand-glow 2.5s infinite ease-in-out; }
-        
-        /* Controles alinhados abaixo da Brand */
-        .top-bar-controls { 
-            display: flex; flex-direction: row; align-items: center; justify-content: center; 
-            gap: 10px; width: 100%; max-width: 800px; 
-        }
-        
-        /* Botão Chat Mobile com TRAVA MÁXIMA DE TAMANHO */
-        .chat-trigger-mobile { 
-            display: flex; 
-            width: 40px; height: 40px; 
-            min-width: 40px; min-height: 40px; 
-            cursor: pointer; align-items: center; justify-content: center; 
-            border: 1px solid var(--accent-color); border-radius: 6px; 
-            background: var(--sidebar-bg); flex-shrink: 0; transition: 0.3s; 
-        }
-        .chat-trigger-mobile img { 
-            width: 25px !important; height: 25px !important; 
-            max-width: 25px !important; max-height: 25px !important; 
-            object-fit: contain; image-rendering: pixelated; 
-        }
-        .chat-trigger-mobile:hover { background: var(--accent-color); }
-
-        /* Barra de pesquisa elástica para não escapar da tela */
-        .search-container { 
-            background: var(--sidebar-bg); border: 1px solid var(--accent-color); 
-            display: flex; padding: 8px 15px; 
-            flex: 1; min-width: 100px; max-width: 500px; 
-            border-radius: 4px; position: relative; 
-        }
+        .top-bar { position: sticky; top: 0; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 8000; background: var(--top-bar-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 204, 68, 0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: background 0.4s; }
+        @keyframes brand-glow { 0% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } 50% { text-shadow: 0 0 2px var(--accent-color), 0 0 5px var(--accent-color); transform: scale(1.02); } 100% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } }
+        .brand { font-family: 'Press Start 2P'; color: var(--accent-color); font-size: 18px; animation: brand-glow 2.5s infinite ease-in-out; }
+        .top-bar-controls { display: flex; align-items: center; gap: 20px; }
+            
+        .search-container { background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: flex; padding: 8px 15px; width: 350px; border-radius: 4px; position: relative; }
         #global-search { background: transparent; border: none; color: var(--text-color); outline: none; width: 100%; font-family: monospace; }
         #search-results { position: absolute; top: 100%; right: -1px; width: calc(100% + 2px); background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: none; flex-direction: column; z-index: 9999; max-height: 400px; overflow-y: auto; border-radius: 0 0 4px 4px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
         .search-item { padding: 10px; border-bottom: 1px solid var(--border-color); cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; }
         .search-item:hover, .search-item.gamepad-focus { background: var(--card-bg); border-left: 3px solid var(--accent-color); outline: none; }
         .search-item img { width: 40px; height: 40px; object-fit: fill; border-radius: 3px; }
-
-        .theme-container { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-        .theme-switch { position: relative; display: inline-block; width: 46px; height: 24px; cursor: pointer; }
+            
+        .theme-container { display: flex; align-items: center; gap: 10px; }
+        .theme-label { font-family: 'Press Start 2P', cursive; font-size: 8px; color: var(--text-color); transition: color 0.4s; }
+        .theme-switch { position: relative; display: inline-block; width: 46px; height: 24px; flex-shrink: 0; }
         .theme-switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; inset: 0; background-color: var(--input-bg); transition: .4s; border-radius: 34px; border: 1px solid var(--accent-color); }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--input-bg); transition: .4s; border-radius: 34px; border: 1px solid var(--accent-color); }
         .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: var(--accent-color); transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #222; }
         input:checked + .slider:before { transform: translateX(22px); }
 
-        /* ==========================================
-           CHAT MODAL (COM CORES FORTES E EMOJIS)
-           ========================================== */
-        .chat-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
-        .chat-window { background: var(--sidebar-bg); border: 2px solid var(--accent-color); padding: 20px; border-radius: 8px; width: 90%; max-width: 450px; height: 75vh; max-height: 500px; display: flex; flex-direction: column; position: relative; box-shadow: 0 0 40px rgba(0, 204, 68, 0.5); }
-        .close-chat-btn { position: absolute; top: 10px; right: 10px; background: transparent; color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 16px; padding: 4px 12px; cursor: pointer; border-radius: 4px; font-weight: bold; transition: 0.3s; }
-        .close-chat-btn:hover { background: #ff3333; color: #fff; }
-        
-        .chat-title { font-size: 16px; color: #00ff44; text-shadow: 0 0 8px rgba(0, 255, 68, 0.8); text-align: center; margin-bottom: 10px; font-weight: bold; font-family: 'Press Start 2P', monospace; padding-top: 10px; }
-        
-        #terminal-output { flex: 1; overflow-y: auto; font-family: monospace; font-size: 12px; color: #00ff44; margin-bottom: 15px; border: 1px solid var(--border-color); padding: 10px; background: var(--bg-color); border-radius: 4px; word-wrap: break-word; }
-        .chat-controls { display: flex; gap: 8px; width: 100%; position: relative; }
-        #chat-nick { width: 80px; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px; font-size: 12px; border-radius: 4px; outline: none; }
-        #chat-msg { flex: 1; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px; font-size: 12px; border-radius: 4px; outline: none; }
-        #chat-msg:disabled { background: var(--card-bg); cursor: not-allowed; opacity: 0.5; }
-        #emoji-btn { background: var(--input-bg); border: 1px solid var(--border-color); cursor: pointer; padding: 0 10px; border-radius: 4px; font-size: 16px; transition: 0.2s; }
-        #emoji-btn:hover { background: var(--card-bg); }
-        #send-btn { width: 45px; background: var(--accent-color); border: none; cursor: pointer; color: #fff; font-weight: bold; border-radius: 4px; font-size: 16px; }
-        
-        /* CAIXA DE EMOJIS FLUTUANTE */
-        #emoji-picker { display: none; position: absolute; bottom: 50px; right: 50px; background: var(--sidebar-bg); border: 1px solid var(--accent-color); padding: 10px; border-radius: 6px; width: 200px; flex-wrap: wrap; gap: 10px; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.5); z-index: 100001; }
-        .emoji-item { cursor: pointer; font-size: 20px; transition: 0.2s; }
-        .emoji-item:hover { transform: scale(1.3); }
-
-        .hero-section { position: relative; width: 100%; height: 600px; background: #000; overflow: hidden; display: flex; align-items: center; }
+        .hero-section { position: relative; width: 100%; height: 800px; background: #000; overflow: hidden; display: flex; align-items: center; }
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; display: flex; align-items: center; z-index: 1; }
         .hero-slide.active { opacity: 1; z-index: 2; }
         .hero-bg-blur { position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; object-fit: cover; filter: blur(25px) brightness(0.5); z-index: 1; pointer-events: none; }
         .hero-bg-media { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: fill; z-index: 2; pointer-events: none; }
         .hero-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 60%, transparent 100%), linear-gradient(to top, var(--bg-color) 0%, transparent 40%); z-index: 3; transition: background 0.4s; pointer-events: none; }
-        .hero-content { position: relative; z-index: 4; padding: 0 50px; max-width: 800px; display: flex; flex-direction: column; gap: 15px; }
-        .hero-title { font-family: 'Press Start 2P', cursive; font-size: clamp(20px, 4vw, 36px); color: #fff; text-shadow: 2px 2px 10px #000; line-height: 1.3; margin-bottom: 5px; }
-        .hero-play-btn { background: #fff; color: #000; font-family: 'Press Start 2P'; font-size: 14px; padding: 15px 30px; border-radius: 4px; border: none; cursor: pointer; width: fit-content; transition: 0.3s; margin-top: 10px; }
+        .hero-content { position: relative; z-index: 4; padding: 0 50px; max-width: 800px; display: flex; flex-direction: column; gap: 15px; pointer-events: auto; }
+        .hero-title { font-family: 'Press Start 2P', cursive; font-size: clamp(20px, 4vw, 45px); color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); line-height: 1.2; margin-bottom: 10px; }
+        .hero-categories { font-size: 14px; color: #ccc; font-weight: bold; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); letter-spacing: 1px; }
+        .hero-categories span { color: var(--accent-color); margin: 0 5px; }
+        .hero-play-btn { display: inline-flex; align-items: center; justify-content: center; background: #fff; color: #000; font-family: 'Roboto', sans-serif; font-weight: bold; font-size: 18px; padding: 12px 30px; border-radius: 4px; border: none; cursor: pointer; width: fit-content; margin-top: 10px; transition: 0.3s; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); position: relative; pointer-events: auto; }
         .hero-play-btn:hover { background: var(--accent-color); color: #fff; transform: scale(1.05); }
+        .hero-play-btn.gamepad-focus { background: var(--accent-color); color: #fff; outline: 3px solid #fff; box-shadow: 0 0 20px var(--accent-color); transform: scale(1.05); }
+        .hero-indicators { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; pointer-events: auto; }
+        .indicator { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
+        .indicator.active { background: var(--accent-color); transform: scale(1.3); }
 
         .catalog { padding: 0 40px; }
-        .row-wrapper { margin-top: 40px; }
-        .row-header { display: flex; align-items: center; gap: 20px; margin-bottom: 15px; border-left: 4px solid var(--accent-color); padding-left: 15px; }
-        .row-title-text { font-family: 'Press Start 2P'; font-size: 14px; color: var(--text-color); }
-        .game-carousel { display: flex; gap: 15px; overflow-x: auto; padding: 25px 5px; scrollbar-width: none; }
-        .game-card { width: var(--card-width-desktop); height: var(--card-height-desktop); border: 1px solid var(--border-color); cursor: pointer; border-radius: 8px; flex-shrink: 0; overflow: hidden; transition: 0.3s; position: relative; }
-        .game-card:hover { transform: scale(1.15); border-color: var(--accent-color); z-index: 100; box-shadow: 0 0 25px rgba(0,204,68,0.4); }
-        .game-card.mobile-active { transform: scale(1.25); border-color: var(--accent-color); z-index: 100; box-shadow: 0 0 25px rgba(0,204,68,0.6); }
-        .card-media { width: 100%; height: 130px; background: #000; position: relative; }
-        .card-media img { width: 100%; height: 100%; object-fit: fill; position: absolute; top: 0; left: 0; transition: opacity 0.2s; }
+        .row-wrapper { margin-top: 30px; margin-bottom: 25px; position: relative; z-index: 5; }
+        .row-header { display: flex; align-items: center; justify-content: flex-start; gap: 20px; margin-bottom: 10px; border-left: 3px solid var(--accent-color); padding-left: 10px; }
+        .row-title-text { font-family: 'Press Start 2P'; font-size: 12px; color: var(--text-color); }
+        .view-all-btn { background: rgba(0, 204, 68, 0.1); border: 1px solid var(--accent-color); color: var(--accent-color); font-family: 'Press Start 2P', cursive; font-size: 8px; padding: 6px 12px; cursor: pointer; border-radius: 2px; transition: 0.3s; text-transform: uppercase; box-shadow: 0 0 5px rgba(0, 204, 68, 0.3); }
+        .view-all-btn:hover, .view-all-btn.gamepad-focus { background: var(--accent-color); color: #fff; box-shadow: 0 0 15px var(--accent-color); outline: 2px solid #fff; transform: scale(1.05); }
+        .row-container { position: relative; display: flex; align-items: center; }
+        .game-carousel { display: flex; gap: 10px; overflow-x: auto; scroll-behavior: smooth; padding: 40px 10px; margin-top: -20px; margin-bottom: -20px; width: 100%; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .game-carousel::-webkit-scrollbar { display: none; }
+        .game-carousel.grid-view { flex-wrap: wrap; overflow-x: visible; justify-content: center; padding: 20px 0; margin: 0; }
+        .game-carousel.grid-view .game-card { margin-bottom: 20px; }
+        .scroll-btn { position: absolute; top: 0; bottom: 0; width: 50px; background: var(--scroll-btn-bg); border: none; color: var(--accent-color); font-size: 30px; cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
+        .row-container:hover .scroll-btn { opacity: 1; }
+        .left-btn { left: 0; } .right-btn { right: 0; }
+        .scroll-btn:hover { background: var(--accent-color); color: #fff; }
+
+        .game-card { width: var(--card-width-desktop); height: var(--card-height-desktop); background: transparent; border: 1px solid var(--border-color); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s; cursor: pointer; border-radius: 6px; flex-shrink: 0; display: flex; flex-direction: column; position: relative; }
+        .game-card:hover, .game-card.mobile-active, .game-card.gamepad-focus { transform: scale(1.3); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0, 204, 68, 0.4); z-index: 100; }
+        .game-card.gamepad-focus { outline: 3px solid var(--accent-color); outline-offset: 2px; }
+        .card-media { width: 100%; height: 140px; position: relative; background: var(--card-bg); overflow: hidden; border-radius: 5px 5px 0 0; }
+        .card-media img { width: 100%; height: 100%; object-fit: fill; position: absolute; top: 0; left: 0; transition: opacity 0.8s ease-in-out; }
         .static-thumb { z-index: 2; opacity: 1; }
         .active-gif { z-index: 3; opacity: 0; display: none; }      
-        .card-title { height: 40px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; padding: 5px; font-family: 'Press Start 2P'; font-size: 8px; text-align: center; z-index: 5; position: relative; }
+        .card-title { position: absolute; top: 140px; left: 0; width: 100%; min-height: 40px; background: var(--card-bg); color: var(--text-color); display: flex; align-items: center; justify-content: center; padding: 5px; transition: background 0.3s, color 0.3s; border-radius: 0 0 5px 5px; z-index: 5; border-top: 1px solid var(--border-color); }
+        .card-title span { font-family: 'Press Start 2P', cursive; font-size: 8px; line-height: 1.4; text-align: center; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .game-card:hover .card-title, .game-card.mobile-active .card-title, .game-card.gamepad-focus .card-title { background: var(--sidebar-bg); color: var(--accent-color); height: auto; border: 1px solid var(--accent-color); border-top: none; left: -1px; width: calc(100% + 2px); border-radius: 0 0 6px 6px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .game-card:hover .card-title span, .game-card.mobile-active .card-title span, .game-card.gamepad-focus .card-title span { display: block; overflow: visible; }
 
         .discord-float { position: fixed; bottom: 20px; right: 20px; display: flex; align-items: center; gap: 12px; background: rgba(0,0,0,0.8); padding: 8px 16px; border-radius: 50px; border: 1px solid #5865f2; text-decoration: none; z-index: 9999; backdrop-filter: blur(5px); transition: bottom 0.3s ease; }
         .discord-text { font-family: monospace; color: #fff; font-size: 12px; text-align: right; }
@@ -223,75 +196,149 @@
 
         @media (max-width: 768px) {
             .sidebar { top: auto; bottom: 0; left: 0; width: 100% !important; height: 65px; flex-direction: row; border-right: none; border-top: 1px solid var(--accent-color); padding: 5px 0; transform: none !important; z-index: 9000; background: var(--top-bar-bg); backdrop-filter: blur(10px); box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }      
-            .sidebar-header { display: none !important; }
+            .sidebar-header, #chat-collapsed-label { display: none !important; }
             .nav-list { flex-direction: row; margin-top: 0; gap: 0; overflow-x: hidden; justify-content: space-around; padding: 0 5px; width: 100%; align-items: center; }
             .nav-item { flex-direction: column; padding: 2px 0; flex: 1; gap: 4px; justify-content: center; border-radius: 4px; }
-            .nav-item img { width: 22px; height: 22px; margin: 0; }
+            .nav-item img { width: 22px; height: 22px; margin: 0; border-radius: 0 !important; }
             .nav-text { display: block !important; opacity: 1 !important; font-size: 6px !important; text-align: center; white-space: normal !important; line-height: 1.1; word-break: break-word; }
             
+            /* Botão do Chat Mobile COM TRAVA - SOMENTE MOBILE */
+            .chat-trigger-mobile {
+                display: flex !important;
+                width: 40px; height: 40px;
+                min-width: 40px; min-height: 40px;
+                cursor: pointer;
+                align-items: center; justify-content: center;
+                border: 1px solid var(--accent-color);
+                border-radius: 6px;
+                background: var(--sidebar-bg);
+                margin-right: 5px;
+                flex-shrink: 0; /* IMPEDE ESTICAR */
+            }
+            .chat-trigger-mobile img { 
+                width: 25px !important; height: 25px !important; 
+                max-width: 25px !important; max-height: 25px !important; 
+                image-rendering: pixelated; 
+                object-fit: contain;
+            }
+
+            /* Janela do Chat Mobile - SOMENTE MOBILE */
+            .sidebar-chat.chat-modal-mobile {
+                display: flex !important;
+                position: fixed !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                width: 90% !important;
+                max-width: 400px !important;
+                height: 70% !important;
+                max-height: 500px !important;
+                z-index: 100000 !important;
+                background: var(--sidebar-bg) !important;
+                border: 2px solid var(--accent-color) !important;
+                border-radius: 12px !important;
+                padding: 40px 15px 15px 15px !important;
+                box-shadow: 0 0 40px rgba(0,204,68,0.6) !important;
+                margin: 0 !important;
+            }
+            
+            .close-chat-btn {
+                display: block !important;
+                position: absolute !important;
+                top: 10px !important;
+                right: 10px !important;
+                color: #ff3333 !important;
+                font-weight: bold !important;
+                border: 1px solid #ff3333 !important;
+                padding: 5px 10px !important;
+                border-radius: 4px !important;
+                background: transparent !important;
+                cursor: pointer !important;
+                z-index: 100001 !important;
+                font-size: 14px !important;
+            }
+            
+            /* Garantir que o chat da sidebar NÃO aparece em mobile escondido na barra */
+            .sidebar .sidebar-chat:not(.chat-modal-mobile) {
+                display: none !important;
+            }
+
+            #chat-nick, #chat-msg { font-size: 16px; padding: 8px; }
+            #send-btn { font-size: 16px; }
             .main-content { margin-left: 0 !important; padding: 0 0 80px 0 !important; }
-            
-            /* Ajustes Mobile Top Bar */
-            .top-bar { padding: 10px 10px !important; gap: 10px !important; }
-            .brand { margin-bottom: 0px; }
-            .top-bar-controls { gap: 8px !important; }
-            .search-container { padding: 8px 10px !important; flex: 1; min-width: 0; }
-            
-            .hero-section { height: 350px; }
-            .catalog { padding: 0 15px; }
-            .game-card { width: 140px; height: 120px; }
-            .card-media { height: 85px; }
-            .discord-float { bottom: 80px; right: 10px; }
+            .discord-float { bottom: 80px; right: 15px; }
+            .scroll-btn { width: 30px; font-size: 20px; opacity: 1; z-index: 10; }
+            .left-btn { left: 0; } .right-btn { right: 0; }
+            .catalog { padding: 0 10px; }
+            .game-carousel { gap: 8px; padding: 30px 10px; }      
+            .game-card { width: 78px; height: 110px; margin: 0; border-radius: 4px; }      
+            .card-media { height: 75px; border-radius: 3px 3px 0 0; }
+            .card-title { min-height: 35px; top: 75px; border-radius: 0 0 3px 3px; padding: 2px; border-top:none; }      
+            .card-title span { font-size: 6px; }
+            .game-card:hover { transform: none; box-shadow: none; border-color: var(--border-color); z-index: 1; }
+            .game-card.mobile-active { transform: scale(1.30); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0,204,68,0.6); z-index: 100; }
             .discord-text { display: none; }
-            .discord-float img { width: 35px; height: 35px; }
+                
+            /* AJUSTE TOP BAR MOBILE - Nome em cima, botoes embaixo */
+            .top-bar { 
+                flex-direction: column !important; 
+                align-items: center !important; 
+                padding: 10px 15px !important; 
+                margin: 0; text-align: center; gap: 10px;
+            }
+            .brand { 
+                width: 100%; text-align: center; 
+                display: block !important; 
+                font-size: 16px !important; 
+                margin-bottom: 5px;
+            }
+            .top-bar-controls { 
+                display: flex; width: 100%; 
+                justify-content: center; align-items: center; 
+                gap: 10px; 
+            }
+            .search-container { flex: 1; width: auto; max-width: none; }
+            .row-header { justify-content: space-between; padding-right: 15px; }
+            .view-all-btn { font-size: 8px; padding: 6px 10px; }
+                
+            .hero-section { height: 400px; min-height: auto; max-height: none; }
+            .hero-bg-media { object-fit: cover; object-position: right center; }
+            .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
+            .hero-content { padding: 0 20px; margin-top: auto; margin-bottom: 40px; }
+            .hero-title { font-size: 24px; }
+        }
+        
+        /* Ocultar chat trigger no Desktop se desejar, mas vamos deixar ele flexível */
+        @media (min-width: 769px) {
+            .chat-trigger-mobile { display: none !important; }
         }
     </style>
 </head>
-<body class="dark-theme">
-
-    <script>
-        // SCRIPT DE ANUNCIO ADSTERRA
-        function dispararAnuncio() {
-            console.log("Sistema: Disparando Anúncio Social Bar...");
-        }
-        window.onload = function() { setTimeout(function() { dispararAnuncio(); }, 10000); };
-    </script>
-
-    <div id="splash-screen"><h1 class="splash-logo">NEO TERMINAL_</h1></div>
-    <div id="loader-overlay"><div class="spinner"></div></div>
+<body>
+    <div id="splash-screen">
+        <h1 class="splash-logo">
+            <span class="initial">N</span><span class="reveal">eo</span>
+            <span class="initial">T</span><span class="reveal">erminal</span>
+            <span class="initial">R</span><span class="reveal">oom</span>
+            <span class="cursor">_</span>
+        </h1>
+    </div>
 
     <a href="https://discord.com/invite/6sqENZGFqB" class="discord-float" target="_blank">
         <div class="discord-text">Junte-se a nós<br><strong>DISCORD</strong></div>
         <img src="assets/imagens-videos/discord.gif?v=3" alt="Discord">
     </a>
 
+    <div id="loader-overlay">
+        <div class="spinner"></div>
+        <div class="loader-text">INICIALIZANDO SISTEMA...</div>
+    </div>
+
     <div id="m3u-modal" class="modal">
         <div class="modal-content">
             <h2><img src="assets/imagens-videos/menu/interrogacao.png" alt="?" style="width: 22px; vertical-align: middle; margin-right: 8px; image-rendering: pixelated;" onerror="this.style.display='none'">SELECIONE O DISCO</h2>
+            <p>Este jogo possui múltiplos discos. Qual você deseja carregar?</p>
             <div id="disc-buttons-container" style="display: flex; flex-direction: column; margin-top: 15px; gap: 8px;"></div>
-        </div>
-    </div>
-
-    <div id="chat-modal-overlay" class="chat-modal-overlay">
-        <div class="chat-window">
-            <button class="close-chat-btn" onclick="closeMobileChat()">X</button>
-            <div class="chat-title">CHAT GLOBAL</div>
-            <div id="terminal-output"></div>
-            
-            <div class="chat-controls">
-                <input id="chat-nick" placeholder="Nick" maxlength="10">
-                <input id="chat-msg" placeholder="Mensagem..." disabled>
-                <button id="emoji-btn" title="Inserir Emoji">😀</button>
-                <button id="send-btn">➤</button>
-                
-                <div id="emoji-picker">
-                    <span class="emoji-item">😀</span> <span class="emoji-item">😂</span>
-                    <span class="emoji-item">😎</span> <span class="emoji-item">😍</span>
-                    <span class="emoji-item">🎮</span> <span class="emoji-item">👾</span>
-                    <span class="emoji-item">💀</span> <span class="emoji-item">🔥</span>
-                    <span class="emoji-item">👍</span> <span class="emoji-item">🚀</span>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -301,14 +348,24 @@
                 <img src="assets/imagens-videos/logo-discord.gif?v=2" onclick="window.scrollTo(0,0);" title="Voltar ao Topo">
             </div>
             <div class="nav-list" id="nav-list"></div>
+            <div class="sidebar-chat" id="chat-container">
+                <button class="close-chat-btn" onclick="closeMobileChat()">X</button>
+                <div style="font-size:10px; color:var(--accent-color); text-align:center; margin-bottom:5px;">CHAT GLOBAL</div>
+                <div id="terminal-output"></div>
+                <div class="chat-controls">
+                    <input id="chat-nick" placeholder="Nick" maxlength="10">
+                    <input id="chat-msg" placeholder="Mensagem..." disabled>
+                    <button id="send-btn">➤</button>
+                </div>
+            </div>
         </nav>
 
         <main class="main-content">
             <header class="top-bar">
-                <div class="brand" onclick="window.scrollTo(0,0)">NEOTERMINALROOM</div>
-                
+                <div class="brand">NEOTERMINALROOM</div>
                 <div class="top-bar-controls">
-                    <div class="chat-trigger-mobile" onclick="openMobileChat()" title="Abrir Chat Global">
+                    
+                    <div class="chat-trigger-mobile" onclick="openMobileChat()">
                         <img src="assets/imagens-videos/imagens do menu/chat.png" alt="Chat">
                     </div>
                     
@@ -326,7 +383,6 @@
                     </div>
                 </div>
             </header>
-            
             <section class="hero-section" id="hero-slider">
                 <div class="hero-indicators" id="hero-indicators"></div>
             </section>
@@ -335,16 +391,25 @@
     </div>
 
 <script type="module">
+    // LÓGICA DA SPLASH SCREEN E CONTROLE DE SCROLL
     document.addEventListener("DOMContentLoaded", () => {
-        setTimeout(() => document.querySelector(".splash-logo").classList.add("animate"), 500);
-        setTimeout(() => document.getElementById("splash-screen").classList.add("fade-out"), 2500);
+        const splash = document.getElementById("splash-screen");
+        const logo = document.querySelector(".splash-logo");
+        
+        document.body.style.overflow = "hidden";
+        setTimeout(() => logo.classList.add("animate"), 500);
+        
+        setTimeout(() => {
+            splash.classList.add("fade-out");
+            document.body.style.overflow = "auto";
+            setTimeout(() => splash.remove(), 800); 
+        }, 3000);
     });
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, push, onChildAdded, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
     const R2_URL = "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/";  
-    const blockRegex = /\.m3u|([._\-\s](cd|disc|disco)\s*0?[2-9])|([._\-\s](cd|disc|disco)\s*1[0-9])/i;
 
     const themeToggle = document.getElementById('theme-toggle');
     if (localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-theme'); themeToggle.checked = true; }
@@ -353,7 +418,11 @@
         else { document.body.classList.remove('dark-theme'); localStorage.setItem('theme', 'light'); }
     });
 
-    const firebaseConfig = { apiKey: "AIzaSyCx_OllbDYkua9BbMOj2oJP5V1UcbxmnbI", databaseURL: "https://neoterminalroom-default-rtdb.firebaseio.com", projectId: "neoterminalroom" };
+    const firebaseConfig = {    
+        apiKey: "AIzaSyCx_OllbDYkua9BbMOj2oJP5V1UcbxmnbI",    
+        databaseURL: "https://neoterminalroom-default-rtdb.firebaseio.com",    
+        projectId: "neoterminalroom"    
+    };
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
     const chatRef = ref(db, 'mensagens');
@@ -361,33 +430,36 @@
     window.startGame = (url) => { triggerLoad(url); };
 
     function triggerLoad(url) {
-        if (typeof dispararAnuncio === "function") { dispararAnuncio(); }
-        document.getElementById('loader-overlay').style.display = 'flex';
+        const loader = document.getElementById('loader-overlay');
+        loader.style.display = 'flex';
         setTimeout(() => { window.location.href = url; }, 1500);
     }
 
-    // LÓGICA DA JANELA DE CHAT
-    window.openMobileChat = () => { document.getElementById('chat-modal-overlay').style.display = 'flex'; };
-    window.closeMobileChat = () => { 
-        document.getElementById('chat-modal-overlay').style.display = 'none'; 
-        document.getElementById('emoji-picker').style.display = 'none'; 
+    window.toggleGrid = (sysId) => {
+        const car = document.getElementById(`carousel-${sysId}`);
+        const btn = document.getElementById(`btn-${sysId}`);
+        const lBtn = document.querySelector(`#section-${sysId} .left-btn`);
+        const rBtn = document.querySelector(`#section-${sysId} .right-btn`);
+        car.classList.toggle('grid-view');
+        if(car.classList.contains('grid-view')) { btn.innerHTML = "⊞ VOLTAR"; if(lBtn) lBtn.style.display = 'none'; if(rBtn) rBtn.style.display = 'none'; } 
+        else { btn.innerHTML = "⊞ VER TODOS"; if(lBtn) lBtn.style.display = 'flex'; if(rBtn) rBtn.style.display = 'flex'; }
     };
-    document.getElementById('chat-modal-overlay').addEventListener('click', (e) => {
-        if (e.target.id === 'chat-modal-overlay') window.closeMobileChat();
-    });
 
-    // LÓGICA DOS EMOJIS
-    document.getElementById('emoji-btn').onclick = () => {
-        const picker = document.getElementById('emoji-picker');
-        picker.style.display = picker.style.display === 'none' || picker.style.display === '' ? 'flex' : 'none';
+    // ABRIR CHAT MOBILE - FUNÇÃO NOVA E CORRIGIDA!
+    window.openMobileChat = () => {
+        const chat = document.getElementById('chat-container');
+        chat.classList.add('chat-modal-mobile');
+        chat.style.display = 'flex';
+        document.body.appendChild(chat); 
     };
-    document.querySelectorAll('.emoji-item').forEach(item => {
-        item.onclick = (e) => {
-            const msgInput = document.getElementById('chat-msg');
-            if(!msgInput.disabled) { msgInput.value += e.target.innerText; }
-            document.getElementById('emoji-picker').style.display = 'none';
-        };
-    });
+
+    window.closeMobileChat = () => {
+        const chat = document.getElementById('chat-container');
+        chat.classList.remove('chat-modal-mobile');
+        chat.style.display = 'none'; 
+        document.getElementById('main-sidebar').appendChild(chat);
+        setTimeout(() => { chat.style.display = 'flex'; }, 100);
+    };
 
     const out = document.getElementById("terminal-output");
     const nickInput = document.getElementById("chat-nick");
@@ -399,7 +471,8 @@
 
     onChildAdded(chatRef, (snap) => {
         const d = snap.val();
-        out.innerHTML += `<div><strong style="color:#fff;">[${d.user}]</strong>: <span style="color:#00ff44;">${d.text}</span></div>`;
+        const timeDisplay = d.time ? `<span class="chat-time">[${d.time}]</span>` : '';
+        out.innerHTML += `<div>${timeDisplay}<strong style="color:var(--text-color)">${d.user}:</strong> ${d.text}</div>`;
         out.scrollTop = out.scrollHeight;
     });
 
@@ -408,133 +481,206 @@
         const text = msgInput.value.trim();
         if(!user) { alert("Digite um Nick primeiro!"); return; }
         if(!text) return;
+        const now = new Date();
+        const timeStr = now.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: '2-digit' }) + ' ' + now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
         localStorage.setItem("neo_nick", user);
-        push(chatRef, {user, text, timestamp: serverTimestamp()});
+        push(chatRef, {user, text, time: timeStr});
         msgInput.value = "";
     }
     sendBtn.onclick = sendMessage;
     msgInput.onkeydown = (e) => { if(e.key === "Enter") sendMessage(); }
 
-    const topGames = [
-        { nome: 'Super Mario World', sys: 'snes', rom: 'systems/snes/roms/super_mario_world_(usa).zip', img: 'assets/wallpapers_hero/super_mario_world.jpg' },
-        { nome: 'Sonic the Hedgehog', sys: 'megadrive', rom: 'systems/megadrive/roms/sonic_the_hedgehog_(usa,_europe).md', img: 'assets/wallpapers_hero/sonic-the-hedgehog.jpg' },
-        { nome: 'Resident Evil 2', sys: 'ps1', rom: 'systems/ps1/roms/resident_evil_2.bin', img: 'assets/wallpapers_hero/resident-evil-2.jpg' }
+    const coreMap = { 'nes': 'nes', 'snes': 'snes', 'gba': 'gba', 'n64': 'n64', 'megadrive': 'segaMD', 'ps1': 'psx' };
+
+    const top10Games = [
+        { id: 'super_mario_world', nome: 'Super Mario World', sysId: 'snes', path: 'systems/snes/', rom: 'roms/super_mario_world_(usa).zip', cats: 'Aventura <span>•</span> Plataforma <span>•</span> SNES' },
+        { id: 'sonic-the-hedgehog', nome: 'Sonic the Hedgehog', sysId: 'megadrive', path: 'systems/megadrive/', rom: 'roms/sonic_the_hedgehog_(usa,_europe).md', cats: 'Ação <span>•</span> Velocidade <span>•</span> Mega Drive' },
+        { id: 'street_fighter_ii', nome: 'Street Fighter II', sysId: 'snes', path: 'systems/snes/', rom: 'roms/street_fighter_ii_(usa).zip', cats: 'Luta <span>•</span> Arcade <span>•</span> SNES' },
+        { id: 'international_super_star_soccer_deluxe_-_futebol_brasileiro_2008', nome: 'Futebol Brasileiro (ISSD)', sysId: 'snes', path: 'systems/snes/', rom: 'roms/international_super_star_soccer_deluxe_-_futebol_brasileiro_2008.zip', cats: 'Esporte <span>•</span> Futebol <span>•</span> SNES' },
+        { id: 'pokemon-fire-red', nome: 'Pokémon FireRed', sysId: 'gba', path: 'systems/gba/', rom: 'roms/pokemon-fire-red.gba', cats: 'RPG <span>•</span> Captura <span>•</span> GBA' },
+        { id: 'top_gear', nome: 'Top Gear', sysId: 'snes', path: 'systems/snes/', rom: 'roms/top_gear_(usa).zip', cats: 'Corrida <span>•</span> Clássico <span>•</span> SNES' },
+        { id: 'donkey_kong_country', nome: 'Donkey Kong Country', sysId: 'snes', path: 'systems/snes/', rom: 'roms/donkey_kong_country_(usa).zip', cats: 'Plataforma <span>•</span> Macacos <span>•</span> SNES' },
+        { id: 'legend_of_zelda,_the_-_a_link_to_the_past', nome: 'Zelda: A Link to the Past', sysId: 'snes', path: 'systems/snes/', rom: 'roms/legend_of_zelda,_the_-_a_link_to_the_past_(usa).zip', cats: 'RPG <span>•</span> Aventura <span>•</span> SNES' },
+        { id: 'streets-of-rage-2', nome: 'Streets of Rage 2', sysId: 'megadrive', path: 'systems/megadrive/', rom: 'roms/streets_of_rage_2_(usa).md', cats: 'Beat \'em up <span>•</span> Luta <span>•</span> Mega Drive' },
+        { id: 'mega_man_x', nome: 'Mega Man X', sysId: 'snes', path: 'systems/snes/', rom: 'roms/mega_man_x_(usa).zip', cats: 'Ação <span>•</span> Tiro <span>•</span> SNES' }
     ];
 
-    const systems = [
-        { id: 'nes', name: 'NES', path:'systems/nes/', icon: 'assets/imagens-videos/imagens do menu/nitendinho.png'},
-        { id: 'snes', name: 'SNES', path:'systems/snes/', icon: 'assets/imagens-videos/imagens do menu/supernitendo.png'},
-        { id: 'n64', name: 'N64', path: 'systems/n64/', icon: 'assets/imagens-videos/imagens do menu/n64.png'},
-        { id: 'gba', name: 'GBA', path: 'systems/gba/', icon: 'assets/imagens-videos/imagens do menu/gba.png'},
-        { id: 'megadrive', name: 'MEGA DRIVE', path: 'systems/megadrive/', icon: 'assets/imagens-videos/imagens do menu/megadrive.png'},
-        { id: 'ps1', name: 'PS1', path: 'systems/ps1/', icon: 'assets/imagens-videos/imagens do menu/ps1.png'}
-    ];
+    const heroSlider = document.getElementById('hero-slider');
+    const heroIndicators = document.getElementById('hero-indicators');
+    let currentHeroIndex = 0;
+    let heroTimer;
 
-    let indexData = [];
-    const catalog = document.getElementById("catalog-area");
-    const navList = document.getElementById("nav-list");
-
-    const hero = document.getElementById('hero-slider');
-    topGames.forEach((g, i) => {
+    top10Games.forEach((game, index) => {
         const slide = document.createElement('div');
-        slide.className = `hero-slide ${i === 0 ? 'active' : ''}`;
-        slide.innerHTML = `<img src="${g.img}" class="hero-bg-media"><div class="hero-overlay"></div><div class="hero-content"><h1 class="hero-title">${g.nome}</h1><button class="hero-play-btn selectable-item" onclick="window.startGame('player-universal.html?game=${encodeURIComponent(R2_URL+g.rom)}&core=${g.sys === 'ps1' ? 'psx' : g.sys}')">JOGAR AGORA</button></div>`;
-        hero.appendChild(slide);
-        const dot = document.createElement('div'); dot.className = `indicator ${i === 0 ? 'active' : ''}`;
-        dot.onclick = () => { document.querySelectorAll('.hero-slide').forEach(s => s.classList.remove('active')); slide.classList.add('active'); };
-        document.getElementById('hero-indicators').appendChild(dot);
+        slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
+        slide.id = `hero-slide-${index}`;
+            
+        const coreToUse = coreMap[game.sysId] || 'snes';
+        const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + game.path + game.rom)}&core=${coreToUse}`;
+        const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
+
+        slide.innerHTML = `
+            <img src="${wallpaperPath}" class="hero-bg-blur" alt="Background Preenchimento">
+            <img src="${wallpaperPath}" class="hero-bg-media" alt="Wallpaper HD">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">${game.nome}</h1>
+                <div class="hero-categories">${game.cats}</div>
+                <button class="hero-play-btn selectable-item" onclick="window.startGame('${playUrl}')">
+                    <span>▶</span> JOGAR
+                </button>
+            </div>
+        `;
+        heroSlider.appendChild(slide);
+
+        const dot = document.createElement('div');
+        dot.className = `indicator ${index === 0 ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(index);
+        heroIndicators.appendChild(dot);
     });
 
-    setInterval(() => {
-        const slides = document.querySelectorAll('.hero-slide');
-        const dots = document.querySelectorAll('.indicator');
-        let active = 0;
-        slides.forEach((s,i) => { if(s.classList.contains('active')) active = i; });
-        slides[active].classList.remove('active'); dots[active].classList.remove('active');
-        const next = (active + 1) % slides.length;
-        slides[next].classList.add('active'); dots[next].classList.add('active');
-    }, 5000);
+    function goToSlide(index) {
+        document.querySelectorAll('.hero-slide').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.indicator').forEach(d => d.classList.remove('active'));
+        document.getElementById(`hero-slide-${index}`).classList.add('active');
+        document.querySelectorAll('.indicator')[index].classList.add('active');
+        currentHeroIndex = index;
+        resetHeroTimer();
+    }
 
-    // ==========================================
-    // SISTEMA DE GIFS: LOOP 1.5s E LIMPEZA MOBILE
-    // ==========================================
-    let globalHoverTimeout;
-    let globalGifInterval;
-    let activeCardMobile = null;
+    function nextSlide() { goToSlide((currentHeroIndex + 1) % top10Games.length); }
+    function resetHeroTimer() { clearInterval(heroTimer); heroTimer = setInterval(nextSlide, 5000); }
+    resetHeroTimer();
 
-    const resetGif = (cardElement) => {
-        if(!cardElement) return;
-        const s = cardElement.querySelector('.static-thumb');
-        const a = cardElement.querySelector('.active-gif');
-        if(s) s.style.opacity = '1'; 
-        if(a) { a.style.opacity = '0'; setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 200); }
-    };
+    const systems = [
+        { id: 'nes', name: 'NINTENDINHO', icon: 'assets/imagens-videos/imagens do menu/nitendinho.png', path:'systems/nes/'},
+        { id: 'snes', name: 'SUPER NINTENDO', icon: 'assets/imagens-videos/imagens do menu/supernitendo.png', path:'systems/snes/'},
+        { id: 'n64', name: 'NINTENDO 64', icon: 'assets/imagens-videos/imagens do menu/n64.png', path: 'systems/n64/' },
+        { id: 'gba', name: 'GAME BOY ADV', icon: 'assets/imagens-videos/imagens do menu/gba.png', path: 'systems/gba/' },
+        { id: 'megadrive', name: 'MEGA DRIVE', icon: 'assets/imagens-videos/imagens do menu/megadrive.png', path: 'systems/megadrive/' },
+        { id: 'ps1', name: 'PLAYSTATION 1', icon: 'assets/imagens-videos/imagens do menu/ps1.png', path: 'systems/ps1/' }
+    ];
 
-    const playGifWithDelay = (cardElement) => {
-        // Se clicar em outro card no mobile, limpa o anterior na hora
-        if (activeCardMobile && activeCardMobile !== cardElement) {
-            activeCardMobile.classList.remove('mobile-active');
-            resetGif(activeCardMobile);
-        }
-        activeCardMobile = cardElement;
-
-        const s = cardElement.querySelector('.static-thumb');
-        const a = cardElement.querySelector('.active-gif');
-        
-        clearTimeout(globalHoverTimeout);   
-        clearInterval(globalGifInterval);
-        
-        if (!a || !a.dataset.gif) return; 
-        
-        const showCoverAndWait = () => { 
-            s.style.opacity = '1'; a.style.opacity = '0'; 
-            setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 200); 
-        };
-        const showGifAndWait = () => { 
-            a.src = a.dataset.gif; a.style.display = 'block'; 
-            setTimeout(() => { s.style.opacity = '0'; a.style.opacity = '1'; }, 50); 
-        };
-
-        // Inicia rápido e repete o loop a cada 1.5s cravado
-        globalHoverTimeout = setTimeout(() => { 
-            showGifAndWait();
-            globalGifInterval = setInterval(() => {
-                showCoverAndWait();
-                setTimeout(showGifAndWait, 300); // 300ms na capa, o resto no gif
-            }, 1500); 
-        }, 300);   
-    };
+    const catalog = document.getElementById("catalog-area");
+    const nav = document.getElementById("nav-list");
+    let indexData = [];  
+    let fetchPromises = [];
 
     systems.forEach(sys => {
-        const navItem = document.createElement("div"); navItem.className = "nav-item";
-        navItem.innerHTML = `<img src="${sys.icon}"><span class="nav-text">${sys.name}</span>`;
-        navItem.onclick = () => window.scrollTo({ top: document.getElementById(`sec-${sys.id}`).offsetTop - 80, behavior: 'smooth' });
-        navList.appendChild(navItem);
+        const item = document.createElement("div");
+        item.className = "nav-item";
+        item.innerHTML = `<img src="${sys.icon}"><span class="nav-text">${sys.name}</span>`;
+        item.onclick = () => {
+            const section = document.getElementById(`section-${sys.id}`);
+            if(section) window.scrollTo({top: section.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth'});
+        };
+        nav.appendChild(item);
 
-        const wrap = document.createElement("div"); wrap.id = `sec-${sys.id}`; wrap.className="row-wrapper";
-        wrap.innerHTML = `<div class="row-header"><span class="row-title-text">${sys.name}</span></div><div class="game-carousel" id="car-${sys.id}"></div>`;
-        catalog.appendChild(wrap);
+        const wrapper = document.createElement("div");
+        wrapper.className = "row-wrapper";
+        wrapper.id = `section-${sys.id}`;
+        wrapper.innerHTML = `
+            <div class="row-header">
+                <span class="row-title-text">${sys.name}</span>
+                <button class="view-all-btn selectable-item" id="btn-${sys.id}" onclick="toggleGrid('${sys.id}')">⊞ VER TODOS</button>
+            </div>
+            <div class="row-container">
+                <button class="scroll-btn left-btn" onclick="document.getElementById('carousel-${sys.id}').scrollBy(-300,0)">❮</button>
+                <div class="game-carousel" id="carousel-${sys.id}"></div>
+                <button class="scroll-btn right-btn" onclick="document.getElementById('carousel-${sys.id}').scrollBy(300,0)">❯</button>
+            </div>
+        `;
+        catalog.appendChild(wrapper);
 
-        fetch(`${sys.path}games.json?v=${Date.now()}`).then(r => r.json()).then(games => {
-            const car = document.getElementById(`car-${sys.id}`);
+        let p = fetch(`${sys.path}games.json?v=${new Date().getTime()}`).then(r => r.json()).then(games => {
+            const car = document.getElementById(`carousel-${sys.id}`);
             games.forEach(g => {
-                if (sys.id === 'ps1' && blockRegex.test((g.rom + ' ' + g.nome).toLowerCase())) return;
-                indexData.push({...g, sysId: sys.id, sysPath: sys.path});
                 
-                const card = document.createElement("div"); card.className = "game-card selectable-item";
-                const capa = g.capa ? g.capa.split('/').pop() : '';
-                const gifNome = g.preview ? g.preview.split('/').pop() : '';
-                const imgPath = capa ? `${R2_URL}${sys.path}capas/${capa}` : '';
+                // === O FILTRO DEFINITIVO DO PS1 MULTI-DISCO ===
+                if (sys.id === 'ps1') {
+                    const textToSearch = ((g.rom || '') + ' ' + (g.nome || '')).toLowerCase();
+                    const multiDiscRegex = /\.m3u|(cd|disc|disco)\s*0?[1-9]/;
+                    if (multiDiscRegex.test(textToSearch)) {
+                        return; 
+                    }
+                }
+
+                indexData.push({...g, sysPath: sys.path, sysName: sys.name, sysId: sys.id});
+                const card = document.createElement("div");
+                card.className = "game-card selectable-item";
+                
+                let capaNome = g.capa ? g.capa.split('/').pop() : '';
+                let gifNome = g.preview ? g.preview.split('/').pop() : '';
+
+                const imgPath = capaNome ? `${R2_URL}${sys.path}capas/${capaNome}` : '';
                 const gifPath = gifNome ? `${R2_URL}${sys.path}previews/${gifNome}` : '';
-                const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${sys.id === 'ps1' ? 'psx' : sys.id}`;
-                
+
+                const coreToUse = coreMap[sys.id] || 'snes';   
+                const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
+
+                card.dataset.url = playUrl;
+
                 card.innerHTML = `
                     <div class="card-media">
                         <img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';" class="static-thumb" loading="lazy">
                         <img src="" data-gif="${gifPath}" class="active-gif">
                     </div>
-                    <div class="card-title"><span>${g.nome}</span></div>
+                    <div class="card-title">
+                        <span>${g.nome}</span>
+                    </div>
                 `;
+                    
+                // LÓGICA CORRIGIDA DOS GIFS
+                const playGifWithDelay = (cardElement) => {
+                    const s = cardElement.querySelector('.static-thumb');
+                    const a = cardElement.querySelector('.active-gif');
+                    
+                    // NO MOBILE: MATA OS OUTROS GIFS ATIVOS IMEDIATAMENTE
+                    if (window.innerWidth <= 768) {
+                        document.querySelectorAll('.game-card.mobile-active').forEach(c => {
+                            if (c !== cardElement) {
+                                c.classList.remove('mobile-active');
+                                const st = c.querySelector('.static-thumb');
+                                const ac = c.querySelector('.active-gif');
+                                if (st) st.style.opacity = '1';
+                                if (ac) { ac.style.opacity = '0'; ac.style.display = 'none'; }
+                                clearTimeout(c.hoverTimeout);
+                                clearInterval(c.gifInterval);
+                            }
+                        });
+                    }
+
+                    clearTimeout(cardElement.hoverTimeout);   
+                    clearInterval(cardElement.gifInterval);
+                    if (!a.dataset.gif) return; 
+                    
+                    const showCoverAndWait = () => { 
+                        s.style.opacity = '1'; a.style.opacity = '0'; 
+                        setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 200); 
+                    };
+                    const showGifAndWait = () => { 
+                        a.src = a.dataset.gif; a.style.display = 'block'; 
+                        setTimeout(() => { s.style.opacity = '0'; a.style.opacity = '1'; }, 50); 
+                    };
+
+                    // LOOP DE 1.5 SEGUNDOS
+                    cardElement.hoverTimeout = setTimeout(() => { 
+                        showGifAndWait();
+                        cardElement.gifInterval = setInterval(() => {
+                            showCoverAndWait();
+                            setTimeout(showGifAndWait, 500); 
+                        }, 1500); 
+                    }, 500);   
+                };
+
+                const resetGif = (cardElement) => {
+                    clearTimeout(cardElement.hoverTimeout);   
+                    clearInterval(cardElement.gifInterval);
+                    const s = cardElement.querySelector('.static-thumb');
+                    const a = cardElement.querySelector('.active-gif');
+                    if(s) s.style.opacity = '1'; 
+                    if(a) { a.style.opacity = '0'; setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 200); }
+                };
 
                 if (window.innerWidth <= 768) {
                     card.onclick = (e) => {
@@ -544,36 +690,114 @@
                     };
                 } else {
                     card.onmouseenter = () => playGifWithDelay(card);
-                    card.onmouseleave = () => {
-                        clearTimeout(globalHoverTimeout);
-                        clearInterval(globalGifInterval);
-                        resetGif(card);
-                    };
+                    card.onmouseleave = () => resetGif(card);
                     card.onclick = () => window.startGame(playUrl);
                 }
                 car.appendChild(card);
             });
-        });
+        }).catch(err => { console.error("Erro no JSON:", sys.id); });
+        fetchPromises.push(p);
     });
 
-    const sIn = document.getElementById('global-search');
-    const sRes = document.getElementById('search-results');
-    sIn.oninput = (e) => {
-        const val = e.target.value.toLowerCase();
-        sRes.innerHTML = '';
-        if(!val) { sRes.style.display = 'none'; return; }
-        const hits = indexData.filter(g => g.nome.toLowerCase().includes(val) && (g.sysId !== 'ps1' || !blockRegex.test((g.rom + g.nome).toLowerCase()))).slice(0,10);
-        if(hits.length) {
-            sRes.style.display = 'flex';
-            hits.forEach(h => {
-                const div = document.createElement('div'); div.className = 'search-item selectable-item';
-                div.innerHTML = `<span>${h.nome} [${h.sysId.toUpperCase()}]</span>`;
-                div.onclick = () => window.startGame(`player-universal.html?game=${encodeURIComponent(R2_URL+h.sysPath+h.rom)}&core=${h.sysId === 'ps1' ? 'psx' : h.sysId}`);
-                sRes.appendChild(div);
+    const searchInput = document.getElementById('global-search');
+    const searchResults = document.getElementById('search-results');
+
+    searchInput.addEventListener('input', (e) => {
+        const val = e.target.value.toLowerCase().replace('#', '').trim();
+        searchResults.innerHTML = '';  
+        if(!val) { searchResults.style.display = 'none'; return; }
+
+        const hits = indexData.filter(g => {
+            if (!g.nome || !g.nome.toLowerCase().includes(val)) return false;
+            
+            if (g.sysId === 'ps1') {
+                const textToSearch = ((g.rom || '') + ' ' + (g.nome || '')).toLowerCase();
+                if (/\.m3u|(cd|disc|disco)\s*0?[1-9]/.test(textToSearch)) {
+                    return false;
+                }
+            }
+            return true;
+        });
+
+        if(hits.length > 0) {
+            searchResults.style.display = 'flex';
+            hits.slice(0, 10).forEach(h => {
+                const div = document.createElement('div');
+                div.className = 'search-item selectable-item';   
+                 
+                let capaNomeBusca = h.capa ? h.capa.split('/').pop() : '';
+                const imgPath = capaNomeBusca ? `${R2_URL}${h.sysPath}capas/${capaNomeBusca}` : '';
+
+                div.innerHTML = `<img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';"><span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>`;
+                    
+                const coreToUse = coreMap[h.sysId] || 'snes';
+                const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + h.sysPath + h.rom)}&core=${coreToUse}`;
+                div.dataset.url = playUrl;
+                div.onclick = () => window.startGame(playUrl);
+                searchResults.appendChild(div);
             });
+        } else { searchResults.style.display = 'none'; }
+    });
+
+    document.addEventListener('click', (e) => { if (!e.target.closest('.search-container')) searchResults.style.display = 'none'; });
+
+    // GAMEPAD
+    let selectableItems = [];
+    let currentFocusIndex = -1;
+    let gamepadConnected = false;
+    let axisCooldown = false;
+
+    function updateGamepadFocusList() {
+        selectableItems = Array.from(document.querySelectorAll('.selectable-item')).filter(el => {
+            if (el.classList.contains('hero-play-btn')) return el.closest('.hero-slide').classList.contains('active');
+            const rect = el.getBoundingClientRect();
+            return rect.width > 0 && window.getComputedStyle(el).display !== 'none';
+        });
+    }
+
+    window.addEventListener("gamepadconnected", (e) => {
+        gamepadConnected = true;
+        updateGamepadFocusList();
+        if(currentFocusIndex === -1 && selectableItems.length > 0) focusItem(0);
+        pollGamepad();
+    });
+    window.addEventListener("gamepaddisconnected", () => { gamepadConnected = false; });
+
+    function focusItem(index) {
+        if(selectableItems.length === 0 || currentFocusIndex >= selectableItems.length) return;
+        if(currentFocusIndex >= 0) {
+            selectableItems[currentFocusIndex].classList.remove('gamepad-focus');
+            if(selectableItems[currentFocusIndex].classList.contains('game-card')) selectableItems[currentFocusIndex].dispatchEvent(new Event('mouseleave'));
         }
-    };
-    document.addEventListener('click', (e) => { if (!e.target.closest('.search-container')) sRes.style.display = 'none'; });
+        currentFocusIndex = index;
+        const target = selectableItems[currentFocusIndex];
+        target.classList.add('gamepad-focus');
+        target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+        if(target.classList.contains('game-card')) target.dispatchEvent(new Event('mouseenter'));
+    }
+
+    function pollGamepad() {
+        if (!gamepadConnected) return;
+        const gp = navigator.getGamepads()[0];
+        if (gp) {
+            const dpadUp = gp.buttons[12]?.pressed; const dpadDown = gp.buttons[13]?.pressed;
+            const dpadLeft = gp.buttons[14]?.pressed; const dpadRight = gp.buttons[15]?.pressed;
+            const confirmBtn = gp.buttons[0]?.pressed;  
+
+            if(!axisCooldown) {
+                let moved = false;
+                if (dpadLeft) { focusItem(Math.max(0, currentFocusIndex - 1)); moved = true; }
+                else if (dpadRight) { focusItem(Math.min(selectableItems.length - 1, currentFocusIndex + 1)); moved = true; }
+                
+                if(moved) { axisCooldown = true; setTimeout(() => { axisCooldown = false; }, 200); }
+            }
+            if (confirmBtn && !window.confirmBtnPressed) {
+                window.confirmBtnPressed = true;   
+                if(currentFocusIndex >= 0 && selectableItems[currentFocusIndex]) selectableItems[currentFocusIndex].click();
+            } else if (!confirmBtn) { window.confirmBtnPressed = false; }
+        }
+        requestAnimationFrame(pollGamepad);
+    }
 </script>
 </body>
 </html>
