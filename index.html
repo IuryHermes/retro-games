@@ -355,7 +355,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-    // URL DAS ROMS NO R2
     const R2_URL = "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/";  
 
     const themeToggle = document.getElementById('theme-toggle');
@@ -636,15 +635,11 @@
                 const card = document.createElement("div");
                 card.className = "game-card selectable-item";
                 
-                // --- A SOLUÇÃO: ---
-                // Agora que o fix_json.py já ajustou os nomes no JSON, nós buscamos a imagem
-                // DIRETO DO SEU GITHUB PAGES, usando o caminho relativo.
-                const imgPath = g.capa ? `${sys.path}capas/${g.capa}` : '';
-                const gifPath = g.preview ? `${sys.path}previews/${g.preview}` : '';
+                // O GRANDE ACERTO ESTÁ AQUI: As imagens estão no R2 e agora com os nomes corretos do games.json
+                const imgPath = g.capa ? `${R2_URL}${sys.path}capas/${g.capa}` : '';
+                const gifPath = g.preview ? `${R2_URL}${sys.path}previews/${g.preview}` : '';
 
                 const coreToUse = coreMap[sys.id] || 'snes';   
-                
-                // O R2_URL fica SÓ NA ROM!
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
 
                 card.dataset.url = playUrl;
@@ -721,8 +716,8 @@
                 const div = document.createElement('div');
                 div.className = 'search-item selectable-item';   
                  
-                // SEM R2_URL AQUI TAMBÉM
-                const imgPath = h.capa ? `${h.sysPath}capas/${h.capa}` : '';
+                // NA BUSCA A MESMA COISA: Imagem no R2!
+                const imgPath = h.capa ? `${R2_URL}${h.sysPath}capas/${h.capa}` : '';
 
                 div.innerHTML = `
                     <img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';">   
