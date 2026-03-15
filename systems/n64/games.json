@@ -3,7 +3,7 @@
         "nome": "007 Goldeneye",
         "rom": "roms/007_goldeneye.z64",
         "capa": "007_goldeneye.jpg",
-        "preview": ""
+        "preview": "007_goldeneye.z64.gif"
     },
     {
         "nome": "Automobili Lamborghini",
@@ -21,7 +21,7 @@
         "nome": "Cruisn Exotica",
         "rom": "roms/cruisn_exotica.z64",
         "capa": "cruisn_exotica.jpg",
-        "preview": ""
+        "preview": "cruisn_exotica.z64.gif"
     },
     {
         "nome": "Diddy Kong Racing",
@@ -33,7 +33,7 @@
         "nome": "Donald Duck Goin Quackers",
         "rom": "roms/donald_duck_goin_quackers.z64",
         "capa": "donald_duck_goin_quackers.jpg",
-        "preview": ""
+        "preview": "donald_duck_goin_quackers.z64.gif"
     },
     {
         "nome": "Doom 64",
@@ -51,7 +51,7 @@
         "nome": "Gex 3 Deep Cover Gecko",
         "rom": "roms/gex_3_deep_cover_gecko.z64",
         "capa": "gex_3_deep_cover_gecko.jpg",
-        "preview": ""
+        "preview": "gex_3_deep_cover_gecko.z64.gif"
     },
     {
         "nome": "Jet Force Gemini",
@@ -63,7 +63,7 @@
         "nome": "Mario Kart 64",
         "rom": "roms/mario_kart_64.v64",
         "capa": "mario_kart_64.png",
-        "preview": ""
+        "preview": "mario_kart_64.v64.gif"
     },
     {
         "nome": "Paper Mario",
@@ -87,7 +87,7 @@
         "nome": "Shadow Man",
         "rom": "roms/shadow_man.v64",
         "capa": "shadow_man.png",
-        "preview": ""
+        "preview": "shadow_man.v64.gif"
     },
     {
         "nome": "South Park",
@@ -117,24 +117,24 @@
         "nome": "The Legend Of Zelda Majoras Mask",
         "rom": "roms/the_legend_of_zelda_-_majoras_mask.z64",
         "capa": "the_legend_of_zelda_-_majoras_mask.jpg",
-        "preview": ""
+        "preview": "the_legend_of_zelda_-_majoras_mask.z64.gif"
     },
     {
         "nome": "The Legend Of Zelda Ocarina Of Time",
         "rom": "roms/the_legend_of_zelda_-_ocarina_of_time.z64",
         "capa": "the_legend_of_zelda_-_ocarina_of_time.jpg",
-        "preview": ""
+        "preview": "the_legend_of_zelda_-_ocarina_of_time.z64.gif"
     },
     {
         "nome": "Turok 2 Seeds Of Evil",
         "rom": "roms/turok_2_-_seeds_of_evil.z64",
         "capa": "turok_2_-_seeds_of_evil.jpg",
-        "preview": ""
+        "preview": "turok_2_-_seeds_of_evil.z64.gif"
     },
     {
         "nome": "Turok 3 Shadow Of Oblivion",
         "rom": "roms/turok_3_-_shadow_of_oblivion.z64",
         "capa": "turok_3_-_shadow_of_oblivion.jpg",
-        "preview": ""
+        "preview": "turok_3_-_shadow_of_oblivion.z64.gif"
     }
 ]

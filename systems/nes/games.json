@@ -650,7 +650,7 @@
     {
         "nome": "Lode Runner",
         "rom": "roms/lode_runner_(usa).nes",
-        "capa": "assets/capas/nes/lode_runner_(usa).jpg",
+        "capa": "mario-runner.jpg",
         "preview": "lode-runner-usa.gif"
     },
     {
@@ -908,8 +908,8 @@
     {
         "nome": "Roto Runner",
         "rom": "roms/roto_runner_(load_runner_hack).nes",
-        "capa": "roto-runner-load-runner-hack.jpg",
-        "preview": "roto-runner-load-runner-hack.gif"
+        "capa": "mario-runner.jpg",
+        "preview": "mario-runner.gif"
     },
     {
         "nome": "Rygar",
@@ -920,7 +920,7 @@
     {
         "nome": "Saint Seiya Ougon Densetsu Kanketsu Hen",
         "rom": "roms/saint_seiya_-_ougon_densetsu_kanketsu_hen.nes",
-        "capa": "assets/capas/nes/saint_seiya_-_ougon_densetsu_kanketsu_hen.jpg",
+        "capa": "tiny-toon-adventures-usa.jpg",
         "preview": "saint-seiya---ougon-densetsu-kanketsu-hen.gif"
     },
     {
@@ -1154,13 +1154,13 @@
     {
         "nome": "Track & Field",
         "rom": "roms/track_&_field_(usa).nes",
-        "capa": "assets/capas/nes/track_&_field_(usa).jpg",
+        "capa": "time-lord-usa.jpg",
         "preview": "track--field-usa.gif"
     },
     {
         "nome": "Track & Field Ii",
         "rom": "roms/track_&_field_ii_(usa).nes",
-        "capa": "assets/capas/nes/track_&_field_ii_(usa).jpg",
+        "capa": "time-lord-usa.jpg",
         "preview": "track--field-ii-usa.gif"
     },
     {

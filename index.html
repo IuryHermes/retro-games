@@ -383,62 +383,37 @@
                 .then(response => response.text())
                 .then(text => {
                     const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0 && !l.startsWith('#'));
-                        
                     const discContainer = document.getElementById('disc-buttons-container');
                     discContainer.innerHTML = '';   
                         
                     if (lines.length > 0) {
                         lines.forEach((line, index) => {
                             let discFile = line;
-                            if (discFile.endsWith('.cue')) {
-                                discFile = discFile.replace('.cue', '.bin');
-                            }
-                                
+                            if (discFile.endsWith('.cue')) { discFile = discFile.replace('.cue', '.bin'); }
                             const basePath = baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1);
                             const finalUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(basePath + discFile)}&core=${coreParam}`;
                                 
                             const btn = document.createElement('button');
                             btn.className = 'disc-btn selectable-item';   
                             btn.innerText = `INICIAR DISCO ${index + 1}`;
-                            btn.onclick = () => {
-                                document.getElementById('m3u-modal').style.display = 'none';
-                                triggerLoad(finalUrl);
-                            };
+                            btn.onclick = () => { document.getElementById('m3u-modal').style.display = 'none'; triggerLoad(finalUrl); };
                             discContainer.appendChild(btn);
                         });
                             
                         const cancelBtn = document.createElement('button');
                         cancelBtn.className = 'disc-btn cancel-btn selectable-item';
                         cancelBtn.innerText = 'CANCELAR';
-                        cancelBtn.onclick = () => {
-                            document.getElementById('m3u-modal').style.display = 'none';
-                            updateGamepadFocusList();   
-                        };
+                        cancelBtn.onclick = () => { document.getElementById('m3u-modal').style.display = 'none'; updateGamepadFocusList(); };
                         discContainer.appendChild(cancelBtn);
 
                         const modal = document.getElementById('m3u-modal');
                         modal.style.display = 'flex';
                             
-                        setTimeout(() => {   
-                            updateGamepadFocusList();
-                            const firstBtn = discContainer.querySelector('.disc-btn');
-                            if(firstBtn) {
-                                currentFocusIndex = selectableItems.indexOf(firstBtn);
-                                focusItem(currentFocusIndex);
-                            }
-                        }, 100);
-
-                    } else {
-                        triggerLoad(url);   
-                    }
+                        setTimeout(() => { updateGamepadFocusList(); const firstBtn = discContainer.querySelector('.disc-btn'); if(firstBtn) { currentFocusIndex = selectableItems.indexOf(firstBtn); focusItem(currentFocusIndex); } }, 100);
+                    } else { triggerLoad(url); }
                 })
-                .catch(err => {
-                    console.error("Erro ao ler M3U", err);
-                    triggerLoad(url);
-                });
-        } else {
-            triggerLoad(url);
-        }
+                .catch(err => { console.error("Erro M3U", err); triggerLoad(url); });
+        } else { triggerLoad(url); }
     };
 
     function triggerLoad(url) {
@@ -452,25 +427,12 @@
         const btn = document.getElementById(`btn-${sysId}`);
         const lBtn = document.querySelector(`#section-${sysId} .left-btn`);
         const rBtn = document.querySelector(`#section-${sysId} .right-btn`);
-            
         car.classList.toggle('grid-view');
-            
-        if(car.classList.contains('grid-view')) {
-            btn.innerHTML = "⊞ VOLTAR";
-            if(lBtn) lBtn.style.display = 'none';
-            if(rBtn) rBtn.style.display = 'none';
-        } else {
-            btn.innerHTML = "⊞ VER TODOS";
-            if(lBtn) lBtn.style.display = 'flex';
-            if(rBtn) rBtn.style.display = 'flex';
-        }
+        if(car.classList.contains('grid-view')) { btn.innerHTML = "⊞ VOLTAR"; if(lBtn) lBtn.style.display = 'none'; if(rBtn) rBtn.style.display = 'none'; } 
+        else { btn.innerHTML = "⊞ VER TODOS"; if(lBtn) lBtn.style.display = 'flex'; if(rBtn) rBtn.style.display = 'flex'; }
     };
 
-    window.closeMobileChat = () => {
-        const chat = document.getElementById('chat-container');
-        chat.classList.remove('chat-modal-mobile');
-        document.getElementById('main-sidebar').appendChild(chat);
-    };
+    window.closeMobileChat = () => { const chat = document.getElementById('chat-container'); chat.classList.remove('chat-modal-mobile'); document.getElementById('main-sidebar').appendChild(chat); };
 
     const out = document.getElementById("terminal-output");
     const nickInput = document.getElementById("chat-nick");
@@ -553,28 +515,14 @@
     function goToSlide(index) {
         document.querySelectorAll('.hero-slide').forEach(s => s.classList.remove('active'));
         document.querySelectorAll('.indicator').forEach(d => d.classList.remove('active'));
-            
         document.getElementById(`hero-slide-${index}`).classList.add('active');
         document.querySelectorAll('.indicator')[index].classList.add('active');
-            
         currentHeroIndex = index;
         resetHeroTimer();
-
-        const wasHeroFocused = selectableItems[currentFocusIndex] && selectableItems[currentFocusIndex].classList.contains('hero-play-btn');
-        updateGamepadFocusList();
-        if (wasHeroFocused) {
-            const newIndex = selectableItems.findIndex(el => el.classList.contains('hero-play-btn') && el.closest('.hero-slide.active'));
-            if (newIndex !== -1) { currentFocusIndex = newIndex; selectableItems[currentFocusIndex].classList.add('gamepad-focus'); }
-        }
     }
 
     function nextSlide() { goToSlide((currentHeroIndex + 1) % top10Games.length); }
-    function prevSlide() { goToSlide((currentHeroIndex - 1 + top10Games.length) % top10Games.length); }
-
-    function resetHeroTimer() {
-        clearInterval(heroTimer);
-        heroTimer = setInterval(nextSlide, 5000);   
-    }
+    function resetHeroTimer() { clearInterval(heroTimer); heroTimer = setInterval(nextSlide, 5000); }
     resetHeroTimer();
 
     const systems = [
@@ -595,22 +543,15 @@
         const item = document.createElement("div");
         item.className = "nav-item";
         item.innerHTML = `<img src="${sys.icon}"><span class="nav-text">${sys.name}</span>`;
-            
         item.onclick = () => {
             const section = document.getElementById(`section-${sys.id}`);
-            const car = document.getElementById(`carousel-${sys.id}`);
-            if(section) {
-                if (!car.classList.contains('grid-view')) toggleGrid(sys.id);
-                const y = section.getBoundingClientRect().top + window.scrollY - 100;
-                window.scrollTo({top: y, behavior: 'smooth'});
-            }
+            if(section) window.scrollTo({top: section.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth'});
         };
         nav.appendChild(item);
 
         const wrapper = document.createElement("div");
         wrapper.className = "row-wrapper";
         wrapper.id = `section-${sys.id}`;
-            
         wrapper.innerHTML = `
             <div class="row-header">
                 <span class="row-title-text">${sys.name}</span>
@@ -624,20 +565,19 @@
         `;
         catalog.appendChild(wrapper);
 
-        let p = fetch(`${sys.path}games.json?v=${new Date().getTime()}`).then(r => {
-            if(!r.ok) throw new Error("JSON não encontrado");
-            return r.json();
-        }).then(games => {
+        let p = fetch(`${sys.path}games.json?v=${new Date().getTime()}`).then(r => r.json()).then(games => {
             const car = document.getElementById(`carousel-${sys.id}`);
             games.forEach(g => {
                 indexData.push({...g, sysPath: sys.path, sysName: sys.name, sysId: sys.id});
-                    
                 const card = document.createElement("div");
                 card.className = "game-card selectable-item";
                 
-                // O GRANDE ACERTO ESTÁ AQUI: As imagens estão no R2 e agora com os nomes corretos do games.json
-                const imgPath = g.capa ? `${R2_URL}${sys.path}capas/${g.capa}` : '';
-                const gifPath = g.preview ? `${R2_URL}${sys.path}previews/${g.preview}` : '';
+                // TRAVA MASTER: Pega SÓ o nome do arquivo limpo, ignorando qualquer sujeira que tenha ficado
+                let capaNome = g.capa ? g.capa.split('/').pop() : '';
+                let gifNome = g.preview ? g.preview.split('/').pop() : '';
+
+                const imgPath = capaNome ? `${R2_URL}${sys.path}capas/${capaNome}` : '';
+                const gifPath = gifNome ? `${R2_URL}${sys.path}previews/${gifNome}` : '';
 
                 const coreToUse = coreMap[sys.id] || 'snes';   
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
@@ -687,11 +627,7 @@
                 }
                 car.appendChild(card);
             });
-        }).catch(err => {
-            console.error("Erro ao carregar sistema", err);
-            wrapper.style.display = "none";
-            item.style.display = "none";   
-        });
+        }).catch(err => { console.error("Erro no JSON:", sys.id); });
         fetchPromises.push(p);
     });
 
@@ -701,52 +637,32 @@
     searchInput.addEventListener('input', (e) => {
         const val = e.target.value.toLowerCase().replace('#', '').trim();
         searchResults.innerHTML = '';  
-            
-        if(!val) {   
-            searchResults.style.display = 'none';   
-            updateGamepadFocusList();   
-            return;   
-        }
+        if(!val) { searchResults.style.display = 'none'; return; }
 
         const hits = indexData.filter(g => g.nome && g.nome.toLowerCase().includes(val));
-            
         if(hits.length > 0) {
             searchResults.style.display = 'flex';
             hits.slice(0, 10).forEach(h => {
                 const div = document.createElement('div');
                 div.className = 'search-item selectable-item';   
                  
-                // NA BUSCA A MESMA COISA: Imagem no R2!
-                const imgPath = h.capa ? `${R2_URL}${h.sysPath}capas/${h.capa}` : '';
+                let capaNomeBusca = h.capa ? h.capa.split('/').pop() : '';
+                const imgPath = capaNomeBusca ? `${R2_URL}${h.sysPath}capas/${capaNomeBusca}` : '';
 
-                div.innerHTML = `
-                    <img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';">   
-                    <span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>
-                `;
+                div.innerHTML = `<img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';"><span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>`;
                     
                 const coreToUse = coreMap[h.sysId] || 'snes';
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + h.sysPath + h.rom)}&core=${coreToUse}`;
-                    
                 div.dataset.url = playUrl;
                 div.onclick = () => window.startGame(playUrl);
-                    
                 searchResults.appendChild(div);
             });
-            updateGamepadFocusList();   
-        } else {
-            searchResults.style.display = 'none';
-        }
+        } else { searchResults.style.display = 'none'; }
     });
 
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.search-container')) {
-            searchResults.style.display = 'none';
-        }
-    });
+    document.addEventListener('click', (e) => { if (!e.target.closest('.search-container')) searchResults.style.display = 'none'; });
 
-    // =========================================================================
-    // NAVEGAÇÃO ESPACIAL POR GAMEPAD  
-    // =========================================================================
+    // GAMEPAD
     let selectableItems = [];
     let currentFocusIndex = -1;
     let gamepadConnected = false;
@@ -760,63 +676,6 @@
         });
     }
 
-    Promise.all(fetchPromises).then(() => { updateGamepadFocusList(); });
-
-    function findNextFocus(direction) {
-        if (currentFocusIndex === -1 || !selectableItems[currentFocusIndex]) return 0;
-            
-        const curRect = selectableItems[currentFocusIndex].getBoundingClientRect();
-        const curX = curRect.left + curRect.width / 2;
-        const curY = curRect.top + curRect.height / 2;
-
-        let bestIdx = currentFocusIndex;
-        let minDistance = Infinity;
-
-        for (let i = 0; i < selectableItems.length; i++) {
-            if (i === currentFocusIndex) continue;
-            const rect = selectableItems[i].getBoundingClientRect();
-            const x = rect.left + rect.width / 2;
-            const y = rect.top + rect.height / 2;
-
-            let dx = x - curX;
-            let dy = y - curY;
-            let isCandidate = false;
-
-            if (direction === 'left' && dx < -10 && Math.abs(dy) < curRect.height * 1.5) isCandidate = true;
-            if (direction === 'right' && dx > 10 && Math.abs(dy) < curRect.height * 1.5) isCandidate = true;
-            if (direction === 'up' && dy < -10) isCandidate = true;
-            if (direction === 'down' && dy > 10) isCandidate = true;
-
-            if (isCandidate) {
-                let dist = (direction === 'left' || direction === 'right')   
-                    ? Math.abs(dx) + Math.abs(dy) * 10   
-                    : Math.abs(dy) + Math.abs(dx) * 0.1;
-
-                if (dist < minDistance) {
-                    minDistance = dist;
-                    bestIdx = i;
-                }
-            }
-        }
-        return bestIdx;
-    }
-
-    function focusItem(index) {
-        if(selectableItems.length === 0) return;
-            
-        if(currentFocusIndex >= 0 && currentFocusIndex < selectableItems.length) {
-            selectableItems[currentFocusIndex].classList.remove('gamepad-focus');
-            if(selectableItems[currentFocusIndex].classList.contains('game-card')) selectableItems[currentFocusIndex].dispatchEvent(new Event('mouseleave'));
-        }
-
-        currentFocusIndex = index;
-        const target = selectableItems[currentFocusIndex];
-        target.classList.add('gamepad-focus');
-        target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
-
-        if(target.classList.contains('game-card')) target.dispatchEvent(new Event('mouseenter'));
-    }
-
     window.addEventListener("gamepadconnected", (e) => {
         gamepadConnected = true;
         updateGamepadFocusList();
@@ -825,76 +684,38 @@
     });
     window.addEventListener("gamepaddisconnected", () => { gamepadConnected = false; });
 
+    function focusItem(index) {
+        if(selectableItems.length === 0 || currentFocusIndex >= selectableItems.length) return;
+        if(currentFocusIndex >= 0) {
+            selectableItems[currentFocusIndex].classList.remove('gamepad-focus');
+            if(selectableItems[currentFocusIndex].classList.contains('game-card')) selectableItems[currentFocusIndex].dispatchEvent(new Event('mouseleave'));
+        }
+        currentFocusIndex = index;
+        const target = selectableItems[currentFocusIndex];
+        target.classList.add('gamepad-focus');
+        target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+        if(target.classList.contains('game-card')) target.dispatchEvent(new Event('mouseenter'));
+    }
+
     function pollGamepad() {
         if (!gamepadConnected) return;
         const gp = navigator.getGamepads()[0];
-
         if (gp) {
             const dpadUp = gp.buttons[12]?.pressed; const dpadDown = gp.buttons[13]?.pressed;
             const dpadLeft = gp.buttons[14]?.pressed; const dpadRight = gp.buttons[15]?.pressed;
-            const xAxis = gp.axes[0]; const yAxis = gp.axes[1];
             const confirmBtn = gp.buttons[0]?.pressed;  
-
-            const m3uModal = document.getElementById('m3u-modal');
-            if (m3uModal.style.display === 'flex') {
-                if(!axisCooldown) {
-                    let moved = false;
-                    if (dpadUp || yAxis < -0.5) { let next = findNextFocus('up'); if (next !== currentFocusIndex) { focusItem(next); moved = true; } }
-                    else if (dpadDown || yAxis > 0.5) { let next = findNextFocus('down'); if (next !== currentFocusIndex) { focusItem(next); moved = true; } }
-                        
-                    if(moved) {
-                        axisCooldown = true;
-                        setTimeout(() => { axisCooldown = false; }, 200);   
-                    }
-                }
-
-                if (confirmBtn && !window.confirmBtnPressed) {
-                    window.confirmBtnPressed = true;
-                    if(currentFocusIndex >= 0 && selectableItems[currentFocusIndex]) {
-                        selectableItems[currentFocusIndex].click();
-                    }
-                } else if (!confirmBtn) {
-                    window.confirmBtnPressed = false;
-                }
-                requestAnimationFrame(pollGamepad);
-                return;   
-            }
 
             if(!axisCooldown) {
                 let moved = false;
-                let currentEl = selectableItems[currentFocusIndex];
-
-                if (dpadLeft || xAxis < -0.5) {
-                    if (currentEl && currentEl.classList.contains('hero-play-btn')) { prevSlide(); moved = true; }   
-                    else { let next = findNextFocus('left'); if (next !== currentFocusIndex) { focusItem(next); moved = true; } }
-                }
-                else if (dpadRight || xAxis > 0.5) {
-                    if (currentEl && currentEl.classList.contains('hero-play-btn')) { nextSlide(); moved = true; }   
-                    else { let next = findNextFocus('right'); if (next !== currentFocusIndex) { focusItem(next); moved = true; } }
-                }
-                else if (dpadUp || yAxis < -0.5) {
-                    let next = findNextFocus('up'); if (next !== currentFocusIndex) { focusItem(next); moved = true; }
-                }
-                else if (dpadDown || yAxis > 0.5) {
-                    let next = findNextFocus('down'); if (next !== currentFocusIndex) { focusItem(next); moved = true; }
-                }
-
-                if(moved) {
-                    axisCooldown = true;
-                    setTimeout(() => { axisCooldown = false; }, 200);   
-                }
+                if (dpadLeft) { focusItem(Math.max(0, currentFocusIndex - 1)); moved = true; }
+                else if (dpadRight) { focusItem(Math.min(selectableItems.length - 1, currentFocusIndex + 1)); moved = true; }
+                
+                if(moved) { axisCooldown = true; setTimeout(() => { axisCooldown = false; }, 200); }
             }
-
             if (confirmBtn && !window.confirmBtnPressed) {
                 window.confirmBtnPressed = true;   
-                if(currentFocusIndex >= 0 && selectableItems[currentFocusIndex]) {
-                    const target = selectableItems[currentFocusIndex];
-                    if(target.dataset.url) window.startGame(target.dataset.url);
-                    else target.click();   
-                }
-            } else if (!confirmBtn) {
-                window.confirmBtnPressed = false;
-            }
+                if(currentFocusIndex >= 0 && selectableItems[currentFocusIndex]) selectableItems[currentFocusIndex].click();
+            } else if (!confirmBtn) { window.confirmBtnPressed = false; }
         }
         requestAnimationFrame(pollGamepad);
     }
