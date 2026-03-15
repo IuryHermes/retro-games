@@ -2,1096 +2,1315 @@
     {
         "nome": "2 In 1 Asterix Obelix Bash Them All Asterix Obelix Xxl",
         "rom": "roms/2-in-1-asterix-obelix-bash-them-all-asterix-obelix-xxl.gba",
-        "capa": "assets/capas/gba/2-in-1-asterix-obelix-bash-them-all-asterix-obelix-xxl.jpg"
+        "capa": "assets/capas/gba/2-in-1-asterix-obelix-bash-them-all-asterix-obelix-xxl.jpg",
+        "preview": ""
     },
     {
         "nome": "2006 Fifa World Cup Germany 2006",
         "rom": "roms/2006-fifa-world-cup-germany-2006.gba",
-        "capa": "assets/capas/gba/2006-fifa-world-cup-germany-2006.jpg"
+        "capa": "assets/capas/gba/2006-fifa-world-cup-germany-2006.jpg",
+        "preview": ""
     },
     {
         "nome": "Advance Wars 2 Black Hole Rising",
         "rom": "roms/advance-wars-2-black-hole-rising.gba",
-        "capa": "assets/capas/gba/advance-wars-2-black-hole-rising.jpg"
+        "capa": "assets/capas/gba/advance-wars-2-black-hole-rising.jpg",
+        "preview": ""
     },
     {
         "nome": "Advance Wars",
         "rom": "roms/advance-wars.gba",
-        "capa": "assets/capas/gba/advance-wars.jpg"
+        "capa": "advance-wars.jpg",
+        "preview": "advance-wars.gif"
     },
     {
         "nome": "Agent Hugo Roborumble",
         "rom": "roms/agent-hugo-roborumble.gba",
-        "capa": "assets/capas/gba/agent-hugo-roborumble.jpg"
+        "capa": "assets/capas/gba/agent-hugo-roborumble.jpg",
+        "preview": ""
     },
     {
         "nome": "Aggressive Inline",
         "rom": "roms/aggressive-inline.gba",
-        "capa": "assets/capas/gba/aggressive-inline.jpg"
+        "capa": "aggressive-inline.jpg",
+        "preview": "aggressive-inline.gif"
     },
     {
         "nome": "Alienators Evolution Continues",
         "rom": "roms/alienators-evolution-continues.gba",
-        "capa": "assets/capas/gba/alienators-evolution-continues.jpg"
+        "capa": "assets/capas/gba/alienators-evolution-continues.jpg",
+        "preview": ""
     },
     {
         "nome": "Altered Beast Guardian Of The Realms",
         "rom": "roms/altered-beast-guardian-of-the-realms.gba",
-        "capa": "assets/capas/gba/altered-beast-guardian-of-the-realms.jpg"
+        "capa": "assets/capas/gba/altered-beast-guardian-of-the-realms.jpg",
+        "preview": ""
     },
     {
         "nome": "Army Men Advance",
         "rom": "roms/army-men-advance.gba",
-        "capa": "assets/capas/gba/army-men-advance.jpg"
+        "capa": "assets/capas/gba/army-men-advance.jpg",
+        "preview": ""
     },
     {
         "nome": "Avatar The Last Airbender",
         "rom": "roms/avatar-the-last-airbender.gba",
-        "capa": "assets/capas/gba/avatar-the-last-airbender.jpg"
+        "capa": "assets/capas/gba/avatar-the-last-airbender.jpg",
+        "preview": ""
     },
     {
         "nome": "Banjo Kazooie Grunty S Revenge",
         "rom": "roms/banjo-kazooie-grunty-s-revenge.gba",
-        "capa": "assets/capas/gba/banjo-kazooie-grunty-s-revenge.jpg"
+        "capa": "assets/capas/gba/banjo-kazooie-grunty-s-revenge.jpg",
+        "preview": ""
     },
     {
         "nome": "Batman Begins",
         "rom": "roms/batman-begins.gba",
-        "capa": "assets/capas/gba/batman-begins.jpg"
+        "capa": "batman-begins.png",
+        "preview": "batman-begins.gif"
     },
     {
         "nome": "Batman Rise Of Sin Tzu",
         "rom": "roms/batman-rise-of-sin-tzu.gba",
-        "capa": "assets/capas/gba/batman-rise-of-sin-tzu.jpg"
+        "capa": "assets/capas/gba/batman-rise-of-sin-tzu.jpg",
+        "preview": ""
     },
     {
         "nome": "Beyblade V Force Ultimate Blader Jam",
         "rom": "roms/beyblade-v-force-ultimate-blader-jam.gba",
-        "capa": "assets/capas/gba/beyblade-v-force-ultimate-blader-jam.jpg"
+        "capa": "assets/capas/gba/beyblade-v-force-ultimate-blader-jam.jpg",
+        "preview": ""
     },
     {
         "nome": "Blackthorne",
         "rom": "roms/blackthorne.gba",
-        "capa": "assets/capas/gba/blackthorne.jpg"
+        "capa": "blackthorne.jpg",
+        "preview": "blackthorne.gif"
     },
     {
         "nome": "Boktai 2 Solar Boy Django",
         "rom": "roms/boktai-2-solar-boy-django.gba",
-        "capa": "assets/capas/gba/boktai-2-solar-boy-django.jpg"
+        "capa": "assets/capas/gba/boktai-2-solar-boy-django.jpg",
+        "preview": ""
     },
     {
         "nome": "Boktai The Sun Is In Your Hand",
         "rom": "roms/boktai-the-sun-is-in-your-hand.gba",
-        "capa": "assets/capas/gba/boktai-the-sun-is-in-your-hand.jpg"
+        "capa": "assets/capas/gba/boktai-the-sun-is-in-your-hand.jpg",
+        "preview": ""
     },
     {
         "nome": "Bomberman Tournament",
         "rom": "roms/bomberman-tournament.gba",
-        "capa": "assets/capas/gba/bomberman-tournament.jpg"
+        "capa": "assets/capas/gba/bomberman-tournament.jpg",
+        "preview": ""
     },
     {
         "nome": "Breath Of Fire 2",
         "rom": "roms/breath-of-fire-2.gba",
-        "capa": "assets/capas/gba/breath-of-fire-2.jpg"
+        "capa": "assets/capas/gba/breath-of-fire-2.jpg",
+        "preview": ""
     },
     {
         "nome": "Breath Of Fire",
         "rom": "roms/breath-of-fire.gba",
-        "capa": "assets/capas/gba/breath-of-fire.jpg"
+        "capa": "assets/capas/gba/breath-of-fire.jpg",
+        "preview": ""
     },
     {
         "nome": "Care Bears The Care Quests",
         "rom": "roms/care-bears-the-care-quests.gba",
-        "capa": "assets/capas/gba/care-bears-the-care-quests.jpg"
+        "capa": "assets/capas/gba/care-bears-the-care-quests.jpg",
+        "preview": ""
     },
     {
         "nome": "Cars",
         "rom": "roms/cars.gba",
-        "capa": "assets/capas/gba/cars.jpg"
+        "capa": "cars.jpg",
+        "preview": "cars.gif"
     },
     {
         "nome": "Cartoon Network Speedway",
         "rom": "roms/cartoon-network-speedway.gba",
-        "capa": "assets/capas/gba/cartoon-network-speedway.jpg"
+        "capa": "assets/capas/gba/cartoon-network-speedway.jpg",
+        "preview": ""
     },
     {
         "nome": "Casper",
         "rom": "roms/casper.gba",
-        "capa": "assets/capas/gba/casper.jpg"
+        "capa": "casper.jpg",
+        "preview": "casper.gif"
     },
     {
         "nome": "Castlevania Aria Of Sorrow",
         "rom": "roms/castlevania-aria-of-sorrow.gba",
-        "capa": "assets/capas/gba/castlevania-aria-of-sorrow.jpg"
+        "capa": "assets/capas/gba/castlevania-aria-of-sorrow.jpg",
+        "preview": ""
     },
     {
         "nome": "Castlevania Circle Of The Moon",
         "rom": "roms/castlevania-circle-of-the-moon.gba",
-        "capa": "assets/capas/gba/castlevania-circle-of-the-moon.jpg"
+        "capa": "assets/capas/gba/castlevania-circle-of-the-moon.jpg",
+        "preview": ""
     },
     {
         "nome": "Castlevania Harmony Of Dissonance",
         "rom": "roms/castlevania-harmony-of-dissonance.gba",
-        "capa": "assets/capas/gba/castlevania-harmony-of-dissonance.jpg"
+        "capa": "assets/capas/gba/castlevania-harmony-of-dissonance.jpg",
+        "preview": ""
     },
     {
         "nome": "Celeste",
         "rom": "roms/celeste.gba",
-        "capa": "assets/capas/gba/celeste.jpg"
+        "capa": "celeste.png",
+        "preview": "celeste.gif"
     },
     {
         "nome": "Contra Advance The Alien Wars Ex",
         "rom": "roms/contra-advance-the-alien-wars-ex.gba",
-        "capa": "assets/capas/gba/contra-advance-the-alien-wars-ex.jpg"
+        "capa": "assets/capas/gba/contra-advance-the-alien-wars-ex.jpg",
+        "preview": ""
     },
     {
         "nome": "Crash Bandicoot 2 N Tranced",
         "rom": "roms/crash-bandicoot-2-n-tranced.gba",
-        "capa": "assets/capas/gba/crash-bandicoot-2-n-tranced.jpg"
+        "capa": "assets/capas/gba/crash-bandicoot-2-n-tranced.jpg",
+        "preview": ""
     },
     {
         "nome": "Crash Bandicoot Purple Ripto S Rampage",
         "rom": "roms/crash-bandicoot-purple-ripto-s-rampage.gba",
-        "capa": "assets/capas/gba/crash-bandicoot-purple-ripto-s-rampage.jpg"
+        "capa": "assets/capas/gba/crash-bandicoot-purple-ripto-s-rampage.jpg",
+        "preview": ""
     },
     {
         "nome": "Crash Bandicoot The Huge Adventure",
         "rom": "roms/crash-bandicoot-the-huge-adventure.gba",
-        "capa": "assets/capas/gba/crash-bandicoot-the-huge-adventure.jpg"
+        "capa": "assets/capas/gba/crash-bandicoot-the-huge-adventure.jpg",
+        "preview": ""
     },
     {
         "nome": "Crash Nitro Kart",
         "rom": "roms/crash-nitro-kart.gba",
-        "capa": "assets/capas/gba/crash-nitro-kart.jpg"
+        "capa": "assets/capas/gba/crash-nitro-kart.jpg",
+        "preview": ""
     },
     {
         "nome": "Crazy Chase",
         "rom": "roms/crazy-chase.gba",
-        "capa": "assets/capas/gba/crazy-chase.jpg"
+        "capa": "crazy-chase.jpg",
+        "preview": "crazy-chase.gif"
     },
     {
         "nome": "Crazy Frog Racer",
         "rom": "roms/crazy-frog-racer.gba",
-        "capa": "assets/capas/gba/crazy-frog-racer.jpg"
+        "capa": "assets/capas/gba/crazy-frog-racer.jpg",
+        "preview": ""
     },
     {
         "nome": "Crazy Taxi Catch A Ride",
         "rom": "roms/crazy-taxi-catch-a-ride.gba",
-        "capa": "assets/capas/gba/crazy-taxi-catch-a-ride.jpg"
+        "capa": "assets/capas/gba/crazy-taxi-catch-a-ride.jpg",
+        "preview": ""
     },
     {
         "nome": "Danny Phantom The Ultimate Enemy",
         "rom": "roms/danny-phantom-the-ultimate-enemy.gba",
-        "capa": "assets/capas/gba/danny-phantom-the-ultimate-enemy.jpg"
+        "capa": "assets/capas/gba/danny-phantom-the-ultimate-enemy.jpg",
+        "preview": ""
     },
     {
         "nome": "Dead To Rights",
         "rom": "roms/dead-to-rights.gba",
-        "capa": "assets/capas/gba/dead-to-rights.jpg"
+        "capa": "dead-to-rights.jpg",
+        "preview": "dead-to-rights.gif"
     },
     {
         "nome": "Dinotopia The Timestone Pirates",
         "rom": "roms/dinotopia-the-timestone-pirates.gba",
-        "capa": "assets/capas/gba/dinotopia-the-timestone-pirates.jpg"
+        "capa": "assets/capas/gba/dinotopia-the-timestone-pirates.jpg",
+        "preview": ""
     },
     {
         "nome": "Donkey Kong Country 3",
         "rom": "roms/donkey-kong-country-3.gba",
-        "capa": "assets/capas/gba/donkey-kong-country-3.jpg"
+        "capa": "assets/capas/gba/donkey-kong-country-3.jpg",
+        "preview": ""
     },
     {
         "nome": "Donkey Kong Country",
         "rom": "roms/donkey-kong-country.gba",
-        "capa": "assets/capas/gba/donkey-kong-country.jpg"
+        "capa": "assets/capas/gba/donkey-kong-country.jpg",
+        "preview": ""
     },
     {
         "nome": "Dragon Ball Advanced Adventure",
         "rom": "roms/dragon-ball-advanced-adventure.gba",
-        "capa": "assets/capas/gba/dragon-ball-advanced-adventure.jpg"
+        "capa": "assets/capas/gba/dragon-ball-advanced-adventure.jpg",
+        "preview": ""
     },
     {
         "nome": "Dragon Ball Gt Transformation",
         "rom": "roms/dragon-ball-gt-transformation.gba",
-        "capa": "assets/capas/gba/dragon-ball-gt-transformation.jpg"
+        "capa": "assets/capas/gba/dragon-ball-gt-transformation.jpg",
+        "preview": ""
     },
     {
         "nome": "Dragon Ball Z Taiketsu",
         "rom": "roms/dragon-ball-z-taiketsu.gba",
-        "capa": "assets/capas/gba/dragon-ball-z-taiketsu.jpg"
+        "capa": "assets/capas/gba/dragon-ball-z-taiketsu.jpg",
+        "preview": ""
     },
     {
         "nome": "Dragon Ball Z The Legacy Of Goku Ii",
         "rom": "roms/dragon-ball-z-the-legacy-of-goku-ii.gba",
-        "capa": "assets/capas/gba/dragon-ball-z-the-legacy-of-goku-ii.jpg"
+        "capa": "assets/capas/gba/dragon-ball-z-the-legacy-of-goku-ii.jpg",
+        "preview": ""
     },
     {
         "nome": "Dragon Ball Z The Legacy Of Goku",
         "rom": "roms/dragon-ball-z-the-legacy-of-goku.gba",
-        "capa": "assets/capas/gba/dragon-ball-z-the-legacy-of-goku.jpg"
+        "capa": "assets/capas/gba/dragon-ball-z-the-legacy-of-goku.jpg",
+        "preview": ""
     },
     {
         "nome": "Extreme Ghostbusters Code Ecto 1",
         "rom": "roms/extreme-ghostbusters-code-ecto-1.gba",
-        "capa": "assets/capas/gba/extreme-ghostbusters-code-ecto-1.jpg"
+        "capa": "assets/capas/gba/extreme-ghostbusters-code-ecto-1.jpg",
+        "preview": ""
     },
     {
         "nome": "F Zero Maximum Velocity",
         "rom": "roms/f-zero-maximum-velocity.gba",
-        "capa": "assets/capas/gba/f-zero-maximum-velocity.jpg"
+        "capa": "assets/capas/gba/f-zero-maximum-velocity.jpg",
+        "preview": ""
     },
     {
         "nome": "Fairly Oddparents The Enter The Cleft",
         "rom": "roms/fairly-oddparents-the-enter-the-cleft.gba",
-        "capa": "assets/capas/gba/fairly-oddparents-the-enter-the-cleft.jpg"
+        "capa": "assets/capas/gba/fairly-oddparents-the-enter-the-cleft.jpg",
+        "preview": ""
     },
     {
         "nome": "Fifa Soccer 2004",
         "rom": "roms/fifa-soccer-2004.gba",
-        "capa": "assets/capas/gba/fifa-soccer-2004.jpg"
+        "capa": "assets/capas/gba/fifa-soccer-2004.jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy I Ii Dawn Of Souls Br",
         "rom": "roms/final-fantasy-i-ii-dawn-of-souls-br.gba",
-        "capa": "assets/capas/gba/final-fantasy-i-ii-dawn-of-souls-br.jpg"
+        "capa": "assets/capas/gba/final-fantasy-i-ii-dawn-of-souls-br.jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy I Ii Dawn Of Souls",
         "rom": "roms/final-fantasy-i-ii-dawn-of-souls.gba",
-        "capa": "assets/capas/gba/final-fantasy-i-ii-dawn-of-souls.jpg"
+        "capa": "assets/capas/gba/final-fantasy-i-ii-dawn-of-souls.jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy Tactics Advance",
         "rom": "roms/final-fantasy-tactics-advance.gba",
-        "capa": "assets/capas/gba/final-fantasy-tactics-advance.jpg"
+        "capa": "assets/capas/gba/final-fantasy-tactics-advance.jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy Vi Advance",
         "rom": "roms/final-fantasy-vi-advance.gba",
-        "capa": "assets/capas/gba/final-fantasy-vi-advance.jpg"
+        "capa": "assets/capas/gba/final-fantasy-vi-advance.jpg",
+        "preview": ""
     },
     {
         "nome": "Fire Emblem 8 The Sacred Stones",
         "rom": "roms/fire-emblem-8-the-sacred-stones.gba",
-        "capa": "assets/capas/gba/fire-emblem-8-the-sacred-stones.jpg"
+        "capa": "assets/capas/gba/fire-emblem-8-the-sacred-stones.jpg",
+        "preview": ""
     },
     {
         "nome": "Franklin S Great Adventures",
         "rom": "roms/franklin-s-great-adventures.gba",
-        "capa": "assets/capas/gba/franklin-s-great-adventures.jpg"
+        "capa": "assets/capas/gba/franklin-s-great-adventures.jpg",
+        "preview": ""
     },
     {
         "nome": "Gekido Advance Kintaro S Revenge",
         "rom": "roms/gekido-advance-kintaro-s-revenge.gba",
-        "capa": "assets/capas/gba/gekido-advance-kintaro-s-revenge.jpg"
+        "capa": "assets/capas/gba/gekido-advance-kintaro-s-revenge.jpg",
+        "preview": ""
     },
     {
         "nome": "Ghost Rider",
         "rom": "roms/ghost-rider.gba",
-        "capa": "assets/capas/gba/ghost-rider.jpg"
+        "capa": "ghost-rider.jpg",
+        "preview": "ghost-rider.gif"
     },
     {
         "nome": "Golden Sun The Lost Age",
         "rom": "roms/golden-sun-the-lost-age.gba",
-        "capa": "assets/capas/gba/golden-sun-the-lost-age.jpg"
+        "capa": "assets/capas/gba/golden-sun-the-lost-age.jpg",
+        "preview": ""
     },
     {
         "nome": "Golden Sun",
         "rom": "roms/golden-sun.gba",
-        "capa": "assets/capas/gba/golden-sun.jpg"
+        "capa": "golden-sun.jpg",
+        "preview": "golden-sun.gif"
     },
     {
         "nome": "Grand Theft Auto Advance",
         "rom": "roms/grand-theft-auto-advance.gba",
-        "capa": "assets/capas/gba/grand-theft-auto-advance.jpg"
+        "capa": "assets/capas/gba/grand-theft-auto-advance.jpg",
+        "preview": ""
     },
     {
         "nome": "Gremlins Stripe Vs Gizmo",
         "rom": "roms/gremlins-stripe-vs-gizmo.gba",
-        "capa": "assets/capas/gba/gremlins-stripe-vs-gizmo.jpg"
+        "capa": "assets/capas/gba/gremlins-stripe-vs-gizmo.jpg",
+        "preview": ""
     },
     {
         "nome": "Grim Adventures Of Billy Mandy The",
         "rom": "roms/grim-adventures-of-billy-mandy-the.gba",
-        "capa": "assets/capas/gba/grim-adventures-of-billy-mandy-the.jpg"
+        "capa": "assets/capas/gba/grim-adventures-of-billy-mandy-the.jpg",
+        "preview": ""
     },
     {
         "nome": "Gunstar Super Heroes",
         "rom": "roms/gunstar-super-heroes.gba",
-        "capa": "assets/capas/gba/gunstar-super-heroes.jpg"
+        "capa": "assets/capas/gba/gunstar-super-heroes.jpg",
+        "preview": ""
     },
     {
         "nome": "Harry Potter And The Chamber Of Secrets",
         "rom": "roms/harry-potter-and-the-chamber-of-secrets.gba",
-        "capa": "assets/capas/gba/harry-potter-and-the-chamber-of-secrets.jpg"
+        "capa": "assets/capas/gba/harry-potter-and-the-chamber-of-secrets.jpg",
+        "preview": ""
     },
     {
         "nome": "Harry Potter And The Order Of The Phoenix",
         "rom": "roms/harry-potter-and-the-order-of-the-phoenix.gba",
-        "capa": "assets/capas/gba/harry-potter-and-the-order-of-the-phoenix.jpg"
+        "capa": "assets/capas/gba/harry-potter-and-the-order-of-the-phoenix.jpg",
+        "preview": ""
     },
     {
         "nome": "Harry Potter And The Sorcerer S Stone",
         "rom": "roms/harry-potter-and-the-sorcerer-s-stone.gba",
-        "capa": "assets/capas/gba/harry-potter-and-the-sorcerer-s-stone.jpg"
+        "capa": "assets/capas/gba/harry-potter-and-the-sorcerer-s-stone.jpg",
+        "preview": ""
     },
     {
         "nome": "Harvest Moon Friends Of Mineral Town",
         "rom": "roms/harvest-moon-friends-of-mineral-town.gba",
-        "capa": "assets/capas/gba/harvest-moon-friends-of-mineral-town.jpg"
+        "capa": "assets/capas/gba/harvest-moon-friends-of-mineral-town.jpg",
+        "preview": ""
     },
     {
         "nome": "Harvest Moon Mfomt",
         "rom": "roms/harvest-moon-mfomt.gba",
-        "capa": "assets/capas/gba/harvest-moon-mfomt.jpg"
+        "capa": "assets/capas/gba/harvest-moon-mfomt.jpg",
+        "preview": ""
     },
     {
         "nome": "Hugo Bukkazoom",
         "rom": "roms/hugo-bukkazoom.gba",
-        "capa": "assets/capas/gba/hugo-bukkazoom.jpg"
+        "capa": "hugo-bukkazoom.jpg",
+        "preview": "hugo-bukkazoom.gif"
     },
     {
         "nome": "Hugo The Evil Mirror Advance",
         "rom": "roms/hugo-the-evil-mirror-advance.gba",
-        "capa": "assets/capas/gba/hugo-the-evil-mirror-advance.jpg"
+        "capa": "assets/capas/gba/hugo-the-evil-mirror-advance.jpg",
+        "preview": ""
     },
     {
         "nome": "Ice Nine",
         "rom": "roms/ice-nine.gba",
-        "capa": "assets/capas/gba/ice-nine.jpg"
+        "capa": "ice-nine.jpg",
+        "preview": "ice-nine.gif"
     },
     {
         "nome": "Iridion Ii",
         "rom": "roms/iridion-ii.gba",
-        "capa": "assets/capas/gba/iridion-ii.jpg"
+        "capa": "assets/capas/gba/iridion-ii.jpg",
+        "preview": ""
     },
     {
         "nome": "James Pond Codename Robocod",
         "rom": "roms/james-pond-codename-robocod.gba",
-        "capa": "assets/capas/gba/james-pond-codename-robocod.jpg"
+        "capa": "assets/capas/gba/james-pond-codename-robocod.jpg",
+        "preview": ""
     },
     {
         "nome": "Justice League Heroes The Flash",
         "rom": "roms/justice-league-heroes-the-flash.gba",
-        "capa": "assets/capas/gba/justice-league-heroes-the-flash.jpg"
+        "capa": "assets/capas/gba/justice-league-heroes-the-flash.jpg",
+        "preview": ""
     },
     {
         "nome": "Justice League Injustice For All",
         "rom": "roms/justice-league-injustice-for-all.gba",
-        "capa": "assets/capas/gba/justice-league-injustice-for-all.jpg"
+        "capa": "assets/capas/gba/justice-league-injustice-for-all.jpg",
+        "preview": ""
     },
     {
         "nome": "King Kong The 8Th Wonder Of The World",
         "rom": "roms/king-kong-the-8th-wonder-of-the-world.gba",
-        "capa": "assets/capas/gba/king-kong-the-8th-wonder-of-the-world.jpg"
+        "capa": "assets/capas/gba/king-kong-the-8th-wonder-of-the-world.jpg",
+        "preview": ""
     },
     {
         "nome": "Kingdom Hearts Chain Of Memories",
         "rom": "roms/kingdom-hearts-chain-of-memories.gba",
-        "capa": "assets/capas/gba/kingdom-hearts-chain-of-memories.jpg"
+        "capa": "assets/capas/gba/kingdom-hearts-chain-of-memories.jpg",
+        "preview": ""
     },
     {
         "nome": "Kirby And The Amazing Mirror",
         "rom": "roms/kirby-and-the-amazing-mirror.gba",
-        "capa": "assets/capas/gba/kirby-and-the-amazing-mirror.jpg"
+        "capa": "assets/capas/gba/kirby-and-the-amazing-mirror.jpg",
+        "preview": ""
     },
     {
         "nome": "Koala Brothers Outback Adventures",
         "rom": "roms/koala-brothers-outback-adventures.gba",
-        "capa": "assets/capas/gba/koala-brothers-outback-adventures.jpg"
+        "capa": "assets/capas/gba/koala-brothers-outback-adventures.jpg",
+        "preview": ""
     },
     {
         "nome": "Kong The Animated Series",
         "rom": "roms/kong-the-animated-series.gba",
-        "capa": "assets/capas/gba/kong-the-animated-series.jpg"
+        "capa": "assets/capas/gba/kong-the-animated-series.jpg",
+        "preview": ""
     },
     {
         "nome": "Lady Sia Br",
         "rom": "roms/lady-sia-br.gba",
-        "capa": "assets/capas/gba/lady-sia-br.jpg"
+        "capa": "assets/capas/gba/lady-sia-br.jpg",
+        "preview": ""
     },
     {
         "nome": "Lady Sia",
         "rom": "roms/lady-sia.gba",
-        "capa": "assets/capas/gba/lady-sia.jpg"
+        "capa": "lady-sia.jpg",
+        "preview": "lady-sia.gif"
     },
     {
         "nome": "Lara Croft Tomb Raider Legend",
         "rom": "roms/lara-croft-tomb-raider-legend.gba",
-        "capa": "assets/capas/gba/lara-croft-tomb-raider-legend.jpg"
+        "capa": "assets/capas/gba/lara-croft-tomb-raider-legend.jpg",
+        "preview": ""
     },
     {
         "nome": "Lara Croft Tomb Raider The Prophecy",
         "rom": "roms/lara-croft-tomb-raider-the-prophecy.gba",
-        "capa": "assets/capas/gba/lara-croft-tomb-raider-the-prophecy.jpg"
+        "capa": "assets/capas/gba/lara-croft-tomb-raider-the-prophecy.jpg",
+        "preview": ""
     },
     {
         "nome": "Lilo Stitch 2 Haemsterviel Havoc",
         "rom": "roms/lilo-stitch-2-haemsterviel-havoc.gba",
-        "capa": "assets/capas/gba/lilo-stitch-2-haemsterviel-havoc.jpg"
+        "capa": "assets/capas/gba/lilo-stitch-2-haemsterviel-havoc.jpg",
+        "preview": ""
     },
     {
         "nome": "Lilo Stitch",
         "rom": "roms/lilo-stitch.gba",
-        "capa": "assets/capas/gba/lilo-stitch.jpg"
+        "capa": "lilo-stitch.jpg",
+        "preview": "lilo-stitch.gif"
     },
     {
         "nome": "Lion King The",
         "rom": "roms/lion-king-the.gba",
-        "capa": "assets/capas/gba/lion-king-the.jpg"
+        "capa": "assets/capas/gba/lion-king-the.jpg",
+        "preview": ""
     },
     {
         "nome": "Love Hina Advance",
         "rom": "roms/love-hina-advance.gba",
-        "capa": "assets/capas/gba/love-hina-advance.jpg"
+        "capa": "assets/capas/gba/love-hina-advance.jpg",
+        "preview": ""
     },
     {
         "nome": "Madagascar",
         "rom": "roms/madagascar.gba",
-        "capa": "assets/capas/gba/madagascar.jpg"
+        "capa": "madagascar.jpg",
+        "preview": "madagascar.gif"
     },
     {
         "nome": "Mario Luigi Superstar Saga",
         "rom": "roms/mario-luigi-superstar-saga.gba",
-        "capa": "assets/capas/gba/mario-luigi-superstar-saga.jpg"
+        "capa": "assets/capas/gba/mario-luigi-superstar-saga.jpg",
+        "preview": ""
     },
     {
         "nome": "Mario Vs. Donkey Kong",
         "rom": "roms/mario-vs.-donkey-kong.gba",
-        "capa": "assets/capas/gba/mario-vs.-donkey-kong.jpg"
+        "capa": "assets/capas/gba/mario-vs.-donkey-kong.jpg",
+        "preview": ""
     },
     {
         "nome": "Marvel Ultimate Alliance",
         "rom": "roms/marvel-ultimate-alliance.gba",
-        "capa": "assets/capas/gba/marvel-ultimate-alliance.jpg"
+        "capa": "assets/capas/gba/marvel-ultimate-alliance.jpg",
+        "preview": ""
     },
     {
         "nome": "Max Payne Gba",
         "rom": "roms/max-payne-gba.gba",
-        "capa": "assets/capas/gba/max-payne-gba.jpg"
+        "capa": "assets/capas/gba/max-payne-gba.jpg",
+        "preview": ""
     },
     {
         "nome": "Medabots Ax Metabee Version",
         "rom": "roms/medabots-ax-metabee-version.gba",
-        "capa": "assets/capas/gba/medabots-ax-metabee-version.jpg"
+        "capa": "assets/capas/gba/medabots-ax-metabee-version.jpg",
+        "preview": ""
     },
     {
         "nome": "Medabots Ax Rokusho Version",
         "rom": "roms/medabots-ax-rokusho-version.gba",
-        "capa": "assets/capas/gba/medabots-ax-rokusho-version.jpg"
+        "capa": "assets/capas/gba/medabots-ax-rokusho-version.jpg",
+        "preview": ""
     },
     {
         "nome": "Medal Of Honor Infiltrator",
         "rom": "roms/medal-of-honor-infiltrator.gba",
-        "capa": "assets/capas/gba/medal-of-honor-infiltrator.jpg"
+        "capa": "assets/capas/gba/medal-of-honor-infiltrator.jpg",
+        "preview": ""
     },
     {
         "nome": "Medal Of Honor Underground",
         "rom": "roms/medal-of-honor-underground.gba",
-        "capa": "assets/capas/gba/medal-of-honor-underground.jpg"
+        "capa": "assets/capas/gba/medal-of-honor-underground.jpg",
+        "preview": ""
     },
     {
         "nome": "Mega Man Bass",
         "rom": "roms/mega-man-bass.gba",
-        "capa": "assets/capas/gba/mega-man-bass.jpg"
+        "capa": "megaman-bass.jpg",
+        "preview": "megaman-bass.gif"
     },
     {
         "nome": "Mega Man Battle Network 2 Ptbr",
         "rom": "roms/mega-man-battle-network-2-ptbr.gba",
-        "capa": "assets/capas/gba/mega-man-battle-network-2-ptbr.jpg"
+        "capa": "assets/capas/gba/mega-man-battle-network-2-ptbr.jpg",
+        "preview": ""
     },
     {
         "nome": "Mega Man Battle Network 3 Ptbr",
         "rom": "roms/mega-man-battle-network-3-ptbr.gba",
-        "capa": "assets/capas/gba/mega-man-battle-network-3-ptbr.jpg"
+        "capa": "assets/capas/gba/mega-man-battle-network-3-ptbr.jpg",
+        "preview": ""
     },
     {
         "nome": "Mega Man Battle Network",
         "rom": "roms/mega-man-battle-network.gba",
-        "capa": "assets/capas/gba/mega-man-battle-network.jpg"
+        "capa": "assets/capas/gba/mega-man-battle-network.jpg",
+        "preview": ""
     },
     {
         "nome": "Mega Man Zero 2",
         "rom": "roms/mega-man-zero-2.gba",
-        "capa": "assets/capas/gba/mega-man-zero-2.jpg"
+        "capa": "megaman-zero2.jpg",
+        "preview": "megaman-zero2.gif"
     },
     {
         "nome": "Mega Man Zero 3",
         "rom": "roms/mega-man-zero-3.gba",
-        "capa": "assets/capas/gba/mega-man-zero-3.jpg"
+        "capa": "megaman-zero3.jpg",
+        "preview": "megaman-zero3.gif"
     },
     {
         "nome": "Mega Man Zero 4",
         "rom": "roms/mega-man-zero-4.gba",
-        "capa": "assets/capas/gba/mega-man-zero-4.jpg"
+        "capa": "megaman-zero4.jpg",
+        "preview": "megaman-zero4.gif"
     },
     {
         "nome": "Mega Man Zero",
         "rom": "roms/mega-man-zero.gba",
-        "capa": "assets/capas/gba/mega-man-zero.jpg"
+        "capa": "megaman-zero.jpg",
+        "preview": "megaman-zero.gif"
     },
     {
         "nome": "Metal Slug Advance",
         "rom": "roms/metal-slug-advance.gba",
-        "capa": "assets/capas/gba/metal-slug-advance.jpg"
+        "capa": "assets/capas/gba/metal-slug-advance.jpg",
+        "preview": ""
     },
     {
         "nome": "Metroid Fusion",
         "rom": "roms/metroid-fusion.gba",
-        "capa": "assets/capas/gba/metroid-fusion.jpg"
+        "capa": "metroid-fusion.jpg",
+        "preview": "metroid-fusion.gif"
     },
     {
         "nome": "Metroid Zero Mission",
         "rom": "roms/metroid-zero-mission.gba",
-        "capa": "assets/capas/gba/metroid-zero-mission.jpg"
+        "capa": "assets/capas/gba/metroid-zero-mission.jpg",
+        "preview": ""
     },
     {
         "nome": "Mortal Kombat Deadly Alliance",
         "rom": "roms/mortal-kombat-deadly-alliance.gba",
-        "capa": "assets/capas/gba/mortal-kombat-deadly-alliance.jpg"
+        "capa": "assets/capas/gba/mortal-kombat-deadly-alliance.jpg",
+        "preview": ""
     },
     {
         "nome": "Mother 1 2",
         "rom": "roms/mother-1-2.gba",
-        "capa": "assets/capas/gba/mother-1-2.jpg"
+        "capa": "mother-1-2.jpg",
+        "preview": "mother-1-2.gif"
     },
     {
         "nome": "Mother 3",
         "rom": "roms/mother-3.gba",
-        "capa": "assets/capas/gba/mother-3.jpg"
+        "capa": "mother-3.png",
+        "preview": "mother-3.gif"
     },
     {
         "nome": "Motoracer Advance",
         "rom": "roms/motoracer-advance.gba",
-        "capa": "assets/capas/gba/motoracer-advance.jpg"
+        "capa": "assets/capas/gba/motoracer-advance.jpg",
+        "preview": ""
     },
     {
         "nome": "Naruto Ninja Council 2",
         "rom": "roms/naruto-ninja-council-2.gba",
-        "capa": "assets/capas/gba/naruto-ninja-council-2.jpg"
+        "capa": "assets/capas/gba/naruto-ninja-council-2.jpg",
+        "preview": ""
     },
     {
         "nome": "Need For Speed Most Wanted",
         "rom": "roms/need-for-speed-most-wanted.gba",
-        "capa": "assets/capas/gba/need-for-speed-most-wanted.jpg"
+        "capa": "assets/capas/gba/need-for-speed-most-wanted.jpg",
+        "preview": ""
     },
     {
         "nome": "Next Generation Tennis",
         "rom": "roms/next-generation-tennis.gba",
-        "capa": "assets/capas/gba/next-generation-tennis.jpg"
+        "capa": "assets/capas/gba/next-generation-tennis.jpg",
+        "preview": ""
     },
     {
         "nome": "Nicktoons Attack Of The Toybots",
         "rom": "roms/nicktoons-attack-of-the-toybots.gba",
-        "capa": "assets/capas/gba/nicktoons-attack-of-the-toybots.jpg"
+        "capa": "assets/capas/gba/nicktoons-attack-of-the-toybots.jpg",
+        "preview": ""
     },
     {
         "nome": "Nicktoons Unite",
         "rom": "roms/nicktoons-unite.gba",
-        "capa": "assets/capas/gba/nicktoons-unite.jpg"
+        "capa": "nicktoons-unite.jpg",
+        "preview": "nicktoons-unite.gif"
     },
     {
         "nome": "Ninja Five 0",
         "rom": "roms/ninja-five-0.gba",
-        "capa": "assets/capas/gba/ninja-five-0.jpg"
+        "capa": "ninja-five-0.jpg",
+        "preview": "ninja-five-0.gif"
     },
     {
         "nome": "Noddy A Day In Toyland",
         "rom": "roms/noddy-a-day-in-toyland.gba",
-        "capa": "assets/capas/gba/noddy-a-day-in-toyland.jpg"
+        "capa": "assets/capas/gba/noddy-a-day-in-toyland.jpg",
+        "preview": ""
     },
     {
         "nome": "One Piece",
         "rom": "roms/one-piece.gba",
-        "capa": "assets/capas/gba/one-piece.jpg"
+        "capa": "one-piece.jpg",
+        "preview": "one-piece.gif"
     },
     {
         "nome": "Open Season",
         "rom": "roms/open-season.gba",
-        "capa": "assets/capas/gba/open-season.jpg"
+        "capa": "open-season.jpg",
+        "preview": "open-season.gif"
     },
     {
         "nome": "Pirates Of The Caribbean The Curse Of The Black Pearl",
         "rom": "roms/pirates-of-the-caribbean-the-curse-of-the-black-pearl.gba",
-        "capa": "assets/capas/gba/pirates-of-the-caribbean-the-curse-of-the-black-pearl.jpg"
+        "capa": "assets/capas/gba/pirates-of-the-caribbean-the-curse-of-the-black-pearl.jpg",
+        "preview": ""
     },
     {
         "nome": "Planet Of The Apes",
         "rom": "roms/planet-of-the-apes.gba",
-        "capa": "assets/capas/gba/planet-of-the-apes.jpg"
+        "capa": "assets/capas/gba/planet-of-the-apes.jpg",
+        "preview": ""
     },
     {
         "nome": "Pok Mon Blue Stars 2",
         "rom": "roms/pok-mon-blue-stars-2.gba",
-        "capa": "assets/capas/gba/pok-mon-blue-stars-2.jpg"
+        "capa": "assets/capas/gba/pok-mon-blue-stars-2.jpg",
+        "preview": ""
     },
     {
         "nome": "Pok Mon Legendary",
         "rom": "roms/pok-mon-legendary.gba",
-        "capa": "assets/capas/gba/pok-mon-legendary.jpg"
+        "capa": "assets/capas/gba/pok-mon-legendary.jpg",
+        "preview": ""
     },
     {
         "nome": "Pokemon Ashgray 4.5.3",
         "rom": "roms/pokemon-ashgray-4.5.3.gba",
-        "capa": "assets/capas/gba/pokemon-ashgray-4.5.3.jpg"
+        "capa": "assets/capas/gba/pokemon-ashgray-4.5.3.jpg",
+        "preview": ""
     },
     {
         "nome": "Pokemon Dark Fire",
         "rom": "roms/pokemon-dark-fire.gba",
-        "capa": "assets/capas/gba/pokemon-dark-fire.jpg"
+        "capa": "pokemon-dark-fire.jpg",
+        "preview": "pokemon-dark-fire.gif"
     },
     {
         "nome": "Pokemon Dark Pearl",
         "rom": "roms/pokemon-dark-pearl.gba",
-        "capa": "assets/capas/gba/pokemon-dark-pearl.jpg"
+        "capa": "pokemon-dark-pearl.jpg",
+        "preview": "pokemon-dark-pearl.gif"
     },
     {
         "nome": "Pokemon Emerald Version",
         "rom": "roms/pokemon-emerald-version.gba",
-        "capa": "assets/capas/gba/pokemon-emerald-version.jpg"
+        "capa": "assets/capas/gba/pokemon-emerald-version.jpg",
+        "preview": ""
     },
     {
         "nome": "Pokemon Emerald",
         "rom": "roms/pokemon-emerald.gba",
-        "capa": "assets/capas/gba/pokemon-emerald.jpg"
+        "capa": "pokemon-emerald.jpg",
+        "preview": "pokemon-emerald.gif"
     },
     {
         "nome": "Pokemon Fire Red Version",
         "rom": "roms/pokemon-fire-red-version.gba",
-        "capa": "assets/capas/gba/pokemon-fire-red-version.jpg"
+        "capa": "assets/capas/gba/pokemon-fire-red-version.jpg",
+        "preview": ""
     },
     {
         "nome": "Pokemon Fire Red",
         "rom": "roms/pokemon-fire-red.gba",
-        "capa": "assets/capas/gba/pokemon-fire-red.jpg"
+        "capa": "pokemon-fire-red.jpg",
+        "preview": "pokemon-fire-red.gif"
     },
     {
         "nome": "Pokemon Leaf Green Version",
         "rom": "roms/pokemon-leaf-green-version.gba",
-        "capa": "assets/capas/gba/pokemon-leaf-green-version.jpg"
+        "capa": "assets/capas/gba/pokemon-leaf-green-version.jpg",
+        "preview": ""
     },
     {
         "nome": "Pokemon Light Platinum",
         "rom": "roms/pokemon-light-platinum.gba",
-        "capa": "assets/capas/gba/pokemon-light-platinum.jpg"
+        "capa": "pokemon-light-platinum.jpg",
+        "preview": "pokemon-light-platinum.gif"
     },
     {
         "nome": "Pokemon Lunares Br",
         "rom": "roms/pokemon-lunares-br.gba",
-        "capa": "assets/capas/gba/pokemon-lunares-br.jpg"
+        "capa": "assets/capas/gba/pokemon-lunares-br.jpg",
+        "preview": ""
     },
     {
         "nome": "Pokemon My Ass",
         "rom": "roms/pokemon-my-ass.gba",
-        "capa": "assets/capas/gba/pokemon-my-ass.jpg"
+        "capa": "pokemon-my-ass.jpg",
+        "preview": "pokemon-my-ass.gif"
     },
     {
         "nome": "Pokemon Mystery Dungeon Red Rescue Team",
         "rom": "roms/pokemon-mystery-dungeon-red-rescue-team.gba",
-        "capa": "assets/capas/gba/pokemon-mystery-dungeon-red-rescue-team.jpg"
+        "capa": "assets/capas/gba/pokemon-mystery-dungeon-red-rescue-team.jpg",
+        "preview": ""
     },
     {
         "nome": "Pokemon New Hoenn",
         "rom": "roms/pokemon-new-hoenn.gba",
-        "capa": "assets/capas/gba/pokemon-new-hoenn.jpg"
+        "capa": "pokemon-new-hoenn.jpg",
+        "preview": "pokemon-new-hoenn.gif"
     },
     {
         "nome": "Pokemon Omega Ruby V1.8",
         "rom": "roms/pokemon-omega-ruby-v1.8.gba",
-        "capa": "assets/capas/gba/pokemon-omega-ruby-v1.8.jpg"
+        "capa": "assets/capas/gba/pokemon-omega-ruby-v1.8.jpg",
+        "preview": ""
     },
     {
         "nome": "Pokemon Resolute Version",
         "rom": "roms/pokemon-resolute-version.gba",
-        "capa": "assets/capas/gba/pokemon-resolute-version.jpg"
+        "capa": "assets/capas/gba/pokemon-resolute-version.jpg",
+        "preview": ""
     },
     {
         "nome": "Pokemon Ribeirao Pires",
         "rom": "roms/pokemon-ribeirao-pires.gba",
-        "capa": "assets/capas/gba/pokemon-ribeirao-pires.jpg"
+        "capa": "assets/capas/gba/pokemon-ribeirao-pires.jpg",
+        "preview": ""
     },
     {
         "nome": "Pokemon Ruby",
         "rom": "roms/pokemon-ruby.gba",
-        "capa": "assets/capas/gba/pokemon-ruby.jpg"
+        "capa": "pokemon-ruby.jpg",
+        "preview": "pokemon-ruby.gif"
     },
     {
         "nome": "Pokemon Sapphire Version",
         "rom": "roms/pokemon-sapphire-version.gba",
-        "capa": "assets/capas/gba/pokemon-sapphire-version.jpg"
+        "capa": "assets/capas/gba/pokemon-sapphire-version.jpg",
+        "preview": ""
     },
     {
         "nome": "Pokemon Shadow Force",
         "rom": "roms/pokemon-shadow-force.gba",
-        "capa": "assets/capas/gba/pokemon-shadow-force.jpg"
+        "capa": "assets/capas/gba/pokemon-shadow-force.jpg",
+        "preview": ""
     },
     {
         "nome": "Pokemon Stone Dragon",
         "rom": "roms/pokemon-stone-dragon.gba",
-        "capa": "assets/capas/gba/pokemon-stone-dragon.jpg"
+        "capa": "assets/capas/gba/pokemon-stone-dragon.jpg",
+        "preview": ""
     },
     {
         "nome": "Pokemon Volcano",
         "rom": "roms/pokemon-volcano.gba",
-        "capa": "assets/capas/gba/pokemon-volcano.jpg"
+        "capa": "pokemon-volcano.jpg",
+        "preview": "pokemon-volcano.gif"
     },
     {
         "nome": "Pokemon Water Blue",
         "rom": "roms/pokemon-water-blue.gba",
-        "capa": "assets/capas/gba/pokemon-water-blue.jpg"
+        "capa": "pokemon-water-blue.jpg",
+        "preview": "pokemon-water-blue.gif"
     },
     {
         "nome": "Prince Of Persia The Sands Of Time",
         "rom": "roms/prince-of-persia-the-sands-of-time.gba",
-        "capa": "assets/capas/gba/prince-of-persia-the-sands-of-time.jpg"
+        "capa": "assets/capas/gba/prince-of-persia-the-sands-of-time.jpg",
+        "preview": ""
     },
     {
         "nome": "Princess Natasha Student Secret Agent Princess",
         "rom": "roms/princess-natasha-student-secret-agent-princess.gba",
-        "capa": "assets/capas/gba/princess-natasha-student-secret-agent-princess.jpg"
+        "capa": "assets/capas/gba/princess-natasha-student-secret-agent-princess.jpg",
+        "preview": ""
     },
     {
         "nome": "Pro Beach Soccer",
         "rom": "roms/pro-beach-soccer.gba",
-        "capa": "assets/capas/gba/pro-beach-soccer.jpg"
+        "capa": "assets/capas/gba/pro-beach-soccer.jpg",
+        "preview": ""
     },
     {
         "nome": "R Type Iii The Third Lightning",
         "rom": "roms/r-type-iii-the-third-lightning.gba",
-        "capa": "assets/capas/gba/r-type-iii-the-third-lightning.jpg"
+        "capa": "assets/capas/gba/r-type-iii-the-third-lightning.jpg",
+        "preview": ""
     },
     {
         "nome": "Ratatouille",
         "rom": "roms/ratatouille.gba",
-        "capa": "assets/capas/gba/ratatouille.jpg"
+        "capa": "ratatouille.jpg",
+        "preview": "ratatouille.gif"
     },
     {
         "nome": "Rayman 3",
         "rom": "roms/rayman-3.gba",
-        "capa": "assets/capas/gba/rayman-3.jpg"
+        "capa": "rayman-3.png",
+        "preview": "rayman-3.gif"
     },
     {
         "nome": "Rayman Advance",
         "rom": "roms/rayman-advance.gba",
-        "capa": "assets/capas/gba/rayman-advance.jpg"
+        "capa": "rayman-advance.jpg",
+        "preview": "rayman-advance.gif"
     },
     {
         "nome": "Robot Wars Advanced Destruction",
         "rom": "roms/robot-wars-advanced-destruction.gba",
-        "capa": "assets/capas/gba/robot-wars-advanced-destruction.jpg"
+        "capa": "assets/capas/gba/robot-wars-advanced-destruction.jpg",
+        "preview": ""
     },
     {
         "nome": "Robotech The Macross Saga",
         "rom": "roms/robotech-the-macross-saga.gba",
-        "capa": "assets/capas/gba/robotech-the-macross-saga.jpg"
+        "capa": "assets/capas/gba/robotech-the-macross-saga.jpg",
+        "preview": ""
     },
     {
         "nome": "Rocket Power Dream Scheme",
         "rom": "roms/rocket-power-dream-scheme.gba",
-        "capa": "assets/capas/gba/rocket-power-dream-scheme.jpg"
+        "capa": "assets/capas/gba/rocket-power-dream-scheme.jpg",
+        "preview": ""
     },
     {
         "nome": "Samurai Jack The Amulet Of Time",
         "rom": "roms/samurai-jack-the-amulet-of-time.gba",
-        "capa": "assets/capas/gba/samurai-jack-the-amulet-of-time.jpg"
+        "capa": "assets/capas/gba/samurai-jack-the-amulet-of-time.jpg",
+        "preview": ""
     },
     {
         "nome": "Scooby Doo 2 Monsters Unleashed",
         "rom": "roms/scooby-doo-2-monsters-unleashed.gba",
-        "capa": "assets/capas/gba/scooby-doo-2-monsters-unleashed.jpg"
+        "capa": "assets/capas/gba/scooby-doo-2-monsters-unleashed.jpg",
+        "preview": ""
     },
     {
         "nome": "Shaman King Master Of Spirits 2",
         "rom": "roms/shaman-king-master-of-spirits-2.gba",
-        "capa": "assets/capas/gba/shaman-king-master-of-spirits-2.jpg"
+        "capa": "assets/capas/gba/shaman-king-master-of-spirits-2.jpg",
+        "preview": ""
     },
     {
         "nome": "Shaman King Master Of Spirits",
         "rom": "roms/shaman-king-master-of-spirits.gba",
-        "capa": "assets/capas/gba/shaman-king-master-of-spirits.jpg"
+        "capa": "assets/capas/gba/shaman-king-master-of-spirits.jpg",
+        "preview": ""
     },
     {
         "nome": "Shining Force Resurrection Of The Dark Dragon",
         "rom": "roms/shining-force-resurrection-of-the-dark-dragon.gba",
-        "capa": "assets/capas/gba/shining-force-resurrection-of-the-dark-dragon.jpg"
+        "capa": "assets/capas/gba/shining-force-resurrection-of-the-dark-dragon.jpg",
+        "preview": ""
     },
     {
         "nome": "Shining Soul Ii",
         "rom": "roms/shining-soul-ii.gba",
-        "capa": "assets/capas/gba/shining-soul-ii.jpg"
+        "capa": "shining-soul-ii.jpg",
+        "preview": "shining-soul-ii.gif"
     },
     {
         "nome": "Shining Soul",
         "rom": "roms/shining-soul.gba",
-        "capa": "assets/capas/gba/shining-soul.jpg"
+        "capa": "shining-soul.jpg",
+        "preview": "shining-soul.gif"
     },
     {
         "nome": "Shrek 2 Beg For Mercy",
         "rom": "roms/shrek-2-beg-for-mercy.gba",
-        "capa": "assets/capas/gba/shrek-2-beg-for-mercy.jpg"
+        "capa": "assets/capas/gba/shrek-2-beg-for-mercy.jpg",
+        "preview": ""
     },
     {
         "nome": "Sim City 2000",
         "rom": "roms/sim-city-2000.gba",
-        "capa": "assets/capas/gba/sim-city-2000.jpg"
+        "capa": "assets/capas/gba/sim-city-2000.jpg",
+        "preview": ""
     },
     {
         "nome": "Sonic Battle.Com",
         "rom": "roms/sonic-battle.com.gba",
-        "capa": "assets/capas/gba/sonic-battle.com.jpg"
+        "capa": "assets/capas/gba/sonic-battle.com.jpg",
+        "preview": ""
     },
     {
         "nome": "Spider Man 2",
         "rom": "roms/spider-man-2.gba",
-        "capa": "assets/capas/gba/spider-man-2.jpg"
+        "capa": "spiderman-2.jpg",
+        "preview": "spiderman-2.gif"
     },
     {
         "nome": "Spider Man 3",
         "rom": "roms/spider-man-3.gba",
-        "capa": "assets/capas/gba/spider-man-3.jpg"
+        "capa": "spiderman-3.jpg",
+        "preview": "spiderman-3.gif"
     },
     {
         "nome": "Spider Man Battle For New York",
         "rom": "roms/spider-man-battle-for-new-york.gba",
-        "capa": "assets/capas/gba/spider-man-battle-for-new-york.jpg"
+        "capa": "assets/capas/gba/spider-man-battle-for-new-york.jpg",
+        "preview": ""
     },
     {
         "nome": "Spider Man Mysterio S Menace",
         "rom": "roms/spider-man-mysterio-s-menace.gba",
-        "capa": "assets/capas/gba/spider-man-mysterio-s-menace.jpg"
+        "capa": "assets/capas/gba/spider-man-mysterio-s-menace.jpg",
+        "preview": ""
     },
     {
         "nome": "Spongebob And Friends Attack Of The Toybots",
         "rom": "roms/spongebob-and-friends-attack-of-the-toybots.gba",
-        "capa": "assets/capas/gba/spongebob-and-friends-attack-of-the-toybots.jpg"
+        "capa": "assets/capas/gba/spongebob-and-friends-attack-of-the-toybots.jpg",
+        "preview": ""
     },
     {
         "nome": "Spongebob Squarepants Supersponge Br",
         "rom": "roms/spongebob-squarepants-supersponge-br.gba",
-        "capa": "assets/capas/gba/spongebob-squarepants-supersponge-br.jpg"
+        "capa": "assets/capas/gba/spongebob-squarepants-supersponge-br.jpg",
+        "preview": ""
     },
     {
         "nome": "Spongebob Squarepants Supersponge",
         "rom": "roms/spongebob-squarepants-supersponge.gba",
-        "capa": "assets/capas/gba/spongebob-squarepants-supersponge.jpg"
+        "capa": "assets/capas/gba/spongebob-squarepants-supersponge.jpg",
+        "preview": ""
     },
     {
         "nome": "Spyro Orange The Cortex Conspiracy",
         "rom": "roms/spyro-orange-the-cortex-conspiracy.gba",
-        "capa": "assets/capas/gba/spyro-orange-the-cortex-conspiracy.jpg"
+        "capa": "assets/capas/gba/spyro-orange-the-cortex-conspiracy.jpg",
+        "preview": ""
     },
     {
         "nome": "Star Wars Episode Ii Attack Of The Clones",
         "rom": "roms/star-wars-episode-ii-attack-of-the-clones.gba",
-        "capa": "assets/capas/gba/star-wars-episode-ii-attack-of-the-clones.jpg"
+        "capa": "assets/capas/gba/star-wars-episode-ii-attack-of-the-clones.jpg",
+        "preview": ""
     },
     {
         "nome": "Star Wars Episode Iii Revenge Of The Sith",
         "rom": "roms/star-wars-episode-iii-revenge-of-the-sith.gba",
-        "capa": "assets/capas/gba/star-wars-episode-iii-revenge-of-the-sith.jpg"
+        "capa": "assets/capas/gba/star-wars-episode-iii-revenge-of-the-sith.jpg",
+        "preview": ""
     },
     {
         "nome": "Strawberry Shortcake Ice Cream Island Riding Camp",
         "rom": "roms/strawberry-shortcake-ice-cream-island-riding-camp.gba",
-        "capa": "assets/capas/gba/strawberry-shortcake-ice-cream-island-riding-camp.jpg"
+        "capa": "assets/capas/gba/strawberry-shortcake-ice-cream-island-riding-camp.jpg",
+        "preview": ""
     },
     {
         "nome": "Super Bubble Pop",
         "rom": "roms/super-bubble-pop.gba",
-        "capa": "assets/capas/gba/super-bubble-pop.jpg"
+        "capa": "super-bubble-pop.jpg",
+        "preview": "super-bubble-pop.gif"
     },
     {
         "nome": "Super Ghouls N Ghosts",
         "rom": "roms/super-ghouls-n-ghosts.gba",
-        "capa": "assets/capas/gba/super-ghouls-n-ghosts.jpg"
+        "capa": "assets/capas/gba/super-ghouls-n-ghosts.jpg",
+        "preview": ""
     },
     {
         "nome": "Super Mario Advance 2 Super Mario World",
         "rom": "roms/super-mario-advance-2-super-mario-world.gba",
-        "capa": "assets/capas/gba/super-mario-advance-2-super-mario-world.jpg"
+        "capa": "assets/capas/gba/super-mario-advance-2-super-mario-world.jpg",
+        "preview": ""
     },
     {
         "nome": "Super Mario Advance",
         "rom": "roms/super-mario-advance.gba",
-        "capa": "assets/capas/gba/super-mario-advance.jpg"
+        "capa": "super-mario-advance.jpg",
+        "preview": "super-mario-advance.gif"
     },
     {
         "nome": "Super Robot Taisen Original Generation 2",
         "rom": "roms/super-robot-taisen-original-generation-2.gba",
-        "capa": "assets/capas/gba/super-robot-taisen-original-generation-2.jpg"
+        "capa": "assets/capas/gba/super-robot-taisen-original-generation-2.jpg",
+        "preview": ""
     },
     {
         "nome": "Sword Of Mana",
         "rom": "roms/sword-of-mana.gba",
-        "capa": "assets/capas/gba/sword-of-mana.jpg"
+        "capa": "sword-of-mana.jpg",
+        "preview": "sword-of-mana.gif"
     },
     {
         "nome": "Tactics Ogre The Knight Of Lodis",
         "rom": "roms/tactics-ogre-the-knight-of-lodis.gba",
-        "capa": "assets/capas/gba/tactics-ogre-the-knight-of-lodis.jpg"
+        "capa": "assets/capas/gba/tactics-ogre-the-knight-of-lodis.jpg",
+        "preview": ""
     },
     {
         "nome": "Tak The Great Juju Challenge",
         "rom": "roms/tak-the-great-juju-challenge.gba",
-        "capa": "assets/capas/gba/tak-the-great-juju-challenge.jpg"
+        "capa": "assets/capas/gba/tak-the-great-juju-challenge.jpg",
+        "preview": ""
     },
     {
         "nome": "Tales Of Phantasia",
         "rom": "roms/tales-of-phantasia.gba",
-        "capa": "assets/capas/gba/tales-of-phantasia.jpg"
+        "capa": "tales-of-phantasia.png",
+        "preview": "tales-of-phantasia.gif"
     },
     {
         "nome": "Teenage Mutant Ninja Turtles 2 Battle Nexus",
         "rom": "roms/teenage-mutant-ninja-turtles-2-battle-nexus.gba",
-        "capa": "assets/capas/gba/teenage-mutant-ninja-turtles-2-battle-nexus.jpg"
+        "capa": "assets/capas/gba/teenage-mutant-ninja-turtles-2-battle-nexus.jpg",
+        "preview": ""
     },
     {
         "nome": "Teenage Mutant Ninja Turtles",
         "rom": "roms/teenage-mutant-ninja-turtles.gba",
-        "capa": "assets/capas/gba/teenage-mutant-ninja-turtles.jpg"
+        "capa": "assets/capas/gba/teenage-mutant-ninja-turtles.jpg",
+        "preview": ""
     },
     {
         "nome": "Tekken Advance",
         "rom": "roms/tekken-advance.gba",
-        "capa": "assets/capas/gba/tekken-advance.jpg"
+        "capa": "assets/capas/gba/tekken-advance.jpg",
+        "preview": ""
     },
     {
         "nome": "Tennis Masters Series 2003",
         "rom": "roms/tennis-masters-series-2003.gba",
-        "capa": "assets/capas/gba/tennis-masters-series-2003.jpg"
+        "capa": "assets/capas/gba/tennis-masters-series-2003.jpg",
+        "preview": ""
     },
     {
         "nome": "The Hobbit",
         "rom": "roms/the-hobbit.gba",
-        "capa": "assets/capas/gba/the-hobbit.jpg"
+        "capa": "assets/capas/gba/the-hobbit.jpg",
+        "preview": ""
     },
     {
         "nome": "The Incredibles Rise Of The Underminer",
         "rom": "roms/the-incredibles-rise-of-the-underminer.gba",
-        "capa": "assets/capas/gba/the-incredibles-rise-of-the-underminer.jpg"
+        "capa": "assets/capas/gba/the-incredibles-rise-of-the-underminer.jpg",
+        "preview": ""
     },
     {
         "nome": "The Incredibles",
         "rom": "roms/the-incredibles.gba",
-        "capa": "assets/capas/gba/the-incredibles.jpg"
+        "capa": "assets/capas/gba/the-incredibles.jpg",
+        "preview": ""
     },
     {
         "nome": "The Land Before Time",
         "rom": "roms/the-land-before-time.gba",
-        "capa": "assets/capas/gba/the-land-before-time.jpg"
+        "capa": "assets/capas/gba/the-land-before-time.jpg",
+        "preview": ""
     },
     {
         "nome": "The Legend Of Zelda A Link To The Past Four Swords",
         "rom": "roms/the-legend-of-zelda-a-link-to-the-past-four-swords.gba",
-        "capa": "assets/capas/gba/the-legend-of-zelda-a-link-to-the-past-four-swords.jpg"
+        "capa": "assets/capas/gba/the-legend-of-zelda-a-link-to-the-past-four-swords.jpg",
+        "preview": ""
     },
     {
         "nome": "The Legend Of Zelda The Minish Cap",
         "rom": "roms/the-legend-of-zelda-the-minish-cap.gba",
-        "capa": "assets/capas/gba/the-legend-of-zelda-the-minish-cap.jpg"
+        "capa": "assets/capas/gba/the-legend-of-zelda-the-minish-cap.jpg",
+        "preview": ""
     },
     {
         "nome": "The Lord Of The Rings The Fellowship Of The Ring",
         "rom": "roms/the-lord-of-the-rings-the-fellowship-of-the-ring.gba",
-        "capa": "assets/capas/gba/the-lord-of-the-rings-the-fellowship-of-the-ring.jpg"
+        "capa": "assets/capas/gba/the-lord-of-the-rings-the-fellowship-of-the-ring.jpg",
+        "preview": ""
     },
     {
         "nome": "The Minish Cap",
         "rom": "roms/the-minish-cap.gba",
-        "capa": "assets/capas/gba/the-minish-cap.jpg"
+        "capa": "assets/capas/gba/the-minish-cap.jpg",
+        "preview": ""
     },
     {
         "nome": "The Powerpuff Girls Mojo Jojo A Go Go",
         "rom": "roms/the-powerpuff-girls-mojo-jojo-a-go-go.gba",
-        "capa": "assets/capas/gba/the-powerpuff-girls-mojo-jojo-a-go-go.jpg"
+        "capa": "assets/capas/gba/the-powerpuff-girls-mojo-jojo-a-go-go.jpg",
+        "preview": ""
     },
     {
         "nome": "The Revenge Of Shinobi",
         "rom": "roms/the-revenge-of-shinobi.gba",
-        "capa": "assets/capas/gba/the-revenge-of-shinobi.jpg"
+        "capa": "assets/capas/gba/the-revenge-of-shinobi.jpg",
+        "preview": ""
     },
     {
         "nome": "The Scorpion King Sword Of Osiris",
         "rom": "roms/the-scorpion-king-sword-of-osiris.gba",
-        "capa": "assets/capas/gba/the-scorpion-king-sword-of-osiris.jpg"
+        "capa": "assets/capas/gba/the-scorpion-king-sword-of-osiris.jpg",
+        "preview": ""
     },
     {
         "nome": "Tom Clancy S Rainbow Six Rogue Spear",
         "rom": "roms/tom-clancy-s-rainbow-six-rogue-spear.gba",
-        "capa": "assets/capas/gba/tom-clancy-s-rainbow-six-rogue-spear.jpg"
+        "capa": "assets/capas/gba/tom-clancy-s-rainbow-six-rogue-spear.jpg",
+        "preview": ""
     },
     {
         "nome": "Tom Clancy S Splinter Cell Pandora Tomorrow",
         "rom": "roms/tom-clancy-s-splinter-cell-pandora-tomorrow.gba",
-        "capa": "assets/capas/gba/tom-clancy-s-splinter-cell-pandora-tomorrow.jpg"
+        "capa": "assets/capas/gba/tom-clancy-s-splinter-cell-pandora-tomorrow.jpg",
+        "preview": ""
     },
     {
         "nome": "Tom Clancy S Splinter Cell",
         "rom": "roms/tom-clancy-s-splinter-cell.gba",
-        "capa": "assets/capas/gba/tom-clancy-s-splinter-cell.jpg"
+        "capa": "assets/capas/gba/tom-clancy-s-splinter-cell.jpg",
+        "preview": ""
     },
     {
         "nome": "Tony Hawk S American Sk8Land",
         "rom": "roms/tony-hawk-s-american-sk8land.gba",
-        "capa": "assets/capas/gba/tony-hawk-s-american-sk8land.jpg"
+        "capa": "assets/capas/gba/tony-hawk-s-american-sk8land.jpg",
+        "preview": ""
     },
     {
         "nome": "Totally Spies",
         "rom": "roms/totally-spies.gba",
-        "capa": "assets/capas/gba/totally-spies.jpg"
+        "capa": "totally-spies.jpg",
+        "preview": "totally-spies.gif"
     },
     {
         "nome": "Van Helsing",
         "rom": "roms/van-helsing.gba",
-        "capa": "assets/capas/gba/van-helsing.jpg"
+        "capa": "van-helsing.jpg",
+        "preview": "van-helsing.gif"
     },
     {
         "nome": "Wario Land 4",
         "rom": "roms/wario-land-4.gba",
-        "capa": "assets/capas/gba/wario-land-4.jpg"
+        "capa": "wario-land-4.jpg",
+        "preview": "wario-land-4.gif"
     },
     {
         "nome": "X Men Reign Of Apocalypse",
         "rom": "roms/x-men-reign-of-apocalypse.gba",
-        "capa": "assets/capas/gba/x-men-reign-of-apocalypse.jpg"
+        "capa": "assets/capas/gba/x-men-reign-of-apocalypse.jpg",
+        "preview": ""
     },
     {
         "nome": "X Men The Official Game",
         "rom": "roms/x-men-the-official-game.gba",
-        "capa": "assets/capas/gba/x-men-the-official-game.jpg"
+        "capa": "assets/capas/gba/x-men-the-official-game.jpg",
+        "preview": ""
     },
     {
         "nome": "X2 Wolverine S Revenge",
         "rom": "roms/x2-wolverine-s-revenge.gba",
-        "capa": "assets/capas/gba/x2-wolverine-s-revenge.jpg"
+        "capa": "assets/capas/gba/x2-wolverine-s-revenge.jpg",
+        "preview": ""
     },
     {
         "nome": "Yu Gi Oh 7 Trials To Glory World Championship Tournament 2005",
         "rom": "roms/yu-gi-oh-7-trials-to-glory-world-championship-tournament-2005.gba",
-        "capa": "assets/capas/gba/yu-gi-oh-7-trials-to-glory-world-championship-tournament-2005.jpg"
+        "capa": "assets/capas/gba/yu-gi-oh-7-trials-to-glory-world-championship-tournament-2005.jpg",
+        "preview": ""
     },
     {
         "nome": "Yu Gi Oh The Eternal Duelist Soul",
         "rom": "roms/yu-gi-oh-the-eternal-duelist-soul.gba",
-        "capa": "assets/capas/gba/yu-gi-oh-the-eternal-duelist-soul.jpg"
+        "capa": "assets/capas/gba/yu-gi-oh-the-eternal-duelist-soul.jpg",
+        "preview": ""
     },
     {
         "nome": "Yu Gi Oh The Sacred Cards",
         "rom": "roms/yu-gi-oh-the-sacred-cards.gba",
-        "capa": "assets/capas/gba/yu-gi-oh-the-sacred-cards.jpg"
+        "capa": "assets/capas/gba/yu-gi-oh-the-sacred-cards.jpg",
+        "preview": ""
     },
     {
         "nome": "Yu Yu Hakusho Ghostfiles Spirit Detective",
         "rom": "roms/yu-yu-hakusho-ghostfiles-spirit-detective.gba",
-        "capa": "assets/capas/gba/yu-yu-hakusho-ghostfiles-spirit-detective.jpg"
+        "capa": "assets/capas/gba/yu-yu-hakusho-ghostfiles-spirit-detective.jpg",
+        "preview": ""
     },
     {
         "nome": "Yu Yu Hakusho Ghostfiles Tournament Tactics",
         "rom": "roms/yu-yu-hakusho-ghostfiles-tournament-tactics.gba",
-        "capa": "assets/capas/gba/yu-yu-hakusho-ghostfiles-tournament-tactics.jpg"
+        "capa": "assets/capas/gba/yu-yu-hakusho-ghostfiles-tournament-tactics.jpg",
+        "preview": ""
     },
     {
         "nome": "Zatchbell Electric Arena",
         "rom": "roms/zatchbell-electric-arena.gba",
-        "capa": "assets/capas/gba/zatchbell-electric-arena.jpg"
+        "capa": "assets/capas/gba/zatchbell-electric-arena.jpg",
+        "preview": ""
     }
 ]

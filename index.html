@@ -83,7 +83,9 @@
         .cancel-btn { background: #333; color: #fff; border: 1px solid #555; margin-top: 20px; }
         .cancel-btn:hover, .cancel-btn.gamepad-focus { background: #555; color: #fff; box-shadow: 0 0 15px #555; transform: scale(1.02); border-color: #fff; }
 
-        #splash-screen { position: fixed; inset: 0; background-color: var(--bg-color); display: flex; justify-content: center; align-items: center; z-index: 1000000; transition: opacity 0.8s ease-out, visibility 0.8s; }
+        #splash-screen {
+            position: fixed; inset: 0; background-color: var(--bg-color); display: flex; justify-content: center; align-items: center; z-index: 1000000; transition: opacity 0.8s ease-out, visibility 0.8s;
+        }
         .splash-logo { font-family: 'Press Start 2P', monospace; font-size: clamp(20px, 4vw, 40px); color: var(--accent-color); display: flex; align-items: flex-end; white-space: nowrap; }
         .initial { font-weight: bold; }
         .reveal { display: inline-block; max-width: 0; opacity: 0; overflow: hidden; transition: max-width 1.5s ease-in-out, opacity 1.5s ease-in-out; vertical-align: bottom; font-size: clamp(16px, 3.5vw, 32px); margin-bottom: 2px; }
@@ -97,10 +99,12 @@
         @media(min-width: 769px) {
             .sidebar:hover { width: var(--sidebar-expanded-width); box-shadow: 10px 0 50px rgba(0,0,0,0.5); }
             .sidebar:hover .nav-text { display: inline-block; opacity: 1; transition: 0.3s; }
+            .sidebar:hover .menu-label { opacity: 0; }
             .sidebar:hover .sidebar-chat { display: flex; }
         }
         .sidebar-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; flex-shrink: 0; }
         .sidebar-header img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-color); cursor: pointer; }
+        .menu-label { font-family: 'Press Start 2P'; font-size: 8px; color: var(--text-color); margin-top: 8px; text-align: center; display: block; transition: 0.2s; cursor: pointer; }
         .nav-list { display: flex; flex-direction: column; gap: 10px; flex: 1; margin-top: 10px; }
         .nav-item { display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-muted); justify-content: center; flex-shrink: 0; transition: 0.3s; }
         @media(min-width: 769px) { .nav-item { justify-content: flex-start; } }
@@ -353,17 +357,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-    // ==========================================
-    // INÍCIO DAS CONEXÕES R2 CLOUDFLARE E UTILITÁRIOS
-    // ==========================================
     const R2_URL = "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/";  
-
-    function getCleanName(romPath) {
-        if (!romPath) return "";
-        let base = romPath.split('/').pop().replace(/\.[^/.]+$/, "");
-        // A regra que converte "1943_-_the_battle_(usa)" para o exato nome que tá no seu GitHub!
-        return base.replace(/_/g, '-').replace(/[()',!&]/g, '').toLowerCase();
-    }
 
     const themeToggle = document.getElementById('theme-toggle');
     if (localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-theme'); themeToggle.checked = true; }
@@ -381,9 +375,6 @@
     const db = getDatabase(app);
     const chatRef = ref(db, 'mensagens');
 
-    // ==========================================
-    // LÓGICA DE INÍCIO DE JOGO E M3U
-    // ==========================================
     window.startGame = (url) => {
         if (url.includes('.m3u')) {
             const rawGameParam = url.split('?game=')[1].split('&')[0];
@@ -538,8 +529,6 @@
         slide.id = `hero-slide-${index}`;
             
         const coreToUse = coreMap[game.sysId] || 'snes';
-        
-        // APENAS A ROM VEM DO R2
         const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + game.path + game.rom)}&core=${coreToUse}`;
         const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
 
@@ -648,22 +637,19 @@
                 const card = document.createElement("div");
                 card.className = "game-card selectable-item";
                     
-                // A SOLUÇÃO: A imagem é local! NÃO PÕE R2_URL AQUI
-                const safeName = getCleanName(g.rom);
-                const imgTry1 = `${sys.path}capas/${safeName}.jpg`;
-                const gifTry1 = `${sys.path}previews/${safeName}.gif`;
+                // As imagens agora vêm certinhas porque o fix_json.py as conectou!
+                const imgPath = `${R2_URL}${sys.path}capas/${g.capa}`;
+                const gifPath = g.preview ? `${R2_URL}${sys.path}previews/${g.preview}` : '';
 
                 const coreToUse = coreMap[sys.id] || 'snes';   
-                
-                // AQUI PÕE O R2_URL PORQUE É A ROM:
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
 
                 card.dataset.url = playUrl;
 
                 card.innerHTML = `
                     <div class="card-media">
-                        <img src="${imgTry1}" class="static-thumb" loading="lazy">
-                        <img src="" data-gif1="${gifTry1}" class="active-gif">
+                        <img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';" class="static-thumb" loading="lazy">
+                        <img src="" data-gif="${gifPath}" class="active-gif">
                     </div>
                     <div class="card-title">
                         <span>${g.nome}</span>
@@ -675,9 +661,11 @@
                     const s = cardElement.querySelector('.static-thumb');
                     const a = cardElement.querySelector('.active-gif');
                     clearTimeout(hoverTimeout);   
+                    if (!a.dataset.gif) return; // Se não tiver GIF, não faz nada
+                    
                     const showCoverAndWait = () => { s.style.opacity = '1'; a.style.opacity = '0'; setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 800); hoverTimeout = setTimeout(showGifAndWait, 3000); };
-                    const showGifAndWait = () => { a.src = a.dataset.gif1; a.style.display = 'block'; setTimeout(() => { s.style.opacity = '0'; a.style.opacity = '1'; }, 50); hoverTimeout = setTimeout(showCoverAndWait, 4000); };
-                    hoverTimeout = setTimeout(() => { const tester = new Image(); tester.src = a.dataset.gif1; tester.onload = showGifAndWait; }, 1000);   
+                    const showGifAndWait = () => { a.src = a.dataset.gif; a.style.display = 'block'; setTimeout(() => { s.style.opacity = '0'; a.style.opacity = '1'; }, 50); hoverTimeout = setTimeout(showCoverAndWait, 4000); };
+                    hoverTimeout = setTimeout(() => { const tester = new Image(); tester.src = a.dataset.gif; tester.onload = showGifAndWait; }, 1000);   
                 };
                 const resetGif = (cardElement) => {
                     clearTimeout(hoverTimeout);   
@@ -730,11 +718,10 @@
                 const div = document.createElement('div');
                 div.className = 'search-item selectable-item';   
                  
-                const safeName = getCleanName(h.rom);
-                const imgTry1 = `${h.sysPath}capas/${safeName}.jpg`;
+                const imgPath = `${R2_URL}${h.sysPath}capas/${h.capa}`;
 
                 div.innerHTML = `
-                    <img src="${imgTry1}">   
+                    <img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';">   
                     <span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>
                 `;
                     

@@ -2,651 +2,781 @@
     {
         "nome": "A Bug S Life Ps1",
         "rom": "roms/a_bug_s_life_ps1.bin",
-        "capa": "assets/capas/ps1/a_bug_s_life_ps1.jpg"
+        "capa": "a-bug-s-life-ps1.jpg",
+        "preview": "a-bug-s-life-ps1.gif"
     },
     {
         "nome": "A I T D 2024 Ch1N Com Br.M3U",
         "rom": "roms/a_i_t_d_2024_ch1n_com_br.m3u",
-        "capa": "assets/capas/ps1/a_i_t_d_2024_ch1n_com_br.jpg"
+        "capa": "assets/capas/ps1/a_i_t_d_2024_ch1n_com_br.jpg",
+        "preview": ""
     },
     {
         "nome": "A I T D 2024 Ch1N Com Br Cd1",
         "rom": "roms/a_i_t_d_2024_ch1n_com_br_cd1.bin",
-        "capa": "assets/capas/ps1/a_i_t_d_2024_ch1n_com_br_cd1.jpg"
+        "capa": "assets/capas/ps1/a_i_t_d_2024_ch1n_com_br_cd1.jpg",
+        "preview": ""
     },
     {
         "nome": "A I T D 2024 Ch1N Com Br Cd2",
         "rom": "roms/a_i_t_d_2024_ch1n_com_br_cd2.bin",
-        "capa": "assets/capas/ps1/a_i_t_d_2024_ch1n_com_br_cd2.jpg"
+        "capa": "assets/capas/ps1/a_i_t_d_2024_ch1n_com_br_cd2.jpg",
+        "preview": ""
     },
     {
         "nome": "Aladdin In Nasira S Revenge",
         "rom": "roms/aladdin_in_nasira_s_revenge.bin",
-        "capa": "assets/capas/ps1/aladdin_in_nasira_s_revenge.jpg"
+        "capa": "aladdin-in-nasira-s-revenge.jpg",
+        "preview": "aladdin-in-nasira-s-revenge.gif"
     },
     {
         "nome": "Alien Trilogy Pt Br Ps1",
         "rom": "roms/alien_trilogy_pt_br_ps1.bin",
-        "capa": "assets/capas/ps1/alien_trilogy_pt_br_ps1.jpg"
+        "capa": "alien-trilogy-pt-br-ps1.jpg",
+        "preview": "alien-trilogy-pt-br-ps1.gif"
     },
     {
         "nome": "Alone In The Dark.M3U",
         "rom": "roms/alone_in_the_dark.m3u",
-        "capa": "assets/capas/ps1/alone_in_the_dark.jpg"
+        "capa": "alone-in-the-dark.jpg",
+        "preview": "alone-in-the-dark.gif"
     },
     {
         "nome": "Alone In The Dark.Pbp",
         "rom": "roms/alone_in_the_dark.pbp",
-        "capa": "assets/capas/ps1/alone_in_the_dark.jpg"
+        "capa": "alone-in-the-dark.jpg",
+        "preview": "alone-in-the-dark.gif"
     },
     {
         "nome": "Amerzone The Explorer S Legacy.M3U",
         "rom": "roms/amerzone_the_explorer_s_legacy.m3u",
-        "capa": "assets/capas/ps1/amerzone_the_explorer_s_legacy.jpg"
+        "capa": "amerzone-the-explorer-s-legacy.jpg",
+        "preview": "amerzone-the-explorer-s-legacy.gif"
     },
     {
         "nome": "Amerzone The Explorer S Legacy Cd1",
         "rom": "roms/amerzone_the_explorer_s_legacy_cd1.bin",
-        "capa": "assets/capas/ps1/amerzone_the_explorer_s_legacy_cd1.jpg"
+        "capa": "assets/capas/ps1/amerzone_the_explorer_s_legacy_cd1.jpg",
+        "preview": ""
     },
     {
         "nome": "Amerzone The Explorer S Legacy Cd2",
         "rom": "roms/amerzone_the_explorer_s_legacy_cd2.bin",
-        "capa": "assets/capas/ps1/amerzone_the_explorer_s_legacy_cd2.jpg"
+        "capa": "assets/capas/ps1/amerzone_the_explorer_s_legacy_cd2.jpg",
+        "preview": ""
     },
     {
         "nome": "Apocalypse",
         "rom": "roms/apocalypse.bin",
-        "capa": "assets/capas/ps1/apocalypse.jpg"
+        "capa": "apocalypse.png",
+        "preview": "apocalypse.gif"
     },
     {
         "nome": "Asterix The Gallic War Dublado Ch1N Com Br.M3U",
         "rom": "roms/asterix_the_gallic_war_dublado_ch1n_com_br.m3u",
-        "capa": "assets/capas/ps1/asterix_the_gallic_war_dublado_ch1n_com_br.jpg"
+        "capa": "asterix-the-gallic-war-dublado-ch1n-com-br.jpg",
+        "preview": "asterix-the-gallic-war-dublado-ch1n-com-br.gif"
     },
     {
         "nome": "Asterix The Gallic War Dublado Ch1N Com Br Cd01",
         "rom": "roms/asterix_the_gallic_war_dublado_ch1n_com_br_cd01.bin",
-        "capa": "assets/capas/ps1/asterix_the_gallic_war_dublado_ch1n_com_br_cd01.jpg"
+        "capa": "assets/capas/ps1/asterix_the_gallic_war_dublado_ch1n_com_br_cd01.jpg",
+        "preview": ""
     },
     {
         "nome": "Asterix The Gallic War Dublado Ch1N Com Br Cd02",
         "rom": "roms/asterix_the_gallic_war_dublado_ch1n_com_br_cd02.bin",
-        "capa": "assets/capas/ps1/asterix_the_gallic_war_dublado_ch1n_com_br_cd02.jpg"
+        "capa": "assets/capas/ps1/asterix_the_gallic_war_dublado_ch1n_com_br_cd02.jpg",
+        "preview": ""
     },
     {
         "nome": "Beyblade Pt Br Ps1",
         "rom": "roms/beyblade_pt_br_ps1.bin",
-        "capa": "assets/capas/ps1/beyblade_pt_br_ps1.jpg"
+        "capa": "beyblade-pt-br-ps1.jpg",
+        "preview": "beyblade-pt-br-ps1.gif"
     },
     {
         "nome": "Bomberman Fantasy Race Em Portugu S Playstation 1",
         "rom": "roms/bomberman_fantasy_race_em_portugu_s_playstation_1.bin",
-        "capa": "assets/capas/ps1/bomberman_fantasy_race_em_portugu_s_playstation_1.jpg"
+        "capa": "bomberman-fantasy-race-em-portugu-s-playstation-1.jpg",
+        "preview": "bomberman-fantasy-race-em-portugu-s-playstation-1.gif"
     },
     {
         "nome": "Breath Of Fire Iii Pt Br Ps1",
         "rom": "roms/breath_of_fire_iii_pt_br_ps1.bin",
-        "capa": "assets/capas/ps1/breath_of_fire_iii_pt_br_ps1.jpg"
+        "capa": "breath-of-fire-iii-pt-br-ps1.jpg",
+        "preview": "breath-of-fire-iii-pt-br-ps1.gif"
     },
     {
         "nome": "Breath Of Fire Iv Pt Br Ps1",
         "rom": "roms/breath_of_fire_iv_pt_br_ps1.bin",
-        "capa": "assets/capas/ps1/breath_of_fire_iv_pt_br_ps1.jpg"
+        "capa": "breath-of-fire-iv-pt-br-ps1.jpg",
+        "preview": "breath-of-fire-iv-pt-br-ps1.gif"
     },
     {
         "nome": "Castlevania Symphony Of The Night",
         "rom": "roms/castlevania_symphony_of_the_night.bin",
-        "capa": "assets/capas/ps1/castlevania_symphony_of_the_night.jpg"
+        "capa": "castlevania-symphony-of-the-night.jpg",
+        "preview": "castlevania-symphony-of-the-night.gif"
     },
     {
         "nome": "Chrono Cross Pt Br Ps1.M3U",
         "rom": "roms/chrono_cross_pt_br_ps1.m3u",
-        "capa": "assets/capas/ps1/chrono_cross_pt_br_ps1.jpg"
+        "capa": "chrono-cross-pt-br-ps1.jpg",
+        "preview": "chrono-cross-pt-br-ps1.gif"
     },
     {
         "nome": "Chrono Cross Pt Br Ps1 Cd1",
         "rom": "roms/chrono_cross_pt_br_ps1_cd1.bin",
-        "capa": "assets/capas/ps1/chrono_cross_pt_br_ps1_cd1.jpg"
+        "capa": "assets/capas/ps1/chrono_cross_pt_br_ps1_cd1.jpg",
+        "preview": ""
     },
     {
         "nome": "Chrono Cross Pt Br Ps1 Cd2",
         "rom": "roms/chrono_cross_pt_br_ps1_cd2.bin",
-        "capa": "assets/capas/ps1/chrono_cross_pt_br_ps1_cd2.jpg"
+        "capa": "assets/capas/ps1/chrono_cross_pt_br_ps1_cd2.jpg",
+        "preview": ""
     },
     {
         "nome": "Contra Legacy Of War",
         "rom": "roms/contra_legacy_of_war.bin",
-        "capa": "assets/capas/ps1/contra_legacy_of_war.jpg"
+        "capa": "contra-legacy-of-war.jpg",
+        "preview": "contra-legacy-of-war.gif"
     },
     {
         "nome": "Crash Bandicoot 2 Cortex Strikes Back",
         "rom": "roms/crash_bandicoot_2_cortex_strikes_back.bin",
-        "capa": "assets/capas/ps1/crash_bandicoot_2_cortex_strikes_back.jpg"
+        "capa": "crash-bandicoot-2-cortex-strikes-back.jpg",
+        "preview": "crash-bandicoot-2-cortex-strikes-back.gif"
     },
     {
         "nome": "Crash Bandicoot 3 Warped",
         "rom": "roms/crash_bandicoot_3_warped.bin",
-        "capa": "assets/capas/ps1/crash_bandicoot_3_warped.jpg"
+        "capa": "crash-bandicoot-3-warped.jpg",
+        "preview": "crash-bandicoot-3-warped.gif"
     },
     {
         "nome": "Crash Bash Pt Br",
         "rom": "roms/crash_bash_pt_br.bin",
-        "capa": "assets/capas/ps1/crash_bash_pt_br.jpg"
+        "capa": "crash-bash-pt-br.jpg",
+        "preview": "crash-bash-pt-br.gif"
     },
     {
         "nome": "Crash Team Racing",
         "rom": "roms/crash_team_racing.bin",
-        "capa": "assets/capas/ps1/crash_team_racing.jpg"
+        "capa": "crash-team-racing.jpg",
+        "preview": "crash-team-racing.gif"
     },
     {
         "nome": "Diablo",
         "rom": "roms/diablo.bin",
-        "capa": "assets/capas/ps1/diablo.jpg"
+        "capa": "diablo.jpg",
+        "preview": "diablo.gif"
     },
     {
         "nome": "Digimon World",
         "rom": "roms/digimon_world.bin",
-        "capa": "assets/capas/ps1/digimon_world.jpg"
+        "capa": "digimon-world.jpg",
+        "preview": "digimon-world.gif"
     },
     {
         "nome": "Dino Crisis 2 Dublado",
         "rom": "roms/dino_crisis_2_dublado.bin",
-        "capa": "assets/capas/ps1/dino_crisis_2_dublado.jpg"
+        "capa": "dino-crisis-2-dublado.jpg",
+        "preview": "dino-crisis-2-dublado.gif"
     },
     {
         "nome": "Dino Crisis Dublado E Legendado",
         "rom": "roms/dino_crisis_dublado_e_legendado.bin",
-        "capa": "assets/capas/ps1/dino_crisis_dublado_e_legendado.jpg"
+        "capa": "dino-crisis-dublado-e-legendado.jpg",
+        "preview": "dino-crisis-dublado-e-legendado.gif"
     },
     {
         "nome": "Disneys Atlantis The Lost Empire",
         "rom": "roms/disneys_atlantis_the_lost_empire.bin",
-        "capa": "assets/capas/ps1/disneys_atlantis_the_lost_empire.jpg"
+        "capa": "disneys-atlantis-the-lost-empire.jpg",
+        "preview": "disneys-atlantis-the-lost-empire.gif"
     },
     {
         "nome": "Dracula A Ressurreicao.M3U",
         "rom": "roms/dracula_a_ressurreicao.m3u",
-        "capa": "assets/capas/ps1/dracula_a_ressurreicao.jpg"
+        "capa": "dracula-a-ressurreicao.png",
+        "preview": "dracula-a-ressurreicao.gif"
     },
     {
         "nome": "Dracula A Ressurreicao Cd1",
         "rom": "roms/dracula_a_ressurreicao_cd1.bin",
-        "capa": "assets/capas/ps1/dracula_a_ressurreicao_cd1.jpg"
+        "capa": "assets/capas/ps1/dracula_a_ressurreicao_cd1.jpg",
+        "preview": ""
     },
     {
         "nome": "Dracula A Ressurreicao Cd2",
         "rom": "roms/dracula_a_ressurreicao_cd2.bin",
-        "capa": "assets/capas/ps1/dracula_a_ressurreicao_cd2.jpg"
+        "capa": "assets/capas/ps1/dracula_a_ressurreicao_cd2.jpg",
+        "preview": ""
     },
     {
         "nome": "Driver",
         "rom": "roms/driver.bin",
-        "capa": "assets/capas/ps1/driver.jpg"
+        "capa": "driver.jpg",
+        "preview": "driver.gif"
     },
     {
         "nome": "Driver 2 Pt",
         "rom": "roms/driver_2_pt.bin",
-        "capa": "assets/capas/ps1/driver_2_pt.jpg"
+        "capa": "driver-2-pt.jpg",
+        "preview": "driver-2-pt.gif"
     },
     {
         "nome": "Driver 2 Pt.M3U",
         "rom": "roms/driver_2_pt.m3u",
-        "capa": "assets/capas/ps1/driver_2_pt.jpg"
+        "capa": "driver-2-pt.jpg",
+        "preview": "driver-2-pt.gif"
     },
     {
         "nome": "Echo Night Pt Br",
         "rom": "roms/echo_night_pt_br.bin",
-        "capa": "assets/capas/ps1/echo_night_pt_br.jpg"
+        "capa": "echo-night-pt-br.png",
+        "preview": "echo-night-pt-br.gif"
     },
     {
         "nome": "Final Fantasy Ix Em Portugu S Pt Br.M3U",
         "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br.m3u",
-        "capa": "assets/capas/ps1/final_fantasy_ix_em_portugu_s_pt_br.jpg"
+        "capa": "final-fantasy-ix-em-portugu-s-pt-br.jpg",
+        "preview": "final-fantasy-ix-em-portugu-s-pt-br.gif"
     },
     {
         "nome": "Final Fantasy Ix Em Portugu S Pt Br Cd1",
         "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br_cd1.bin",
-        "capa": "assets/capas/ps1/final_fantasy_ix_em_portugu_s_pt_br_cd1.jpg"
+        "capa": "assets/capas/ps1/final_fantasy_ix_em_portugu_s_pt_br_cd1.jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy Ix Em Portugu S Pt Br Cd2",
         "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br_cd2.bin",
-        "capa": "assets/capas/ps1/final_fantasy_ix_em_portugu_s_pt_br_cd2.jpg"
+        "capa": "assets/capas/ps1/final_fantasy_ix_em_portugu_s_pt_br_cd2.jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy Ix Em Portugu S Pt Br Cd3",
         "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br_cd3.bin",
-        "capa": "assets/capas/ps1/final_fantasy_ix_em_portugu_s_pt_br_cd3.jpg"
+        "capa": "assets/capas/ps1/final_fantasy_ix_em_portugu_s_pt_br_cd3.jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy Ix Em Portugu S Pt Br Cd4",
         "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br_cd4.bin",
-        "capa": "assets/capas/ps1/final_fantasy_ix_em_portugu_s_pt_br_cd4.jpg"
+        "capa": "assets/capas/ps1/final_fantasy_ix_em_portugu_s_pt_br_cd4.jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy Vii Pt Br.M3U",
         "rom": "roms/final_fantasy_vii_pt_br.m3u",
-        "capa": "assets/capas/ps1/final_fantasy_vii_pt_br.jpg"
+        "capa": "final-fantasy-vii-pt-br.jpg",
+        "preview": "final-fantasy-vii-pt-br.gif"
     },
     {
         "nome": "Final Fantasy Vii Pt Br Cd1",
         "rom": "roms/final_fantasy_vii_pt_br_cd1.bin",
-        "capa": "assets/capas/ps1/final_fantasy_vii_pt_br_cd1.jpg"
+        "capa": "assets/capas/ps1/final_fantasy_vii_pt_br_cd1.jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy Vii Pt Br Cd2",
         "rom": "roms/final_fantasy_vii_pt_br_cd2.bin",
-        "capa": "assets/capas/ps1/final_fantasy_vii_pt_br_cd2.jpg"
+        "capa": "assets/capas/ps1/final_fantasy_vii_pt_br_cd2.jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy Vii Pt Br Cd3",
         "rom": "roms/final_fantasy_vii_pt_br_cd3.bin",
-        "capa": "assets/capas/ps1/final_fantasy_vii_pt_br_cd3.jpg"
+        "capa": "assets/capas/ps1/final_fantasy_vii_pt_br_cd3.jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy Viii.M3U",
         "rom": "roms/final_fantasy_viii.m3u",
-        "capa": "assets/capas/ps1/final_fantasy_viii.jpg"
+        "capa": "final-fantasy-viii.png",
+        "preview": "final-fantasy-viii.gif"
     },
     {
         "nome": "Final Fantasy Viii Cd1",
         "rom": "roms/final_fantasy_viii_cd1.bin",
-        "capa": "assets/capas/ps1/final_fantasy_viii_cd1.jpg"
+        "capa": "assets/capas/ps1/final_fantasy_viii_cd1.jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy Viii Cd2",
         "rom": "roms/final_fantasy_viii_cd2.bin",
-        "capa": "assets/capas/ps1/final_fantasy_viii_cd2.jpg"
+        "capa": "assets/capas/ps1/final_fantasy_viii_cd2.jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy Viii Cd3",
         "rom": "roms/final_fantasy_viii_cd3.bin",
-        "capa": "assets/capas/ps1/final_fantasy_viii_cd3.jpg"
+        "capa": "assets/capas/ps1/final_fantasy_viii_cd3.jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy Viii Cd4",
         "rom": "roms/final_fantasy_viii_cd4.bin",
-        "capa": "assets/capas/ps1/final_fantasy_viii_cd4.jpg"
+        "capa": "assets/capas/ps1/final_fantasy_viii_cd4.jpg",
+        "preview": ""
     },
     {
         "nome": "Gold And Glory The Road To El Dorado Pt Br",
         "rom": "roms/gold_and_glory_the_road_to_el_dorado_pt_br.bin",
-        "capa": "assets/capas/ps1/gold_and_glory_the_road_to_el_dorado_pt_br.jpg"
+        "capa": "gold-and-glory-the-road-to-el-dorado-pt-br.jpg",
+        "preview": "gold-and-glory-the-road-to-el-dorado-pt-br.gif"
     },
     {
         "nome": "Gran Turismo Pt",
         "rom": "roms/gran_turismo_pt.bin",
-        "capa": "assets/capas/ps1/gran_turismo_pt.jpg"
+        "capa": "gran-turismo-pt.jpg",
+        "preview": "gran-turismo-pt.gif"
     },
     {
         "nome": "Grandia Pt Br.M3U",
         "rom": "roms/grandia_pt_br.m3u",
-        "capa": "assets/capas/ps1/grandia_pt_br.jpg"
+        "capa": "grandia-pt-br.jpg",
+        "preview": "grandia-pt-br.gif"
     },
     {
         "nome": "Grandia Pt Br Cd01",
         "rom": "roms/grandia_pt_br_cd01.bin",
-        "capa": "assets/capas/ps1/grandia_pt_br_cd01.jpg"
+        "capa": "assets/capas/ps1/grandia_pt_br_cd01.jpg",
+        "preview": ""
     },
     {
         "nome": "Grandia Pt Br Cd2",
         "rom": "roms/grandia_pt_br_cd2.bin",
-        "capa": "assets/capas/ps1/grandia_pt_br_cd2.jpg"
+        "capa": "assets/capas/ps1/grandia_pt_br_cd2.jpg",
+        "preview": ""
     },
     {
         "nome": "Gunfighter The Legend Of Jesse James Pt",
         "rom": "roms/gunfighter_the_legend_of_jesse_james_pt.bin",
-        "capa": "assets/capas/ps1/gunfighter_the_legend_of_jesse_james_pt.jpg"
+        "capa": "gunfighter-the-legend-of-jesse-james-pt.jpg",
+        "preview": "gunfighter-the-legend-of-jesse-james-pt.gif"
     },
     {
         "nome": "Harry Potter And The Chamber Of Secrets Pt Br",
         "rom": "roms/harry_potter_and_the_chamber_of_secrets_pt_br.bin",
-        "capa": "assets/capas/ps1/harry_potter_and_the_chamber_of_secrets_pt_br.jpg"
+        "capa": "harry-potter-and-the-chamber-of-secrets-pt-br.jpg",
+        "preview": "harry-potter-and-the-chamber-of-secrets-pt-br.gif"
     },
     {
         "nome": "Harry Potter And The Philosopher S Stone Pt",
         "rom": "roms/harry_potter_and_the_philosopher_s_stone_pt.bin",
-        "capa": "assets/capas/ps1/harry_potter_and_the_philosopher_s_stone_pt.jpg"
+        "capa": "harry-potter-and-the-philosopher-s-stone-pt.jpg",
+        "preview": "harry-potter-and-the-philosopher-s-stone-pt.gif"
     },
     {
         "nome": "Harvest Moon Back To Nature Em Portugu S Pt",
         "rom": "roms/harvest_moon_back_to_nature_em_portugu_s_pt.bin",
-        "capa": "assets/capas/ps1/harvest_moon_back_to_nature_em_portugu_s_pt.jpg"
+        "capa": "harvest-moon-back-to-nature-em-portugu-s-pt.jpg",
+        "preview": "harvest-moon-back-to-nature-em-portugu-s-pt.gif"
     },
     {
         "nome": "Hercules Playstation 1",
         "rom": "roms/hercules_playstation_1.bin",
-        "capa": "assets/capas/ps1/hercules_playstation_1.jpg"
+        "capa": "hercules-playstation-1.jpg",
+        "preview": "hercules-playstation-1.gif"
     },
     {
         "nome": "Hoshigami Ruining Blue Earth",
         "rom": "roms/hoshigami_ruining_blue_earth.bin",
-        "capa": "assets/capas/ps1/hoshigami_ruining_blue_earth.jpg"
+        "capa": "hoshigami-ruining-blue-earth.png",
+        "preview": "hoshigami-ruining-blue-earth.gif"
     },
     {
         "nome": "Hugo",
         "rom": "roms/hugo.bin",
-        "capa": "assets/capas/ps1/hugo.jpg"
+        "capa": "hugo.jpg",
+        "preview": "hugo.gif"
     },
     {
         "nome": "Hugo 3 The Quest Of The Sunstones",
         "rom": "roms/hugo_3_the_quest_of_the_sunstones.bin",
-        "capa": "assets/capas/ps1/hugo_3_the_quest_of_the_sunstones.jpg"
+        "capa": "hugo-3-the-quest-of-the-sunstones.jpg",
+        "preview": "hugo-3-the-quest-of-the-sunstones.gif"
     },
     {
         "nome": "Hugo Black Diamond Fever",
         "rom": "roms/hugo_black_diamond_fever.bin",
-        "capa": "assets/capas/ps1/hugo_black_diamond_fever.jpg"
+        "capa": "hugo-black-diamond-fever.jpg",
+        "preview": "hugo-black-diamond-fever.gif"
     },
     {
         "nome": "Hugo The Evil Mirror Pt",
         "rom": "roms/hugo_the_evil_mirror_pt.bin",
-        "capa": "assets/capas/ps1/hugo_the_evil_mirror_pt.jpg"
+        "capa": "hugo-the-evil-mirror-pt.jpg",
+        "preview": "hugo-the-evil-mirror-pt.gif"
     },
     {
         "nome": "Jackie Chan Stuntmaster Pt",
         "rom": "roms/jackie_chan_stuntmaster_pt.bin",
-        "capa": "assets/capas/ps1/jackie_chan_stuntmaster_pt.jpg"
+        "capa": "jackie-chan-stuntmaster-pt.jpg",
+        "preview": "jackie-chan-stuntmaster-pt.gif"
     },
     {
         "nome": "Jersey Devil Pt Br",
         "rom": "roms/jersey_devil_pt_br.bin",
-        "capa": "assets/capas/ps1/jersey_devil_pt_br.jpg"
+        "capa": "jersey-devil-pt-br.jpg",
+        "preview": "jersey-devil-pt-br.gif"
     },
     {
         "nome": "Legacy Of Kain Soul Reaver V2 0 Ch1N",
         "rom": "roms/legacy_of_kain_soul_reaver_v2_0_ch1n.bin",
-        "capa": "assets/capas/ps1/legacy_of_kain_soul_reaver_v2_0_ch1n.jpg"
+        "capa": "legacy-of-kain-soul-reaver-v2-0-ch1n.jpg",
+        "preview": "legacy-of-kain-soul-reaver-v2-0-ch1n.gif"
     },
     {
         "nome": "Lilo Stitch",
         "rom": "roms/lilo_stitch.bin",
-        "capa": "assets/capas/ps1/lilo_stitch.jpg"
+        "capa": "lilo-stitch.jpg",
+        "preview": "lilo-stitch.gif"
     },
     {
         "nome": "Looney Tunes Racing",
         "rom": "roms/looney_tunes_racing.bin",
-        "capa": "assets/capas/ps1/looney_tunes_racing.jpg"
+        "capa": "looney-tunes-racing.jpg",
+        "preview": "looney-tunes-racing.gif"
     },
     {
         "nome": "Medal Of Honor",
         "rom": "roms/medal_of_honor.bin",
-        "capa": "assets/capas/ps1/medal_of_honor.jpg"
+        "capa": "medal-of-honor.jpg",
+        "preview": "medal-of-honor.gif"
     },
     {
         "nome": "Medievil 2",
         "rom": "roms/medievil_2.bin",
-        "capa": "assets/capas/ps1/medievil_2.jpg"
+        "capa": "medievil-2.jpg",
+        "preview": "medievil-2.gif"
     },
     {
         "nome": "Medievil Dublado",
         "rom": "roms/medievil_dublado.bin",
-        "capa": "assets/capas/ps1/medievil_dublado.jpg"
+        "capa": "medievil-dublado.jpg",
+        "preview": "medievil-dublado.gif"
     },
     {
         "nome": "Mega Man 8 Dublado",
         "rom": "roms/mega_man_8_dublado.bin",
-        "capa": "assets/capas/ps1/mega_man_8_dublado.jpg"
+        "capa": "mega-man-8-dublado.jpg",
+        "preview": "mega-man-8-dublado.gif"
     },
     {
         "nome": "Mega Man X3",
         "rom": "roms/mega_man_x3.bin",
-        "capa": "assets/capas/ps1/mega_man_x3.jpg"
+        "capa": "mega-man-x3.jpg",
+        "preview": "mega-man-x3.gif"
     },
     {
         "nome": "Mega Man X4",
         "rom": "roms/mega_man_x4.bin",
-        "capa": "assets/capas/ps1/mega_man_x4.jpg"
+        "capa": "mega-man-x4.jpg",
+        "preview": "mega-man-x4.gif"
     },
     {
         "nome": "Mega Man X5",
         "rom": "roms/mega_man_x5.bin",
-        "capa": "assets/capas/ps1/mega_man_x5.jpg"
+        "capa": "mega-man-x5.jpg",
+        "preview": "mega-man-x5.gif"
     },
     {
         "nome": "Metal Gear Solid Em Portugu S Pt Br.M3U",
         "rom": "roms/metal_gear_solid_em_portugu_s_pt_br.m3u",
-        "capa": "assets/capas/ps1/metal_gear_solid_em_portugu_s_pt_br.jpg"
+        "capa": "metal-gear-solid-em-portugu-s-pt-br.jpg",
+        "preview": "metal-gear-solid-em-portugu-s-pt-br.gif"
     },
     {
         "nome": "Metal Gear Solid Em Portugu S Pt Br Cd1",
         "rom": "roms/metal_gear_solid_em_portugu_s_pt_br_cd1.bin",
-        "capa": "assets/capas/ps1/metal_gear_solid_em_portugu_s_pt_br_cd1.jpg"
+        "capa": "assets/capas/ps1/metal_gear_solid_em_portugu_s_pt_br_cd1.jpg",
+        "preview": ""
     },
     {
         "nome": "Metal Gear Solid Em Portugu S Pt Br Cd2",
         "rom": "roms/metal_gear_solid_em_portugu_s_pt_br_cd2.bin",
-        "capa": "assets/capas/ps1/metal_gear_solid_em_portugu_s_pt_br_cd2.jpg"
+        "capa": "assets/capas/ps1/metal_gear_solid_em_portugu_s_pt_br_cd2.jpg",
+        "preview": ""
     },
     {
         "nome": "Metal Gear Solid Vr Missions Pt Br",
         "rom": "roms/metal_gear_solid_vr_missions_pt_br.bin",
-        "capa": "assets/capas/ps1/metal_gear_solid_vr_missions_pt_br.jpg"
+        "capa": "metal-gear-solid-vr-missions-pt-br.jpg",
+        "preview": "metal-gear-solid-vr-missions-pt-br.gif"
     },
     {
         "nome": "Mickey S Wild Adventure Pt Br",
         "rom": "roms/mickey_s_wild_adventure_pt_br.bin",
-        "capa": "assets/capas/ps1/mickey_s_wild_adventure_pt_br.jpg"
+        "capa": "mickey-s-wild-adventure-pt-br.jpg",
+        "preview": "mickey-s-wild-adventure-pt-br.gif"
     },
     {
         "nome": "Monsters Inc Scream Team Pt Br",
         "rom": "roms/monsters_inc_scream_team_pt_br.bin",
-        "capa": "assets/capas/ps1/monsters_inc_scream_team_pt_br.jpg"
+        "capa": "monsters-inc-scream-team-pt-br.jpg",
+        "preview": "monsters-inc-scream-team-pt-br.gif"
     },
     {
         "nome": "Mortal Kombat 4 Em Portugu S Pt Br",
         "rom": "roms/mortal_kombat_4_em_portugu_s_pt_br.bin",
-        "capa": "assets/capas/ps1/mortal_kombat_4_em_portugu_s_pt_br.jpg"
+        "capa": "mortal-kombat-4-em-portugu-s-pt-br.jpg",
+        "preview": "mortal-kombat-4-em-portugu-s-pt-br.gif"
     },
     {
         "nome": "Necronomicon The Dawning Of Darkness.M3U",
         "rom": "roms/necronomicon_the_dawning_of_darkness.m3u",
-        "capa": "assets/capas/ps1/necronomicon_the_dawning_of_darkness.jpg"
+        "capa": "necronomicon-the-dawning-of-darkness.jpg",
+        "preview": "necronomicon-the-dawning-of-darkness.gif"
     },
     {
         "nome": "Necronomicon The Dawning Of Darkness Cd1",
         "rom": "roms/necronomicon_the_dawning_of_darkness_cd1.bin",
-        "capa": "assets/capas/ps1/necronomicon_the_dawning_of_darkness_cd1.jpg"
+        "capa": "assets/capas/ps1/necronomicon_the_dawning_of_darkness_cd1.jpg",
+        "preview": ""
     },
     {
         "nome": "Necronomicon The Dawning Of Darkness Cd2",
         "rom": "roms/necronomicon_the_dawning_of_darkness_cd2.bin",
-        "capa": "assets/capas/ps1/necronomicon_the_dawning_of_darkness_cd2.jpg"
+        "capa": "assets/capas/ps1/necronomicon_the_dawning_of_darkness_cd2.jpg",
+        "preview": ""
     },
     {
         "nome": "Nicktoons Racing",
         "rom": "roms/nicktoons_racing.bin",
-        "capa": "assets/capas/ps1/nicktoons_racing.jpg"
+        "capa": "nicktoons-racing.jpg",
+        "preview": "nicktoons-racing.gif"
     },
     {
         "nome": "Nigthmare Creatures 2 Pt",
         "rom": "roms/nigthmare_creatures_2_pt.bin",
-        "capa": "assets/capas/ps1/nigthmare_creatures_2_pt.jpg"
+        "capa": "nigthmare-creatures-2-pt.jpg",
+        "preview": "nigthmare-creatures-2-pt.gif"
     },
     {
         "nome": "Parasite Eve 2 Pt Br.M3U",
         "rom": "roms/parasite_eve_2_pt_br.m3u",
-        "capa": "assets/capas/ps1/parasite_eve_2_pt_br.jpg"
+        "capa": "parasite-eve-2-pt-br.jpg",
+        "preview": "parasite-eve-2-pt-br.gif"
     },
     {
         "nome": "Parasite Eve 2 Pt Br Cd1",
         "rom": "roms/parasite_eve_2_pt_br_cd1.bin",
-        "capa": "assets/capas/ps1/parasite_eve_2_pt_br_cd1.jpg"
+        "capa": "assets/capas/ps1/parasite_eve_2_pt_br_cd1.jpg",
+        "preview": ""
     },
     {
         "nome": "Parasite Eve 2 Pt Br Cd2",
         "rom": "roms/parasite_eve_2_pt_br_cd2.bin",
-        "capa": "assets/capas/ps1/parasite_eve_2_pt_br_cd2.jpg"
+        "capa": "assets/capas/ps1/parasite_eve_2_pt_br_cd2.jpg",
+        "preview": ""
     },
     {
         "nome": "Parasite Eve Pt Br",
         "rom": "roms/parasite_eve_pt_br.bin",
-        "capa": "assets/capas/ps1/parasite_eve_pt_br.jpg"
+        "capa": "parasite-eve-pt-br.jpg",
+        "preview": "parasite-eve-pt-br.gif"
     },
     {
         "nome": "Parasite Eve Pt Br.M3U",
         "rom": "roms/parasite_eve_pt_br.m3u",
-        "capa": "assets/capas/ps1/parasite_eve_pt_br.jpg"
+        "capa": "parasite-eve-pt-br.jpg",
+        "preview": "parasite-eve-pt-br.gif"
     },
     {
         "nome": "Parasite Eve Pt Br Cd2",
         "rom": "roms/parasite_eve_pt_br_cd2.bin",
-        "capa": "assets/capas/ps1/parasite_eve_pt_br_cd2.jpg"
+        "capa": "assets/capas/ps1/parasite_eve_pt_br_cd2.jpg",
+        "preview": ""
     },
     {
         "nome": "Re3",
         "rom": "roms/re3.bin",
-        "capa": "assets/capas/ps1/re3.jpg"
+        "capa": "assets/capas/ps1/re3.jpg",
+        "preview": ""
     },
     {
         "nome": "Resident Evil 2.M3U",
         "rom": "roms/resident_evil_2.m3u",
-        "capa": "assets/capas/ps1/resident_evil_2.jpg"
+        "capa": "resident-evil-2.jpg",
+        "preview": "resident-evil-2.gif"
     },
     {
         "nome": "Resident Evil 2 Cd1",
         "rom": "roms/resident_evil_2_cd1.bin",
-        "capa": "assets/capas/ps1/resident_evil_2_cd1.jpg"
+        "capa": "assets/capas/ps1/resident_evil_2_cd1.jpg",
+        "preview": ""
     },
     {
         "nome": "Resident Evil 2 Cd2",
         "rom": "roms/resident_evil_2_cd2.bin",
-        "capa": "assets/capas/ps1/resident_evil_2_cd2.jpg"
+        "capa": "assets/capas/ps1/resident_evil_2_cd2.jpg",
+        "preview": ""
     },
     {
         "nome": "Resident Evil Director S Cut",
         "rom": "roms/resident_evil_director_s_cut.bin",
-        "capa": "assets/capas/ps1/resident_evil_director_s_cut.jpg"
+        "capa": "resident-evil-director-s-cut.jpg",
+        "preview": "resident-evil-director-s-cut.gif"
     },
     {
         "nome": "Shadow Man Em Portugu S Pt Br",
         "rom": "roms/shadow_man_em_portugu_s_pt_br.bin",
-        "capa": "assets/capas/ps1/shadow_man_em_portugu_s_pt_br.jpg"
+        "capa": "shadow-man-em-portugu-s-pt-br.jpg",
+        "preview": "shadow-man-em-portugu-s-pt-br.gif"
     },
     {
         "nome": "Sheep Raider",
         "rom": "roms/sheep_raider.bin",
-        "capa": "assets/capas/ps1/sheep_raider.jpg"
+        "capa": "sheep-raider.jpg",
+        "preview": "sheep-raider.gif"
     },
     {
         "nome": "Silent Hill 1 Nova Dublagem",
         "rom": "roms/silent_hill_1_nova_dublagem.bin",
-        "capa": "assets/capas/ps1/silent_hill_1_nova_dublagem.jpg"
+        "capa": "silent-hill-1-nova-dublagem.png",
+        "preview": "silent-hill-1-nova-dublagem.gif"
     },
     {
         "nome": "Sol Divide Pt Br Playstation 1",
         "rom": "roms/sol_divide_pt_br_playstation_1.bin",
-        "capa": "assets/capas/ps1/sol_divide_pt_br_playstation_1.jpg"
+        "capa": "sol-divide-pt-br-playstation-1.jpg",
+        "preview": "sol-divide-pt-br-playstation-1.gif"
     },
     {
         "nome": "South Park Rally Pt Br Playstation 1",
         "rom": "roms/south_park_rally_pt_br_playstation_1.bin",
-        "capa": "assets/capas/ps1/south_park_rally_pt_br_playstation_1.jpg"
+        "capa": "south-park-rally-pt-br-playstation-1.jpg",
+        "preview": "south-park-rally-pt-br-playstation-1.gif"
     },
     {
         "nome": "Spider Man 1",
         "rom": "roms/spider_man_1.bin",
-        "capa": "assets/capas/ps1/spider_man_1.jpg"
+        "capa": "spider-man-1.jpg",
+        "preview": "spider-man-1.gif"
     },
     {
         "nome": "Spider Man 2 Enter Electro Pt",
         "rom": "roms/spider_man_2_enter_electro_pt.bin",
-        "capa": "assets/capas/ps1/spider_man_2_enter_electro_pt.jpg"
+        "capa": "spider-man-2-enter-electro-pt.jpg",
+        "preview": "spider-man-2-enter-electro-pt.gif"
     },
     {
         "nome": "Spongebob Squarepants Supersponge Pt",
         "rom": "roms/spongebob_squarepants_supersponge_pt.bin",
-        "capa": "assets/capas/ps1/spongebob_squarepants_supersponge_pt.jpg"
+        "capa": "spongebob-squarepants-supersponge-pt.jpg",
+        "preview": "spongebob-squarepants-supersponge-pt.gif"
     },
     {
         "nome": "Street Fighter Ex2 Plus Pt",
         "rom": "roms/street_fighter_ex2_plus_pt.bin",
-        "capa": "assets/capas/ps1/street_fighter_ex2_plus_pt.jpg"
+        "capa": "street-fighter-ex2-plus-pt.jpg",
+        "preview": "street-fighter-ex2-plus-pt.gif"
     },
     {
         "nome": "Tarzan",
         "rom": "roms/tarzan.bin",
-        "capa": "assets/capas/ps1/tarzan.jpg"
+        "capa": "tarzan.jpg",
+        "preview": "tarzan.gif"
     },
     {
         "nome": "Tekken 2",
         "rom": "roms/tekken_2.bin",
-        "capa": "assets/capas/ps1/tekken_2.jpg"
+        "capa": "tekken-2.jpg",
+        "preview": "tekken-2.gif"
     },
     {
         "nome": "Tekken 3 Playstation",
         "rom": "roms/tekken_3_playstation.bin",
-        "capa": "assets/capas/ps1/tekken_3_playstation.jpg"
+        "capa": "tekken-3-playstation.jpg",
+        "preview": "tekken-3-playstation.gif"
     },
     {
         "nome": "Tekken Pt Br Playstation 1",
         "rom": "roms/tekken_pt_br_playstation_1.bin",
-        "capa": "assets/capas/ps1/tekken_pt_br_playstation_1.jpg"
+        "capa": "tekken-pt-br-playstation-1.jpg",
+        "preview": "tekken-pt-br-playstation-1.gif"
     },
     {
         "nome": "Tomb Raider Pt Br",
         "rom": "roms/tomb_raider_pt_br.bin",
-        "capa": "assets/capas/ps1/tomb_raider_pt_br.jpg"
+        "capa": "tomb-raider-pt-br.jpg",
+        "preview": "tomb-raider-pt-br.gif"
     },
     {
         "nome": "Toy Story 2",
         "rom": "roms/toy_story_2.bin",
-        "capa": "assets/capas/ps1/toy_story_2.jpg"
+        "capa": "toy-story-2.jpg",
+        "preview": "toy-story-2.gif"
     },
     {
         "nome": "Twisted Metal 2 Pt Br",
         "rom": "roms/twisted_metal_2_pt_br.bin",
-        "capa": "assets/capas/ps1/twisted_metal_2_pt_br.jpg"
+        "capa": "twisted-metal-2-pt-br.jpg",
+        "preview": "twisted-metal-2-pt-br.gif"
     },
     {
         "nome": "Vagrant Story Pt",
         "rom": "roms/vagrant_story_pt.bin",
-        "capa": "assets/capas/ps1/vagrant_story_pt.jpg"
+        "capa": "vagrant-story-pt.jpg",
+        "preview": "vagrant-story-pt.gif"
     },
     {
         "nome": "Valkyrie Profile",
         "rom": "roms/valkyrie_profile.bin",
-        "capa": "assets/capas/ps1/valkyrie_profile.jpg"
+        "capa": "valkyrie-profile.png",
+        "preview": "valkyrie-profile.gif"
     },
     {
         "nome": "Vigilante8",
         "rom": "roms/vigilante8.bin",
-        "capa": "assets/capas/ps1/vigilante8.jpg"
+        "capa": "vigilante8.jpg",
+        "preview": "vigilante8.gif"
     },
     {
         "nome": "Wacky Races",
         "rom": "roms/wacky_races.bin",
-        "capa": "assets/capas/ps1/wacky_races.jpg"
+        "capa": "wacky-races.jpg",
+        "preview": "wacky-races.gif"
     },
     {
         "nome": "We2026",
         "rom": "roms/we2026.bin",
-        "capa": "assets/capas/ps1/we2026.jpg"
+        "capa": "assets/capas/ps1/we2026.jpg",
+        "preview": ""
     },
     {
         "nome": "Wild Arms Pt Br",
         "rom": "roms/wild_arms_pt_br.bin",
-        "capa": "assets/capas/ps1/wild_arms_pt_br.jpg"
+        "capa": "wild-arms-pt-br.jpg",
+        "preview": "wild-arms-pt-br.gif"
     },
     {
         "nome": "Xenogears Pt Br Playstation 1.M3U",
         "rom": "roms/xenogears_pt_br_playstation_1.m3u",
-        "capa": "assets/capas/ps1/xenogears_pt_br_playstation_1.jpg"
+        "capa": "xenogears-pt-br-playstation-1.jpg",
+        "preview": "xenogears-pt-br-playstation-1.gif"
     },
     {
         "nome": "Xenogears Pt Br Playstation 1 Cd1",
         "rom": "roms/xenogears_pt_br_playstation_1_cd1.bin",
-        "capa": "assets/capas/ps1/xenogears_pt_br_playstation_1_cd1.jpg"
+        "capa": "assets/capas/ps1/xenogears_pt_br_playstation_1_cd1.jpg",
+        "preview": ""
     },
     {
         "nome": "Xenogears Pt Br Playstation 1 Cd2",
         "rom": "roms/xenogears_pt_br_playstation_1_cd2.bin",
-        "capa": "assets/capas/ps1/xenogears_pt_br_playstation_1_cd2.jpg"
+        "capa": "assets/capas/ps1/xenogears_pt_br_playstation_1_cd2.jpg",
+        "preview": ""
     },
     {
         "nome": "Yu Gi Oh Forbidden Memories",
         "rom": "roms/yu_gi_oh_forbidden_memories.bin",
-        "capa": "assets/capas/ps1/yu_gi_oh_forbidden_memories.jpg"
+        "capa": "yu-gi-oh-forbidden-memories.jpg",
+        "preview": "yu-gi-oh-forbidden-memories.gif"
     }
 ]

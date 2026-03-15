@@ -2,1351 +2,1621 @@
     {
         "nome": "3 Ninjas Kick Back",
         "rom": "roms/3_ninjas_kick_back_(usa).zip",
-        "capa": "assets/capas/snes/3_ninjas_kick_back_(usa).jpg"
+        "capa": "assets/capas/snes/3_ninjas_kick_back_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "7Th Saga, The",
         "rom": "roms/7th_saga,_the_(usa).zip",
-        "capa": "assets/capas/snes/7th_saga,_the_(usa).jpg"
+        "capa": "assets/capas/snes/7th_saga,_the_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Aaahh!!! Real Monsters",
         "rom": "roms/aaahh!!!_real_monsters_(usa).zip",
-        "capa": "assets/capas/snes/aaahh!!!_real_monsters_(usa).jpg"
+        "capa": "assets/capas/snes/aaahh!!!_real_monsters_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Actraiser",
         "rom": "roms/actraiser_(usa).zip",
-        "capa": "assets/capas/snes/actraiser_(usa).jpg"
+        "capa": "assets/capas/snes/actraiser_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Actraiser 2",
         "rom": "roms/actraiser_2_(usa).zip",
-        "capa": "assets/capas/snes/actraiser_2_(usa).jpg"
+        "capa": "assets/capas/snes/actraiser_2_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Addams Family, The Pugsley'S Scavenger Hunt",
         "rom": "roms/addams_family,_the_-_pugsley's_scavenger_hunt_(usa).zip",
-        "capa": "assets/capas/snes/addams_family,_the_-_pugsley's_scavenger_hunt_(usa).jpg"
+        "capa": "assets/capas/snes/addams_family,_the_-_pugsley's_scavenger_hunt_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Addams Family Values",
         "rom": "roms/addams_family_values.zip",
-        "capa": "assets/capas/snes/addams_family_values.jpg"
+        "capa": "addams_family_values.jpg",
+        "preview": "addams_family_values.gif"
     },
     {
         "nome": "Adventures Of Dr. Franken, The",
         "rom": "roms/adventures_of_dr._franken,_the_(usa).zip",
-        "capa": "assets/capas/snes/adventures_of_dr._franken,_the_(usa).jpg"
+        "capa": "assets/capas/snes/adventures_of_dr._franken,_the_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Aero Fighters",
         "rom": "roms/aero_fighters_(usa).zip",
-        "capa": "assets/capas/snes/aero_fighters_(usa).jpg"
+        "capa": "assets/capas/snes/aero_fighters_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Aerobiz",
         "rom": "roms/aerobiz_(usa).zip",
-        "capa": "assets/capas/snes/aerobiz_(usa).jpg"
+        "capa": "assets/capas/snes/aerobiz_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Air Cavalry",
         "rom": "roms/air_cavalry.zip",
-        "capa": "assets/capas/snes/air_cavalry.jpg"
+        "capa": "air_cavalry.jpg",
+        "preview": "air_cavalry.gif"
     },
     {
         "nome": "Aladdin",
         "rom": "roms/aladdin_(usa).zip",
-        "capa": "assets/capas/snes/aladdin_(usa).jpg"
+        "capa": "assets/capas/snes/aladdin_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Alcahest",
         "rom": "roms/alcahest_(pt-br).zip",
-        "capa": "assets/capas/snes/alcahest_(pt-br).jpg"
+        "capa": "assets/capas/snes/alcahest_(pt-br).jpg",
+        "preview": ""
     },
     {
         "nome": "Alien 3",
         "rom": "roms/alien_3_(usa).zip",
-        "capa": "assets/capas/snes/alien_3_(usa).jpg"
+        "capa": "assets/capas/snes/alien_3_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Alien Vs. Predator",
         "rom": "roms/alien_vs._predator_(usa).zip",
-        "capa": "assets/capas/snes/alien_vs._predator_(usa).jpg"
+        "capa": "assets/capas/snes/alien_vs._predator_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Animaniacs",
         "rom": "roms/animaniacs_(usa).zip",
-        "capa": "assets/capas/snes/animaniacs_(usa).jpg"
+        "capa": "assets/capas/snes/animaniacs_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Arcana",
         "rom": "roms/arcana_(usa).zip",
-        "capa": "assets/capas/snes/arcana_(usa).jpg"
+        "capa": "assets/capas/snes/arcana_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Arkanoid Doh It Again",
         "rom": "roms/arkanoid_-_doh_it_again_(usa).zip",
-        "capa": "assets/capas/snes/arkanoid_-_doh_it_again_(usa).jpg"
+        "capa": "assets/capas/snes/arkanoid_-_doh_it_again_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Bahamut Lagoon",
         "rom": "roms/bahamut_lagoon_(japan).zip",
-        "capa": "assets/capas/snes/bahamut_lagoon_(japan).jpg"
+        "capa": "assets/capas/snes/bahamut_lagoon_(japan).jpg",
+        "preview": ""
     },
     {
         "nome": "Battle Cars",
         "rom": "roms/battle_cars.zip",
-        "capa": "assets/capas/snes/battle_cars.jpg"
+        "capa": "battle_cars.jpg",
+        "preview": "battle_cars.gif"
     },
     {
         "nome": "Battle Soccer Field No Hasha",
         "rom": "roms/battle_soccer_-_field_no_hasha_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/battle_soccer_-_field_no_hasha_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/battle_soccer_-_field_no_hasha_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Battletoads & Double Dragon",
         "rom": "roms/battletoads_&_double_dragon_(usa).zip",
-        "capa": "assets/capas/snes/battletoads_&_double_dragon_(usa).jpg"
+        "capa": "assets/capas/snes/battletoads_&_double_dragon_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Battletoads In Battlemaniacs",
         "rom": "roms/battletoads_in_battlemaniacs_(usa).zip",
-        "capa": "assets/capas/snes/battletoads_in_battlemaniacs_(usa).jpg"
+        "capa": "assets/capas/snes/battletoads_in_battlemaniacs_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Biker Mice From Mars",
         "rom": "roms/biker_mice_from_mars_(usa).zip",
-        "capa": "assets/capas/snes/biker_mice_from_mars_(usa).jpg"
+        "capa": "assets/capas/snes/biker_mice_from_mars_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Biometal",
         "rom": "roms/biometal_(usa).zip",
-        "capa": "assets/capas/snes/biometal_(usa).jpg"
+        "capa": "assets/capas/snes/biometal_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Bishoujo Senshi Sailor Moon R",
         "rom": "roms/bishoujo_senshi_sailor_moon_r_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/bishoujo_senshi_sailor_moon_r_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/bishoujo_senshi_sailor_moon_r_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Blackthorne",
         "rom": "roms/blackthorne_(usa).zip",
-        "capa": "assets/capas/snes/blackthorne_(usa).jpg"
+        "capa": "assets/capas/snes/blackthorne_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Blues Brothers, The",
         "rom": "roms/blues_brothers,_the_(usa).zip",
-        "capa": "assets/capas/snes/blues_brothers,_the_(usa).jpg"
+        "capa": "assets/capas/snes/blues_brothers,_the_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Bobby'S World",
         "rom": "roms/bobby's_world_(usa)_(proto).zip",
-        "capa": "assets/capas/snes/bobby's_world_(usa)_(proto).jpg"
+        "capa": "assets/capas/snes/bobby's_world_(usa)_(proto).jpg",
+        "preview": ""
     },
     {
         "nome": "Bonkers",
         "rom": "roms/bonkers_(usa).zip",
-        "capa": "assets/capas/snes/bonkers_(usa).jpg"
+        "capa": "assets/capas/snes/bonkers_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Brain Lord",
         "rom": "roms/brain_lord_(usa).zip",
-        "capa": "assets/capas/snes/brain_lord_(usa).jpg"
+        "capa": "assets/capas/snes/brain_lord_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Brainies, The",
         "rom": "roms/brainies,_the_(usa).zip",
-        "capa": "assets/capas/snes/brainies,_the_(usa).jpg"
+        "capa": "assets/capas/snes/brainies,_the_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Brandish",
         "rom": "roms/brandish_(usa).zip",
-        "capa": "assets/capas/snes/brandish_(usa).jpg"
+        "capa": "assets/capas/snes/brandish_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Breath Of Fire",
         "rom": "roms/breath_of_fire_(usa).zip",
-        "capa": "assets/capas/snes/breath_of_fire_(usa).jpg"
+        "capa": "assets/capas/snes/breath_of_fire_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Breath Of Fire Ii",
         "rom": "roms/breath_of_fire_ii_(pt-br).zip",
-        "capa": "assets/capas/snes/breath_of_fire_ii_(pt-br).jpg"
+        "capa": "assets/capas/snes/breath_of_fire_ii_(pt-br).jpg",
+        "preview": ""
     },
     {
         "nome": "Bs Legend Of Zelda, The",
         "rom": "roms/bs_legend_of_zelda,_the_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/bs_legend_of_zelda,_the_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/bs_legend_of_zelda,_the_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Bs Radical Dreamers",
         "rom": "roms/bs_radical_dreamers.zip",
-        "capa": "assets/capas/snes/bs_radical_dreamers.jpg"
+        "capa": "bs_radical_dreamers.jpg",
+        "preview": "bs_radical_dreamers.gif"
     },
     {
         "nome": "Bubsy Ii",
         "rom": "roms/bubsy_ii_(usa).zip",
-        "capa": "assets/capas/snes/bubsy_ii_(usa).jpg"
+        "capa": "assets/capas/snes/bubsy_ii_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Bubsy In Claws Encounters Of The Furred Kind",
         "rom": "roms/bubsy_in_claws_encounters_of_the_furred_kind_(usa).zip",
-        "capa": "assets/capas/snes/bubsy_in_claws_encounters_of_the_furred_kind_(usa).jpg"
+        "capa": "assets/capas/snes/bubsy_in_claws_encounters_of_the_furred_kind_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Bugs Bunny Rabbit Rampage",
         "rom": "roms/bugs_bunny_-_rabbit_rampage_(usa).zip",
-        "capa": "assets/capas/snes/bugs_bunny_-_rabbit_rampage_(usa).jpg"
+        "capa": "assets/capas/snes/bugs_bunny_-_rabbit_rampage_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Captain America And The Avengers",
         "rom": "roms/captain_america_and_the_avengers_(usa).zip",
-        "capa": "assets/capas/snes/captain_america_and_the_avengers_(usa).jpg"
+        "capa": "assets/capas/snes/captain_america_and_the_avengers_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Captain Commando",
         "rom": "roms/captain_commando_(usa).zip",
-        "capa": "assets/capas/snes/captain_commando_(usa).jpg"
+        "capa": "assets/capas/snes/captain_commando_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Captain Tsubasa V Hasha No Shougou Campione",
         "rom": "roms/captain_tsubasa_v_-_hasha_no_shougou_campione_(japan)_(translated_pt).zip",
-        "capa": "assets/capas/snes/captain_tsubasa_v_-_hasha_no_shougou_campione_(japan)_(translated_pt).jpg"
+        "capa": "assets/capas/snes/captain_tsubasa_v_-_hasha_no_shougou_campione_(japan)_(translated_pt).jpg",
+        "preview": ""
     },
     {
         "nome": "Castlevania Dracula X",
         "rom": "roms/castlevania_-_dracula_x_(usa).zip",
-        "capa": "assets/capas/snes/castlevania_-_dracula_x_(usa).jpg"
+        "capa": "assets/capas/snes/castlevania_-_dracula_x_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Choplifter Iii Rescue & Survive",
         "rom": "roms/choplifter_iii_-_rescue_&_survive_(usa).zip",
-        "capa": "assets/capas/snes/choplifter_iii_-_rescue_&_survive_(usa).jpg"
+        "capa": "assets/capas/snes/choplifter_iii_-_rescue_&_survive_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Chrono Trigger",
         "rom": "roms/chrono_trigger_(usa).zip",
-        "capa": "assets/capas/snes/chrono_trigger_(usa).jpg"
+        "capa": "assets/capas/snes/chrono_trigger_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Civilization",
         "rom": "roms/civilization_(usa).zip",
-        "capa": "assets/capas/snes/civilization_(usa).jpg"
+        "capa": "assets/capas/snes/civilization_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Claymates",
         "rom": "roms/claymates_(usa).zip",
-        "capa": "assets/capas/snes/claymates_(usa).jpg"
+        "capa": "assets/capas/snes/claymates_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Cliffhanger",
         "rom": "roms/cliffhanger_(usa).zip",
-        "capa": "assets/capas/snes/cliffhanger_(usa).jpg"
+        "capa": "assets/capas/snes/cliffhanger_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Clock Tower",
         "rom": "roms/clock_tower_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/clock_tower_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/clock_tower_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Combatribes, The",
         "rom": "roms/combatribes,_the_(usa).zip",
-        "capa": "assets/capas/snes/combatribes,_the_(usa).jpg"
+        "capa": "assets/capas/snes/combatribes,_the_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Contra Iii The Alien Wars",
         "rom": "roms/contra_iii_-_the_alien_wars_(usa).zip",
-        "capa": "assets/capas/snes/contra_iii_-_the_alien_wars_(usa).jpg"
+        "capa": "assets/capas/snes/contra_iii_-_the_alien_wars_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Cool Spot",
         "rom": "roms/cool_spot_(usa).zip",
-        "capa": "assets/capas/snes/cool_spot_(usa).jpg"
+        "capa": "assets/capas/snes/cool_spot_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Cooly Skunk",
         "rom": "roms/cooly_skunk.zip",
-        "capa": "assets/capas/snes/cooly_skunk.jpg"
+        "capa": "cooly_skunk.jpg",
+        "preview": "cooly_skunk.gif"
     },
     {
         "nome": "Cutthroat Island",
         "rom": "roms/cutthroat_island_(usa).zip",
-        "capa": "assets/capas/snes/cutthroat_island_(usa).jpg"
+        "capa": "assets/capas/snes/cutthroat_island_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Cybernator",
         "rom": "roms/cybernator_(usa).zip",
-        "capa": "assets/capas/snes/cybernator_(usa).jpg"
+        "capa": "assets/capas/snes/cybernator_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Daffy Duck The Marvin Missions",
         "rom": "roms/daffy_duck_-_the_marvin_missions_(usa).zip",
-        "capa": "assets/capas/snes/daffy_duck_-_the_marvin_missions_(usa).jpg"
+        "capa": "assets/capas/snes/daffy_duck_-_the_marvin_missions_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Dark Half",
         "rom": "roms/dark_half_(jp).zip",
-        "capa": "assets/capas/snes/dark_half_(jp).jpg"
+        "capa": "assets/capas/snes/dark_half_(jp).jpg",
+        "preview": ""
     },
     {
         "nome": "Daze Before Christmas",
         "rom": "roms/daze_before_christmas_(europe).zip",
-        "capa": "assets/capas/snes/daze_before_christmas_(europe).jpg"
+        "capa": "assets/capas/snes/daze_before_christmas_(europe).jpg",
+        "preview": ""
     },
     {
         "nome": "Death And Return Of Superman, The",
         "rom": "roms/death_and_return_of_superman,_the_(usa).zip",
-        "capa": "assets/capas/snes/death_and_return_of_superman,_the_(usa).jpg"
+        "capa": "assets/capas/snes/death_and_return_of_superman,_the_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Demolition Man",
         "rom": "roms/demolition_man_(usa).zip",
-        "capa": "assets/capas/snes/demolition_man_(usa).jpg"
+        "capa": "assets/capas/snes/demolition_man_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Demon'S Crest",
         "rom": "roms/demon's_crest_(usa).zip",
-        "capa": "assets/capas/snes/demon's_crest_(usa).jpg"
+        "capa": "assets/capas/snes/demon's_crest_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Disney’S Pinocchio",
         "rom": "roms/disney’s_pinocchio.zip",
-        "capa": "assets/capas/snes/disney’s_pinocchio.jpg"
+        "capa": "disney’s_pinocchio.jpg",
+        "preview": "disney’s_pinocchio.gif"
     },
     {
         "nome": "Donkey Kong Country",
         "rom": "roms/donkey_kong_country_(usa).zip",
-        "capa": "assets/capas/snes/donkey_kong_country_(usa).jpg"
+        "capa": "assets/capas/snes/donkey_kong_country_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Donkey Kong Country 2 Diddy'S Kong Quest",
         "rom": "roms/donkey_kong_country_2_-_diddy's_kong_quest_(usa).zip",
-        "capa": "assets/capas/snes/donkey_kong_country_2_-_diddy's_kong_quest_(usa).jpg"
+        "capa": "assets/capas/snes/donkey_kong_country_2_-_diddy's_kong_quest_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Donkey Kong Country 3 Dixie Kong'S Double Trouble!",
         "rom": "roms/donkey_kong_country_3_-_dixie_kong's_double_trouble!_(usa).zip",
-        "capa": "assets/capas/snes/donkey_kong_country_3_-_dixie_kong's_double_trouble!_(usa).jpg"
+        "capa": "assets/capas/snes/donkey_kong_country_3_-_dixie_kong's_double_trouble!_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Dottie Dreads Nought",
         "rom": "roms/dottie_dreads_nought.zip",
-        "capa": "assets/capas/snes/dottie_dreads_nought.jpg"
+        "capa": "dottie_dreads_nought.jpg",
+        "preview": "dottie_dreads_nought.gif"
     },
     {
         "nome": "Dragon'S Lair",
         "rom": "roms/dragon's_lair_(usa).zip",
-        "capa": "assets/capas/snes/dragon's_lair_(usa).jpg"
+        "capa": "assets/capas/snes/dragon's_lair_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Dragon The Bruce Lee Story",
         "rom": "roms/dragon_-_the_bruce_lee_story_(usa).zip",
-        "capa": "assets/capas/snes/dragon_-_the_bruce_lee_story_(usa).jpg"
+        "capa": "assets/capas/snes/dragon_-_the_bruce_lee_story_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Dragon Ball Z Hyper Dimension",
         "rom": "roms/dragon_ball_z_-_hyper_dimension_(france).zip",
-        "capa": "assets/capas/snes/dragon_ball_z_-_hyper_dimension_(france).jpg"
+        "capa": "assets/capas/snes/dragon_ball_z_-_hyper_dimension_(france).jpg",
+        "preview": ""
     },
     {
         "nome": "Dragon Ball Z La Legende Saien",
         "rom": "roms/dragon_ball_z_-_la_legende_saien_(france).zip",
-        "capa": "assets/capas/snes/dragon_ball_z_-_la_legende_saien_(france).jpg"
+        "capa": "assets/capas/snes/dragon_ball_z_-_la_legende_saien_(france).jpg",
+        "preview": ""
     },
     {
         "nome": "Dragon Ball Z Super Butouden",
         "rom": "roms/dragon_ball_z_-_super_butouden_(france).zip",
-        "capa": "assets/capas/snes/dragon_ball_z_-_super_butouden_(france).jpg"
+        "capa": "assets/capas/snes/dragon_ball_z_-_super_butouden_(france).jpg",
+        "preview": ""
     },
     {
         "nome": "Dragon Ball Z Super Saiya Densetsu",
         "rom": "roms/dragon_ball_z_-_super_saiya_densetsu_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/dragon_ball_z_-_super_saiya_densetsu_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/dragon_ball_z_-_super_saiya_densetsu_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Dragon Ball Z Ultime Menace",
         "rom": "roms/dragon_ball_z_-_ultime_menace_(france).zip",
-        "capa": "assets/capas/snes/dragon_ball_z_-_ultime_menace_(france).jpg"
+        "capa": "assets/capas/snes/dragon_ball_z_-_ultime_menace_(france).jpg",
+        "preview": ""
     },
     {
         "nome": "Dragon Quest I & Ii",
         "rom": "roms/dragon_quest_i_&_ii_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/dragon_quest_i_&_ii_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/dragon_quest_i_&_ii_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Dragon Quest Iii Soshite Densetsu E...",
         "rom": "roms/dragon_quest_iii_-_soshite_densetsu_e..._(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/dragon_quest_iii_-_soshite_densetsu_e..._(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/dragon_quest_iii_-_soshite_densetsu_e..._(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "E.V.O. Search For Eden",
         "rom": "roms/e.v.o._-_search_for_eden_(usa).zip",
-        "capa": "assets/capas/snes/e.v.o._-_search_for_eden_(usa).jpg"
+        "capa": "assets/capas/snes/e.v.o._-_search_for_eden_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Earthbound",
         "rom": "roms/earthbound_(usa).zip",
-        "capa": "assets/capas/snes/earthbound_(usa).jpg"
+        "capa": "assets/capas/snes/earthbound_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Earthworm Jim 2",
         "rom": "roms/earthworm_jim_2_(usa).zip",
-        "capa": "assets/capas/snes/earthworm_jim_2_(usa).jpg"
+        "capa": "assets/capas/snes/earthworm_jim_2_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Eyra The Crow Maiden",
         "rom": "roms/eyra_-_the_crow_maiden_(pt-br).zip",
-        "capa": "assets/capas/snes/eyra_-_the_crow_maiden_(pt-br).jpg"
+        "capa": "assets/capas/snes/eyra_-_the_crow_maiden_(pt-br).jpg",
+        "preview": ""
     },
     {
         "nome": "F Zero",
         "rom": "roms/f-zero.zip",
-        "capa": "assets/capas/snes/f-zero.jpg"
+        "capa": "f-zero.jpg",
+        "preview": "f-zero.gif"
     },
     {
         "nome": "Final Fantasy Mystic Quest",
         "rom": "roms/final_fantasy_-_mystic_quest_(usa).zip",
-        "capa": "assets/capas/snes/final_fantasy_-_mystic_quest_(usa).jpg"
+        "capa": "assets/capas/snes/final_fantasy_-_mystic_quest_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy Ii",
         "rom": "roms/final_fantasy_ii_(usa).zip",
-        "capa": "assets/capas/snes/final_fantasy_ii_(usa).jpg"
+        "capa": "assets/capas/snes/final_fantasy_ii_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy Iii",
         "rom": "roms/final_fantasy_iii_(usa).zip",
-        "capa": "assets/capas/snes/final_fantasy_iii_(usa).jpg"
+        "capa": "assets/capas/snes/final_fantasy_iii_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy Iv",
         "rom": "roms/final_fantasy_iv_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/final_fantasy_iv_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/final_fantasy_iv_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy V",
         "rom": "roms/final_fantasy_v_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/final_fantasy_v_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/final_fantasy_v_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fantasy Vi",
         "rom": "roms/final_fantasy_vi_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/final_fantasy_vi_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/final_fantasy_vi_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fight",
         "rom": "roms/final_fight_(usa).zip",
-        "capa": "assets/capas/snes/final_fight_(usa).jpg"
+        "capa": "assets/capas/snes/final_fight_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fight 2",
         "rom": "roms/final_fight_2_(usa).zip",
-        "capa": "assets/capas/snes/final_fight_2_(usa).jpg"
+        "capa": "assets/capas/snes/final_fight_2_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fight 3",
         "rom": "roms/final_fight_3_(usa).zip",
-        "capa": "assets/capas/snes/final_fight_3_(usa).jpg"
+        "capa": "assets/capas/snes/final_fight_3_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Final Fight Guy",
         "rom": "roms/final_fight_guy_(usa).zip",
-        "capa": "assets/capas/snes/final_fight_guy_(usa).jpg"
+        "capa": "assets/capas/snes/final_fight_guy_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Fire Striker",
         "rom": "roms/fire_striker_(usa).zip",
-        "capa": "assets/capas/snes/fire_striker_(usa).jpg"
+        "capa": "assets/capas/snes/fire_striker_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Firepower 2000",
         "rom": "roms/firepower_2000_(usa).zip",
-        "capa": "assets/capas/snes/firepower_2000_(usa).jpg"
+        "capa": "assets/capas/snes/firepower_2000_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Flashback The Quest For Identity",
         "rom": "roms/flashback_-_the_quest_for_identity_(usa).zip",
-        "capa": "assets/capas/snes/flashback_-_the_quest_for_identity_(usa).jpg"
+        "capa": "assets/capas/snes/flashback_-_the_quest_for_identity_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Front Mission",
         "rom": "roms/front_mission_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/front_mission_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/front_mission_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Front Mission Gun Hazard",
         "rom": "roms/front_mission_-_gun_hazard_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/front_mission_-_gun_hazard_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/front_mission_-_gun_hazard_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Futebol Brasileiro '96",
         "rom": "roms/futebol_brasileiro_'96.zip",
-        "capa": "assets/capas/snes/futebol_brasileiro_'96.jpg"
+        "capa": "futebol_brasileiro_96.jpg",
+        "preview": "futebol_brasileiro_96.gif"
     },
     {
         "nome": "Ganpuru Gunman'S Proof",
         "rom": "roms/ganpuru_-_gunman's_proof_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/ganpuru_-_gunman's_proof_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/ganpuru_-_gunman's_proof_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Ghoul Patrol",
         "rom": "roms/ghoul_patrol.zip",
-        "capa": "assets/capas/snes/ghoul_patrol.jpg"
+        "capa": "ghoul_patrol.jpg",
+        "preview": "ghoul_patrol.gif"
     },
     {
         "nome": "Go Go Ackman",
         "rom": "roms/go_go_ackman_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/go_go_ackman_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/go_go_ackman_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Go Go Ackman 3",
         "rom": "roms/go_go_ackman_3_(japan).zip",
-        "capa": "assets/capas/snes/go_go_ackman_3_(japan).jpg"
+        "capa": "assets/capas/snes/go_go_ackman_3_(japan).jpg",
+        "preview": ""
     },
     {
         "nome": "Goof Troop",
         "rom": "roms/goof_troop_(usa).zip",
-        "capa": "assets/capas/snes/goof_troop_(usa).jpg"
+        "capa": "assets/capas/snes/goof_troop_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Gp 1 Part Ii",
         "rom": "roms/gp-1_-_part_ii_(usa).zip",
-        "capa": "assets/capas/snes/gp-1_-_part_ii_(usa).jpg"
+        "capa": "assets/capas/snes/gp-1_-_part_ii_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Gradius Iii",
         "rom": "roms/gradius_iii_(usa).zip",
-        "capa": "assets/capas/snes/gradius_iii_(usa).jpg"
+        "capa": "assets/capas/snes/gradius_iii_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Great Circus Mystery Starring Mickey & Minnie, The",
         "rom": "roms/great_circus_mystery_starring_mickey_&_minnie,_the_(usa).zip",
-        "capa": "assets/capas/snes/great_circus_mystery_starring_mickey_&_minnie,_the_(usa).jpg"
+        "capa": "assets/capas/snes/great_circus_mystery_starring_mickey_&_minnie,_the_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Hameln No Violin Hiki",
         "rom": "roms/hameln_no_violin_hiki_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/hameln_no_violin_hiki_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/hameln_no_violin_hiki_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Harley'S Humongous Adventure",
         "rom": "roms/harley's_humongous_adventure_(usa).zip",
-        "capa": "assets/capas/snes/harley's_humongous_adventure_(usa).jpg"
+        "capa": "assets/capas/snes/harley's_humongous_adventure_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Harvest Moon",
         "rom": "roms/harvest_moon_(usa).zip",
-        "capa": "assets/capas/snes/harvest_moon_(usa).jpg"
+        "capa": "assets/capas/snes/harvest_moon_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Hyper V Ball",
         "rom": "roms/hyper_v-ball_(usa).zip",
-        "capa": "assets/capas/snes/hyper_v-ball_(usa).jpg"
+        "capa": "assets/capas/snes/hyper_v-ball_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Ignition Factor, The",
         "rom": "roms/ignition_factor,_the_(usa).zip",
-        "capa": "assets/capas/snes/ignition_factor,_the_(usa).jpg"
+        "capa": "assets/capas/snes/ignition_factor,_the_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Illusion Of Gaia",
         "rom": "roms/illusion_of_gaia_(usa).zip",
-        "capa": "assets/capas/snes/illusion_of_gaia_(usa).jpg"
+        "capa": "assets/capas/snes/illusion_of_gaia_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Inazuma Serve Da! Super Beach Volley",
         "rom": "roms/inazuma_serve_da!_super_beach_volley_(japan).zip",
-        "capa": "assets/capas/snes/inazuma_serve_da!_super_beach_volley_(japan).jpg"
+        "capa": "assets/capas/snes/inazuma_serve_da!_super_beach_volley_(japan).jpg",
+        "preview": ""
     },
     {
         "nome": "Inindo Way Of The Ninja",
         "rom": "roms/inindo_-_way_of_the_ninja_(usa).zip",
-        "capa": "assets/capas/snes/inindo_-_way_of_the_ninja_(usa).jpg"
+        "capa": "assets/capas/snes/inindo_-_way_of_the_ninja_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Inspector Gadget",
         "rom": "roms/inspector_gadget_(usa).zip",
-        "capa": "assets/capas/snes/inspector_gadget_(usa).jpg"
+        "capa": "assets/capas/snes/inspector_gadget_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "International Super Star Soccer Deluxe Futebol Brasileiro 2007",
         "rom": "roms/international_super_star_soccer_deluxe_-_futebol_brasileiro_2007.zip",
-        "capa": "assets/capas/snes/international_super_star_soccer_deluxe_-_futebol_brasileiro_2007.jpg"
+        "capa": "international_super_star_soccer_deluxe_-_futebol_brasileiro_2007.jpg",
+        "preview": "international_super_star_soccer_deluxe_-_futebol_brasileiro_2007.gif"
     },
     {
         "nome": "International Super Star Soccer Deluxe Futebol Brasileiro 2008",
         "rom": "roms/international_super_star_soccer_deluxe_-_futebol_brasileiro_2008.zip",
-        "capa": "assets/capas/snes/international_super_star_soccer_deluxe_-_futebol_brasileiro_2008.jpg"
+        "capa": "international_super_star_soccer_deluxe_-_futebol_brasileiro_2008.jpg",
+        "preview": "international_super_star_soccer_deluxe_-_futebol_brasileiro_2008.gif"
     },
     {
         "nome": "International Super Star Soccer Deluxe Ronaldinho Soccer 97",
         "rom": "roms/international_super_star_soccer_deluxe_-_ronaldinho_soccer_97.zip",
-        "capa": "assets/capas/snes/international_super_star_soccer_deluxe_-_ronaldinho_soccer_97.jpg"
+        "capa": "international_super_star_soccer_deluxe_-_ronaldinho_soccer_97.jpg",
+        "preview": "international_super_star_soccer_deluxe_-_ronaldinho_soccer_97.gif"
     },
     {
         "nome": "International Super Star Soccer Deluxe World Cup France 98",
         "rom": "roms/international_super_star_soccer_deluxe_-_world_cup_france_98.zip",
-        "capa": "assets/capas/snes/international_super_star_soccer_deluxe_-_world_cup_france_98.jpg"
+        "capa": "international_super_star_soccer_deluxe_-_world_cup_france_98.jpg",
+        "preview": "international_super_star_soccer_deluxe_-_world_cup_france_98.gif"
     },
     {
         "nome": "International Superstar Soccer Deluxe (Narração Milto",
         "rom": "roms/international_superstar_soccer_deluxe_(narração_milto.zip",
-        "capa": "assets/capas/snes/international_superstar_soccer_deluxe_(narração_milto.jpg"
+        "capa": "international_superstar_soccer_deluxe_(narração_milto.jpg",
+        "preview": "international_superstar_soccer_deluxe_(narração_milto.gif"
     },
     {
         "nome": "Iron Commando Koutetsu No Senshi",
         "rom": "roms/iron_commando_-_koutetsu_no_senshi_(japan).zip",
-        "capa": "assets/capas/snes/iron_commando_-_koutetsu_no_senshi_(japan).jpg"
+        "capa": "assets/capas/snes/iron_commando_-_koutetsu_no_senshi_(japan).jpg",
+        "preview": ""
     },
     {
         "nome": "J.R.R. Tolkien'S The Lord Of The Rings Volume 1",
         "rom": "roms/j.r.r._tolkien's_the_lord_of_the_rings_-_volume_1_(usa).zip",
-        "capa": "assets/capas/snes/j.r.r._tolkien's_the_lord_of_the_rings_-_volume_1_(usa).jpg"
+        "capa": "assets/capas/snes/j.r.r._tolkien's_the_lord_of_the_rings_-_volume_1_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Jelly Boy",
         "rom": "roms/jelly_boy_(europe).zip",
-        "capa": "assets/capas/snes/jelly_boy_(europe).jpg"
+        "capa": "assets/capas/snes/jelly_boy_(europe).jpg",
+        "preview": ""
     },
     {
         "nome": "Jelly Boy 2",
         "rom": "roms/jelly_boy_2_(japan)_(proto)_(translated_en).zip",
-        "capa": "assets/capas/snes/jelly_boy_2_(japan)_(proto)_(translated_en).jpg"
+        "capa": "assets/capas/snes/jelly_boy_2_(japan)_(proto)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Jetsons, The Invasion Of The Planet Pirates",
         "rom": "roms/jetsons,_the_-_invasion_of_the_planet_pirates_(usa).zip",
-        "capa": "assets/capas/snes/jetsons,_the_-_invasion_of_the_planet_pirates_(usa).jpg"
+        "capa": "assets/capas/snes/jetsons,_the_-_invasion_of_the_planet_pirates_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Joe & Mac 2 Lost In The Tropics",
         "rom": "roms/joe_&_mac_2_-_lost_in_the_tropics_(usa).zip",
-        "capa": "assets/capas/snes/joe_&_mac_2_-_lost_in_the_tropics_(usa).jpg"
+        "capa": "assets/capas/snes/joe_&_mac_2_-_lost_in_the_tropics_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Jungle Book, The",
         "rom": "roms/jungle_book,_the_(usa).zip",
-        "capa": "assets/capas/snes/jungle_book,_the_(usa).jpg"
+        "capa": "assets/capas/snes/jungle_book,_the_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Jurassic Park Ii The Chaos Continues",
         "rom": "roms/jurassic_park_ii_-_the_chaos_continues_(usa).zip",
-        "capa": "assets/capas/snes/jurassic_park_ii_-_the_chaos_continues_(usa).jpg"
+        "capa": "assets/capas/snes/jurassic_park_ii_-_the_chaos_continues_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Kendo Rage",
         "rom": "roms/kendo_rage_(usa).zip",
-        "capa": "assets/capas/snes/kendo_rage_(usa).jpg"
+        "capa": "assets/capas/snes/kendo_rage_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Killer Instinct",
         "rom": "roms/killer_instinct_(usa).zip",
-        "capa": "assets/capas/snes/killer_instinct_(usa).jpg"
+        "capa": "assets/capas/snes/killer_instinct_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "King Arthur'S World",
         "rom": "roms/king_arthur's_world_(usa).zip",
-        "capa": "assets/capas/snes/king_arthur's_world_(usa).jpg"
+        "capa": "assets/capas/snes/king_arthur's_world_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "King Of Dragons, The",
         "rom": "roms/king_of_dragons,_the_(usa).zip",
-        "capa": "assets/capas/snes/king_of_dragons,_the_(usa).jpg"
+        "capa": "assets/capas/snes/king_of_dragons,_the_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Knights Of The Round",
         "rom": "roms/knights_of_the_round_(usa).sfc.zip",
-        "capa": "assets/capas/snes/knights_of_the_round_(usa).sfc.jpg"
+        "capa": "assets/capas/snes/knights_of_the_round_(usa).sfc.jpg",
+        "preview": ""
     },
     {
         "nome": "Kyuuyaku Megami Tensei",
         "rom": "roms/kyuuyaku_megami_tensei_(pt-br).zip",
-        "capa": "assets/capas/snes/kyuuyaku_megami_tensei_(pt-br).jpg"
+        "capa": "assets/capas/snes/kyuuyaku_megami_tensei_(pt-br).jpg",
+        "preview": ""
     },
     {
         "nome": "Lamborghini American Challenge",
         "rom": "roms/lamborghini_american_challenge_(usa).zip",
-        "capa": "assets/capas/snes/lamborghini_american_challenge_(usa).jpg"
+        "capa": "assets/capas/snes/lamborghini_american_challenge_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Laplace No Ma",
         "rom": "roms/laplace_no_ma_(pt-br).zip",
-        "capa": "assets/capas/snes/laplace_no_ma_(pt-br).jpg"
+        "capa": "assets/capas/snes/laplace_no_ma_(pt-br).jpg",
+        "preview": ""
     },
     {
         "nome": "Last Action Hero",
         "rom": "roms/last_action_hero_(usa).zip",
-        "capa": "assets/capas/snes/last_action_hero_(usa).jpg"
+        "capa": "assets/capas/snes/last_action_hero_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Legend",
         "rom": "roms/legend_(usa).zip",
-        "capa": "assets/capas/snes/legend_(usa).jpg"
+        "capa": "assets/capas/snes/legend_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Legend Of Zelda, The A Link To The Past",
         "rom": "roms/legend_of_zelda,_the_-_a_link_to_the_past_(usa).zip",
-        "capa": "assets/capas/snes/legend_of_zelda,_the_-_a_link_to_the_past_(usa).jpg"
+        "capa": "assets/capas/snes/legend_of_zelda,_the_-_a_link_to_the_past_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Lemmings",
         "rom": "roms/lemmings_(usa).zip",
-        "capa": "assets/capas/snes/lemmings_(usa).jpg"
+        "capa": "assets/capas/snes/lemmings_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Lion King, The",
         "rom": "roms/lion_king,_the_(usa).zip",
-        "capa": "assets/capas/snes/lion_king,_the_(usa).jpg"
+        "capa": "assets/capas/snes/lion_king,_the_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Live A Live",
         "rom": "roms/live_a_live_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/live_a_live_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/live_a_live_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Looney Tunes B Ball",
         "rom": "roms/looney_tunes_b-ball_(usa).zip",
-        "capa": "assets/capas/snes/looney_tunes_b-ball_(usa).jpg"
+        "capa": "assets/capas/snes/looney_tunes_b-ball_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Lost Vikings, The",
         "rom": "roms/lost_vikings,_the_(usa).zip",
-        "capa": "assets/capas/snes/lost_vikings,_the_(usa).jpg"
+        "capa": "assets/capas/snes/lost_vikings,_the_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Lost Vikings 2",
         "rom": "roms/lost_vikings_2_(usa).zip",
-        "capa": "assets/capas/snes/lost_vikings_2_(usa).jpg"
+        "capa": "assets/capas/snes/lost_vikings_2_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Lufia & The Fortress Of Doom",
         "rom": "roms/lufia_&_the_fortress_of_doom_(usa).zip",
-        "capa": "assets/capas/snes/lufia_&_the_fortress_of_doom_(usa).jpg"
+        "capa": "assets/capas/snes/lufia_&_the_fortress_of_doom_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Madou Monogatari Hanamaru Daiyouchienji",
         "rom": "roms/madou_monogatari_-_hanamaru_daiyouchienji_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/madou_monogatari_-_hanamaru_daiyouchienji_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/madou_monogatari_-_hanamaru_daiyouchienji_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Magic Knight Rayearth",
         "rom": "roms/magic_knight_rayearth_(j).zip",
-        "capa": "assets/capas/snes/magic_knight_rayearth_(j).jpg"
+        "capa": "assets/capas/snes/magic_knight_rayearth_(j).jpg",
+        "preview": ""
     },
     {
         "nome": "Magical Pop'N",
         "rom": "roms/magical_pop'n_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/magical_pop'n_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/magical_pop'n_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Magical Quest Starring Mickey Mouse, The",
         "rom": "roms/magical_quest_starring_mickey_mouse,_the_(usa).zip",
-        "capa": "assets/capas/snes/magical_quest_starring_mickey_mouse,_the_(usa).jpg"
+        "capa": "assets/capas/snes/magical_quest_starring_mickey_mouse,_the_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Majuu Ou",
         "rom": "roms/majuu_ou_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/majuu_ou_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/majuu_ou_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Manda Ver! Goemon 2 O Estranho General Macguiness",
         "rom": "roms/manda_ver!_goemon_2_-_o_estranho_general_macguiness_(pt-br).zip",
-        "capa": "assets/capas/snes/manda_ver!_goemon_2_-_o_estranho_general_macguiness_(pt-br).jpg"
+        "capa": "assets/capas/snes/manda_ver!_goemon_2_-_o_estranho_general_macguiness_(pt-br).jpg",
+        "preview": ""
     },
     {
         "nome": "Marvel Super Heroes War Of The Gems",
         "rom": "roms/marvel_super_heroes_-_war_of_the_gems_(usa).zip",
-        "capa": "assets/capas/snes/marvel_super_heroes_-_war_of_the_gems_(usa).jpg"
+        "capa": "assets/capas/snes/marvel_super_heroes_-_war_of_the_gems_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Mask, The",
         "rom": "roms/mask,_the_(usa).zip",
-        "capa": "assets/capas/snes/mask,_the_(usa).jpg"
+        "capa": "assets/capas/snes/mask,_the_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Mega Man 7",
         "rom": "roms/mega_man_7_(usa).zip",
-        "capa": "assets/capas/snes/mega_man_7_(usa).jpg"
+        "capa": "assets/capas/snes/mega_man_7_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Mega Man X2",
         "rom": "roms/mega_man_x2_(usa).zip",
-        "capa": "assets/capas/snes/mega_man_x2_(usa).jpg"
+        "capa": "assets/capas/snes/mega_man_x2_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Mega Man X3",
         "rom": "roms/mega_man_x3_(usa).zip",
-        "capa": "assets/capas/snes/mega_man_x3_(usa).jpg"
+        "capa": "assets/capas/snes/mega_man_x3_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Mega Man X",
         "rom": "roms/mega_man_x_(usa).zip",
-        "capa": "assets/capas/snes/mega_man_x_(usa).jpg"
+        "capa": "assets/capas/snes/mega_man_x_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Megaman & Bass",
         "rom": "roms/megaman_&_bass_(pt-br).zip",
-        "capa": "assets/capas/snes/megaman_&_bass_(pt-br).jpg"
+        "capa": "assets/capas/snes/megaman_&_bass_(pt-br).jpg",
+        "preview": ""
     },
     {
         "nome": "Metal Warriors",
         "rom": "roms/metal_warriors_(usa).zip",
-        "capa": "assets/capas/snes/metal_warriors_(usa).jpg"
+        "capa": "assets/capas/snes/metal_warriors_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Mickey Mania The Timeless Adventures Of Mickey Mouse",
         "rom": "roms/mickey_mania_-_the_timeless_adventures_of_mickey_mouse_(usa).zip",
-        "capa": "assets/capas/snes/mickey_mania_-_the_timeless_adventures_of_mickey_mouse_(usa).jpg"
+        "capa": "assets/capas/snes/mickey_mania_-_the_timeless_adventures_of_mickey_mouse_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Mickey No Tokyo Disneyland Daibouken",
         "rom": "roms/mickey_no_tokyo_disneyland_daibouken_(japan).zip",
-        "capa": "assets/capas/snes/mickey_no_tokyo_disneyland_daibouken_(japan).jpg"
+        "capa": "assets/capas/snes/mickey_no_tokyo_disneyland_daibouken_(japan).jpg",
+        "preview": ""
     },
     {
         "nome": "Mickey To Donald Magical Adventure 3",
         "rom": "roms/mickey_to_donald_-_magical_adventure_3_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/mickey_to_donald_-_magical_adventure_3_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/mickey_to_donald_-_magical_adventure_3_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Monstania",
         "rom": "roms/monstania_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/monstania_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/monstania_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Mortal Kombat",
         "rom": "roms/mortal_kombat_(usa).zip",
-        "capa": "assets/capas/snes/mortal_kombat_(usa).jpg"
+        "capa": "assets/capas/snes/mortal_kombat_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Mortal Kombat 3",
         "rom": "roms/mortal_kombat_3_(usa).zip",
-        "capa": "assets/capas/snes/mortal_kombat_3_(usa).jpg"
+        "capa": "assets/capas/snes/mortal_kombat_3_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Mortal Kombat Ii",
         "rom": "roms/mortal_kombat_ii.zip",
-        "capa": "assets/capas/snes/mortal_kombat_ii.jpg"
+        "capa": "mortal_kombat_ii.jpg",
+        "preview": "mortal_kombat_ii.gif"
     },
     {
         "nome": "Nba Live 95",
         "rom": "roms/nba_live_95_(usa).zip",
-        "capa": "assets/capas/snes/nba_live_95_(usa).jpg"
+        "capa": "assets/capas/snes/nba_live_95_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Neugier Umi To Kaze No Kodō",
         "rom": "roms/neugier_umi_to_kaze_no_kodō.zip",
-        "capa": "assets/capas/snes/neugier_umi_to_kaze_no_kodō.jpg"
+        "capa": "neugier_umi_to_kaze_no_kodō.jpg",
+        "preview": "neugier_umi_to_kaze_no_kodō.gif"
     },
     {
         "nome": "Ninja Gaiden Trilogy",
         "rom": "roms/ninja_gaiden_trilogy_(usa).zip",
-        "capa": "assets/capas/snes/ninja_gaiden_trilogy_(usa).jpg"
+        "capa": "assets/capas/snes/ninja_gaiden_trilogy_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Ogre Battle The March Of The Black Queen",
         "rom": "roms/ogre_battle_-_the_march_of_the_black_queen_(usa).zip",
-        "capa": "assets/capas/snes/ogre_battle_-_the_march_of_the_black_queen_(usa).jpg"
+        "capa": "assets/capas/snes/ogre_battle_-_the_march_of_the_black_queen_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Panic In Nakayoshi World",
         "rom": "roms/panic_in_nakayoshi_world_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/panic_in_nakayoshi_world_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/panic_in_nakayoshi_world_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Paperboy 2",
         "rom": "roms/paperboy_2_(usa).zip",
-        "capa": "assets/capas/snes/paperboy_2_(usa).jpg"
+        "capa": "assets/capas/snes/paperboy_2_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Pirates Of Dark Water, The",
         "rom": "roms/pirates_of_dark_water,_the.zip",
-        "capa": "assets/capas/snes/pirates_of_dark_water,_the.jpg"
+        "capa": "pirates_of_dark_water,_the.jpg",
+        "preview": "pirates_of_dark_water,_the.gif"
     },
     {
         "nome": "Pitfall The Mayan Adventure",
         "rom": "roms/pitfall_-_the_mayan_adventure.zip",
-        "capa": "assets/capas/snes/pitfall_-_the_mayan_adventure.jpg"
+        "capa": "pitfall_-_the_mayan_adventure.jpg",
+        "preview": "pitfall_-_the_mayan_adventure.gif"
     },
     {
         "nome": "Popeye Ijiwaru Majo Sea Hag No Maki",
         "rom": "roms/popeye_-_ijiwaru_majo_sea_hag_no_maki_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/popeye_-_ijiwaru_majo_sea_hag_no_maki_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/popeye_-_ijiwaru_majo_sea_hag_no_maki_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Power Drive",
         "rom": "roms/power_drive_(europe).zip",
-        "capa": "assets/capas/snes/power_drive_(europe).jpg"
+        "capa": "assets/capas/snes/power_drive_(europe).jpg",
+        "preview": ""
     },
     {
         "nome": "Prince Of Persia",
         "rom": "roms/prince_of_persia_(usa).zip",
-        "capa": "assets/capas/snes/prince_of_persia_(usa).jpg"
+        "capa": "assets/capas/snes/prince_of_persia_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Prince Of Persia 2 The Shadow & The Flame",
         "rom": "roms/prince_of_persia_2_-_the_shadow_&_the_flame_(usa).zip",
-        "capa": "assets/capas/snes/prince_of_persia_2_-_the_shadow_&_the_flame_(usa).jpg"
+        "capa": "assets/capas/snes/prince_of_persia_2_-_the_shadow_&_the_flame_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Radical Dreamers",
         "rom": "roms/radical_dreamers.zip",
-        "capa": "assets/capas/snes/radical_dreamers.jpg"
+        "capa": "radical_dreamers.png",
+        "preview": "radical_dreamers.gif"
     },
     {
         "nome": "Raiden Trad",
         "rom": "roms/raiden_trad_(usa).zip",
-        "capa": "assets/capas/snes/raiden_trad_(usa).jpg"
+        "capa": "assets/capas/snes/raiden_trad_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Ranma 1 2 Akanekodan Teki Hihou",
         "rom": "roms/ranma_1-2_-_akanekodan_teki_hihou_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/ranma_1-2_-_akanekodan_teki_hihou_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/ranma_1-2_-_akanekodan_teki_hihou_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Rock N' Roll Racing",
         "rom": "roms/rock_n'_roll_racing_(usa).zip",
-        "capa": "assets/capas/snes/rock_n'_roll_racing_(usa).jpg"
+        "capa": "assets/capas/snes/rock_n'_roll_racing_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Rockman & Forte",
         "rom": "roms/rockman_&_forte_(j).zip",
-        "capa": "assets/capas/snes/rockman_&_forte_(j).jpg"
+        "capa": "assets/capas/snes/rockman_&_forte_(j).jpg",
+        "preview": ""
     },
     {
         "nome": "Rocko'S Modern Life Spunky'S Dangerous Day",
         "rom": "roms/rocko's_modern_life_-_spunky's_dangerous_day.zip",
-        "capa": "assets/capas/snes/rocko's_modern_life_-_spunky's_dangerous_day.jpg"
+        "capa": "rockos_modern_life_-_spunkys_dangerous_day.jpg",
+        "preview": "rockos_modern_life_-_spunkys_dangerous_day.gif"
     },
     {
         "nome": "Romancing Saga 3",
         "rom": "roms/romancing_saga_3_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/romancing_saga_3_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/romancing_saga_3_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Ronaldinho Futebol Brasileiro 2011",
         "rom": "roms/ronaldinho_futebol_brasileiro_2011(unl).zip",
-        "capa": "assets/capas/snes/ronaldinho_futebol_brasileiro_2011(unl).jpg"
+        "capa": "assets/capas/snes/ronaldinho_futebol_brasileiro_2011(unl).jpg",
+        "preview": ""
     },
     {
         "nome": "Ronaldinho Soccer 97",
         "rom": "roms/ronaldinho_soccer_97.zip",
-        "capa": "assets/capas/snes/ronaldinho_soccer_97.jpg"
+        "capa": "ronaldinho_soccer_97.jpg",
+        "preview": "ronaldinho_soccer_97.gif"
     },
     {
         "nome": "Rudra No Hihou",
         "rom": "roms/rudra_no_hihou_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/rudra_no_hihou_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/rudra_no_hihou_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Rushing Beat Shura",
         "rom": "roms/rushing_beat_shura_(japan).zip",
-        "capa": "assets/capas/snes/rushing_beat_shura_(japan).jpg"
+        "capa": "assets/capas/snes/rushing_beat_shura_(japan).jpg",
+        "preview": ""
     },
     {
         "nome": "Sailor Moon Another Story",
         "rom": "roms/sailor_moon_-_another_story_(pt-br)_.zip",
-        "capa": "assets/capas/snes/sailor_moon_-_another_story_(pt-br)_.jpg"
+        "capa": "assets/capas/snes/sailor_moon_-_another_story_(pt-br)_.jpg",
+        "preview": ""
     },
     {
         "nome": "Saturday Night Slam Masters",
         "rom": "roms/saturday_night_slam_masters.zip",
-        "capa": "assets/capas/snes/saturday_night_slam_masters.jpg"
+        "capa": "saturday_night_slam_masters.jpg",
+        "preview": "saturday_night_slam_masters.gif"
     },
     {
         "nome": "Scooby Doo Mystery",
         "rom": "roms/scooby-doo_mystery_(usa).zip",
-        "capa": "assets/capas/snes/scooby-doo_mystery_(usa).jpg"
+        "capa": "assets/capas/snes/scooby-doo_mystery_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Secret Of Evermore",
         "rom": "roms/secret_of_evermore_(usa).zip",
-        "capa": "assets/capas/snes/secret_of_evermore_(usa).jpg"
+        "capa": "assets/capas/snes/secret_of_evermore_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Secret Of Mana",
         "rom": "roms/secret_of_mana_(usa).zip",
-        "capa": "assets/capas/snes/secret_of_mana_(usa).jpg"
+        "capa": "assets/capas/snes/secret_of_mana_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Secret Of The Stars",
         "rom": "roms/secret_of_the_stars.zip",
-        "capa": "assets/capas/snes/secret_of_the_stars.jpg"
+        "capa": "secret_of_the_stars.jpg",
+        "preview": "secret_of_the_stars.gif"
     },
     {
         "nome": "Seiken Densetsu 3",
         "rom": "roms/seiken_densetsu_3_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/seiken_densetsu_3_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/seiken_densetsu_3_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Shadow, The",
         "rom": "roms/shadow,_the_(usa)_(proto).zip",
-        "capa": "assets/capas/snes/shadow,_the_(usa)_(proto).jpg"
+        "capa": "assets/capas/snes/shadow,_the_(usa)_(proto).jpg",
+        "preview": ""
     },
     {
         "nome": "Shadowrun",
         "rom": "roms/shadowrun_(usa).zip",
-        "capa": "assets/capas/snes/shadowrun_(usa).jpg"
+        "capa": "assets/capas/snes/shadowrun_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Shin Kidou Senki Gundam W Endless Duel",
         "rom": "roms/shin_kidou_senki_gundam_w_-_endless_duel_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/shin_kidou_senki_gundam_w_-_endless_duel_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/shin_kidou_senki_gundam_w_-_endless_duel_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Side Pocket",
         "rom": "roms/side_pocket_(usa).zip",
-        "capa": "assets/capas/snes/side_pocket_(usa).jpg"
+        "capa": "assets/capas/snes/side_pocket_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Simcity",
         "rom": "roms/simcity_(usa).zip",
-        "capa": "assets/capas/snes/simcity_(usa).jpg"
+        "capa": "assets/capas/snes/simcity_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Skyblazer",
         "rom": "roms/skyblazer_(usa).zip",
-        "capa": "assets/capas/snes/skyblazer_(usa).jpg"
+        "capa": "assets/capas/snes/skyblazer_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Snoopy Concert",
         "rom": "roms/snoopy_concert_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/snoopy_concert_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/snoopy_concert_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Soldiers Of Fortune",
         "rom": "roms/soldiers_of_fortune_(usa).zip",
-        "capa": "assets/capas/snes/soldiers_of_fortune_(usa).jpg"
+        "capa": "assets/capas/snes/soldiers_of_fortune_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Sonic The Hedgehog",
         "rom": "roms/sonic_the_hedgehog.zip",
-        "capa": "assets/capas/snes/sonic_the_hedgehog.jpg"
+        "capa": "sonic_the_hedgehog.jpg",
+        "preview": "sonic_the_hedgehog.gif"
     },
     {
         "nome": "Space Ace",
         "rom": "roms/space_ace_(usa).zip",
-        "capa": "assets/capas/snes/space_ace_(usa).jpg"
+        "capa": "assets/capas/snes/space_ace_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Sparkster",
         "rom": "roms/sparkster_(usa).zip",
-        "capa": "assets/capas/snes/sparkster_(usa).jpg"
+        "capa": "assets/capas/snes/sparkster_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Spawn",
         "rom": "roms/spawn_(usa).zip",
-        "capa": "assets/capas/snes/spawn_(usa).jpg"
+        "capa": "assets/capas/snes/spawn_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Speedy Gonzales Los Gatos Bandidos",
         "rom": "roms/speedy_gonzales_-_los_gatos_bandidos_(usa).zip",
-        "capa": "assets/capas/snes/speedy_gonzales_-_los_gatos_bandidos_(usa).jpg"
+        "capa": "assets/capas/snes/speedy_gonzales_-_los_gatos_bandidos_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Spellcraft",
         "rom": "roms/spellcraft_(usa)_(proto).zip",
-        "capa": "assets/capas/snes/spellcraft_(usa)_(proto).jpg"
+        "capa": "assets/capas/snes/spellcraft_(usa)_(proto).jpg",
+        "preview": ""
     },
     {
         "nome": "Spider Man & Venom Separation Anxiety",
         "rom": "roms/spider-man_&_venom_-_separation_anxiety_(usa).zip",
-        "capa": "assets/capas/snes/spider-man_&_venom_-_separation_anxiety_(usa).jpg"
+        "capa": "assets/capas/snes/spider-man_&_venom_-_separation_anxiety_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Spider Man And The X Men Arcade'S Revenge",
         "rom": "roms/spider-man_and_the_x-men_-_arcade's_revenge_(usa).zip",
-        "capa": "assets/capas/snes/spider-man_and_the_x-men_-_arcade's_revenge_(usa).jpg"
+        "capa": "assets/capas/snes/spider-man_and_the_x-men_-_arcade's_revenge_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Star Fox",
         "rom": "roms/star_fox_(usa).zip",
-        "capa": "assets/capas/snes/star_fox_(usa).jpg"
+        "capa": "assets/capas/snes/star_fox_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Star Fox 2",
         "rom": "roms/star_fox_2_(japan)_(proto)_(translated_en).zip",
-        "capa": "assets/capas/snes/star_fox_2_(japan)_(proto)_(translated_en).jpg"
+        "capa": "assets/capas/snes/star_fox_2_(japan)_(proto)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Star Ocean",
         "rom": "roms/star_ocean_(pt-br).zip",
-        "capa": "assets/capas/snes/star_ocean_(pt-br).jpg"
+        "capa": "assets/capas/snes/star_ocean_(pt-br).jpg",
+        "preview": ""
     },
     {
         "nome": "Stargate",
         "rom": "roms/stargate.zip",
-        "capa": "assets/capas/snes/stargate.jpg"
+        "capa": "stargate.jpg",
+        "preview": "stargate.gif"
     },
     {
         "nome": "Stone Protectors",
         "rom": "roms/stone_protectors.zip",
-        "capa": "assets/capas/snes/stone_protectors.jpg"
+        "capa": "stone_protectors.jpg",
+        "preview": "stone_protectors.gif"
     },
     {
         "nome": "Street Fighter Ii",
         "rom": "roms/street_fighter_ii_(usa).zip",
-        "capa": "assets/capas/snes/street_fighter_ii_(usa).jpg"
+        "capa": "assets/capas/snes/street_fighter_ii_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Street Fighter Ii Turbo Hyper Fighting",
         "rom": "roms/street_fighter_ii_turbo_-_hyper_fighting.zip",
-        "capa": "assets/capas/snes/street_fighter_ii_turbo_-_hyper_fighting.jpg"
+        "capa": "street_fighter_ii_turbo_-_hyper_fighting.jpg",
+        "preview": "street_fighter_ii_turbo_-_hyper_fighting.gif"
     },
     {
         "nome": "Strike Gunner",
         "rom": "roms/strike_gunner.zip",
-        "capa": "assets/capas/snes/strike_gunner.jpg"
+        "capa": "strike_gunner.jpg",
+        "preview": "strike_gunner.gif"
     },
     {
         "nome": "Sunset Riders",
         "rom": "roms/sunset_riders_(usa).zip",
-        "capa": "assets/capas/snes/sunset_riders_(usa).jpg"
+        "capa": "assets/capas/snes/sunset_riders_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Super Aleste",
         "rom": "roms/super_aleste.zip",
-        "capa": "assets/capas/snes/super_aleste.jpg"
+        "capa": "super_aleste.jpg",
+        "preview": "super_aleste.gif"
     },
     {
         "nome": "Super Bomberman 2",
         "rom": "roms/super_bomberman_2_(usa).zip",
-        "capa": "assets/capas/snes/super_bomberman_2_(usa).jpg"
+        "capa": "assets/capas/snes/super_bomberman_2_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Super Castlevania Iv",
         "rom": "roms/super_castlevania_iv_(usa).zip",
-        "capa": "assets/capas/snes/super_castlevania_iv_(usa).jpg"
+        "capa": "assets/capas/snes/super_castlevania_iv_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Super Copa",
         "rom": "roms/super_copa_(brazil)_(es,pt).zip",
-        "capa": "assets/capas/snes/super_copa_(brazil)_(es,pt).jpg"
+        "capa": "assets/capas/snes/super_copa_(brazil)_(es,pt).jpg",
+        "preview": ""
     },
     {
         "nome": "Super Mario All Stars",
         "rom": "roms/super_mario_all-stars_(usa).zip",
-        "capa": "assets/capas/snes/super_mario_all-stars_(usa).jpg"
+        "capa": "assets/capas/snes/super_mario_all-stars_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Super Mario All Stars + Super Mario World",
         "rom": "roms/super_mario_all-stars_+_super_mario_world_(usa).zip",
-        "capa": "assets/capas/snes/super_mario_all-stars_+_super_mario_world_(usa).jpg"
+        "capa": "assets/capas/snes/super_mario_all-stars_+_super_mario_world_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Super Mario Kart",
         "rom": "roms/super_mario_kart_(usa).zip",
-        "capa": "assets/capas/snes/super_mario_kart_(usa).jpg"
+        "capa": "assets/capas/snes/super_mario_kart_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Super Mario Rpg Legend Of The Seven Stars",
         "rom": "roms/super_mario_rpg_-_legend_of_the_seven_stars_(usa).zip",
-        "capa": "assets/capas/snes/super_mario_rpg_-_legend_of_the_seven_stars_(usa).jpg"
+        "capa": "assets/capas/snes/super_mario_rpg_-_legend_of_the_seven_stars_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Super Mario World",
         "rom": "roms/super_mario_world_(usa).zip",
-        "capa": "assets/capas/snes/super_mario_world_(usa).jpg"
+        "capa": "assets/capas/snes/super_mario_world_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Super Mario World 2025",
         "rom": "roms/super_mario_world_2025_(pt-br)_.zip",
-        "capa": "assets/capas/snes/super_mario_world_2025_(pt-br)_.jpg"
+        "capa": "assets/capas/snes/super_mario_world_2025_(pt-br)_.jpg",
+        "preview": ""
     },
     {
         "nome": "Super Mario World 2 Yoshi'S Island",
         "rom": "roms/super_mario_world_2_-_yoshi's_island_(usa).zip",
-        "capa": "assets/capas/snes/super_mario_world_2_-_yoshi's_island_(usa).jpg"
+        "capa": "assets/capas/snes/super_mario_world_2_-_yoshi's_island_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Super Metroid",
         "rom": "roms/super_metroid_(japan,_usa).zip",
-        "capa": "assets/capas/snes/super_metroid_(japan,_usa).jpg"
+        "capa": "assets/capas/snes/super_metroid_(japan,_usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Super Morph",
         "rom": "roms/super_morph_(europe).zip",
-        "capa": "assets/capas/snes/super_morph_(europe).jpg"
+        "capa": "assets/capas/snes/super_morph_(europe).jpg",
+        "preview": ""
     },
     {
         "nome": "Super R Type",
         "rom": "roms/super_r-type_(usa).zip",
-        "capa": "assets/capas/snes/super_r-type_(usa).jpg"
+        "capa": "assets/capas/snes/super_r-type_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Super Soccer",
         "rom": "roms/super_soccer_(usa).zip",
-        "capa": "assets/capas/snes/super_soccer_(usa).jpg"
+        "capa": "assets/capas/snes/super_soccer_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Super Street Fighter Ii",
         "rom": "roms/super_street_fighter_ii_(usa).zip",
-        "capa": "assets/capas/snes/super_street_fighter_ii_(usa).jpg"
+        "capa": "assets/capas/snes/super_street_fighter_ii_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Tales Of Phantasia",
         "rom": "roms/tales_of_phantasia_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/tales_of_phantasia_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/tales_of_phantasia_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Tecmo Secret Of The Stars",
         "rom": "roms/tecmo_secret_of_the_stars_(usa).zip",
-        "capa": "assets/capas/snes/tecmo_secret_of_the_stars_(usa).jpg"
+        "capa": "assets/capas/snes/tecmo_secret_of_the_stars_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Teenage Mutant Ninja Turtles Tournament Fighters",
         "rom": "roms/teenage_mutant_ninja_turtles_-_tournament_fighters_(usa).zip",
-        "capa": "assets/capas/snes/teenage_mutant_ninja_turtles_-_tournament_fighters_(usa).jpg"
+        "capa": "assets/capas/snes/teenage_mutant_ninja_turtles_-_tournament_fighters_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Teenage Mutant Ninja Turtles Iv Turtles In Time",
         "rom": "roms/teenage_mutant_ninja_turtles_iv_-_turtles_in_time_(usa).zip",
-        "capa": "assets/capas/snes/teenage_mutant_ninja_turtles_iv_-_turtles_in_time_(usa).jpg"
+        "capa": "assets/capas/snes/teenage_mutant_ninja_turtles_iv_-_turtles_in_time_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Tenchi Muyou! Game Hen",
         "rom": "roms/tenchi_muyou!_-_game_hen_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/tenchi_muyou!_-_game_hen_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/tenchi_muyou!_-_game_hen_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Terranigma",
         "rom": "roms/terranigma_(europe).zip",
-        "capa": "assets/capas/snes/terranigma_(europe).jpg"
+        "capa": "assets/capas/snes/terranigma_(europe).jpg",
+        "preview": ""
     },
     {
         "nome": "The Adventures Of Batman & Robin",
         "rom": "roms/the_adventures_of_batman_&_robin_(pt-br).zip",
-        "capa": "assets/capas/snes/the_adventures_of_batman_&_robin_(pt-br).jpg"
+        "capa": "assets/capas/snes/the_adventures_of_batman_&_robin_(pt-br).jpg",
+        "preview": ""
     },
     {
         "nome": "The Ignition Factor",
         "rom": "roms/the_ignition_factor.zip",
-        "capa": "assets/capas/snes/the_ignition_factor.jpg"
+        "capa": "the_ignition_factor.jpg",
+        "preview": "the_ignition_factor.gif"
     },
     {
         "nome": "The Legend Of The Mystical Ninja",
         "rom": "roms/the_legend_of_the_mystical_ninja_(ganbare_goemon)_[pt-br].zip",
-        "capa": "assets/capas/snes/the_legend_of_the_mystical_ninja_(ganbare_goemon)_[pt-br].jpg"
+        "capa": "assets/capas/snes/the_legend_of_the_mystical_ninja_(ganbare_goemon)_[pt-br].jpg",
+        "preview": ""
     },
     {
         "nome": "Theme Park",
         "rom": "roms/theme_park_(europe).zip",
-        "capa": "assets/capas/snes/theme_park_(europe).jpg"
+        "capa": "assets/capas/snes/theme_park_(europe).jpg",
+        "preview": ""
     },
     {
         "nome": "Tick, The",
         "rom": "roms/tick,_the_(usa).zip",
-        "capa": "assets/capas/snes/tick,_the_(usa).jpg"
+        "capa": "assets/capas/snes/tick,_the_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Time Slip",
         "rom": "roms/time_slip_(usa).zip",
-        "capa": "assets/capas/snes/time_slip_(usa).jpg"
+        "capa": "assets/capas/snes/time_slip_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Timecop",
         "rom": "roms/timecop_(usa).zip",
-        "capa": "assets/capas/snes/timecop_(usa).jpg"
+        "capa": "assets/capas/snes/timecop_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Tiny Toon Adventures Wacky Sports Challenge",
         "rom": "roms/tiny_toon_adventures_-_wacky_sports_challenge_(usa).zip",
-        "capa": "assets/capas/snes/tiny_toon_adventures_-_wacky_sports_challenge_(usa).jpg"
+        "capa": "assets/capas/snes/tiny_toon_adventures_-_wacky_sports_challenge_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Tom & Jerry",
         "rom": "roms/tom_&_jerry_(usa).zip",
-        "capa": "assets/capas/snes/tom_&_jerry_(usa).jpg"
+        "capa": "assets/capas/snes/tom_&_jerry_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Top Gear",
         "rom": "roms/top_gear_(usa).zip",
-        "capa": "assets/capas/snes/top_gear_(usa).jpg"
+        "capa": "assets/capas/snes/top_gear_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Top Gear 2",
         "rom": "roms/top_gear_2_(usa).zip",
-        "capa": "assets/capas/snes/top_gear_2_(usa).jpg"
+        "capa": "assets/capas/snes/top_gear_2_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Top Gear 3000",
         "rom": "roms/top_gear_3000_(usa).zip",
-        "capa": "assets/capas/snes/top_gear_3000_(usa).jpg"
+        "capa": "assets/capas/snes/top_gear_3000_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Treasure Of Rudras",
         "rom": "roms/treasure_of_rudras.zip",
-        "capa": "assets/capas/snes/treasure_of_rudras.jpg"
+        "capa": "treasure_of_rudras.jpg",
+        "preview": "treasure_of_rudras.gif"
     },
     {
         "nome": "Trials Of Mana",
         "rom": "roms/trials_of_mana.zip",
-        "capa": "assets/capas/snes/trials_of_mana.jpg"
+        "capa": "trials_of_mana.jpg",
+        "preview": "trials_of_mana.gif"
     },
     {
         "nome": "True Lies",
         "rom": "roms/true_lies_(usa).zip",
-        "capa": "assets/capas/snes/true_lies_(usa).jpg"
+        "capa": "assets/capas/snes/true_lies_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Twinbee Rainbow Bell Adventure",
         "rom": "roms/twinbee_-_rainbow_bell_adventure_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/twinbee_-_rainbow_bell_adventure_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/twinbee_-_rainbow_bell_adventure_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "U.N. Squadron",
         "rom": "roms/u.n._squadron_(usa).zip",
-        "capa": "assets/capas/snes/u.n._squadron_(usa).jpg"
+        "capa": "assets/capas/snes/u.n._squadron_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Ultimate Mortal Kombat 3",
         "rom": "roms/ultimate_mortal_kombat_3.zip",
-        "capa": "assets/capas/snes/ultimate_mortal_kombat_3.jpg"
+        "capa": "ultimate_mortal_kombat_3.jpg",
+        "preview": "ultimate_mortal_kombat_3.gif"
     },
     {
         "nome": "Umihara Kawase",
         "rom": "roms/umihara_kawase_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/umihara_kawase_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/umihara_kawase_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "Warlock",
         "rom": "roms/warlock_(usa).zip",
-        "capa": "assets/capas/snes/warlock_(usa).jpg"
+        "capa": "assets/capas/snes/warlock_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Winter Olympic Games Lillehammer '94",
         "rom": "roms/winter_olympic_games_-_lillehammer_'94_(usa).zip",
-        "capa": "assets/capas/snes/winter_olympic_games_-_lillehammer_'94_(usa).jpg"
+        "capa": "assets/capas/snes/winter_olympic_games_-_lillehammer_'94_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Wolfchild",
         "rom": "roms/wolfchild_(usa).zip",
-        "capa": "assets/capas/snes/wolfchild_(usa).jpg"
+        "capa": "assets/capas/snes/wolfchild_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Wonder Project J Kikai No Shounen Pino",
         "rom": "roms/wonder_project_j_-_kikai_no_shounen_pino_(japan)_(translated_en).zip",
-        "capa": "assets/capas/snes/wonder_project_j_-_kikai_no_shounen_pino_(japan)_(translated_en).jpg"
+        "capa": "assets/capas/snes/wonder_project_j_-_kikai_no_shounen_pino_(japan)_(translated_en).jpg",
+        "preview": ""
     },
     {
         "nome": "World Cup France 98",
         "rom": "roms/world_cup_france_98.zip",
-        "capa": "assets/capas/snes/world_cup_france_98.jpg"
+        "capa": "world_cup_france_98.jpg",
+        "preview": "world_cup_france_98.gif"
     },
     {
         "nome": "World Cup Usa 94",
         "rom": "roms/world_cup_usa_94_(usa).zip",
-        "capa": "assets/capas/snes/world_cup_usa_94_(usa).jpg"
+        "capa": "assets/capas/snes/world_cup_usa_94_(usa).jpg",
+        "preview": ""
     },
     {
         "nome": "Worms",
         "rom": "roms/worms_(europe).zip",
-        "capa": "assets/capas/snes/worms_(europe).jpg"
+        "capa": "assets/capas/snes/worms_(europe).jpg",
+        "preview": ""
     },
     {
         "nome": "X Men Mutant Apocalypse",
         "rom": "roms/x-men_-_mutant_apocalypse_(usa).zip",
-        "capa": "assets/capas/snes/x-men_-_mutant_apocalypse_(usa).jpg"
+        "capa": "assets/capas/snes/x-men_-_mutant_apocalypse_(usa).jpg",
+        "preview": ""
     }
 ]
