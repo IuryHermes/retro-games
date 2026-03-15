@@ -10,22 +10,29 @@
     
     <style>
         html, body { margin: 0; background: #000; width: 100%; height: 100dvh; overflow: hidden; font-family: 'Courier New', Courier, monospace; }
-        .ui-header { position: absolute; top: 15px; left: 0; right: 0; padding: 0 20px; z-index: 9999999; display: flex; justify-content: space-between; align-items: flex-start; }
-        .btn { background: rgba(0,0,0,0.85); border: 2px solid #009933; color: #00ff44; padding: 10px 20px; font-size: 11px; font-weight: bold; border-radius: 4px; cursor: pointer; text-decoration: none; backdrop-filter: blur(5px); text-transform: uppercase; pointer-events: auto; }
-        .btn:hover { background: #009933; color: #fff; box-shadow: 0 0 15px #00ff44; }
-        .btn-exit:hover { background: #ff3333; border-color: #ff3333; }
-        #custom-modal { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 10000000; justify-content: center; align-items: center; backdrop-filter: blur(15px); }
-        .modal-content { background: #0a0a0c; border: 3px solid #009933; padding: 25px; text-align: center; max-width: 500px; width: 90%; color: #00ff44; border-radius: 12px; }
-        .modal-img { width: 140px; margin-bottom: 15px; image-rendering: pixelated; }
-        .instructions { text-align: left; background: rgba(0, 255, 68, 0.05); padding: 15px; border-radius: 8px; margin: 20px 0; font-size: 13px; color: #eee; border: 1px solid #004411; }
-        .platform-box { margin-bottom: 15px; }
-        .platform-box strong { color: #00ff44; display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 11px; }
-        .icon-ref { background: #222; padding: 2px 6px; border-radius: 4px; border: 1px solid #00ff44; font-weight: bold; color: #00ff44; font-size: 10px; }
+        
         #game { width: 100vw; height: 100dvh; background-color: #000; }
+        
+        /* TELA DE LOADING */
         #loader-overlay { position: fixed; inset: 0; background: #000; z-index: 9999998; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease; pointer-events: none; }
         #ps1-text { color: #fff; font-family: 'Courier New', monospace; font-size: 16px; margin-bottom: 15px; text-transform: uppercase; font-weight: bold; letter-spacing: 2px; text-align: center; line-height: 1.5; }
+        
         .ps1-bar-container { width: 280px; height: 15px; border: 2px solid #fff; padding: 2px; background: #000; }
-        #ps1-bar-fill { width: 0%; height: 100%; background: #00ff44; transition: width 0.3s linear; }
+        
+        /* A MÁGICA VISUAL DA BARRA (Listras em movimento contínuo) */
+        #ps1-bar-fill { 
+            width: 0%; height: 100%; 
+            background: linear-gradient(45deg, #00ff44 25%, #00cc33 25%, #00cc33 50%, #00ff44 50%, #00ff44 75%, #00cc33 75%, #00cc33 100%);
+            background-size: 20px 20px;
+            animation: moveStripes 1s linear infinite;
+            transition: width 0.1s linear; 
+        }
+        
+        @keyframes moveStripes {
+            0% { background-position: 0 0; }
+            100% { background-position: 20px 0; }
+        }
+
         .blink { animation: blink 1.5s infinite; color: #00ff44;}
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
     </style>
@@ -38,75 +45,51 @@
 
     <div id="loader-overlay">
         <div id="ps1-text">
-            NOW LOADING...<br>
-            <span class="blink" style="font-size: 12px;">[ CLIQUE NA TELA PARA LIBERAR O JOGO APÓS O CARREGAMENTO ]</span>
+            NOW LOADING<span id="loading-dots">...</span><br>
+            <span class="blink" style="font-size: 12px;">[ AGUARDE A EXTRAÇÃO DO DISCO ]</span>
         </div>
         <div class="ps1-bar-container">
             <div id="ps1-bar-fill"></div>
         </div>
     </div>
 
-    <div class="ui-header">
-        <button class="btn btn-exit" onclick="abrirModal()">⬅ MENU</button>
-        <button id="btn-fullscreen" class="btn" onclick="toggleFullScreen()" style="margin-right: 70px;">⛶ TELA CHEIA</button>
-    </div>
-
-    <div id="custom-modal">
-        <div class="modal-content">
-            <img src="assets/imagens-videos/menu/confirmacao_save.png" class="modal-img" onerror="this.style.display='none'">
-            <h2 style="color:#fff; margin:0;">SALVOU O PROGRESSO?</h2>
-            <div class="instructions">
-                <div class="platform-box"><strong>💻 No Computador:</strong> Arraste o mouse para a parte de baixo da tela.</div>
-                <div class="platform-box">
-                    <strong>📱 No Celular:</strong> Toque no ícone   
-                    <img src="assets/imagens-videos/imagens do menu/menu_110986.png" style="height: 16px; vertical-align: middle; margin: 0 4px; image-rendering: pixelated;" alt="Menu" onerror="this.alt='[MENU]'; this.style.display='none';">   
-                    para abrir o painel.
-                </div>
-                <hr style="border:0; border-top:1px solid #004411; margin: 10px 0;">
-                <strong>COMO SALVAR:</strong> Clique no <span class="icon-ref">DISQUETE</span> e faça o download do save.<br>
-                <strong>COMO CARREGAR:</strong> Quando voltar, clique na <span class="icon-ref">PASTA</span>, selecione o save e continue.
-            </div>
-            <div style="display:flex; gap:10px; justify-content:center;">
-                <button class="btn btn-exit" onclick="confirmarSair()">SAIR SEM SALVAR</button>
-                <button class="btn" onclick="fecharModal()">VOLTAR E SALVAR</button>
-            </div>
-        </div>
-    </div>
-
     <div id="game"></div>
 
     <script>
-        function abrirModal() { document.getElementById('custom-modal').style.display = 'flex'; }
-        function fecharModal() { document.getElementById('custom-modal').style.display = 'none'; }
-        function confirmarSair() { window.location.href = "index.html"; }
+        // ==========================================
+        // LÓGICA DA SETA DE VOLTAR (Navegador/Celular)
+        // ==========================================
+        window.history.pushState({page: 1}, "", ""); // Empurra um estado falso pra fila
+        window.addEventListener('popstate', function(event) {
+            // Se o usuário apertar voltar, manda pro index.html
+            window.location.href = "index.html";
+        });
 
-        function toggleFullScreen() {
-            let doc = window.document;
-            let docEl = doc.documentElement;
-            let requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-            let cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-
-            if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-                if(requestFullScreen) {
-                    requestFullScreen.call(docEl).catch(err => { alert("O iPhone bloqueia a tela cheia pelo navegador! Dica: Toque em 'Compartilhar' e depois 'Adicionar à Tela de Início' para jogar em tela cheia real!"); });
-                } else { alert("O iPhone bloqueia a tela cheia pelo navegador! Dica: Toque em 'Compartilhar' e depois 'Adicionar à Tela de Início' para jogar em tela cheia real!"); }
-            } else { if(cancelFullScreen) cancelFullScreen.call(doc); }
-        }
-
+        // Pega os parâmetros do jogo
         const params = new URLSearchParams(window.location.search);
         const core = params.get("core");   
         const game = params.get("game");
 
+        // ==========================================
+        // LOADING ASSINTÓTICO + PONTINHOS ANIMADOS
+        // ==========================================
         let progress = 0;
+        let dotCount = 0;
         let barFill = document.getElementById('ps1-bar-fill');
-        let psText = document.getElementById('ps1-text');
+        let dotsEl = document.getElementById('loading-dots');
+        let textEl = document.getElementById('ps1-text');
         
         let loadingInterval = setInterval(() => {
-            let remaining = 99 - progress;
-            let speed = (core === 'psx' || core === 'pcsx_rearmed') ? 0.015 : 0.05;
+            // A barra nunca para de atualizar matematicamente
+            let remaining = 99.5 - progress;
+            let speed = (core === 'psx' || core === 'pcsx_rearmed') ? 0.005 : 0.05;
             progress += remaining * speed;
             if(barFill) barFill.style.width = progress + '%';
-        }, 150);
+            
+            // Anima os três pontinhos pra dar sensação de atividade
+            dotCount = (dotCount + 1) % 4;
+            if(dotsEl) dotsEl.innerText = ".".repeat(dotCount);
+        }, 50); // Atualiza a cada 50ms para ser super fluido
 
         if (core && game) {
             const baseUrl = window.location.origin + '/';
@@ -114,12 +97,23 @@
             window.EJS_core = core;   
             window.EJS_backgroundColor = "#000000";
 
-            try { for (let key in localStorage) { if (key.includes('emulatorjs')) localStorage.removeItem(key); } } catch(e) {}
+            // LIMPEZA NUCLEAR DO CACHE DO EMULATORJS PARA FORÇAR O CONTROLE CERTO
+            try { 
+                for (let key in localStorage) { 
+                    if (key.includes('emulatorjs') || key.includes('EJS')) {
+                        localStorage.removeItem(key); 
+                    }
+                } 
+            } catch(e) {}
 
             window.EJS_onGameStart = function() {
                 clearInterval(loadingInterval);
-                if(barFill) barFill.style.width = '100%';
-                if(psText) psText.innerHTML = "<span style='color:#00ff44;'>START!</span>";
+                if(barFill) {
+                    barFill.style.width = '100%';
+                    barFill.style.animation = 'none'; // Para as listras
+                }
+                if(textEl) textEl.innerHTML = "<span style='color:#00ff44;'>START!</span>";
+                
                 dispararAnuncio(); 
 
                 setTimeout(() => {
@@ -133,12 +127,19 @@
             window.EJS_startOnLoaded = true;
             window.EJS_language = "pt-BR";
             window.EJS_loadStateOnStart = false;    
+            
+            // Agora o emulador só vai ter botão de Menu e Config na interface interna dele
             window.EJS_buttons = { save_state: true, load_state: true, full_screen: true, fast_forward: true, settings: true, menu: true };
             window.EJS_defaultOptions = { "vsync": false };
 
-            // ESPECÍFICO DO PLAYSTATION
+            // ==========================================
+            // FORÇANDO O CONTROLE DO PLAYSTATION
+            // ==========================================
             if (core === 'psx' || core === 'pcsx_rearmed') {
                 window.EJS_biosUrl = 'https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/ps1/roms/scph5501.bin';
+                
+                // Força nas duas variáveis conhecidas do EmulatorJS
+                window.EJS_gamepadStyle = "playstation";
                 window.EJS_VirtualGamepadSettings = { 
                     opacity: 0.5, 
                     hideOnKeyboardInfo: false, 
@@ -152,10 +153,6 @@
                 };
             }
         }
-
-        document.getElementById('loader-overlay').addEventListener('dblclick', function() {
-            this.style.display = 'none';
-        });
     </script>
     <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
 </body>
