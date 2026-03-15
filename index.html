@@ -110,8 +110,6 @@
         .nav-item img { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; image-rendering: pixelated; }
         .nav-text { display: none; opacity: 0; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 
-        .mobile-only-chat-btn { display: none !important; }
-
         .sidebar-chat { background: var(--bg-color); border: 1px solid var(--accent-color); padding: 10px; border-radius: 4px; height: 350px; min-height: 350px; display: none; flex-direction: column; width: 100%; flex-shrink: 0; margin-bottom: 20px; margin-top: auto; position: relative; }
         .close-chat-btn { display: none; }     
         #terminal-output { flex: 1; overflow-y: auto; font-family: monospace; font-size: 10px; color: var(--accent-color); margin-bottom: 10px; word-wrap: break-word; overflow-x: hidden; }
@@ -128,6 +126,9 @@
         @keyframes brand-glow { 0% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } 50% { text-shadow: 0 0 2px var(--accent-color), 0 0 5px var(--accent-color); transform: scale(1.02); } 100% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } }
         .brand { font-family: 'Press Start 2P'; color: var(--accent-color); font-size: 18px; animation: brand-glow 2.5s infinite ease-in-out; }
         .top-bar-controls { display: flex; align-items: center; gap: 20px; }
+        
+        .chat-trigger-mobile { display: none; width: 40px; height: 40px; cursor: pointer; align-items: center; justify-content: center; border: 1px solid var(--accent-color); border-radius: 6px; background: var(--sidebar-bg); }
+        .chat-trigger-mobile img { width: 30px; height: 30px; }
             
         .search-container { background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: flex; padding: 8px 15px; width: 350px; border-radius: 4px; position: relative; }
         #global-search { background: transparent; border: none; color: var(--text-color); outline: none; width: 100%; font-family: monospace; }
@@ -202,12 +203,41 @@
             .nav-item img { width: 22px; height: 22px; margin: 0; border-radius: 0 !important; }
             .nav-text { display: block !important; opacity: 1 !important; font-size: 6px !important; text-align: center; white-space: normal !important; line-height: 1.1; word-break: break-word; }
             
-            .mobile-only-chat-btn { display: flex !important; } /* AGORA SIM O BOTAO APARECE! */
-            
-            .sidebar-chat.chat-modal-mobile { display: flex !important; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 75%; max-height: 500px; background: var(--top-bar-bg); border: 2px solid var(--accent-color); z-index: 100000 !important; box-shadow: 0 0 40px rgba(0, 204, 68, 0.4); margin: 0; border-radius: 8px; padding-top: 35px; backdrop-filter: blur(10px); }
-            .close-chat-btn { display: block; position: absolute; top: 8px; right: 10px; background: transparent; color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 14px; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-weight: bold; }
-            #chat-nick, #chat-msg { font-size: 16px; padding: 8px; }
-            #send-btn { font-size: 16px; }
+            /* O SEGREDO DO CHAT MOBILE MODAL ESTÁ AQUI */
+            .sidebar-chat.chat-modal-mobile { 
+                display: flex !important; 
+                position: fixed !important; 
+                top: 50% !important; 
+                left: 50% !important; 
+                transform: translate(-50%, -50%) !important; 
+                width: 90% !important; 
+                height: 75% !important; 
+                max-height: 500px !important; 
+                background: var(--top-bar-bg) !important; 
+                border: 2px solid var(--accent-color) !important; 
+                z-index: 100000 !important; 
+                box-shadow: 0 0 40px rgba(0, 204, 68, 0.6) !important; 
+                margin: 0 !important; 
+                border-radius: 8px !important; 
+                padding: 40px 10px 10px 10px !important; 
+                backdrop-filter: blur(10px) !important; 
+            }
+            .close-chat-btn { 
+                display: block !important; 
+                position: absolute !important; 
+                top: 10px !important; 
+                right: 10px !important; 
+                background: transparent !important; 
+                color: #ff3333 !important; 
+                border: 1px solid #ff3333 !important; 
+                font-family: monospace !important; 
+                font-size: 14px !important; 
+                padding: 5px 10px !important; 
+                cursor: pointer !important; 
+                border-radius: 3px !important; 
+                font-weight: bold !important; 
+            }
+
             .main-content { margin-left: 0 !important; padding: 0 0 80px 0 !important; }
             .discord-float { bottom: 80px; right: 15px; }
             .scroll-btn { width: 30px; font-size: 20px; opacity: 1; z-index: 10; }
@@ -222,13 +252,23 @@
             .game-card.mobile-active { transform: scale(1.30); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0,204,68,0.6); z-index: 100; }
             .discord-text { display: none; }
                 
-            .top-bar { flex-direction: column; align-items: center; padding: 15px 10px; margin: 0; text-align: center; }
-            .brand { width: 100%; text-align: center; }
-            .top-bar-controls { width: 95%; margin-top: 15px; justify-content: space-between; gap: 10px; }
-            .search-container { flex: 1; width: auto; }
-            .row-header { justify-content: space-between; padding-right: 15px; }
-            .view-all-btn { font-size: 8px; padding: 6px 10px; }
-                
+            .top-bar { padding: 10px 15px !important; flex-direction: row !important; justify-content: space-between !important; align-items: center !important; }
+            .brand { font-size: 14px; }
+            .top-bar-controls { flex: 1; justify-content: flex-end !important; gap: 8px !important; }
+            .search-container { width: 140px !important; margin: 0 !important; }
+            
+            .chat-trigger-mobile {
+                display: flex !important;
+                width: 35px; height: 35px;
+                cursor: pointer;
+                align-items: center; justify-content: center;
+                border: 1px solid var(--accent-color);
+                border-radius: 6px;
+                background: var(--sidebar-bg);
+                flex-shrink: 0;
+            }
+            .chat-trigger-mobile img { width: 25px; height: 25px; image-rendering: pixelated; }
+
             .hero-section { height: 400px; min-height: auto; max-height: none; }
             .hero-bg-media { object-fit: cover; object-position: right center; }
             .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
@@ -238,6 +278,17 @@
     </style>
 </head>
 <body>
+
+    <script>
+        function dispararAnuncio() {
+            console.log("Sistema: Disparando Anúncio Social Bar...");
+            // COLE O SCRIPT DE ANUNCIO AQUI
+        }
+        window.onload = function() {
+            setTimeout(function() { dispararAnuncio(); }, 10000); 
+        };
+    </script>
+
     <div id="splash-screen">
         <h1 class="splash-logo">
             <span class="initial">N</span><span class="reveal">eo</span>
@@ -271,9 +322,10 @@
                 <img src="assets/imagens-videos/logo-discord.gif?v=2" onclick="window.scrollTo(0,0);" title="Voltar ao Topo">
             </div>
             <div class="nav-list" id="nav-list"></div>
+            
             <div class="sidebar-chat" id="chat-container">
                 <button class="close-chat-btn" onclick="closeMobileChat()">X</button>
-                <div style="font-size:10px; color:var(--accent-color); text-align:center; margin-bottom:5px;">CHAT GLOBAL</div>
+                <div style="font-size:10px; color:var(--accent-color); text-align:center; margin-bottom:5px; font-weight:bold;">CHAT GLOBAL</div>
                 <div id="terminal-output"></div>
                 <div class="chat-controls">
                     <input id="chat-nick" placeholder="Nick" maxlength="10">
@@ -287,20 +339,26 @@
             <header class="top-bar">
                 <div class="brand">NEOTERMINALROOM</div>
                 <div class="top-bar-controls">
+                    
+                    <div class="chat-trigger-mobile" onclick="openMobileChat()">
+                        <img src="assets/imagens-videos/imagens do menu/chat.png" alt="Chat">
+                    </div>
+                    
                     <div class="search-container">
                         <span style="color:var(--accent-color); margin-right:10px;">#</span>
                         <input type="text" id="global-search" placeholder="buscar jogo..." autocomplete="off">
                         <div id="search-results"></div>
                     </div>
+                        
                     <div class="theme-container">
-                        <span class="theme-label">TEMA</span>
                         <label class="theme-switch" title="Mudar Tema">
-                            <input type="checkbox" id="theme-toggle">
+                            <input type="checkbox" id="theme-toggle" checked>
                             <span class="slider"></span>
                         </label>
                     </div>
                 </div>
             </header>
+            
             <section class="hero-section" id="hero-slider">
                 <div class="hero-indicators" id="hero-indicators"></div>
             </section>
@@ -348,6 +406,8 @@
     window.startGame = (url) => { triggerLoad(url); };
 
     function triggerLoad(url) {
+        if (typeof dispararAnuncio === "function") { dispararAnuncio(); }
+        
         const loader = document.getElementById('loader-overlay');
         loader.style.display = 'flex';
         setTimeout(() => { window.location.href = url; }, 1500);
@@ -363,9 +423,13 @@
         else { btn.innerHTML = "⊞ VER TODOS"; if(lBtn) lBtn.style.display = 'flex'; if(rBtn) rBtn.style.display = 'flex'; }
     };
 
-    // ABRIR CHAT MOBILE - FUNÇÃO NOVA!
-    window.openMobileChat = () => { document.getElementById('chat-container').classList.add('chat-modal-mobile'); };
-    window.closeMobileChat = () => { const chat = document.getElementById('chat-container'); chat.classList.remove('chat-modal-mobile'); document.getElementById('main-sidebar').appendChild(chat); };
+    // CONTROLE DO CHAT MOBILE CORRIGIDO
+    window.openMobileChat = () => { 
+        document.getElementById('chat-container').classList.add('chat-modal-mobile'); 
+    };
+    window.closeMobileChat = () => { 
+        document.getElementById('chat-container').classList.remove('chat-modal-mobile'); 
+    };
 
     const out = document.getElementById("terminal-output");
     const nickInput = document.getElementById("chat-nick");
@@ -572,15 +636,6 @@
             });
         }).catch(err => { console.error("Erro no JSON:", sys.id); });
         fetchPromises.push(p);
-    });
-
-    // INSERIR BOTÃO DE CHAT MOBILE NO FINAL DA BARRA DE BAIXO
-    Promise.all(fetchPromises).then(() => {
-        const chatBtnMobile = document.createElement("div");
-        chatBtnMobile.className = "nav-item mobile-only-chat-btn";
-        chatBtnMobile.innerHTML = `<img src="assets/imagens-videos/logo-discord.gif?v=2" style="border-radius:50%; border: 1px solid var(--accent-color);"><span class="nav-text">CHAT</span>`;
-        chatBtnMobile.onclick = () => { window.openMobileChat(); };
-        nav.appendChild(chatBtnMobile);
     });
 
     const searchInput = document.getElementById('global-search');
