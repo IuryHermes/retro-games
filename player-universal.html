@@ -31,6 +31,14 @@
     </style>
 </head>
 <body>
+
+    <script>
+        function dispararAnuncio() {
+            console.log("Sistema: Anúncio do Player Iniciado...");
+            // O SCRIPT DO POP-UNDER OU SOCIAL BAR ENTRARÁ AQUI
+        }
+    </script>
+
     <div id="loader-overlay">
         <div id="ps1-text">
             NOW LOADING...<br>
@@ -98,19 +106,21 @@
             }
         }
 
+        const params = new URLSearchParams(window.location.search);
+        const core = params.get("core");   
+        const game = params.get("game");
+
+        // LOADING ASSINTÓTICO: NUNCA TRAVA EM 100% SEM O SINAL DO EMULADOR
         let progress = 0;
         let barFill = document.getElementById('ps1-bar-fill');
         let psText = document.getElementById('ps1-text');
         
         let loadingInterval = setInterval(() => {
-            progress += Math.random() * 8;
-            if(progress > 90) progress = 90;
+            let remaining = 99 - progress;
+            let speed = (core === 'psx' || core === 'pcsx_rearmed') ? 0.015 : 0.05;
+            progress += remaining * speed;
             if(barFill) barFill.style.width = progress + '%';
-        }, 300);
-
-        const params = new URLSearchParams(window.location.search);
-        const core = params.get("core");   
-        const game = params.get("game");
+        }, 150);
 
         if (core && game) {
             const baseUrl = window.location.origin + '/';
@@ -125,9 +135,13 @@
             } catch(e) {}
 
             window.EJS_onGameStart = function() {
+                // Ao iniciar o jogo de fato, a barra pula pra 100% e o Anúncio é ativado
                 clearInterval(loadingInterval);
                 if(barFill) barFill.style.width = '100%';
                 if(psText) psText.innerHTML = "<span style='color:#00ff44;'>START!</span>";
+                
+                dispararAnuncio(); // Gatilho de Monetização Ativado!
+
                 setTimeout(() => {
                     const loader = document.getElementById('loader-overlay');
                     if(loader) {
@@ -137,6 +151,7 @@
                 }, 500);
             };
 
+            // BIOS PS1 ESSENCIAL
             if (core === 'psx' || core === 'pcsx_rearmed') {
                 window.EJS_biosUrl = 'https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/ps1/roms/scph5501.bin';
             }
@@ -149,15 +164,17 @@
             window.EJS_language = "pt-BR";
             window.EJS_loadStateOnStart = false;    
 
-            window.EJS_buttons = { save_state: true, load_state: true, full_screen: true, fast_forward: true };
+            // INCLUI 'settings: true' E 'menu: true' PARA PERMITIR REMAPEAMENTO SE NECESSÁRIO
+            window.EJS_buttons = { save_state: true, load_state: true, full_screen: true, fast_forward: true, settings: true, menu: true };
             
-            // Força o layout de gamepad do PlayStation se for PS1
+            // Força o layout e parâmetros do PlayStation se for PS1
             if (core === 'psx' || core === 'pcsx_rearmed') {
                 window.EJS_VirtualGamepadSettings = { 
                     opacity: 0.5, 
                     hideOnKeyboardInfo: false, 
                     buttonStyle: "playstation" 
                 };
+                window.EJS_gamepadIndex = 0; // Força a leitura do controle físico 0
             } else {
                 window.EJS_VirtualGamepadSettings = { 
                     opacity: 0.5, 
