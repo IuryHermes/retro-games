@@ -192,68 +192,29 @@
         .discord-float { position: fixed; bottom: 20px; right: 20px; display: flex; align-items: center; gap: 12px; background: rgba(0,0,0,0.8); padding: 8px 16px; border-radius: 50px; border: 1px solid #5865f2; text-decoration: none; z-index: 9999; backdrop-filter: blur(5px); transition: bottom 0.3s ease; }
         .discord-text { font-family: monospace; color: #fff; font-size: 12px; text-align: right; }
         .discord-float img { width: 45px; height: 45px; border-radius: 50%; }
-
-        @media (max-width: 768px) {
-            .sidebar { top: auto; bottom: 0; left: 0; width: 100% !important; height: 65px; flex-direction: row; border-right: none; border-top: 1px solid var(--accent-color); padding: 5px 0; transform: none !important; z-index: 9000; background: var(--top-bar-bg); backdrop-filter: blur(10px); box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }      
-            .sidebar-header, #chat-collapsed-label { display: none !important; }
-            .nav-list { flex-direction: row; margin-top: 0; gap: 0; overflow-x: hidden; justify-content: space-around; padding: 0 5px; width: 100%; align-items: center; }
-            .nav-item { flex-direction: column; padding: 2px 0; flex: 1; gap: 4px; justify-content: center; border-radius: 4px; }
-            .nav-item img { width: 22px; height: 22px; margin: 0; border-radius: 0 !important; }
-            .nav-text { display: block !important; opacity: 1 !important; font-size: 6px !important; text-align: center; white-space: normal !important; line-height: 1.1; word-break: break-word; }
-            
-            .mobile-only-chat-btn { display: flex !important; } /* AGORA SIM O BOTAO APARECE! */
-            
-            .sidebar-chat.chat-modal-mobile { display: flex !important; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 75%; max-height: 500px; background: var(--top-bar-bg); border: 2px solid var(--accent-color); z-index: 100000 !important; box-shadow: 0 0 40px rgba(0, 204, 68, 0.4); margin: 0; border-radius: 8px; padding-top: 35px; backdrop-filter: blur(10px); }
-            .close-chat-btn { display: block; position: absolute; top: 8px; right: 10px; background: transparent; color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 14px; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-weight: bold; }
-            #chat-nick, #chat-msg { font-size: 16px; padding: 8px; }
-            #send-btn { font-size: 16px; }
-            .main-content { margin-left: 0 !important; padding: 0 0 80px 0 !important; }
-            .discord-float { bottom: 80px; right: 15px; }
-            .scroll-btn { width: 30px; font-size: 20px; opacity: 1; z-index: 10; }
-            .left-btn { left: 0; } .right-btn { right: 0; }
-            .catalog { padding: 0 10px; }
-            .game-carousel { gap: 8px; padding: 30px 10px; }      
-            .game-card { width: 78px; height: 110px; margin: 0; border-radius: 4px; }      
-            .card-media { height: 75px; border-radius: 3px 3px 0 0; }
-            .card-title { min-height: 35px; top: 75px; border-radius: 0 0 3px 3px; padding: 2px; border-top:none; }      
-            .card-title span { font-size: 6px; }
-            .game-card:hover { transform: none; box-shadow: none; border-color: var(--border-color); z-index: 1; }
-            .game-card.mobile-active { transform: scale(1.30); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0,204,68,0.6); z-index: 100; }
-            .discord-text { display: none; }
-                
-            .top-bar { flex-direction: column; align-items: center; padding: 15px 10px; margin: 0; text-align: center; }
-            .brand { width: 100%; text-align: center; }
-            .top-bar-controls { width: 95%; margin-top: 15px; justify-content: space-between; gap: 10px; }
-            .search-container { flex: 1; width: auto; }
-            .row-header { justify-content: space-between; padding-right: 15px; }
-            .view-all-btn { font-size: 8px; padding: 6px 10px; }
-                
-            .hero-section { height: 400px; min-height: auto; max-height: none; }
-            .hero-bg-media { object-fit: cover; object-position: right center; }
-            .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
-            .hero-content { padding: 0 20px; margin-top: auto; margin-bottom: 40px; }
-            .hero-title { font-size: 24px; }
-    	        /* Botão do Chat Mobile ao lado da Busca - AJUSTADO */
+	@media (max-width: 768px) {
+    .sidebar { top: auto; bottom: 0; left: 0; width: 100% !important; height: 65px; flex-direction: row; border-right: none; border-top: 1px solid var(--accent-color); padding: 5px 0; transform: none !important; z-index: 9000; background: var(--top-bar-bg); backdrop-filter: blur(10px); box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }     
+    .sidebar-header, #chat-collapsed-label { display: none !important; }
+    .nav-list { flex-direction: row; margin-top: 0; gap: 0; overflow-x: hidden; justify-content: space-around; padding: 0 5px; width: 100%; align-items: center; }
+    .nav-item { flex-direction: column; padding: 2px 0; flex: 1; gap: 4px; justify-content: center; border-radius: 4px; }
+    .nav-item img { width: 22px; height: 22px; margin: 0; border-radius: 0 !important; }
+    .nav-text { display: block !important; opacity: 1 !important; font-size: 6px !important; text-align: center; white-space: normal !important; line-height: 1.1; word-break: break-word; }
+    
+    /* Botão do Chat Mobile - SOMENTE MOBILE */
     .chat-trigger-mobile {
         display: flex !important;
-        width: 40px;
-        height: 40px;
+        width: 40px; height: 40px;
         cursor: pointer;
-        align-items: center;
-        justify-content: center;
+        align-items: center; justify-content: center;
         border: 1px solid var(--accent-color);
         border-radius: 6px;
         background: var(--sidebar-bg);
         margin-right: 5px;
         flex-shrink: 0;
     }
-    .chat-trigger-mobile img {
-        width: 30px;
-        height: 30px;
-        image-rendering: pixelated;
-    }
+    .chat-trigger-mobile img { width: 30px; height: 30px; image-rendering: pixelated; }
 
-    /* Janela do Chat Mobile - VERSÃO CORRIGIDA */
+    /* Janela do Chat Mobile - SOMENTE MOBILE */
     .sidebar-chat.chat-modal-mobile {
         display: flex !important;
         position: fixed !important;
@@ -289,17 +250,49 @@
         font-size: 14px !important;
     }
     
-    .close-chat-btn:hover {
-        background: #ff3333 !important;
-        color: #fff !important;
-    }
-    
-    /* Garantir que o chat NÃO aparece na sidebar em mobile */
+    /* NOVO: Garantir que o chat da sidebar NÃO aparece em mobile */
     .sidebar .sidebar-chat:not(.chat-modal-mobile) {
         display: none !important;
     }
     
-    /* ... mantenha o resto do CSS mobile existente ... */
+    /* NOVO: Garantir que o botão mobile NÃO aparece em desktop */
+    .chat-trigger-mobile {
+        display: none;
+    }
+    @media (max-width: 768px) {
+        .chat-trigger-mobile {
+            display: flex !important;
+        }
+    }
+
+    #chat-nick, #chat-msg { font-size: 16px; padding: 8px; }
+    #send-btn { font-size: 16px; }
+    .main-content { margin-left: 0 !important; padding: 0 0 80px 0 !important; }
+    .discord-float { bottom: 80px; right: 15px; }
+    .scroll-btn { width: 30px; font-size: 20px; opacity: 1; z-index: 10; }
+    .left-btn { left: 0; } .right-btn { right: 0; }
+    .catalog { padding: 0 10px; }
+    .game-carousel { gap: 8px; padding: 30px 10px; }     
+    .game-card { width: 78px; height: 110px; margin: 0; border-radius: 4px; }     
+    .card-media { height: 75px; border-radius: 3px 3px 0 0; }
+    .card-title { min-height: 35px; top: 75px; border-radius: 0 0 3px 3px; padding: 2px; border-top:none; }     
+    .card-title span { font-size: 6px; }
+    .game-card:hover { transform: none; box-shadow: none; border-color: var(--border-color); z-index: 1; }
+    .game-card.mobile-active { transform: scale(1.30); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0,204,68,0.6); z-index: 100; }
+    .discord-text { display: none; }
+        
+    .top-bar { flex-direction: column; align-items: center; padding: 15px 10px; margin: 0; text-align: center; }
+    .brand { width: 100%; text-align: center; }
+    .top-bar-controls { width: 95%; margin-top: 15px; justify-content: space-between; gap: 10px; }
+    .search-container { flex: 1; width: auto; }
+    .row-header { justify-content: space-between; padding-right: 15px; }
+    .view-all-btn { font-size: 8px; padding: 6px 10px; }
+        
+    .hero-section { height: 400px; min-height: auto; max-height: none; }
+    .hero-bg-media { object-fit: cover; object-position: right center; }
+    .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
+    .hero-content { padding: 0 20px; margin-top: auto; margin-bottom: 40px; }
+    .hero-title { font-size: 24px; }
 }
     </style>
 </head>
