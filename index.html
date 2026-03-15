@@ -97,12 +97,10 @@
         @media(min-width: 769px) {
             .sidebar:hover { width: var(--sidebar-expanded-width); box-shadow: 10px 0 50px rgba(0,0,0,0.5); }
             .sidebar:hover .nav-text { display: inline-block; opacity: 1; transition: 0.3s; }
-            .sidebar:hover .menu-label { opacity: 0; }
             .sidebar:hover .sidebar-chat { display: flex; }
         }
         .sidebar-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; flex-shrink: 0; }
         .sidebar-header img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-color); cursor: pointer; }
-        .menu-label { font-family: 'Press Start 2P'; font-size: 8px; color: var(--text-color); margin-top: 8px; text-align: center; display: block; transition: 0.2s; cursor: pointer; }
         .nav-list { display: flex; flex-direction: column; gap: 10px; flex: 1; margin-top: 10px; }
         .nav-item { display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-muted); justify-content: center; flex-shrink: 0; transition: 0.3s; }
         @media(min-width: 769px) { .nav-item { justify-content: flex-start; } }
@@ -363,7 +361,7 @@
     function getCleanName(romPath) {
         if (!romPath) return "";
         let base = romPath.split('/').pop().replace(/\.[^/.]+$/, "");
-        // A regra que resolve o bug das capas com hifens extras
+        // A regra que converte "1943_-_the_battle_(usa)" para o exato nome que tá no seu GitHub!
         return base.replace(/_/g, '-').replace(/[()',!&]/g, '').toLowerCase();
     }
 
@@ -540,6 +538,8 @@
         slide.id = `hero-slide-${index}`;
             
         const coreToUse = coreMap[game.sysId] || 'snes';
+        
+        // APENAS A ROM VEM DO R2
         const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + game.path + game.rom)}&core=${coreToUse}`;
         const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
 
@@ -648,19 +648,22 @@
                 const card = document.createElement("div");
                 card.className = "game-card selectable-item";
                     
+                // A SOLUÇÃO: A imagem é local! NÃO PÕE R2_URL AQUI
                 const safeName = getCleanName(g.rom);
-                const imgPath = `${R2_URL}${sys.path}capas/${safeName}.jpg`;
-                const gifPath = `${R2_URL}${sys.path}previews/${safeName}.gif`;
+                const imgTry1 = `${sys.path}capas/${safeName}.jpg`;
+                const gifTry1 = `${sys.path}previews/${safeName}.gif`;
 
                 const coreToUse = coreMap[sys.id] || 'snes';   
+                
+                // AQUI PÕE O R2_URL PORQUE É A ROM:
                 const playUrl = `player-universal.html?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
 
                 card.dataset.url = playUrl;
 
                 card.innerHTML = `
                     <div class="card-media">
-                        <img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';" class="static-thumb" loading="lazy">
-                        <img src="" data-gif="${gifPath}" class="active-gif">
+                        <img src="${imgTry1}" class="static-thumb" loading="lazy">
+                        <img src="" data-gif1="${gifTry1}" class="active-gif">
                     </div>
                     <div class="card-title">
                         <span>${g.nome}</span>
@@ -673,8 +676,8 @@
                     const a = cardElement.querySelector('.active-gif');
                     clearTimeout(hoverTimeout);   
                     const showCoverAndWait = () => { s.style.opacity = '1'; a.style.opacity = '0'; setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 800); hoverTimeout = setTimeout(showGifAndWait, 3000); };
-                    const showGifAndWait = () => { a.src = a.dataset.gif; a.style.display = 'block'; setTimeout(() => { s.style.opacity = '0'; a.style.opacity = '1'; }, 50); hoverTimeout = setTimeout(showCoverAndWait, 4000); };
-                    hoverTimeout = setTimeout(() => { const tester = new Image(); tester.src = a.dataset.gif; tester.onload = showGifAndWait; }, 1000);   
+                    const showGifAndWait = () => { a.src = a.dataset.gif1; a.style.display = 'block'; setTimeout(() => { s.style.opacity = '0'; a.style.opacity = '1'; }, 50); hoverTimeout = setTimeout(showCoverAndWait, 4000); };
+                    hoverTimeout = setTimeout(() => { const tester = new Image(); tester.src = a.dataset.gif1; tester.onload = showGifAndWait; }, 1000);   
                 };
                 const resetGif = (cardElement) => {
                     clearTimeout(hoverTimeout);   
@@ -728,10 +731,10 @@
                 div.className = 'search-item selectable-item';   
                  
                 const safeName = getCleanName(h.rom);
-                const imgPath = `${R2_URL}${h.sysPath}capas/${safeName}.jpg`;
+                const imgTry1 = `${h.sysPath}capas/${safeName}.jpg`;
 
                 div.innerHTML = `
-                    <img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';">   
+                    <img src="${imgTry1}">   
                     <span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>
                 `;
                     
