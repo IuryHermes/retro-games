@@ -3,117 +3,85 @@
 <head>
     <meta charset="utf-8">
     <title>NeoTerminal Room - PS1 Player</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-touch-fullscreen" content="yes">
     
     <style>
-        html, body { margin: 0; background: #000; width: 100%; height: 100dvh; overflow: hidden; font-family: 'Courier New', Courier, monospace; }
-        #game { width: 100vw; height: 100dvh; background-color: #000; }
+        html, body { margin: 0; background: #000; width: 100%; height: 100dvh; overflow: hidden; }
+        #game { width: 100vw; height: 100dvh; }
         
+        /* TELA DE LOADING */
         #loader-overlay { position: fixed; inset: 0; background: #000; z-index: 9999998; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease; pointer-events: none; }
-        #ps1-text { color: #fff; font-size: 16px; margin-bottom: 15px; text-transform: uppercase; font-weight: bold; letter-spacing: 2px; text-align: center; line-height: 1.5; }
-        .ps1-bar-container { width: 280px; height: 15px; border: 2px solid #fff; padding: 2px; background: #000; }
-        
+        #ps1-text { color: #fff; font-family: monospace; font-size: 16px; margin-bottom: 15px; text-transform: uppercase; font-weight: bold; text-align: center; }
+        .ps1-bar-container { width: 250px; height: 10px; border: 1px solid #fff; padding: 2px; background: #000; }
         #ps1-bar-fill { 
             width: 0%; height: 100%; 
             background: linear-gradient(45deg, #00ff44 25%, #00cc33 25%, #00cc33 50%, #00ff44 50%, #00ff44 75%, #00cc33 75%, #00cc33 100%);
             background-size: 20px 20px;
             animation: moveStripes 1s linear infinite;
-            transition: width 0.1s linear; 
         }
-        
         @keyframes moveStripes { 0% { background-position: 0 0; } 100% { background-position: 20px 0; } }
-        .blink { animation: blink 1.5s infinite; color: #00ff44;}
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
     </style>
 </head>
 <body>
 
-    <script>
-        function dispararAnuncio() { console.log("Sistema: Anúncio PS1 Iniciado..."); }
-    </script>
-
     <div id="loader-overlay">
-        <div id="ps1-text">
-            CARREGANDO DISCO<span id="loading-dots">...</span><br>
-            <span class="blink" style="font-size: 12px;">[ O PS1 EXIGE MAIS MEMÓRIA, AGUARDE ]</span>
-        </div>
-        <div class="ps1-bar-container">
-            <div id="ps1-bar-fill"></div>
-        </div>
+        <div id="ps1-text">CARREGANDO PS1<span id="loading-dots">...</span></div>
+        <div class="ps1-bar-container"><div id="ps1-bar-fill"></div></div>
     </div>
 
     <div id="game"></div>
 
     <script>
-        // Seta de voltar nativa do celular volta pro Menu
+        // Seta de voltar do celular volta pro site
         window.history.pushState({page: 1}, "", ""); 
         window.addEventListener('popstate', function() { window.location.href = "index.html"; });
 
         const params = new URLSearchParams(window.location.search);
         const game = params.get("game");
-        
-        // Aqui o CORE é travado no PS1, não importa o que venha do link
-        const core = "psx"; 
 
+        // CONFIGURAÇÕES GLOBAIS ANTES DO LOADER (ESSENCIAL)
+        window.EJS_player = '#game';
+        window.EJS_core = 'psx'; 
+        window.EJS_biosUrl = 'https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/ps1/roms/scph5501.bin';
+        window.EJS_gameUrl = game;
+        window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
+        window.EJS_startOnLoaded = true;
+        window.EJS_backgroundColor = "#000000";
+        window.EJS_language = "pt-BR";
+
+        // CONTROLES - FORÇANDO O LAYOUT "MODERN" QUE TEM L1,L2,R1,R2
+        window.EJS_VirtualGamepadSettings = { 
+            buttonStyle: "modern", 
+            opacity: 0.5 
+        };
+
+        // PERFORMANCE: DESLIGANDO VSYNC E COISAS QUE PESAM
+        window.EJS_settings = {
+            "vsync": false,
+            "quality": "low", // Melhora FPS no mobile
+            "threads": true
+        };
+
+        window.EJS_buttons = { save_state: true, load_state: true, settings: true, menu: true, full_screen: false };
+
+        // LÓGICA DA BARRA DE LOADING
         let progress = 0;
-        let dotCount = 0;
         let barFill = document.getElementById('ps1-bar-fill');
-        let dotsEl = document.getElementById('loading-dots');
-        let textEl = document.getElementById('ps1-text');
-        
         let loadingInterval = setInterval(() => {
-            let remaining = 99.5 - progress;
-            progress += remaining * 0.005; // Velocidade lenta e realista para PS1
+            let remaining = 99 - progress;
+            progress += remaining * 0.005; 
             if(barFill) barFill.style.width = progress + '%';
-            
-            dotCount = (dotCount + 1) % 4;
-            if(dotsEl) dotsEl.innerText = ".".repeat(dotCount);
-        }, 50); 
+        }, 50);
 
-        if (game) {
-            const baseUrl = window.location.origin + '/';
-            window.EJS_player = '#game';
-            window.EJS_core = core;   
-            window.EJS_backgroundColor = "#000000";
-            
-            // Limpa rastros de outros controles (SNES/Mega)
-            try { for (let key in localStorage) { if (key.includes('emulatorjs')) localStorage.removeItem(key); } } catch(e) {}
+        window.EJS_onGameStart = function() {
+            clearInterval(loadingInterval);
+            const loader = document.getElementById('loader-overlay');
+            if(loader) loader.style.display = 'none';
+        };
 
-            window.EJS_onGameStart = function() {
-                clearInterval(loadingInterval);
-                if(barFill) { barFill.style.width = '100%'; barFill.style.animation = 'none'; }
-                if(textEl) textEl.innerHTML = "<span style='color:#00ff44;'>START!</span>";
-                
-                dispararAnuncio(); 
-
-                setTimeout(() => {
-                    const loader = document.getElementById('loader-overlay');
-                    if(loader) { loader.style.opacity = '0'; setTimeout(() => loader.style.display = 'none', 500); }
-                }, 500);
-            };
-
-            window.EJS_gameUrl = game.trim().startsWith("http") ? game.trim() : baseUrl + game.trim();
-            window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
-            window.EJS_startOnLoaded = true;
-            window.EJS_language = "pt-BR";
-            window.EJS_loadStateOnStart = false;    
-            
-            window.EJS_buttons = { save_state: true, load_state: true, full_screen: true, fast_forward: true, settings: true, menu: true };
-            window.EJS_defaultOptions = { "vsync": false };
-            
-            // BIOS DO PS1
-            window.EJS_biosUrl = 'https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/ps1/roms/scph5501.bin';
-            
-            // LAYOUT COM L1, L2, R1, R2 
-            window.EJS_VirtualGamepadSettings = { 
-                opacity: 0.5, 
-                hideOnKeyboardInfo: false, 
-                buttonStyle: "modern" // "modern" carrega o layout avançado com 4 gatilhos no EmulatorJS
-            };
-        }
+        // Limpa cache de configurações antigas para forçar o controle novo
+        try { localStorage.clear(); } catch(e) {}
     </script>
     <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
 </body>
