@@ -128,8 +128,11 @@
         .brand { font-family: 'Press Start 2P'; color: var(--accent-color); font-size: 18px; animation: brand-glow 2.5s infinite ease-in-out; }
         .top-bar-controls { display: flex; align-items: center; gap: 20px; }
             
-        .search-container { background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: flex; padding: 8px 15px; width: 350px; border-radius: 4px; position: relative; }
-        #global-search { background: transparent; border: none; color: var(--text-color); outline: none; width: 100%; font-family: monospace; }
+        .search-container { 
+                width: 150px !important; /* Tamanho reduzido para caber tudo */
+                margin: 0 !important;
+            }
+	#global-search { background: transparent; border: none; color: var(--text-color); outline: none; width: 100%; font-family: monospace; }
         #search-results { position: absolute; top: 100%; right: -1px; width: calc(100% + 2px); background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: none; flex-direction: column; z-index: 9999; max-height: 400px; overflow-y: auto; border-radius: 0 0 4px 4px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
         .search-item { padding: 10px; border-bottom: 1px solid var(--border-color); cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; }
         .search-item:hover, .search-item.gamepad-focus { background: var(--card-bg); border-left: 3px solid var(--accent-color); outline: none; }
@@ -203,16 +206,15 @@
     /* Botão do Chat Mobile - SOMENTE MOBILE */
     .chat-trigger-mobile {
         display: flex !important;
-        width: 40px; height: 40px;
+        width: 35px; height: 35px;
         cursor: pointer;
         align-items: center; justify-content: center;
         border: 1px solid var(--accent-color);
         border-radius: 6px;
         background: var(--sidebar-bg);
-        margin-right: 5px;
         flex-shrink: 0;
     }
-    .chat-trigger-mobile img { width: 30px; height: 30px; image-rendering: pixelated; }
+    .chat-trigger-mobile img { width: 25px; height: 25px; image-rendering: pixelated; }
 
     /* Janela do Chat Mobile - SOMENTE MOBILE */
     .sidebar-chat.chat-modal-mobile {
@@ -281,9 +283,22 @@
     .game-card.mobile-active { transform: scale(1.30); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0,204,68,0.6); z-index: 100; }
     .discord-text { display: none; }
         
-    .top-bar { flex-direction: column; align-items: center; padding: 15px 10px; margin: 0; text-align: center; }
+    .top-bar { 
+                padding: 10px 15px !important; 
+                display: flex !important; 
+                flex-direction: row !important; /* Força ficar um do lado do outro */
+                justify-content: space-between !important; 
+                align-items: center !important;
+            }
     .brand { width: 100%; text-align: center; }
-    .top-bar-controls { width: 95%; margin-top: 15px; justify-content: space-between; gap: 10px; }
+    .top-bar-controls { 
+                display: flex !important; 
+                flex-direction: row !important; 
+                align-items: center !important; 
+                gap: 8px !important;
+                flex: 1;
+                justify-content: flex-end;
+            }
     .search-container { flex: 1; width: auto; }
     .row-header { justify-content: space-between; padding-right: 15px; }
     .view-all-btn { font-size: 8px; padding: 6px 10px; }
