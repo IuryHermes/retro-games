@@ -2,55 +2,90 @@
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8">
-    <title>NeoTerminal Room - PS1 Pro</title>
+    <title>NeoTerminal Room - PS1 Fixed</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
         html, body { margin: 0; background: #000; width: 100%; height: 100dvh; overflow: hidden; }
         #game { width: 100vw; height: 100dvh; }
-        #loading-overlay { position: fixed; inset: 0; background: #000; z-index: 99; display: flex; justify-content: center; align-items: center; color: #00ff44; font-family: monospace; }
+
+        /* --- FORÇANDO O VISUAL PLAYSTATION NA MARRA (CSS INJECTION) --- */
+        
+        /* 1. Esconde as letras originais (A, B, X, Y) */
+        div[class*="button"] span, 
+        div[id*="button"] span { display: none !important; }
+
+        /* 2. Desenha o X (Cruz) - Antigo Botão A (Baixo) */
+        div[id*="MODERN_BUTTON_1"]::before, 
+        div[data-button="BUTTON_1"]::before { 
+            content: "✖" !important; color: #738adb !important; font-size: 24px !important; font-weight: bold !important;
+            display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;
+        }
+
+        /* 3. Desenha o O (Círculo) - Antigo Botão B (Direita) */
+        div[id*="MODERN_BUTTON_2"]::before, 
+        div[data-button="BUTTON_2"]::before { 
+            content: "●" !important; color: #eb4e4e !important; font-size: 24px !important;
+            display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;
+        }
+
+        /* 4. Desenha o ⬜ (Quadrado) - Antigo Botão X (Esquerda) */
+        div[id*="MODERN_BUTTON_3"]::before, 
+        div[data-button="BUTTON_3"]::before { 
+            content: "■" !important; color: #f591f5 !important; font-size: 28px !important;
+            display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;
+        }
+
+        /* 5. Desenha o △ (Triângulo) - Antigo Botão Y (Cima) */
+        div[id*="MODERN_BUTTON_4"]::before, 
+        div[data-button="BUTTON_4"]::before { 
+            content: "▲" !important; color: #44d481 !important; font-size: 24px !important;
+            display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;
+        }
+
+        /* Ajuste de fundo dos botões para parecer PS1 */
+        div[class*="button"] { 
+            background: rgba(40, 40, 40, 0.8) !important; 
+            border: 2px solid rgba(255,255,255,0.2) !important; 
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5) !important;
+        }
+
+        #loading { position: fixed; inset: 0; background: #000; z-index: 99; display: flex; justify-content: center; align-items: center; color: #00ff44; font-family: monospace; }
     </style>
 </head>
 <body>
-    <div id="loading-overlay">SISTEMA PS1 INICIALIZANDO...</div>
+    <div id="loading">SISTEMA PS1 PRONTO.</div>
     <div id="game"></div>
 
     <script type="text/javascript">
-        // 1. LIMPEZA TOTAL (Obrigatório para remover o fantasma da Nintendo)
         localStorage.clear();
-        sessionStorage.clear();
 
-        // 2. CONFIGURAÇÃO DE ACORDO COM A DOCUMENTAÇÃO V4
+        window.history.pushState({page: 1}, "", ""); 
+        window.addEventListener('popstate', () => { window.location.href = "index.html"; });
+
         const params = new URLSearchParams(window.location.search);
         
         window.EJS_player = '#game';
-        window.EJS_core = 'psx'; // Aciona o núcleo pcsx_rearmed automaticamente
+        window.EJS_core = 'psx'; 
         window.EJS_gameUrl = params.get("game");
         window.EJS_biosUrl = 'https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/ps1/roms/scph5501.bin';
-        
-        // APONTANDO PARA A CDN OFICIAL (Para evitar erros 404 de texturas)
         window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
 
         window.EJS_startOnLoaded = true;
         window.EJS_language = "pt-BR";
-        window.EJS_backgroundColor = "#000000";
 
-        // 3. O SEGREDO DO CONTROLE (A skin "playstation" existe na CDN mas precisa ser chamada assim)
+        // Usamos o modo "modern" porque ele é o único que libera L1, L2, R1, R2
         window.EJS_VirtualGamepadSettings = { 
-            buttonStyle: "playstation" 
+            buttonStyle: "modern" 
         };
 
-        // 4. CORREÇÃO DO LAG (Performance para o GitHub Pages)
         window.EJS_defaultOptions = {
-            "vsync": false,  // Desligado para evitar input lag
-            "quality": 1,    // 1 = Performance (Essencial para mobile)
-            "threads": false // GitHub Pages não suporta SharedArrayBuffer, então deixe em FALSE para não travar
+            "vsync": false,
+            "quality": 1, 
+            "threads": false // GitHub Pages trava com threads, deixamos false para FPS estável
         };
 
-        window.EJS_onGameStart = () => {
-            document.getElementById('loading-overlay').remove();
-        };
+        window.EJS_onGameStart = () => { document.getElementById('loading').remove(); };
     </script>
-    
     <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
 </body>
 </html>
