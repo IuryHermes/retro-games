@@ -127,11 +127,11 @@
 
         /* BOTÃO PIX PC */
         .pix-trigger-pc { 
-            display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: #fff; 
-            background: rgba(0, 153, 51, 0.15); border: 1px solid var(--accent-color); justify-content: center; flex-shrink: 0; transition: 0.3s; margin-bottom: 15px;
+            display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-muted); 
+            background: transparent; border: 1px solid transparent; justify-content: center; flex-shrink: 0; transition: 0.3s; margin-bottom: 15px;
         }
         @media(min-width: 769px) { .pix-trigger-pc { justify-content: flex-start; } }
-        .pix-trigger-pc:hover { background: var(--accent-color); color: #fff; box-shadow: 0 0 15px var(--accent-color); }
+        .pix-trigger-pc:hover { background: rgba(0, 153, 51, 0.15); color: var(--text-color); border: 1px solid var(--accent-color); }
         .pix-text-pc { display: none; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 
         /* CHAT SIDEBAR (PADRÃO PC) */
@@ -193,7 +193,7 @@
         .hero-play-btn { display: inline-flex; align-items: center; justify-content: center; background: #fff; color: #000; font-family: 'Roboto', sans-serif; font-weight: bold; font-size: 18px; padding: 12px 30px; border-radius: 4px; border: none; cursor: pointer; width: fit-content; margin-top: 10px; transition: 0.3s; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); position: relative; pointer-events: auto; }
         .hero-play-btn:hover { background: var(--accent-color); color: #fff; transform: scale(1.05); }
         .hero-play-btn.gamepad-focus { background: var(--accent-color); color: #fff; outline: 3px solid #fff; box-shadow: 0 0 20px var(--accent-color); transform: scale(1.05); }
-        .hero-indicators { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; pointer-events: auto; }
+        .hero-indicators { absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; pointer-events: auto; }
         .indicator { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
         .indicator.active { background: var(--accent-color); transform: scale(1.3); }
 
@@ -220,7 +220,7 @@
         .card-media img { width: 100%; height: 100%; object-fit: fill; position: absolute; top: 0; left: 0; transition: opacity 0.8s ease-in-out; }
         .static-thumb { z-index: 2; opacity: 1; }
         .active-gif { z-index: 3; opacity: 0; display: none; }      
-        .card-title { absolute; top: 140px; left: 0; width: 100%; min-height: 40px; background: var(--card-bg); color: var(--text-color); display: flex; align-items: center; justify-content: center; padding: 5px; transition: background 0.3s, color 0.3s; border-radius: 0 0 5px 5px; z-index: 5; border-top: 1px solid var(--border-color); }
+        .card-title { position: absolute; top: 140px; left: 0; width: 100%; min-height: 40px; background: var(--card-bg); color: var(--text-color); display: flex; align-items: center; justify-content: center; padding: 5px; transition: background 0.3s, color 0.3s; border-radius: 0 0 5px 5px; z-index: 5; border-top: 1px solid var(--border-color); }
         .card-title span { font-family: 'Press Start 2P', cursive; font-size: 8px; line-height: 1.4; text-align: center; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .game-card:hover .card-title, .game-card.mobile-active .card-title, .game-card.gamepad-focus .card-title { background: var(--sidebar-bg); color: var(--accent-color); height: auto; border: 1px solid var(--accent-color); border-top: none; left: -1px; width: calc(100% + 2px); border-radius: 0 0 6px 6px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
         .game-card:hover .card-title span, .game-card.mobile-active .card-title span, .game-card.gamepad-focus .card-title span { display: block; overflow: visible; }
@@ -244,8 +244,10 @@
             .discord-float { bottom: 80px; right: 15px; }
             .discord-text { display: none; }
             
+            /* Oculta o chat embutido em telas menores */
             .sidebar-chat { display: none !important; }
             
+            /* Ativa a versão Modal do Chat */
             .sidebar-chat.chat-modal-mobile { display: flex !important; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 75%; max-height: 500px; background: var(--top-bar-bg); border: 2px solid var(--accent-color); z-index: 100000 !important; box-shadow: 0 0 40px rgba(0, 204, 68, 0.4); margin: 0; border-radius: 8px; padding-top: 35px; backdrop-filter: blur(10px); }
             .close-chat-btn { display: block; position: absolute; top: 8px; right: 10px; background: transparent; color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 14px; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-weight: bold; z-index: 10; transition: 0.3s; }
             .close-chat-btn:hover { background: #ff3333; color: #fff; }
@@ -254,14 +256,14 @@
         @media (max-width: 768px) {
             .top-bar { flex-direction: column; align-items: center; padding: 10px 15px; margin: 0; text-align: center; gap: 10px; }
             .brand { width: 100%; text-align: center; display: block !important; font-size: 16px !important; margin-bottom: 5px; }
-            .top-bar-controls { display: flex; flex-direction: row !important; width: 100%; justify-content: center; align-items: center; gap: 5px; margin-top: 5px; }
+            .top-bar-controls { display: flex; flex-direction: row !important; width: 100%; justify-content: space-between; align-items: center; gap: 5px; margin-top: 5px; }
             
             .pix-trigger-mobile { display: flex !important; width: 38px !important; height: 38px !important; flex-shrink: 0 !important; border: 1px solid var(--accent-color); border-radius: 6px; background: rgba(0, 153, 51, 0.1); align-items: center; justify-content: center; cursor: pointer; order: 0; }
             .chat-trigger-mobile { display: flex !important; width: 38px !important; height: 38px !important; flex-shrink: 0 !important; border: 1px solid var(--accent-color); border-radius: 6px; background: var(--sidebar-bg); align-items: center; justify-content: center; cursor: pointer; order: 1; }
             .chat-trigger-mobile img { width: 22px; height: 22px; object-fit: contain; image-rendering: pixelated; }
             
             .search-container { flex: 1; width: auto; max-width: none; order: 2; height: 38px; }
-            .theme-container { order: 3; }
+            .theme-container { order: 3; display: flex !important; } /* Correção do Botão Tema no Mobile */
             
             .row-header { justify-content: space-between; padding-right: 15px; }
             .view-all-btn { font-size: 8px; padding: 6px 10px; }
@@ -441,7 +443,6 @@
     import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
     const R2_URL = "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/";  
-    // TRAVA PARA MÚLTIPLOS DISCOS DO PS1
     const blockRegex = /\.m3u|([._\-\s](cd|disc|disco)\s*[0-9]+)/i;
 
     const themeToggle = document.getElementById('theme-toggle');
@@ -471,7 +472,6 @@
         else { btn.innerHTML = "⊞ VER TODOS"; if(lBtn) lBtn.style.display = 'flex'; if(rBtn) rBtn.style.display = 'flex'; }
     };
 
-    // ABRIR CHAT E PIX
     window.openMobileChat = () => { 
         const chat = document.getElementById('chat-container');
         document.body.appendChild(chat); 
@@ -495,7 +495,6 @@
         alert("Chave PIX copiada com sucesso! Muito obrigado pelo apoio! 💚");
     };
 
-    // SORTEIO DE LINKS
     const shopeeLinks = ["https://s.shopee.com.br/6KzsumXzVK?share_channel_code=1", "https://s.shopee.com.br/W25xuKRTY?share_channel_code=1", "https://s.shopee.com.br/50UVKoE5pk?share_channel_code=1"];
     const mlLinks = ["https://meli.la/1eNR6GB", "https://meli.la/2HD21Wi", "https://meli.la/1GQhiTZ", "https://meli.la/1Ld2GkU"];
 
@@ -503,8 +502,8 @@
         let gifNome = gameObj.preview ? gameObj.preview.split('/').pop() : '';
         let capaNome = gameObj.capa ? gameObj.capa.split('/').pop() : '';
         
-        // CORREÇÃO: PUXA DIRETO DO SEU SERVIDOR LOCAL COMO ANTES (COM R2_URL)
-        const mediaPath = gifNome ? `${R2_URL}${gameObj.sysPath}previews/${gifNome}` : (capaNome ? `${R2_URL}${gameObj.sysPath}capas/${capaNome}` : 'assets/imagens-videos/logo-discord.gif');
+        // CORREÇÃO: PUXANDO DO R2 COM ENCODEURICOMPONENT PARA EVITAR QUEBRAS COM ESPAÇOS
+        const mediaPath = gifNome ? `${R2_URL}${gameObj.sysPath}previews/${encodeURIComponent(gifNome)}` : (capaNome ? `${R2_URL}${gameObj.sysPath}capas/${encodeURIComponent(capaNome)}` : 'assets/imagens-videos/logo-discord.gif');
         
         document.getElementById('modal-game-img').src = mediaPath;
         document.getElementById('modal-game-title').innerText = gameObj.nome;
@@ -645,7 +644,6 @@
             const car = document.getElementById(`carousel-${sys.id}`);
             games.forEach(g => {
                 
-                // BLOQUEIO DE MULTI-DISCOS DO PS1
                 if (sys.id === 'ps1' && blockRegex.test(g.rom)) { return; } 
 
                 const gameObjFull = {...g, sysPath: sys.path, sysName: sys.name, sysId: sys.id};
@@ -655,9 +653,10 @@
                 let capaNome = g.capa ? g.capa.split('/').pop() : '';
                 let gifNome = g.preview ? g.preview.split('/').pop() : '';
                 
-                // CORREÇÃO: Puxa o caminho local da sua hospedagem e ignora o R2 para exibir o catálogo
-                const imgPath = capaNome ? `${sys.path}capas/${capaNome}` : '';
-                const gifPath = gifNome ? `${sys.path}previews/${gifNome}` : '';
+                // CORREÇÃO MESTRE: PUXANDO DO R2 COM ENCODEURICOMPONENT
+                // O encodeURIComponent garante que arquivos com espaço (ex: "Mega Man X.jpg") sejam encontrados no R2.
+                const imgPath = capaNome ? `${R2_URL}${sys.path}capas/${encodeURIComponent(capaNome)}` : '';
+                const gifPath = gifNome ? `${R2_URL}${sys.path}previews/${encodeURIComponent(gifNome)}` : '';
 
                 const coreToUse = coreMap[sys.id] || 'snes';   
                 const playerFile = sys.id === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
@@ -665,6 +664,7 @@
 
                 card.dataset.url = playUrl;
 
+                // Tenta carregar do R2. Se falhar, como medida de segurança, não exibe erro na cara do usuário.
                 card.innerHTML = `
                     <div class="card-media">
                         <img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';" class="static-thumb" loading="lazy">
@@ -718,8 +718,7 @@
 
                 const div = document.createElement('div'); div.className = 'search-item selectable-item';   
                 let capaNomeBusca = h.capa ? h.capa.split('/').pop() : '';
-                // CORREÇÃO: Capa na pesquisa sem R2_URL
-                const imgPath = capaNomeBusca ? `${h.sysPath}capas/${capaNomeBusca}` : 'assets/imagens-videos/logo-discord.gif';
+                const imgPath = capaNomeBusca ? `${R2_URL}${h.sysPath}capas/${encodeURIComponent(capaNomeBusca)}` : 'assets/imagens-videos/logo-discord.gif';
 
                 div.innerHTML = `<img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';"><span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>`;
                     
