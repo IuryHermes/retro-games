@@ -412,6 +412,7 @@
     const db = getDatabase(app);
     const chatRef = ref(db, 'mensagens');
 
+    // LÓGICA DE JOGO LIMPA (SEM M3U)
     window.startGame = (url) => {
         document.getElementById('loader-overlay').style.display = 'flex';
         setTimeout(() => { window.location.href = url; }, 1500);
@@ -438,6 +439,7 @@
 
     window.openGameModal = (gameObj, playUrl) => {
         let capaNome = gameObj.capa ? gameObj.capa.split('/').pop() : '';
+        // CORREÇÃO: Puxa direto do seu GitHub sem R2_URL
         document.getElementById('modal-game-img').src = capaNome ? `${gameObj.sysPath}capas/${capaNome}` : 'assets/imagens-videos/logo-discord.gif';
         document.getElementById('modal-game-title').innerText = gameObj.nome;
         document.getElementById('modal-game-sys').innerText = "SISTEMA: " + gameObj.sysId.toUpperCase();
@@ -505,6 +507,8 @@
         slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
         const coreToUse = coreMap[game.sysId] || 'snes';
         const playerFile = game.sysId === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
+        
+        // O R2_URL é aplicado APENAS NA ROM
         const playUrl = `${playerFile}?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + game.path + game.rom)}&core=${coreToUse}`;
         const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
 
@@ -574,15 +578,25 @@
                 
                 let capaNome = g.capa ? g.capa.split('/').pop() : '';
                 let gifNome = g.preview ? g.preview.split('/').pop() : '';
+                
+                // CORREÇÃO: Capas do seu site, não do R2
                 const imgPath = capaNome ? `${sys.path}capas/${capaNome}` : '';
                 const gifPath = gifNome ? `${sys.path}previews/${gifNome}` : '';
-                const coreToUse = coreMap[sys.id] || 'snes';   
                 
+                const coreToUse = coreMap[sys.id] || 'snes';   
                 const playerFile = sys.id === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
+                
+                // R2_URL APENAS NA ROM
                 const playUrl = `${playerFile}?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
 
                 card.dataset.url = playUrl;
-                card.innerHTML = `<div class="card-media"><img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';" class="static-thumb" loading="lazy"><img src="" data-gif="${gifPath}" class="active-gif"></div><div class="card-title"><span>${g.nome}</span></div>`;
+                card.innerHTML = `
+                    <div class="card-media">
+                        <img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';" class="static-thumb" loading="lazy">
+                        <img src="" data-gif="${gifPath}" class="active-gif">
+                    </div>
+                    <div class="card-title"><span>${g.nome}</span></div>
+                `;
                     
                 let hoverTimeout;
                 const playGifWithDelay = (cardElement) => {
@@ -594,7 +608,7 @@
                 };
                 const resetGif = (cardElement) => {
                     clearTimeout(hoverTimeout); const s = cardElement.querySelector('.static-thumb'); const a = cardElement.querySelector('.active-gif');
-                    s.style.opacity = '1'; a.style.opacity = '0'; setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 800);
+                    if(s) s.style.opacity = '1'; if(a) { a.style.opacity = '0'; setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 800); }
                 };
 
                 if (window.innerWidth <= 768) {
@@ -624,6 +638,7 @@
             hits.slice(0, 10).forEach(h => {
                 const div = document.createElement('div'); div.className = 'search-item selectable-item';   
                 let capaNomeBusca = h.capa ? h.capa.split('/').pop() : '';
+                // CORREÇÃO: Puxa do local sem R2_URL
                 const imgPath = capaNomeBusca ? `${h.sysPath}capas/${capaNomeBusca}` : 'assets/imagens-videos/logo-discord.gif';
                 div.innerHTML = `<img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';"><span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>`;
                 const coreToUse = coreMap[h.sysId] || 'snes';
