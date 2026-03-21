@@ -67,23 +67,13 @@
             transition: background-color 0.4s, color 0.4s;
         }
 
+        /* LOADERS & MODALS */
         #loader-overlay { position: fixed; inset: 0; background: var(--sidebar-bg); z-index: 100000; display: none; flex-direction: column; justify-content: center; align-items: center; }
         .loader-text { color: var(--accent-color); font-family: 'Press Start 2P'; margin-top: 20px; animation: blink 1s infinite; text-align: center; line-height: 1.5; padding: 0 10px; }
         .spinner { width: 50px; height: 50px; border: 5px solid var(--border-color); border-top: 5px solid var(--accent-color); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-            
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100000; justify-content: center; align-items: center; backdrop-filter: blur(5px); padding: 20px; }
-        .modal-content { background: #111; border: 2px solid var(--accent-color); padding: 25px; border-radius: 8px; width: 100%; max-width: 500px; color: #e0e0e0; font-family: monospace; box-shadow: 0 0 30px rgba(0,204,68,0.5); text-align: center; max-height: 90dvh; overflow-y: auto; scrollbar-width: none; }
-        .modal-content::-webkit-scrollbar { display: none; }
-        .modal-content h2 { color: var(--accent-color); margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 10px; font-family: 'Press Start 2P', monospace; font-size: 14px; line-height: 1.5;}
-        .modal-content p { line-height: 1.6; font-size: 13px; margin-top: 15px; color: #ccc;}
-        .disc-btn { background: var(--accent-color); color: #000; border: none; padding: 12px 20px; font-weight: bold; font-size: 14px; cursor: pointer; font-family: 'Press Start 2P', monospace; border-radius: 3px; width: 100%; transition: 0.3s; outline: none; margin-top: 10px; }
-        .disc-btn:hover, .disc-btn.gamepad-focus { background: #fff; box-shadow: 0 0 15px #fff; transform: scale(1.02); }
-        .cancel-btn { background: #333; color: #fff; border: 1px solid #555; margin-top: 20px; }
-        .cancel-btn:hover, .cancel-btn.gamepad-focus { background: #555; color: #fff; box-shadow: 0 0 15px #555; transform: scale(1.02); border-color: #fff; }
 
-        /* MODAL DE INFORMAÇÕES DO JOGO E AFILIADOS (VITRINE) */
         #game-info-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100000; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 20px; }
         .game-info-content { background: var(--sidebar-bg); border: 2px solid var(--accent-color); border-radius: 8px; width: 100%; max-width: 600px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 0 30px rgba(0,204,68,0.5); position: relative; }
         .game-info-close { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 16px; padding: 5px 12px; cursor: pointer; border-radius: 4px; font-weight: bold; z-index: 10; transition: 0.3s; }
@@ -96,7 +86,6 @@
         .game-info-rating { display: flex; align-items: center; gap: 5px; color: #ffd700; }
         .game-info-desc { font-size: 12px; line-height: 1.6; color: var(--text-muted); margin-bottom: 20px; }
         
-        /* BANNER AFILIADOS */
         .affiliate-banner { background: var(--input-bg); border: 1px dashed var(--accent-color); padding: 15px; border-radius: 6px; text-align: center; display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
         .affiliate-banner span { color: var(--text-color); font-weight: bold; font-size: 12px; }
         .affiliate-links { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
@@ -105,26 +94,26 @@
         .affiliate-btn.ml { background: #ffe600; color: #333; }
         .affiliate-btn.ali { background: #ff3300; }
         .affiliate-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
-
         .game-info-play-btn { background: var(--accent-color); color: #fff; border: none; padding: 15px; width: 100%; font-family: 'Press Start 2P', monospace; font-size: 14px; cursor: pointer; border-radius: 4px; transition: 0.3s; }
         .game-info-play-btn:hover { background: #fff; color: #000; box-shadow: 0 0 15px #fff; }
 
         /* SPLASH SCREEN & APRESENTAÇÃO */
         #splash-screen { position: fixed; inset: 0; background-color: var(--bg-color); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000000; transition: opacity 0.8s ease-out, visibility 0.8s; }
-        .splash-logo { font-family: 'Press Start 2P', monospace; font-size: clamp(20px, 4vw, 40px); color: var(--accent-color); display: flex; align-items: flex-end; white-space: nowrap; margin-bottom: 20px;}
+        .splash-logo { font-family: 'Press Start 2P', monospace; font-size: clamp(20px, 4vw, 40px); color: var(--accent-color); display: flex; align-items: flex-end; white-space: nowrap; margin-bottom: 20px; }
         .initial { font-weight: bold; }
         .reveal { display: inline-block; max-width: 0; opacity: 0; overflow: hidden; transition: max-width 1.5s ease-in-out, opacity 1.5s ease-in-out; vertical-align: bottom; font-size: clamp(16px, 3.5vw, 32px); margin-bottom: 2px; }
         .cursor { animation: blink-cursor 1s step-end infinite; margin-left: 5px; }
         @keyframes blink-cursor { 50% { opacity: 0; } }
         .splash-logo.animate .reveal { max-width: 300px; opacity: 1; }
-        #splash-screen.fade-out { opacity: 0; visibility: hidden; }
-
+        
         .splash-subtitle { color: var(--text-color); font-size: clamp(10px, 2vw, 14px); text-align: center; opacity: 0; transform: translateY(20px); transition: opacity 1s ease 1s, transform 1s ease 1s; font-family: monospace; font-weight: bold; background: rgba(0, 153, 51, 0.1); padding: 10px 20px; border-radius: 4px; border: 1px solid var(--accent-color); }
         .splash-logo.animate ~ .splash-subtitle { opacity: 1; transform: translateY(0); }
+        #splash-screen.fade-out { opacity: 0; visibility: hidden; }
 
+        /* SIDEBAR E CHAT */
         .sidebar { width: var(--sidebar-collapsed-width); background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; position: fixed; height: 100%; z-index: 5000; padding: 10px 5px; transition: width 0.3s ease, background 0.4s; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
         .sidebar::-webkit-scrollbar { display: none; }
-        @media(min-width: 769px) {
+        @media(min-width: 1025px) {
             .sidebar:hover { width: var(--sidebar-expanded-width); box-shadow: 10px 0 50px rgba(0,0,0,0.5); }
             .sidebar:hover .nav-text { display: inline-block; opacity: 1; transition: 0.3s; }
             .sidebar:hover .menu-label { opacity: 0; }
@@ -132,7 +121,6 @@
         }
         .sidebar-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; flex-shrink: 0; }
         .sidebar-header img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-color); cursor: pointer; }
-        .menu-label { font-family: 'Press Start 2P'; font-size: 8px; color: var(--text-color); margin-top: 8px; text-align: center; display: block; transition: 0.2s; cursor: pointer; }
         .nav-list { display: flex; flex-direction: column; gap: 10px; flex: 1; margin-top: 10px; }
         .nav-item { display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-muted); justify-content: center; flex-shrink: 0; transition: 0.3s; }
         @media(min-width: 769px) { .nav-item { justify-content: flex-start; } }
@@ -140,24 +128,36 @@
         .nav-item img { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; image-rendering: pixelated; }
         .nav-text { display: none; opacity: 0; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 
-        /* CHAT SIDEBAR */
+        /* PAINEL DE CHAT */
         .sidebar-chat { background: var(--bg-color); border: 1px solid var(--accent-color); padding: 10px; border-radius: 4px; height: 350px; min-height: 350px; display: none; flex-direction: column; width: 100%; flex-shrink: 0; margin-bottom: 20px; margin-top: auto; position: relative; }
         .close-chat-btn { display: none; }     
         #terminal-output { flex: 1; overflow-y: auto; font-family: monospace; font-size: 10px; color: var(--accent-color); margin-bottom: 10px; word-wrap: break-word; overflow-x: hidden; }
         .chat-time { color: var(--text-muted); font-size: 8px; margin-right: 5px; }
-        .chat-controls { display: flex; gap: 5px; width: 100%; box-sizing: border-box; }
-        #chat-nick { width: 70px; min-width: 0; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 5px; font-size: 10px; border-radius: 3px; outline: none; }
+        .chat-controls { display: flex; gap: 5px; width: 100%; box-sizing: border-box; position: relative; }
+        #chat-nick { width: 60px; min-width: 0; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 5px; font-size: 10px; border-radius: 3px; outline: none; }
         #chat-msg { flex: 1; min-width: 0; background: var(--sidebar-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 5px; font-size: 11px; border-radius: 3px; outline: none; }
         #chat-msg:disabled { background: var(--card-bg); cursor: not-allowed; opacity: 0.5; }
+        
+        #emoji-btn { background: var(--card-bg); border: 1px solid var(--border-color); cursor: pointer; border-radius: 3px; font-size: 14px; display: flex; align-items: center; justify-content: center; padding: 0 5px; transition: 0.3s; }
+        #emoji-btn:hover { background: var(--accent-color); border-color: var(--accent-color); }
+        #emoji-picker { display: none; position: absolute; bottom: 35px; right: 0; width: 220px; background: var(--sidebar-bg); border: 1px solid var(--accent-color); border-radius: 6px; padding: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); z-index: 1000; flex-wrap: wrap; gap: 6px; justify-content: center; }
+        .emoji-item { font-size: 18px; cursor: pointer; transition: transform 0.2s; user-select: none; }
+        .emoji-item:hover { transform: scale(1.3); }
         #send-btn { width: 30px; flex-shrink: 0; background: var(--accent-color); border: none; cursor: pointer; color: #fff; font-weight: bold; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+
+        /* BACKDROP DO CHAT MOBILE */
+        #chat-mobile-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 99998; backdrop-filter: blur(3px); }
 
         .main-content { margin-left: var(--sidebar-collapsed-width); padding: 0 0 50px 0; position: relative; z-index: 1; transition: margin-left 0.3s ease; }
             
-        .top-bar { position: sticky; top: 0; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 8000; background: var(--top-bar-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 204, 68, 0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: background 0.4s; }
+        /* TOP BAR GERAL */
+        .top-bar { position: sticky; top: 0; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 8000; background: var(--top-bar-bg); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 204, 68, 0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: background 0.4s; }
         @keyframes brand-glow { 0% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } 50% { text-shadow: 0 0 2px var(--accent-color), 0 0 5px var(--accent-color); transform: scale(1.02); } 100% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } }
-        .brand { font-family: 'Press Start 2P'; color: var(--accent-color); font-size: 18px; animation: brand-glow 2.5s infinite ease-in-out; }
+        .brand { font-family: 'Press Start 2P'; color: var(--accent-color); font-size: 18px; animation: brand-glow 2.5s infinite ease-in-out; cursor: pointer;}
         .top-bar-controls { display: flex; align-items: center; gap: 20px; }
             
+        .chat-trigger-mobile { display: none; } /* Oculto no desktop por padrão */
+
         .search-container { background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: flex; padding: 8px 15px; width: 350px; border-radius: 4px; position: relative; }
         #global-search { background: transparent; border: none; color: var(--text-color); outline: none; width: 100%; font-family: monospace; }
         #search-results { position: absolute; top: 100%; right: -1px; width: calc(100% + 2px); background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: none; flex-direction: column; z-index: 9999; max-height: 400px; overflow-y: auto; border-radius: 0 0 4px 4px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
@@ -223,21 +223,44 @@
         .discord-text { font-family: monospace; color: #fff; font-size: 12px; text-align: right; }
         .discord-float img { width: 45px; height: 45px; border-radius: 50%; }
 
-        @media (max-width: 768px) {
+        /* ========================================================= */
+        /* RESPONSIVIDADE TOTAL: MOBILE, TABLET, PAISAGEM (LANDSCAPE)*/
+        /* ========================================================= */
+        
+        /* TABLETS E TELAS MÉDIAS (até 1024px) */
+        @media (max-width: 1024px) {
             .sidebar { top: auto; bottom: 0; left: 0; width: 100% !important; height: 65px; flex-direction: row; border-right: none; border-top: 1px solid var(--accent-color); padding: 5px 0; transform: none !important; z-index: 9000; background: var(--top-bar-bg); backdrop-filter: blur(10px); box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }      
-            .sidebar-header, #chat-collapsed-label { display: none !important; }
+            .sidebar-header, .theme-container { display: none !important; }
             .nav-list { flex-direction: row; margin-top: 0; gap: 0; overflow-x: hidden; justify-content: space-around; padding: 0 5px; width: 100%; align-items: center; }
             .nav-item { flex-direction: column; padding: 2px 0; flex: 1; gap: 4px; justify-content: center; border-radius: 4px; }
             .nav-item img { width: 22px; height: 22px; margin: 0; border-radius: 0 !important; }
             .nav-text { display: block !important; opacity: 1 !important; font-size: 6px !important; text-align: center; white-space: normal !important; line-height: 1.1; word-break: break-word; }
-            .sidebar-chat.chat-modal-mobile { display: flex !important; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 75%; max-height: 500px; background: var(--top-bar-bg); border: 2px solid var(--accent-color); z-index: 100000 !important; box-shadow: 0 0 40px rgba(0, 204, 68, 0.4); margin: 0; border-radius: 8px; padding-top: 35px; backdrop-filter: blur(10px); }
-            .close-chat-btn { display: block; position: absolute; top: 8px; right: 10px; background: transparent; color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 14px; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-weight: bold; }
-            #chat-nick, #chat-msg { font-size: 16px; padding: 8px; }
-            #send-btn { font-size: 16px; }
             .main-content { margin-left: 0 !important; padding: 0 0 80px 0 !important; }
             .discord-float { bottom: 80px; right: 15px; }
-            .scroll-btn { width: 30px; font-size: 20px; opacity: 1; z-index: 10; }
-            .left-btn { left: 0; } .right-btn { right: 0; }
+            .discord-text { display: none; }
+            
+            /* FORÇAR O BOTÃO DE CHAT A APARECER AQUI TAMBÉM */
+            .top-bar-controls { display: flex; flex-direction: row !important; width: 100%; justify-content: center; align-items: center; gap: 10px; margin-top: 5px; }
+            .chat-trigger-mobile { display: flex !important; width: 38px !important; height: 38px !important; flex-shrink: 0 !important; border: 1px solid var(--accent-color); border-radius: 6px; background: var(--sidebar-bg); align-items: center; justify-content: center; cursor: pointer; order: 1; }
+            .chat-trigger-mobile img { width: 22px; height: 22px; object-fit: contain; image-rendering: pixelated; }
+            .search-container { flex: 1; width: auto; max-width: none; order: 2; height: 38px; }
+            
+            .sidebar-chat.chat-modal-mobile { display: flex !important; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 75%; max-height: 500px; background: var(--top-bar-bg); border: 2px solid var(--accent-color); z-index: 100000 !important; box-shadow: 0 0 40px rgba(0, 204, 68, 0.4); margin: 0; border-radius: 8px; padding-top: 35px; backdrop-filter: blur(10px); }
+            .close-chat-btn { display: block; position: absolute; top: 8px; right: 10px; background: transparent; color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 14px; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-weight: bold; }
+        }
+
+        /* SMARTPHONES EM PÉ */
+        @media (max-width: 768px) {
+            .top-bar { flex-direction: column; align-items: center; padding: 10px 15px; margin: 0; text-align: center; gap: 10px; }
+            .brand { width: 100%; text-align: center; display: block !important; font-size: 16px !important; margin-bottom: 5px; }
+            
+            .row-header { justify-content: space-between; padding-right: 15px; }
+            .view-all-btn { font-size: 8px; padding: 6px 10px; }
+            .hero-section { height: 400px; min-height: auto; max-height: none; }
+            .hero-bg-media { object-fit: cover; object-position: right center; }
+            .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
+            .hero-content { padding: 0 20px; margin-top: auto; margin-bottom: 40px; }
+            .hero-title { font-size: 24px; }
             .catalog { padding: 0 10px; }
             .game-carousel { gap: 8px; padding: 30px 10px; }      
             .game-card { width: 78px; height: 110px; margin: 0; border-radius: 4px; }      
@@ -246,26 +269,29 @@
             .card-title span { font-size: 6px; }
             .game-card:hover { transform: none; box-shadow: none; border-color: var(--border-color); z-index: 1; }
             .game-card.mobile-active { transform: scale(1.30); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0,204,68,0.6); z-index: 100; }
-            .discord-text { display: none; }
-                
-            .top-bar { flex-direction: column; align-items: center; padding: 15px 10px; margin: 0; text-align: center; }
-            .brand { width: 100%; text-align: center; }
-            .top-bar-controls { width: 95%; margin-top: 15px; justify-content: space-between; gap: 10px; }
-            .search-container { flex: 1; width: auto; }
-            .row-header { justify-content: space-between; padding-right: 15px; }
-            .view-all-btn { font-size: 8px; padding: 6px 10px; }
-                
-            .hero-section { height: 400px; min-height: auto; max-height: none; }
-            .hero-bg-media { object-fit: cover; object-position: right center; }
-            .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
-            .hero-content { padding: 0 20px; margin-top: auto; margin-bottom: 40px; }
-            .hero-title { font-size: 24px; }
         }
 
-        @media (min-width: 769px) { .chat-trigger-mobile { display: none !important; } }
+        /* CELULAR DEITADO E TABLET (PAISAGEM) */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero-section { height: 200px !important; min-height: 200px !important; }
+            .hero-content { padding: 0 20px; padding-bottom: 20px;}
+            .hero-title { font-size: 18px; margin-bottom: 5px; }
+            .hero-play-btn { padding: 8px 20px; font-size: 12px; margin-top: 5px; }
+            .top-bar { padding: 5px 20px !important; flex-direction: row !important; }
+            .brand { font-size: 14px !important; width: auto; margin-bottom: 0; text-align: left; }
+            .top-bar-controls { margin-top: 0 !important; width: auto !important; justify-content: flex-end; }
+            .search-container { width: 200px; padding: 4px 10px; height: 30px; }
+            .chat-trigger-mobile { width: 30px !important; height: 30px !important; }
+            .chat-trigger-mobile img { width: 16px; height: 16px; }
+            .catalog { padding-top: 10px; }
+            .row-wrapper { margin-bottom: 15px; }
+            .sidebar-chat.chat-modal-mobile { height: 90%; top: 5%; transform: translateX(-50%); }
+        }
     </style>
 </head>
 <body>
+    
+    <div id="chat-mobile-backdrop" onclick="closeMobileChat()"></div>
 
     <div id="splash-screen">
         <h1 class="splash-logo">
@@ -318,16 +344,19 @@
             <div class="sidebar-header">
                 <img src="assets/imagens-videos/logo-discord.gif?v=2" onclick="window.scrollTo(0,0);" title="Voltar ao Topo">
             </div>
-                
             <div class="nav-list" id="nav-list"></div>
-                
+            
             <div class="sidebar-chat" id="chat-container">
                 <button class="close-chat-btn" onclick="closeMobileChat()">X</button>
-                <div style="font-size:10px; color:var(--accent-color); text-align:center; margin-bottom:5px;">CHAT GLOBAL</div>
+                <div style="font-size:10px; color:var(--accent-color); text-align:center; margin-bottom:5px; font-family: 'Press Start 2P', cursive;">CHAT GLOBAL</div>
                 <div id="terminal-output"></div>
                 <div class="chat-controls">
                     <input id="chat-nick" placeholder="Nick" maxlength="10">
                     <input id="chat-msg" placeholder="Mensagem..." disabled>
+                    <button id="emoji-btn" title="Adicionar Emoji">😀</button>
+                    <div id="emoji-picker">
+                        <span class="emoji-item">🎮</span><span class="emoji-item">🕹️</span><span class="emoji-item">👾</span><span class="emoji-item">🔥</span><span class="emoji-item">😎</span><span class="emoji-item">🇧🇷</span><span class="emoji-item">💀</span><span class="emoji-item">👍</span><span class="emoji-item">🏆</span><span class="emoji-item">🚀</span><span class="emoji-item">🤬</span><span class="emoji-item">❤️</span>
+                    </div>
                     <button id="send-btn">➤</button>
                 </div>
             </div>
@@ -335,15 +364,16 @@
 
         <main class="main-content">
             <header class="top-bar">
-                <div class="brand">NEOTERMINALROOM</div>
-                    
+                <div class="brand" onclick="window.scrollTo(0,0)">NEOTERMINALROOM</div>
                 <div class="top-bar-controls">
+                    <div class="chat-trigger-mobile" onclick="openMobileChat()">
+                        <img src="assets/imagens-videos/imagens do menu/chat.png" alt="Chat">
+                    </div>
                     <div class="search-container">
                         <span style="color:var(--accent-color); margin-right:10px;">#</span>
                         <input type="text" id="global-search" placeholder="buscar jogo..." autocomplete="off">
                         <div id="search-results"></div>
                     </div>
-                        
                     <div class="theme-container">
                         <span class="theme-label">TEMA</span>
                         <label class="theme-switch" title="Mudar Tema">
@@ -353,11 +383,9 @@
                     </div>
                 </div>
             </header>
-                
             <section class="hero-section" id="hero-slider">
                 <div class="hero-indicators" id="hero-indicators"></div>
             </section>
-
             <section class="catalog" id="catalog-area"></section>
         </main>
     </div>
@@ -366,15 +394,13 @@
     document.addEventListener("DOMContentLoaded", () => {
         const splash = document.getElementById("splash-screen");
         const logo = document.querySelector(".splash-logo");
-        
         document.body.style.overflow = "hidden";
         setTimeout(() => logo.classList.add("animate"), 500);
-        
         setTimeout(() => {
             splash.classList.add("fade-out");
             document.body.style.overflow = "auto";
             setTimeout(() => splash.remove(), 800); 
-        }, 3000);
+        }, 3500);
     });
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -389,27 +415,39 @@
         else { document.body.classList.remove('dark-theme'); localStorage.setItem('theme', 'light'); }
     });
 
-    const firebaseConfig = {    
-        apiKey: "AIzaSyCx_OllbDYkua9BbMOj2oJP5V1UcbxmnbI",    
-        databaseURL: "https://neoterminalroom-default-rtdb.firebaseio.com",    
-        projectId: "neoterminalroom"    
-    };
+    const firebaseConfig = { apiKey: "AIzaSyCx_OllbDYkua9BbMOj2oJP5V1UcbxmnbI", databaseURL: "https://neoterminalroom-default-rtdb.firebaseio.com", projectId: "neoterminalroom" };
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
     const chatRef = ref(db, 'mensagens');
 
-    window.startGame = (url) => { triggerLoad(url); };
-
-    function triggerLoad(url) {
-        const loader = document.getElementById('loader-overlay');
-        loader.style.display = 'flex';
+    window.startGame = (url) => {
+        document.getElementById('loader-overlay').style.display = 'flex';
         setTimeout(() => { window.location.href = url; }, 1500);
-    }
+    };
+
+    window.toggleGrid = (sysId) => {
+        const car = document.getElementById(`carousel-${sysId}`);
+        const btn = document.getElementById(`btn-${sysId}`);
+        const lBtn = document.querySelector(`#section-${sysId} .left-btn`);
+        const rBtn = document.querySelector(`#section-${sysId} .right-btn`);
+        car.classList.toggle('grid-view');
+        if(car.classList.contains('grid-view')) { btn.innerHTML = "⊞ VOLTAR"; if(lBtn) lBtn.style.display = 'none'; if(rBtn) rBtn.style.display = 'none'; } 
+        else { btn.innerHTML = "⊞ VER TODOS"; if(lBtn) lBtn.style.display = 'flex'; if(rBtn) rBtn.style.display = 'flex'; }
+    };
+
+    window.openMobileChat = () => { 
+        document.getElementById('chat-container').classList.add('chat-modal-mobile'); 
+        document.getElementById('chat-mobile-backdrop').style.display = 'block';
+    };
+    window.closeMobileChat = () => { 
+        document.getElementById('chat-container').classList.remove('chat-modal-mobile'); 
+        document.getElementById('chat-mobile-backdrop').style.display = 'none';
+    };
 
     window.openGameModal = (gameObj, playUrl) => {
         let capaNome = gameObj.capa ? gameObj.capa.split('/').pop() : '';
-        // CORREÇÃO: Capa direto do seu repo local
-        document.getElementById('modal-game-img').src = capaNome ? `${gameObj.sysPath}capas/${capaNome}` : 'assets/imagens-videos/logo-discord.gif';
+        // CORREÇÃO MESTRE: Capa na Vitrine apontando direto pro seu R2!
+        document.getElementById('modal-game-img').src = capaNome ? `${R2_URL}${gameObj.sysPath}capas/${capaNome}` : 'assets/imagens-videos/logo-discord.gif';
         document.getElementById('modal-game-title').innerText = gameObj.nome;
         document.getElementById('modal-game-sys').innerText = "SISTEMA: " + gameObj.sysId.toUpperCase();
         let nota = gameObj.nota || (Math.random() * (9.5 - 7.5) + 7.5).toFixed(1);
@@ -419,31 +457,6 @@
     };
 
     window.closeGameModal = () => { document.getElementById('game-info-modal').style.display = 'none'; };
-
-    window.toggleGrid = (sysId) => {
-        const car = document.getElementById(`carousel-${sysId}`);
-        const btn = document.getElementById(`btn-${sysId}`);
-        const lBtn = document.querySelector(`#section-${sysId} .left-btn`);
-        const rBtn = document.querySelector(`#section-${sysId} .right-btn`);
-            
-        car.classList.toggle('grid-view');
-            
-        if(car.classList.contains('grid-view')) {
-            btn.innerHTML = "⊞ VOLTAR";
-            if(lBtn) lBtn.style.display = 'none';
-            if(rBtn) rBtn.style.display = 'none';
-        } else {
-            btn.innerHTML = "⊞ VER TODOS";
-            if(lBtn) lBtn.style.display = 'flex';
-            if(rBtn) rBtn.style.display = 'flex';
-        }
-    };
-
-    window.closeMobileChat = () => {
-        const chat = document.getElementById('chat-container');
-        chat.classList.remove('chat-modal-mobile');
-        document.getElementById('main-sidebar').appendChild(chat);
-    };
 
     const out = document.getElementById("terminal-output");
     const nickInput = document.getElementById("chat-nick");
@@ -461,18 +474,21 @@
     });
 
     function sendMessage() {
-        const user = nickInput.value.trim();
-        const text = msgInput.value.trim();
+        const user = nickInput.value.trim(); const text = msgInput.value.trim();
         if(!user) { alert("Digite um Nick primeiro!"); return; }
         if(!text) return;
-        const now = new Date();
-        const timeStr = now.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: '2-digit' }) + ' ' + now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+        const now = new Date(); const timeStr = now.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: '2-digit' }) + ' ' + now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
         localStorage.setItem("neo_nick", user);
-        push(chatRef, {user, text, time: timeStr});
-        msgInput.value = "";
+        push(chatRef, {user, text, time: timeStr}); msgInput.value = "";
     }
     sendBtn.onclick = sendMessage;
     msgInput.onkeydown = (e) => { if(e.key === "Enter") sendMessage(); }
+
+    const emojiBtn = document.getElementById("emoji-btn");
+    const emojiPicker = document.getElementById("emoji-picker");
+    emojiBtn.onclick = (e) => { e.stopPropagation(); emojiPicker.style.display = emojiPicker.style.display === "flex" ? "none" : "flex"; };
+    document.querySelectorAll(".emoji-item").forEach(em => { em.onclick = (e) => { e.stopPropagation(); if (!msgInput.disabled) { msgInput.value += em.innerText; msgInput.focus(); } }; });
+    document.addEventListener("click", (e) => { if (emojiPicker.style.display === "flex" && !emojiPicker.contains(e.target) && e.target !== emojiBtn) emojiPicker.style.display = "none"; });
 
     const coreMap = { 'nes': 'nes', 'snes': 'snes', 'gba': 'gba', 'n64': 'n64', 'megadrive': 'segaMD', 'ps1': 'psx' };
 
@@ -491,51 +507,39 @@
 
     const heroSlider = document.getElementById('hero-slider');
     const heroIndicators = document.getElementById('hero-indicators');
-    let currentHeroIndex = 0;
-    let heroTimer;
+    let currentHeroIndex = 0; let heroTimer;
 
     top10Games.forEach((game, index) => {
         const slide = document.createElement('div');
         slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
-        slide.id = `hero-slide-${index}`;
-            
         const coreToUse = coreMap[game.sysId] || 'snes';
         const playerFile = game.sysId === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
         const playUrl = `${playerFile}?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + game.path + game.rom)}&core=${coreToUse}`;
         const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
 
         slide.innerHTML = `
-            <img src="${wallpaperPath}" class="hero-bg-blur" alt="Background Preenchimento">
-            <img src="${wallpaperPath}" class="hero-bg-media" alt="Wallpaper HD">
+            <img src="${wallpaperPath}" class="hero-bg-blur">
+            <img src="${wallpaperPath}" class="hero-bg-media">
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1 class="hero-title">${game.nome}</h1>
                 <div class="hero-categories">${game.cats}</div>
-                <button class="hero-play-btn selectable-item" onclick="window.startGame('${playUrl}')">
-                    <span>▶</span> JOGAR
-                </button>
+                <button class="hero-play-btn selectable-item" onclick="window.startGame('${playUrl}')"><span>▶</span> JOGAR</button>
             </div>
         `;
         heroSlider.appendChild(slide);
-
-        const dot = document.createElement('div');
-        dot.className = `indicator ${index === 0 ? 'active' : ''}`;
-        dot.onclick = () => goToSlide(index);
-        heroIndicators.appendChild(dot);
+        const dot = document.createElement('div'); dot.className = `indicator ${index === 0 ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(index); heroIndicators.appendChild(dot);
     });
 
     function goToSlide(index) {
         document.querySelectorAll('.hero-slide').forEach(s => s.classList.remove('active'));
         document.querySelectorAll('.indicator').forEach(d => d.classList.remove('active'));
-            
-        document.getElementById(`hero-slide-${index}`).classList.add('active');
+        document.querySelectorAll('.hero-slide')[index].classList.add('active');
         document.querySelectorAll('.indicator')[index].classList.add('active');
-            
-        currentHeroIndex = index;
-        resetHeroTimer();
+        currentHeroIndex = index; resetHeroTimer();
         updateGamepadFocusList();
     }
-
     function nextSlide() { goToSlide((currentHeroIndex + 1) % top10Games.length); }
     function prevSlide() { goToSlide((currentHeroIndex - 1 + top10Games.length) % top10Games.length); }
     function resetHeroTimer() { clearInterval(heroTimer); heroTimer = setInterval(nextSlide, 5000); }
@@ -552,33 +556,22 @@
 
     const catalog = document.getElementById("catalog-area");
     const nav = document.getElementById("nav-list");
-    let indexData = [];  
-    let fetchPromises = [];
+    let indexData = []; let fetchPromises = [];
 
     systems.forEach(sys => {
-        const item = document.createElement("div");
-        item.className = "nav-item";
+        const item = document.createElement("div"); item.className = "nav-item";
         item.innerHTML = `<img src="${sys.icon}"><span class="nav-text">${sys.name}</span>`;
         item.onclick = () => {
             const section = document.getElementById(`section-${sys.id}`);
-            if(section) window.scrollTo({top: section.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth'});
+            if(section) {
+                if (!document.getElementById(`carousel-${sys.id}`).classList.contains('grid-view')) toggleGrid(sys.id);
+                window.scrollTo({top: section.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth'});
+            }
         };
         nav.appendChild(item);
 
-        const wrapper = document.createElement("div");
-        wrapper.className = "row-wrapper";
-        wrapper.id = `section-${sys.id}`;
-        wrapper.innerHTML = `
-            <div class="row-header">
-                <span class="row-title-text">${sys.name}</span>
-                <button class="view-all-btn selectable-item" id="btn-${sys.id}" onclick="toggleGrid('${sys.id}')">⊞ VER TODOS</button>
-            </div>
-            <div class="row-container">
-                <button class="scroll-btn left-btn" onclick="document.getElementById('carousel-${sys.id}').scrollBy(-300,0)">❮</button>
-                <div class="game-carousel" id="carousel-${sys.id}"></div>
-                <button class="scroll-btn right-btn" onclick="document.getElementById('carousel-${sys.id}').scrollBy(300,0)">❯</button>
-            </div>
-        `;
+        const wrapper = document.createElement("div"); wrapper.className = "row-wrapper"; wrapper.id = `section-${sys.id}`;
+        wrapper.innerHTML = `<div class="row-header"><span class="row-title-text">${sys.name}</span><button class="view-all-btn selectable-item" id="btn-${sys.id}" onclick="toggleGrid('${sys.id}')">⊞ VER TODOS</button></div><div class="row-container"><button class="scroll-btn left-btn" onclick="document.getElementById('carousel-${sys.id}').scrollBy(-300,0)">❮</button><div class="game-carousel" id="carousel-${sys.id}"></div><button class="scroll-btn right-btn" onclick="document.getElementById('carousel-${sys.id}').scrollBy(300,0)">❯</button></div>`;
         catalog.appendChild(wrapper);
 
         let p = fetch(`${sys.path}games.json?v=${new Date().getTime()}`).then(r => r.json()).then(games => {
@@ -586,19 +579,17 @@
             games.forEach(g => {
                 const gameObjFull = {...g, sysPath: sys.path, sysName: sys.name, sysId: sys.id};
                 indexData.push(gameObjFull);
-                const card = document.createElement("div");
-                card.className = "game-card selectable-item";
+                const card = document.createElement("div"); card.className = "game-card selectable-item";
                 
                 let capaNome = g.capa ? g.capa.split('/').pop() : '';
                 let gifNome = g.preview ? g.preview.split('/').pop() : '';
 
-                // CORREÇÃO: Capas e GIFs direto do seu servidor, sem R2_URL
-                const imgPath = capaNome ? `${sys.path}capas/${capaNome}` : '';
-                const gifPath = gifNome ? `${sys.path}previews/${gifNome}` : '';
+                // CORREÇÃO MESTRE: Capas e GIFs apontando pro seu servidor R2 corretamente!
+                const imgPath = capaNome ? `${R2_URL}${sys.path}capas/${capaNome}` : '';
+                const gifPath = gifNome ? `${R2_URL}${sys.path}previews/${gifNome}` : '';
 
                 const coreToUse = coreMap[sys.id] || 'snes';   
                 const playerFile = sys.id === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
-                // O R2_URL fica apenas na ROM!
                 const playUrl = `${playerFile}?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
 
                 card.dataset.url = playUrl;
@@ -608,41 +599,30 @@
                         <img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';" class="static-thumb" loading="lazy">
                         <img src="" data-gif="${gifPath}" class="active-gif">
                     </div>
-                    <div class="card-title">
-                        <span>${g.nome}</span>
-                    </div>
+                    <div class="card-title"><span>${g.nome}</span></div>
                 `;
                     
                 let hoverTimeout;
                 const playGifWithDelay = (cardElement) => {
-                    const s = cardElement.querySelector('.static-thumb');
-                    const a = cardElement.querySelector('.active-gif');
-                    clearTimeout(hoverTimeout);   
-                    if (!a.dataset.gif) return; 
-                    
+                    const s = cardElement.querySelector('.static-thumb'); const a = cardElement.querySelector('.active-gif');
+                    clearTimeout(hoverTimeout); if (!a.dataset.gif) return; 
                     const showCoverAndWait = () => { s.style.opacity = '1'; a.style.opacity = '0'; setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 800); hoverTimeout = setTimeout(showGifAndWait, 3000); };
                     const showGifAndWait = () => { a.src = a.dataset.gif; a.style.display = 'block'; setTimeout(() => { s.style.opacity = '0'; a.style.opacity = '1'; }, 50); hoverTimeout = setTimeout(showCoverAndWait, 4000); };
                     hoverTimeout = setTimeout(() => { const tester = new Image(); tester.src = a.dataset.gif; tester.onload = showGifAndWait; }, 1000);   
                 };
-                
                 const resetGif = (cardElement) => {
-                    clearTimeout(hoverTimeout);   
-                    const s = cardElement.querySelector('.static-thumb');
-                    const a = cardElement.querySelector('.active-gif');
-                    if (s) s.style.opacity = '1'; 
-                    if (a) { a.style.opacity = '0'; setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 800); }
+                    clearTimeout(hoverTimeout); const s = cardElement.querySelector('.static-thumb'); const a = cardElement.querySelector('.active-gif');
+                    if(s) s.style.opacity = '1'; if(a) { a.style.opacity = '0'; setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 800); }
                 };
 
                 if (window.innerWidth <= 768) {
                     card.onclick = (e) => {
                         if (card.classList.contains('mobile-active')) { window.openGameModal(gameObjFull, playUrl); return; }
                         document.querySelectorAll('.game-card').forEach(c => { c.classList.remove('mobile-active'); resetGif(c); });
-                        card.classList.add('mobile-active');
-                        playGifWithDelay(card);
+                        card.classList.add('mobile-active'); playGifWithDelay(card);
                     };
                 } else {
-                    card.onmouseenter = () => playGifWithDelay(card);
-                    card.onmouseleave = () => resetGif(card);
+                    card.onmouseenter = () => playGifWithDelay(card); card.onmouseleave = () => resetGif(card);
                     card.onclick = () => window.openGameModal(gameObjFull, playUrl);
                 }
                 car.appendChild(card);
@@ -656,31 +636,25 @@
 
     searchInput.addEventListener('input', (e) => {
         const val = e.target.value.toLowerCase().replace('#', '').trim();
-        searchResults.innerHTML = '';  
-        if(!val) { searchResults.style.display = 'none'; updateGamepadFocusList(); return; }
+        searchResults.innerHTML = ''; if(!val) { searchResults.style.display = 'none'; updateGamepadFocusList(); return; }
 
         const hits = indexData.filter(g => g.nome && g.nome.toLowerCase().includes(val));
         if(hits.length > 0) {
             searchResults.style.display = 'flex';
             hits.slice(0, 10).forEach(h => {
-                const div = document.createElement('div');
-                div.className = 'search-item selectable-item';   
+                const div = document.createElement('div'); div.className = 'search-item selectable-item';   
                  
                 let capaNomeBusca = h.capa ? h.capa.split('/').pop() : '';
-                // CORREÇÃO: Capa na busca puxa do local sem R2_URL
-                const imgPath = capaNomeBusca ? `${h.sysPath}capas/${capaNomeBusca}` : 'assets/imagens-videos/logo-discord.gif';
+                // CORREÇÃO: Capa da pesquisa usando R2_URL
+                const imgPath = capaNomeBusca ? `${R2_URL}${h.sysPath}capas/${capaNomeBusca}` : 'assets/imagens-videos/logo-discord.gif';
 
-                div.innerHTML = `
-                    <img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';">   
-                    <span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>
-                `;
+                div.innerHTML = `<img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';"><span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>`;
                     
                 const coreToUse = coreMap[h.sysId] || 'snes';
                 const playerFile = h.sysId === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
                 const playUrl = `${playerFile}?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + h.sysPath + h.rom)}&core=${coreToUse}`;
                 
-                div.dataset.url = playUrl;
-                div.onclick = () => window.openGameModal(h, playUrl);
+                div.dataset.url = playUrl; div.onclick = () => window.openGameModal(h, playUrl);
                 searchResults.appendChild(div);
             });
             updateGamepadFocusList();   
@@ -690,59 +664,29 @@
     document.addEventListener('click', (e) => { if (!e.target.closest('.search-container')) searchResults.style.display = 'none'; });
 
     // GAMEPAD
-    let selectableItems = [];
-    let currentFocusIndex = -1;
-    let gamepadConnected = false;
-    let axisCooldown = false;
-
-    function updateGamepadFocusList() {
-        selectableItems = Array.from(document.querySelectorAll('.selectable-item')).filter(el => {
-            if (el.classList.contains('hero-play-btn')) return el.closest('.hero-slide').classList.contains('active');
-            const rect = el.getBoundingClientRect();
-            return rect.width > 0 && window.getComputedStyle(el).display !== 'none';
-        });
-    }
-
-    window.addEventListener("gamepadconnected", (e) => {
-        gamepadConnected = true;
-        updateGamepadFocusList();
-        if(currentFocusIndex === -1 && selectableItems.length > 0) focusItem(0);
-        pollGamepad();
-    });
+    let selectableItems = []; let currentFocusIndex = -1; let gamepadConnected = false; let axisCooldown = false;
+    function updateGamepadFocusList() { selectableItems = Array.from(document.querySelectorAll('.selectable-item')).filter(el => { if (el.classList.contains('hero-play-btn')) return el.closest('.hero-slide').classList.contains('active'); return el.getBoundingClientRect().width > 0 && window.getComputedStyle(el).display !== 'none'; }); }
+    window.addEventListener("gamepadconnected", (e) => { gamepadConnected = true; updateGamepadFocusList(); if(currentFocusIndex === -1 && selectableItems.length > 0) focusItem(0); pollGamepad(); });
     window.addEventListener("gamepaddisconnected", () => { gamepadConnected = false; });
-
     function focusItem(index) {
         if(selectableItems.length === 0 || currentFocusIndex >= selectableItems.length) return;
-        if(currentFocusIndex >= 0) {
-            selectableItems[currentFocusIndex].classList.remove('gamepad-focus');
-            if(selectableItems[currentFocusIndex].classList.contains('game-card')) selectableItems[currentFocusIndex].dispatchEvent(new Event('mouseleave'));
-        }
-        currentFocusIndex = index;
-        const target = selectableItems[currentFocusIndex];
-        target.classList.add('gamepad-focus');
-        target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+        if(currentFocusIndex >= 0) { selectableItems[currentFocusIndex].classList.remove('gamepad-focus'); if(selectableItems[currentFocusIndex].classList.contains('game-card')) selectableItems[currentFocusIndex].dispatchEvent(new Event('mouseleave')); }
+        currentFocusIndex = index; const target = selectableItems[currentFocusIndex];
+        target.classList.add('gamepad-focus'); target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
         if(target.classList.contains('game-card')) target.dispatchEvent(new Event('mouseenter'));
     }
-
     function pollGamepad() {
-        if (!gamepadConnected) return;
-        const gp = navigator.getGamepads()[0];
+        if (!gamepadConnected) return; const gp = navigator.getGamepads()[0];
         if (gp) {
-            const dpadUp = gp.buttons[12]?.pressed; const dpadDown = gp.buttons[13]?.pressed;
-            const dpadLeft = gp.buttons[14]?.pressed; const dpadRight = gp.buttons[15]?.pressed;
+            const dpadUp = gp.buttons[12]?.pressed; const dpadDown = gp.buttons[13]?.pressed; const dpadLeft = gp.buttons[14]?.pressed; const dpadRight = gp.buttons[15]?.pressed;
             const confirmBtn = gp.buttons[0]?.pressed;  
-
             if(!axisCooldown) {
                 let moved = false;
-                if (dpadLeft) { focusItem(Math.max(0, currentFocusIndex - 1)); moved = true; }
-                else if (dpadRight) { focusItem(Math.min(selectableItems.length - 1, currentFocusIndex + 1)); moved = true; }
-                
+                if (dpadLeft) { focusItem(Math.max(0, currentFocusIndex - 1)); moved = true; } else if (dpadRight) { focusItem(Math.min(selectableItems.length - 1, currentFocusIndex + 1)); moved = true; }
                 if(moved) { axisCooldown = true; setTimeout(() => { axisCooldown = false; }, 200); }
             }
-            if (confirmBtn && !window.confirmBtnPressed) {
-                window.confirmBtnPressed = true;   
-                if(currentFocusIndex >= 0 && selectableItems[currentFocusIndex]) selectableItems[currentFocusIndex].click();
-            } else if (!confirmBtn) { window.confirmBtnPressed = false; }
+            if (confirmBtn && !window.confirmBtnPressed) { window.confirmBtnPressed = true; if(currentFocusIndex >= 0 && selectableItems[currentFocusIndex]) selectableItems[currentFocusIndex].click(); } 
+            else if (!confirmBtn) { window.confirmBtnPressed = false; }
         }
         requestAnimationFrame(pollGamepad);
     }
