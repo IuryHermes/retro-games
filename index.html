@@ -110,14 +110,13 @@
         .splash-logo.animate ~ .splash-subtitle { opacity: 1; transform: translateY(0); }
         #splash-screen.fade-out { opacity: 0; visibility: hidden; }
 
-        /* SIDEBAR E CHAT */
+        /* SIDEBAR E CHAT (MODAL FIX) */
         .sidebar { width: var(--sidebar-collapsed-width); background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; position: fixed; height: 100%; z-index: 5000; padding: 10px 5px; transition: width 0.3s ease, background 0.4s; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; }
         .sidebar::-webkit-scrollbar { display: none; }
         @media(min-width: 1025px) {
             .sidebar:hover { width: var(--sidebar-expanded-width); box-shadow: 10px 0 50px rgba(0,0,0,0.5); }
             .sidebar:hover .nav-text { display: inline-block; opacity: 1; transition: 0.3s; }
             .sidebar:hover .menu-label { opacity: 0; }
-            .sidebar:hover .sidebar-chat { display: flex; }
         }
         .sidebar-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; flex-shrink: 0; }
         .sidebar-header img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-color); cursor: pointer; }
@@ -128,35 +127,41 @@
         .nav-item img { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; image-rendering: pixelated; }
         .nav-text { display: none; opacity: 0; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 
-        /* PAINEL DE CHAT */
-        .sidebar-chat { background: var(--bg-color); border: 1px solid var(--accent-color); padding: 10px; border-radius: 4px; height: 350px; min-height: 350px; display: none; flex-direction: column; width: 100%; flex-shrink: 0; margin-bottom: 20px; margin-top: auto; position: relative; }
-        .close-chat-btn { display: none; }     
-        #terminal-output { flex: 1; overflow-y: auto; font-family: monospace; font-size: 10px; color: var(--accent-color); margin-bottom: 10px; word-wrap: break-word; overflow-x: hidden; }
-        .chat-time { color: var(--text-muted); font-size: 8px; margin-right: 5px; }
-        .chat-controls { display: flex; gap: 5px; width: 100%; box-sizing: border-box; position: relative; }
-        #chat-nick { width: 60px; min-width: 0; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 5px; font-size: 10px; border-radius: 3px; outline: none; }
-        #chat-msg { flex: 1; min-width: 0; background: var(--sidebar-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 5px; font-size: 11px; border-radius: 3px; outline: none; }
-        #chat-msg:disabled { background: var(--card-bg); cursor: not-allowed; opacity: 0.5; }
-        
-        #emoji-btn { background: var(--card-bg); border: 1px solid var(--border-color); cursor: pointer; border-radius: 3px; font-size: 14px; display: flex; align-items: center; justify-content: center; padding: 0 5px; transition: 0.3s; }
-        #emoji-btn:hover { background: var(--accent-color); border-color: var(--accent-color); }
-        #emoji-picker { display: none; position: absolute; bottom: 35px; right: 0; width: 220px; background: var(--sidebar-bg); border: 1px solid var(--accent-color); border-radius: 6px; padding: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); z-index: 1000; flex-wrap: wrap; gap: 6px; justify-content: center; }
-        .emoji-item { font-size: 18px; cursor: pointer; transition: transform 0.2s; user-select: none; }
-        .emoji-item:hover { transform: scale(1.3); }
-        #send-btn { width: 30px; flex-shrink: 0; background: var(--accent-color); border: none; cursor: pointer; color: #fff; font-weight: bold; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        /* CONSERTO DO CHAT: Janela Modal Real */
+        .sidebar-chat { display: none; } /* Ocultar chat da sidebar antiga */
 
-        /* BACKDROP DO CHAT MOBILE */
-        #chat-mobile-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 99998; backdrop-filter: blur(3px); }
+        #chat-modal-wrapper {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200000; 
+            justify-content: center; align-items: center; backdrop-filter: blur(5px);
+        }
+        #chat-modal-wrapper.active { display: flex; }
+
+        .chat-modal-panel {
+            background: var(--top-bar-bg); border: 2px solid var(--accent-color); border-radius: 8px; width: 90%; max-width: 450px; 
+            height: 75%; max-height: 500px; padding: 20px; display: flex; flex-direction: column; position: relative;
+            box-shadow: 0 0 40px rgba(0, 204, 68, 0.4); backdrop-filter: blur(10px);
+        }
+        .chat-title-mobile { font-size: 11px; color: var(--accent-color); text-align: center; margin-bottom: 10px; font-family: 'Press Start 2P', cursive; }
+        #terminal-output { flex: 1; overflow-y: auto; font-family: monospace; font-size: 11px; color: var(--accent-color); margin-bottom: 10px; word-wrap: break-word; overflow-x: hidden; }
+        .chat-time { color: var(--text-muted); font-size: 8px; margin-right: 5px; }
+        .chat-controls { display: flex; gap: 5px; width: 100%; box-sizing: border-box; }
+        #chat-nick { width: 80px; min-width: 0; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px; font-size: 11px; border-radius: 3px; outline: none; }
+        #chat-msg { flex: 1; min-width: 0; background: var(--sidebar-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 8px; font-size: 12px; border-radius: 3px; outline: none; }
+        #chat-msg:disabled { background: var(--card-bg); cursor: not-allowed; opacity: 0.5; }
+        #send-btn { width: 35px; flex-shrink: 0; background: var(--accent-color); border: none; cursor: pointer; color: #fff; font-weight: bold; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+
+        /* Botão Fechar no Chat */
+        .close-chat-btn { position: absolute; top: 10px; right: 10px; background: transparent; color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 16px; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-weight: bold; z-index: 10; transition: 0.3s; }
+        .close-chat-btn:hover { background: #ff3333; color: #fff; }
 
         .main-content { margin-left: var(--sidebar-collapsed-width); padding: 0 0 50px 0; position: relative; z-index: 1; transition: margin-left 0.3s ease; }
             
-        /* TOP BAR GERAL */
         .top-bar { position: sticky; top: 0; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 8000; background: var(--top-bar-bg); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 204, 68, 0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: background 0.4s; }
         @keyframes brand-glow { 0% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } 50% { text-shadow: 0 0 2px var(--accent-color), 0 0 5px var(--accent-color); transform: scale(1.02); } 100% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } }
-        .brand { font-family: 'Press Start 2P'; color: var(--accent-color); font-size: 18px; animation: brand-glow 2.5s infinite ease-in-out; cursor: pointer;}
+        .brand { font-family: 'Press Start 2P'; color: var(--accent-color); font-size: 18px; animation: brand-glow 2.5s infinite ease-in-out; cursor: pointer; }
         .top-bar-controls { display: flex; align-items: center; gap: 20px; }
             
-        .chat-trigger-mobile { display: none; } /* Oculto no desktop por padrão */
+        .chat-trigger-mobile { display: none; } 
 
         .search-container { background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: flex; padding: 8px 15px; width: 350px; border-radius: 4px; position: relative; }
         #global-search { background: transparent; border: none; color: var(--text-color); outline: none; width: 100%; font-family: monospace; }
@@ -223,44 +228,23 @@
         .discord-text { font-family: monospace; color: #fff; font-size: 12px; text-align: right; }
         .discord-float img { width: 45px; height: 45px; border-radius: 50%; }
 
-        /* ========================================================= */
-        /* RESPONSIVIDADE TOTAL: MOBILE, TABLET, PAISAGEM (LANDSCAPE)*/
-        /* ========================================================= */
-        
-        /* TABLETS E TELAS MÉDIAS (até 1024px) */
-        @media (max-width: 1024px) {
+        @media (max-width: 768px) {
             .sidebar { top: auto; bottom: 0; left: 0; width: 100% !important; height: 65px; flex-direction: row; border-right: none; border-top: 1px solid var(--accent-color); padding: 5px 0; transform: none !important; z-index: 9000; background: var(--top-bar-bg); backdrop-filter: blur(10px); box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }      
-            .sidebar-header, .theme-container { display: none !important; }
+            .sidebar-header { display: none !important; }
             .nav-list { flex-direction: row; margin-top: 0; gap: 0; overflow-x: hidden; justify-content: space-around; padding: 0 5px; width: 100%; align-items: center; }
             .nav-item { flex-direction: column; padding: 2px 0; flex: 1; gap: 4px; justify-content: center; border-radius: 4px; }
             .nav-item img { width: 22px; height: 22px; margin: 0; border-radius: 0 !important; }
             .nav-text { display: block !important; opacity: 1 !important; font-size: 6px !important; text-align: center; white-space: normal !important; line-height: 1.1; word-break: break-word; }
+            
+            /* CONSERTO MOBILE: Chat ocupa bem a tela, mas ainda modal */
+            .chat-modal-panel { width: 95%; height: 85%; max-height: none; padding: 15px; padding-top: 35px; }
+            #chat-nick, #chat-msg { font-size: 16px; padding: 8px; }
+            #send-btn { font-size: 16px; width: 40px; }
+            
             .main-content { margin-left: 0 !important; padding: 0 0 80px 0 !important; }
             .discord-float { bottom: 80px; right: 15px; }
-            .discord-text { display: none; }
-            
-            /* FORÇAR O BOTÃO DE CHAT A APARECER AQUI TAMBÉM */
-            .top-bar-controls { display: flex; flex-direction: row !important; width: 100%; justify-content: center; align-items: center; gap: 10px; margin-top: 5px; }
-            .chat-trigger-mobile { display: flex !important; width: 38px !important; height: 38px !important; flex-shrink: 0 !important; border: 1px solid var(--accent-color); border-radius: 6px; background: var(--sidebar-bg); align-items: center; justify-content: center; cursor: pointer; order: 1; }
-            .chat-trigger-mobile img { width: 22px; height: 22px; object-fit: contain; image-rendering: pixelated; }
-            .search-container { flex: 1; width: auto; max-width: none; order: 2; height: 38px; }
-            
-            .sidebar-chat.chat-modal-mobile { display: flex !important; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 75%; max-height: 500px; background: var(--top-bar-bg); border: 2px solid var(--accent-color); z-index: 100000 !important; box-shadow: 0 0 40px rgba(0, 204, 68, 0.4); margin: 0; border-radius: 8px; padding-top: 35px; backdrop-filter: blur(10px); }
-            .close-chat-btn { display: block; position: absolute; top: 8px; right: 10px; background: transparent; color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 14px; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-weight: bold; }
-        }
-
-        /* SMARTPHONES EM PÉ */
-        @media (max-width: 768px) {
-            .top-bar { flex-direction: column; align-items: center; padding: 10px 15px; margin: 0; text-align: center; gap: 10px; }
-            .brand { width: 100%; text-align: center; display: block !important; font-size: 16px !important; margin-bottom: 5px; }
-            
-            .row-header { justify-content: space-between; padding-right: 15px; }
-            .view-all-btn { font-size: 8px; padding: 6px 10px; }
-            .hero-section { height: 400px; min-height: auto; max-height: none; }
-            .hero-bg-media { object-fit: cover; object-position: right center; }
-            .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
-            .hero-content { padding: 0 20px; margin-top: auto; margin-bottom: 40px; }
-            .hero-title { font-size: 24px; }
+            .scroll-btn { width: 30px; font-size: 20px; opacity: 1; z-index: 10; }
+            .left-btn { left: 0; } .right-btn { right: 0; }
             .catalog { padding: 0 10px; }
             .game-carousel { gap: 8px; padding: 30px 10px; }      
             .game-card { width: 78px; height: 110px; margin: 0; border-radius: 4px; }      
@@ -269,29 +253,38 @@
             .card-title span { font-size: 6px; }
             .game-card:hover { transform: none; box-shadow: none; border-color: var(--border-color); z-index: 1; }
             .game-card.mobile-active { transform: scale(1.30); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0,204,68,0.6); z-index: 100; }
+            .discord-text { display: none; }
+                
+            .top-bar { flex-direction: column; align-items: center; padding: 10px 15px; margin: 0; text-align: center; gap: 10px; }
+            .brand { width: 100%; text-align: center; display: block !important;}
+            .top-bar-controls { display: flex; flex-direction: row-reverse; width: 100%; justify-content: space-between; gap: 10px; }
+            .chat-trigger-mobile { display: flex !important; width: 38px; height: 38px; flex-shrink: 0; border: 1px solid var(--accent-color); border-radius: 6px; background: var(--sidebar-bg); align-items: center; justify-content: center; cursor: pointer; order: 1; }
+            .chat-trigger-mobile img { width: 22px; height: 22px; object-fit: contain; image-rendering: pixelated; }
+            .search-container { flex: 1; width: auto; max-width: none; order: 2;}
+            
+            .row-header { justify-content: space-between; padding-right: 15px; }
+            .view-all-btn { font-size: 8px; padding: 6px 10px; }
+                
+            .hero-section { height: 400px; min-height: auto; max-height: none; }
+            .hero-bg-media { object-fit: cover; object-position: right center; }
+            .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
+            .hero-content { padding: 0 20px; margin-top: auto; margin-bottom: 40px; }
+            .hero-title { font-size: 24px; }
         }
 
-        /* CELULAR DEITADO E TABLET (PAISAGEM) */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .hero-section { height: 200px !important; min-height: 200px !important; }
-            .hero-content { padding: 0 20px; padding-bottom: 20px;}
-            .hero-title { font-size: 18px; margin-bottom: 5px; }
-            .hero-play-btn { padding: 8px 20px; font-size: 12px; margin-top: 5px; }
-            .top-bar { padding: 5px 20px !important; flex-direction: row !important; }
-            .brand { font-size: 14px !important; width: auto; margin-bottom: 0; text-align: left; }
-            .top-bar-controls { margin-top: 0 !important; width: auto !important; justify-content: flex-end; }
-            .search-container { width: 200px; padding: 4px 10px; height: 30px; }
-            .chat-trigger-mobile { width: 30px !important; height: 30px !important; }
-            .chat-trigger-mobile img { width: 16px; height: 16px; }
-            .catalog { padding-top: 10px; }
-            .row-wrapper { margin-bottom: 15px; }
-            .sidebar-chat.chat-modal-mobile { height: 90%; top: 5%; transform: translateX(-50%); }
+        /* CONSERTO CHAT: No PC, o chat é aberto por um botão na sidebar */
+        .chat-trigger-pc { 
+            display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-muted); 
+            justify-content: flex-start; flex-shrink: 0; transition: 0.3s; margin-bottom: 15px;
         }
+        .chat-trigger-pc:hover { background: rgba(0, 204, 68, 0.2); color: var(--text-color); }
+        .chat-trigger-pc img { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; image-rendering: pixelated; }
+        .chat-text-pc { display: none; opacity: 0; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
+        @media(min-width: 1025px) { .sidebar:hover .chat-text-pc { display: inline-block; opacity: 1; transition: 0.3s; } }
+        @media(max-width: 768px) { .chat-trigger-pc { display: none !important; } }
     </style>
 </head>
 <body>
-    
-    <div id="chat-mobile-backdrop" onclick="closeMobileChat()"></div>
 
     <div id="splash-screen">
         <h1 class="splash-logo">
@@ -339,32 +332,36 @@
         </div>
     </div>
 
+    <div id="chat-modal-wrapper" onclick="closeMobileChat()">
+        <div class="chat-modal-panel" onclick="event.stopPropagation()">
+            <button class="close-chat-btn" onclick="closeMobileChat()">X</button>
+            <div class="chat-title-mobile">CHAT GLOBAL</div>
+            <div id="terminal-output"></div>
+            <div class="chat-controls">
+                <input id="chat-nick" placeholder="Nick" maxlength="10">
+                <input id="chat-msg" placeholder="Mensagem..." disabled>
+                <button id="send-btn">➤</button>
+            </div>
+        </div>
+    </div>
+
     <div class="app-container" id="app-container">
         <nav class="sidebar" id="main-sidebar">
             <div class="sidebar-header">
                 <img src="assets/imagens-videos/logo-discord.gif?v=2" onclick="window.scrollTo(0,0);" title="Voltar ao Topo">
             </div>
-            <div class="nav-list" id="nav-list"></div>
             
-            <div class="sidebar-chat" id="chat-container">
-                <button class="close-chat-btn" onclick="closeMobileChat()">X</button>
-                <div style="font-size:10px; color:var(--accent-color); text-align:center; margin-bottom:5px; font-family: 'Press Start 2P', cursive;">CHAT GLOBAL</div>
-                <div id="terminal-output"></div>
-                <div class="chat-controls">
-                    <input id="chat-nick" placeholder="Nick" maxlength="10">
-                    <input id="chat-msg" placeholder="Mensagem..." disabled>
-                    <button id="emoji-btn" title="Adicionar Emoji">😀</button>
-                    <div id="emoji-picker">
-                        <span class="emoji-item">🎮</span><span class="emoji-item">🕹️</span><span class="emoji-item">👾</span><span class="emoji-item">🔥</span><span class="emoji-item">😎</span><span class="emoji-item">🇧🇷</span><span class="emoji-item">💀</span><span class="emoji-item">👍</span><span class="emoji-item">🏆</span><span class="emoji-item">🚀</span><span class="emoji-item">🤬</span><span class="emoji-item">❤️</span>
-                    </div>
-                    <button id="send-btn">➤</button>
-                </div>
+            <div class="chat-trigger-pc" onclick="openMobileChat()" title="Abrir Chat Global">
+                <img src="assets/imagens-videos/imagens do menu/chat.png" alt="Chat">
+                <span class="chat-text-pc">Chat Global</span>
             </div>
+                
+            <div class="nav-list" id="nav-list"></div>
         </nav>
 
         <main class="main-content">
             <header class="top-bar">
-                <div class="brand" onclick="window.scrollTo(0,0)">NEOTERMINALROOM</div>
+                <div class="brand" onclick="window.scrollTo(0,0);">NEOTERMINALROOM</div>
                 <div class="top-bar-controls">
                     <div class="chat-trigger-mobile" onclick="openMobileChat()">
                         <img src="assets/imagens-videos/imagens do menu/chat.png" alt="Chat">
@@ -400,7 +397,7 @@
             splash.classList.add("fade-out");
             document.body.style.overflow = "auto";
             setTimeout(() => splash.remove(), 800); 
-        }, 3500);
+        }, 3000);
     });
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -435,18 +432,12 @@
         else { btn.innerHTML = "⊞ VER TODOS"; if(lBtn) lBtn.style.display = 'flex'; if(rBtn) rBtn.style.display = 'flex'; }
     };
 
-    window.openMobileChat = () => { 
-        document.getElementById('chat-container').classList.add('chat-modal-mobile'); 
-        document.getElementById('chat-mobile-backdrop').style.display = 'block';
-    };
-    window.closeMobileChat = () => { 
-        document.getElementById('chat-container').classList.remove('chat-modal-mobile'); 
-        document.getElementById('chat-mobile-backdrop').style.display = 'none';
-    };
+    // CONSERTO CHAT: JavaScript para abrir/fechar o Modal real
+    window.openMobileChat = () => { document.getElementById('chat-modal-wrapper').classList.add('active'); };
+    window.closeMobileChat = () => { document.getElementById('chat-modal-wrapper').classList.remove('active'); };
 
     window.openGameModal = (gameObj, playUrl) => {
         let capaNome = gameObj.capa ? gameObj.capa.split('/').pop() : '';
-        // CORREÇÃO MESTRE: Capa na Vitrine apontando direto pro seu R2!
         document.getElementById('modal-game-img').src = capaNome ? `${R2_URL}${gameObj.sysPath}capas/${capaNome}` : 'assets/imagens-videos/logo-discord.gif';
         document.getElementById('modal-game-title').innerText = gameObj.nome;
         document.getElementById('modal-game-sys').innerText = "SISTEMA: " + gameObj.sysId.toUpperCase();
@@ -483,12 +474,6 @@
     }
     sendBtn.onclick = sendMessage;
     msgInput.onkeydown = (e) => { if(e.key === "Enter") sendMessage(); }
-
-    const emojiBtn = document.getElementById("emoji-btn");
-    const emojiPicker = document.getElementById("emoji-picker");
-    emojiBtn.onclick = (e) => { e.stopPropagation(); emojiPicker.style.display = emojiPicker.style.display === "flex" ? "none" : "flex"; };
-    document.querySelectorAll(".emoji-item").forEach(em => { em.onclick = (e) => { e.stopPropagation(); if (!msgInput.disabled) { msgInput.value += em.innerText; msgInput.focus(); } }; });
-    document.addEventListener("click", (e) => { if (emojiPicker.style.display === "flex" && !emojiPicker.contains(e.target) && e.target !== emojiBtn) emojiPicker.style.display = "none"; });
 
     const coreMap = { 'nes': 'nes', 'snes': 'snes', 'gba': 'gba', 'n64': 'n64', 'megadrive': 'segaMD', 'ps1': 'psx' };
 
@@ -577,14 +562,15 @@
         let p = fetch(`${sys.path}games.json?v=${new Date().getTime()}`).then(r => r.json()).then(games => {
             const car = document.getElementById(`carousel-${sys.id}`);
             games.forEach(g => {
+                // CORREÇÃO: Pular jogos PS1 multi-disco (.m3u)
+                if (sys.id === 'ps1' && g.rom.endsWith('.m3u')) { return; } 
+
                 const gameObjFull = {...g, sysPath: sys.path, sysName: sys.name, sysId: sys.id};
                 indexData.push(gameObjFull);
                 const card = document.createElement("div"); card.className = "game-card selectable-item";
                 
                 let capaNome = g.capa ? g.capa.split('/').pop() : '';
                 let gifNome = g.preview ? g.preview.split('/').pop() : '';
-
-                // CORREÇÃO MESTRE: Capas e GIFs apontando pro seu servidor R2 corretamente!
                 const imgPath = capaNome ? `${R2_URL}${sys.path}capas/${capaNome}` : '';
                 const gifPath = gifNome ? `${R2_URL}${sys.path}previews/${gifNome}` : '';
 
@@ -642,10 +628,11 @@
         if(hits.length > 0) {
             searchResults.style.display = 'flex';
             hits.slice(0, 10).forEach(h => {
+                // CORREÇÃO BUSCA: Pular jogos PS1 multi-disco (.m3u)
+                if (h.sysId === 'ps1' && h.rom.endsWith('.m3u')) { return; } 
+
                 const div = document.createElement('div'); div.className = 'search-item selectable-item';   
-                 
                 let capaNomeBusca = h.capa ? h.capa.split('/').pop() : '';
-                // CORREÇÃO: Capa da pesquisa usando R2_URL
                 const imgPath = capaNomeBusca ? `${R2_URL}${h.sysPath}capas/${capaNomeBusca}` : 'assets/imagens-videos/logo-discord.gif';
 
                 div.innerHTML = `<img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';"><span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>`;
