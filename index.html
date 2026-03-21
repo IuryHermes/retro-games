@@ -79,7 +79,7 @@
         .game-info-close { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 16px; padding: 5px 12px; cursor: pointer; border-radius: 4px; font-weight: bold; z-index: 10; transition: 0.3s; }
         .game-info-close:hover { background: #ff3333; color: #fff; }
         .game-info-header { position: relative; width: 100%; height: 220px; background: #000; }
-        .game-info-header img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+        .game-info-header img { width: 100%; height: 100%; object-fit: contain; opacity: 0.9; } /* object-fit alterado pra GIF ficar inteiro */
         .game-info-title { position: absolute; bottom: 15px; left: 20px; color: #fff; font-family: 'Press Start 2P', cursive; font-size: 18px; text-shadow: 2px 2px 5px #000; z-index: 2; line-height: 1.4; }
         .game-info-body { padding: 20px; color: var(--text-color); }
         .game-info-meta { display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: bold; font-family: monospace; font-size: 14px; color: var(--accent-color); }
@@ -92,7 +92,6 @@
         .affiliate-btn { color: #fff; text-decoration: none; padding: 8px 15px; border-radius: 4px; font-weight: bold; font-size: 11px; transition: 0.3s; }
         .affiliate-btn.shopee { background: #ee4d2d; }
         .affiliate-btn.ml { background: #ffe600; color: #333; }
-        .affiliate-btn.ali { background: #ff3300; }
         .affiliate-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
         .game-info-play-btn { background: var(--accent-color); color: #fff; border: none; padding: 15px; width: 100%; font-family: 'Press Start 2P', monospace; font-size: 14px; cursor: pointer; border-radius: 4px; transition: 0.3s; }
         .game-info-play-btn:hover { background: #fff; color: #000; box-shadow: 0 0 15px #fff; }
@@ -127,8 +126,7 @@
         .nav-item img { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; image-rendering: pixelated; }
         .nav-text { display: none; opacity: 0; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 
-        /* CONSERTO DO CHAT: Janela Modal Real */
-        .sidebar-chat { display: none; } /* Ocultar chat da sidebar antiga */
+        .sidebar-chat { display: none; }
 
         #chat-modal-wrapper {
             display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200000; 
@@ -150,7 +148,6 @@
         #chat-msg:disabled { background: var(--card-bg); cursor: not-allowed; opacity: 0.5; }
         #send-btn { width: 35px; flex-shrink: 0; background: var(--accent-color); border: none; cursor: pointer; color: #fff; font-weight: bold; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
 
-        /* Botão Fechar no Chat */
         .close-chat-btn { position: absolute; top: 10px; right: 10px; background: transparent; color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 16px; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-weight: bold; z-index: 10; transition: 0.3s; }
         .close-chat-btn:hover { background: #ff3333; color: #fff; }
 
@@ -228,23 +225,37 @@
         .discord-text { font-family: monospace; color: #fff; font-size: 12px; text-align: right; }
         .discord-float img { width: 45px; height: 45px; border-radius: 50%; }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .sidebar { top: auto; bottom: 0; left: 0; width: 100% !important; height: 65px; flex-direction: row; border-right: none; border-top: 1px solid var(--accent-color); padding: 5px 0; transform: none !important; z-index: 9000; background: var(--top-bar-bg); backdrop-filter: blur(10px); box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }      
-            .sidebar-header { display: none !important; }
+            .sidebar-header, .theme-container { display: none !important; }
             .nav-list { flex-direction: row; margin-top: 0; gap: 0; overflow-x: hidden; justify-content: space-around; padding: 0 5px; width: 100%; align-items: center; }
             .nav-item { flex-direction: column; padding: 2px 0; flex: 1; gap: 4px; justify-content: center; border-radius: 4px; }
             .nav-item img { width: 22px; height: 22px; margin: 0; border-radius: 0 !important; }
             .nav-text { display: block !important; opacity: 1 !important; font-size: 6px !important; text-align: center; white-space: normal !important; line-height: 1.1; word-break: break-word; }
             
-            /* CONSERTO MOBILE: Chat ocupa bem a tela, mas ainda modal */
             .chat-modal-panel { width: 95%; height: 85%; max-height: none; padding: 15px; padding-top: 35px; }
             #chat-nick, #chat-msg { font-size: 16px; padding: 8px; }
             #send-btn { font-size: 16px; width: 40px; }
             
             .main-content { margin-left: 0 !important; padding: 0 0 80px 0 !important; }
             .discord-float { bottom: 80px; right: 15px; }
-            .scroll-btn { width: 30px; font-size: 20px; opacity: 1; z-index: 10; }
-            .left-btn { left: 0; } .right-btn { right: 0; }
+            .discord-text { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { flex-direction: column; align-items: center; padding: 10px 15px; margin: 0; text-align: center; gap: 10px; }
+            .brand { width: 100%; text-align: center; display: block !important; font-size: 16px !important; margin-bottom: 5px; }
+            .top-bar-controls { display: flex; flex-direction: row !important; width: 100%; justify-content: center; align-items: center; gap: 10px; margin-top: 5px; }
+            .chat-trigger-mobile { display: flex !important; width: 38px !important; height: 38px !important; flex-shrink: 0 !important; border: 1px solid var(--accent-color); border-radius: 6px; background: var(--sidebar-bg); align-items: center; justify-content: center; cursor: pointer; order: 1; }
+            .chat-trigger-mobile img { width: 22px; height: 22px; object-fit: contain; image-rendering: pixelated; }
+            .search-container { flex: 1; width: auto; max-width: none; order: 2; height: 38px; }
+            .row-header { justify-content: space-between; padding-right: 15px; }
+            .view-all-btn { font-size: 8px; padding: 6px 10px; }
+            .hero-section { height: 400px; min-height: auto; max-height: none; }
+            .hero-bg-media { object-fit: cover; object-position: right center; }
+            .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
+            .hero-content { padding: 0 20px; margin-top: auto; margin-bottom: 40px; }
+            .hero-title { font-size: 24px; }
             .catalog { padding: 0 10px; }
             .game-carousel { gap: 8px; padding: 30px 10px; }      
             .game-card { width: 78px; height: 110px; margin: 0; border-radius: 4px; }      
@@ -253,23 +264,22 @@
             .card-title span { font-size: 6px; }
             .game-card:hover { transform: none; box-shadow: none; border-color: var(--border-color); z-index: 1; }
             .game-card.mobile-active { transform: scale(1.30); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0,204,68,0.6); z-index: 100; }
-            .discord-text { display: none; }
-                
-            .top-bar { flex-direction: column; align-items: center; padding: 10px 15px; margin: 0; text-align: center; gap: 10px; }
-            .brand { width: 100%; text-align: center; display: block !important;}
-            .top-bar-controls { display: flex; flex-direction: row-reverse; width: 100%; justify-content: space-between; gap: 10px; }
-            .chat-trigger-mobile { display: flex !important; width: 38px; height: 38px; flex-shrink: 0; border: 1px solid var(--accent-color); border-radius: 6px; background: var(--sidebar-bg); align-items: center; justify-content: center; cursor: pointer; order: 1; }
-            .chat-trigger-mobile img { width: 22px; height: 22px; object-fit: contain; image-rendering: pixelated; }
-            .search-container { flex: 1; width: auto; max-width: none; order: 2;}
-            
-            .row-header { justify-content: space-between; padding-right: 15px; }
-            .view-all-btn { font-size: 8px; padding: 6px 10px; }
-                
-            .hero-section { height: 400px; min-height: auto; max-height: none; }
-            .hero-bg-media { object-fit: cover; object-position: right center; }
-            .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
-            .hero-content { padding: 0 20px; margin-top: auto; margin-bottom: 40px; }
-            .hero-title { font-size: 24px; }
+        }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero-section { height: 200px !important; min-height: 200px !important; }
+            .hero-content { padding: 0 20px; padding-bottom: 20px;}
+            .hero-title { font-size: 18px; margin-bottom: 5px; }
+            .hero-play-btn { padding: 8px 20px; font-size: 12px; margin-top: 5px; }
+            .top-bar { padding: 5px 20px !important; flex-direction: row !important; }
+            .brand { font-size: 14px !important; width: auto; margin-bottom: 0; text-align: left; }
+            .top-bar-controls { margin-top: 0 !important; width: auto !important; justify-content: flex-end; }
+            .search-container { width: 200px; padding: 4px 10px; height: 30px; }
+            .chat-trigger-mobile { width: 30px !important; height: 30px !important; }
+            .chat-trigger-mobile img { width: 16px; height: 16px; }
+            .catalog { padding-top: 10px; }
+            .row-wrapper { margin-bottom: 15px; }
+            .chat-modal-panel { height: 90%; top: 5%; }
         }
 
         /* CONSERTO CHAT: No PC, o chat é aberto por um botão na sidebar */
@@ -310,7 +320,7 @@
         <div class="game-info-content">
             <button class="game-info-close" onclick="closeGameModal()">X</button>
             <div class="game-info-header">
-                <img id="modal-game-img" src="" alt="Capa do Jogo">
+                <img id="modal-game-img" src="" alt="Visual do Jogo">
                 <div class="game-info-title" id="modal-game-title">Nome do Jogo</div>
             </div>
             <div class="game-info-body">
@@ -322,9 +332,8 @@
                 <div class="affiliate-banner">
                     <span>🎮 Jogue como um Profissional: Compre Controles USB com Desconto!</span>
                     <div class="affiliate-links">
-                        <a href="#" class="affiliate-btn shopee" target="_blank">🛒 Shopee</a>
-                        <a href="#" class="affiliate-btn ali" target="_blank">🌎 AliExpress</a>
-                        <a href="#" class="affiliate-btn ml" target="_blank">📦 Mercado Livre</a>
+                        <a href="#" class="affiliate-btn shopee" id="btn-shopee" target="_blank">🛒 Shopee</a>
+                        <a href="#" class="affiliate-btn ml" id="btn-ml" target="_blank">📦 Mercado Livre</a>
                     </div>
                 </div>
                 <button class="game-info-play-btn" id="modal-play-btn">▶ JOGAR AGORA</button>
@@ -404,6 +413,8 @@
     import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
     const R2_URL = "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/";  
+    // NOVA REGEX: Pega tudo de PS1 que seja multi disco (.m3u, cd1, cd01, disc 2, etc)
+    const blockRegex = /\.m3u|([._\-\s](cd|disc|disco)\s*[0-9]+)/i;
 
     const themeToggle = document.getElementById('theme-toggle');
     if (localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-theme'); themeToggle.checked = true; }
@@ -432,17 +443,28 @@
         else { btn.innerHTML = "⊞ VER TODOS"; if(lBtn) lBtn.style.display = 'flex'; if(rBtn) rBtn.style.display = 'flex'; }
     };
 
-    // CONSERTO CHAT: JavaScript para abrir/fechar o Modal real
     window.openMobileChat = () => { document.getElementById('chat-modal-wrapper').classList.add('active'); };
     window.closeMobileChat = () => { document.getElementById('chat-modal-wrapper').classList.remove('active'); };
 
+    const shopeeLinks = ["https://s.shopee.com.br/6KzsumXzVK?share_channel_code=1", "https://s.shopee.com.br/W25xuKRTY?share_channel_code=1", "https://s.shopee.com.br/50UVKoE5pk?share_channel_code=1"];
+    const mlLinks = ["https://meli.la/1eNR6GB", "https://meli.la/2HD21Wi", "https://meli.la/1GQhiTZ", "https://meli.la/1Ld2GkU"];
+
     window.openGameModal = (gameObj, playUrl) => {
+        let gifNome = gameObj.preview ? gameObj.preview.split('/').pop() : '';
         let capaNome = gameObj.capa ? gameObj.capa.split('/').pop() : '';
-        document.getElementById('modal-game-img').src = capaNome ? `${R2_URL}${gameObj.sysPath}capas/${capaNome}` : 'assets/imagens-videos/logo-discord.gif';
+        
+        // Puxa o GIF se tiver, senão puxa a Capa
+        const mediaPath = gifNome ? `${gameObj.sysPath}previews/${gifNome}` : (capaNome ? `${gameObj.sysPath}capas/${capaNome}` : 'assets/imagens-videos/logo-discord.gif');
+        document.getElementById('modal-game-img').src = mediaPath;
+        
         document.getElementById('modal-game-title').innerText = gameObj.nome;
         document.getElementById('modal-game-sys').innerText = "SISTEMA: " + gameObj.sysId.toUpperCase();
         let nota = gameObj.nota || (Math.random() * (9.5 - 7.5) + 7.5).toFixed(1);
         document.getElementById('modal-game-rating').innerHTML = `⭐ ${nota} / 10`;
+        
+        document.getElementById('btn-shopee').href = shopeeLinks[Math.floor(Math.random() * shopeeLinks.length)];
+        document.getElementById('btn-ml').href = mlLinks[Math.floor(Math.random() * mlLinks.length)];
+
         document.getElementById('modal-play-btn').onclick = () => { window.closeGameModal(); window.startGame(playUrl); };
         document.getElementById('game-info-modal').style.display = 'flex';
     };
@@ -550,7 +572,7 @@
             const section = document.getElementById(`section-${sys.id}`);
             if(section) {
                 if (!document.getElementById(`carousel-${sys.id}`).classList.contains('grid-view')) toggleGrid(sys.id);
-                window.scrollTo({top: section.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth'});
+                window.scrollTo({top: section.getBoundingClientRect().top - 80, behavior: 'smooth'});
             }
         };
         nav.appendChild(item);
@@ -562,8 +584,9 @@
         let p = fetch(`${sys.path}games.json?v=${new Date().getTime()}`).then(r => r.json()).then(games => {
             const car = document.getElementById(`carousel-${sys.id}`);
             games.forEach(g => {
-                // CORREÇÃO: Pular jogos PS1 multi-disco (.m3u)
-                if (sys.id === 'ps1' && g.rom.endsWith('.m3u')) { return; } 
+                
+                // NOVO BLOQUEIO DE MULTI-DISCOS DO PS1
+                if (sys.id === 'ps1' && blockRegex.test(g.rom)) { return; } 
 
                 const gameObjFull = {...g, sysPath: sys.path, sysName: sys.name, sysId: sys.id};
                 indexData.push(gameObjFull);
@@ -571,8 +594,8 @@
                 
                 let capaNome = g.capa ? g.capa.split('/').pop() : '';
                 let gifNome = g.preview ? g.preview.split('/').pop() : '';
-                const imgPath = capaNome ? `${R2_URL}${sys.path}capas/${capaNome}` : '';
-                const gifPath = gifNome ? `${R2_URL}${sys.path}previews/${gifNome}` : '';
+                const imgPath = capaNome ? `${sys.path}capas/${capaNome}` : '';
+                const gifPath = gifNome ? `${sys.path}previews/${gifNome}` : '';
 
                 const coreToUse = coreMap[sys.id] || 'snes';   
                 const playerFile = sys.id === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
@@ -628,12 +651,12 @@
         if(hits.length > 0) {
             searchResults.style.display = 'flex';
             hits.slice(0, 10).forEach(h => {
-                // CORREÇÃO BUSCA: Pular jogos PS1 multi-disco (.m3u)
-                if (h.sysId === 'ps1' && h.rom.endsWith('.m3u')) { return; } 
+                
+                if (h.sysId === 'ps1' && blockRegex.test(h.rom)) { return; } 
 
                 const div = document.createElement('div'); div.className = 'search-item selectable-item';   
                 let capaNomeBusca = h.capa ? h.capa.split('/').pop() : '';
-                const imgPath = capaNomeBusca ? `${R2_URL}${h.sysPath}capas/${capaNomeBusca}` : 'assets/imagens-videos/logo-discord.gif';
+                const imgPath = capaNomeBusca ? `${h.sysPath}capas/${capaNomeBusca}` : 'assets/imagens-videos/logo-discord.gif';
 
                 div.innerHTML = `<img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';"><span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>`;
                     
