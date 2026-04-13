@@ -1,163 +1,186 @@
 [
     {
-        "nome": "007 Goldeneye",
+        "nome": "Goldeneye 007",
         "rom": "roms/007_goldeneye.z64",
         "capa": "007_goldeneye.jpg",
         "preview": "007_goldeneye.z64.gif",
-        "nota": "8.7"
+        "nota": "9.0",
+        "descricao": "O GoldenEye 007 é um clássico da era N64, conhecido por sua jogabilidade imersiva e gráficos impressionantes. Com uma história envolvente e níveis emocionantes, é um jogo que ainda hoje é apreciado por fãs de jogos de tiro em primeira pessoa. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
         "nome": "Automobili Lamborghini",
         "rom": "roms/automobili_lamborghini.z64",
         "capa": "automobili_lamborghini.png",
         "preview": "automobili_lamborghini.gif",
-        "nota": "S/N"
+        "nota": "6.8",
+        "descricao": "Automobili Lamborghini é um jogo de corrida de alta velocidade que desafia os pilotos a alcançar a velocidade máxima em pistas de corrida de todo o mundo. Com gráficos realistas e controles precisos, este jogo é um desafio para qualquer jogador de corrida.\n\n🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
         "nome": "Banjo Kazooie",
         "rom": "roms/banjo-kazooie.n64",
         "capa": "banjo-kazooie.png",
         "preview": "banjo-kazooie.gif",
-        "nota": "8.5"
+        "nota": "8.5",
+        "descricao": "Banjo-Kazooie é um jogo clássico de plataforma que revolucionou a indústria com sua jogabilidade inovadora e mundos incrivelmente detalhados. Com sua dupla herói, Banjo e Kazooie, você irá explorar mundos mágicos e combater inimigos para salvar a irmã de Banjo, Tooty. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
         "nome": "Cruisn Exotica",
         "rom": "roms/cruisn_exotica.z64",
         "capa": "cruisn_exotica.jpg",
         "preview": "cruisn_exotica.z64.gif",
-        "nota": "6.8"
+        "nota": "8.5",
+        "descricao": "Cruisn Exotica é um jogo de corrida de veículos de 1997 desenvolvido pela Rare e publicado pela Nintendo para o Nintendo 64. O jogo é conhecido por sua atmosfera tropical e sua variedade de veículos. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
         "nome": "Diddy Kong Racing",
         "rom": "roms/diddy_kong_racing.z64",
         "capa": "diddy_kong_racing.png",
         "preview": "diddy_kong_racing.gif",
-        "nota": "8.4"
+        "nota": "7.4",
+        "descricao": "Diddy Kong Racing é um clássico de corrida de karts que oferece uma experiência única e emocionante. Com gráficos coloridos e uma trilha sonora cativante, este jogo é uma verdadeira explosão de ação e adrenalina. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
-        "nome": "Donald Duck Goin Quackers",
+        "nome": "Donald Duck: Goin' Quackers",
         "rom": "roms/donald_duck_goin_quackers.z64",
         "capa": "donald_duck_goin_quackers.jpg",
         "preview": "donald_duck_goin_quackers.z64.gif",
-        "nota": "8.0"
+        "nota": "7.8",
+        "descricao": "Um jogo de plataforma clássico de plataforma com Donald Duck, conhecido por suas fases de corrida de barco e sua atmosfera de aventura. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
         "nome": "Doom 64",
         "rom": "roms/doom_64.z64",
         "capa": "doom_64.png",
         "preview": "doom_64.gif",
-        "nota": "7.7"
+        "nota": "8.5",
+        "descricao": "Você está prestes a mergulhar em uma jornada épica de terror e ação em uma ilha isolada, onde o demônio Cacofonix está esperando por você. Com gráficos 3D impressionantes e uma trilha sonora assustadora, você não pode perder essa oportunidade de jogar uma das melhores versões de Doom de todos os tempos. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
-        "nome": "Fifa 99",
+        "nome": "Fifa 64",
         "rom": "roms/fifa_99.n64",
         "capa": "fifa_99.jpg",
         "preview": "fifa_99.gif",
-        "nota": "8.4"
+        "nota": "8.5",
+        "descricao": "O FIFA 64 foi um divisor de águas para a série, introduzindo gráficos 3D e jogabilidade mais realista. Embora tenha recebido críticas mistas na época, é agora lembrado como um clássico da era N64. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
-        "nome": "Gex 3 Deep Cover Gecko",
+        "nome": "Gex 3: Deep Cover Gecko",
         "rom": "roms/gex_3_deep_cover_gecko.z64",
         "capa": "gex_3_deep_cover_gecko.jpg",
         "preview": "gex_3_deep_cover_gecko.z64.gif",
-        "nota": "8.0"
+        "nota": "8.5",
+        "descricao": "Você está pronto para enfrentar o mundo dos espionagem com o seu melhor amigo, um gato chamado Gex? Com suas habilidades de espião e sua aparência de gato, você precisa infiltrar-se em uma base secreta e coletar informações importantes. Mas não é fácil, pois você terá que enfrentar inimigos perigosos e superar obstáculos difíceis. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
         "nome": "Jet Force Gemini",
         "rom": "roms/jet_force_gemini.z64",
         "capa": "jet_force_gemini.png",
         "preview": "jet_force_gemini.gif",
-        "nota": "7.9"
+        "nota": "8.5",
+        "descricao": "Um clássico da Nintendo 64, Jet Force Gemini é um jogo de ação-aventura que segue a história de Juno, Lorn e Vela, três irmãos que lutam contra uma conspiração alienígena. Com gráficos impressionantes e uma trilha sonora épica, este jogo é um verdadeiro tesouro para os fãs de retrogaming. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
         "nome": "Mario Kart 64",
         "rom": "roms/mario_kart_64.v64",
         "capa": "mario_kart_64.png",
         "preview": "mario_kart_64.v64.gif",
-        "nota": "8.7"
+        "nota": "8.5",
+        "descricao": "O Mario Kart 64 é um clássico da Nintendo 64, com gráficos impressionantes e uma variedade de pistas emocionantes. É um jogo que nunca envelhece, com uma sensação de velocidade e adrenalina que ainda é difícil de igualar hoje em dia. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
         "nome": "Paper Mario",
         "rom": "roms/paper_mario.z64",
         "capa": "paper_mario.png",
         "preview": "paper_mario.gif",
-        "nota": "8.8"
+        "nota": "8.5",
+        "descricao": "Um jogo de RPG de aventura desenvolvido pela Intelligent Systems e publicado pela Nintendo para o Nintendo 64. Lançado em 2000, é conhecido por sua história única e jogabilidade inovadora. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
         "nome": "Perfect Dark",
         "rom": "roms/perfect_dark.z64",
         "capa": "perfect_dark.png",
         "preview": "perfect_dark.gif",
-        "nota": "8.0"
+        "nota": "8.5",
+        "descricao": "Perfect Dark é um jogo de tiro em primeira pessoa desenvolvido pela Rare e publicado pela Nintendo para a Nintendo 64. Lançado em 2000, é considerado um dos melhores jogos da plataforma.\n\nO jogo segue a história de Joanna Dark, uma agente secreta que deve infiltrar-se em uma base alienígena para evitar uma invasão.\n\n🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
-        "nome": "Pokemon Stadium",
+        "nome": "Pokémon Stadium",
         "rom": "roms/pokemon_stadium.z64",
         "capa": "pokemon_stadium.png",
         "preview": "pokemon_stadium.gif",
-        "nota": "8.0"
+        "nota": "8.5",
+        "descricao": "Pokémon Stadium é um jogo de simulação de batalha de Pokémon desenvolvido pela HAL Laboratory e publicado pela Nintendo. Lançado em 1999 para o Nintendo 64, o jogo permite que os jogadores treinem e liguem seus Pokémon em um ambiente de batalha. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
         "nome": "Shadow Man",
         "rom": "roms/shadow_man.v64",
         "capa": "shadow_man.png",
         "preview": "shadow_man.v64.gif",
-        "nota": "6.1"
+        "nota": "8.5",
+        "descricao": "O Shadow Man é um jogo de ação-aventura desenvolvido pela Acclaim Entertainment e lançado em 1999 para o Nintendo 64. Com uma história sombria e uma jogabilidade intensa, este jogo é um clássico da era dos consoles de 64 bits. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
-        "nome": "South Park",
+        "nome": "South Park: The Legend Of The Ring",
         "rom": "roms/south_park.z64",
         "capa": "south_park.png",
         "preview": "south_park.gif",
-        "nota": "4.8"
+        "nota": "7.6",
+        "descricao": "South Park: The Legend of the Ring é um jogo de ação-aventura baseado na série de TV South Park. Desenvolvido pela Acclaim Entertainment, foi lançado em 2000 para a Nintendo 64. Embora tenha recebido críticas mistas, o jogo é lembrado por sua atmosfera sombria e humor negro. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
         "nome": "Space Station Silicon Valley",
         "rom": "roms/space_station_silicon_valley.n64",
         "capa": "space_station_silicon_valley.jpg",
         "preview": "space_station_silicon_valley.gif",
-        "nota": "8.7"
+        "nota": "8.5",
+        "descricao": "Um jogo de ação-aventura em 3D desenvolvido pela Dylan Cuthbert e lançado em 1998 para o Nintendo 64. O jogo é conhecido por sua jogabilidade única e sua atmosfera cyberpunk. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
         "nome": "Star Fox 64",
         "rom": "roms/star_fox_64.z64",
         "capa": "star_fox_64.png",
         "preview": "star_fox_64.gif",
-        "nota": "8.6"
+        "nota": "8.5",
+        "descricao": "O Star Fox 64 é um clássico da era N64, com gráficos impressionantes e jogabilidade adrenalinica. É um dos jogos mais lembrados da era. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
         "nome": "Super Mario 64",
         "rom": "roms/super_mario_64.z64",
         "capa": "super_mario_64.png",
         "preview": "super_mario_64.gif",
-        "nota": "8.8"
+        "nota": "9.5",
+        "descricao": "O Super Mario 64 é um clássico da era de ouro dos jogos 3D, revolucionando a forma como os jogos eram projetados e jogados. Com sua jogabilidade inovadora e gráficos impressionantes, este jogo é uma experiência que não pode ser esquecida. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
-        "nome": "The Legend Of Zelda Majoras Mask",
+        "nome": "The Legend Of Zelda: Majora'S Mask",
         "rom": "roms/the_legend_of_zelda_-_majoras_mask.z64",
         "capa": "the_legend_of_zelda_-_majoras_mask.jpg",
         "preview": "the_legend_of_zelda_-_majoras_mask.z64.gif",
-        "nota": "8.7"
+        "nota": "9.5",
+        "descricao": "Você está prestes a entrar em uma jornada épica em Termina, um mundo onde o tempo é curto e a pressão é grande. Com o seu personagem, Link, você deve desvendar os mistérios da máscara de Majora e salvar o mundo de uma catástrofe iminente. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
         "nome": "The Legend Of Zelda Ocarina Of Time",
         "rom": "roms/the_legend_of_zelda_-_ocarina_of_time.z64",
         "capa": "the_legend_of_zelda_-_ocarina_of_time.jpg",
         "preview": "the_legend_of_zelda_-_ocarina_of_time.z64.gif",
-        "nota": "8.8"
+        "nota": "9.5",
+        "descricao": "Você está prestes a mergulhar em uma jornada épica através de Hyrule, um mundo de magia e aventura. Com gráficos revolucionários para a época e uma trilha sonora icônica, Ocarina of Time é um clássico que nunca envelhece. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
-        "nome": "Turok 2 Seeds Of Evil",
+        "nome": "Turok 2: Seeds Of Evil",
         "rom": "roms/turok_2_-_seeds_of_evil.z64",
         "capa": "turok_2_-_seeds_of_evil.jpg",
         "preview": "turok_2_-_seeds_of_evil.z64.gif",
-        "nota": "8.1"
+        "nota": "8.5",
+        "descricao": "Você está pronto para enfrentar o caos em uma ilha pré-histórica? Turok 2: Seeds of Evil é um jogo de tiro em primeira pessoa que oferece uma experiência de ação intensa e uma história envolvente. Com gráficos impressionantes e uma trilha sonora épica, você será transportado para um mundo de aventuras e perigo. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
-        "nome": "Turok 3 Shadow Of Oblivion",
+        "nome": "Turok 3: Shadow Of Oblivion",
         "rom": "roms/turok_3_-_shadow_of_oblivion.z64",
         "capa": "turok_3_-_shadow_of_oblivion.jpg",
         "preview": "turok_3_-_shadow_of_oblivion.z64.gif",
-        "nota": "7.0"
+        "nota": "8.5",
+        "descricao": "Você está pronto para enfrentar o caos? Turok 3: Shadow of Oblivion é um jogo de tiro em primeira pessoa que desafia você a explorar um mundo apocalíptico e derrotar os inimigos que ameaçam a humanidade. Com gráficos 3D impressionantes e uma trilha sonora épica, você será transportado para um mundo de ação e aventura. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     }
 ]
