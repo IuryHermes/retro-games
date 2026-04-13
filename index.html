@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NeoTerminalRoom</title>
+
+    <title>NeoTerminalRoom - Jogos Retrô e Emuladores Dublados Online</title>
+    <meta name="description" content="O maior site de jogos retrô dublados do Brasil. Jogue PS1, SNES, GBA e Mega Drive direto no navegador do seu PC ou celular, sem baixar nada.">
+    <meta name="keywords" content="emulador online, jogos dublados, ps1 online, snes online, jogos retro pt-br, neoterminalroom">
+
     <link rel="icon" type="image/gif" href="assets/imagens-videos/logo-discord.gif?v=2">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Press+Start+2P&display=block" rel="stylesheet">
-        
+
     <style>
         /* VARIÁVEIS GLOBAIS */
         :root {
-            --bg-color: #f4f4f9; --sidebar-bg: #ffffff; --accent-color: #009933;     
+            --bg-color: #f4f4f9; --sidebar-bg: #ffffff; --accent-color: #009933;
             --text-color: #1a1a1a; --text-muted: #555; --border-color: #cccccc;
             --card-bg: #e6e6e6; --input-bg: #f0f0f0; --top-bar-bg: rgba(255, 255, 255, 0.85);
             --grid-glow: rgba(0, 153, 51, 0.15); --grid-line: rgba(0, 153, 51, 0.1);
@@ -31,7 +35,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-            
+
         body {
             background-color: var(--bg-color);
             background-image: radial-gradient(circle at 50% 50%, var(--grid-glow) 0%, transparent 80%),
@@ -55,29 +59,43 @@
         .modal-content-box { background: var(--sidebar-bg); border: 2px solid var(--accent-color); border-radius: 8px; width: 100%; max-width: 600px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 0 30px rgba(0,204,68,0.5); position: relative; }
         .game-info-close { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 16px; padding: 5px 12px; cursor: pointer; border-radius: 4px; font-weight: bold; z-index: 10; transition: 0.3s; }
         .game-info-close:hover { background: #ff3333; color: #fff; }
-        
+
         .game-info-header { position: relative; width: 100%; height: 220px; background: #000; display: flex; justify-content: center; align-items: center; overflow: hidden;}
-        .game-info-header img { max-width: 100%; max-height: 100%; object-fit: contain; opacity: 0.9; } 
+        .game-info-header img { max-width: 100%; max-height: 100%; object-fit: contain; opacity: 0.9; }
         .game-info-title { position: absolute; bottom: 15px; left: 20px; color: #fff; font-family: 'Press Start 2P', cursive; font-size: 18px; text-shadow: 2px 2px 5px #000; z-index: 2; line-height: 1.4; }
         .game-info-body { padding: 20px; color: var(--text-color); }
         .game-info-meta { display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: bold; font-family: monospace; font-size: 14px; color: var(--accent-color); }
         .game-info-rating { color: #ffd700; }
-        .game-info-desc { font-size: 12px; line-height: 1.6; color: var(--text-muted); margin-bottom: 20px; }
-        
+
+        .terminal-desc-box { background: #050505; border: 1px solid var(--accent-color); border-radius: 6px; padding: 15px; margin-bottom: 20px; position: relative; box-shadow: inset 0 0 20px rgba(0, 204, 68, 0.15); max-height: 160px; overflow-y: auto; cursor: pointer; }
+        .terminal-desc-box::-webkit-scrollbar { width: 6px; }
+        .terminal-desc-box::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 5px; }
+        .terminal-desc-text { font-family: 'Courier New', Courier, monospace; font-size: 14px; line-height: 1.5; color: #00ff44; text-shadow: 0 0 3px rgba(0, 255, 68, 0.5); text-align: left; word-wrap: break-word; }
+        .destaque-text { background: var(--accent-color); color: #000; padding: 8px 12px; font-weight: bold; border-radius: 3px; font-family: 'Press Start 2P', cursive; font-size: 10px; display: inline-block; margin-top: 15px; text-shadow: none; box-shadow: 0 0 15px var(--accent-color); animation: pulse-destaque 1.5s infinite; }
+        @keyframes pulse-destaque { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
+
         .affiliate-banner { background: var(--input-bg); border: 1px dashed var(--accent-color); padding: 15px; border-radius: 6px; text-align: center; display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
         .affiliate-banner span { color: var(--text-color); font-weight: bold; font-size: 12px; }
         .affiliate-links { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
         .affiliate-btn { color: #fff; cursor: pointer; text-decoration: none; padding: 8px 15px; border-radius: 4px; font-weight: bold; font-size: 11px; transition: 0.3s; border: none; }
         .affiliate-btn.shopee { background: #ee4d2d; } .affiliate-btn.ml { background: #ffe600; color: #333; }
         .affiliate-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
-        
         .game-info-play-btn { background: var(--accent-color); color: #fff; border: none; padding: 15px; width: 100%; font-family: 'Press Start 2P', monospace; font-size: 14px; cursor: pointer; border-radius: 4px; transition: 0.3s; }
         .game-info-play-btn:hover { background: #fff; color: #000; box-shadow: 0 0 15px #fff; }
 
-        /* MODAL PIX CUSTOMIZAÇÃO */
         #pix-modal .modal-content-box { max-width: 400px; padding: 20px; align-items: center; }
 
-        /* SPLASH SCREEN & EFEITO MÁQUINA DE ESCREVER */
+        /* ========================================================== */
+        /* CSS DO HALL DOS APOIADORES (SIDEBAR)                       */
+        /* ========================================================== */
+        #sidebar-hall-container { display: none; padding: 10px; margin: 10px 5px; background: var(--input-bg); border: 1px solid var(--accent-color); border-radius: 4px; flex-direction: column; gap: 8px; flex-shrink: 0; }
+        .hall-item-sidebar { border-left: 2px solid var(--accent-color); padding-left: 6px; margin-bottom: 4px; }
+        .hall-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
+        .hall-nick { font-family: 'Press Start 2P', cursive; font-size: 6px; color: var(--text-color); }
+        .hall-valor { font-family: monospace; font-size: 9px; color: var(--accent-color); font-weight: bold; }
+        .hall-msg { font-size: 11px; color: var(--text-muted); font-style: italic; line-height: 1.2; word-wrap: break-word; }
+
+        /* SPLASH SCREEN */
         #splash-screen { position: fixed; inset: 0; background-color: var(--bg-color); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000000; transition: opacity 0.8s ease-out, visibility 0.8s; }
         .splash-logo { font-family: 'Press Start 2P', monospace; font-size: clamp(20px, 4vw, 40px); color: var(--accent-color); margin-bottom: 5px; }
         .initial { font-weight: bold; }
@@ -85,37 +103,24 @@
         .cursor { animation: blink-cursor 1s step-end infinite; margin-left: 5px; }
         @keyframes blink-cursor { 50% { opacity: 0; } }
         .splash-logo.animate .reveal { max-width: 300px; opacity: 1; }
-        
-        .splash-subtitle { 
-            color: var(--text-color); 
-            font-size: clamp(10px, 2.5vw, 14px); 
-            font-family: 'Courier New', Courier, monospace; 
-            font-weight: bold; 
-            text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 2px solid var(--accent-color);
-            max-width: 0;
-            margin: 10px auto 0 auto;
-            opacity: 0;
-        }
-        .splash-logo.animate ~ .splash-subtitle { 
-            opacity: 1;
-            animation: typing-text 2.5s steps(60, end) 1s forwards, blink-caret 0.8s step-end infinite; 
-        }
+        .splash-subtitle { color: var(--text-color); font-size: clamp(10px, 2.5vw, 14px); font-family: 'Courier New', Courier, monospace; font-weight: bold; text-align: center; white-space: nowrap; overflow: hidden; border-right: 2px solid var(--accent-color); max-width: 0; margin: 10px auto 0 auto; opacity: 0; }
+        .splash-logo.animate ~ .splash-subtitle { opacity: 1; animation: typing-text 2.5s steps(60, end) 1s forwards, blink-caret 0.8s step-end infinite; }
         @keyframes typing-text { from { max-width: 0; } to { max-width: 700px; } }
         @keyframes blink-caret { 50% { border-color: transparent; } }
-
         #splash-screen.fade-out { opacity: 0; visibility: hidden; }
 
-        /* SIDEBAR DESKTOP */
+        /* SIDEBAR E COMPORTAMENTO NO HOVER */
         .sidebar { width: var(--sidebar-collapsed-width); background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; position: fixed; height: 100%; z-index: 5000; padding: 10px 5px; transition: width 0.3s ease; overflow-y: auto; scrollbar-width: none; }
+
         @media(min-width: 1025px) {
             .sidebar:hover { width: var(--sidebar-expanded-width); box-shadow: 10px 0 50px rgba(0,0,0,0.5); }
             .sidebar:hover .nav-text { display: inline-block; opacity: 1; }
-            .sidebar:hover .sidebar-chat { display: flex; } 
+            .sidebar:hover .sidebar-chat { display: flex; }
             .sidebar:hover .pix-text-pc { display: inline-block; opacity: 1; transition: 0.3s; }
+            /* Hall aparece no hover da sidebar */
+            .sidebar:hover #sidebar-hall-container.ativo { display: flex; }
         }
+
         .sidebar-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; flex-shrink: 0; }
         .sidebar-header img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-color); cursor: pointer; }
         .nav-list { display: flex; flex-direction: column; gap: 10px; flex: 1; margin-top: 10px; }
@@ -125,25 +130,19 @@
         .nav-item img { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; image-rendering: pixelated; }
         .nav-text { display: none; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 
-        /* BOTÃO PIX PC */
-        .pix-trigger-pc { 
-            display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-muted); 
-            background: transparent; border: 1px solid transparent; justify-content: center; flex-shrink: 0; transition: 0.3s; margin-bottom: 15px;
-        }
+        .pix-trigger-pc { display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-muted); background: transparent; border: 1px solid transparent; justify-content: center; flex-shrink: 0; transition: 0.3s; margin-bottom: 15px; }
         @media(min-width: 769px) { .pix-trigger-pc { justify-content: flex-start; } }
         .pix-trigger-pc:hover { background: rgba(0, 153, 51, 0.15); color: var(--text-color); border: 1px solid var(--accent-color); }
         .pix-text-pc { display: none; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 
-        /* CHAT SIDEBAR (PADRÃO PC) */
         .sidebar-chat { background: var(--bg-color); border: 1px solid var(--accent-color); padding: 10px; border-radius: 4px; height: 350px; min-height: 350px; display: none; flex-direction: column; width: 100%; flex-shrink: 0; margin-bottom: 20px; margin-top: auto; position: relative; }
-        .close-chat-btn { display: none; } 
+        .close-chat-btn { display: none; }
         #terminal-output { flex: 1; overflow-y: auto; font-family: monospace; font-size: 10px; color: var(--accent-color); margin-bottom: 10px; word-wrap: break-word; overflow-x: hidden; }
         .chat-time { color: var(--text-muted); font-size: 8px; margin-right: 5px; }
         .chat-controls { display: flex; gap: 5px; width: 100%; box-sizing: border-box; position: relative;}
         #chat-nick { width: 60px; min-width: 0; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 5px; font-size: 10px; border-radius: 3px; outline: none; }
         #chat-msg { flex: 1; min-width: 0; background: var(--sidebar-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 5px; font-size: 11px; border-radius: 3px; outline: none; }
         #chat-msg:disabled { background: var(--card-bg); cursor: not-allowed; opacity: 0.5; }
-        
         #emoji-btn { background: var(--card-bg); border: 1px solid var(--border-color); cursor: pointer; border-radius: 3px; font-size: 14px; display: flex; align-items: center; justify-content: center; padding: 0 5px; transition: 0.3s; }
         #emoji-btn:hover { background: var(--accent-color); border-color: var(--accent-color); }
         #emoji-picker { display: none; position: absolute; bottom: 35px; right: 0; width: 220px; background: var(--sidebar-bg); border: 1px solid var(--accent-color); border-radius: 6px; padding: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); z-index: 1000; flex-wrap: wrap; gap: 6px; justify-content: center; }
@@ -151,18 +150,16 @@
         .emoji-item:hover { transform: scale(1.3); }
         #send-btn { width: 30px; flex-shrink: 0; background: var(--accent-color); border: none; cursor: pointer; color: #fff; font-weight: bold; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
 
-        /* BACKDROP DO CHAT MOBILE */
         #chat-mobile-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 99998; backdrop-filter: blur(3px); }
 
         .main-content { margin-left: var(--sidebar-collapsed-width); padding: 0 0 50px 0; position: relative; z-index: 1; transition: margin-left 0.3s ease; }
-            
+
         .top-bar { position: sticky; top: 0; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 8000; background: var(--top-bar-bg); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 204, 68, 0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: background 0.4s; }
         @keyframes brand-glow { 0% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } 50% { text-shadow: 0 0 2px var(--accent-color), 0 0 5px var(--accent-color); transform: scale(1.02); } 100% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } }
         .brand { font-family: 'Press Start 2P'; color: var(--accent-color); font-size: 18px; animation: brand-glow 2.5s infinite ease-in-out; cursor: pointer; }
         .top-bar-controls { display: flex; align-items: center; gap: 20px; }
-            
-        .chat-trigger-mobile { display: none; } 
-        .pix-trigger-mobile { display: none; }
+
+        .chat-trigger-mobile { display: none; } .pix-trigger-mobile { display: none; }
 
         .search-container { background: var(--sidebar-bg); border: 1px solid var(--accent-color); display: flex; padding: 8px 15px; width: 350px; border-radius: 4px; position: relative; }
         #global-search { background: transparent; border: none; color: var(--text-color); outline: none; width: 100%; font-family: monospace; }
@@ -170,7 +167,7 @@
         .search-item { padding: 10px; border-bottom: 1px solid var(--border-color); cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; }
         .search-item:hover, .search-item.gamepad-focus { background: var(--card-bg); border-left: 3px solid var(--accent-color); outline: none; }
         .search-item img { width: 40px; height: 40px; object-fit: fill; border-radius: 3px; }
-            
+
         .theme-container { display: flex; align-items: center; gap: 10px; }
         .theme-label { font-family: 'Press Start 2P', cursive; font-size: 8px; color: var(--text-color); transition: color 0.4s; }
         .theme-switch { position: relative; display: inline-block; width: 46px; height: 24px; flex-shrink: 0; }
@@ -179,6 +176,12 @@
         .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: var(--accent-color); transition: .4s; border-radius: 50%; }
         input:checked + .slider { background-color: #222; }
         input:checked + .slider:before { transform: translateX(22px); }
+
+        /* MARQUEE DO MOBILE (LETREIRO ROLANDO) LIMPO E VERDE */
+        .mobile-marquee-wrapper { display: none; width: 100%; overflow: hidden; background: transparent; border: none; padding: 5px 0; margin: 5px 0; white-space: nowrap; position: relative; }
+        .mobile-marquee-content { display: inline-block; animation: marquee 20s linear infinite; font-family: 'Press Start 2P', cursive; font-size: 8px; color: var(--accent-color); text-shadow: 0 0 5px rgba(0, 204, 68, 0.4); }
+        .marquee-item { display: inline-block; margin-right: 50px; }
+        @keyframes marquee { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
         .hero-section { position: relative; width: 100%; height: 800px; background: #000; overflow: hidden; display: flex; align-items: center; }
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; display: flex; align-items: center; z-index: 1; }
@@ -219,7 +222,7 @@
         .card-media { width: 100%; height: 140px; position: relative; background: var(--card-bg); overflow: hidden; border-radius: 5px 5px 0 0; }
         .card-media img { width: 100%; height: 100%; object-fit: fill; position: absolute; top: 0; left: 0; transition: opacity 0.8s ease-in-out; }
         .static-thumb { z-index: 2; opacity: 1; }
-        .active-gif { z-index: 3; opacity: 0; display: none; }      
+        .active-gif { z-index: 3; opacity: 0; display: none; }
         .card-title { position: absolute; top: 140px; left: 0; width: 100%; min-height: 40px; background: var(--card-bg); color: var(--text-color); display: flex; align-items: center; justify-content: center; padding: 5px; transition: background 0.3s, color 0.3s; border-radius: 0 0 5px 5px; z-index: 5; border-top: 1px solid var(--border-color); }
         .card-title span { font-family: 'Press Start 2P', cursive; font-size: 8px; line-height: 1.4; text-align: center; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .game-card:hover .card-title, .game-card.mobile-active .card-title, .game-card.gamepad-focus .card-title { background: var(--sidebar-bg); color: var(--accent-color); height: auto; border: 1px solid var(--accent-color); border-top: none; left: -1px; width: calc(100% + 2px); border-radius: 0 0 6px 6px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
@@ -229,12 +232,9 @@
         .discord-text { font-family: monospace; color: #fff; font-size: 12px; text-align: right; }
         .discord-float img { width: 45px; height: 45px; border-radius: 50%; }
 
-        /* ========================================================= */
-        /* RESPONSIVIDADE E CHAT MODAL                               */
-        /* ========================================================= */
-        
+        /* RESPONSIVIDADE PARA MOBILE */
         @media (max-width: 1024px) {
-            .sidebar { top: auto; bottom: 0; left: 0; width: 100% !important; height: 65px; flex-direction: row; border-right: none; border-top: 1px solid var(--accent-color); padding: 5px 0; transform: none !important; z-index: 9000; background: var(--top-bar-bg); backdrop-filter: blur(10px); box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }      
+            .sidebar { top: auto; bottom: 0; left: 0; width: 100% !important; height: 65px; flex-direction: row; border-right: none; border-top: 1px solid var(--accent-color); padding: 5px 0; transform: none !important; z-index: 9000; background: var(--top-bar-bg); backdrop-filter: blur(10px); box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
             .sidebar-header { display: none !important; }
             .nav-list { flex-direction: row; margin-top: 0; gap: 0; overflow-x: hidden; justify-content: space-around; padding: 0 5px; width: 100%; align-items: center; }
             .nav-item { flex-direction: column; padding: 2px 0; flex: 1; gap: 4px; justify-content: center; border-radius: 4px; }
@@ -243,28 +243,26 @@
             .main-content { margin-left: 0 !important; padding: 0 0 80px 0 !important; }
             .discord-float { bottom: 80px; right: 15px; }
             .discord-text { display: none; }
-            
-            /* Oculta o chat embutido em telas menores */
+
+            #sidebar-hall-container { display: none !important; }
+
             .sidebar-chat { display: none !important; }
-            
-            /* Ativa a versão Modal do Chat */
             .sidebar-chat.chat-modal-mobile { display: flex !important; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; height: 75%; max-height: 500px; background: var(--top-bar-bg); border: 2px solid var(--accent-color); z-index: 100000 !important; box-shadow: 0 0 40px rgba(0, 204, 68, 0.4); margin: 0; border-radius: 8px; padding-top: 35px; backdrop-filter: blur(10px); }
             .close-chat-btn { display: block; position: absolute; top: 8px; right: 10px; background: transparent; color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 14px; padding: 2px 8px; cursor: pointer; border-radius: 3px; font-weight: bold; z-index: 10; transition: 0.3s; }
             .close-chat-btn:hover { background: #ff3333; color: #fff; }
+
+            .mobile-marquee-wrapper { display: block; }
         }
 
         @media (max-width: 768px) {
             .top-bar { flex-direction: column; align-items: center; padding: 10px 15px; margin: 0; text-align: center; gap: 10px; }
             .brand { width: 100%; text-align: center; display: block !important; font-size: 16px !important; margin-bottom: 5px; }
             .top-bar-controls { display: flex; flex-direction: row !important; width: 100%; justify-content: space-between; align-items: center; gap: 5px; margin-top: 5px; }
-            
             .pix-trigger-mobile { display: flex !important; width: 38px !important; height: 38px !important; flex-shrink: 0 !important; border: 1px solid var(--accent-color); border-radius: 6px; background: rgba(0, 153, 51, 0.1); align-items: center; justify-content: center; cursor: pointer; order: 0; }
             .chat-trigger-mobile { display: flex !important; width: 38px !important; height: 38px !important; flex-shrink: 0 !important; border: 1px solid var(--accent-color); border-radius: 6px; background: var(--sidebar-bg); align-items: center; justify-content: center; cursor: pointer; order: 1; }
             .chat-trigger-mobile img { width: 22px; height: 22px; object-fit: contain; image-rendering: pixelated; }
-            
             .search-container { flex: 1; width: auto; max-width: none; order: 2; height: 38px; }
-            .theme-container { order: 3; display: flex !important; } /* Correção do Botão Tema no Mobile */
-            
+            .theme-container { order: 3; display: flex !important; }
             .row-header { justify-content: space-between; padding-right: 15px; }
             .view-all-btn { font-size: 8px; padding: 6px 10px; }
             .hero-section { height: 400px; min-height: auto; max-height: none; }
@@ -273,14 +271,13 @@
             .hero-content { padding: 0 20px; margin-top: auto; margin-bottom: 40px; }
             .hero-title { font-size: 24px; }
             .catalog { padding: 0 10px; }
-            .game-carousel { gap: 8px; padding: 30px 10px; }      
-            .game-card { width: 78px; height: 110px; margin: 0; border-radius: 4px; }      
+            .game-carousel { gap: 8px; padding: 30px 10px; }
+            .game-card { width: 78px; height: 110px; margin: 0; border-radius: 4px; }
             .card-media { height: 75px; border-radius: 3px 3px 0 0; }
-            .card-title { min-height: 35px; top: 75px; border-radius: 0 0 3px 3px; padding: 2px; border-top:none; }      
+            .card-title { min-height: 35px; top: 75px; border-radius: 0 0 3px 3px; padding: 2px; border-top:none; }
             .card-title span { font-size: 6px; }
             .game-card:hover { transform: none; box-shadow: none; border-color: var(--border-color); z-index: 1; }
             .game-card.mobile-active { transform: scale(1.30); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0,204,68,0.6); z-index: 100; }
-            
             .sidebar-chat.chat-modal-mobile { width: 95%; height: 85%; max-height: none; padding: 15px; padding-top: 35px; }
             #chat-nick, #chat-msg { font-size: 16px; padding: 8px; }
             #send-btn { font-size: 16px; width: 40px; }
@@ -301,10 +298,17 @@
             .row-wrapper { margin-bottom: 15px; }
             .sidebar-chat.chat-modal-mobile { height: 90%; top: 5%; transform: translateX(-50%); }
         }
+
+        .chat-trigger-pc { display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-muted); justify-content: flex-start; flex-shrink: 0; transition: 0.3s; margin-bottom: 15px; }
+        .chat-trigger-pc:hover { background: rgba(0, 204, 68, 0.2); color: var(--text-color); }
+        .chat-trigger-pc img { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; image-rendering: pixelated; }
+        .chat-text-pc { display: none; opacity: 0; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
+        @media(min-width: 1025px) { .sidebar:hover .chat-text-pc { display: inline-block; opacity: 1; transition: 0.3s; } }
+        @media(max-width: 768px) { .chat-trigger-pc { display: none !important; } }
     </style>
 </head>
 <body>
-    
+
     <div id="chat-mobile-backdrop" onclick="closeMobileChat()"></div>
 
     <div id="splash-screen">
@@ -334,7 +338,11 @@
                     <span id="modal-game-sys" style="color: #fff;">SISTEMA</span>
                     <span class="game-info-rating" id="modal-game-rating">⭐ 0.0 / 10</span>
                 </div>
-                <p class="game-info-desc" id="modal-game-desc">Uma aventura épica espera por você.</p>
+
+                <div class="terminal-desc-box" title="Clique para acelerar a digitação">
+                    <div id="modal-game-desc" class="terminal-desc-text"></div>
+                </div>
+
                 <div class="affiliate-banner">
                     <span>🎮 Jogue como um Profissional: Compre Controles USB com Desconto!</span>
                     <div class="affiliate-links">
@@ -350,19 +358,16 @@
     <div id="pix-modal" class="modal-bg" onclick="closePixModal()">
         <div class="modal-content-box" onclick="event.stopPropagation()" style="max-width: 400px; padding: 20px; align-items: center;">
             <button class="game-info-close" onclick="closePixModal()">X</button>
-            <h2 style="color: var(--accent-color); font-family: 'Press Start 2P', cursive; font-size: 14px; text-align: center; margin-bottom: 15px; margin-top: 10px;">APOIE O PROJETO</h2>
-            <p style="font-size: 12px; color: var(--text-color); text-align: center; margin-bottom: 20px; line-height: 1.5;">Ajude a manter os servidores online e os jogos dublados! Sua doação faz o <b>Modo Brasil</b> acontecer. 🇧🇷</p>
-            
-            <div style="text-align: center; margin-bottom: 20px;">
-                <img src="assets/imagens-videos/chave%20pix.jpg" alt="QR Code PIX" style="width: 200px; height: 200px; border: 2px solid var(--accent-color); border-radius: 8px; object-fit: contain;">
-            </div>
-            
+            <h2 style="color: var(--accent-color); font-family: 'Press Start 2P', cursive; font-size: 14px; text-align: center; margin-bottom: 15px; margin-top: 10px;">INSERT COIN</h2>
+            <p style="font-size: 12px; color: var(--text-color); text-align: center; margin-bottom: 20px; line-height: 1.5;">Ajude a manter os servidores online! Digite o valor que deseja contribuir. O sistema vai te guiar.</p>
+
             <div style="background: var(--input-bg); border: 1px dashed var(--accent-color); padding: 15px; border-radius: 6px; text-align: center; width: 100%;">
-                <p style="font-size: 10px; color: var(--accent-color); margin-bottom: 10px; font-weight: bold; font-family: monospace;">CHAVE PIX (ALEATÓRIA):</p>
-                <input type="text" id="pix-key-input" value="befe0c00-09e0-4b91-aec7-a550c7a1a54d" readonly style="background: var(--sidebar-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 10px; border-radius: 4px; width: 100%; font-family: monospace; font-size: 12px; text-align: center; margin-bottom: 10px; outline: none; box-sizing: border-box;">
-                
-                <button onclick="copyPixKey()" style="background: var(--accent-color); color: #fff; border: none; padding: 12px; border-radius: 4px; width: 100%; font-weight: bold; cursor: pointer; font-family: 'Press Start 2P', monospace; font-size: 10px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0, 153, 51, 0.3);">📋 COPIAR CHAVE</button>
+                <span style="color: var(--accent-color); font-weight: bold; font-family: monospace; font-size: 16px;">R$</span>
+                <input type="number" id="valor-doacao" placeholder="0.00" min="1" step="0.50" style="background: var(--sidebar-bg); border: none; border-bottom: 2px solid var(--accent-color); color: var(--text-color); padding: 10px; width: 120px; font-family: 'Press Start 2P', monospace; font-size: 14px; text-align: center; margin-bottom: 15px; outline: none;">
+
+                <button id="btn-gerar-pix" onclick="gerarPagamentoMP()" style="background: var(--accent-color); color: #fff; border: none; padding: 12px; border-radius: 4px; width: 100%; font-weight: bold; cursor: pointer; font-family: 'Press Start 2P', monospace; font-size: 10px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0, 153, 51, 0.3);">🟢 CONTINUAR PARA PAGAMENTO</button>
             </div>
+            <p style="font-size: 9px; color: var(--text-muted); text-align: center; margin-top: 15px;">Transação 100% segura via Mercado Pago.</p>
         </div>
     </div>
 
@@ -371,13 +376,19 @@
             <div class="sidebar-header">
                 <img src="assets/imagens-videos/logo-discord.gif?v=2" onclick="window.scrollTo(0,0);" title="Voltar ao Topo">
             </div>
-            
+
             <div class="pix-trigger-pc" onclick="openPixModal()" title="Apoiar o Projeto">
                 <span style="font-size: 24px; line-height: 1;">☕</span>
                 <span class="pix-text-pc">Apoiar Projeto</span>
             </div>
-                
+
             <div class="nav-list" id="nav-list"></div>
+
+            <div id="sidebar-hall-container">
+                <div style="font-size: 8px; font-family: 'Press Start 2P', cursive; color: var(--accent-color); text-align: center; margin-bottom: 5px;">HALL APOIADORES</div>
+                <div id="hall-items-sidebar" style="display: flex; flex-direction: column; gap: 8px;">
+                    </div>
+            </div>
 
             <div class="sidebar-chat" id="chat-container">
                 <button class="close-chat-btn" onclick="closeMobileChat()">X</button>
@@ -398,6 +409,13 @@
         <main class="main-content">
             <header class="top-bar">
                 <div class="brand" onclick="window.scrollTo(0,0);">NEOTERMINALROOM</div>
+
+                <div class="mobile-marquee-wrapper">
+                    <div class="mobile-marquee-content" id="mobile-marquee-content">
+                        Carregando banco de dados...
+                    </div>
+                </div>
+
                 <div class="top-bar-controls">
                     <div class="pix-trigger-mobile" onclick="openPixModal()">
                         <span style="font-size: 18px; line-height: 1;">☕</span>
@@ -419,10 +437,13 @@
                     </div>
                 </div>
             </header>
+
             <section class="hero-section" id="hero-slider">
                 <div class="hero-indicators" id="hero-indicators"></div>
             </section>
+
             <section class="catalog" id="catalog-area"></section>
+
         </main>
     </div>
 
@@ -435,20 +456,20 @@
         setTimeout(() => {
             splash.classList.add("fade-out");
             document.body.style.overflow = "auto";
-            setTimeout(() => splash.remove(), 800); 
+            setTimeout(() => splash.remove(), 800);
         }, 3800);
     });
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getDatabase, ref, push, onChildAdded, get, remove, query, limitToLast, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-    const R2_URL = "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/";  
+    const R2_URL = "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/";
     const blockRegex = /\.m3u|([._\-\s](cd|disc|disco)\s*[0-9]+)/i;
 
     const themeToggle = document.getElementById('theme-toggle');
     if (localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-theme'); themeToggle.checked = true; }
     themeToggle.addEventListener('change', () => {
-        if (themeToggle.checked) { document.body.classList.add('dark-theme'); localStorage.setItem('theme', 'dark'); }   
+        if (themeToggle.checked) { document.body.classList.add('dark-theme'); localStorage.setItem('theme', 'dark'); }
         else { document.body.classList.remove('dark-theme'); localStorage.setItem('theme', 'light'); }
     });
 
@@ -456,6 +477,97 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
     const chatRef = ref(db, 'mensagens');
+    const supportersRef = ref(db, 'apoiadores_cafe');
+
+    // =======================================================================
+    // LÓGICA DO PAGAMENTO E HALL DOS APOIADORES
+    // =======================================================================
+
+    // Ouvinte que atualiza o Hall na Sidebar (PC) e o Letreiro Marquee (Mobile)
+    onValue(query(supportersRef, limitToLast(5)), (snapshot) => {
+        const hallSidebar = document.getElementById('hall-items-sidebar');
+        const hallMarquee = document.getElementById('mobile-marquee-content');
+        const containerSidebar = document.getElementById('sidebar-hall-container');
+
+        hallSidebar.innerHTML = '';
+        hallMarquee.innerHTML = '';
+
+        if (!snapshot.exists()) {
+            containerSidebar.classList.remove('ativo');
+            hallMarquee.innerHTML = 'Aguardando heróis da resistência...';
+            return;
+        }
+
+        containerSidebar.classList.add('ativo');
+
+        const msgs = [];
+        snapshot.forEach(child => { msgs.push(child.val()); });
+        msgs.reverse();
+
+        let htmlMarquee = '';
+
+        msgs.forEach((d, index) => {
+            const valorFormat = d.valor ? parseFloat(d.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'R$ 1,00';
+
+            // Preenche na Sidebar (Só os 3 últimos no PC)
+            if(index < 3) {
+                const item = document.createElement('div');
+                item.className = 'hall-item-sidebar';
+                item.innerHTML = `
+                    <div class="hall-item-header">
+                        <span class="hall-nick">${d.nome}</span>
+                        <span class="hall-valor">${valorFormat}</span>
+                    </div>
+                    <div class="hall-msg">"${d.mensagem}"</div>
+                `;
+                hallSidebar.appendChild(item);
+            }
+
+            // Constrói a linha contínua do Marquee (Mobile) - Texto Puro Verde!
+            htmlMarquee += `<div class="marquee-item">⭐ ${d.nome} (${valorFormat}): "${d.mensagem}"</div>`;
+        });
+
+        hallMarquee.innerHTML = htmlMarquee;
+    });
+
+    window.gerarPagamentoMP = async () => {
+        const valorInput = document.getElementById('valor-doacao').value;
+        const valor = parseFloat(valorInput);
+
+        if (isNaN(valor) || valor < 1) {
+            alert("⚠️ Por favor, insira um valor válido (mínimo R$ 1,00).");
+            return;
+        }
+
+        const btn = document.getElementById('btn-gerar-pix');
+        btn.innerText = "⏳ GERANDO CONEXÃO...";
+        btn.disabled = true;
+
+        try {
+            // 🔗 ATENÇÃO: SE VOCÊ MUDOU A URL NA CLOUDFLARE, ATUALIZE AQUI!
+            const URL_WORKER = "https://webhook-pix-cafe.dr-iuryhermes.workers.dev/gerar-link";
+
+            const resposta = await fetch(URL_WORKER, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ valor: valor })
+            });
+
+            const dados = await resposta.json();
+
+            if (dados.link) {
+                window.location.href = dados.link;
+            } else {
+                alert("❌ Erro ao comunicar com os servidores de pagamento.");
+            }
+        } catch (erro) {
+            alert("❌ Falha na conexão. Tente novamente mais tarde.");
+        } finally {
+            btn.innerText = "🟢 CONTINUAR PARA PAGAMENTO";
+            btn.disabled = false;
+        }
+    };
+    // =======================================================================
 
     window.startGame = (url) => {
         document.getElementById('loader-overlay').style.display = 'flex';
@@ -468,32 +580,25 @@
         const lBtn = document.querySelector(`#section-${sysId} .left-btn`);
         const rBtn = document.querySelector(`#section-${sysId} .right-btn`);
         car.classList.toggle('grid-view');
-        if(car.classList.contains('grid-view')) { btn.innerHTML = "⊞ VOLTAR"; if(lBtn) lBtn.style.display = 'none'; if(rBtn) rBtn.style.display = 'none'; } 
+        if(car.classList.contains('grid-view')) { btn.innerHTML = "⊞ VOLTAR"; if(lBtn) lBtn.style.display = 'none'; if(rBtn) rBtn.style.display = 'none'; }
         else { btn.innerHTML = "⊞ VER TODOS"; if(lBtn) lBtn.style.display = 'flex'; if(rBtn) rBtn.style.display = 'flex'; }
     };
 
-    window.openMobileChat = () => { 
+    window.openMobileChat = () => {
         const chat = document.getElementById('chat-container');
-        document.body.appendChild(chat); 
-        chat.classList.add('chat-modal-mobile'); 
+        document.body.appendChild(chat);
+        chat.classList.add('chat-modal-mobile');
         document.getElementById('chat-mobile-backdrop').style.display = 'block';
     };
-    window.closeMobileChat = () => { 
+    window.closeMobileChat = () => {
         const chat = document.getElementById('chat-container');
-        chat.classList.remove('chat-modal-mobile'); 
+        chat.classList.remove('chat-modal-mobile');
         document.getElementById('chat-mobile-backdrop').style.display = 'none';
-        document.getElementById('main-sidebar').appendChild(chat); 
+        document.getElementById('main-sidebar').appendChild(chat);
     };
 
     window.openPixModal = () => { document.getElementById('pix-modal').style.display = 'flex'; };
     window.closePixModal = () => { document.getElementById('pix-modal').style.display = 'none'; };
-    window.copyPixKey = () => {
-        const copyText = document.getElementById("pix-key-input");
-        copyText.select();
-        copyText.setSelectionRange(0, 99999);
-        navigator.clipboard.writeText(copyText.value);
-        alert("Chave PIX copiada com sucesso! Muito obrigado pelo apoio! 💚");
-    };
 
     const shopeeLinks = ["https://s.shopee.com.br/6KzsumXzVK?share_channel_code=1", "https://s.shopee.com.br/W25xuKRTY?share_channel_code=1", "https://s.shopee.com.br/50UVKoE5pk?share_channel_code=1"];
     const mlLinks = ["https://meli.la/1eNR6GB", "https://meli.la/2HD21Wi", "https://meli.la/1GQhiTZ", "https://meli.la/1Ld2GkU"];
@@ -501,16 +606,45 @@
     window.openGameModal = (gameObj, playUrl) => {
         let gifNome = gameObj.preview ? gameObj.preview.split('/').pop() : '';
         let capaNome = gameObj.capa ? gameObj.capa.split('/').pop() : '';
-        
-        // CORREÇÃO: PUXANDO DO R2 COM ENCODEURICOMPONENT PARA EVITAR QUEBRAS COM ESPAÇOS
+
         const mediaPath = gifNome ? `${R2_URL}${gameObj.sysPath}previews/${encodeURIComponent(gifNome)}` : (capaNome ? `${R2_URL}${gameObj.sysPath}capas/${encodeURIComponent(capaNome)}` : 'assets/imagens-videos/logo-discord.gif');
-        
+
         document.getElementById('modal-game-img').src = mediaPath;
         document.getElementById('modal-game-title').innerText = gameObj.nome;
         document.getElementById('modal-game-sys').innerText = "SISTEMA: " + gameObj.sysId.toUpperCase();
         let nota = gameObj.nota || (Math.random() * (9.5 - 7.5) + 7.5).toFixed(1);
         document.getElementById('modal-game-rating').innerHTML = `⭐ ${nota} / 10`;
-        
+
+        const descContainer = document.getElementById('modal-game-desc');
+        const fullText = gameObj.descricao || "ACESSANDO BANCO DE DADOS...\n> Uma aventura épica espera por você.";
+
+        descContainer.innerHTML = '<span id="typewriter-text"></span><span class="cursor">_</span>';
+        const typeTarget = document.getElementById('typewriter-text');
+
+        if(window.typewriterInterval) clearInterval(window.typewriterInterval);
+
+        let i = 0;
+        const formatarDestaque = (texto) => {
+            const regex = /(🎮 DESTAQUE:.*)/i;
+            return texto.replace(regex, '<br><span class="destaque-text">$1</span>');
+        };
+
+        window.typewriterInterval = setInterval(() => {
+            if (i < fullText.length) {
+                typeTarget.textContent += fullText.charAt(i);
+                i++;
+                descContainer.parentElement.scrollTop = descContainer.parentElement.scrollHeight;
+            } else {
+                clearInterval(window.typewriterInterval);
+                typeTarget.innerHTML = formatarDestaque(typeTarget.textContent);
+            }
+        }, 90);
+
+        descContainer.parentElement.onclick = () => {
+            clearInterval(window.typewriterInterval);
+            typeTarget.innerHTML = formatarDestaque(fullText);
+        };
+
         const btnShopee = document.getElementById('btn-shopee-modal');
         const btnMl = document.getElementById('btn-ml-modal');
         btnShopee.href = shopeeLinks[Math.floor(Math.random() * shopeeLinks.length)];
@@ -522,8 +656,14 @@
         document.getElementById('game-info-modal').style.display = 'flex';
     };
 
-    window.closeGameModal = () => { document.getElementById('game-info-modal').style.display = 'none'; };
+    window.closeGameModal = () => {
+        if(window.typewriterInterval) clearInterval(window.typewriterInterval);
+        document.getElementById('game-info-modal').style.display = 'none';
+    };
 
+    // =======================================================================
+    // LÓGICA DO CHAT (COM CORREÇÃO DE AUTO-SCROLL)
+    // =======================================================================
     const out = document.getElementById("terminal-output");
     const nickInput = document.getElementById("chat-nick");
     const msgInput = document.getElementById("chat-msg");
@@ -536,7 +676,9 @@
         const d = snap.val();
         const timeDisplay = d.time ? `<span class="chat-time">[${d.time}]</span>` : '';
         out.innerHTML += `<div>${timeDisplay}<strong style="color:var(--text-color)">${d.user}:</strong> ${d.text}</div>`;
-        out.scrollTop = out.scrollHeight;
+
+        // Timeout garante que o navegador rolou para a última mensagem perfeitamente
+        setTimeout(() => { out.scrollTop = out.scrollHeight; }, 50);
     });
 
     function sendMessage() {
@@ -643,28 +785,25 @@
         let p = fetch(`${sys.path}games.json?v=${new Date().getTime()}`).then(r => r.json()).then(games => {
             const car = document.getElementById(`carousel-${sys.id}`);
             games.forEach(g => {
-                
-                if (sys.id === 'ps1' && blockRegex.test(g.rom)) { return; } 
+
+                if (sys.id === 'ps1' && blockRegex.test(g.rom)) { return; }
 
                 const gameObjFull = {...g, sysPath: sys.path, sysName: sys.name, sysId: sys.id};
                 indexData.push(gameObjFull);
                 const card = document.createElement("div"); card.className = "game-card selectable-item";
-                
+
                 let capaNome = g.capa ? g.capa.split('/').pop() : '';
                 let gifNome = g.preview ? g.preview.split('/').pop() : '';
-                
-                // CORREÇÃO MESTRE: PUXANDO DO R2 COM ENCODEURICOMPONENT
-                // O encodeURIComponent garante que arquivos com espaço (ex: "Mega Man X.jpg") sejam encontrados no R2.
+
                 const imgPath = capaNome ? `${R2_URL}${sys.path}capas/${encodeURIComponent(capaNome)}` : '';
                 const gifPath = gifNome ? `${R2_URL}${sys.path}previews/${encodeURIComponent(gifNome)}` : '';
 
-                const coreToUse = coreMap[sys.id] || 'snes';   
+                const coreToUse = coreMap[sys.id] || 'snes';
                 const playerFile = sys.id === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
                 const playUrl = `${playerFile}?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
 
                 card.dataset.url = playUrl;
 
-                // Tenta carregar do R2. Se falhar, como medida de segurança, não exibe erro na cara do usuário.
                 card.innerHTML = `
                     <div class="card-media">
                         <img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';" class="static-thumb" loading="lazy">
@@ -672,14 +811,14 @@
                     </div>
                     <div class="card-title"><span>${g.nome}</span></div>
                 `;
-                    
+
                 let hoverTimeout;
                 const playGifWithDelay = (cardElement) => {
                     const s = cardElement.querySelector('.static-thumb'); const a = cardElement.querySelector('.active-gif');
-                    clearTimeout(hoverTimeout); if (!a.dataset.gif) return; 
+                    clearTimeout(hoverTimeout); if (!a.dataset.gif) return;
                     const showCoverAndWait = () => { s.style.opacity = '1'; a.style.opacity = '0'; setTimeout(() => { if(a.style.opacity === '0') a.style.display = 'none'; }, 800); hoverTimeout = setTimeout(showGifAndWait, 3000); };
                     const showGifAndWait = () => { a.src = a.dataset.gif; a.style.display = 'block'; setTimeout(() => { s.style.opacity = '0'; a.style.opacity = '1'; }, 50); hoverTimeout = setTimeout(showCoverAndWait, 4000); };
-                    hoverTimeout = setTimeout(() => { const tester = new Image(); tester.src = a.dataset.gif; tester.onload = showGifAndWait; }, 1000);   
+                    hoverTimeout = setTimeout(() => { const tester = new Image(); tester.src = a.dataset.gif; tester.onload = showGifAndWait; }, 1000);
                 };
                 const resetGif = (cardElement) => {
                     clearTimeout(hoverTimeout); const s = cardElement.querySelector('.static-thumb'); const a = cardElement.querySelector('.active-gif');
@@ -713,23 +852,23 @@
         if(hits.length > 0) {
             searchResults.style.display = 'flex';
             hits.slice(0, 10).forEach(h => {
-                
-                if (h.sysId === 'ps1' && blockRegex.test(h.rom)) { return; } 
 
-                const div = document.createElement('div'); div.className = 'search-item selectable-item';   
+                if (h.sysId === 'ps1' && blockRegex.test(h.rom)) { return; }
+
+                const div = document.createElement('div'); div.className = 'search-item selectable-item';
                 let capaNomeBusca = h.capa ? h.capa.split('/').pop() : '';
                 const imgPath = capaNomeBusca ? `${R2_URL}${h.sysPath}capas/${encodeURIComponent(capaNomeBusca)}` : 'assets/imagens-videos/logo-discord.gif';
 
                 div.innerHTML = `<img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';"><span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>`;
-                    
+
                 const coreToUse = coreMap[h.sysId] || 'snes';
                 const playerFile = h.sysId === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
                 const playUrl = `${playerFile}?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + h.sysPath + h.rom)}&core=${coreToUse}`;
-                
+
                 div.dataset.url = playUrl; div.onclick = () => window.openGameModal(h, playUrl);
                 searchResults.appendChild(div);
             });
-            updateGamepadFocusList();   
+            updateGamepadFocusList();
         } else { searchResults.style.display = 'none'; }
     });
 
@@ -751,13 +890,13 @@
         if (!gamepadConnected) return; const gp = navigator.getGamepads()[0];
         if (gp) {
             const dpadUp = gp.buttons[12]?.pressed; const dpadDown = gp.buttons[13]?.pressed; const dpadLeft = gp.buttons[14]?.pressed; const dpadRight = gp.buttons[15]?.pressed;
-            const confirmBtn = gp.buttons[0]?.pressed;  
+            const confirmBtn = gp.buttons[0]?.pressed;
             if(!axisCooldown) {
                 let moved = false;
                 if (dpadLeft) { focusItem(Math.max(0, currentFocusIndex - 1)); moved = true; } else if (dpadRight) { focusItem(Math.min(selectableItems.length - 1, currentFocusIndex + 1)); moved = true; }
                 if(moved) { axisCooldown = true; setTimeout(() => { axisCooldown = false; }, 200); }
             }
-            if (confirmBtn && !window.confirmBtnPressed) { window.confirmBtnPressed = true; if(currentFocusIndex >= 0 && selectableItems[currentFocusIndex]) selectableItems[currentFocusIndex].click(); } 
+            if (confirmBtn && !window.confirmBtnPressed) { window.confirmBtnPressed = true; if(currentFocusIndex >= 0 && selectableItems[currentFocusIndex]) selectableItems[currentFocusIndex].click(); }
             else if (!confirmBtn) { window.confirmBtnPressed = false; }
         }
         requestAnimationFrame(pollGamepad);
