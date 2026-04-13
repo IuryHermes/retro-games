@@ -83,7 +83,12 @@
         .game-info-play-btn { background: var(--accent-color); color: #fff; border: none; padding: 15px; width: 100%; font-family: 'Press Start 2P', monospace; font-size: 14px; cursor: pointer; border-radius: 4px; transition: 0.3s; }
         .game-info-play-btn:hover { background: #fff; color: #000; box-shadow: 0 0 15px #fff; }
 
+        /* FORMULÁRIO ZERO ATRITO (MODAL DE PIX) */
         #pix-modal .modal-content-box { max-width: 400px; padding: 20px; align-items: center; }
+        .sup-input { width: 100%; background: var(--input-bg); border: 1px solid var(--accent-color); color: var(--text-color); padding: 12px; margin-bottom: 10px; border-radius: 4px; font-family: monospace; outline: none; box-sizing: border-box; }
+        .sup-input:focus { box-shadow: 0 0 5px var(--accent-color); }
+        .btn-pay { background: var(--accent-color); color: #fff; border: none; padding: 15px; width: 100%; font-family: 'Press Start 2P', monospace; font-size: 10px; cursor: pointer; border-radius: 4px; transition: 0.3s; font-weight: bold; box-shadow: 0 4px 10px rgba(0, 153, 51, 0.3); }
+        .btn-pay:hover { filter: brightness(1.2); transform: scale(1.02); }
 
         /* ========================================================== */
         /* CSS DO HALL DOS APOIADORES (SIDEBAR)                       */
@@ -358,21 +363,21 @@
         <div class="modal-content-box" onclick="event.stopPropagation()" style="max-width: 400px; padding: 20px; align-items: center;">
             <button class="game-info-close" onclick="closePixModal()">X</button>
             <h2 style="color: var(--accent-color); font-family: 'Press Start 2P', cursive; font-size: 14px; text-align: center; margin-bottom: 15px; margin-top: 10px;">INSERT COIN</h2>
-            <p style="font-size: 12px; color: var(--text-color); text-align: center; margin-bottom: 20px; line-height: 1.5;">Ajude a manter os servidores online! Digite o valor que deseja contribuir.</p>
 
-            <div style="background: rgba(255, 51, 51, 0.1); border-left: 4px solid #ff3333; padding: 10px; margin-bottom: 20px; border-radius: 4px;">
-                <p style="font-size: 10px; color: #ff3333; text-align: left; font-family: monospace; font-weight: bold; margin: 0; line-height: 1.4;">
-                    ⚠️ IMPORTANTE: Após pagar o PIX no banco, aguarde a tela ficar verde e clique em "VOLTAR PARA O SITE" para escrever sua mensagem no Hall!
-                </p>
+            <p style="font-size: 10px; color: var(--text-color); text-align: center; margin-bottom: 15px; line-height: 1.5; font-family: 'Press Start 2P', cursive;">DEIXE SUA MARCA NO HALL</p>
+
+            <div style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px;">
+                <input type="text" id="sup-name" class="sup-input" placeholder="Seu Nick (Máx 15)" maxlength="15">
+                <textarea id="sup-msg" class="sup-input" placeholder="Sua mensagem (Máx 100 caracteres)..." maxlength="100" rows="3" style="resize: none;"></textarea>
             </div>
 
-            <div style="background: var(--input-bg); border: 1px dashed var(--accent-color); padding: 15px; border-radius: 6px; text-align: center; width: 100%;">
+            <div style="background: var(--input-bg); border: 1px dashed var(--accent-color); padding: 15px; border-radius: 6px; text-align: center; width: 100%; box-sizing: border-box;">
                 <span style="color: var(--accent-color); font-weight: bold; font-family: monospace; font-size: 16px;">R$</span>
                 <input type="number" id="valor-doacao" placeholder="0.00" min="1" step="0.50" style="background: var(--sidebar-bg); border: none; border-bottom: 2px solid var(--accent-color); color: var(--text-color); padding: 10px; width: 120px; font-family: 'Press Start 2P', monospace; font-size: 14px; text-align: center; margin-bottom: 15px; outline: none;">
 
-                <button id="btn-gerar-pix" onclick="gerarPagamentoMP()" style="background: var(--accent-color); color: #fff; border: none; padding: 12px; border-radius: 4px; width: 100%; font-weight: bold; cursor: pointer; font-family: 'Press Start 2P', monospace; font-size: 10px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0, 153, 51, 0.3);">🟢 CONTINUAR PARA PAGAMENTO</button>
+                <button class="btn-pay" id="btn-iniciar-apoio" onclick="processarApoio()">🟢 CONCORDAR E PAGAR</button>
             </div>
-            <p style="font-size: 9px; color: var(--text-muted); text-align: center; margin-top: 15px;">Transação 100% segura via Mercado Pago.</p>
+            <p style="font-size: 9px; color: var(--text-muted); text-align: center; margin-top: 15px;">O seu nome vai pro Hall assim que o Pix for aprovado pelo banco!</p>
         </div>
     </div>
 
@@ -466,7 +471,7 @@
     });
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getDatabase, ref, push, onChildAdded, get, remove, query, limitToLast, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { getDatabase, ref, push, set, onChildAdded, get, remove, query, limitToLast, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
     const R2_URL = "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/";
     const blockRegex = /\.m3u|([._\-\s](cd|disc|disco)\s*[0-9]+)/i;
@@ -485,17 +490,18 @@
     const supportersRef = ref(db, 'apoiadores_cafe');
 
     // =======================================================================
-    // LÓGICA DO PAGAMENTO E HALL DOS APOIADORES
+    // LÓGICA DO PAGAMENTO ZERO ATRITO E ATUALIZAÇÃO DO HALL
     // =======================================================================
 
     // Ouvinte que atualiza o Hall na Sidebar (PC) e o Letreiro Marquee (Mobile)
-    onValue(query(supportersRef, limitToLast(5)), (snapshot) => {
+    onValue(query(supportersRef, limitToLast(10)), (snapshot) => {
         const hallSidebar = document.getElementById('hall-items-sidebar');
         const hallMarquee = document.getElementById('mobile-marquee-content');
         const containerSidebar = document.getElementById('sidebar-hall-container');
 
         hallSidebar.innerHTML = '';
-        hallMarquee.innerHTML = '';
+        let marqueeHTML = '';
+        let count = 0;
 
         if (!snapshot.exists()) {
             containerSidebar.classList.remove('ativo');
@@ -503,19 +509,20 @@
             return;
         }
 
-        containerSidebar.classList.add('ativo');
+        const data = [];
+        // Filtra para exibir APENAS os pagamentos que o Cloudflare marcou como 'aprovado'
+        snapshot.forEach(child => {
+            if(child.val().status === 'aprovado') {
+                data.push(child.val());
+            }
+        });
+        data.reverse();
 
-        const msgs = [];
-        snapshot.forEach(child => { msgs.push(child.val()); });
-        msgs.reverse();
-
-        let htmlMarquee = '';
-
-        msgs.forEach((d, index) => {
+        data.forEach((d, i) => {
             const valorFormat = d.valor ? parseFloat(d.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'R$ 1,00';
 
             // Preenche na Sidebar (Só os 3 últimos no PC)
-            if(index < 3) {
+            if(i < 3) {
                 const item = document.createElement('div');
                 item.className = 'hall-item-sidebar';
                 item.innerHTML = `
@@ -528,48 +535,64 @@
                 hallSidebar.appendChild(item);
             }
 
-            // Constrói a linha contínua do Marquee (Mobile) - Texto Puro Verde!
-            htmlMarquee += `<div class="marquee-item">⭐ ${d.nome} (${valorFormat}): "${d.mensagem}"</div>`;
+            // Constrói a linha contínua do Marquee (Mobile) - Texto Puro Verde
+            marqueeHTML += `<div class="marquee-item">⭐ ${d.nome} (${valorFormat}): "${d.mensagem}"</div>`;
+            count++;
         });
 
-        hallMarquee.innerHTML = htmlMarquee;
+        if(count > 0) {
+            containerSidebar.classList.add('ativo');
+            hallMarquee.innerHTML = marqueeHTML;
+        } else {
+            containerSidebar.classList.remove('ativo');
+            hallMarquee.innerHTML = 'Aguardando heróis da resistência...';
+        }
     });
 
-    window.gerarPagamentoMP = async () => {
+    window.processarApoio = async () => {
+        const nome = document.getElementById('sup-name').value.trim();
+        const msg = document.getElementById('sup-msg').value.trim();
         const valorInput = document.getElementById('valor-doacao').value;
         const valor = parseFloat(valorInput);
 
-        if (isNaN(valor) || valor < 1) {
-            alert("⚠️ Por favor, insira um valor válido (mínimo R$ 1,00).");
-            return;
-        }
+        if(!nome || !msg) { alert("⚠️ Preencha seu Nick e sua Mensagem!"); return; }
+        if (isNaN(valor) || valor < 1) { alert("⚠️ Por favor, insira um valor válido (mínimo R$ 1,00)."); return; }
 
-        const btn = document.getElementById('btn-gerar-pix');
-        btn.innerText = "⏳ GERANDO CONEXÃO...";
+        const btn = document.getElementById('btn-iniciar-apoio');
+        btn.innerText = "⏳ PROCESSANDO...";
         btn.disabled = true;
 
-        try {
-            // 🔗 ATENÇÃO: SE VOCÊ MUDOU A URL NA CLOUDFLARE, ATUALIZE AQUI!
-            const URL_WORKER = "https://webhook-pix-cafe.dr-iuryhermes.workers.dev/gerar-link";
+        // 1. Gera ID Único para essa transação
+        const idMensagem = "MSG-" + Date.now();
 
-            const resposta = await fetch(URL_WORKER, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ valor: valor })
+        try {
+            // 2. Salva no Firebase como PENDENTE
+            await set(ref(db, 'apoiadores_cafe/' + idMensagem), {
+                nome: nome,
+                mensagem: msg,
+                valor: valor,
+                status: 'pendente',
+                timestamp: Date.now()
             });
 
-            const dados = await resposta.json();
+            // 3. Pede o link ao Worker (O Worker amarra o idMensagem ao Pix)
+            const resp = await fetch("https://webhook-pix-cafe.dr-iuryhermes.workers.dev/gerar-link", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ valor: valor, idMensagem: idMensagem })
+            });
+
+            const dados = await resp.json();
 
             if (dados.link) {
-                window.location.href = dados.link;
+                window.location.href = dados.link; // Redireciona pro Mercado Pago
             } else {
-                alert("❌ Erro ao comunicar com os servidores de pagamento.");
+                alert("❌ Erro ao gerar pagamento.");
+                btn.innerText = "🟢 CONCORDAR E PAGAR"; btn.disabled = false;
             }
-        } catch (erro) {
-            alert("❌ Falha na conexão. Tente novamente mais tarde.");
-        } finally {
-            btn.innerText = "🟢 CONTINUAR PARA PAGAMENTO";
-            btn.disabled = false;
+        } catch (e) {
+            alert("❌ Erro de conexão.");
+            btn.innerText = "🟢 CONCORDAR E PAGAR"; btn.disabled = false;
         }
     };
     // =======================================================================
