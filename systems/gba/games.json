@@ -1729,10 +1729,10 @@
     },
     {
         "nome": "Pokémon Emerald (PT-BR)",
-        "rom": "roms/Pokemon - Emerald Version.gba",
+        "rom": "roms/Pokemon_Emerald_PTBR.gba",
         "capa": "capas/pokemon_emerald.jpg",
         "preview": "previews/pokemon_emerald.gif",
-        "descricao": "A versão definitiva da terceira geração. Explore a região de Hoenn, enfrente as equipes Magma e Aqua, e capture o lendário Rayquaza nesta aventura épica e totalmente dublada.",
+        "descricao": "A versão definitiva da terceira geração. Explore a região de Hoenn, enfrente as equipes Magma e Aqua, e capture o lendário Rayquaza nesta aventura épica e totalmente traduzida/dublada em português.",
         "nota": 9.5
     }
 ]
