@@ -1032,22 +1032,6 @@
         "descricao": "Pokémon Dark Pearl é um jogo de RPG de fato, com uma história envolvente e uma jogabilidade adictiva. Com uma variedade de criaturas para capturar e treinar, você nunca se cansará de explorar o mundo de Pokémon. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
-        "nome": "Pokémon Emerald",
-        "rom": "roms/pokemon-emerald-version.gba",
-        "capa": "pokemon-emerald.jpg",
-        "preview": "pokemon-emerald.gif",
-        "nota": "8.5",
-        "descricao": "Você está pronto para capturar os 3 inimigos de Hoenn? Com uma história emocionante e uma jogabilidade adictiva, Pokémon Emerald é um clássico que não pode ser perdido! 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
-    },
-    {
-        "nome": "Pokémon Emerald",
-        "rom": "roms/pokemon-emerald.gba",
-        "capa": "pokemon-emerald.jpg",
-        "preview": "pokemon-emerald.gif",
-        "nota": "8.5",
-        "descricao": "Você está pronto para capturar os treinadores e se tornar o melhor de todos? Pokémon Emerald é um jogo de RPG de ação que oferece uma experiência única e emocionante. Com uma história rica e personagens memoráveis, você não pode perder! 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
-    },
-    {
         "nome": "Pokémon Firered",
         "rom": "roms/pokemon-fire-red-version.gba",
         "capa": "pokemon-fire-red.jpg",
@@ -1158,14 +1142,6 @@
         "preview": "pokemon-shadow.gif",
         "nota": "4.5",
         "descricao": "Pokémon Shadow Force é um jogo de RPG de rolagem de dados que tenta capturar o espírito dos clássicos, mas acaba sentindo-se um pouco desatualizado. A jogabilidade é simples, mas os gráficos e a música são um passo atrás em comparação com os outros jogos da série. No entanto, ainda é um jogo divertido para jogar e oferece uma experiência única para os fãs da série."
-    },
-    {
-        "nome": "Pokémon Emerald",
-        "rom": "roms/pokemon-stone-dragon.gba",
-        "capa": "pokemon-stone.jpg",
-        "preview": "pokemon-stone.gif",
-        "nota": "8.5",
-        "descricao": "Você está prestes a mergulhar em uma aventura épica no mundo de Pokémon. Com gráficos incríveis e uma história envolvente, Pokémon Emerald é um clássico que não pode ser perdido. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
         "nome": "Pokémon Ruby",
@@ -1750,5 +1726,13 @@
         "preview": "zatchbell.gif",
         "nota": "8.5",
         "descricao": "Você está prestes a entrar em um mundo de batalhas épicas e estratégias incríveis com Zatchbell Electric Arena! Com gráficos coloridos e uma jogabilidade adictiva, você não pode perder a chance de se tornar o campeão da arena. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
+    },
+    {
+        "nome": "Pokémon Emerald (PT-BR)",
+        "rom": "roms/Pokemon - Emerald Version.gba",
+        "capa": "capas/pokemon_emerald.jpg",
+        "preview": "previews/pokemon_emerald.gif",
+        "descricao": "A versão definitiva da terceira geração. Explore a região de Hoenn, enfrente as equipes Magma e Aqua, e capture o lendário Rayquaza nesta aventura épica e totalmente dublada.",
+        "nota": 9.5
     }
 ]
