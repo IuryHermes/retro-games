@@ -8,8 +8,19 @@
     <script src="coi-serviceworker.js"></script>
 
     <style>
-        html, body { margin: 0; background: #000; width: 100%; height: 100dvh; overflow: hidden; }
-        #game { width: 100vw; height: 100dvh; background-color: #000; }
+        html, body { 
+            margin: 0; 
+            padding: 0;
+            background: #000; 
+            width: 100%; 
+            height: 100dvh; 
+            overflow: hidden; 
+        }
+        #game { 
+            width: 100vw; 
+            height: 100dvh; 
+            background-color: #000; 
+        }
     </style>
 </head>
 <body>
@@ -21,20 +32,26 @@
         
         window.EJS_player = '#game';
         
-        // 2. MUDANÇA DE CORE: pcsx_rearmed é muito mais rápido
+        // CORE OTIMIZADO: pcsx_rearmed é muito mais leve que o 'psx' padrão
         window.EJS_core = 'pcsx_rearmed';  
         
+        // URL do Jogo vinda do parâmetro
         window.EJS_gameUrl = params.get("game");
+        
+        // Caminho dos dados do EmulatorJS
         window.EJS_pathtodata = 'https://cdn.emulatorjs.org/latest/data/';
+        
+        // Idioma (Mantido em en-US para estabilidade)
         window.EJS_language = "en-US"; 
 
-        // 3. BIOS REAL: Melhora a compatibilidade e tira peso da CPU
-        // Certifique-se de que o arquivo scph5501.bin está nesse caminho no seu R2
+        // BIOS REAL: Carrega o arquivo que você subiu para o R2 (scph10000 renomeado)
         window.EJS_biosUrl = 'https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/ps1/roms/scph5501.bin';
 
-        // 4. OTIMIZAÇÕES EXTRAS
-        window.EJS_threads = true; // Força o uso de múltiplos núcleos
-        window.EJS_WS = true;      // WebAssembly acelerado
+        // CONFIGURAÇÕES DE PERFORMANCE EXTREMA
+        window.EJS_threads = true;        // Ativa múltiplos núcleos
+        window.EJS_WS = true;             // Força WebAssembly
+        window.EJS_mouse = false;         // Desativa mouse para economizar recursos
+        window.EJS_multitap = false;      // Desativa multitap para ganhar velocidade
     </script>
     
     <script src="https://cdn.emulatorjs.org/latest/data/loader.js"></script>
