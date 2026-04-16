@@ -1,7 +1,7 @@
 [
     {
         "nome": "A Bug'S Life",
-        "rom": "roms/a_bug_s_life_ps1.bin",
+        "rom": "roms/a_bug_s_life_ps1.chd",
         "capa": "a-bug-s-life-ps1.jpg",
         "preview": "a-bug-s-life-ps1.gif",
         "nota": "7.5",
@@ -9,7 +9,7 @@
     },
     {
         "nome": "A I T D 2024 Ch1N Com Br.M3U",
-        "rom": "roms/a_i_t_d_2024_ch1n_com_br.m3u",
+        "rom": "roms/a_i_t_d_2024_ch1n_com_br.chd",
         "capa": "alone-in-the-dark.jpg",
         "preview": "alone-in-the-dark.gif",
         "nota": "5.8",
@@ -17,7 +17,7 @@
     },
     {
         "nome": "Alone In The Dark",
-        "rom": "roms/a_i_t_d_2024_ch1n_com_br_cd1.bin",
+        "rom": "roms/a_i_t_d_2024_ch1n_com_br_cd1.chd",
         "capa": "alone-in-the-dark.jpg",
         "preview": "alone-in-the-dark.gif",
         "nota": "7.5",
@@ -25,7 +25,7 @@
     },
     {
         "nome": "A I T D 2024 Ch1N Com Br Cd2",
-        "rom": "roms/a_i_t_d_2024_ch1n_com_br_cd2.bin",
+        "rom": "roms/a_i_t_d_2024_ch1n_com_br_cd2.chd",
         "capa": "alone-in-the-dark.jpg",
         "preview": "alone-in-the-dark.gif",
         "nota": "5.8",
@@ -33,7 +33,7 @@
     },
     {
         "nome": "Aladdin In Nasira'S Revenge",
-        "rom": "roms/aladdin_in_nasira_s_revenge.bin",
+        "rom": "roms/aladdin_in_nasira_s_revenge.chd",
         "capa": "aladdin-in-nasira-s-revenge.jpg",
         "preview": "aladdin-in-nasira-s-revenge.gif",
         "nota": "7.0",
@@ -41,7 +41,7 @@
     },
     {
         "nome": "Alien Trilogy",
-        "rom": "roms/alien_trilogy_pt_br_ps1.bin",
+        "rom": "roms/alien_trilogy_pt_br_ps1.chd",
         "capa": "alien-trilogy-pt-br-ps1.jpg",
         "preview": "alien-trilogy-pt-br-ps1.gif",
         "nota": "7.5",
@@ -49,7 +49,7 @@
     },
     {
         "nome": "Alone In The Dark.M3U",
-        "rom": "roms/alone_in_the_dark.m3u",
+        "rom": "roms/alone_in_the_dark.chd",
         "capa": "alone-in-the-dark.jpg",
         "preview": "alone-in-the-dark.gif",
         "nota": "7.1",
@@ -57,7 +57,7 @@
     },
     {
         "nome": "Alone In The Dark",
-        "rom": "roms/alone_in_the_dark.pbp",
+        "rom": "roms/alone_in_the_dark.chd",
         "capa": "alone-in-the-dark.jpg",
         "preview": "alone-in-the-dark.gif",
         "nota": "8.0",
@@ -65,7 +65,7 @@
     },
     {
         "nome": "Amerzone The Explorer S Legacy.M3U",
-        "rom": "roms/amerzone_the_explorer_s_legacy.m3u",
+        "rom": "roms/amerzone_the_explorer_s_legacy.chd",
         "capa": "amerzone-the-explorer-s-legacy.jpg",
         "preview": "amerzone-the-explorer-s-legacy.gif",
         "nota": "4.9",
@@ -73,7 +73,7 @@
     },
     {
         "nome": "Amerzone: The Explorer'S Legacy",
-        "rom": "roms/amerzone_the_explorer_s_legacy_cd1.bin",
+        "rom": "roms/amerzone_the_explorer_s_legacy_cd1.chd",
         "capa": "amerzone-the-explorer-s-legacy.jpg",
         "preview": "amerzone-the-explorer-s-legacy.gif",
         "nota": "7.5",
@@ -81,7 +81,7 @@
     },
     {
         "nome": "Amerzone The Explorer S Legacy Cd2",
-        "rom": "roms/amerzone_the_explorer_s_legacy_cd2.bin",
+        "rom": "roms/amerzone_the_explorer_s_legacy_cd2.chd",
         "capa": "amerzone-the-explorer-s-legacy.jpg",
         "preview": "amerzone-the-explorer-s-legacy.gif",
         "nota": "4.9",
@@ -89,7 +89,7 @@
     },
     {
         "nome": "Apocalypse",
-        "rom": "roms/apocalypse.bin",
+        "rom": "roms/apocalypse.chd",
         "capa": "apocalypse.png",
         "preview": "apocalypse.gif",
         "nota": "7.4",
@@ -97,7 +97,7 @@
     },
     {
         "nome": "Asterix The Gallic War Dublado Ch1N Com Br.M3U",
-        "rom": "roms/asterix_the_gallic_war_dublado_ch1n_com_br.m3u",
+        "rom": "roms/asterix_the_gallic_war_dublado_ch1n_com_br.chd",
         "capa": "asterix-the-gallic-war-dublado-ch1n-com-br.jpg",
         "preview": "asterix-the-gallic-war-dublado-ch1n-com-br.gif",
         "nota": "5.8",
@@ -105,7 +105,7 @@
     },
     {
         "nome": "Asterix: A Guerra Gallica",
-        "rom": "roms/asterix_the_gallic_war_dublado_ch1n_com_br_cd01.bin",
+        "rom": "roms/asterix_the_gallic_war_dublado_ch1n_com_br_cd01.chd",
         "capa": "asterix-the-gallic-war-dublado-ch1n-com-br.jpg",
         "preview": "asterix-the-gallic-war-dublado-ch1n-com-br.gif",
         "nota": "7.0",
@@ -113,7 +113,7 @@
     },
     {
         "nome": "Asterix: The Gallic War",
-        "rom": "roms/asterix_the_gallic_war_dublado_ch1n_com_br_cd02.bin",
+        "rom": "roms/asterix_the_gallic_war_dublado_ch1n_com_br_cd02.chd",
         "capa": "asterix-the-gallic-war-dublado-ch1n-com-br.jpg",
         "preview": "asterix-the-gallic-war-dublado-ch1n-com-br.gif",
         "nota": "7.0",
@@ -121,7 +121,7 @@
     },
     {
         "nome": "Beyblade",
-        "rom": "roms/beyblade_pt_br_ps1.bin",
+        "rom": "roms/beyblade_pt_br_ps1.chd",
         "capa": "beyblade-pt-br-ps1.jpg",
         "preview": "beyblade-pt-br-ps1.gif",
         "nota": "6.0",
@@ -129,7 +129,7 @@
     },
     {
         "nome": "Bomberman Fantasy Race",
-        "rom": "roms/bomberman_fantasy_race_em_portugu_s_playstation_1.bin",
+        "rom": "roms/bomberman_fantasy_race_em_portugu_s_playstation_1.chd",
         "capa": "bomberman-fantasy-race-em-portugu-s-playstation-1.jpg",
         "preview": "bomberman-fantasy-race-em-portugu-s-playstation-1.gif",
         "nota": "6.0",
@@ -137,7 +137,7 @@
     },
     {
         "nome": "Breath Of Fire Iii",
-        "rom": "roms/breath_of_fire_iii_pt_br_ps1.bin",
+        "rom": "roms/breath_of_fire_iii_pt_br_ps1.chd",
         "capa": "breath-of-fire-iii-pt-br-ps1.jpg",
         "preview": "breath-of-fire-iii-pt-br-ps1.gif",
         "nota": "8.0",
@@ -145,7 +145,7 @@
     },
     {
         "nome": "Breath Of Fire Iv",
-        "rom": "roms/breath_of_fire_iv_pt_br_ps1.bin",
+        "rom": "roms/breath_of_fire_iv_pt_br_ps1.chd",
         "capa": "breath-of-fire-iv-pt-br-ps1.jpg",
         "preview": "breath-of-fire-iv-pt-br-ps1.gif",
         "nota": "7.5",
@@ -153,7 +153,7 @@
     },
     {
         "nome": "Castlevania: Symphony Of The Night",
-        "rom": "roms/castlevania_symphony_of_the_night.bin",
+        "rom": "roms/castlevania_symphony_of_the_night.chd",
         "capa": "castlevania-symphony-of-the-night.jpg",
         "preview": "castlevania-symphony-of-the-night.gif",
         "nota": "9.4",
@@ -161,7 +161,7 @@
     },
     {
         "nome": "Chrono Cross Pt Br Ps1.M3U",
-        "rom": "roms/chrono_cross_pt_br_ps1.m3u",
+        "rom": "roms/chrono_cross_pt_br_ps1.chd",
         "capa": "chrono-cross-pt-br-ps1.jpg",
         "preview": "chrono-cross-pt-br-ps1.gif",
         "nota": "8.8",
@@ -169,7 +169,7 @@
     },
     {
         "nome": "Chrono Cross",
-        "rom": "roms/chrono_cross_pt_br_ps1_cd1.bin",
+        "rom": "roms/chrono_cross_pt_br_ps1_cd1.chd",
         "capa": "chrono-cross-pt-br-ps1.jpg",
         "preview": "chrono-cross-pt-br-ps1.gif",
         "nota": "8.5",
@@ -177,7 +177,7 @@
     },
     {
         "nome": "Chrono Cross Pt Br Ps1 Cd2",
-        "rom": "roms/chrono_cross_pt_br_ps1_cd2.bin",
+        "rom": "roms/chrono_cross_pt_br_ps1_cd2.chd",
         "capa": "chrono-cross-pt-br-ps1.jpg",
         "preview": "chrono-cross-pt-br-ps1.gif",
         "nota": "8.8",
@@ -185,7 +185,7 @@
     },
     {
         "nome": "Contra: Legacy Of War",
-        "rom": "roms/contra_legacy_of_war.bin",
+        "rom": "roms/contra_legacy_of_war.chd",
         "capa": "contra-legacy-of-war.jpg",
         "preview": "contra-legacy-of-war.gif",
         "nota": "8.5",
@@ -193,7 +193,7 @@
     },
     {
         "nome": "Crash Bandicoot 2: Cortex Strikes Back",
-        "rom": "roms/crash_bandicoot_2_cortex_strikes_back.bin",
+        "rom": "roms/crash_bandicoot_2_cortex_strikes_back.chd",
         "capa": "crash-bandicoot-2-cortex-strikes-back.jpg",
         "preview": "crash-bandicoot-2-cortex-strikes-back.gif",
         "nota": "8.5",
@@ -201,7 +201,7 @@
     },
     {
         "nome": "Crash Bandicoot 3: Warped",
-        "rom": "roms/crash_bandicoot_3_warped.bin",
+        "rom": "roms/crash_bandicoot_3_warped.chd",
         "capa": "crash-bandicoot-3-warped.jpg",
         "preview": "crash-bandicoot-3-warped.gif",
         "nota": "8.5",
@@ -209,7 +209,7 @@
     },
     {
         "nome": "Crash Bandicoot: Crash Bash",
-        "rom": "roms/crash_bash_pt_br.bin",
+        "rom": "roms/crash_bash_pt_br.chd",
         "capa": "crash-bash-pt-br.jpg",
         "preview": "crash-bash-pt-br.gif",
         "nota": "7.5",
@@ -217,7 +217,7 @@
     },
     {
         "nome": "Crash Team Racing",
-        "rom": "roms/crash_team_racing.bin",
+        "rom": "roms/crash_team_racing.chd",
         "capa": "crash-team-racing.jpg",
         "preview": "crash-team-racing.gif",
         "nota": "8.5",
@@ -225,7 +225,7 @@
     },
     {
         "nome": "Diablo",
-        "rom": "roms/diablo.bin",
+        "rom": "roms/diablo.chd",
         "capa": "diablo.jpg",
         "preview": "diablo.gif",
         "nota": "9.4",
@@ -233,7 +233,7 @@
     },
     {
         "nome": "Digimon World",
-        "rom": "roms/digimon_world.bin",
+        "rom": "roms/digimon_world.chd",
         "capa": "digimon-world.jpg",
         "preview": "digimon-world.gif",
         "nota": "7.5",
@@ -241,7 +241,7 @@
     },
     {
         "nome": "Dino Crisis 2",
-        "rom": "roms/dino_crisis_2_dublado.bin",
+        "rom": "roms/dino_crisis_2_dublado.chd",
         "capa": "dino-crisis-2-dublado.jpg",
         "preview": "dino-crisis-2-dublado.gif",
         "nota": "7.4",
@@ -249,7 +249,7 @@
     },
     {
         "nome": "Dino Crisis",
-        "rom": "roms/dino_crisis_dublado_e_legendado.bin",
+        "rom": "roms/dino_crisis_dublado_e_legendado.chd",
         "capa": "dino-crisis-dublado-e-legendado.jpg",
         "preview": "dino-crisis-dublado-e-legendado.gif",
         "nota": "8.0",
@@ -257,7 +257,7 @@
     },
     {
         "nome": "Disney'S Atlantis: The Lost Empire",
-        "rom": "roms/disneys_atlantis_the_lost_empire.bin",
+        "rom": "roms/disneys_atlantis_the_lost_empire.chd",
         "capa": "disneys-atlantis-the-lost-empire.jpg",
         "preview": "disneys-atlantis-the-lost-empire.gif",
         "nota": "7.0",
@@ -265,7 +265,7 @@
     },
     {
         "nome": "Dracula A Ressurreicao.M3U",
-        "rom": "roms/dracula_a_ressurreicao.m3u",
+        "rom": "roms/dracula_a_ressurreicao.chd",
         "capa": "dracula-a-ressurreicao.png",
         "preview": "dracula-a-ressurreicao.gif",
         "nota": "5.3",
@@ -273,7 +273,7 @@
     },
     {
         "nome": "Dracula: A Ressurreição",
-        "rom": "roms/dracula_a_ressurreicao_cd1.bin",
+        "rom": "roms/dracula_a_ressurreicao_cd1.chd",
         "capa": "dracula-a-ressurreicao.png",
         "preview": "dracula-a-ressurreicao.gif",
         "nota": "7.5",
@@ -281,7 +281,7 @@
     },
     {
         "nome": "Dracula A Ressurreicao Cd2",
-        "rom": "roms/dracula_a_ressurreicao_cd2.bin",
+        "rom": "roms/dracula_a_ressurreicao_cd2.chd",
         "capa": "dracula-a-ressurreicao.png",
         "preview": "dracula-a-ressurreicao.gif",
         "nota": "5.3",
@@ -289,7 +289,7 @@
     },
     {
         "nome": "Driver",
-        "rom": "roms/driver.bin",
+        "rom": "roms/driver.chd",
         "capa": "driver.jpg",
         "preview": "driver.gif",
         "nota": "7.5",
@@ -297,7 +297,7 @@
     },
     {
         "nome": "Driver 2",
-        "rom": "roms/driver_2_pt.bin",
+        "rom": "roms/driver_2_pt.chd",
         "capa": "driver-2-pt.jpg",
         "preview": "driver-2-pt.gif",
         "nota": "7.5",
@@ -305,7 +305,7 @@
     },
     {
         "nome": "Driver 2 Pt.M3U",
-        "rom": "roms/driver_2_pt.m3u",
+        "rom": "roms/driver_2_pt.chd",
         "capa": "driver-2-pt.jpg",
         "preview": "driver-2-pt.gif",
         "nota": "8.1",
@@ -313,7 +313,7 @@
     },
     {
         "nome": "Echo Night",
-        "rom": "roms/echo_night_pt_br.bin",
+        "rom": "roms/echo_night_pt_br.chd",
         "capa": "echo-night-pt-br.png",
         "preview": "echo-night-pt-br.gif",
         "nota": "7.5",
@@ -321,7 +321,7 @@
     },
     {
         "nome": "Final Fantasy Ix Em Portugu S Pt Br.M3U",
-        "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br.m3u",
+        "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br.chd",
         "capa": "final-fantasy-ix-em-portugu-s-pt-br.jpg",
         "preview": "final-fantasy-ix-em-portugu-s-pt-br.gif",
         "nota": "8.7",
@@ -329,7 +329,7 @@
     },
     {
         "nome": "Final Fantasy Ix",
-        "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br_cd1.bin",
+        "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br_cd1.chd",
         "capa": "final-fantasy-ix-em-portugu-s-pt-br.jpg",
         "preview": "final-fantasy-ix-em-portugu-s-pt-br.gif",
         "nota": "8.5",
@@ -337,7 +337,7 @@
     },
     {
         "nome": "Final Fantasy Ix Em Portugu S Pt Br Cd2",
-        "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br_cd2.bin",
+        "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br_cd2.chd",
         "capa": "final-fantasy-ix-em-portugu-s-pt-br.jpg",
         "preview": "final-fantasy-ix-em-portugu-s-pt-br.gif",
         "nota": "8.7",
@@ -345,7 +345,7 @@
     },
     {
         "nome": "Final Fantasy Ix Em Portugu S Pt Br Cd3",
-        "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br_cd3.bin",
+        "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br_cd3.chd",
         "capa": "final-fantasy-ix-em-portugu-s-pt-br.jpg",
         "preview": "final-fantasy-ix-em-portugu-s-pt-br.gif",
         "nota": "8.7",
@@ -353,7 +353,7 @@
     },
     {
         "nome": "Final Fantasy Ix Em Portugu S Pt Br Cd4",
-        "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br_cd4.bin",
+        "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br_cd4.chd",
         "capa": "final-fantasy-ix-em-portugu-s-pt-br.jpg",
         "preview": "final-fantasy-ix-em-portugu-s-pt-br.gif",
         "nota": "8.7",
@@ -361,14 +361,14 @@
     },
     {
         "nome": "Final Fantasy Vii Pt Br.M3U",
-        "rom": "roms/final_fantasy_vii_pt_br.m3u",
+        "rom": "roms/final_fantasy_vii_pt_br.chd",
         "capa": "final-fantasy-vii-pt-br.jpg",
         "preview": "final-fantasy-vii-pt-br.gif",
         "nota": "8.7"
     },
     {
         "nome": "Final Fantasy Vii",
-        "rom": "roms/final_fantasy_vii_pt_br_cd1.bin",
+        "rom": "roms/final_fantasy_vii_pt_br_cd1.chd",
         "capa": "final-fantasy-vii-pt-br.jpg",
         "preview": "final-fantasy-vii-pt-br.gif",
         "nota": "9.5",
@@ -376,7 +376,7 @@
     },
     {
         "nome": "Final Fantasy Vii Pt Br Cd2",
-        "rom": "roms/final_fantasy_vii_pt_br_cd2.bin",
+        "rom": "roms/final_fantasy_vii_pt_br_cd2.chd",
         "capa": "final-fantasy-vii-pt-br.jpg",
         "preview": "final-fantasy-vii-pt-br.gif",
         "nota": "8.7",
@@ -384,21 +384,21 @@
     },
     {
         "nome": "Final Fantasy Vii Pt Br Cd3",
-        "rom": "roms/final_fantasy_vii_pt_br_cd3.bin",
+        "rom": "roms/final_fantasy_vii_pt_br_cd3.chd",
         "capa": "final-fantasy-vii-pt-br.jpg",
         "preview": "final-fantasy-vii-pt-br.gif",
         "nota": "8.7"
     },
     {
         "nome": "Final Fantasy Viii.M3U",
-        "rom": "roms/final_fantasy_viii.m3u",
+        "rom": "roms/final_fantasy_viii.chd",
         "capa": "final-fantasy-viii.png",
         "preview": "final-fantasy-viii.gif",
         "nota": "8.7"
     },
     {
         "nome": "Final Fantasy Viii",
-        "rom": "roms/final_fantasy_viii_cd1.bin",
+        "rom": "roms/final_fantasy_viii_cd1.chd",
         "capa": "final-fantasy-viii.png",
         "preview": "final-fantasy-viii.gif",
         "nota": "8.5",
@@ -406,7 +406,7 @@
     },
     {
         "nome": "Final Fantasy Viii Cd2",
-        "rom": "roms/final_fantasy_viii_cd2.bin",
+        "rom": "roms/final_fantasy_viii_cd2.chd",
         "capa": "final-fantasy-viii.png",
         "preview": "final-fantasy-viii.gif",
         "nota": "8.6",
@@ -414,21 +414,21 @@
     },
     {
         "nome": "Final Fantasy Viii Cd3",
-        "rom": "roms/final_fantasy_viii_cd3.bin",
+        "rom": "roms/final_fantasy_viii_cd3.chd",
         "capa": "final-fantasy-viii.png",
         "preview": "final-fantasy-viii.gif",
         "nota": "8.6"
     },
     {
         "nome": "Final Fantasy Viii Cd4",
-        "rom": "roms/final_fantasy_viii_cd4.bin",
+        "rom": "roms/final_fantasy_viii_cd4.chd",
         "capa": "final-fantasy-viii.png",
         "preview": "final-fantasy-viii.gif",
         "nota": "8.6"
     },
     {
         "nome": "Gold And Glory: The Road To El Dorado",
-        "rom": "roms/gold_and_glory_the_road_to_el_dorado_pt_br.bin",
+        "rom": "roms/gold_and_glory_the_road_to_el_dorado_pt_br.chd",
         "capa": "gold-and-glory-the-road-to-el-dorado-pt-br.jpg",
         "preview": "gold-and-glory-the-road-to-el-dorado-pt-br.gif",
         "nota": "7.0",
@@ -436,7 +436,7 @@
     },
     {
         "nome": "Gran Turismo",
-        "rom": "roms/gran_turismo_pt.bin",
+        "rom": "roms/gran_turismo_pt.chd",
         "capa": "gran-turismo-pt.jpg",
         "preview": "gran-turismo-pt.gif",
         "nota": "9.5",
@@ -444,14 +444,14 @@
     },
     {
         "nome": "Grandia Pt Br.M3U",
-        "rom": "roms/grandia_pt_br.m3u",
+        "rom": "roms/grandia_pt_br.chd",
         "capa": "grandia-pt-br.jpg",
         "preview": "grandia-pt-br.gif",
         "nota": "8.4"
     },
     {
         "nome": "Grandia",
-        "rom": "roms/grandia_pt_br_cd01.bin",
+        "rom": "roms/grandia_pt_br_cd01.chd",
         "capa": "grandia-pt-br.jpg",
         "preview": "grandia-pt-br.gif",
         "nota": "8.5",
@@ -459,14 +459,14 @@
     },
     {
         "nome": "Grandia Pt Br Cd2",
-        "rom": "roms/grandia_pt_br_cd2.bin",
+        "rom": "roms/grandia_pt_br_cd2.chd",
         "capa": "grandia-pt-br.jpg",
         "preview": "grandia-pt-br.gif",
         "nota": "S/N"
     },
     {
         "nome": "Gunfighter: The Legend Of Jesse James",
-        "rom": "roms/gunfighter_the_legend_of_jesse_james_pt.bin",
+        "rom": "roms/gunfighter_the_legend_of_jesse_james_pt.chd",
         "capa": "gunfighter-the-legend-of-jesse-james-pt.jpg",
         "preview": "gunfighter-the-legend-of-jesse-james-pt.gif",
         "nota": "6.5",
@@ -474,7 +474,7 @@
     },
     {
         "nome": "Harry Potter And The Chamber Of Secrets",
-        "rom": "roms/harry_potter_and_the_chamber_of_secrets_pt_br.bin",
+        "rom": "roms/harry_potter_and_the_chamber_of_secrets_pt_br.chd",
         "capa": "harry-potter-and-the-chamber-of-secrets-pt-br.jpg",
         "preview": "harry-potter-and-the-chamber-of-secrets-pt-br.gif",
         "nota": "8.0",
@@ -482,7 +482,7 @@
     },
     {
         "nome": "Harry Potter And The Philosopher'S Stone",
-        "rom": "roms/harry_potter_and_the_philosopher_s_stone_pt.bin",
+        "rom": "roms/harry_potter_and_the_philosopher_s_stone_pt.chd",
         "capa": "harry-potter-and-the-philosopher-s-stone-pt.jpg",
         "preview": "harry-potter-and-the-philosopher-s-stone-pt.gif",
         "nota": "8.0",
@@ -490,7 +490,7 @@
     },
     {
         "nome": "Harvest Moon: Back To Nature",
-        "rom": "roms/harvest_moon_back_to_nature_em_portugu_s_pt.bin",
+        "rom": "roms/harvest_moon_back_to_nature_em_portugu_s_pt.chd",
         "capa": "harvest-moon-back-to-nature-em-portugu-s-pt.jpg",
         "preview": "harvest-moon-back-to-nature-em-portugu-s-pt.gif",
         "nota": "8.5",
@@ -498,7 +498,7 @@
     },
     {
         "nome": "Hercules: The Legendary Journeys",
-        "rom": "roms/hercules_playstation_1.bin",
+        "rom": "roms/hercules_playstation_1.chd",
         "capa": "hercules-playstation-1.jpg",
         "preview": "hercules-playstation-1.gif",
         "nota": "7.0",
@@ -506,7 +506,7 @@
     },
     {
         "nome": "Hoshigami: Ruining Blue Earth",
-        "rom": "roms/hoshigami_ruining_blue_earth.bin",
+        "rom": "roms/hoshigami_ruining_blue_earth.chd",
         "capa": "hoshigami-ruining-blue-earth.png",
         "preview": "hoshigami-ruining-blue-earth.gif",
         "nota": "7.5",
@@ -514,7 +514,7 @@
     },
     {
         "nome": "Hugo",
-        "rom": "roms/hugo.bin",
+        "rom": "roms/hugo.chd",
         "capa": "hugo.jpg",
         "preview": "hugo.gif",
         "nota": "6.5",
@@ -522,7 +522,7 @@
     },
     {
         "nome": "Hugo 3 The Quest Of The Sunstones",
-        "rom": "roms/hugo_3_the_quest_of_the_sunstones.bin",
+        "rom": "roms/hugo_3_the_quest_of_the_sunstones.chd",
         "capa": "hugo-3-the-quest-of-the-sunstones.jpg",
         "preview": "hugo-3-the-quest-of-the-sunstones.gif",
         "nota": "6.5",
@@ -530,7 +530,7 @@
     },
     {
         "nome": "Hugo: Black Diamond Fever",
-        "rom": "roms/hugo_black_diamond_fever.bin",
+        "rom": "roms/hugo_black_diamond_fever.chd",
         "capa": "hugo-black-diamond-fever.jpg",
         "preview": "hugo-black-diamond-fever.gif",
         "nota": "7.0",
@@ -538,7 +538,7 @@
     },
     {
         "nome": "Hugo: O Espelho Maldito",
-        "rom": "roms/hugo_the_evil_mirror_pt.bin",
+        "rom": "roms/hugo_the_evil_mirror_pt.chd",
         "capa": "hugo-the-evil-mirror-pt.jpg",
         "preview": "hugo-the-evil-mirror-pt.gif",
         "nota": "7.0",
@@ -546,7 +546,7 @@
     },
     {
         "nome": "Jackie Chan Stuntmaster",
-        "rom": "roms/jackie_chan_stuntmaster_pt.bin",
+        "rom": "roms/jackie_chan_stuntmaster_pt.chd",
         "capa": "jackie-chan-stuntmaster-pt.jpg",
         "preview": "jackie-chan-stuntmaster-pt.gif",
         "nota": "6.5",
@@ -554,7 +554,7 @@
     },
     {
         "nome": "Jersey Devil",
-        "rom": "roms/jersey_devil_pt_br.bin",
+        "rom": "roms/jersey_devil_pt_br.chd",
         "capa": "jersey-devil-pt-br.jpg",
         "preview": "jersey-devil-pt-br.gif",
         "nota": "6.0",
@@ -562,7 +562,7 @@
     },
     {
         "nome": "Legacy Of Kain: Soul Reaver",
-        "rom": "roms/legacy_of_kain_soul_reaver_v2_0_ch1n.bin",
+        "rom": "roms/legacy_of_kain_soul_reaver_v2_0_ch1n.chd",
         "capa": "legacy-of-kain-soul-reaver-v2-0-ch1n.jpg",
         "preview": "legacy-of-kain-soul-reaver-v2-0-ch1n.gif",
         "nota": "8.5",
@@ -570,7 +570,7 @@
     },
     {
         "nome": "Lilo & Stitch",
-        "rom": "roms/lilo_stitch.bin",
+        "rom": "roms/lilo_stitch.chd",
         "capa": "lilo-stitch.jpg",
         "preview": "lilo-stitch.gif",
         "nota": "7.5",
@@ -578,7 +578,7 @@
     },
     {
         "nome": "Looney Tunes Racing",
-        "rom": "roms/looney_tunes_racing.bin",
+        "rom": "roms/looney_tunes_racing.chd",
         "capa": "looney-tunes-racing.jpg",
         "preview": "looney-tunes-racing.gif",
         "nota": "6.0",
@@ -586,7 +586,7 @@
     },
     {
         "nome": "Medal Of Honor",
-        "rom": "roms/medal_of_honor.bin",
+        "rom": "roms/medal_of_honor.chd",
         "capa": "medal-of-honor.jpg",
         "preview": "medal-of-honor.gif",
         "nota": "8.5",
@@ -594,7 +594,7 @@
     },
     {
         "nome": "Medievil 2",
-        "rom": "roms/medievil_2.bin",
+        "rom": "roms/medievil_2.chd",
         "capa": "medievil-2.jpg",
         "preview": "medievil-2.gif",
         "nota": "6.5",
@@ -602,7 +602,7 @@
     },
     {
         "nome": "Medievil",
-        "rom": "roms/medievil_dublado.bin",
+        "rom": "roms/medievil_dublado.chd",
         "capa": "medievil-dublado.jpg",
         "preview": "medievil-dublado.gif",
         "nota": "8.5",
@@ -610,7 +610,7 @@
     },
     {
         "nome": "Mega Man 8",
-        "rom": "roms/mega_man_8_dublado.bin",
+        "rom": "roms/mega_man_8_dublado.chd",
         "capa": "mega-man-8-dublado.jpg",
         "preview": "mega-man-8-dublado.gif",
         "nota": "8.5",
@@ -618,7 +618,7 @@
     },
     {
         "nome": "Mega Man X3",
-        "rom": "roms/mega_man_x3.bin",
+        "rom": "roms/mega_man_x3.chd",
         "capa": "mega-man-x3.jpg",
         "preview": "mega-man-x3.gif",
         "nota": "8.5",
@@ -626,7 +626,7 @@
     },
     {
         "nome": "Mega Man X4",
-        "rom": "roms/mega_man_x4.bin",
+        "rom": "roms/mega_man_x4.chd",
         "capa": "mega-man-x4.jpg",
         "preview": "mega-man-x4.gif",
         "nota": "8.0",
@@ -634,7 +634,7 @@
     },
     {
         "nome": "Mega Man X5",
-        "rom": "roms/mega_man_x5.bin",
+        "rom": "roms/mega_man_x5.chd",
         "capa": "mega-man-x5.jpg",
         "preview": "mega-man-x5.gif",
         "nota": "7.8",
@@ -642,14 +642,14 @@
     },
     {
         "nome": "Metal Gear Solid Em Portugu S Pt Br.M3U",
-        "rom": "roms/metal_gear_solid_em_portugu_s_pt_br.m3u",
+        "rom": "roms/metal_gear_solid_em_portugu_s_pt_br.chd",
         "capa": "metal-gear-solid-em-portugu-s-pt-br.jpg",
         "preview": "metal-gear-solid-em-portugu-s-pt-br.gif",
         "nota": "8.8"
     },
     {
         "nome": "Metal Gear Solid",
-        "rom": "roms/metal_gear_solid_em_portugu_s_pt_br_cd1.bin",
+        "rom": "roms/metal_gear_solid_em_portugu_s_pt_br_cd1.chd",
         "capa": "metal-gear-solid-em-portugu-s-pt-br.jpg",
         "preview": "metal-gear-solid-em-portugu-s-pt-br.gif",
         "nota": "9.5",
@@ -657,14 +657,14 @@
     },
     {
         "nome": "Metal Gear Solid Em Portugu S Pt Br Cd2",
-        "rom": "roms/metal_gear_solid_em_portugu_s_pt_br_cd2.bin",
+        "rom": "roms/metal_gear_solid_em_portugu_s_pt_br_cd2.chd",
         "capa": "metal-gear-solid-em-portugu-s-pt-br.jpg",
         "preview": "metal-gear-solid-em-portugu-s-pt-br.gif",
         "nota": "8.8"
     },
     {
         "nome": "Metal Gear Solid: Vr Missions",
-        "rom": "roms/metal_gear_solid_vr_missions_pt_br.bin",
+        "rom": "roms/metal_gear_solid_vr_missions_pt_br.chd",
         "capa": "metal-gear-solid-vr-missions-pt-br.jpg",
         "preview": "metal-gear-solid-vr-missions-pt-br.gif",
         "nota": "8.5",
@@ -672,7 +672,7 @@
     },
     {
         "nome": "Mickey'S Wild Adventure",
-        "rom": "roms/mickey_s_wild_adventure_pt_br.bin",
+        "rom": "roms/mickey_s_wild_adventure_pt_br.chd",
         "capa": "mickey-s-wild-adventure-pt-br.jpg",
         "preview": "mickey-s-wild-adventure-pt-br.gif",
         "nota": "6.0",
@@ -680,7 +680,7 @@
     },
     {
         "nome": "Monsters, Inc. Scream Team",
-        "rom": "roms/monsters_inc_scream_team_pt_br.bin",
+        "rom": "roms/monsters_inc_scream_team_pt_br.chd",
         "capa": "monsters-inc-scream-team-pt-br.jpg",
         "preview": "monsters-inc-scream-team-pt-br.gif",
         "nota": "7.0",
@@ -688,7 +688,7 @@
     },
     {
         "nome": "Mortal Kombat 4",
-        "rom": "roms/mortal_kombat_4_em_portugu_s_pt_br.bin",
+        "rom": "roms/mortal_kombat_4_em_portugu_s_pt_br.chd",
         "capa": "mortal-kombat-4-em-portugu-s-pt-br.jpg",
         "preview": "mortal-kombat-4-em-portugu-s-pt-br.gif",
         "nota": "7.5",
@@ -696,14 +696,14 @@
     },
     {
         "nome": "Necronomicon The Dawning Of Darkness.M3U",
-        "rom": "roms/necronomicon_the_dawning_of_darkness.m3u",
+        "rom": "roms/necronomicon_the_dawning_of_darkness.chd",
         "capa": "necronomicon-the-dawning-of-darkness.jpg",
         "preview": "necronomicon-the-dawning-of-darkness.gif",
         "nota": "7.1"
     },
     {
         "nome": "Necronomicon: The Dawning Of Darkness",
-        "rom": "roms/necronomicon_the_dawning_of_darkness_cd1.bin",
+        "rom": "roms/necronomicon_the_dawning_of_darkness_cd1.chd",
         "capa": "necronomicon-the-dawning-of-darkness.jpg",
         "preview": "necronomicon-the-dawning-of-darkness.gif",
         "nota": "6.0",
@@ -711,14 +711,14 @@
     },
     {
         "nome": "Necronomicon The Dawning Of Darkness Cd2",
-        "rom": "roms/necronomicon_the_dawning_of_darkness_cd2.bin",
+        "rom": "roms/necronomicon_the_dawning_of_darkness_cd2.chd",
         "capa": "necronomicon-the-dawning-of-darkness.jpg",
         "preview": "necronomicon-the-dawning-of-darkness.gif",
         "nota": "7.1"
     },
     {
         "nome": "Nicktoons Racing",
-        "rom": "roms/nicktoons_racing.bin",
+        "rom": "roms/nicktoons_racing.chd",
         "capa": "nicktoons-racing.jpg",
         "preview": "nicktoons-racing.gif",
         "nota": "6.5",
@@ -726,7 +726,7 @@
     },
     {
         "nome": "Nightmare Creatures 2",
-        "rom": "roms/nigthmare_creatures_2_pt.bin",
+        "rom": "roms/nigthmare_creatures_2_pt.chd",
         "capa": "nigthmare-creatures-2-pt.jpg",
         "preview": "nigthmare-creatures-2-pt.gif",
         "nota": "7.0",
@@ -734,14 +734,14 @@
     },
     {
         "nome": "Parasite Eve 2 Pt Br.M3U",
-        "rom": "roms/parasite_eve_2_pt_br.m3u",
+        "rom": "roms/parasite_eve_2_pt_br.chd",
         "capa": "parasite-eve-2-pt-br.jpg",
         "preview": "parasite-eve-2-pt-br.gif",
         "nota": "8.6"
     },
     {
         "nome": "Parasite Eve 2",
-        "rom": "roms/parasite_eve_2_pt_br_cd1.bin",
+        "rom": "roms/parasite_eve_2_pt_br_cd1.chd",
         "capa": "parasite-eve-2-pt-br.jpg",
         "preview": "parasite-eve-2-pt-br.gif",
         "nota": "8.0",
@@ -749,14 +749,14 @@
     },
     {
         "nome": "Parasite Eve 2 Pt Br Cd2",
-        "rom": "roms/parasite_eve_2_pt_br_cd2.bin",
+        "rom": "roms/parasite_eve_2_pt_br_cd2.chd",
         "capa": "parasite-eve-2-pt-br.jpg",
         "preview": "parasite-eve-2-pt-br.gif",
         "nota": "8.6"
     },
     {
         "nome": "Parasite Eve",
-        "rom": "roms/parasite_eve_pt_br.bin",
+        "rom": "roms/parasite_eve_pt_br.chd",
         "capa": "parasite-eve-pt-br.jpg",
         "preview": "parasite-eve-pt-br.gif",
         "nota": "8.5",
@@ -764,21 +764,21 @@
     },
     {
         "nome": "Parasite Eve Pt Br.M3U",
-        "rom": "roms/parasite_eve_pt_br.m3u",
+        "rom": "roms/parasite_eve_pt_br.chd",
         "capa": "parasite-eve-pt-br.jpg",
         "preview": "parasite-eve-pt-br.gif",
         "nota": "8.7"
     },
     {
         "nome": "Parasite Eve Pt Br Cd2",
-        "rom": "roms/parasite_eve_pt_br_cd2.bin",
+        "rom": "roms/parasite_eve_pt_br_cd2.chd",
         "capa": "parasite-eve-2-pt-br.jpg",
         "preview": "parasite-eve-2-pt-br.gif",
         "nota": "8.7"
     },
     {
         "nome": "Resident Evil 3",
-        "rom": "roms/re3.bin",
+        "rom": "roms/re3.chd",
         "capa": "re3-dub-br.jpg",
         "preview": "re3-dub-br.gif",
         "nota": "8.5",
@@ -786,14 +786,14 @@
     },
     {
         "nome": "Resident Evil 2.M3U",
-        "rom": "roms/resident_evil_2.m3u",
+        "rom": "roms/resident_evil_2.chd",
         "capa": "resident-evil-2.jpg",
         "preview": "resident-evil-2.gif",
         "nota": "9.0"
     },
     {
         "nome": "Resident Evil 2",
-        "rom": "roms/resident_evil_2_cd1.bin",
+        "rom": "roms/resident_evil_2_cd1.chd",
         "capa": "resident-evil-2.jpg",
         "preview": "resident-evil-2.gif",
         "nota": "9.5",
@@ -801,14 +801,14 @@
     },
     {
         "nome": "Resident Evil 2 Cd2",
-        "rom": "roms/resident_evil_2_cd2.bin",
+        "rom": "roms/resident_evil_2_cd2.chd",
         "capa": "resident-evil-2.jpg",
         "preview": "resident-evil-2.gif",
         "nota": "9.0"
     },
     {
         "nome": "Resident Evil",
-        "rom": "roms/resident_evil_director_s_cut.bin",
+        "rom": "roms/resident_evil_director_s_cut.chd",
         "capa": "resident-evil-director-s-cut.jpg",
         "preview": "resident-evil-director-s-cut.gif",
         "nota": "8.5",
@@ -816,7 +816,7 @@
     },
     {
         "nome": "Shadow Man",
-        "rom": "roms/shadow_man_em_portugu_s_pt_br.bin",
+        "rom": "roms/shadow_man_em_portugu_s_pt_br.chd",
         "capa": "shadow-man-em-portugu-s-pt-br.jpg",
         "preview": "shadow-man-em-portugu-s-pt-br.gif",
         "nota": "8.0",
@@ -824,7 +824,7 @@
     },
     {
         "nome": "Sheep In Space",
-        "rom": "roms/sheep_raider.bin",
+        "rom": "roms/sheep_raider.chd",
         "capa": "sheep-raider.jpg",
         "preview": "sheep-raider.gif",
         "nota": "8.0",
@@ -832,7 +832,7 @@
     },
     {
         "nome": "Silent Hill",
-        "rom": "roms/silent_hill_1_nova_dublagem.bin",
+        "rom": "roms/silent_hill_1_nova_dublagem.chd",
         "capa": "silent-hill-1-nova-dublagem.png",
         "preview": "silent-hill-1-nova-dublagem.gif",
         "nota": "8.5",
@@ -840,7 +840,7 @@
     },
     {
         "nome": "Sol Divide",
-        "rom": "roms/sol_divide_pt_br_playstation_1.bin",
+        "rom": "roms/sol_divide_pt_br_playstation_1.chd",
         "capa": "sol-divide-pt-br-playstation-1.jpg",
         "preview": "sol-divide-pt-br-playstation-1.gif",
         "nota": "6.5",
@@ -848,7 +848,7 @@
     },
     {
         "nome": "South Park Rally",
-        "rom": "roms/south_park_rally_pt_br_playstation_1.bin",
+        "rom": "roms/south_park_rally_pt_br_playstation_1.chd",
         "capa": "south-park-rally-pt-br-playstation-1.jpg",
         "preview": "south-park-rally-pt-br-playstation-1.gif",
         "nota": "5.0",
@@ -856,7 +856,7 @@
     },
     {
         "nome": "Spider Man",
-        "rom": "roms/spider_man_1.bin",
+        "rom": "roms/spider_man_1.chd",
         "capa": "spider-man-1.jpg",
         "preview": "spider-man-1.gif",
         "nota": "8.5",
@@ -864,7 +864,7 @@
     },
     {
         "nome": "Spider Man 2",
-        "rom": "roms/spider_man_2_enter_electro_pt.bin",
+        "rom": "roms/spider_man_2_enter_electro_pt.chd",
         "capa": "spider-man-2-enter-electro-pt.jpg",
         "preview": "spider-man-2-enter-electro-pt.gif",
         "nota": "6.0",
@@ -872,7 +872,7 @@
     },
     {
         "nome": "Spongebob Squarepants: Supersponge",
-        "rom": "roms/spongebob_squarepants_supersponge_pt.bin",
+        "rom": "roms/spongebob_squarepants_supersponge_pt.chd",
         "capa": "spongebob-squarepants-supersponge-pt.jpg",
         "preview": "spongebob-squarepants-supersponge-pt.gif",
         "nota": "7.0",
@@ -880,7 +880,7 @@
     },
     {
         "nome": "Street Fighter Ii: The World Warrior",
-        "rom": "roms/street_fighter_ex2_plus_pt.bin",
+        "rom": "roms/street_fighter_ex2_plus_pt.chd",
         "capa": "street-fighter-ex2-plus-pt.jpg",
         "preview": "street-fighter-ex2-plus-pt.gif",
         "nota": "9.5",
@@ -888,7 +888,7 @@
     },
     {
         "nome": "Tarzan",
-        "rom": "roms/tarzan.bin",
+        "rom": "roms/tarzan.chd",
         "capa": "tarzan.jpg",
         "preview": "tarzan.gif",
         "nota": "7.0",
@@ -896,7 +896,7 @@
     },
     {
         "nome": "Tekken 2",
-        "rom": "roms/tekken_2.bin",
+        "rom": "roms/tekken_2.chd",
         "capa": "tekken-2.jpg",
         "preview": "tekken-2.gif",
         "nota": "8.5",
@@ -904,7 +904,7 @@
     },
     {
         "nome": "Tekken 3",
-        "rom": "roms/tekken_3_playstation.bin",
+        "rom": "roms/tekken_3_playstation.chd",
         "capa": "tekken-3-playstation.jpg",
         "preview": "tekken-3-playstation.gif",
         "nota": "9.5",
@@ -912,7 +912,7 @@
     },
     {
         "nome": "Tekken",
-        "rom": "roms/tekken_pt_br_playstation_1.bin",
+        "rom": "roms/tekken_pt_br_playstation_1.chd",
         "capa": "tekken-pt-br-playstation-1.jpg",
         "preview": "tekken-pt-br-playstation-1.gif",
         "nota": "8.5",
@@ -920,7 +920,7 @@
     },
     {
         "nome": "Tomb Raider",
-        "rom": "roms/tomb_raider_pt_br.bin",
+        "rom": "roms/tomb_raider_pt_br.chd",
         "capa": "tomb-raider-pt-br.jpg",
         "preview": "tomb-raider-pt-br.gif",
         "nota": "8.5",
@@ -928,7 +928,7 @@
     },
     {
         "nome": "Toy Story 2",
-        "rom": "roms/toy_story_2.bin",
+        "rom": "roms/toy_story_2.chd",
         "capa": "toy-story-2.jpg",
         "preview": "toy-story-2.gif",
         "nota": "8.5",
@@ -936,7 +936,7 @@
     },
     {
         "nome": "Twisted Metal 2",
-        "rom": "roms/twisted_metal_2_pt_br.bin",
+        "rom": "roms/twisted_metal_2_pt_br.chd",
         "capa": "twisted-metal-2-pt-br.jpg",
         "preview": "twisted-metal-2-pt-br.gif",
         "nota": "8.0",
@@ -944,7 +944,7 @@
     },
     {
         "nome": "Vagrant Story",
-        "rom": "roms/vagrant_story_pt.bin",
+        "rom": "roms/vagrant_story_pt.chd",
         "capa": "vagrant-story-pt.jpg",
         "preview": "vagrant-story-pt.gif",
         "nota": "8.5",
@@ -952,7 +952,7 @@
     },
     {
         "nome": "Valkyrie Profile",
-        "rom": "roms/valkyrie_profile.bin",
+        "rom": "roms/valkyrie_profile.chd",
         "capa": "valkyrie-profile.png",
         "preview": "valkyrie-profile.gif",
         "nota": "8.5",
@@ -960,7 +960,7 @@
     },
     {
         "nome": "Vigilante 8",
-        "rom": "roms/vigilante8.bin",
+        "rom": "roms/vigilante8.chd",
         "capa": "vigilante8.jpg",
         "preview": "vigilante8.gif",
         "nota": "8.0",
@@ -968,7 +968,7 @@
     },
     {
         "nome": "Wacky Races",
-        "rom": "roms/wacky_races.bin",
+        "rom": "roms/wacky_races.chd",
         "capa": "wacky-races.jpg",
         "preview": "wacky-races.gif",
         "nota": "6.0",
@@ -976,7 +976,7 @@
     },
     {
         "nome": "Winning Eleven",
-        "rom": "roms/we2026.bin",
+        "rom": "roms/we2026.chd",
         "capa": "we2026.jpg",
         "preview": "",
         "nota": "8.5",
@@ -984,7 +984,7 @@
     },
     {
         "nome": "Wild Arms",
-        "rom": "roms/wild_arms_pt_br.bin",
+        "rom": "roms/wild_arms_pt_br.chd",
         "capa": "wild-arms-pt-br.jpg",
         "preview": "wild-arms-pt-br.gif",
         "nota": "8.5",
@@ -992,14 +992,14 @@
     },
     {
         "nome": "Xenogears Pt Br Playstation 1.M3U",
-        "rom": "roms/xenogears_pt_br_playstation_1.m3u",
+        "rom": "roms/xenogears_pt_br_playstation_1.chd",
         "capa": "xenogears-pt-br-playstation-1.jpg",
         "preview": "xenogears-pt-br-playstation-1.gif",
         "nota": "S/N"
     },
     {
         "nome": "Xenogears",
-        "rom": "roms/xenogears_pt_br_playstation_1_cd1.bin",
+        "rom": "roms/xenogears_pt_br_playstation_1_cd1.chd",
         "capa": "xenogears-pt-br-playstation-1.jpg",
         "preview": "xenogears-pt-br-playstation-1.gif",
         "nota": "8.5",
@@ -1007,14 +1007,14 @@
     },
     {
         "nome": "Xenogears Pt Br Playstation 1 Cd2",
-        "rom": "roms/xenogears_pt_br_playstation_1_cd2.bin",
+        "rom": "roms/xenogears_pt_br_playstation_1_cd2.chd",
         "capa": "xenogears-pt-br-playstation-1.jpg",
         "preview": "xenogears-pt-br-playstation-1.gif",
         "nota": "S/N"
     },
     {
         "nome": "Yu Gi Oh! Forbidden Memories",
-        "rom": "roms/yu_gi_oh_forbidden_memories.bin",
+        "rom": "roms/yu_gi_oh_forbidden_memories.chd",
         "capa": "yu-gi-oh-forbidden-memories.jpg",
         "preview": "yu-gi-oh-forbidden-memories.gif",
         "nota": "7.0",
