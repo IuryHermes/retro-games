@@ -636,9 +636,12 @@
         let gifNome = gameObj.preview ? gameObj.preview.split('/').pop() : '';
         let capaNome = gameObj.capa ? gameObj.capa.split('/').pop() : '';
 
+        const localCoverPath = capaNome ? `${gameObj.sysPath}capas/${encodeURIComponent(capaNome)}` : 'assets/imagens-videos/logo-discord.gif';
         const mediaPath = gifNome ? `${R2_URL}${gameObj.sysPath}previews/${encodeURIComponent(gifNome)}` : (capaNome ? `${R2_URL}${gameObj.sysPath}capas/${encodeURIComponent(capaNome)}` : 'assets/imagens-videos/logo-discord.gif');
 
-        document.getElementById('modal-game-img').src = mediaPath;
+        const modalImage = document.getElementById('modal-game-img');
+        modalImage.onerror = () => { modalImage.onerror = () => { modalImage.src = 'assets/imagens-videos/logo-discord.gif'; }; modalImage.src = localCoverPath; };
+        modalImage.src = mediaPath;
         document.getElementById('modal-game-title').innerText = gameObj.nome;
         document.getElementById('modal-game-sys').innerText = "SISTEMA: " + gameObj.sysId.toUpperCase();
         let nota = gameObj.nota || 'S/N';
@@ -829,6 +832,7 @@
                 let gifNome = g.preview ? g.preview.split('/').pop() : '';
 
                 const imgPath = capaNome ? `${R2_URL}${sys.path}capas/${encodeURIComponent(capaNome)}` : '';
+                const localCoverPath = capaNome ? `${sys.path}capas/${encodeURIComponent(capaNome)}` : 'assets/imagens-videos/logo-discord.gif';
                 const gifPath = gifNome ? `${R2_URL}${sys.path}previews/${encodeURIComponent(gifNome)}` : '';
 
                 const coreToUse = coreMap[sys.id] || 'snes';
@@ -839,7 +843,7 @@
 
                 card.innerHTML = `
                     <div class="card-media">
-                        <img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';" class="static-thumb" loading="lazy">
+                        <img src="${imgPath}" onerror="this.onerror=function(){this.onerror=null;this.src='assets/imagens-videos/logo-discord.gif';};this.src='${localCoverPath}';" class="static-thumb" loading="lazy">
                         <img src="" data-gif="${gifPath}" class="active-gif">
                     </div>
                     <div class="card-title"><span>${escapeHTML(g.nome)}</span></div>
