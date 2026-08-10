@@ -2,6 +2,9 @@
 
 Branch: `agent/neoterminalroom-hardening`
 
+Commit: `80883b04e249ee2f6169b227c0b24894c42a56ae`  
+Pull Request (rascunho): https://github.com/IuryHermes/retro-games/pull/1
+
 ## Escopo
 
 Esta revisão endurece o hub público, o chat, o fluxo de apoiadores, o carregamento dos catálogos e o script de notas. O PS1 foi deliberadamente preservado: nenhum arquivo em `systems/ps1/` e nenhum `player-ps1.html` foi editado.
