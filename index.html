@@ -475,6 +475,7 @@
 
     const R2_URL = "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/";
     const blockRegex = /\.m3u|([._\-\s](cd|disc|disco)\s*[0-9]+)/i;
+    const escapeHTML = (value) => String(value ?? '').replace(/[&<>\"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]));
 
     const themeToggle = document.getElementById('theme-toggle');
     if (localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-theme'); themeToggle.checked = true; }
@@ -499,13 +500,13 @@
         const hallMarquee = document.getElementById('mobile-marquee-content');
         const containerSidebar = document.getElementById('sidebar-hall-container');
 
-        hallSidebar.innerHTML = '';
+        hallSidebar.replaceChildren();
         let marqueeHTML = '';
         let count = 0;
 
         if (!snapshot.exists()) {
             containerSidebar.classList.remove('ativo');
-            hallMarquee.innerHTML = 'Aguardando heróis da resistência...';
+            hallMarquee.textContent = 'Aguardando heróis da resistência...';
             return;
         }
 
@@ -525,18 +526,17 @@
             if(i < 3) {
                 const item = document.createElement('div');
                 item.className = 'hall-item-sidebar';
-                item.innerHTML = `
-                    <div class="hall-item-header">
-                        <span class="hall-nick">${d.nome}</span>
-                        <span class="hall-valor">${valorFormat}</span>
-                    </div>
-                    <div class="hall-msg">"${d.mensagem}"</div>
-                `;
+                const header = document.createElement('div'); header.className = 'hall-item-header';
+                const nick = document.createElement('span'); nick.className = 'hall-nick'; nick.textContent = String(d.nome || '').slice(0, 40);
+                const amount = document.createElement('span'); amount.className = 'hall-valor'; amount.textContent = valorFormat;
+                header.append(nick, amount);
+                const message = document.createElement('div'); message.className = 'hall-msg'; message.textContent = `"${String(d.mensagem || '').slice(0, 240)}"`;
+                item.append(header, message);
                 hallSidebar.appendChild(item);
             }
 
             // Constrói a linha contínua do Marquee (Mobile) - Texto Puro Verde
-            marqueeHTML += `<div class="marquee-item">⭐ ${d.nome} (${valorFormat}): "${d.mensagem}"</div>`;
+            marqueeHTML += `<div class="marquee-item">⭐ ${escapeHTML(String(d.nome || '').slice(0, 40))} (${valorFormat}): "${escapeHTML(String(d.mensagem || '').slice(0, 240))}"</div>`;
             count++;
         });
 
@@ -545,7 +545,7 @@
             hallMarquee.innerHTML = marqueeHTML;
         } else {
             containerSidebar.classList.remove('ativo');
-            hallMarquee.innerHTML = 'Aguardando heróis da resistência...';
+            hallMarquee.textContent = 'Aguardando heróis da resistência...';
         }
     });
 
@@ -556,6 +556,7 @@
         const valor = parseFloat(valorInput);
 
         if(!nome || !msg) { alert("⚠️ Preencha seu Nick e sua Mensagem!"); return; }
+        if(nome.length > 40 || msg.length > 240) { alert("⚠️ Nick: até 40 caracteres. Mensagem: até 240 caracteres."); return; }
         if (isNaN(valor) || valor < 1) { alert("⚠️ Por favor, insira um valor válido (mínimo R$ 1,00)."); return; }
 
         const btn = document.getElementById('btn-iniciar-apoio');
@@ -640,8 +641,8 @@
         document.getElementById('modal-game-img').src = mediaPath;
         document.getElementById('modal-game-title').innerText = gameObj.nome;
         document.getElementById('modal-game-sys').innerText = "SISTEMA: " + gameObj.sysId.toUpperCase();
-        let nota = gameObj.nota || (Math.random() * (9.5 - 7.5) + 7.5).toFixed(1);
-        document.getElementById('modal-game-rating').innerHTML = `⭐ ${nota} / 10`;
+        let nota = gameObj.nota || 'S/N';
+        document.getElementById('modal-game-rating').textContent = `⭐ ${String(nota).slice(0, 20)} / 10`;
 
         const descContainer = document.getElementById('modal-game-desc');
         const fullText = gameObj.descricao || "ACESSANDO BANCO DE DADOS...\n> Uma aventura épica espera por você.";
@@ -654,7 +655,7 @@
         let i = 0;
         const formatarDestaque = (texto) => {
             const regex = /(🎮 DESTAQUE:.*)/i;
-            return texto.replace(regex, '<br><span class="destaque-text">$1</span>');
+            return escapeHTML(texto).replace(/(🎮 DESTAQUE:.*)/i, '<br><span class="destaque-text">$1</span>');
         };
 
         window.typewriterInterval = setInterval(() => {
@@ -700,10 +701,12 @@
     if(localStorage.getItem("neo_nick")) { nickInput.value = localStorage.getItem("neo_nick"); msgInput.disabled = false; }
     nickInput.oninput = () => { msgInput.disabled = (nickInput.value.trim().length === 0); };
 
-    onChildAdded(chatRef, (snap) => {
+    onChildAdded(query(chatRef, limitToLast(100)), (snap) => {
         const d = snap.val();
-        const timeDisplay = d.time ? `<span class="chat-time">[${d.time}]</span>` : '';
-        out.innerHTML += `<div>${timeDisplay}<strong style="color:var(--text-color)">${d.user}:</strong> ${d.text}</div>`;
+        const row = document.createElement('div');
+        if (d.time) { const time = document.createElement('span'); time.className = 'chat-time'; time.textContent = `[${String(d.time).slice(0, 40)}]`; row.appendChild(time); }
+        const user = document.createElement('strong'); user.style.color = 'var(--text-color)'; user.textContent = `${String(d.user || '').slice(0, 40)}:`;
+        row.append(user, document.createTextNode(` ${String(d.text || '').slice(0, 240)}`)); out.appendChild(row);
 
         // Timeout garante que o navegador rolou para a última mensagem perfeitamente
         setTimeout(() => { out.scrollTop = out.scrollHeight; }, 50);
@@ -712,7 +715,7 @@
     function sendMessage() {
         const user = nickInput.value.trim(); const text = msgInput.value.trim();
         if(!user) { alert("Digite um Nick primeiro!"); return; }
-        if(!text) return;
+        if(!text || user.length > 40 || text.length > 240) return;
         const now = new Date(); const timeStr = now.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: '2-digit' }) + ' ' + now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
         localStorage.setItem("neo_nick", user);
         push(chatRef, {user, text, time: timeStr}); msgInput.value = "";
@@ -810,7 +813,9 @@
         wrapper.innerHTML = `<div class="row-header"><span class="row-title-text">${sys.name}</span><button class="view-all-btn selectable-item" id="btn-${sys.id}" onclick="toggleGrid('${sys.id}')">⊞ VER TODOS</button></div><div class="row-container"><button class="scroll-btn left-btn" onclick="document.getElementById('carousel-${sys.id}').scrollBy(-300,0)">❮</button><div class="game-carousel" id="carousel-${sys.id}"></div><button class="scroll-btn right-btn" onclick="document.getElementById('carousel-${sys.id}').scrollBy(300,0)">❯</button></div>`;
         catalog.appendChild(wrapper);
 
-        let p = fetch(`${sys.path}games.json?v=${new Date().getTime()}`).then(r => r.json()).then(games => {
+        let p = fetch(`${sys.path}games.json?v=${new Date().getTime()}`)
+        .then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); })
+        .then(games => {
             const car = document.getElementById(`carousel-${sys.id}`);
             games.forEach(g => {
 
@@ -837,7 +842,7 @@
                         <img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';" class="static-thumb" loading="lazy">
                         <img src="" data-gif="${gifPath}" class="active-gif">
                     </div>
-                    <div class="card-title"><span>${g.nome}</span></div>
+                    <div class="card-title"><span>${escapeHTML(g.nome)}</span></div>
                 `;
 
                 let hoverTimeout;
@@ -865,6 +870,10 @@
                 }
                 car.appendChild(card);
             });
+        }).catch(error => {
+            const car = document.getElementById(`carousel-${sys.id}`);
+            if (car) car.innerHTML = `<div class="game-card" style="padding:20px;color:var(--text-muted)">Catálogo indisponível no momento.</div>`;
+            console.error(`Falha ao carregar ${sys.id}:`, error);
         });
         fetchPromises.push(p);
     });
@@ -887,7 +896,7 @@
                 let capaNomeBusca = h.capa ? h.capa.split('/').pop() : '';
                 const imgPath = capaNomeBusca ? `${R2_URL}${h.sysPath}capas/${encodeURIComponent(capaNomeBusca)}` : 'assets/imagens-videos/logo-discord.gif';
 
-                div.innerHTML = `<img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';"><span style="font-size:10px; font-weight:bold; margin-left:10px;">${h.nome} <span style="color:var(--accent-color); font-size:8px;">[${h.sysName}]</span></span>`;
+                div.innerHTML = `<img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';"><span style="font-size:10px; font-weight:bold; margin-left:10px;">${escapeHTML(h.nome)} <span style="color:var(--accent-color); font-size:8px;">[${escapeHTML(h.sysName)}]</span></span>`;
 
                 const coreToUse = coreMap[h.sysId] || 'snes';
                 const playerFile = h.sysId === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
@@ -921,7 +930,7 @@
             const confirmBtn = gp.buttons[0]?.pressed;
             if(!axisCooldown) {
                 let moved = false;
-                if (dpadLeft) { focusItem(Math.max(0, currentFocusIndex - 1)); moved = true; } else if (dpadRight) { focusItem(Math.min(selectableItems.length - 1, currentFocusIndex + 1)); moved = true; }
+                if (dpadLeft || dpadUp) { focusItem(Math.max(0, currentFocusIndex - 1)); moved = true; } else if (dpadRight || dpadDown) { focusItem(Math.min(selectableItems.length - 1, currentFocusIndex + 1)); moved = true; }
                 if(moved) { axisCooldown = true; setTimeout(() => { axisCooldown = false; }, 200); }
             }
             if (confirmBtn && !window.confirmBtnPressed) { window.confirmBtnPressed = true; if(currentFocusIndex >= 0 && selectableItems[currentFocusIndex]) selectableItems[currentFocusIndex].click(); }

@@ -4,8 +4,9 @@ import time
 import os
 import re
 
-# SUA CHAVE DA API RAWG
-API_KEY = "1e7e5d1463234792821c92d4fc62cb54"
+# Configure localmente: PowerShell `$env:RAWG_API_KEY = "..."`.
+# Nunca coloque a chave em arquivos versionados ou no frontend público.
+API_KEY = os.getenv("RAWG_API_KEY", "").strip()
 
 # AGORA SIM: A LISTA COM TODOS OS SEUS SISTEMAS!
 SISTEMAS = ["nes", "snes", "n64", "gba", "megadrive", "ps1"]
@@ -40,6 +41,8 @@ def buscar_nota_rawg(nome_original):
     return None
 
 def atualizar_todos_os_sistemas():
+    if not API_KEY:
+        raise RuntimeError("RAWG_API_KEY não configurada. Defina a variável de ambiente antes de executar.")
     total_geral_atualizados = 0
     total_geral_falhas = 0
 
