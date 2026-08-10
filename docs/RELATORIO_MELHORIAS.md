@@ -21,7 +21,8 @@ Esta revisão endurece o hub público, o chat, o fluxo de apoiadores, o carregam
 - Dados dinâmicos de nomes e títulos recebem escape antes de entrar em templates HTML.
 - Chave RAWG removida de `atualizar_notas.py`; o script agora exige `RAWG_API_KEY` no ambiente local.
 - Novo validador somente leitura em `tools/validate_catalogs.py`.
-- Verificação das 1.053 URLs públicas de capa: 13 referências GBA quebradas foram cobertas com artes originais versionadas e o frontend ganhou fallback local; uma referência PS1 quebrada foi registrada, mas não alterada por causa do congelamento explícito do PS1.
+- Verificação das 1.053 URLs públicas de capa: 13 referências GBA e uma referência PS1 quebradas foram cobertas com artes originais versionadas e o frontend ganhou fallback local. O player PS1 não foi alterado.
+- A listagem agora remove duplicatas exatas pelo caminho da ROM (preferindo a entrada M3U quando aplicável) e rotula variantes legítimas por região, PT-BR, modificação ou edição, evitando que pareçam o mesmo jogo.
 
 ## Arquitetura observada
 

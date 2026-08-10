@@ -820,11 +820,33 @@
         .then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); })
         .then(games => {
             const car = document.getElementById(`carousel-${sys.id}`);
+            const uniqueByRom = new Map();
             games.forEach(g => {
+                const key = String(g.rom || '').trim().toLowerCase();
+                if (!key) return;
+                const previous = uniqueByRom.get(key);
+                if (!previous || (/m3u/i.test(g.nome || '') && !/m3u/i.test(previous.nome || ''))) uniqueByRom.set(key, g);
+            });
+            const uniqueGames = [...uniqueByRom.values()];
+            const nameCounts = new Map();
+            uniqueGames.forEach(g => { const key = String(g.nome || '').trim().toLowerCase(); nameCounts.set(key, (nameCounts.get(key) || 0) + 1); });
+            const nameSeen = new Map();
+            const variantLabel = (game) => {
+                const rom = String(game.rom || '').toLowerCase();
+                if (/pt[-_ ]?br|br\.gba|traduz|dublad|narra/.test(rom)) return 'PT-BR';
+                if (/hack|runner|dark[-_ ]fire|new[-_ ]hoenn|volcano|my[-_ ]ass|2025|ronaldinho|world[-_ ]cup|futebol|ultimate|guy|mappy[-_ ]land|flickies|tatsujin/.test(rom)) return 'MOD / EDIÇÃO';
+                const region = rom.match(/(usa|europe|japan|world|korea)/);
+                return region ? region[1].toUpperCase() : 'VARIANTE';
+            };
+            uniqueGames.forEach(g => {
 
                 if (sys.id === 'ps1' && blockRegex.test(g.rom)) { return; }
 
-                const gameObjFull = {...g, sysPath: sys.path, sysName: sys.name, sysId: sys.id};
+                const nameKey = String(g.nome || '').trim().toLowerCase();
+                const occurrence = (nameSeen.get(nameKey) || 0) + 1;
+                nameSeen.set(nameKey, occurrence);
+                const displayName = nameCounts.get(nameKey) > 1 ? `${g.nome} · ${variantLabel(g)} ${occurrence}` : g.nome;
+                const gameObjFull = {...g, nomeOriginal: g.nome, nome: displayName, sysPath: sys.path, sysName: sys.name, sysId: sys.id};
                 indexData.push(gameObjFull);
                 const card = document.createElement("div"); card.className = "game-card selectable-item";
 
@@ -846,7 +868,7 @@
                         <img src="${imgPath}" onerror="this.onerror=function(){this.onerror=null;this.src='assets/imagens-videos/logo-discord.gif';};this.src='${localCoverPath}';" class="static-thumb" loading="lazy">
                         <img src="" data-gif="${gifPath}" class="active-gif">
                     </div>
-                    <div class="card-title"><span>${escapeHTML(g.nome)}</span></div>
+                    <div class="card-title"><span>${escapeHTML(displayName)}</span></div>
                 `;
 
                 let hoverTimeout;
