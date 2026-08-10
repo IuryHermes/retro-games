@@ -21,6 +21,7 @@ Esta revisão endurece o hub público, o chat, o fluxo de apoiadores, o carregam
 - Dados dinâmicos de nomes e títulos recebem escape antes de entrar em templates HTML.
 - Chave RAWG removida de `atualizar_notas.py`; o script agora exige `RAWG_API_KEY` no ambiente local.
 - Novo validador somente leitura em `tools/validate_catalogs.py`.
+- Verificação das 1.053 URLs públicas de capa: 13 referências GBA quebradas foram cobertas com artes originais versionadas e o frontend ganhou fallback local; uma referência PS1 quebrada foi registrada, mas não alterada por causa do congelamento explícito do PS1.
 
 ## Arquitetura observada
 
