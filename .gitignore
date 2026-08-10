@@ -7,3 +7,7 @@ systems/*/previews/
 .DS_Store
 .r2_credentials
 r2_credentials
+
+# Artefatos locais de ferramentas Python
+__pycache__/
+*.py[cod]
