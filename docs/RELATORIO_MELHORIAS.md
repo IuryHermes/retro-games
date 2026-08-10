@@ -7,7 +7,7 @@ Pull Request (rascunho): https://github.com/IuryHermes/retro-games/pull/1
 
 ## Escopo
 
-Esta revisão endurece o hub público, o chat, o fluxo de apoiadores, o carregamento dos catálogos e o script de notas. O PS1 foi deliberadamente preservado: nenhum arquivo em `systems/ps1/` e nenhum `player-ps1.html` foi editado.
+Esta revisão endurece o hub público, o chat, o fluxo de apoiadores, o carregamento dos catálogos e o script de notas. O player PS1 e suas ROMs foram preservados; apenas a capa PS1 que estava quebrada foi adicionada após a auditoria completa solicitada.
 
 ## Mudanças realizadas
 
