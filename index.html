@@ -134,7 +134,7 @@
         .nav-item img { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; image-rendering: pixelated; }
         .nav-text { display: none; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 
-        .pix-trigger-pc { display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-muted); background: transparent; border: 1px solid transparent; justify-content: center; flex-shrink: 0; transition: 0.3s; margin-bottom: 15px; }
+        .pix-trigger-pc { display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-muted); background: transparent; border: 1px solid transparent; justify-content: center; flex-shrink: 0; transition: 0.3s; margin-bottom: 15px; text-decoration: none; }
         @media(min-width: 769px) { .pix-trigger-pc { justify-content: flex-start; } }
         .pix-trigger-pc:hover { background: rgba(0, 153, 51, 0.15); color: var(--text-color); border: 1px solid var(--accent-color); }
         .pix-text-pc { display: none; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
@@ -387,10 +387,10 @@
                 <img src="assets/imagens-videos/logo-discord.gif?v=2" onclick="window.scrollTo(0,0);" title="Voltar ao Topo">
             </div>
 
-            <div class="pix-trigger-pc" onclick="openPixModal()" title="Apoiar o Projeto">
+            <a class="pix-trigger-pc" href="apoie.html" title="Clube NeoTerminalRoom">
                 <span style="font-size: 24px; line-height: 1;">☕</span>
                 <span class="pix-text-pc">Apoiar Projeto</span>
-            </div>
+            </a>
 
             <div class="nav-list" id="nav-list"></div>
 
@@ -427,7 +427,7 @@
                 </div>
 
                 <div class="top-bar-controls">
-                    <div class="pix-trigger-mobile" onclick="openPixModal()">
+                    <a class="pix-trigger-mobile" href="apoie.html" title="Clube NeoTerminalRoom">
                         <span style="font-size: 18px; line-height: 1;">☕</span>
                     </div>
                     <div class="chat-trigger-mobile" onclick="openMobileChat()">
@@ -628,6 +628,15 @@
 
     window.openPixModal = () => { document.getElementById('pix-modal').style.display = 'flex'; };
     window.closePixModal = () => { document.getElementById('pix-modal').style.display = 'none'; };
+
+    const apoioValor = new URLSearchParams(window.location.search).get('apoio');
+    if (['5', '12', '25'].includes(apoioValor)) {
+        window.setTimeout(() => {
+            const valor = document.getElementById('valor-doacao');
+            if (valor) valor.value = apoioValor;
+            window.openPixModal();
+        }, 300);
+    }
 
     const shopeeLinks = ["https://s.shopee.com.br/6KzsumXzVK?share_channel_code=1", "https://s.shopee.com.br/W25xuKRTY?share_channel_code=1", "https://s.shopee.com.br/50UVKoE5pk?share_channel_code=1"];
     const mlLinks = ["https://meli.la/1eNR6GB", "https://meli.la/2HD21Wi", "https://meli.la/1GQhiTZ", "https://meli.la/1Ld2GkU"];
@@ -867,7 +876,7 @@
                     <div class="card-media">
                         <img src="${imgPath}" onerror="this.onerror=function(){this.onerror=null;this.src='assets/imagens-videos/logo-discord.gif';};this.src='${localCoverPath}';" class="static-thumb" loading="lazy">
                         <img src="" data-gif="${gifPath}" class="active-gif">
-                    </div>
+                    </a>
                     <div class="card-title"><span>${escapeHTML(displayName)}</span></div>
                 `;
 
