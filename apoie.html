@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Apoie o NeoTerminalRoom e ajude a manter a central brasileira de jogos retrô.">
+  <title>Clube NeoTerminalRoom — Apoie o projeto</title>
+  <style>
+    :root{--bg:#070b0e;--panel:#10181d;--panel2:#14242a;--green:#00cc44;--text:#e8fff0;--muted:#9cb4a4;--gold:#ffd166}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#123222 0,#070b0e 48%);color:var(--text);font:16px/1.6 system-ui,Segoe UI,sans-serif;min-height:100vh}
+    .wrap{width:min(1080px,92%);margin:auto;padding:28px 0 56px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:48px}.brand{color:var(--green);font:700 18px monospace;letter-spacing:2px}.back{color:var(--muted);text-decoration:none}.back:hover{color:var(--green)}
+    h1{font-size:clamp(30px,6vw,58px);line-height:1.05;margin:0 0 16px;max-width:780px}.lead{color:var(--muted);font-size:18px;max-width:720px;margin-bottom:34px}.intro{display:grid;grid-template-columns:1.5fr 1fr;gap:28px;align-items:end;margin-bottom:46px}.note{border:1px solid #265d3a;border-radius:12px;padding:18px;background:#0c1712;color:#c9e9d0}.note strong{color:var(--green)}
+    .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.plan{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid #244536;border-radius:14px;padding:24px;display:flex;flex-direction:column;min-height:350px}.plan.featured{border-color:var(--green);box-shadow:0 0 28px #00cc4420;transform:translateY(-8px)}.plan h2{margin:0;color:var(--green);font-size:22px}.price{font-size:34px;font-weight:800;margin:14px 0;color:#fff}.price small{font-size:14px;color:var(--muted);font-weight:400}.plan ul{padding-left:20px;color:var(--muted);flex:1}.plan li{margin:8px 0}.btn{display:inline-block;text-align:center;text-decoration:none;border:1px solid var(--green);border-radius:8px;padding:11px 14px;color:#031108;background:var(--green);font-weight:800}.btn:hover{filter:brightness(1.15)}.btn.alt{background:transparent;color:var(--green)}
+    .how{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.how article{background:#0c1418;border:1px solid #1d3030;border-radius:12px;padding:18px}.how h3{color:var(--gold);margin-top:0}.privacy{margin-top:32px;color:var(--muted);font-size:14px;border-top:1px solid #1d3030;padding-top:20px}.privacy strong{color:var(--text)}
+    @media(max-width:800px){.intro,.plans,.how{grid-template-columns:1fr}.plan.featured{transform:none}.top{margin-bottom:30px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="top"><div class="brand">NEOTERMINALROOM</div><a class="back" href="index.html">← Voltar ao site</a></nav>
+    <section class="intro">
+      <div><h1>Ajude a manter o arcade ligado.</h1><p class="lead">O Clube NeoTerminalRoom transforma a paixão por jogos retrô em manutenção, conteúdo e melhorias para toda a comunidade.</p></div>
+      <div class="note"><strong>Você escolhe como aparecer.</strong><br>Use um apelido ou marque a contribuição como anônima. Seu nome civil não é publicado no mural.</div>
+    </section>
+    <section aria-labelledby="planos"><h2 id="planos">Escolha seu plano</h2><div class="plans">
+      <article class="plan"><h2>Continue</h2><div class="price">R$ 5 <small>/mês</small></div><ul><li>Nome opcional no mural</li><li>Badge no Discord</li><li>Agradecimento da comunidade</li></ul><a class="btn alt" href="index.html?apoio=5#apoio">Apoiar com R$ 5</a></article>
+      <article class="plan featured"><h2>Cartucho</h2><div class="price">R$ 12 <small>/mês</small></div><ul><li>Todos os benefícios Continue</li><li>Enquetes da comunidade</li><li>Listas e novidades antecipadas</li></ul><a class="btn" href="index.html?apoio=12#apoio">Apoiar com R$ 12</a></article>
+      <article class="plan"><h2>Arcade</h2><div class="price">R$ 25 <small>/mês</small></div><ul><li>Todos os benefícios Cartucho</li><li>Live mensal</li><li>Prioridade em sugestões</li></ul><a class="btn alt" href="index.html?apoio=25#apoio">Apoiar com R$ 25</a></article>
+    </div></section>
+    <section class="how"><article><h3>1. Escolha</h3><p>Selecione um plano e use seu apelido ou “Anônimo” no formulário.</p></article><article><h3>2. Contribua</h3><p>O checkout seguro abre pelo provedor de pagamento configurado pelo projeto.</p></article><article><h3>3. Participe</h3><p>Receba os benefícios da comunidade e ajude a decidir as próximas melhorias.</p></article></section>
+    <p class="privacy"><strong>Privacidade:</strong> o mural mostra apenas o apelido/mensagem escolhidos por você. A plataforma de pagamento pode solicitar dados reais internamente para validar a transação; esses dados não são publicados pelo NeoTerminalRoom.<br><br><strong>Transparência:</strong> os botões desta primeira versão abrem uma contribuição avulsa no valor do plano. A cobrança recorrente será ativada quando o provedor de assinaturas da marca estiver configurado.</p>
+  </main>
+</body>
+</html>
