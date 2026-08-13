@@ -21,12 +21,14 @@
             height: 100dvh; 
             background-color: #000; 
         }
+        #neo-cloud-panel{position:fixed;right:8px;top:8px;z-index:9999999;color:#dfffe8;font:12px monospace}#neo-cloud-toggle,#neo-cloud-menu button{border:1px solid #00cc44;background:#061109;color:#55ff88;padding:8px;cursor:pointer}#neo-cloud-menu{display:none;width:210px;margin-top:5px;padding:8px;border:1px solid #00cc44;background:rgba(0,0,0,.94)}#neo-cloud-panel.open #neo-cloud-menu{display:block}.neo-cloud-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:8px}#neo-cloud-status{padding:5px 0}.neo-cloud-login{display:block;color:#55ff88;margin:7px 0}
     </style>
 </head>
 <body>
 
     <div id="game"></div>
 
+    <script src="cloud-saves.js"></script>
     <script type="text/javascript">
         const params = new URLSearchParams(window.location.search);
         
@@ -52,8 +54,12 @@
         window.EJS_WS = true;             // Força WebAssembly
         window.EJS_mouse = false;         // Desativa mouse para economizar recursos
         window.EJS_multitap = false;      // Desativa multitap para ganhar velocidade
+        window.EJS_startOnLoaded = true;
+        window.NeoCloudSaves.prepare({ game: window.EJS_gameUrl, core: window.EJS_core }).finally(() => {
+            const loaderScript = document.createElement('script');
+            loaderScript.src = 'https://cdn.emulatorjs.org/latest/data/loader.js';
+            document.body.appendChild(loaderScript);
+        });
     </script>
-    
-    <script src="https://cdn.emulatorjs.org/latest/data/loader.js"></script>
 </body>
 </html>
