@@ -369,14 +369,17 @@
             <p style="font-size: 10px; color: var(--text-color); text-align: center; margin-bottom: 15px; line-height: 1.5; font-family: 'Press Start 2P', cursive;">DEIXE SUA MARCA NO HALL</p>
 
             <div style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px;">
+                <select id="sup-plan" class="sup-input" aria-label="Plano de apoio">
+                    <option value="cafe">Café — R$ 5</option>
+                    <option value="cartucho">Cartucho — R$ 12</option>
+                    <option value="arcade">Arcade — R$ 25</option>
+                </select>
+                <label style="font: 11px monospace; color: var(--text-color);"><input type="checkbox" id="sup-anonymous"> Apoiar como anônimo</label>
                 <input type="text" id="sup-name" class="sup-input" placeholder="Seu Nick (Máx 15)" maxlength="15">
                 <textarea id="sup-msg" class="sup-input" placeholder="Sua mensagem (Máx 100 caracteres)..." maxlength="100" rows="3" style="resize: none;"></textarea>
             </div>
 
             <div style="background: var(--input-bg); border: 1px dashed var(--accent-color); padding: 15px; border-radius: 6px; text-align: center; width: 100%; box-sizing: border-box;">
-                <span style="color: var(--accent-color); font-weight: bold; font-family: monospace; font-size: 16px;">R$</span>
-                <input type="number" id="valor-doacao" placeholder="0.00" min="1" step="0.50" style="background: var(--sidebar-bg); border: none; border-bottom: 2px solid var(--accent-color); color: var(--text-color); padding: 10px; width: 120px; font-family: 'Press Start 2P', monospace; font-size: 14px; text-align: center; margin-bottom: 15px; outline: none;">
-
                 <button class="btn-pay" id="btn-iniciar-apoio" onclick="processarApoio()">🟢 CONCORDAR E PAGAR</button>
             </div>
             <p style="font-size: 9px; color: var(--text-muted); text-align: center; margin-top: 15px;">O seu nome vai pro Hall assim que o Pix for aprovado pelo banco!</p>
@@ -553,14 +556,13 @@
     });
 
     window.processarApoio = async () => {
-        const nome = document.getElementById('sup-name').value.trim();
+        const anonimo = document.getElementById('sup-anonymous').checked;
+        const nome = anonimo ? 'Anonimo' : document.getElementById('sup-name').value.trim();
         const msg = document.getElementById('sup-msg').value.trim();
-        const valorInput = document.getElementById('valor-doacao').value;
-        const valor = parseFloat(valorInput);
+        const plano = document.getElementById('sup-plan').value;
 
         if(!nome || !msg) { alert("⚠️ Preencha seu Nick e sua Mensagem!"); return; }
         if(nome.length > 40 || msg.length > 240) { alert("⚠️ Nick: até 40 caracteres. Mensagem: até 240 caracteres."); return; }
-        if (isNaN(valor) || valor < 1) { alert("⚠️ Por favor, insira um valor válido (mínimo R$ 1,00)."); return; }
 
         const btn = document.getElementById('btn-iniciar-apoio');
         btn.innerText = "⏳ PROCESSANDO...";
@@ -570,20 +572,11 @@
         const idMensagem = "MSG-" + Date.now();
 
         try {
-            // 2. Salva no Firebase como PENDENTE
-            await set(ref(db, 'apoiadores_cafe/' + idMensagem), {
-                nome: nome,
-                mensagem: msg,
-                valor: valor,
-                status: 'pendente',
-                timestamp: Date.now()
-            });
-
-            // 3. Pede o link ao Worker (O Worker amarra o idMensagem ao Pix)
-            const resp = await fetch("https://webhook-pix-cafe.dr-iuryhermes.workers.dev/gerar-link", {
+            // O Worker valida o plano, registra o apoio e só libera o Hall após confirmar o pagamento.
+            const resp = await fetch("https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev/gerar-link", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ valor: valor, idMensagem: idMensagem })
+                body: JSON.stringify({ plano, nome, mensagem: msg, anonimo, idMensagem })
             });
 
             const dados = await resp.json();
@@ -635,8 +628,9 @@
     const apoioValor = new URLSearchParams(window.location.search).get('apoio');
     if (['5', '12', '25'].includes(apoioValor)) {
         window.setTimeout(() => {
-            const valor = document.getElementById('valor-doacao');
-            if (valor) valor.value = apoioValor;
+            const planosPorValor = { '5': 'cafe', '12': 'cartucho', '25': 'arcade' };
+            const plano = document.getElementById('sup-plan');
+            if (plano) plano.value = planosPorValor[apoioValor];
             window.openPixModal();
         }, 300);
     }
