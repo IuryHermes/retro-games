@@ -374,6 +374,8 @@
                     <option value="cartucho">Cartucho — R$ 12</option>
                     <option value="arcade">Arcade — R$ 25</option>
                 </select>
+                <a id="discord-connect" class="btn-pay" href="#" style="text-align:center;text-decoration:none;background:#5865f2;">CONECTAR DISCORD</a>
+                <div id="discord-status" style="font:11px monospace;color:var(--text-muted);text-align:center;">Obrigatório: entre no servidor e aceite as regras primeiro.</div>
                 <label style="font: 11px monospace; color: var(--text-color);"><input type="checkbox" id="sup-anonymous"> Apoiar como anônimo</label>
                 <input type="text" id="sup-name" class="sup-input" placeholder="Seu Nick (Máx 15)" maxlength="15">
                 <textarea id="sup-msg" class="sup-input" placeholder="Sua mensagem (Máx 100 caracteres)..." maxlength="100" rows="3" style="resize: none;"></textarea>
@@ -496,6 +498,21 @@
     const chatRef = ref(db, 'mensagens');
     const supportersRef = ref(db, 'apoiadores_cafe');
 
+    const discordParam = new URLSearchParams(window.location.search).get('discord');
+    if (discordParam) {
+        sessionStorage.setItem('neo_discord_link', discordParam);
+        history.replaceState({}, '', window.location.pathname + (new URLSearchParams(window.location.search).get('apoio') ? `?apoio=${new URLSearchParams(window.location.search).get('apoio')}` : '') + window.location.hash);
+    }
+    const discordStatus = document.getElementById('discord-status');
+    const discordConnect = document.getElementById('discord-connect');
+    const refreshDiscordLink = () => {
+        const plan = document.getElementById('sup-plan').value;
+        discordConnect.href = `https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev/discord/login?plano=${encodeURIComponent(plan)}`;
+        if (sessionStorage.getItem('neo_discord_link')) { discordConnect.textContent = 'DISCORD CONECTADO ✓'; discordStatus.textContent = 'Conta verificada no servidor e com as regras aceitas.'; discordStatus.style.color = 'var(--accent-color)'; }
+    };
+    document.getElementById('sup-plan').addEventListener('change', refreshDiscordLink);
+    refreshDiscordLink();
+
     // =======================================================================
     // LÓGICA DO PAGAMENTO ZERO ATRITO E ATUALIZAÇÃO DO HALL
     // =======================================================================
@@ -560,8 +577,10 @@
         const nome = anonimo ? 'Anonimo' : document.getElementById('sup-name').value.trim();
         const msg = document.getElementById('sup-msg').value.trim();
         const plano = document.getElementById('sup-plan').value;
+        const discordToken = sessionStorage.getItem('neo_discord_link');
 
         if(!nome || !msg) { alert("⚠️ Preencha seu Nick e sua Mensagem!"); return; }
+        if(!discordToken) { alert("⚠️ Conecte sua conta do Discord antes de pagar."); return; }
         if(nome.length > 40 || msg.length > 240) { alert("⚠️ Nick: até 40 caracteres. Mensagem: até 240 caracteres."); return; }
 
         const btn = document.getElementById('btn-iniciar-apoio');
@@ -576,7 +595,7 @@
             const resp = await fetch("https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev/gerar-link", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ plano, nome, mensagem: msg, anonimo, idMensagem })
+                body: JSON.stringify({ plano, nome, mensagem: msg, anonimo, idMensagem, discordToken })
             });
 
             const dados = await resp.json();
