@@ -107,18 +107,34 @@
         element._clearTimer = setTimeout(() => { element.textContent = token ? 'Nuvem conectada' : 'Entre no Clube para salvar'; }, 2500);
     }
 
-    function createControls() {
+    async function sessionInfo() {
+        if (!token) return null;
+        const response = await fetch(`${API}/club/session`, { headers: { Authorization: `Bearer ${token}` }, cache: 'no-store' });
+        if (!response.ok) return null;
+        return response.json();
+    }
+
+    function createControls(session) {
         const panel = document.createElement('div');
         panel.id = 'neo-cloud-panel';
-        panel.innerHTML = `<button id="neo-cloud-toggle" type="button">☁ SAVES</button><div id="neo-cloud-menu"><div id="neo-cloud-status">${token ? 'Nuvem conectada' : 'Entre no Clube para salvar'}</div><div class="neo-cloud-grid"></div></div>`;
+        const planLimit = session ? session.manualSaveLimit : 0;
+        const planText = session ? (planLimit === null ? 'Slots ilimitados' : `${planLimit} slots manuais`) : 'Entre no Clube para salvar';
+        panel.innerHTML = `<button id="neo-cloud-toggle" type="button">☁ SAVES</button><div id="neo-cloud-menu"><div id="neo-cloud-status">${planText}</div><div class="neo-cloud-grid"></div></div>`;
         document.body.appendChild(panel);
         const grid = panel.querySelector('.neo-cloud-grid');
-        for (let number = 1; number <= 5; number++) {
+        let visibleSlots = planLimit === null ? 7 : planLimit;
+        const appendSlot = number => {
             const slot = `manual-${number}`;
             const save = document.createElement('button'); save.type = 'button'; save.textContent = `Salvar ${number}`;
             save.onclick = async () => { const state = await currentState(); state ? upload(slot, state, `Slot ${number}`) : setStatus('Jogo ainda carregando'); };
             const load = document.createElement('button'); load.type = 'button'; load.textContent = `Carregar ${number}`; load.onclick = () => loadSlot(slot);
             grid.append(save, load);
+        };
+        for (let number = 1; number <= visibleSlots; number++) appendSlot(number);
+        if (planLimit === null) {
+            const more = document.createElement('button'); more.type = 'button'; more.textContent = '+ NOVO SLOT'; more.style.gridColumn = '1 / -1';
+            more.onclick = () => { visibleSlots += 1; appendSlot(visibleSlots); grid.appendChild(more); };
+            grid.appendChild(more);
         }
         panel.querySelector('#neo-cloud-toggle').onclick = () => panel.classList.toggle('open');
     }
@@ -126,7 +142,10 @@
     async function prepare(options) {
         rememberToken();
         gameId = stableGameId(options.game, options.core);
-        createControls();
+        let session = null;
+        try { session = await sessionInfo(); } catch (_) {}
+        if (token && !session) { sessionStorage.removeItem(TOKEN_KEY); token = ''; }
+        createControls(session);
         window.EJS_gameID = Array.from(gameId).reduce((hash, char) => ((hash * 31 + char.charCodeAt(0)) >>> 0), 7);
         if (token) {
             try {
