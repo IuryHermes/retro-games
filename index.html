@@ -161,10 +161,6 @@
         .top-bar { position: sticky; top: 0; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 8000; background: var(--top-bar-bg); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 204, 68, 0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: background 0.4s; }
         @keyframes brand-glow { 0% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } 50% { text-shadow: 0 0 2px var(--accent-color), 0 0 5px var(--accent-color); transform: scale(1.02); } 100% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } }
         .brand { font-family: 'Press Start 2P'; color: var(--accent-color); font-size: 18px; animation: brand-glow 2.5s infinite ease-in-out; cursor: pointer; }
-        .support-cta { display: inline-flex; align-items: center; gap: 6px; color: #061008; background: var(--accent-color); border: 1px solid var(--accent-color); border-radius: 6px; padding: 8px 10px; font: 700 10px monospace; text-decoration: none; white-space: nowrap; box-shadow: 0 0 10px rgba(0,204,68,.25); }
-        .support-cta:hover { color: #fff; background: transparent; box-shadow: 0 0 15px var(--accent-color); }
-        .discord-login { display: inline-flex; align-items: center; border: 1px solid #5865f2; background: #5865f2; color: #fff; border-radius: 6px; padding: 8px 10px; font: 700 10px monospace; text-decoration: none; white-space: nowrap; cursor: pointer; }
-        .discord-login.connected { border-color: var(--accent-color); background: transparent; color: var(--accent-color); }
         .top-bar-controls { display: flex; align-items: center; gap: 20px; }
 
         .chat-trigger-mobile { display: none; } .pix-trigger-mobile { display: none; }
@@ -324,7 +320,7 @@
         <div class="splash-subtitle">O Maior Site de Jogos Retrô Dublado do Brasil.</div>
     </div>
 
-    <a href="https://discord.com/invite/6sqENZGFqB" class="discord-float" target="_blank">
+    <a href="https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev/club/login" class="discord-float" id="discord-club-login">
         <div class="discord-text">Junte-se a nós<br><strong>DISCORD</strong></div>
         <img src="assets/imagens-videos/discord.gif?v=3" alt="Discord">
     </a>
@@ -430,9 +426,6 @@
         <main class="main-content">
             <header class="top-bar">
                 <div class="brand" onclick="window.scrollTo(0,0);">NEOTERMINALROOM</div>
-                <a class="support-cta" href="apoie.html" title="Abrir Clube NeoTerminalRoom">☕ APOIE O PROJETO</a>
-                <a class="discord-login" id="discord-club-login" href="https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev/club/login">DISCORD LOGIN</a>
-
                 <div class="mobile-marquee-wrapper">
                     <div class="mobile-marquee-content" id="mobile-marquee-content">
                         Carregando banco de dados...
@@ -1016,14 +1009,22 @@
         }
         const access = sessionStorage.getItem('neo_club_access');
         const button = document.getElementById('discord-club-login');
-        if (!access || !button) return;
+        if (!button) return;
+        const buttonText = button.querySelector('.discord-text');
+        const error = new URLSearchParams(location.search).get('club_erro');
+        if (error === 'entre_no_servidor' || error === 'aceite_as_regras') {
+            button.href = 'https://discord.com/invite/6sqENZGFqB';
+            if (buttonText) buttonText.innerHTML = error === 'aceite_as_regras' ? 'Aceite as regras<br><strong>ABRIR DISCORD</strong>' : 'Entre no servidor<br><strong>ABRIR DISCORD</strong>';
+            history.replaceState(null, '', location.pathname + location.hash);
+            return;
+        }
+        if (!access) return;
         try {
             const response = await fetch(`${worker}/club/session`, { headers: { Authorization: `Bearer ${access}` }, cache: 'no-store' });
             if (!response.ok) throw new Error('expired');
             const session = await response.json();
             const labels = { owner: 'ADMIN', cafe: 'CONTINUE', cartucho: 'CARTUCHO', arcade: 'ARCADE' };
-            button.textContent = `✓ ${session.username || 'DISCORD'} · ${labels[session.plan] || session.plan}`;
-            button.classList.add('connected');
+            if (buttonText) buttonText.innerHTML = `Conectado como ${session.username || 'Discord'}<br><strong>${labels[session.plan] || session.plan}</strong>`;
             button.removeAttribute('href');
             button.title = 'Clique para sair';
             button.onclick = () => { sessionStorage.removeItem('neo_club_access'); location.reload(); };
