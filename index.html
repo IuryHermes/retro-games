@@ -519,7 +519,7 @@
         const data = [];
         // Filtra para exibir APENAS os pagamentos que o Cloudflare marcou como 'aprovado'
         snapshot.forEach(child => {
-            if(child.val().status === 'aprovado') {
+            if(child.val().status === 'aprovado' && (!child.val().validoAte || child.val().validoAte > Date.now())) {
                 data.push(child.val());
             }
         });
