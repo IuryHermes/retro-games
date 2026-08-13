@@ -1000,5 +1000,16 @@
         requestAnimationFrame(pollGamepad);
     }
 </script>
+<script>
+    // Guarda a sessao do Clube devolvida pelo Discord para os players usarem
+    // sem colocar credenciais em localStorage persistente.
+    (() => {
+        const fragment = new URLSearchParams(location.hash.slice(1));
+        const token = fragment.get('club_token');
+        if (!token) return;
+        sessionStorage.setItem('neo_club_access', token);
+        history.replaceState(null, '', location.pathname + location.search + '#saves');
+    })();
+</script>
 </body>
 </html>
