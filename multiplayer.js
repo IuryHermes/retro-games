@@ -157,21 +157,74 @@
             const link = `${location.origin}/multiplayer-room.html?room=${encodeURIComponent(room.id)}`;
             document.getElementById('neo-multi-link').value = link;
             setStatus(isPublic ? 'Sala pública aberta. Aguarde jogadores.' : 'Sala privada aberta. Compartilhe o convite.');
+            void loadOnlinePlayers();
         } catch (error) { setStatus(error.message); button.disabled = false; }
+    }
+
+    async function loadOnlinePlayers() {
+        const list = document.getElementById('neo-multi-online-list');
+        if (!list || !room) return;
+        list.textContent = 'Consultando jogadores online...';
+        try {
+            await request('/social/heartbeat', { method:'POST', body:JSON.stringify({ page:'game' }) });
+            const data = await request('/social/players');
+            list.replaceChildren();
+            if (!data.players?.length) { list.textContent = 'Nenhum outro jogador online agora.'; return; }
+            data.players.forEach(player => {
+                const row = document.createElement('div'); row.className = 'neo-multi-person';
+                const name = document.createElement('span'); name.textContent = player.name;
+                const invite = document.createElement('button'); invite.type = 'button'; invite.textContent = 'CONVIDAR';
+                invite.onclick = async () => { invite.disabled = true; try { await request('/social/invite', { method:'POST', body:JSON.stringify({ toUid:player.uid, roomId:room.id }) }); invite.textContent = 'ENVIADO ✓'; } catch (error) { invite.disabled = false; setStatus(error.message); } };
+                row.append(name, invite); list.appendChild(row);
+            });
+        } catch (error) { list.textContent = error.message; }
+    }
+
+    function dockOnlineButton(panel) {
+        const toggle = panel.querySelector('#neo-multi-toggle');
+        const attach = () => {
+            const menu = document.querySelector('.ejs_menu_bar');
+            if (!menu || toggle.parentElement === menu) return Boolean(menu);
+            toggle.classList.add('ejs_menu_button'); menu.appendChild(toggle); return true;
+        };
+        if (!attach()) {
+            const observer = new MutationObserver(() => { if (attach()) observer.disconnect(); });
+            observer.observe(document.documentElement, { childList:true, subtree:true });
+            setTimeout(() => observer.disconnect(), 30000);
+        }
+    }
+
+    let socialSince = Date.now() - 60000;
+    async function socialPulse() {
+        if (!token()) return;
+        try {
+            await request('/social/heartbeat', { method:'POST', body:JSON.stringify({ page:'game' }) });
+            const data = await request(`/social/events?since=${socialSince}`);
+            for (const event of data.events || []) {
+                socialSince = Math.max(socialSince, event.createdAt);
+                const notice = document.createElement('div');
+                notice.style.cssText = 'position:fixed;right:12px;bottom:70px;z-index:10000000;max-width:330px;padding:13px;background:#061109;color:#fff;border:1px solid #00cc44;font:12px monospace';
+                notice.textContent = event.type === 'invite' ? `${event.fromName} convidou você para ${event.title}. ` : `Mensagem de ${event.fromName}: ${event.preview}`;
+                if (event.type === 'invite') { const link = document.createElement('a'); link.href = `multiplayer-room.html?room=${encodeURIComponent(event.roomId)}`; link.textContent = 'ENTRAR'; link.style.color = '#55ff88'; notice.appendChild(link); }
+                document.body.appendChild(notice); setTimeout(() => notice.remove(), 15000);
+            }
+        } catch (_) {}
     }
 
     function createPanel() {
         const style = document.createElement('style');
-        style.textContent = '#neo-multiplayer-panel{position:fixed;right:8px;top:8px;z-index:9999999;color:#dfffe8;font:12px monospace}#neo-multi-toggle,#neo-multi-menu button,#neo-multi-menu select{border:1px solid #00cc44;background:#061109;color:#55ff88;padding:8px;cursor:pointer}#neo-multi-menu{display:none;width:min(330px,92vw);max-height:80dvh;overflow:auto;margin-top:5px;padding:10px;border:1px solid #00cc44;background:rgba(0,0,0,.96);box-shadow:0 0 22px rgba(0,204,68,.25)}#neo-multiplayer-panel.open #neo-multi-menu{display:block}#neo-multi-status{color:#a9cdb2;line-height:1.45;margin:8px 0}#neo-multi-create-box{display:grid;gap:8px}#neo-multi-create-box label{display:flex;align-items:center;justify-content:space-between;gap:10px}#neo-multi-room input{width:100%;margin:7px 0;background:#111;border:1px solid #555;color:#fff;padding:7px}.neo-multi-person{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #253129}.neo-multi-person button{padding:4px 7px;margin-left:3px}#neo-multi-close{width:100%;margin-top:9px;border-color:#ff4f61!important;color:#ff6b7b!important}';
+        style.textContent = '#neo-multiplayer-panel{position:fixed;right:8px;top:8px;z-index:9999999;color:#dfffe8;font:12px monospace}#neo-multi-toggle,#neo-multi-menu button,#neo-multi-menu select{border:1px solid #00cc44;background:#061109;color:#55ff88;padding:8px;cursor:pointer}#neo-multi-toggle.ejs_menu_button{position:static;width:auto;height:auto;min-width:46px;border:0;background:transparent;padding:0 8px;font-size:11px}#neo-multi-menu{display:none;width:min(350px,92vw);max-height:80dvh;overflow:auto;margin-top:5px;padding:10px;border:1px solid #00cc44;background:rgba(0,0,0,.96);box-shadow:0 0 22px rgba(0,204,68,.25)}#neo-multiplayer-panel.open #neo-multi-menu{display:block}#neo-multi-status{color:#a9cdb2;line-height:1.45;margin:8px 0}#neo-multi-create-box{display:grid;gap:8px}#neo-multi-create-box label{display:flex;align-items:center;justify-content:space-between;gap:10px}#neo-multi-room input{width:100%;margin:7px 0;background:#111;border:1px solid #555;color:#fff;padding:7px}.neo-multi-person{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #253129}.neo-multi-person button{padding:4px 7px;margin-left:3px}#neo-multi-online-list{max-height:180px;overflow:auto;border-top:1px solid #253129;margin-top:8px}#neo-multi-close{width:100%;margin-top:9px;border-color:#ff4f61!important;color:#ff6b7b!important}';
         document.head.appendChild(style);
         const panel = document.createElement('section'); panel.id = 'neo-multiplayer-panel';
-        panel.innerHTML = `<button id="neo-multi-toggle" type="button">🌐 ONLINE</button><div id="neo-multi-menu"><strong>MULTIPLAYER</strong><div id="neo-multi-status">Abra uma sala e transforme visitantes em controles remotos.</div><div id="neo-multi-create-box"><label>Jogadores <select id="neo-multi-max"><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label><label><input id="neo-multi-public" type="checkbox" checked> Sala pública</label><button id="neo-multi-create" type="button">ABRIR SALA</button></div><div id="neo-multi-room" hidden><div id="neo-multi-count"></div><input id="neo-multi-link" readonly><button id="neo-multi-copy" type="button">COPIAR CONVITE</button><div id="neo-multi-players"></div><button id="neo-multi-close" type="button">ENCERRAR SALA</button></div></div>`;
+        panel.innerHTML = `<button id="neo-multi-toggle" type="button">🌐 JOGAR ONLINE</button><div id="neo-multi-menu"><strong>MULTIPLAYER</strong><div id="neo-multi-status">Abra uma sala e transforme visitantes em controles remotos.</div><div id="neo-multi-create-box"><label>Jogadores <select id="neo-multi-max"><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label><label><input id="neo-multi-public" type="checkbox" checked> Sala pública</label><button id="neo-multi-create" type="button">ABRIR SALA</button></div><div id="neo-multi-room" hidden><div id="neo-multi-count"></div><input id="neo-multi-link" readonly><button id="neo-multi-copy" type="button">COPIAR CONVITE</button><strong>CONVIDAR JOGADORES ONLINE</strong><div id="neo-multi-online-list"></div><div id="neo-multi-players"></div><button id="neo-multi-close" type="button">ENCERRAR SALA</button></div></div>`;
         document.body.appendChild(panel);
         panel.querySelector('#neo-multi-toggle').onclick = () => panel.classList.toggle('open');
         panel.querySelector('#neo-multi-create').onclick = createRoom;
         panel.querySelector('#neo-multi-copy').onclick = async () => { await navigator.clipboard.writeText(panel.querySelector('#neo-multi-link').value); setStatus('Convite copiado.'); };
         panel.querySelector('#neo-multi-close').onclick = () => { send({ type:'close' }); socket?.close(); };
         if (system === 'n64') panel.querySelector('#neo-multi-max').value = '4';
+        dockOnlineButton(panel);
+        void socialPulse(); setInterval(socialPulse, 15000);
     }
 
     addEventListener('DOMContentLoaded', createPanel, { once:true });

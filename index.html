@@ -553,6 +553,7 @@
                 <div class="top-bar-controls">
                     <button class="account-button top-account-mobile" id="account-button-mobile" type="button" aria-label="Entrar ou criar cadastro"><img class="account-avatar" src="assets/imagens-videos/logo-discord.gif?v=2" alt=""><span class="account-copy"><span class="account-name">LOGIN / CADASTRO</span></span></button>
                     <button class="multiplayer-hub-trigger" id="multiplayer-hub-trigger" type="button" title="Encontrar partida" aria-label="Jogar online">🌐</button>
+                    <a class="multiplayer-hub-trigger" href="social.html" title="Jogadores online" aria-label="Jogadores online" style="text-decoration:none;display:grid;place-items:center">👥</a>
                     <a class="pix-trigger-mobile" href="apoie.html" title="Clube NeoTerminalRoom">
                         <span style="font-size: 18px; line-height: 1;">☕</span>
                     </a>
@@ -627,6 +628,29 @@
     const receivedAccountToken = accountFragment.get('account_token');
     if (receivedAccountToken) { sessionStorage.setItem('neo_account_access', receivedAccountToken); history.replaceState(null, '', location.pathname + location.search); }
     let discordAccountToken = sessionStorage.getItem('neo_account_access') || '';
+    let socialTimer = 0, socialSince = Date.now() - 60000;
+    async function socialRequest(path, options = {}) {
+        const access = auth.currentUser ? await auth.currentUser.getIdToken() : discordAccountToken;
+        if (!access) throw new Error('offline');
+        const response = await fetch(`${ACCOUNT_API}${path}`, { ...options, headers:{ Authorization:`Bearer ${access}`, ...(options.body ? {'Content-Type':'application/json'} : {}) }, cache:'no-store' });
+        if (!response.ok) throw new Error('social');
+        return response.json();
+    }
+    function showSocialEvent(event) {
+        const toast = document.createElement('aside');
+        toast.style.cssText = 'position:fixed;right:15px;bottom:85px;z-index:100000;max-width:340px;padding:14px;background:#061109;color:#fff;border:1px solid #00cc44;border-radius:8px;font:12px monospace;box-shadow:0 0 24px #00cc4466';
+        const text = document.createElement('div'); text.textContent = event.type === 'invite' ? `${event.fromName} convidou você para ${event.title}.` : `Mensagem privada de ${event.fromName}: ${event.preview}`; toast.appendChild(text);
+        if (event.type === 'invite') { const link = document.createElement('a'); link.href = `multiplayer-room.html?room=${encodeURIComponent(event.roomId)}`; link.textContent = ' ENTRAR NA PARTIDA'; link.style.cssText='display:block;color:#55ff88;margin-top:9px'; toast.appendChild(link); }
+        document.body.appendChild(toast); setTimeout(() => toast.remove(), 15000);
+    }
+    async function socialPulse() {
+        try {
+            await socialRequest('/social/heartbeat', { method:'POST', body:JSON.stringify({ page:'site' }) });
+            const data = await socialRequest(`/social/events?since=${socialSince}`);
+            (data.events || []).forEach(event => { socialSince = Math.max(socialSince, event.createdAt); showSocialEvent(event); });
+        } catch (_) {}
+    }
+    function startSocialPresence() { if (socialTimer) return; void socialPulse(); socialTimer = setInterval(socialPulse, 15000); }
     const multiplayerModal = document.getElementById('multiplayer-modal');
     const multiplayerRooms = document.getElementById('multiplayer-rooms');
     let multiplayerRefreshTimer = 0;
@@ -812,6 +836,7 @@
         if (!user && !discordAccountToken) { accountProfile = null; sessionStorage.removeItem('neo_club_access'); applyProfile(); return; }
         try {
             const data = await profileRequest('GET'); accountProfile = data.profile; applyProfile(); closeAuth();
+            startSocialPresence();
             const pendingRoom = sessionStorage.getItem('neo_pending_multiplayer_room');
             if (/^[a-f0-9]{12}$/.test(pendingRoom || '')) { sessionStorage.removeItem('neo_pending_multiplayer_room'); location.href = `multiplayer-room.html?room=${encodeURIComponent(pendingRoom)}`; }
         }

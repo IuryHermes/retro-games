@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Jogadores Online — NeoTerminalRoom</title>
+    <link rel="icon" href="assets/imagens-videos/logo-discord.gif?v=2" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --green: #00cc44;
+        --bright: #55ff88;
+        --panel: #07120b;
+        --muted: #9ab9a2;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: radial-gradient(circle at top, #102817, #020503 55%);
+        color: #edfff1;
+        font: 14px monospace;
+        min-height: 100dvh;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 4;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px clamp(14px, 4vw, 48px);
+        background: rgba(2, 6, 3, 0.94);
+        border-bottom: 1px solid var(--green);
+        backdrop-filter: blur(12px);
+      }
+      a {
+        color: var(--bright);
+      }
+      header a {
+        text-decoration: none;
+      }
+      .wrap {
+        width: min(1100px, 94vw);
+        margin: 28px auto;
+      }
+      .hero {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 20px;
+        margin-bottom: 24px;
+      }
+      .hero h1 {
+        color: var(--bright);
+        font-size: clamp(22px, 5vw, 42px);
+        margin: 0;
+      }
+      .hero p {
+        color: var(--muted);
+        max-width: 620px;
+        line-height: 1.6;
+      }
+      .actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      button,
+      .button,
+      input {
+        border: 1px solid var(--green);
+        background: #061109;
+        color: #eaffef;
+        border-radius: 6px;
+        padding: 10px 12px;
+        font: inherit;
+      }
+      .button {
+        text-decoration: none;
+        display: inline-block;
+      }
+      button {
+        cursor: pointer;
+      }
+      button:hover,
+      .button:hover {
+        background: #12331c;
+      }
+      .status {
+        color: var(--muted);
+        margin: 12px 0;
+      }
+      .players {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 12px;
+      }
+      .player {
+        display: grid;
+        grid-template-columns: 52px 1fr;
+        gap: 12px;
+        padding: 14px;
+        background: rgba(7, 18, 11, 0.94);
+        border: 1px solid #1d4b2a;
+        border-radius: 10px;
+      }
+      .player img {
+        width: 52px;
+        height: 52px;
+        object-fit: cover;
+        image-rendering: pixelated;
+        border-radius: 7px;
+      }
+      .player strong {
+        display: block;
+        color: var(--bright);
+        margin: 3px 0 8px;
+      }
+      .player small {
+        color: var(--muted);
+      }
+      .player .buttons {
+        grid-column: 1/-1;
+        display: flex;
+        gap: 7px;
+      }
+      .player .buttons button {
+        flex: 1;
+        font-size: 11px;
+      }
+      .empty {
+        padding: 30px;
+        border: 1px dashed #356340;
+        text-align: center;
+        color: var(--muted);
+      }
+      dialog {
+        width: min(560px, 94vw);
+        border: 1px solid var(--green);
+        background: #030805;
+        color: #fff;
+        border-radius: 10px;
+        padding: 0;
+      }
+      dialog::backdrop {
+        background: rgba(0, 0, 0, 0.78);
+      }
+      .chat-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 13px;
+        border-bottom: 1px solid #255630;
+      }
+      .messages {
+        height: min(55dvh, 430px);
+        overflow: auto;
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .message {
+        max-width: 84%;
+        padding: 9px;
+        border-radius: 8px;
+        background: #14231a;
+      }
+      .message.mine {
+        align-self: flex-end;
+        background: #104b24;
+      }
+      .message small {
+        display: block;
+        color: #a9cdb2;
+        margin-top: 4px;
+      }
+      .composer {
+        display: flex;
+        gap: 8px;
+        padding: 12px;
+        border-top: 1px solid #255630;
+      }
+      .composer input {
+        flex: 1;
+        min-width: 0;
+      }
+      .toast {
+        position: fixed;
+        right: 14px;
+        bottom: 14px;
+        z-index: 9;
+        max-width: 360px;
+        padding: 14px;
+        background: #07120b;
+        border: 1px solid var(--green);
+        box-shadow: 0 0 25px #00cc4455;
+        border-radius: 8px;
+      }
+      .toast a {
+        display: inline-block;
+        margin-top: 8px;
+      }
+      .hidden {
+        display: none !important;
+      }
+      @media (max-width: 650px) {
+        .hero {
+          display: block;
+        }
+        .actions {
+          margin-top: 14px;
+        }
+        .player .buttons {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="index.html">← NEOTERMINALROOM</a><strong>ÁREA SOCIAL</strong>
+    </header>
+    <main class="wrap">
+      <section class="hero">
+        <div>
+          <h1>JOGADORES ONLINE</h1>
+          <p>
+            Encontre quem está no site, converse em particular e envie convites
+            para sua sala multiplayer.
+          </p>
+        </div>
+        <div class="actions">
+          <button id="refresh" type="button">ATUALIZAR</button
+          ><a
+            class="button"
+            href="https://discord.com/channels/1206797125854167110/1537280728922849332"
+            target="_blank"
+            rel="noopener"
+            >VOZ NO NEOTERMINALSEC</a
+          >
+        </div>
+      </section>
+      <div class="status" id="status">Conectando sua conta...</div>
+      <section class="players" id="players"></section>
+    </main>
+    <dialog id="chat">
+      <div class="chat-head">
+        <strong id="chat-title">CONVERSA</strong
+        ><button id="chat-close" type="button">FECHAR</button>
+      </div>
+      <div class="messages" id="messages"></div>
+      <form class="composer" id="composer">
+        <input
+          id="message"
+          maxlength="500"
+          autocomplete="off"
+          placeholder="Escreva uma mensagem privada..."
+        /><button>ENVIAR</button>
+      </form>
+    </dialog>
+    <aside class="toast hidden" id="toast"></aside>
+    <script type="module" src="social.js"></script>
+  </body>
+</html>

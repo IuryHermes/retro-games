@@ -1,0 +1,192 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const API = "https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev";
+const app = initializeApp(
+  {
+    apiKey: "AIzaSyCx_OllbDYkua9BbMOj2oJP5V1UcbxmnbI",
+    authDomain: "neoterminalroom.firebaseapp.com",
+    projectId: "neoterminalroom",
+  },
+  "neo-social",
+);
+const auth = getAuth(app);
+const state = {
+  firebase: null,
+  discord: sessionStorage.getItem("neo_account_access") || "",
+  players: [],
+  chat: null,
+  since: Date.now() - 60000,
+};
+const el = (id) => document.getElementById(id);
+const avatar = (value) =>
+  `assets/avatars/${/^avatar-\d{2}$/.test(value || "") ? value : "avatar-01"}.png`;
+async function token() {
+  if (state.firebase) return state.firebase.getIdToken();
+  if (state.discord) return state.discord;
+  throw new Error("Entre na sua conta pela página inicial.");
+}
+async function api(path, options = {}) {
+  const response = await fetch(`${API}${path}`, {
+    ...options,
+    headers: {
+      Authorization: `Bearer ${await token()}`,
+      ...(options.body ? { "Content-Type": "application/json" } : {}),
+      ...options.headers,
+    },
+    cache: "no-store",
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok)
+    throw new Error(data.erro || "Serviço social indisponível.");
+  return data;
+}
+async function heartbeat() {
+  await api("/social/heartbeat", {
+    method: "POST",
+    body: JSON.stringify({ page: "social" }),
+  });
+}
+function toast(event) {
+  const box = el("toast");
+  box.replaceChildren();
+  const text = document.createElement("div");
+  text.textContent =
+    event.type === "invite"
+      ? `${event.fromName} convidou você para ${event.title}.`
+      : `Nova mensagem de ${event.fromName}: ${event.preview}`;
+  box.appendChild(text);
+  if (event.type === "invite") {
+    const link = document.createElement("a");
+    link.href = `multiplayer-room.html?room=${encodeURIComponent(event.roomId)}`;
+    link.textContent = "ENTRAR NA PARTIDA";
+    box.appendChild(link);
+  }
+  box.classList.remove("hidden");
+  setTimeout(() => box.classList.add("hidden"), 12000);
+  if (Notification.permission === "granted")
+    new Notification("NeoTerminalRoom", { body: text.textContent });
+}
+async function pollEvents() {
+  try {
+    const data = await api(`/social/events?since=${state.since}`);
+    for (const event of data.events || []) {
+      state.since = Math.max(state.since, event.createdAt);
+      toast(event);
+    }
+  } catch (_) {}
+}
+async function loadPlayers() {
+  try {
+    await heartbeat();
+    const data = await api("/social/players");
+    state.players = data.players || [];
+    el("players").replaceChildren();
+    el("status").textContent =
+      `${state.players.length} jogador(es) disponível(is) agora`;
+    if (!state.players.length) {
+      el("players").innerHTML =
+        '<div class="empty">Nenhum outro jogador apareceu nos últimos 90 segundos.</div>';
+      return;
+    }
+    for (const player of state.players) {
+      const card = document.createElement("article");
+      card.className = "player";
+      const image = document.createElement("img");
+      image.src = avatar(player.avatar);
+      image.alt = "";
+      const info = document.createElement("div");
+      const name = document.createElement("strong");
+      name.textContent = player.name;
+      const page = document.createElement("small");
+      page.textContent =
+        player.page === "game" ? "Jogando agora" : "Navegando no site";
+      info.append(name, page);
+      const buttons = document.createElement("div");
+      buttons.className = "buttons";
+      const chat = document.createElement("button");
+      chat.textContent = "CONVERSAR";
+      chat.onclick = () => openChat(player);
+      const invite = document.createElement("button");
+      invite.textContent = "CONVIDAR";
+      invite.onclick = () => invitePlayer(player);
+      buttons.append(chat, invite);
+      card.append(image, info, buttons);
+      el("players").appendChild(card);
+    }
+  } catch (error) {
+    el("status").textContent = error.message;
+    el("players").innerHTML =
+      '<div class="empty"><a href="index.html">Entre ou conclua seu perfil na página inicial.</a></div>';
+  }
+}
+async function invitePlayer(player) {
+  const room = new URLSearchParams(location.search).get("room");
+  if (!room) {
+    alert(
+      "Abra um jogo, crie uma sala pelo botão JOGAR ONLINE e use a lista de jogadores ao lado do convite.",
+    );
+    return;
+  }
+  try {
+    await api("/social/invite", {
+      method: "POST",
+      body: JSON.stringify({ toUid: player.uid, roomId: room }),
+    });
+    alert(`Convite enviado para ${player.name}.`);
+  } catch (error) {
+    alert(error.message);
+  }
+}
+async function openChat(player) {
+  state.chat = player;
+  el("chat-title").textContent = `CONVERSA COM ${player.name}`;
+  el("chat").showModal();
+  await loadMessages();
+}
+async function loadMessages() {
+  if (!state.chat) return;
+  const data = await api(
+    `/social/messages?with=${encodeURIComponent(state.chat.uid)}`,
+  );
+  el("messages").replaceChildren();
+  for (const message of data.messages || []) {
+    const row = document.createElement("div");
+    row.className = `message${message.toUid === state.chat.uid ? " mine" : ""}`;
+    row.textContent = message.text;
+    const time = document.createElement("small");
+    time.textContent = `${message.fromName} · ${new Date(message.createdAt).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
+    row.appendChild(time);
+    el("messages").appendChild(row);
+  }
+  el("messages").scrollTop = el("messages").scrollHeight;
+}
+el("composer").onsubmit = async (event) => {
+  event.preventDefault();
+  const text = el("message").value.trim();
+  if (!text || !state.chat) return;
+  await api("/social/messages", {
+    method: "POST",
+    body: JSON.stringify({ toUid: state.chat.uid, text }),
+  });
+  el("message").value = "";
+  await loadMessages();
+};
+el("chat-close").onclick = () => el("chat").close();
+el("refresh").onclick = loadPlayers;
+onAuthStateChanged(auth, (user) => {
+  state.firebase = user;
+  if (user || state.discord) {
+    void loadPlayers();
+    void pollEvents();
+    setInterval(heartbeat, 30000);
+    setInterval(loadPlayers, 30000);
+    setInterval(pollEvents, 7000);
+    setInterval(() => state.chat && loadMessages(), 5000);
+    if ("Notification" in window && Notification.permission === "default")
+      void Notification.requestPermission();
+  } else loadPlayers();
+});

@@ -9,11 +9,13 @@
   ],
   "durable_objects": {
     "bindings": [
-      { "name": "MULTIPLAYER_ROOMS", "class_name": "MultiplayerRoom" }
+      { "name": "MULTIPLAYER_ROOMS", "class_name": "MultiplayerRoom" },
+      { "name": "SOCIAL_PLAYERS", "class_name": "SocialPlayer" }
     ]
   },
   "migrations": [
-    { "tag": "multiplayer-v1", "new_sqlite_classes": ["MultiplayerRoom"] }
+    { "tag": "multiplayer-v1", "new_sqlite_classes": ["MultiplayerRoom"] },
+    { "tag": "social-v1", "new_sqlite_classes": ["SocialPlayer"] }
   ],
   "observability": { "enabled": true, "head_sampling_rate": 1 }
 }

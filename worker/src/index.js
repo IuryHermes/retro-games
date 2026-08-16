@@ -269,11 +269,110 @@ class MultiplayerRoom {
   }
 }
 __name(MultiplayerRoom, "MultiplayerRoom");
+class SocialPlayer {
+  constructor(ctx, env) {
+    this.ctx = ctx;
+    this.env = env;
+  }
+  async fetch(request) {
+    const url = new URL(request.url);
+    const events = await this.ctx.storage.get("events") || [];
+    if (request.method === "POST" && url.pathname === "/event") {
+      const event = await request.json();
+      const next = [...events, { ...event, id: crypto.randomUUID(), createdAt: Date.now() }].slice(-100);
+      await this.ctx.storage.put("events", next);
+      return json({ ok: true });
+    }
+    if (request.method === "GET" && url.pathname === "/events") {
+      const since = Math.max(0, Number(url.searchParams.get("since")) || 0);
+      return json({ events: events.filter((event) => event.createdAt > since).slice(-50) });
+    }
+    if (request.method === "POST" && url.pathname === "/message") {
+      const message = await request.json();
+      const key = `messages:${message.withUid}`;
+      const messages = await this.ctx.storage.get(key) || [];
+      await this.ctx.storage.put(key, [...messages, message].slice(-100));
+      return json({ ok: true });
+    }
+    if (request.method === "GET" && url.pathname === "/messages") {
+      const withUid = String(url.searchParams.get("with") || "").slice(0, 160);
+      return json({ messages: await this.ctx.storage.get(`messages:${withUid}`) || [] });
+    }
+    return json({ erro: "Rota social invalida." }, 404);
+  }
+}
+__name(SocialPlayer, "SocialPlayer");
 var src_default = {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (request.method === "OPTIONS")
       return new Response(null, { status: 204, headers: cors });
+    if (url.pathname.startsWith("/social/")) {
+      const account = await accountAccess(request, env);
+      if (!account)
+        return json({ erro: "Entre na sua conta para acessar jogadores online." }, 401);
+      const profileObject = await env.GAMES.get(`profiles/v1/${account.uid}.json`);
+      const profile = profileObject ? await profileObject.json() : null;
+      if (!profile)
+        return json({ erro: "Complete seu perfil primeiro." }, 403);
+      const own = env.SOCIAL_PLAYERS.getByName(account.uid);
+      if (request.method === "POST" && url.pathname === "/social/heartbeat") {
+        const body = await request.json().catch(() => ({}));
+        const presence = { uid: account.uid, name: profile.name, avatar: profile.avatar, page: String(body.page || "site").slice(0, 30), updatedAt: Date.now() };
+        await env.GAMES.put(`social/presence/${encodeURIComponent(account.uid)}.json`, JSON.stringify(presence), { httpMetadata: { contentType: "application/json" } });
+        return json({ presence });
+      }
+      if (request.method === "GET" && url.pathname === "/social/players") {
+        const directory = await listAll(env, "social/presence/");
+        const players = (await Promise.all(directory.slice(-200).map(async (object) => {
+          const record = await env.GAMES.get(object.key);
+          return record ? await record.json().catch(() => null) : null;
+        }))).filter((player) => player && player.uid !== account.uid && Date.now() - player.updatedAt < 9e4).slice(0, 100);
+        return json({ self: { uid: account.uid, name: profile.name, avatar: profile.avatar }, players });
+      }
+      if (request.method === "GET" && url.pathname === "/social/events")
+        return own.fetch(new Request(`https://social/events?since=${encodeURIComponent(url.searchParams.get("since") || "0")}`));
+      if (request.method === "GET" && url.pathname === "/social/messages") {
+        const withUid = String(url.searchParams.get("with") || "");
+        return own.fetch(new Request(`https://social/messages?with=${encodeURIComponent(withUid)}`));
+      }
+      if (request.method === "POST" && url.pathname === "/social/invite") {
+        const body = await request.json().catch(() => ({}));
+        const toUid = String(body.toUid || "").slice(0, 160);
+        const roomId = String(body.roomId || "");
+        if (!toUid || toUid === account.uid || !/^[a-f0-9]{12}$/.test(roomId))
+          return json({ erro: "Convite invalido." }, 400);
+        const targetPresenceObject = await env.GAMES.get(`social/presence/${encodeURIComponent(toUid)}.json`);
+        const targetPresence = targetPresenceObject ? await targetPresenceObject.json().catch(() => null) : null;
+        if (!targetPresence || Date.now() - targetPresence.updatedAt >= 9e4)
+          return json({ erro: "Esse jogador nao esta mais online." }, 409);
+        const summaryResponse = await env.MULTIPLAYER_ROOMS.getByName(roomId).fetch(new Request("https://room/summary"));
+        if (!summaryResponse.ok)
+          return json({ erro: "Sala nao encontrada." }, 404);
+        const room = await summaryResponse.json();
+        if (room.hostUid !== account.uid || room.status !== "waiting")
+          return json({ erro: "Somente o anfitriao pode convidar para esta sala." }, 403);
+        await env.SOCIAL_PLAYERS.getByName(toUid).fetch(new Request("https://social/event", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "invite", fromUid: account.uid, fromName: profile.name, roomId, title: room.title }) }));
+        return json({ enviado: true });
+      }
+      if (request.method === "POST" && url.pathname === "/social/messages") {
+        const body = await request.json().catch(() => ({}));
+        const toUid = String(body.toUid || "").slice(0, 160);
+        const text = String(body.text || "").trim().slice(0, 500);
+        if (!toUid || toUid === account.uid || !text)
+          return json({ erro: "Mensagem invalida." }, 400);
+        if (!await env.GAMES.head(`profiles/v1/${toUid}.json`))
+          return json({ erro: "Jogador nao encontrado." }, 404);
+        const message = { id: crypto.randomUUID(), fromUid: account.uid, fromName: profile.name, toUid, text, createdAt: Date.now() };
+        await Promise.all([
+          own.fetch(new Request("https://social/message", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...message, withUid: toUid }) })),
+          env.SOCIAL_PLAYERS.getByName(toUid).fetch(new Request("https://social/message", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...message, withUid: account.uid }) })),
+          env.SOCIAL_PLAYERS.getByName(toUid).fetch(new Request("https://social/event", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "message", fromUid: account.uid, fromName: profile.name, preview: text.slice(0, 80) }) }))
+        ]);
+        return json({ message }, 201);
+      }
+      return json({ erro: "Rota social nao encontrada." }, 404);
+    }
     if (request.method === "GET" && url.pathname === "/multiplayer/ice-servers") {
       const account = await accountAccess(request, env);
       if (!account)
@@ -807,6 +906,7 @@ var src_default = {
 };
 export {
   MultiplayerRoom,
+  SocialPlayer,
   src_default as default
 };
 //# sourceMappingURL=index.js.map
