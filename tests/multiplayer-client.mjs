@@ -52,7 +52,7 @@ assert.match(guest, /attachRemoteAudio/);
 assert.match(guest, /id="remote-audio"/);
 assert.match(guest, /remoteAudio\.srcObject = stream/);
 assert.match(guest, /track\.contentHint = "music"/);
-assert.match(guest, /await remoteAudio\.play\(\)/);
+assert.match(guest, /remoteAudio\.play\(\)/);
 assert.doesNotMatch(guest, /createMediaStreamSource/);
 assert.match(guest, /áudio não recebido do anfitrião/);
 assert.match(worker, /automaticSeat/);
@@ -80,5 +80,8 @@ assert.match(host, /capturedAudioNodes = new WeakSet/);
 assert.match(host, /node\.connect\(audioCaptureDestination\)/);
 assert.match(host, /mediaStream\.removeTrack\(oldTrack\)/);
 assert.match(host, /if \(audioTrack\) mediaStream\.addTrack\(audioTrack\)/);
+assert.match(guest, /const audioPlayback = audioTrackReceived[\s\S]*remoteAudio\.play\(\)[\s\S]*const videoPlayback = video\.play\(\)/);
+assert.match(guest, /addEventListener\("touchstart", unlockPlayback/);
+assert.doesNotMatch(guest, /async function unlockPlayback/);
 
-console.log('multiplayer client and room: 74 checks passed');
+console.log('multiplayer client and room: 77 checks passed');

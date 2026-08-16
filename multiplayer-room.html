@@ -413,7 +413,7 @@
             status.textContent = "Vídeo conectado · pressione uma tecla para liberar o áudio";
           });
         }
-        async function unlockPlayback() {
+        function unlockPlayback() {
           if (!video.srcObject) return;
           if (
             document.fullscreenEnabled &&
@@ -422,17 +422,21 @@
           )
             void document.documentElement.requestFullscreen().catch(() => {});
           video.muted = true;
-          await video.play().catch(() => {});
+          if (audioTrackReceived) remoteAudio.muted = false;
+          const audioPlayback = audioTrackReceived
+            ? remoteAudio.play()
+            : Promise.resolve();
+          const videoPlayback = video.play();
           if (audioTrackReceived) {
-            remoteAudio.muted = false;
-            try {
-              await remoteAudio.play();
+            void audioPlayback.then(() => {
               playbackUnlocked = true;
               status.textContent = "Vídeo e áudio conectados";
-            } catch (_) {
+            }).catch(() => {
               playbackUnlocked = false;
-            }
+              status.textContent = "Vídeo conectado · toque no controle para liberar o áudio";
+            });
           }
+          void videoPlayback.catch(() => {});
         }
         const input = (index, value) => {
           void unlockPlayback();
@@ -442,6 +446,7 @@
           else send(data);
         };
         addEventListener("pointerdown", unlockPlayback, { passive: true });
+        addEventListener("touchstart", unlockPlayback, { passive: true });
         addEventListener("keydown", unlockPlayback);
         const keyboardMap = {
           ArrowUp: 4,
