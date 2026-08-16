@@ -3,6 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title>NeoTerminal Room - Player</title>
+    <script>
+        // GitHub Pages cannot set COOP/COEP response headers. This service worker
+        // applies them in-browser and reloads only on the first compatible visit.
+        window.coi = { quiet: true, coepCredentialless: () => true };
+    </script>
+    <script src="coi-serviceworker.js"></script>
     
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -99,15 +105,7 @@
             window.EJS_core = core;   
             window.EJS_backgroundColor = "#000000";
 
-            // LIMPEZA NUCLEAR DO CACHE DO EMULATORJS PARA FORÇAR O CONTROLE CERTO
-            try { 
-                for (let key in localStorage) { 
-                    if (key.includes('emulatorjs') || key.includes('EJS')) {
-                        localStorage.removeItem(key); 
-                    }
-                } 
-            } catch(e) {}
-
+            // Preserve EmulatorJS settings and its per-device performance tuning.
             window.EJS_onGameStart = function() {
                 clearInterval(loadingInterval);
                 if(barFill) {
@@ -129,6 +127,11 @@
             window.EJS_startOnLoaded = true;
             window.EJS_language = "pt-BR";
             window.EJS_loadStateOnStart = false;    
+            // Use the threaded N64 build only when the browser confirms that
+            // cross-origin isolation and SharedArrayBuffer are available.
+            window.EJS_threads = core === 'n64'
+                && window.crossOriginIsolated
+                && typeof window.SharedArrayBuffer === 'function';
             
             // Agora o emulador só vai ter botão de Menu e Config na interface interna dele
             window.EJS_buttons = { save_state: true, load_state: true, full_screen: true, fast_forward: true, settings: true, menu: true };

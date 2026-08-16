@@ -13,6 +13,7 @@
     let saving = false;
     let automaticEnabled = false;
     let timer = 0;
+    let autosavePending = false;
 
     function rememberToken() {
         const hash = new URLSearchParams(location.hash.slice(1));
@@ -116,9 +117,26 @@
     }
 
     async function autosave() {
-        if (!automaticEnabled) return;
-        const state = await currentState();
-        if (state) await upload('auto', state, 'Autosave');
+        if (!automaticEnabled || autosavePending) return;
+        autosavePending = true;
+        try {
+            const state = await currentState();
+            if (state) await upload('auto', state, 'Autosave');
+        } finally {
+            autosavePending = false;
+        }
+    }
+
+    function scheduleAutosave() {
+        if (!automaticEnabled || autosavePending) return;
+        const run = () => { void autosave(); };
+        // Keep the one-minute cadence while placing the expensive snapshot
+        // between frames whenever the browser exposes an idle window.
+        if (typeof requestIdleCallback === 'function') {
+            requestIdleCallback(run, { timeout: 4000 });
+        } else {
+            setTimeout(run, 0);
+        }
     }
 
     function automaticChoice(session) {
@@ -225,8 +243,11 @@
         window.EJS_onGameStart = function () {
             if (typeof previousStart === 'function') previousStart.apply(this, arguments);
             clearInterval(timer);
-            if (token && automaticEnabled) timer = setInterval(autosave, INTERVAL_MS);
+            if (token && automaticEnabled) timer = setInterval(scheduleAutosave, INTERVAL_MS);
         };
+        addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden' && token && automaticEnabled) void autosave();
+        });
         addEventListener('pagehide', () => { clearInterval(timer); });
     }
 
