@@ -22,5 +22,7 @@ assert.match(worker, /generate-ice-servers/);
 assert.match(host, /\/multiplayer\/ice-servers/);
 assert.match(guest, /\/multiplayer\/ice-servers/);
 assert.doesNotMatch(guest, /stun\.cloudflare\.com:53/);
+assert.match(host, /3\.5 \* 60 \* 60 \* 1000/);
+assert.match(guest, /3\.5 \* 60 \* 60 \* 1000/);
 
-console.log('multiplayer client and room: 16 checks passed');
+console.log('multiplayer client and room: 18 checks passed');

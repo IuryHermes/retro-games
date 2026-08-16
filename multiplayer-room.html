@@ -194,17 +194,20 @@
           channel,
           peer,
           seat = 0,
-          iceServersPromise;
+          iceServersPromise,
+          iceServersExpiresAt = 0;
         const iceServers = () =>
-          iceServersPromise ||
-          (iceServersPromise = fetch(`${API}/multiplayer/ice-servers`, {
-            headers: { Authorization: `Bearer ${access}` },
-          })
-            .then((response) =>
-              response.ok ? response.json() : Promise.reject(),
-            )
-            .then((data) => data.iceServers)
-            .catch(() => [{ urls: ["stun:stun.cloudflare.com:3478"] }]));
+          iceServersPromise && Date.now() < iceServersExpiresAt
+            ? iceServersPromise
+            : ((iceServersExpiresAt = Date.now() + 3.5 * 60 * 60 * 1000),
+              (iceServersPromise = fetch(`${API}/multiplayer/ice-servers`, {
+                headers: { Authorization: `Bearer ${access}` },
+              })
+                .then((response) =>
+                  response.ok ? response.json() : Promise.reject(),
+                )
+                .then((data) => data.iceServers)
+                .catch(() => [{ urls: ["stun:stun.cloudflare.com:3478"] }])));
         const pendingCandidates = [];
         const status = document.getElementById("room-status"),
           waiting = document.getElementById("waiting"),

@@ -10,6 +10,7 @@
     let clientId = '';
     let mediaStream = null;
     let iceServersPromise = null;
+    let iceServersExpiresAt = 0;
 
     const token = () => sessionStorage.getItem(TOKEN_KEY) || sessionStorage.getItem('neo_account_access') || '';
     const params = new URLSearchParams(location.search);
@@ -33,7 +34,8 @@
     }
 
     function iceServers() {
-        if (!iceServersPromise) {
+        if (!iceServersPromise || Date.now() >= iceServersExpiresAt) {
+            iceServersExpiresAt = Date.now() + 3.5 * 60 * 60 * 1000;
             iceServersPromise = request('/multiplayer/ice-servers').then(data => data.iceServers).catch(() => [{ urls:['stun:stun.cloudflare.com:3478'] }]);
         }
         return iceServersPromise;
