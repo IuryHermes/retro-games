@@ -324,7 +324,7 @@
         .auth-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
         .auth-action { border: 1px solid var(--accent-color); background: #0a2814; color: var(--text-color); padding: 10px 6px; border-radius: 4px; cursor: pointer; font: bold 11px monospace; }
         .auth-social { width: 100%; margin-top: 8px; padding: 10px; border: 0; border-radius: 4px; color: white; cursor: pointer; font-weight: 700; }
-        .auth-social.google { background: #fff; color: #333; }.auth-social.facebook { background: #1877f2; }
+        .auth-social.google { background: #fff; color: #333; }.auth-social.facebook { background: #1877f2; }.auth-social.discord { background:#5865f2; }
         .avatar-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 7px; margin: 12px 0; max-height: 190px; overflow-y: auto; padding: 3px; scrollbar-color: var(--accent-color) var(--input-bg); }
         .avatar-choice { padding: 3px; border: 2px solid transparent; background: #020603; border-radius: 7px; cursor: pointer; }
         .avatar-choice img { display: block; width: 100%; border-radius: 4px; image-rendering: pixelated; }
@@ -366,6 +366,7 @@
             <div class="auth-actions"><button class="auth-action" id="auth-register" type="button">CADASTRAR</button><button class="auth-action" id="auth-email-login" type="button">ENTRAR</button></div>
             <button class="auth-social google" id="auth-google" type="button">Continuar com Google</button>
             <button class="auth-social facebook" id="auth-facebook" type="button">Continuar com Facebook</button>
+            <button class="auth-social discord" id="auth-discord" type="button">Continuar com Discord</button>
             <button class="auth-action" id="auth-save-profile" type="button" style="display:none;width:100%;margin-top:10px">SALVAR PERFIL</button>
             <button class="auth-action" id="auth-logout" type="button" style="display:none;width:100%;margin-top:10px;border-color:#ff4f61">SAIR DA CONTA</button>
             <div id="auth-status" aria-live="polite"></div>
@@ -573,6 +574,10 @@
     const AVATARS = Array.from({ length: 40 }, (_, index) => `avatar-${String(index + 1).padStart(2, '0')}`);
     let accountProfile = null;
     let selectedAvatar = 'avatar-01';
+    const accountFragment = new URLSearchParams(location.hash.slice(1));
+    const receivedAccountToken = accountFragment.get('account_token');
+    if (receivedAccountToken) { sessionStorage.setItem('neo_account_access', receivedAccountToken); history.replaceState(null, '', location.pathname + location.search); }
+    let discordAccountToken = sessionStorage.getItem('neo_account_access') || '';
 
     const avatarUrl = avatar => `assets/avatars/${AVATARS.includes(avatar) ? avatar : 'avatar-01'}.png`;
     const authModal = document.getElementById('auth-modal');
@@ -595,8 +600,8 @@
     historyModal.onclick = event => { if (event.target === historyModal) closeHistory(); };
 
     async function historyRequest(method = 'GET', body) {
-        if (!auth.currentUser) throw new Error('Entre na sua conta primeiro.');
-        const token = await auth.currentUser.getIdToken();
+        if (!auth.currentUser && !discordAccountToken) throw new Error('Entre na sua conta primeiro.');
+        const token = auth.currentUser ? await auth.currentUser.getIdToken() : discordAccountToken;
         const response = await fetch(`${ACCOUNT_API}/account/history`, { method, headers: { Authorization: `Bearer ${token}`, ...(body ? {'Content-Type':'application/json'} : {}) }, body: body ? JSON.stringify(body) : undefined, cache: 'no-store' });
         const data = await response.json().catch(() => ({}));
         if (!response.ok) throw new Error(data.erro || 'Não foi possível carregar seus jogos.');
@@ -623,7 +628,7 @@
         } catch (error) { historyList.innerHTML = ''; const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = error.message; historyList.appendChild(empty); }
     }
     async function recordPlayedGame(game, playUrl) {
-        if (!accountProfile || !auth.currentUser) return;
+        if (!accountProfile || (!auth.currentUser && !discordAccountToken)) return;
         const coverName = game.capa ? game.capa.split('/').pop() : '';
         const cover = coverName ? `${R2_URL}${game.sysPath || game.path || ''}capas/${encodeURIComponent(coverName)}` : '';
         const historyId = String(game.id || `${game.sysId}-${String(game.rom || '').split('/').pop()}`).toLowerCase().replace(/\.[a-z0-9]+$/i, '').replace(/[^a-z0-9._,-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 120);
@@ -632,8 +637,8 @@
     }
 
     async function profileRequest(method, body) {
-        if (!auth.currentUser) throw new Error('Entre na sua conta primeiro.');
-        const token = await auth.currentUser.getIdToken(true);
+        if (!auth.currentUser && !discordAccountToken) throw new Error('Entre na sua conta primeiro.');
+        const token = auth.currentUser ? await auth.currentUser.getIdToken(true) : discordAccountToken;
         sessionStorage.setItem('neo_club_access', token);
         const response = await fetch(`${ACCOUNT_API}/account/profile`, { method, headers: { Authorization: `Bearer ${token}`, ...(body ? {'Content-Type':'application/json'} : {}) }, body: body ? JSON.stringify(body) : undefined, cache: 'no-store' });
         const data = await response.json().catch(() => ({}));
@@ -666,14 +671,15 @@
     }
     document.getElementById('auth-google').onclick = () => completeSocialLogin(new GoogleAuthProvider());
     document.getElementById('auth-facebook').onclick = () => completeSocialLogin(new FacebookAuthProvider());
+    document.getElementById('auth-discord').onclick = () => { location.href = `${ACCOUNT_API}/account/discord/login`; };
     document.getElementById('auth-register').onclick = async () => { try { setAuthStatus('Criando conta...'); await createUserWithEmailAndPassword(auth, document.getElementById('auth-email').value.trim(), document.getElementById('auth-password').value); await saveProfile(); } catch (error) { setAuthStatus(error.code === 'auth/email-already-in-use' ? 'Este e-mail já possui conta.' : 'Confira o e-mail e use uma senha de ao menos 6 caracteres.'); } };
     document.getElementById('auth-email-login').onclick = async () => { try { setAuthStatus('Entrando...'); await signInWithEmailAndPassword(auth, document.getElementById('auth-email').value.trim(), document.getElementById('auth-password').value); } catch (_) { setAuthStatus('E-mail ou senha incorretos.'); } };
     document.getElementById('auth-save-profile').onclick = saveProfile;
-    document.getElementById('auth-logout').onclick = async () => { await signOut(auth); sessionStorage.removeItem('neo_club_access'); accountProfile = null; applyProfile(); closeAuth(); };
+    document.getElementById('auth-logout').onclick = async () => { if (auth.currentUser) await signOut(auth); sessionStorage.removeItem('neo_club_access'); sessionStorage.removeItem('neo_account_access'); discordAccountToken = ''; accountProfile = null; applyProfile(); closeAuth(); };
     onAuthStateChanged(auth, async user => {
-        document.getElementById('auth-logout').style.display = user ? 'block' : 'none';
-        document.getElementById('auth-save-profile').style.display = user ? 'block' : 'none';
-        if (!user) { accountProfile = null; sessionStorage.removeItem('neo_club_access'); applyProfile(); return; }
+        document.getElementById('auth-logout').style.display = user || discordAccountToken ? 'block' : 'none';
+        document.getElementById('auth-save-profile').style.display = user || discordAccountToken ? 'block' : 'none';
+        if (!user && !discordAccountToken) { accountProfile = null; sessionStorage.removeItem('neo_club_access'); applyProfile(); return; }
         try { const data = await profileRequest('GET'); accountProfile = data.profile; applyProfile(); closeAuth(); }
         catch (_) { accountProfile = null; applyProfile(); document.getElementById('auth-copy').textContent = 'Escolha seu nome e avatar para concluir o cadastro e liberar 3 saves.'; openAuth(); }
     });

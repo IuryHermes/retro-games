@@ -80,12 +80,24 @@ async function firebaseAccess(token) {
   }
 }
 __name(firebaseAccess, "firebaseAccess");
+async function accountAccess(request, env) {
+  const authorization = request.headers.get("Authorization") || "";
+  const token = authorization.startsWith("Bearer ") ? authorization.slice(7) : "";
+  const discord = await readToken(token, env.DISCORD_CLIENT_SECRET);
+  if (discord?.purpose === "account" && /^discord-\d{10,25}$/.test(discord.accountId))
+    return { uid: discord.accountId, email: "", provider: "discord.com", username: discord.username || "" };
+  const firebase = await firebaseAccess(token);
+  return firebase ? { ...firebase, username: firebase.email.split("@")[0] } : null;
+}
+__name(accountAccess, "accountAccess");
 async function clubAccess(request, url, env) {
   const authorization = request.headers.get("Authorization") || "";
   const token = authorization.startsWith("Bearer ") ? authorization.slice(7) : url.searchParams.get("token") || "";
   const access = await readToken(token, env.DISCORD_CLIENT_SECRET);
   if (access?.purpose === "club" && CLUB_PLANS.includes(access.plan) && /^\d{10,25}$/.test(access.discordId))
     return access;
+  if (access?.purpose === "account" && /^discord-\d{10,25}$/.test(access.accountId))
+    return { discordId: access.accountId, accountUid: access.accountId, username: access.username || "", plan: "registered", purpose: "club", exp: access.exp };
   const firebase = await firebaseAccess(token);
   return firebase ? { discordId: `firebase-${firebase.uid}`, firebaseUid: firebase.uid, username: firebase.email.split("@")[0], plan: "registered", purpose: "club", exp: Date.now() + 55 * 60 * 1e3 } : null;
 }
@@ -135,6 +147,12 @@ var src_default = {
       authorize.search = new URLSearchParams({ client_id: DISCORD_APP_ID, response_type: "code", redirect_uri: `${WORKER}/discord/callback`, scope: "identify", state }).toString();
       return Response.redirect(authorize.toString(), 302);
     }
+    if (request.method === "GET" && url.pathname === "/account/discord/login") {
+      const state = await makeToken({ purpose: "account", exp: Date.now() + 10 * 60 * 1e3 }, env.DISCORD_CLIENT_SECRET);
+      const authorize = new URL("https://discord.com/oauth2/authorize");
+      authorize.search = new URLSearchParams({ client_id: DISCORD_APP_ID, response_type: "code", redirect_uri: `${WORKER}/discord/callback`, scope: "identify", state }).toString();
+      return Response.redirect(authorize.toString(), 302);
+    }
     if (request.method === "POST" && url.pathname === "/admin/publish-poll") {
       if (!env.HERMES_PUBLISH_KEY || request.headers.get("Authorization") !== `Bearer ${env.HERMES_PUBLISH_KEY}`)
         return json({ erro: "Nao autorizado." }, 401);
@@ -159,6 +177,11 @@ var src_default = {
       const oauth = await tokenResponse.json();
       const userResponse = await fetch("https://discord.com/api/v10/users/@me", { headers: { Authorization: `Bearer ${oauth.access_token}` } });
       const user = await userResponse.json();
+      if (state.purpose === "account") {
+        const accountId = `discord-${user.id}`;
+        const access = await makeToken({ accountId, username: user.global_name || user.username, purpose: "account", exp: Date.now() + 7 * 24 * 60 * 60 * 1e3 }, env.DISCORD_CLIENT_SECRET);
+        return Response.redirect(`${SITE}/#account_token=${encodeURIComponent(access)}`, 302);
+      }
       const discordHeaders = { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` };
       const [memberResponse, rolesResponse, guildResponse] = await Promise.all([fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/members/${user.id}`, { headers: discordHeaders }), fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/roles`, { headers: discordHeaders }), fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}`, { headers: discordHeaders })]);
       if (!memberResponse.ok || !rolesResponse.ok || !guildResponse.ok) {
@@ -188,18 +211,17 @@ var src_default = {
       if (!access)
         return json({ erro: "Acesso expirado." }, 401);
       let profile = null;
-      if (access.firebaseUid) {
-        const profileObject = await env.GAMES.get(`profiles/v1/${access.firebaseUid}.json`);
+      if (access.firebaseUid || access.accountUid) {
+        const profileObject = await env.GAMES.get(`profiles/v1/${access.firebaseUid || access.accountUid}.json`);
         profile = profileObject ? await profileObject.json() : null;
       }
       return json({ conectado: true, username: profile?.name || access.username || "", avatar: profile?.avatar || "", plan: access.plan, manualSaveLimit: manualSaveLimit(access.plan), expiresAt: access.exp });
     }
     if (url.pathname === "/account/profile" && ["GET", "PUT"].includes(request.method)) {
-      const authorization = request.headers.get("Authorization") || "";
-      const firebase = await firebaseAccess(authorization.startsWith("Bearer ") ? authorization.slice(7) : "");
-      if (!firebase)
+      const account = await accountAccess(request, env);
+      if (!account)
         return json({ erro: "Login expirado." }, 401);
-      const key = `profiles/v1/${firebase.uid}.json`;
+      const key = `profiles/v1/${account.uid}.json`;
       const currentObject = await env.GAMES.get(key);
       const current = currentObject ? await currentObject.json() : null;
       if (request.method === "GET")
@@ -209,19 +231,18 @@ var src_default = {
       const avatar = String(body.avatar || "").toLowerCase();
       if (!/^[\p{L}\p{N}][\p{L}\p{N} _.-]{1,19}$/u.test(name) || !PROFILE_AVATARS.includes(avatar))
         return json({ erro: "Escolha um nome de 2 a 20 caracteres e um avatar valido." }, 400);
-      const profile = { uid: firebase.uid, name, avatar, provider: firebase.provider, createdAt: current?.createdAt || Date.now(), updatedAt: Date.now() };
+      const profile = { uid: account.uid, name, avatar, provider: account.provider, createdAt: current?.createdAt || Date.now(), updatedAt: Date.now() };
       await env.GAMES.put(key, JSON.stringify(profile), { httpMetadata: { contentType: "application/json" } });
       if (!current) {
-        await fetch(`https://neoterminalroom-default-rtdb.firebaseio.com/hall_cadastros/${encodeURIComponent(firebase.uid)}.json`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ nome: name, avatar, mensagem: `Bem-vindo(a), ${name}! Um novo jogador entrou na sala.`, timestamp: Date.now() }) });
+        await fetch(`https://neoterminalroom-default-rtdb.firebaseio.com/hall_cadastros/${encodeURIComponent(account.uid)}.json`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ nome: name, avatar, mensagem: `Bem-vindo(a), ${name}! Um novo jogador entrou na sala.`, timestamp: Date.now() }) });
       }
       return json({ profile, created: !current });
     }
     if (url.pathname === "/account/history" && ["GET", "POST"].includes(request.method)) {
-      const authorization = request.headers.get("Authorization") || "";
-      const firebase = await firebaseAccess(authorization.startsWith("Bearer ") ? authorization.slice(7) : "");
-      if (!firebase)
+      const account = await accountAccess(request, env);
+      if (!account)
         return json({ erro: "Login expirado." }, 401);
-      const key = `history/v1/${firebase.uid}.json`;
+      const key = `history/v1/${account.uid}.json`;
       const historyObject = await env.GAMES.get(key);
       const history = historyObject ? await historyObject.json() : [];
       if (request.method === "GET")

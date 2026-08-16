@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { generateKeyPairSync, createSign } from 'node:crypto';
+import { generateKeyPairSync, createSign, createHmac } from 'node:crypto';
 import worker from '../worker/src/index.js';
 
 const { privateKey, publicKey } = generateKeyPairSync('rsa', { modulusLength: 2048 });
@@ -38,6 +38,7 @@ globalThis.fetch = async (input, init) => {
 };
 
 const auth = token => ({ Authorization: `Bearer ${token}` });
+const discordToken = (() => { const payload = Buffer.from(JSON.stringify({ accountId:'discord-123456789012345678', username:'DiscordPlayer', purpose:'account', exp:Date.now()+3600000 })).toString('base64url'); return `${payload}.${createHmac('sha256','test-secret').update(payload).digest('base64url')}`; })();
 let response = await worker.fetch(new Request('https://worker/account/profile', { method: 'PUT', headers: { ...auth(tokenFor()), 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Iury Player', avatar: 'avatar-01' }) }), env);
 assert.equal(response.status, 200);
 assert.equal((await response.json()).created, true);
@@ -63,4 +64,11 @@ response = await worker.fetch(new Request('https://worker/account/history', { he
 const history = await response.json();
 assert.deepEqual(history.games.map(game => game.id), ['game-one', 'game-two']);
 
-console.log('worker auth/history: 8 checks passed');
+response = await worker.fetch(new Request('https://worker/account/profile', { method:'PUT', headers:{ ...auth(discordToken), 'Content-Type':'application/json' }, body:JSON.stringify({ name:'Discord Player', avatar:'avatar-02' }) }), env);
+assert.equal(response.status, 200);
+response = await worker.fetch(new Request('https://worker/club/session', { headers:auth(discordToken) }), env);
+const discordSession = await response.json();
+assert.equal(discordSession.plan, 'registered');
+assert.equal(discordSession.manualSaveLimit, 3);
+
+console.log('worker auth/history/discord: 11 checks passed');
