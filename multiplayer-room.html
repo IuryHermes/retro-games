@@ -36,6 +36,7 @@
         color: #55ff88;
       }
       .viewer {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -49,10 +50,27 @@
         object-fit: contain;
       }
       .waiting {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        width: min(88%, 480px);
         padding: 30px;
         text-align: center;
         line-height: 1.7;
         color: #9adbaa;
+        background: rgba(2, 8, 4, 0.88);
+        border: 1px solid #00cc44;
+        border-radius: 8px;
+      }
+      .waiting button {
+        margin-top: 12px;
+        padding: 11px 15px;
+        border: 1px solid #00cc44;
+        background: #12331c;
+        color: #fff;
+        font: inherit;
       }
       .controls {
         padding: 12px 12px max(12px, env(safe-area-inset-bottom));
@@ -252,10 +270,45 @@
                   data: { candidate: e.candidate },
                 });
             };
-            peer.ontrack = (e) => {
+            peer.ontrack = async (e) => {
               video.srcObject = e.streams[0];
-              waiting.hidden = true;
-              void video.play().catch(() => {});
+              video.muted = true;
+              try {
+                await video.play();
+                waiting.hidden = false;
+                waiting.replaceChildren();
+                const copy = document.createElement("div");
+                copy.textContent =
+                  "Vídeo conectado. Toque abaixo para ativar o som.";
+                const start = document.createElement("button");
+                start.type = "button";
+                start.textContent = "ATIVAR SOM E JOGAR";
+                start.onclick = async () => {
+                  video.muted = false;
+                  await video.play().catch(() => {});
+                  waiting.hidden = true;
+                };
+                waiting.append(copy, start);
+              } catch (_) {
+                waiting.hidden = false;
+                waiting.textContent = "Toque na tela para iniciar o vídeo.";
+                waiting.onclick = async () => {
+                  video.muted = true;
+                  await video.play().catch(() => {});
+                  waiting.hidden = true;
+                };
+              }
+            };
+            peer.onconnectionstatechange = () => {
+              const labels = {
+                connecting: "Conectando vídeo...",
+                connected: "Vídeo conectado",
+                disconnected: "Reconectando vídeo...",
+                failed:
+                  "Falha no vídeo. Peça ao anfitrião para reabrir a sala.",
+              };
+              if (labels[peer.connectionState])
+                status.textContent = labels[peer.connectionState];
             };
             peer.ondatachannel = (e) => {
               channel = e.channel;
@@ -312,7 +365,7 @@
               if (message.type === "assignment") {
                 seat = message.seat;
                 controller.hidden = !message.approved;
-                waiting.hidden = message.approved;
+                waiting.hidden = false;
                 waiting.textContent = message.approved
                   ? `Você é o controle ${seat}. Aguardando vídeo...`
                   : "Aguardando aprovação do anfitrião.";

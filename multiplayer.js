@@ -43,9 +43,14 @@
 
     async function collectMedia() {
         if (mediaStream) return mediaStream;
-        const canvas = document.querySelector('#game canvas, canvas');
+        const emulatorCanvas = window.EJS_emulator?.canvas || window.EJS_emulator?.gameManager?.Module?.canvas;
+        const canvases = Array.from(document.querySelectorAll('#game canvas, canvas')).filter(candidate => candidate.width > 0 && candidate.height > 0);
+        const canvas = emulatorCanvas?.captureStream ? emulatorCanvas : canvases.sort((a, b) => (b.width * b.height) - (a.width * a.height))[0];
         if (!canvas?.captureStream) throw new Error('O vídeo do emulador ainda não está pronto. Tente novamente após o jogo iniciar.');
         mediaStream = canvas.captureStream(30);
+        const videoTrack = mediaStream.getVideoTracks()[0];
+        if (!videoTrack) throw new Error('Não foi possível capturar a imagem do jogo. Aguarde o Mario Kart aparecer e tente novamente.');
+        if (typeof videoTrack.requestFrame === 'function') videoTrack.requestFrame();
         try {
             const context = window.AL?.currentCtx?.audioCtx;
             const sources = window.AL?.currentCtx?.sources || context?.sources;

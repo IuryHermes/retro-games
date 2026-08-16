@@ -34,5 +34,9 @@ assert.match(worker, /profiles\/v1\//);
 assert.match(worker, /presenceByUid/);
 assert.match(social, /presence-dot/);
 assert.match(social, /player\.online/);
+assert.match(host, /EJS_emulator\?\.canvas/);
+assert.match(host, /requestFrame/);
+assert.match(guest, /ATIVAR SOM E JOGAR/);
+assert.match(guest, /onconnectionstatechange/);
 
-console.log('multiplayer client and room: 27 checks passed');
+console.log('multiplayer client and room: 31 checks passed');
