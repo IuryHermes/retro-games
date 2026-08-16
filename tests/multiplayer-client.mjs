@@ -55,5 +55,13 @@ assert.match(worker, /automaticSeat/);
 assert.match(worker, /type: "assignment", seat: automaticSeat/);
 assert.match(host, /row\.remove\(\)/);
 assert.match(host, /classList\.remove\('open'\)/);
+assert.match(host, /está conectado à sua sala como controle/);
+assert.match(host, /Seu convite foi enviado com sucesso/);
+assert.match(host, /data-share="whatsapp"/);
+assert.match(host, /data-share="discord"/);
+assert.match(host, /data-share="instagram"/);
+assert.match(host, /data-share="facebook"/);
+assert.match(host, /navigator\.share/);
+assert.match(social, /Seu convite foi enviado com sucesso/);
 
-console.log('multiplayer client and room: 49 checks passed');
+console.log('multiplayer client and room: 57 checks passed');

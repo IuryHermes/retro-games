@@ -22,6 +22,12 @@ const state = {
 const el = (id) => document.getElementById(id);
 const avatar = (value) =>
   `assets/avatars/${/^avatar-\d{2}$/.test(value || "") ? value : "avatar-01"}.png`;
+function successToast(message) {
+  const box = el("toast");
+  box.replaceChildren(document.createTextNode(message));
+  box.classList.remove("hidden");
+  setTimeout(() => box.classList.add("hidden"), 3000);
+}
 async function token() {
   if (state.firebase) return state.firebase.getIdToken();
   if (state.discord) return state.discord;
@@ -148,7 +154,7 @@ async function invitePlayer(player) {
     });
     state.invited.add(player.uid);
     await loadPlayers();
-    alert(`Convite enviado para ${player.name}.`);
+    successToast("Seu convite foi enviado com sucesso.");
   } catch (error) {
     alert(error.message);
   }
