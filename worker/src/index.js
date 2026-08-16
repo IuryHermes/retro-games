@@ -274,6 +274,29 @@ var src_default = {
     const url = new URL(request.url);
     if (request.method === "OPTIONS")
       return new Response(null, { status: 204, headers: cors });
+    if (request.method === "GET" && url.pathname === "/multiplayer/ice-servers") {
+      const account = await accountAccess(request, env);
+      if (!account)
+        return json({ erro: "Entre na sua conta para usar o multiplayer." }, 401);
+      const fallback = [{ urls: ["stun:stun.cloudflare.com:3478"] }];
+      if (!env.TURN_KEY_ID || !env.TURN_KEY_API_TOKEN)
+        return json({ iceServers: fallback, relay: false });
+      const turnResponse = await fetch(`https://rtc.live.cloudflare.com/v1/turn/keys/${encodeURIComponent(env.TURN_KEY_ID)}/credentials/generate-ice-servers`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${env.TURN_KEY_API_TOKEN}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ ttl: 14400 })
+      });
+      if (!turnResponse.ok)
+        return json({ iceServers: fallback, relay: false });
+      const turn = await turnResponse.json().catch(() => ({}));
+      const iceServers = Array.isArray(turn.iceServers) ? turn.iceServers.map((server) => ({
+        ...server,
+        urls: (Array.isArray(server.urls) ? server.urls : [server.urls]).filter((candidate) => typeof candidate === "string" && !candidate.includes(":53?"))
+      })).filter((server) => server.urls.length) : [];
+      const usable = iceServers.length ? iceServers : fallback;
+      const relay = usable.some((server) => server.urls.some((candidate) => candidate.startsWith("turn:") || candidate.startsWith("turns:")));
+      return new Response(JSON.stringify({ iceServers: usable, relay }), { headers: { ...cors, "Content-Type": "application/json", "Cache-Control": "no-store" } });
+    }
     if (request.method === "POST" && url.pathname === "/multiplayer/rooms") {
       const account = await accountAccess(request, env);
       if (!account)

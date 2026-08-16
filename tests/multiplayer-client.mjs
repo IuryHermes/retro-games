@@ -18,5 +18,9 @@ assert.match(index, /neo_pending_multiplayer_room/);
 assert.match(guest, /voltará automaticamente/);
 assert.match(worker, /class MultiplayerRoom/);
 assert.match(worker, /MULTIPLAYER_ROOMS\.getByName/);
+assert.match(worker, /generate-ice-servers/);
+assert.match(host, /\/multiplayer\/ice-servers/);
+assert.match(guest, /\/multiplayer\/ice-servers/);
+assert.doesNotMatch(guest, /stun\.cloudflare\.com:53/);
 
-console.log('multiplayer client and room: 12 checks passed');
+console.log('multiplayer client and room: 16 checks passed');

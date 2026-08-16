@@ -9,6 +9,7 @@
     let ticket = '';
     let clientId = '';
     let mediaStream = null;
+    let iceServersPromise = null;
 
     const token = () => sessionStorage.getItem(TOKEN_KEY) || sessionStorage.getItem('neo_account_access') || '';
     const params = new URLSearchParams(location.search);
@@ -32,7 +33,10 @@
     }
 
     function iceServers() {
-        return [{ urls:['stun:stun.cloudflare.com:3478', 'stun:stun.cloudflare.com:53'] }];
+        if (!iceServersPromise) {
+            iceServersPromise = request('/multiplayer/ice-servers').then(data => data.iceServers).catch(() => [{ urls:['stun:stun.cloudflare.com:3478'] }]);
+        }
+        return iceServersPromise;
     }
 
     async function collectMedia() {
@@ -69,7 +73,7 @@
     async function ensurePeer(person) {
         if (!person.approved || person.host || peers.has(person.clientId)) return;
         const stream = await collectMedia();
-        const pc = new RTCPeerConnection({ iceServers:iceServers() });
+        const pc = new RTCPeerConnection({ iceServers:await iceServers() });
         const channel = pc.createDataChannel('neo-controls', { ordered:false, maxRetransmits:0 });
         channel.onmessage = event => {
             try { const input = JSON.parse(event.data); applyInput(person.seat, Number(input.index), Number(input.value)); } catch (_) {}

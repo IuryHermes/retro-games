@@ -19,6 +19,8 @@ const objects = new Map();
 const multiplayerRooms = new Map();
 const env = {
   DISCORD_CLIENT_SECRET: 'test-secret',
+  TURN_KEY_ID: 'turn-test-id',
+  TURN_KEY_API_TOKEN: 'turn-test-token',
   GAMES: {
     async get(key) {
       const entry = objects.get(key);
@@ -49,12 +51,25 @@ globalThis.fetch = async (input, init) => {
   const url = String(input);
   if (url.includes('/service_accounts/v1/jwk/')) return Response.json({ keys: [jwk] });
   if (url.includes('firebaseio.com/hall_cadastros/')) return Response.json({ ok: true });
+  if (url.includes('/credentials/generate-ice-servers')) {
+    assert.equal(init.headers.Authorization, 'Bearer turn-test-token');
+    assert.equal(JSON.parse(init.body).ttl, 14400);
+    return Response.json({ iceServers:[{ urls:['stun:stun.cloudflare.com:3478'] }, { urls:['turn:turn.cloudflare.com:3478?transport=udp','turn:turn.cloudflare.com:53?transport=udp'], username:'temporary-user', credential:'temporary-password' }] });
+  }
   return originalFetch(input, init);
 };
 
 const auth = token => ({ Authorization: `Bearer ${token}` });
 const discordToken = (() => { const payload = Buffer.from(JSON.stringify({ accountId:'discord-123456789012345678', username:'DiscordPlayer', purpose:'account', exp:Date.now()+3600000 })).toString('base64url'); return `${payload}.${createHmac('sha256','test-secret').update(payload).digest('base64url')}`; })();
-let response = await worker.fetch(new Request('https://worker/account/profile', { method: 'PUT', headers: { ...auth(tokenFor()), 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Iury Player', avatar: 'avatar-01' }) }), env);
+let response = await worker.fetch(new Request('https://worker/multiplayer/ice-servers'), env);
+assert.equal(response.status, 401);
+response = await worker.fetch(new Request('https://worker/multiplayer/ice-servers', { headers:auth(tokenFor()) }), env);
+const ice = await response.json();
+assert.equal(response.status, 200);
+assert.equal(ice.relay, true);
+assert.equal(ice.iceServers[1].urls.length, 1);
+assert.equal(response.headers.get('Cache-Control'), 'no-store');
+response = await worker.fetch(new Request('https://worker/account/profile', { method: 'PUT', headers: { ...auth(tokenFor()), 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Iury Player', avatar: 'avatar-01' }) }), env);
 assert.equal(response.status, 200);
 assert.equal((await response.json()).created, true);
 
