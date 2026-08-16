@@ -11,3 +11,7 @@ r2_credentials
 # Artefatos locais de ferramentas Python
 __pycache__/
 *.py[cod]
+
+# Artefatos locais do Wrangler e backup recuperado do Worker publicado
+.wrangler/
+worker-backup/

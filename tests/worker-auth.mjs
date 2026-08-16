@@ -1,0 +1,66 @@
+import assert from 'node:assert/strict';
+import { generateKeyPairSync, createSign } from 'node:crypto';
+import worker from '../worker/src/index.js';
+
+const { privateKey, publicKey } = generateKeyPairSync('rsa', { modulusLength: 2048 });
+const jwk = publicKey.export({ format: 'jwk' });
+Object.assign(jwk, { kid: 'test-key', alg: 'RS256', use: 'sig' });
+
+const encode = value => Buffer.from(JSON.stringify(value)).toString('base64url');
+const tokenFor = (overrides = {}) => {
+  const now = Math.floor(Date.now() / 1000);
+  const header = encode({ alg: 'RS256', kid: 'test-key', typ: 'JWT' });
+  const payload = encode({ aud: 'neoterminalroom', iss: 'https://securetoken.google.com/neoterminalroom', sub: 'firebase-user-1', email: 'jogador@example.com', iat: now, auth_time: now, exp: now + 3600, firebase: { sign_in_provider: 'google.com' }, ...overrides });
+  const signature = createSign('RSA-SHA256').update(`${header}.${payload}`).sign(privateKey).toString('base64url');
+  return `${header}.${payload}.${signature}`;
+};
+
+const objects = new Map();
+const env = {
+  DISCORD_CLIENT_SECRET: 'test-secret',
+  GAMES: {
+    async get(key) {
+      const value = objects.get(key);
+      return value === undefined ? null : { size: value.length, httpEtag: 'test', uploaded: new Date(), customMetadata: {}, body: value, async json() { return JSON.parse(Buffer.from(value).toString()); } };
+    },
+    async put(key, value) { objects.set(key, Buffer.from(value)); return { httpEtag: 'test' }; },
+    async delete(key) { objects.delete(key); },
+    async list() { return { objects: [] }; }
+  }
+};
+
+const originalFetch = globalThis.fetch;
+globalThis.fetch = async (input, init) => {
+  const url = String(input);
+  if (url.includes('/service_accounts/v1/jwk/')) return Response.json({ keys: [jwk] });
+  if (url.includes('firebaseio.com/hall_cadastros/')) return Response.json({ ok: true });
+  return originalFetch(input, init);
+};
+
+const auth = token => ({ Authorization: `Bearer ${token}` });
+let response = await worker.fetch(new Request('https://worker/account/profile', { method: 'PUT', headers: { ...auth(tokenFor()), 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Iury Player', avatar: 'avatar-01' }) }), env);
+assert.equal(response.status, 200);
+assert.equal((await response.json()).created, true);
+
+response = await worker.fetch(new Request('https://worker/club/session', { headers: auth(tokenFor()) }), env);
+const session = await response.json();
+assert.equal(response.status, 200);
+assert.equal(session.plan, 'registered');
+assert.equal(session.manualSaveLimit, 3);
+assert.equal(session.username, 'Iury Player');
+
+response = await worker.fetch(new Request('https://worker/club/save?game=mario&slot=manual-4', { method: 'PUT', headers: { ...auth(tokenFor()), 'Content-Length': '3' }, body: new Uint8Array([1, 2, 3]) }), env);
+assert.equal(response.status, 403);
+
+response = await worker.fetch(new Request('https://worker/club/session', { headers: auth(tokenFor({ exp: 1 })) }), env);
+assert.equal(response.status, 401);
+
+const played = (id, name) => worker.fetch(new Request('https://worker/account/history', { method: 'POST', headers: { ...auth(tokenFor()), 'Content-Type': 'application/json' }, body: JSON.stringify({ id, name, system: 'snes', cover: 'systems/snes/capas/game.jpg', playUrl: `player-universal.html?game=${id}&core=snes` }) }), env);
+assert.equal((await played('game-one', 'Game One')).status, 200);
+assert.equal((await played('game-two', 'Game Two')).status, 200);
+assert.equal((await played('game-one', 'Game One')).status, 200);
+response = await worker.fetch(new Request('https://worker/account/history', { headers: auth(tokenFor()) }), env);
+const history = await response.json();
+assert.deepEqual(history.games.map(game => game.id), ['game-one', 'game-two']);
+
+console.log('worker auth/history: 8 checks passed');
