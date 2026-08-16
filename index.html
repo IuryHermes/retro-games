@@ -597,7 +597,7 @@
     async function historyRequest(method = 'GET', body) {
         if (!auth.currentUser && !discordAccountToken) throw new Error('Entre na sua conta primeiro.');
         const token = auth.currentUser ? await auth.currentUser.getIdToken() : discordAccountToken;
-        const response = await fetch(`${ACCOUNT_API}/account/history`, { method, headers: { Authorization: `Bearer ${token}`, ...(body ? {'Content-Type':'application/json'} : {}) }, body: body ? JSON.stringify(body) : undefined, cache: 'no-store' });
+        const response = await fetch(`${ACCOUNT_API}/account/history`, { method, headers: { Authorization: `Bearer ${token}`, ...(body ? {'Content-Type':'application/json'} : {}) }, body: body ? JSON.stringify(body) : undefined, cache: 'no-store', keepalive: method === 'POST' });
         const data = await response.json().catch(() => ({}));
         if (!response.ok) throw new Error(data.erro || 'Não foi possível carregar seus jogos.');
         return data;
@@ -617,7 +617,7 @@
                 const name = document.createElement('span'); name.className = 'history-game-name'; name.textContent = String(game.name || '').slice(0, 100);
                 const system = document.createElement('span'); system.className = 'history-meta'; system.textContent = `${String(game.system || '').toUpperCase()} · JOGAR`;
                 const date = document.createElement('span'); date.className = 'history-date'; date.textContent = new Date(game.playedAt).toLocaleString('pt-BR', { dateStyle:'short', timeStyle:'short' });
-                card.onclick = async event => { event.preventDefault(); try { await historyRequest('POST', { id:game.id, name:game.name, system:game.system, cover:game.cover || '', playUrl:game.playUrl }); } catch (_) {} closeHistory(); window.startGame(game.playUrl); };
+                card.onclick = event => { event.preventDefault(); void historyRequest('POST', { id:game.id, name:game.name, system:game.system, cover:game.cover || '', playUrl:game.playUrl }).catch(() => {}); closeHistory(); window.startGame(game.playUrl); };
                 info.append(name, system, date); card.append(image, info); historyList.appendChild(card);
             });
         } catch (error) { historyList.innerHTML = ''; const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = error.message; historyList.appendChild(empty); }
@@ -625,10 +625,14 @@
     async function recordPlayedGame(game, playUrl) {
         if (!accountProfile || (!auth.currentUser && !discordAccountToken)) return;
         const coverName = game.capa ? game.capa.split('/').pop() : '';
-        const cover = coverName ? `${R2_URL}${game.sysPath || game.path || ''}capas/${encodeURIComponent(coverName)}` : '';
+        const cover = game.cover || (coverName ? `${R2_URL}${game.sysPath || game.path || ''}capas/${encodeURIComponent(coverName)}` : '');
         const historyId = String(game.id || `${game.sysId}-${String(game.rom || '').split('/').pop()}`).toLowerCase().replace(/\.[a-z0-9]+$/i, '').replace(/[^a-z0-9._,-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 120);
         try { await historyRequest('POST', { id: historyId, name: game.nomeOriginal || game.nome, system: game.sysId, cover, playUrl }); }
         catch (error) { console.warn('Neo history:', error); }
+    }
+    function playAndRemember(game, playUrl) {
+        void recordPlayedGame(game, playUrl);
+        window.startGame(playUrl);
     }
 
     async function profileRequest(method, body) {
@@ -910,7 +914,7 @@
         btnShopee.onclick = (e) => { e.target.href = shopeeLinks[Math.floor(Math.random() * shopeeLinks.length)]; };
         btnMl.onclick = (e) => { e.target.href = mlLinks[Math.floor(Math.random() * mlLinks.length)]; };
 
-        document.getElementById('modal-play-btn').onclick = async () => { window.closeGameModal(); await recordPlayedGame(gameObj, playUrl); window.startGame(playUrl); };
+        document.getElementById('modal-play-btn').onclick = () => { window.closeGameModal(); playAndRemember(gameObj, playUrl); };
         document.getElementById('game-info-modal').style.display = 'flex';
     };
 
@@ -993,9 +997,10 @@
             <div class="hero-content">
                 <h1 class="hero-title">${game.nome}</h1>
                 <div class="hero-categories">${game.cats}</div>
-                <button class="hero-play-btn selectable-item" onclick="window.startGame('${playUrl}')"><span>▶</span> JOGAR</button>
+                <button class="hero-play-btn selectable-item" type="button"><span>▶</span> JOGAR</button>
             </div>
         `;
+        slide.querySelector('.hero-play-btn').onclick = () => playAndRemember({ ...game, cover: wallpaperPath }, playUrl);
         heroSlider.appendChild(slide);
         const dot = document.createElement('div'); dot.className = `indicator ${index === 0 ? 'active' : ''}`;
         dot.onclick = () => goToSlide(index); heroIndicators.appendChild(dot);
