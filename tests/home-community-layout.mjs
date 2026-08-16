@@ -14,5 +14,9 @@ assert.match(index, /\.search-container \{ flex:0 0 100%/);
 assert.match(index, /\.community-shortcuts-pc/);
 assert.match(index, /'multiplayer-hub-trigger-desktop'/);
 assert.match(index, /\.multiplayer-hub-trigger \{[^}]*background:var\(--sidebar-bg\)/);
+assert.match(index, /\.community-shortcut \{[^}]*background:transparent/);
+assert.match(index, /height: 245px; min-height: 220px/);
+assert.match(index, /function scrollChatToLatest\(\)/);
+assert.match(index, /addEventListener\('mouseenter', scrollChatToLatest\)/);
 
-console.log('home community layout: 9 checks passed');
+console.log('home community layout: 13 checks passed');

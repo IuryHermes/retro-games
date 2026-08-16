@@ -156,7 +156,7 @@
         .pix-text-pc { display: none; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
         .community-shortcuts-pc { display:flex; flex-direction:column; gap:6px; padding:8px 4px 12px; margin:0 0 8px; border-top:1px dashed var(--border-color); border-bottom:1px dashed var(--border-color); }
         .community-shortcuts-title { display:none; opacity:0; padding:2px 7px 5px; color:var(--accent-color); font:7px 'Press Start 2P',cursive; line-height:1.5; white-space:nowrap; }
-        .community-shortcut { min-height:46px; display:flex; align-items:center; justify-content:center; gap:11px; padding:6px; border:1px solid var(--border-color); border-radius:8px; background:var(--input-bg); color:var(--text-color); text-decoration:none; cursor:pointer; transition:.2s; overflow:hidden; }
+        .community-shortcut { min-height:46px; display:flex; align-items:center; justify-content:center; gap:11px; padding:6px; border:1px solid var(--border-color); border-radius:8px; background:transparent; color:var(--text-color); text-decoration:none; cursor:pointer; transition:.2s; overflow:hidden; }
         .community-shortcut:hover { border-color:var(--accent-color); background:rgba(0,204,68,.12); box-shadow:0 0 12px rgba(0,204,68,.18); }
         .community-shortcut img { width:36px; height:36px; object-fit:contain; flex:0 0 36px; }
         .community-shortcut-copy { display:none; opacity:0; min-width:0; text-align:left; }
@@ -164,7 +164,7 @@
         .community-shortcut-copy small { display:block; margin-top:4px; color:var(--text-muted); font:9px monospace; white-space:nowrap; }
         .mobile-community-actions { display:none; align-items:center; gap:6px; }
 
-        .sidebar-chat { background: var(--bg-color); border: 1px solid var(--accent-color); padding: 10px; border-radius: 4px; height: 350px; min-height: 350px; display: none; flex-direction: column; width: 100%; flex-shrink: 0; margin-bottom: 20px; margin-top: auto; position: relative; }
+        .sidebar-chat { background: var(--bg-color); border: 1px solid var(--accent-color); padding: 8px; border-radius: 4px; height: 245px; min-height: 220px; display: none; flex-direction: column; width: 100%; flex-shrink: 1; margin: 8px 0; position: relative; }
         .close-chat-btn { display: none; }
         #terminal-output { flex: 1; overflow-y: auto; font-family: monospace; font-size: 10px; color: var(--accent-color); margin-bottom: 10px; word-wrap: break-word; overflow-x: hidden; }
         .chat-time { color: var(--text-muted); font-size: 8px; margin-right: 5px; }
@@ -230,7 +230,10 @@
         .hero-slide.personalized .hero-bg-media { object-fit:contain; object-position:76% center; width:58%; left:auto; right:5%; filter:drop-shadow(0 20px 34px rgba(0,0,0,.8)); }
         .hero-eyebrow { color:var(--accent-color); font:10px 'Press Start 2P',cursive; letter-spacing:1px; text-shadow:0 2px 8px #000; }
         .hero-resume-note { color:#eee; font:bold 13px monospace; max-width:520px; line-height:1.5; text-shadow:0 2px 8px #000; }
-        .hero-indicators { absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; pointer-events: auto; }
+        .hero-indicators { position:absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; pointer-events: auto; }
+        .hero-nav { position:absolute; top:50%; z-index:6; width:42px; height:58px; transform:translateY(-50%); border:1px solid rgba(255,255,255,.65); border-radius:5px; background:rgba(0,0,0,.55); color:#fff; font-size:28px; cursor:pointer; backdrop-filter:blur(5px); transition:.2s; }
+        .hero-nav:hover, .hero-nav:focus-visible { color:var(--accent-color); border-color:var(--accent-color); background:rgba(0,0,0,.82); outline:none; }
+        .hero-nav.prev { left:18px; }.hero-nav.next { right:18px; }
         .indicator { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
         .indicator.active { background: var(--accent-color); transform: scale(1.3); }
 
@@ -303,6 +306,7 @@
             .row-header { justify-content: space-between; padding-right: 15px; }
             .view-all-btn { font-size: 8px; padding: 6px 10px; }
             .hero-section { height: 400px; min-height: auto; max-height: none; }
+            .hero-nav { width:34px; height:46px; font-size:22px; }.hero-nav.prev{left:7px}.hero-nav.next{right:7px}
             .hero-bg-media { object-fit: cover; object-position: right center; }
             .hero-slide.personalized .hero-bg-media { width:100%; right:0; object-fit:cover; opacity:.5; filter:none; }
             .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
@@ -629,6 +633,8 @@
 
             <section class="hero-section" id="hero-slider">
                 <div class="hero-indicators" id="hero-indicators"></div>
+                <button class="hero-nav prev" id="hero-prev" type="button" aria-label="Jogo anterior">&#8249;</button>
+                <button class="hero-nav next" id="hero-next" type="button" aria-label="Próximo jogo">&#8250;</button>
             </section>
 
             <section class="catalog" id="catalog-area"></section>
@@ -1066,6 +1072,7 @@
         document.body.appendChild(chat);
         chat.classList.add('chat-modal-mobile');
         document.getElementById('chat-mobile-backdrop').style.display = 'block';
+        scrollChatToLatest();
     };
     window.closeMobileChat = () => {
         const chat = document.getElementById('chat-container');
@@ -1171,8 +1178,14 @@
         row.append(user, document.createTextNode(` ${String(d.text || '').slice(0, 240)}`)); out.appendChild(row);
 
         // Timeout garante que o navegador rolou para a última mensagem perfeitamente
-        setTimeout(() => { out.scrollTop = out.scrollHeight; }, 50);
+        scrollChatToLatest();
     });
+
+    function scrollChatToLatest() {
+        requestAnimationFrame(() => requestAnimationFrame(() => { out.scrollTop = out.scrollHeight; }));
+        setTimeout(() => { out.scrollTop = out.scrollHeight; }, 120);
+    }
+    document.getElementById('main-sidebar').addEventListener('mouseenter', scrollChatToLatest);
 
     function sendMessage() {
         const user = nickInput.value.trim(); const text = msgInput.value.trim();
@@ -1247,6 +1260,8 @@
     function nextSlide() { goToSlide((currentHeroIndex + 1) % heroSlideCount()); }
     function prevSlide() { goToSlide((currentHeroIndex - 1 + heroSlideCount()) % heroSlideCount()); }
     function resetHeroTimer() { clearInterval(heroTimer); heroTimer = setInterval(nextSlide, 5000); }
+    document.getElementById('hero-prev').onclick = prevSlide;
+    document.getElementById('hero-next').onclick = nextSlide;
     resetHeroTimer();
 
     const systems = [
@@ -1383,7 +1398,7 @@
         if (!response.ok) return '';
         return URL.createObjectURL(await response.blob());
     }
-    refreshPersonalHero = async function () {
+    async function refreshSinglePersonalHero() {
         if (!accountProfile) return;
         try {
             const [historyData] = await Promise.all([historyRequest(), Promise.allSettled(fetchPromises)]);
@@ -1423,6 +1438,61 @@
             const dot = document.createElement('div'); dot.id = 'personalized-hero-dot'; dot.className = 'indicator'; heroIndicators.prepend(dot);
             rebindHeroIndicators(); goToSlide(0);
         } catch (error) { console.warn('Neo hero personalizado:', error); }
+    };
+    refreshPersonalHero = async function () {
+        if (!accountProfile) return;
+        try {
+            const [historyData] = await Promise.all([historyRequest(), Promise.allSettled(fetchPromises)]);
+            const recentGames = (historyData.games || []).slice(0, 3);
+            if (!recentGames.length) return;
+
+            document.querySelectorAll('.hero-slide.personalized').forEach(previous => {
+                if (previous.dataset.objectUrl) URL.revokeObjectURL(previous.dataset.objectUrl);
+                previous.remove();
+            });
+            document.querySelectorAll('.indicator.personalized-indicator, #personalized-hero-dot').forEach(dot => dot.remove());
+
+            const savedFrames = await Promise.all(recentGames.map(game => autosaveHeroImage(game.id).catch(() => '')));
+            const slides = document.createDocumentFragment();
+            const dots = document.createDocumentFragment();
+            recentGames.forEach((recent, recentIndex) => {
+                const catalogGame = indexData.find(game => catalogHistoryId(game) === recent.id);
+                const coverName = catalogGame?.capa ? catalogGame.capa.split('/').pop() : '';
+                const catalogCover = coverName ? `${R2_URL}${catalogGame.sysPath}capas/${encodeURIComponent(coverName)}` : '';
+                const featured = top10Games.find(game => game.id === recent.id);
+                const savedFrame = savedFrames[recentIndex];
+                const media = savedFrame || (featured ? `assets/wallpapers_hero/${featured.id}.jpg` : (recent.cover || catalogCover || 'assets/imagens-videos/logo-discord.gif'));
+                const slide = document.createElement('div');
+                slide.id = `personalized-hero-${recentIndex}`;
+                slide.className = 'hero-slide personalized';
+                if (savedFrame) slide.dataset.objectUrl = savedFrame;
+                const blur = document.createElement('img'); blur.className = 'hero-bg-blur'; blur.src = media; blur.alt = '';
+                const art = document.createElement('img'); art.className = 'hero-bg-media'; art.src = media; art.alt = '';
+                art.onerror = () => { art.onerror = null; blur.src = art.src = 'assets/imagens-videos/logo-discord.gif'; };
+                const overlay = document.createElement('div'); overlay.className = 'hero-overlay';
+                const content = document.createElement('div'); content.className = 'hero-content';
+                const eyebrow = document.createElement('div'); eyebrow.className = 'hero-eyebrow'; eyebrow.textContent = `OLÁ, ${accountProfile.name}`;
+                const title = document.createElement('h1'); title.className = 'hero-title'; title.textContent = recent.name;
+                const meta = document.createElement('div'); meta.className = 'hero-categories'; meta.textContent = `${String(recent.system || '').toUpperCase()} · RECENTE ${recentIndex + 1} DE ${recentGames.length}`;
+                const note = document.createElement('div'); note.className = 'hero-resume-note'; note.textContent = savedFrame ? 'Esta é a tela do seu autosave. Continue exatamente de onde parou.' : 'Volte ao jogo. A imagem da partida aparecerá aqui depois do próximo autosave.';
+                const button = document.createElement('button'); button.type = 'button'; button.className = 'hero-play-btn selectable-item'; button.innerHTML = '<span>▶</span> CONTINUAR';
+                button.onclick = () => {
+                    void historyRequest('POST', { id:recent.id, name:recent.name, system:recent.system, cover:recent.cover || media, playUrl:recent.playUrl }).catch(() => {});
+                    window.startGame(recent.playUrl);
+                };
+                content.append(eyebrow, title, meta, note, button);
+                slide.append(blur, art, overlay, content);
+                slides.appendChild(slide);
+                const dot = document.createElement('div');
+                dot.id = `personalized-hero-dot-${recentIndex}`;
+                dot.className = 'indicator personalized-indicator';
+                dots.appendChild(dot);
+            });
+            heroSlider.insertBefore(slides, heroSlider.querySelector('.hero-slide'));
+            heroIndicators.insertBefore(dots, heroIndicators.firstChild);
+            rebindHeroIndicators();
+            goToSlide(0);
+        } catch (error) { console.warn('Neo heróis recentes:', error); }
     };
     Promise.allSettled(fetchPromises).then(() => { if (accountProfile) void refreshPersonalHero(); });
 
