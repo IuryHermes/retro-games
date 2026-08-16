@@ -199,6 +199,11 @@
         .hero-play-btn { display: inline-flex; align-items: center; justify-content: center; background: #fff; color: #000; font-family: 'Roboto', sans-serif; font-weight: bold; font-size: 18px; padding: 12px 30px; border-radius: 4px; border: none; cursor: pointer; width: fit-content; margin-top: 10px; transition: 0.3s; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); position: relative; pointer-events: auto; }
         .hero-play-btn:hover { background: var(--accent-color); color: #fff; transform: scale(1.05); }
         .hero-play-btn.gamepad-focus { background: var(--accent-color); color: #fff; outline: 3px solid #fff; box-shadow: 0 0 20px var(--accent-color); transform: scale(1.05); }
+        .hero-slide.personalized { background: radial-gradient(circle at 72% 45%, rgba(0,204,68,.22), #020504 58%, #000); }
+        .hero-slide.personalized .hero-bg-blur { filter: blur(38px) saturate(1.25) brightness(.42); transform:scale(1.08); }
+        .hero-slide.personalized .hero-bg-media { object-fit:contain; object-position:76% center; width:58%; left:auto; right:5%; filter:drop-shadow(0 20px 34px rgba(0,0,0,.8)); }
+        .hero-eyebrow { color:var(--accent-color); font:10px 'Press Start 2P',cursive; letter-spacing:1px; text-shadow:0 2px 8px #000; }
+        .hero-resume-note { color:#eee; font:bold 13px monospace; max-width:520px; line-height:1.5; text-shadow:0 2px 8px #000; }
         .hero-indicators { absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; pointer-events: auto; }
         .indicator { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; }
         .indicator.active { background: var(--accent-color); transform: scale(1.3); }
@@ -270,6 +275,7 @@
             .view-all-btn { font-size: 8px; padding: 6px 10px; }
             .hero-section { height: 400px; min-height: auto; max-height: none; }
             .hero-bg-media { object-fit: cover; object-position: right center; }
+            .hero-slide.personalized .hero-bg-media { width:100%; right:0; object-fit:cover; opacity:.5; filter:none; }
             .hero-overlay { background: linear-gradient(to top, var(--bg-color) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.3) 100%); }
             .hero-content { padding: 0 20px; margin-top: auto; margin-bottom: 40px; }
             .hero-title { font-size: 24px; }
@@ -625,6 +631,7 @@
     const PENDING_HISTORY_KEY = 'neo_pending_history';
     const AVATARS = Array.from({ length: 40 }, (_, index) => `avatar-${String(index + 1).padStart(2, '0')}`);
     let accountProfile = null;
+    let refreshPersonalHero = () => {};
     let selectedAvatar = 'avatar-01';
     const accountFragment = new URLSearchParams(location.hash.slice(1));
     const receivedAccountToken = accountFragment.get('account_token');
@@ -807,7 +814,7 @@
     async function saveProfile() {
         const name = document.getElementById('auth-name').value.trim();
         setAuthStatus('Salvando perfil...');
-        try { const data = await profileRequest('PUT', { name, avatar: selectedAvatar }); accountProfile = data.profile; applyProfile(); setAuthStatus(data.created ? `Bem-vindo(a), ${accountProfile.name}!` : 'Perfil atualizado.'); setTimeout(closeAuth, 900); }
+        try { const data = await profileRequest('PUT', { name, avatar: selectedAvatar }); accountProfile = data.profile; applyProfile(); void refreshPersonalHero(); setAuthStatus(data.created ? `Bem-vindo(a), ${accountProfile.name}!` : 'Perfil atualizado.'); setTimeout(closeAuth, 900); }
         catch (error) { setAuthStatus(error.message); }
     }
     function applyProfile() {
@@ -850,6 +857,7 @@
         try {
             const data = await profileRequest('GET'); accountProfile = data.profile; applyProfile(); closeAuth();
             startSocialPresence();
+            void refreshPersonalHero();
             const pendingRoom = sessionStorage.getItem('neo_pending_multiplayer_room');
             if (/^[a-f0-9]{12}$/.test(pendingRoom || '')) { sessionStorage.removeItem('neo_pending_multiplayer_room'); location.href = `multiplayer-room.html?room=${encodeURIComponent(pendingRoom)}`; }
         }
@@ -1191,8 +1199,9 @@
         currentHeroIndex = index; resetHeroTimer();
         updateGamepadFocusList();
     }
-    function nextSlide() { goToSlide((currentHeroIndex + 1) % top10Games.length); }
-    function prevSlide() { goToSlide((currentHeroIndex - 1 + top10Games.length) % top10Games.length); }
+    function heroSlideCount() { return document.querySelectorAll('.hero-slide').length; }
+    function nextSlide() { goToSlide((currentHeroIndex + 1) % heroSlideCount()); }
+    function prevSlide() { goToSlide((currentHeroIndex - 1 + heroSlideCount()) % heroSlideCount()); }
     function resetHeroTimer() { clearInterval(heroTimer); heroTimer = setInterval(nextSlide, 5000); }
     resetHeroTimer();
 
@@ -1312,6 +1321,66 @@
         });
         fetchPromises.push(p);
     });
+
+    function catalogHistoryId(game) {
+        return String(game.id || `${game.sysId}-${String(game.rom || '').split('/').pop()}`)
+            .toLowerCase().replace(/\.[a-z0-9]+$/i, '').replace(/[^a-z0-9._,-]+/g, '-')
+            .replace(/^-+|-+$/g, '').slice(0, 120);
+    }
+    function rebindHeroIndicators() {
+        [...heroIndicators.children].forEach((dot, index) => { dot.onclick = () => goToSlide(index); });
+    }
+    async function autosaveHeroImage(gameId) {
+        const token = auth.currentUser ? await auth.currentUser.getIdToken() : discordAccountToken;
+        if (!token) return '';
+        const response = await fetch(`${ACCOUNT_API}/club/save-image?game=${encodeURIComponent(gameId)}`, {
+            headers: { Authorization: `Bearer ${token}` }, cache: 'no-store'
+        });
+        if (!response.ok) return '';
+        return URL.createObjectURL(await response.blob());
+    }
+    refreshPersonalHero = async function () {
+        if (!accountProfile) return;
+        try {
+            const [historyData] = await Promise.all([historyRequest(), Promise.allSettled(fetchPromises)]);
+            const recent = historyData.games?.[0];
+            if (!recent) return;
+            const catalogGame = indexData.find(game => catalogHistoryId(game) === recent.id);
+            const coverName = catalogGame?.capa ? catalogGame.capa.split('/').pop() : '';
+            const catalogCover = coverName ? `${R2_URL}${catalogGame.sysPath}capas/${encodeURIComponent(coverName)}` : '';
+            const featured = top10Games.find(game => game.id === recent.id);
+            const savedFrame = await autosaveHeroImage(recent.id).catch(() => '');
+            const media = savedFrame || (featured ? `assets/wallpapers_hero/${featured.id}.jpg` : (recent.cover || catalogCover || 'assets/imagens-videos/logo-discord.gif'));
+            const previousHero = document.getElementById('personalized-hero');
+            if (previousHero?.dataset.objectUrl) URL.revokeObjectURL(previousHero.dataset.objectUrl);
+            previousHero?.remove();
+            document.getElementById('personalized-hero-dot')?.remove();
+
+            const slide = document.createElement('div');
+            slide.id = 'personalized-hero'; slide.className = 'hero-slide personalized';
+            if (savedFrame) slide.dataset.objectUrl = savedFrame;
+            const blur = document.createElement('img'); blur.className = 'hero-bg-blur'; blur.src = media; blur.alt = '';
+            const art = document.createElement('img'); art.className = 'hero-bg-media'; art.src = media; art.alt = '';
+            const fallback = () => { art.onerror = null; blur.src = art.src = 'assets/imagens-videos/logo-discord.gif'; };
+            art.onerror = fallback;
+            const overlay = document.createElement('div'); overlay.className = 'hero-overlay';
+            const content = document.createElement('div'); content.className = 'hero-content';
+            const eyebrow = document.createElement('div'); eyebrow.className = 'hero-eyebrow'; eyebrow.textContent = `OLÁ, ${accountProfile.name}`;
+            const title = document.createElement('h1'); title.className = 'hero-title'; title.textContent = recent.name;
+            const meta = document.createElement('div'); meta.className = 'hero-categories'; meta.textContent = `${String(recent.system || '').toUpperCase()} · SEU ÚLTIMO JOGO`;
+            const note = document.createElement('div'); note.className = 'hero-resume-note'; note.textContent = savedFrame ? 'Esta é a tela do seu último autosave. Continue exatamente de onde parou.' : 'Volte ao jogo. A imagem da partida aparecerá aqui depois do próximo autosave.';
+            const button = document.createElement('button'); button.type = 'button'; button.className = 'hero-play-btn selectable-item'; button.innerHTML = '<span>▶</span> CONTINUAR';
+            button.onclick = () => {
+                void historyRequest('POST', { id:recent.id, name:recent.name, system:recent.system, cover:recent.cover || media, playUrl:recent.playUrl }).catch(() => {});
+                window.startGame(recent.playUrl);
+            };
+            content.append(eyebrow, title, meta, note, button); slide.append(blur, art, overlay, content);
+            heroSlider.prepend(slide);
+            const dot = document.createElement('div'); dot.id = 'personalized-hero-dot'; dot.className = 'indicator'; heroIndicators.prepend(dot);
+            rebindHeroIndicators(); goToSlide(0);
+        } catch (error) { console.warn('Neo hero personalizado:', error); }
+    };
+    Promise.allSettled(fetchPromises).then(() => { if (accountProfile) void refreshPersonalHero(); });
 
     const searchInput = document.getElementById('global-search');
     const searchResults = document.getElementById('search-results');

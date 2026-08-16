@@ -17,6 +17,7 @@ var FIREBASE_ISSUER = `https://securetoken.google.com/${FIREBASE_PROJECT_ID}`;
 var FIREBASE_JWKS = "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com";
 var PROFILE_AVATARS = Array.from({ length: 40 }, (_, index) => `avatar-${String(index + 1).padStart(2, "0")}`);
 var MAX_SAVE_BYTES = 16 * 1024 * 1024;
+var MAX_SAVE_IMAGE_BYTES = 4 * 1024 * 1024;
 var WEEKLY_POLLS = [
   { question: "Qual sistema deve receber prioridade na pr\xF3xima novidade?", answers: ["Super Nintendo", "Mega Drive", "Game Boy Advance", "Nintendo 64"] },
   { question: "Que tipo de jogo combina mais com a pr\xF3xima sele\xE7\xE3o?", answers: ["Plataforma", "RPG", "Corrida", "A\xE7\xE3o"] },
@@ -663,6 +664,8 @@ var src_default = {
       }
       if (request.method === "DELETE") {
         await env.GAMES.delete(target.key);
+        if (target.slot === "auto")
+          await env.GAMES.delete(`save-images/v1/${access.discordId}/${target.game}.png`);
         return json({ removido: true, game: target.game, slot: target.slot });
       }
       const contentLength = Number(request.headers.get("Content-Length") || 0);
@@ -692,6 +695,33 @@ var src_default = {
       }
       const object = await env.GAMES.put(target.key, data, { httpMetadata: { contentType: "application/octet-stream" }, customMetadata: { game: target.game, slot: target.slot, name, gameName, gameSystem, updatedAt } });
       return json({ salvo: true, game: target.game, slot: target.slot, size: data.byteLength, updatedAt, etag: object?.httpEtag });
+    }
+    if (url.pathname === "/club/save-image" && ["GET", "PUT"].includes(request.method)) {
+      const access = await clubAccess(request, url, env);
+      if (!access)
+        return json({ erro: "Acesso expirado." }, 401);
+      const game = (url.searchParams.get("game") || "").trim().toLowerCase();
+      if (!/^[a-z0-9][a-z0-9._-]{0,119}$/.test(game))
+        return json({ erro: "Jogo invalido." }, 400);
+      const key = `save-images/v1/${access.discordId}/${game}.png`;
+      if (request.method === "GET") {
+        const image = await env.GAMES.get(key);
+        if (!image)
+          return json({ erro: "Imagem do autosave nao encontrada." }, 404);
+        const headers = new Headers(cors);
+        headers.set("Content-Type", "image/png");
+        headers.set("Content-Length", String(image.size));
+        headers.set("Cache-Control", "private, no-store");
+        return new Response(image.body, { headers });
+      }
+      const contentLength = Number(request.headers.get("Content-Length") || 0);
+      if (!Number.isSafeInteger(contentLength) || contentLength < 1 || contentLength > MAX_SAVE_IMAGE_BYTES)
+        return json({ erro: "Imagem vazia ou maior que 4 MB." }, 413);
+      const image = await request.arrayBuffer();
+      if (image.byteLength !== contentLength || image.byteLength > MAX_SAVE_IMAGE_BYTES)
+        return json({ erro: "Tamanho da imagem invalido." }, 400);
+      await env.GAMES.put(key, image, { httpMetadata: { contentType: "image/png", cacheControl: "private, no-store" } });
+      return json({ salvo: true, game, size: image.byteLength });
     }
     if (request.method === "POST" && url.pathname === "/admin/setup-discord") {
       const authorization = request.headers.get("Authorization");

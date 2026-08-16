@@ -105,8 +105,16 @@ response = await worker.fetch(new Request('https://worker/club/library', { heade
 const library = await response.json();
 assert.equal(library.automaticGamesUsed, 3);
 assert.equal(library.games.find(game => game.id === 'auto-one').name, 'auto-one');
+response = await worker.fetch(new Request('https://worker/club/save-image?game=auto-one', { method:'PUT', headers:{ ...auth(tokenFor()), 'Content-Type':'image/png', 'Content-Length':'4' }, body:new Uint8Array([137, 80, 78, 71]) }), env);
+assert.equal(response.status, 200);
+response = await worker.fetch(new Request('https://worker/club/save-image?game=auto-one', { headers:auth(tokenFor()) }), env);
+assert.equal(response.status, 200);
+assert.equal(response.headers.get('Content-Type'), 'image/png');
+assert.deepEqual([...new Uint8Array(await response.arrayBuffer())], [137, 80, 78, 71]);
 response = await worker.fetch(new Request('https://worker/club/save?game=auto-one&slot=auto', { method:'DELETE', headers:auth(tokenFor()) }), env);
 assert.equal(response.status, 200);
+response = await worker.fetch(new Request('https://worker/club/save-image?game=auto-one', { headers:auth(tokenFor()) }), env);
+assert.equal(response.status, 404);
 assert.equal((await putAuto('auto-four')).status, 200);
 
 response = await worker.fetch(new Request('https://worker/account/profile', { method:'PUT', headers:{ ...auth(discordToken), 'Content-Type':'application/json' }, body:JSON.stringify({ name:'Discord Player', avatar:'avatar-02' }) }), env);
@@ -129,4 +137,4 @@ response = await worker.fetch(new Request(`https://worker/multiplayer/rooms/${cr
 assert.equal(response.status, 200);
 assert.ok((await response.json()).ticket);
 
-console.log('worker auth/history/discord/cloud/multiplayer: 28 checks passed');
+console.log('worker auth/history/discord/cloud/multiplayer: 34 checks passed');

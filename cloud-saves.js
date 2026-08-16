@@ -116,12 +116,28 @@
         return stateBytes(await manager.getState());
     }
 
+    async function uploadAutosaveImage() {
+        const manager = window.EJS_emulator && window.EJS_emulator.gameManager;
+        if (!token || !manager || typeof manager.screenshot !== 'function') return false;
+        try {
+            const image = stateBytes(await manager.screenshot());
+            if (!image?.byteLength) return false;
+            const response = await fetch(`${API}/club/save-image?game=${encodeURIComponent(gameId)}&token=${encodeURIComponent(token)}`, {
+                method: 'PUT', headers: { 'Content-Type': 'image/png' }, body: image
+            });
+            return response.ok;
+        } catch (error) {
+            console.warn('Neo autosave image:', error);
+            return false;
+        }
+    }
+
     async function autosave() {
         if (!automaticEnabled || autosavePending) return;
         autosavePending = true;
         try {
             const state = await currentState();
-            if (state) await upload('auto', state, 'Autosave');
+            if (state && await upload('auto', state, 'Autosave')) await uploadAutosaveImage();
         } finally {
             autosavePending = false;
         }
