@@ -38,5 +38,7 @@ assert.match(host, /EJS_emulator\?\.canvas/);
 assert.match(host, /requestFrame/);
 assert.match(guest, /ATIVAR SOM E JOGAR/);
 assert.match(guest, /onconnectionstatechange/);
+assert.match(guest, /if \(!peer\)\s+peer = new RTCPeerConnection/);
+assert.match(guest, /const currentPeer = peer/);
 
-console.log('multiplayer client and room: 31 checks passed');
+console.log('multiplayer client and room: 33 checks passed');

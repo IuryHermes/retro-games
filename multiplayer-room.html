@@ -259,10 +259,13 @@
         });
         async function signal(message) {
           if (!peer) {
-            peer = new RTCPeerConnection({
-              iceServers: await iceServers(),
-            });
-            peer.onicecandidate = (e) => {
+            const configuration = await iceServers();
+            if (!peer)
+              peer = new RTCPeerConnection({ iceServers: configuration });
+          }
+          if (!peer.onicecandidate) {
+            const currentPeer = peer;
+            currentPeer.onicecandidate = (e) => {
               if (e.candidate)
                 send({
                   type: "signal",
@@ -270,7 +273,7 @@
                   data: { candidate: e.candidate },
                 });
             };
-            peer.ontrack = async (e) => {
+            currentPeer.ontrack = async (e) => {
               video.srcObject = e.streams[0];
               video.muted = true;
               try {
@@ -299,7 +302,7 @@
                 };
               }
             };
-            peer.onconnectionstatechange = () => {
+            currentPeer.onconnectionstatechange = () => {
               const labels = {
                 connecting: "Conectando vídeo...",
                 connected: "Vídeo conectado",
@@ -307,10 +310,10 @@
                 failed:
                   "Falha no vídeo. Peça ao anfitrião para reabrir a sala.",
               };
-              if (labels[peer.connectionState])
-                status.textContent = labels[peer.connectionState];
+              if (labels[currentPeer.connectionState])
+                status.textContent = labels[currentPeer.connectionState];
             };
-            peer.ondatachannel = (e) => {
+            currentPeer.ondatachannel = (e) => {
               channel = e.channel;
             };
           }
