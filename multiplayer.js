@@ -9,6 +9,9 @@
     let ticket = '';
     let clientId = '';
     let mediaStream = null;
+    let audioCaptureDestination = null;
+    let audioCaptureTimer = 0;
+    const capturedAudioNodes = new WeakSet();
     let iceServersPromise = null;
     let iceServersExpiresAt = 0;
     const seenParticipants = new Set();
@@ -43,17 +46,44 @@
         return iceServersPromise;
     }
 
+    function audioState() {
+        return window.EJS_emulator?.Module?.AL?.currentCtx || window.EJS_emulator?.gameManager?.Module?.AL?.currentCtx || null;
+    }
+
+    function refreshAudioCapture() {
+        const state = audioState();
+        const context = state?.audioCtx;
+        if (!context || !state?.sources) return null;
+        if (!audioCaptureDestination) audioCaptureDestination = context.createMediaStreamDestination();
+        const sources = state.sources instanceof Map ? Array.from(state.sources.values()) : Object.values(state.sources);
+        for (const item of sources.flat ? sources.flat(Infinity) : sources) {
+            const node = item?.gain || item?.node || item;
+            if (node?.connect && !capturedAudioNodes.has(node)) {
+                try { node.connect(audioCaptureDestination); capturedAudioNodes.add(node); } catch (_) {}
+            }
+        }
+        return audioCaptureDestination.stream.getAudioTracks()[0] || null;
+    }
+
+    async function prepareAudioCapture() {
+        for (let attempt = 0; attempt < 50; attempt++) {
+            const track = refreshAudioCapture();
+            if (track?.readyState === 'live') {
+                if (!audioCaptureTimer) audioCaptureTimer = setInterval(refreshAudioCapture, 500);
+                return track;
+            }
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
+        return null;
+    }
+
     async function collectMedia() {
         if (mediaStream) return mediaStream;
         const emulatorCanvas = window.EJS_emulator?.canvas || window.EJS_emulator?.gameManager?.Module?.canvas;
         const canvases = Array.from(document.querySelectorAll('#game canvas, canvas')).filter(candidate => candidate.width > 0 && candidate.height > 0);
         const canvas = emulatorCanvas?.captureStream ? emulatorCanvas : canvases.sort((a, b) => (b.width * b.height) - (a.width * a.height))[0];
         if (!canvas?.captureStream) throw new Error('O vídeo do emulador ainda não está pronto. Tente novamente após o jogo iniciar.');
-        for (let attempt = 0; attempt < 30; attempt++) {
-            const audioState = window.EJS_emulator?.Module?.AL?.currentCtx;
-            if (audioState?.audioCtx && audioState.sources && Object.keys(audioState.sources).length) break;
-            await new Promise(resolve => setTimeout(resolve, 100));
-        }
+        const audioTrack = await prepareAudioCapture();
         let nativeStream = null;
         try { nativeStream = window.EJS_emulator?.collectScreenRecordingMediaTracks?.(canvas, 30) || null; }
         catch (error) { console.warn('Neo multiplayer native media:', error); }
@@ -61,20 +91,9 @@
         const videoTrack = mediaStream.getVideoTracks()[0];
         if (!videoTrack) throw new Error('Não foi possível capturar a imagem do jogo. Aguarde o Mario Kart aparecer e tente novamente.');
         if (typeof videoTrack.requestFrame === 'function') videoTrack.requestFrame();
-        try {
-            const audioState = window.EJS_emulator?.Module?.AL?.currentCtx;
-            const context = audioState?.audioCtx;
-            const sources = audioState?.sources;
-            if (!mediaStream.getAudioTracks().length && context && sources) {
-                const destination = context.createMediaStreamDestination();
-                const nodes = sources instanceof Map ? Array.from(sources.values()) : Object.values(sources);
-                for (const item of nodes.flat ? nodes.flat(Infinity) : nodes) {
-                    const node = item?.node || item?.gain || item;
-                    if (node?.connect) try { node.connect(destination); } catch (_) {}
-                }
-                destination.stream.getAudioTracks().forEach(track => mediaStream.addTrack(track));
-            }
-        } catch (error) { console.warn('Neo multiplayer audio:', error); }
+        for (const oldTrack of mediaStream.getAudioTracks()) mediaStream.removeTrack(oldTrack);
+        if (audioTrack) mediaStream.addTrack(audioTrack);
+        else console.warn('Neo multiplayer audio: o contexto do emulador ainda não estava disponível.');
         console.info('Neo multiplayer media:', { videoTracks:mediaStream.getVideoTracks().length, audioTracks:mediaStream.getAudioTracks().length });
         return mediaStream;
     }
@@ -168,7 +187,7 @@
             if (message.type === 'signal') void handleSignal(message).catch(error => console.warn('Neo multiplayer signal:', error));
             if (message.type === 'input') applyInput(Number(message.seat), Number(message.index), Number(message.value));
         };
-        socket.onclose = event => { setStatus(event.code === 1000 ? 'Sala encerrada.' : 'Conexão multiplayer encerrada.'); peers.forEach(peer => peer.pc.close()); peers.clear(); };
+        socket.onclose = event => { setStatus(event.code === 1000 ? 'Sala encerrada.' : 'Conexão multiplayer encerrada.'); peers.forEach(peer => peer.pc.close()); peers.clear(); if (audioCaptureTimer) { clearInterval(audioCaptureTimer); audioCaptureTimer = 0; } };
     }
 
     function setStatus(message) {

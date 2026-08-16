@@ -70,5 +70,11 @@ assert.match(guest, /SAIR E ENTRAR/);
 assert.match(guest, /Sua partida atual continuará normalmente/);
 assert.match(guest, /pendingInvites/);
 assert.match(guest, /socket\?\.close\(1000, "Entrando em outra sala"\)/);
+assert.match(host, /function refreshAudioCapture/);
+assert.match(host, /setInterval\(refreshAudioCapture, 500\)/);
+assert.match(host, /capturedAudioNodes = new WeakSet/);
+assert.match(host, /node\.connect\(audioCaptureDestination\)/);
+assert.match(host, /mediaStream\.removeTrack\(oldTrack\)/);
+assert.match(host, /if \(audioTrack\) mediaStream\.addTrack\(audioTrack\)/);
 
-console.log('multiplayer client and room: 64 checks passed');
+console.log('multiplayer client and room: 70 checks passed');
