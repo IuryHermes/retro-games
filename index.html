@@ -321,7 +321,6 @@
         .auth-panel p { color: var(--text-muted); font: 12px monospace; text-align: center; line-height: 1.5; }
         .auth-fields { display: grid; gap: 9px; }
         .auth-fields input { width: 100%; box-sizing: border-box; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 11px; border-radius: 4px; }
-        .auth-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
         .auth-action { border: 1px solid var(--accent-color); background: #0a2814; color: var(--text-color); padding: 10px 6px; border-radius: 4px; cursor: pointer; font: bold 11px monospace; }
         .auth-social { width: 100%; margin-top: 8px; padding: 10px; border: 0; border-radius: 4px; color: white; cursor: pointer; font-weight: 700; }
         .auth-social.google { background: #fff; color: #333; }.auth-social.discord { background:#5865f2; }
@@ -359,11 +358,8 @@
             <p id="auth-copy">Crie sua conta e ganhe 3 slots de save por jogo.</p>
             <div class="auth-fields">
                 <input id="auth-name" maxlength="20" autocomplete="nickname" placeholder="Nome no chat (2 a 20)">
-                <input id="auth-email" type="email" autocomplete="email" placeholder="Seu e-mail">
-                <input id="auth-password" type="password" minlength="6" autocomplete="current-password" placeholder="Senha (mínimo 6)">
             </div>
             <div class="avatar-grid" id="avatar-grid" aria-label="Escolha seu avatar"></div>
-            <div class="auth-actions"><button class="auth-action" id="auth-register" type="button">CADASTRAR</button><button class="auth-action" id="auth-email-login" type="button">ENTRAR</button></div>
             <button class="auth-social google" id="auth-google" type="button">Continuar com Google</button>
             <button class="auth-social discord" id="auth-discord" type="button">Continuar com Discord</button>
             <button class="auth-action" id="auth-save-profile" type="button" style="display:none;width:100%;margin-top:10px">SALVAR PERFIL</button>
@@ -549,7 +545,7 @@
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getDatabase, ref, push, set, onChildAdded, get, remove, query, limitToLast, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-    import { getAuth, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
     const R2_URL = "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/";
     const blockRegex = /\.m3u|([._\-\s](cd|disc|disco)\s*[0-9]+)/i;
@@ -670,8 +666,6 @@
     }
     document.getElementById('auth-google').onclick = () => completeSocialLogin(new GoogleAuthProvider());
     document.getElementById('auth-discord').onclick = () => { location.href = `${ACCOUNT_API}/account/discord/login`; };
-    document.getElementById('auth-register').onclick = async () => { try { setAuthStatus('Criando conta...'); await createUserWithEmailAndPassword(auth, document.getElementById('auth-email').value.trim(), document.getElementById('auth-password').value); await saveProfile(); } catch (error) { setAuthStatus(error.code === 'auth/email-already-in-use' ? 'Este e-mail já possui conta.' : 'Confira o e-mail e use uma senha de ao menos 6 caracteres.'); } };
-    document.getElementById('auth-email-login').onclick = async () => { try { setAuthStatus('Entrando...'); await signInWithEmailAndPassword(auth, document.getElementById('auth-email').value.trim(), document.getElementById('auth-password').value); } catch (_) { setAuthStatus('E-mail ou senha incorretos.'); } };
     document.getElementById('auth-save-profile').onclick = saveProfile;
     document.getElementById('auth-logout').onclick = async () => { if (auth.currentUser) await signOut(auth); sessionStorage.removeItem('neo_club_access'); sessionStorage.removeItem('neo_account_access'); discordAccountToken = ''; accountProfile = null; applyProfile(); closeAuth(); };
     onAuthStateChanged(auth, async user => {
