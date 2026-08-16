@@ -12,7 +12,6 @@
     let audioCaptureDestination = null;
     let audioCaptureContext = null;
     let audioCaptureTimer = 0;
-    let capturedAudioNodes = new WeakSet();
     let iceServersPromise = null;
     let iceServersExpiresAt = 0;
     const seenParticipants = new Set();
@@ -58,7 +57,6 @@
         if (!audioCaptureDestination || audioCaptureContext !== context) {
             audioCaptureContext = context;
             audioCaptureDestination = context.createMediaStreamDestination();
-            capturedAudioNodes = new WeakSet();
             const replacementTrack = audioCaptureDestination.stream.getAudioTracks()[0];
             if (replacementTrack && mediaStream?.getAudioTracks().length) {
                 for (const oldTrack of mediaStream.getAudioTracks()) mediaStream.removeTrack(oldTrack);
@@ -72,8 +70,9 @@
         const sources = state.sources instanceof Map ? Array.from(state.sources.values()) : Object.values(state.sources);
         for (const item of sources.flat ? sources.flat(Infinity) : sources) {
             const node = item?.gain || item?.node || item;
-            if (node?.connect && !capturedAudioNodes.has(node)) {
-                try { node.connect(audioCaptureDestination); capturedAudioNodes.add(node); } catch (_) {}
+            if (node?.connect) {
+                try { node.disconnect(audioCaptureDestination); } catch (_) {}
+                try { node.connect(audioCaptureDestination); } catch (_) {}
             }
         }
         return audioCaptureDestination.stream.getAudioTracks()[0] || null;
@@ -83,7 +82,7 @@
         for (let attempt = 0; attempt < 50; attempt++) {
             const track = refreshAudioCapture();
             if (track?.readyState === 'live') {
-                if (!audioCaptureTimer) audioCaptureTimer = setInterval(refreshAudioCapture, 500);
+                if (!audioCaptureTimer) audioCaptureTimer = setInterval(refreshAudioCapture, 200);
                 return track;
             }
             await new Promise(resolve => setTimeout(resolve, 100));
