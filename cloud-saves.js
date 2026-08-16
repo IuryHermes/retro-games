@@ -3,6 +3,7 @@
 
     const API = 'https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev';
     const TOKEN_KEY = 'neo_club_access';
+    const PENDING_HISTORY_KEY = 'neo_pending_history';
     const INTERVAL_MS = 60000;
     let token = sessionStorage.getItem(TOKEN_KEY) || '';
     let gameId = '';
@@ -30,6 +31,29 @@
 
     function endpoint(slot) {
         return `${API}/club/save?game=${encodeURIComponent(gameId)}&slot=${encodeURIComponent(slot)}&token=${encodeURIComponent(token)}`;
+    }
+
+    async function flushPendingHistory() {
+        if (!token) return false;
+        let pending;
+        try { pending = JSON.parse(sessionStorage.getItem(PENDING_HISTORY_KEY) || 'null'); }
+        catch (_) { sessionStorage.removeItem(PENDING_HISTORY_KEY); return false; }
+        if (!pending?.id) return false;
+        try {
+            const response = await fetch(`${API}/account/history`, {
+                method: 'POST',
+                headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify(pending),
+                cache: 'no-store'
+            });
+            if (!response.ok) throw new Error(`History HTTP ${response.status}`);
+            const queued = JSON.parse(sessionStorage.getItem(PENDING_HISTORY_KEY) || 'null');
+            if (queued?.id === pending.id) sessionStorage.removeItem(PENDING_HISTORY_KEY);
+            return true;
+        } catch (error) {
+            console.warn('Neo history retry:', error);
+            return false;
+        }
     }
 
     async function digest(bytes) {
@@ -142,6 +166,7 @@
     async function prepare(options) {
         rememberToken();
         gameId = stableGameId(options.game, options.core);
+        await flushPendingHistory();
         let session = null;
         try { session = await sessionInfo(); } catch (_) {}
         if (token && !session) { sessionStorage.removeItem(TOKEN_KEY); token = ''; }

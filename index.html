@@ -584,6 +584,7 @@
     const supportersRef = ref(db, 'apoiadores_cafe');
     const registrationsRef = ref(db, 'hall_cadastros');
     const ACCOUNT_API = 'https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev';
+    const PENDING_HISTORY_KEY = 'neo_pending_history';
     const AVATARS = Array.from({ length: 40 }, (_, index) => `avatar-${String(index + 1).padStart(2, '0')}`);
     let accountProfile = null;
     let selectedAvatar = 'avatar-01';
@@ -645,7 +646,13 @@
         const coverName = game.capa ? game.capa.split('/').pop() : '';
         const cover = game.cover || (coverName ? `${R2_URL}${game.sysPath || game.path || ''}capas/${encodeURIComponent(coverName)}` : '');
         const historyId = String(game.id || `${game.sysId}-${String(game.rom || '').split('/').pop()}`).toLowerCase().replace(/\.[a-z0-9]+$/i, '').replace(/[^a-z0-9._,-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 120);
-        try { await historyRequest('POST', { id: historyId, name: game.nomeOriginal || game.nome, system: game.sysId, cover, playUrl }); }
+        const pending = { id: historyId, name: game.nomeOriginal || game.nome, system: game.sysId, cover, playUrl };
+        sessionStorage.setItem(PENDING_HISTORY_KEY, JSON.stringify(pending));
+        try {
+            await historyRequest('POST', pending);
+            const queued = JSON.parse(sessionStorage.getItem(PENDING_HISTORY_KEY) || 'null');
+            if (queued?.id === pending.id) sessionStorage.removeItem(PENDING_HISTORY_KEY);
+        }
         catch (error) { console.warn('Neo history:', error); }
     }
     function playAndRemember(game, playUrl) {
