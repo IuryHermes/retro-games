@@ -248,6 +248,7 @@
     </header>
     <main class="viewer">
       <video id="remote-video" autoplay playsinline></video>
+      <audio id="remote-audio" autoplay playsinline></audio>
       <div class="waiting" id="waiting">
         Entre na sua conta no site e aguarde o anfitrião liberar um controle.
       </div>
@@ -306,8 +307,6 @@
           iceServersPromise,
           videoReady = false,
           audioTrackReceived = false,
-          remoteAudioContext,
-           remoteAudioSource,
           iceServersExpiresAt = 0,
           socialSince = Date.now(),
           socialHeartbeatAt = 0;
@@ -327,7 +326,8 @@
         const status = document.getElementById("room-status"),
           waiting = document.getElementById("waiting"),
           controller = document.getElementById("controller"),
-          video = document.getElementById("remote-video");
+          video = document.getElementById("remote-video"),
+          remoteAudio = document.getElementById("remote-audio");
         const inviteDialog = document.getElementById("match-invite"),
           inviteText = document.getElementById("match-invite-text"),
           inviteLater = document.getElementById("match-invite-later"),
@@ -402,17 +402,19 @@
             return;
           }
           audioTrackReceived = true;
-          status.textContent = "Vídeo e áudio conectados";
-          const AudioContext = window.AudioContext || window.webkitAudioContext;
-          if (!AudioContext || remoteAudioSource) return;
-          remoteAudioContext = new AudioContext();
-          remoteAudioSource =
-            remoteAudioContext.createMediaStreamSource(stream);
-          remoteAudioSource.connect(remoteAudioContext.destination);
-          void remoteAudioContext.resume().catch(() => {});
+          for (const track of tracks) track.contentHint = "music";
+          if (remoteAudio.srcObject !== stream) remoteAudio.srcObject = stream;
+          remoteAudio.muted = false;
+          remoteAudio.volume = 1;
+          void remoteAudio.play().then(() => {
+            playbackUnlocked = true;
+            status.textContent = "Vídeo e áudio conectados";
+          }).catch(() => {
+            status.textContent = "Vídeo conectado · pressione uma tecla para liberar o áudio";
+          });
         }
         async function unlockPlayback() {
-          if (playbackUnlocked || !video.srcObject) return;
+          if (!video.srcObject) return;
           if (
             document.fullscreenEnabled &&
             !document.fullscreenElement &&
@@ -420,15 +422,16 @@
           )
             void document.documentElement.requestFullscreen().catch(() => {});
           video.muted = true;
-          if (remoteAudioContext?.state !== "running")
-            await remoteAudioContext?.resume().catch(() => {});
-          try {
-            await video.play();
-            playbackUnlocked =
-              !remoteAudioContext || remoteAudioContext.state === "running";
-          } catch (_) {
-            video.muted = true;
-            await video.play().catch(() => {});
+          await video.play().catch(() => {});
+          if (audioTrackReceived) {
+            remoteAudio.muted = false;
+            try {
+              await remoteAudio.play();
+              playbackUnlocked = true;
+              status.textContent = "Vídeo e áudio conectados";
+            } catch (_) {
+              playbackUnlocked = false;
+            }
           }
         }
         const input = (index, value) => {
@@ -544,8 +547,6 @@
               attachRemoteAudio(stream);
               try {
                 await video.play();
-                if (remoteAudioContext?.state === "running")
-                  playbackUnlocked = true;
               } catch (_) {
                 video.muted = true;
                 await video.play().catch(() => {});

@@ -49,7 +49,11 @@ assert.match(host, /audioTracks:mediaStream\.getAudioTracks/);
 assert.match(guest, /function unlockPlayback/);
 assert.match(guest, /requestFullscreen/);
 assert.match(guest, /attachRemoteAudio/);
-assert.match(guest, /createMediaStreamSource/);
+assert.match(guest, /id="remote-audio"/);
+assert.match(guest, /remoteAudio\.srcObject = stream/);
+assert.match(guest, /track\.contentHint = "music"/);
+assert.match(guest, /await remoteAudio\.play\(\)/);
+assert.doesNotMatch(guest, /createMediaStreamSource/);
 assert.match(guest, /áudio não recebido do anfitrião/);
 assert.match(worker, /automaticSeat/);
 assert.match(worker, /type: "assignment", seat: automaticSeat/);
@@ -77,4 +81,4 @@ assert.match(host, /node\.connect\(audioCaptureDestination\)/);
 assert.match(host, /mediaStream\.removeTrack\(oldTrack\)/);
 assert.match(host, /if \(audioTrack\) mediaStream\.addTrack\(audioTrack\)/);
 
-console.log('multiplayer client and room: 70 checks passed');
+console.log('multiplayer client and room: 74 checks passed');
