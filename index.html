@@ -356,6 +356,16 @@
         .cloud-slot { display:grid; grid-template-columns:1fr auto; gap:8px; align-items:center; padding-top:9px; margin-top:9px; border-top:1px solid var(--border-color); }
         .cloud-slot-copy { color:var(--text-muted); font:9px monospace; line-height:1.45; }
         .cloud-delete { border:1px solid #ff4f61; background:rgba(255,79,97,.1); color:#ff6b7b; border-radius:4px; padding:7px 9px; cursor:pointer; font:bold 9px monospace; }
+        .multiplayer-hub-trigger { min-width:42px; height:38px; border:1px solid #00cc44; background:#061109; color:#55ff88; border-radius:6px; cursor:pointer; font-size:18px; box-shadow:0 0 10px rgba(0,204,68,.16); }
+        .multiplayer-panel { width:min(820px,96vw); max-height:88dvh; overflow:auto; background:var(--sidebar-bg); border:2px solid var(--accent-color); border-radius:8px; padding:22px; color:var(--text-color); box-shadow:0 0 35px rgba(0,204,68,.3); }
+        .multiplayer-panel h2 { color:var(--accent-color); font:14px 'Press Start 2P',cursive; line-height:1.5; padding-right:45px; }
+        .multiplayer-toolbar { display:flex; justify-content:space-between; align-items:center; gap:10px; margin:14px 0; padding:10px; border:1px solid var(--border-color); background:var(--input-bg); border-radius:6px; font:11px monospace; }
+        .multiplayer-toolbar button { border:1px solid var(--accent-color); background:var(--accent-color); color:#001b09; padding:9px 12px; border-radius:4px; cursor:pointer; font-weight:bold; }
+        .multiplayer-rooms { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:12px; }
+        .multiplayer-room-card { border:1px solid var(--border-color); background:var(--input-bg); border-radius:7px; padding:13px; }
+        .multiplayer-room-card strong { display:block; font:11px monospace; line-height:1.4; }
+        .multiplayer-room-card small { display:block; color:var(--text-muted); margin:6px 0 10px; line-height:1.5; }
+        .multiplayer-room-card a { display:block; text-align:center; text-decoration:none; border:1px solid var(--accent-color); background:rgba(0,204,68,.14); color:var(--text-color); padding:9px; border-radius:4px; font:bold 10px monospace; }
         @media(max-width:1024px){ .top-account-mobile{display:flex;width:38px;min-height:38px;height:38px}.top-account-mobile .account-avatar{width:28px;height:28px;flex-basis:28px}.top-account-mobile .account-copy{display:none} }
         @media(max-width:768px){ .avatar-grid{grid-template-columns:repeat(2,1fr);max-height:360px} }
         @media (orientation: landscape) and (max-width: 1366px) and (pointer: coarse), (max-height: 700px) {
@@ -378,6 +388,16 @@
 <body>
 
     <div id="chat-mobile-backdrop" onclick="closeMobileChat()"></div>
+
+    <div id="multiplayer-modal" class="modal-bg" role="dialog" aria-modal="true" aria-labelledby="multiplayer-title">
+        <section class="multiplayer-panel">
+            <button class="game-info-close" id="multiplayer-close" type="button">X</button>
+            <h2 id="multiplayer-title">JOGAR ONLINE</h2>
+            <p class="history-subtitle">Entre como controle remoto de outro jogador ou abra um jogo para criar sua própria sala.</p>
+            <div class="multiplayer-toolbar"><span id="multiplayer-online-count">Buscando jogadores...</span><button id="multiplayer-select-game" type="button">SELECIONAR MEU JOGO</button></div>
+            <div class="multiplayer-rooms" id="multiplayer-rooms"></div>
+        </section>
+    </div>
 
     <div id="auth-modal" class="modal-bg" role="dialog" aria-modal="true" aria-labelledby="auth-title">
         <div class="auth-panel">
@@ -532,6 +552,7 @@
 
                 <div class="top-bar-controls">
                     <button class="account-button top-account-mobile" id="account-button-mobile" type="button" aria-label="Entrar ou criar cadastro"><img class="account-avatar" src="assets/imagens-videos/logo-discord.gif?v=2" alt=""><span class="account-copy"><span class="account-name">LOGIN / CADASTRO</span></span></button>
+                    <button class="multiplayer-hub-trigger" id="multiplayer-hub-trigger" type="button" title="Encontrar partida" aria-label="Jogar online">🌐</button>
                     <a class="pix-trigger-mobile" href="apoie.html" title="Clube NeoTerminalRoom">
                         <span style="font-size: 18px; line-height: 1;">☕</span>
                     </a>
@@ -606,6 +627,35 @@
     const receivedAccountToken = accountFragment.get('account_token');
     if (receivedAccountToken) { sessionStorage.setItem('neo_account_access', receivedAccountToken); history.replaceState(null, '', location.pathname + location.search); }
     let discordAccountToken = sessionStorage.getItem('neo_account_access') || '';
+    const multiplayerModal = document.getElementById('multiplayer-modal');
+    const multiplayerRooms = document.getElementById('multiplayer-rooms');
+    let multiplayerRefreshTimer = 0;
+    async function loadMultiplayerRooms() {
+        try {
+            const response = await fetch(`${ACCOUNT_API}/multiplayer/rooms`, { cache:'no-store' });
+            const data = await response.json();
+            multiplayerRooms.replaceChildren();
+            const online = (data.rooms || []).reduce((total, room) => total + room.online, 0);
+            document.getElementById('multiplayer-online-count').textContent = `${online} pessoa(s) em ${(data.rooms || []).length} sala(s) aguardando`;
+            if (!data.rooms?.length) { multiplayerRooms.innerHTML = '<div class="history-empty">Nenhuma sala pública aguardando agora.<br>Escolha um jogo, abra o menu ONLINE e seja o primeiro anfitrião.</div>'; return; }
+            data.rooms.forEach(room => {
+                const card = document.createElement('article'); card.className = 'multiplayer-room-card';
+                const title = document.createElement('strong'); title.textContent = room.title;
+                const meta = document.createElement('small'); meta.textContent = `${room.system.toUpperCase()} · ${room.hostName} · ${room.online}/${room.maxPlayers} online`;
+                const join = document.createElement('a'); join.href = `multiplayer-room.html?room=${encodeURIComponent(room.id)}`; join.textContent = 'SOLICITAR ENTRADA';
+                card.append(title, meta, join); multiplayerRooms.appendChild(card);
+            });
+        } catch (_) { multiplayerRooms.innerHTML = '<div class="history-empty">Não foi possível consultar as salas agora.</div>'; }
+    }
+    function openMultiplayerHub() {
+        multiplayerModal.style.display = 'flex'; void loadMultiplayerRooms();
+        clearInterval(multiplayerRefreshTimer); multiplayerRefreshTimer = setInterval(loadMultiplayerRooms, 15000);
+    }
+    function closeMultiplayerHub() { multiplayerModal.style.display = 'none'; clearInterval(multiplayerRefreshTimer); }
+    document.getElementById('multiplayer-hub-trigger').onclick = openMultiplayerHub;
+    document.getElementById('multiplayer-close').onclick = closeMultiplayerHub;
+    multiplayerModal.onclick = event => { if (event.target === multiplayerModal) closeMultiplayerHub(); };
+    document.getElementById('multiplayer-select-game').onclick = () => { closeMultiplayerHub(); document.getElementById('global-search').focus(); document.getElementById('global-search').placeholder = 'Escolha um jogo e abra o menu ONLINE...'; };
 
     const avatarUrl = avatar => `assets/avatars/${AVATARS.includes(avatar) ? avatar : 'avatar-01'}.png`;
     const authModal = document.getElementById('auth-modal');

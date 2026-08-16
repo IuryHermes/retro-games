@@ -137,11 +137,210 @@ function slotAllowed(slot, plan) {
   return Number.isSafeInteger(number) && number > 0 && (limit === null || number <= limit);
 }
 __name(slotAllowed, "slotAllowed");
+class MultiplayerRoom {
+  constructor(ctx, env) {
+    this.ctx = ctx;
+    this.env = env;
+  }
+  async room() {
+    return await this.ctx.storage.get("room") || null;
+  }
+  participants() {
+    return this.ctx.getWebSockets().map((socket) => socket.deserializeAttachment()).filter(Boolean);
+  }
+  state(room) {
+    return { type: "state", room: { id: room.id, gameId: room.gameId, title: room.title, system: room.system, maxPlayers: room.maxPlayers, isPublic: room.isPublic, hostName: room.hostName, status: room.status }, participants: this.participants().map(({ clientId, uid, name, host, seat, approved }) => ({ clientId, uid, name, host, seat, approved })) };
+  }
+  broadcast(payload, except) {
+    const message = JSON.stringify(payload);
+    for (const socket of this.ctx.getWebSockets()) {
+      if (socket !== except) {
+        try {
+          socket.send(message);
+        } catch {
+        }
+      }
+    }
+  }
+  find(clientId) {
+    return this.ctx.getWebSockets().find((socket) => socket.deserializeAttachment()?.clientId === clientId);
+  }
+  async fetch(request) {
+    const url = new URL(request.url);
+    if (request.method === "POST" && url.pathname === "/create") {
+      const existing = await this.room();
+      if (existing)
+        return json({ room: existing });
+      const room = await request.json();
+      await this.ctx.storage.put("room", room);
+      return json({ room }, 201);
+    }
+    const room = await this.room();
+    if (!room)
+      return json({ erro: "Sala nao encontrada." }, 404);
+    if (request.method === "GET" && url.pathname === "/summary") {
+      const participants = this.participants();
+      const hostOnline = participants.some((person) => person.host);
+      return json({ ...room, status: hostOnline ? "waiting" : "offline", online: participants.length, seatsUsed: participants.filter((person) => person.approved).length });
+    }
+    if (url.pathname !== "/ws" || request.headers.get("Upgrade") !== "websocket")
+      return json({ erro: "Upgrade WebSocket necessario." }, 426);
+    const uid = request.headers.get("X-Multiplayer-Uid") || "";
+    const name = decodeURIComponent(request.headers.get("X-Multiplayer-Name") || "Jogador").slice(0, 20);
+    const host = request.headers.get("X-Multiplayer-Host") === "1" && uid === room.hostUid;
+    if (!host && this.participants().filter((person) => !person.host).length >= room.maxPlayers - 1)
+      return json({ erro: "Sala lotada." }, 409);
+    for (const socket of this.ctx.getWebSockets()) {
+      const person = socket.deserializeAttachment();
+      if (person?.uid === uid)
+        socket.close(4001, "Nova conexao da mesma conta");
+    }
+    const pair = new WebSocketPair();
+    const [client, server] = Object.values(pair);
+    const attachment = { clientId: crypto.randomUUID(), uid, name, host, seat: host ? 1 : 0, approved: host };
+    server.serializeAttachment(attachment);
+    this.ctx.acceptWebSocket(server, [host ? "host" : "guest"]);
+    server.send(JSON.stringify({ type: "welcome", clientId: attachment.clientId, roomId: room.id, host }));
+    queueMicrotask(() => this.broadcast(this.state(room)));
+    return new Response(null, { status: 101, webSocket: client });
+  }
+  async webSocketMessage(socket, message) {
+    if (typeof message !== "string" || message.length > 65536)
+      return;
+    let data;
+    try {
+      data = JSON.parse(message);
+    } catch {
+      return;
+    }
+    const sender = socket.deserializeAttachment();
+    const room = await this.room();
+    if (!sender || !room)
+      return;
+    if (data.type === "signal" && typeof data.to === "string") {
+      const target = this.find(data.to);
+      if (target)
+        target.send(JSON.stringify({ type: "signal", from: sender.clientId, data: data.data }));
+      return;
+    }
+    if (data.type === "assign" && sender.host) {
+      const target = this.find(String(data.clientId || ""));
+      const seat = Number(data.seat);
+      if (!target || !Number.isInteger(seat) || seat < 0 || seat > room.maxPlayers)
+        return;
+      if (seat > 1 && this.participants().some((person) => person.clientId !== data.clientId && person.seat === seat))
+        return;
+      const targetState = target.deserializeAttachment();
+      targetState.seat = seat;
+      targetState.approved = seat > 1;
+      target.serializeAttachment(targetState);
+      target.send(JSON.stringify({ type: "assignment", seat, approved: targetState.approved }));
+      this.broadcast(this.state(room));
+      return;
+    }
+    if (data.type === "kick" && sender.host) {
+      const target = this.find(String(data.clientId || ""));
+      if (target && !target.deserializeAttachment()?.host)
+        target.close(4003, "Removido pelo anfitriao");
+      return;
+    }
+    if (data.type === "input" && sender.approved && sender.seat > 1) {
+      const hostSocket = this.ctx.getWebSockets("host")[0];
+      if (hostSocket)
+        hostSocket.send(JSON.stringify({ type: "input", seat: sender.seat, index: Number(data.index), value: Number(data.value) }));
+      return;
+    }
+    if (data.type === "close" && sender.host) {
+      await this.ctx.storage.put("room", { ...room, status: "closed", closedAt: Date.now() });
+      for (const peer of this.ctx.getWebSockets())
+        peer.close(1000, "Sala encerrada");
+    }
+  }
+  async webSocketClose(socket) {
+    const person = socket.deserializeAttachment();
+    const room = await this.room();
+    if (person?.host && room) {
+      await this.ctx.storage.put("room", { ...room, status: "closed", closedAt: Date.now() });
+      for (const peer of this.ctx.getWebSockets())
+        peer.close(4000, "Anfitriao desconectou");
+    } else if (room) {
+      queueMicrotask(() => this.broadcast(this.state(room)));
+    }
+  }
+}
+__name(MultiplayerRoom, "MultiplayerRoom");
 var src_default = {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (request.method === "OPTIONS")
       return new Response(null, { status: 204, headers: cors });
+    if (request.method === "POST" && url.pathname === "/multiplayer/rooms") {
+      const account = await accountAccess(request, env);
+      if (!account)
+        return json({ erro: "Entre na sua conta para abrir uma sala." }, 401);
+      const profileObject = await env.GAMES.get(`profiles/v1/${account.uid}.json`);
+      const profile = profileObject ? await profileObject.json() : null;
+      if (!profile)
+        return json({ erro: "Complete seu perfil primeiro." }, 403);
+      const body = await request.json().catch(() => ({}));
+      const gameId = String(body.gameId || "").toLowerCase().replace(/[^a-z0-9._-]/g, "-").slice(0, 120);
+      const title = String(body.title || "").trim().slice(0, 100);
+      const system = String(body.system || "").toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 20);
+      const maxPlayers = Math.max(2, Math.min(4, Number(body.maxPlayers) || 2));
+      if (!gameId || !title || !system)
+        return json({ erro: "Jogo invalido." }, 400);
+      const roomId = crypto.randomUUID().replace(/-/g, "").slice(0, 12);
+      const room = { id: roomId, gameId, title, system, maxPlayers, isPublic: body.isPublic !== false, hostUid: account.uid, hostName: profile.name, status: "waiting", createdAt: Date.now() };
+      const stub = env.MULTIPLAYER_ROOMS.getByName(roomId);
+      await stub.fetch(new Request("https://room/create", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(room) }));
+      await env.GAMES.put(`multiplayer/rooms/${roomId}.json`, JSON.stringify({ id: roomId, createdAt: room.createdAt }), { httpMetadata: { contentType: "application/json" } });
+      const ticket = await makeToken({ purpose: "multiplayer", roomId, uid: account.uid, name: profile.name, host: true, exp: Date.now() + 4 * 60 * 60 * 1e3 }, env.DISCORD_CLIENT_SECRET);
+      return json({ room, ticket }, 201);
+    }
+    if (request.method === "GET" && url.pathname === "/multiplayer/rooms") {
+      const directory = await listAll(env, "multiplayer/rooms/");
+      const summaries = await Promise.all(directory.slice(-100).map(async (object) => {
+        const roomId = object.key.split("/").pop()?.replace(/\.json$/, "") || "";
+        if (!/^[a-f0-9]{12}$/.test(roomId))
+          return null;
+        const response = await env.MULTIPLAYER_ROOMS.getByName(roomId).fetch(new Request("https://room/summary"));
+        if (!response.ok)
+          return null;
+        const summary = await response.json();
+        return summary.isPublic && summary.status === "waiting" && summary.online < summary.maxPlayers ? summary : null;
+      }));
+      return json({ rooms: summaries.filter(Boolean).sort((a, b) => b.createdAt - a.createdAt).slice(0, 50) });
+    }
+    const joinMatch = url.pathname.match(/^\/multiplayer\/rooms\/([a-f0-9]{12})\/join$/);
+    if (request.method === "POST" && joinMatch) {
+      const account = await accountAccess(request, env);
+      if (!account)
+        return json({ erro: "Entre na sua conta para participar." }, 401);
+      const profileObject = await env.GAMES.get(`profiles/v1/${account.uid}.json`);
+      const profile = profileObject ? await profileObject.json() : null;
+      if (!profile)
+        return json({ erro: "Complete seu perfil primeiro." }, 403);
+      const roomId = joinMatch[1];
+      const summaryResponse = await env.MULTIPLAYER_ROOMS.getByName(roomId).fetch(new Request("https://room/summary"));
+      if (!summaryResponse.ok)
+        return json({ erro: "Sala nao encontrada." }, 404);
+      const room = await summaryResponse.json();
+      if (room.status !== "waiting" || room.online >= room.maxPlayers)
+        return json({ erro: "Sala indisponivel ou lotada." }, 409);
+      const ticket = await makeToken({ purpose: "multiplayer", roomId, uid: account.uid, name: profile.name, host: false, exp: Date.now() + 4 * 60 * 60 * 1e3 }, env.DISCORD_CLIENT_SECRET);
+      return json({ room, ticket });
+    }
+    const socketMatch = url.pathname.match(/^\/multiplayer\/rooms\/([a-f0-9]{12})\/ws$/);
+    if (request.method === "GET" && socketMatch) {
+      const ticket = await readToken(url.searchParams.get("ticket") || "", env.DISCORD_CLIENT_SECRET);
+      if (!ticket || ticket.purpose !== "multiplayer" || ticket.roomId !== socketMatch[1] || !ticket.uid)
+        return json({ erro: "Convite expirado." }, 401);
+      const headers = new Headers(request.headers);
+      headers.set("X-Multiplayer-Uid", ticket.uid);
+      headers.set("X-Multiplayer-Name", encodeURIComponent(ticket.name || "Jogador"));
+      headers.set("X-Multiplayer-Host", ticket.host ? "1" : "0");
+      return env.MULTIPLAYER_ROOMS.getByName(socketMatch[1]).fetch(new Request("https://room/ws", { method: "GET", headers }));
+    }
     if (request.method === "GET" && url.pathname === "/discord/app-info") {
       const response = await fetch("https://discord.com/api/v10/oauth2/applications/@me", { headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` } });
       if (!response.ok)
@@ -584,6 +783,7 @@ var src_default = {
   }
 };
 export {
+  MultiplayerRoom,
   src_default as default
 };
 //# sourceMappingURL=index.js.map

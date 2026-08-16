@@ -16,6 +16,7 @@ const tokenFor = (overrides = {}) => {
 };
 
 const objects = new Map();
+const multiplayerRooms = new Map();
 const env = {
   DISCORD_CLIENT_SECRET: 'test-secret',
   GAMES: {
@@ -30,6 +31,16 @@ const env = {
     async put(key, value, options = {}) { objects.set(key, { value:Buffer.from(value), uploaded:new Date(), customMetadata:options.customMetadata || {} }); return { httpEtag: 'test' }; },
     async delete(key) { objects.delete(key); },
     async list({ prefix = '' } = {}) { return { truncated:false, objects:Array.from(objects, ([key, entry]) => ({ key, size:entry.value.length, uploaded:entry.uploaded, customMetadata:entry.customMetadata })).filter(object => object.key.startsWith(prefix)) }; }
+  },
+  MULTIPLAYER_ROOMS: {
+    getByName(id) {
+      return { async fetch(request) {
+        const url = new URL(request.url);
+        if (request.method === 'POST' && url.pathname === '/create') { const room = await request.json(); multiplayerRooms.set(id, room); return Response.json({ room }, { status:201 }); }
+        if (url.pathname === '/summary') { const room = multiplayerRooms.get(id); return room ? Response.json({ ...room, status:'waiting', online:1, seatsUsed:1 }) : Response.json({ erro:'missing' }, { status:404 }); }
+        return Response.json({ erro:'unsupported' }, { status:400 });
+      }};
+    }
   }
 };
 
@@ -90,4 +101,17 @@ const discordSession = await response.json();
 assert.equal(discordSession.plan, 'registered');
 assert.equal(discordSession.manualSaveLimit, 3);
 
-console.log('worker auth/history/discord/cloud library: 21 checks passed');
+response = await worker.fetch(new Request('https://worker/multiplayer/rooms', { method:'POST', headers:{ ...auth(tokenFor()), 'Content-Type':'application/json' }, body:JSON.stringify({ gameId:'snes-mario', title:'Super Mario World', system:'snes', maxPlayers:2, isPublic:true }) }), env);
+assert.equal(response.status, 201);
+const createdRoom = await response.json();
+assert.match(createdRoom.room.id, /^[a-f0-9]{12}$/);
+assert.ok(createdRoom.ticket);
+response = await worker.fetch(new Request('https://worker/multiplayer/rooms'), env);
+const publicRooms = await response.json();
+assert.equal(publicRooms.rooms.length, 1);
+assert.equal(publicRooms.rooms[0].title, 'Super Mario World');
+response = await worker.fetch(new Request(`https://worker/multiplayer/rooms/${createdRoom.room.id}/join`, { method:'POST', headers:auth(tokenFor()) }), env);
+assert.equal(response.status, 200);
+assert.ok((await response.json()).ticket);
+
+console.log('worker auth/history/discord/cloud/multiplayer: 28 checks passed');

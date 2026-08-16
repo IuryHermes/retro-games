@@ -7,5 +7,13 @@
   "r2_buckets": [
     { "binding": "GAMES", "bucket_name": "neoterminalroom" }
   ],
+  "durable_objects": {
+    "bindings": [
+      { "name": "MULTIPLAYER_ROOMS", "class_name": "MultiplayerRoom" }
+    ]
+  },
+  "migrations": [
+    { "tag": "multiplayer-v1", "new_sqlite_classes": ["MultiplayerRoom"] }
+  ],
   "observability": { "enabled": true, "head_sampling_rate": 1 }
 }
