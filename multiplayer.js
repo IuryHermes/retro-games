@@ -47,6 +47,11 @@
         const canvases = Array.from(document.querySelectorAll('#game canvas, canvas')).filter(candidate => candidate.width > 0 && candidate.height > 0);
         const canvas = emulatorCanvas?.captureStream ? emulatorCanvas : canvases.sort((a, b) => (b.width * b.height) - (a.width * a.height))[0];
         if (!canvas?.captureStream) throw new Error('O vídeo do emulador ainda não está pronto. Tente novamente após o jogo iniciar.');
+        for (let attempt = 0; attempt < 30; attempt++) {
+            const audioState = window.EJS_emulator?.Module?.AL?.currentCtx;
+            if (audioState?.audioCtx && audioState.sources && Object.keys(audioState.sources).length) break;
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
         let nativeStream = null;
         try { nativeStream = window.EJS_emulator?.collectScreenRecordingMediaTracks?.(canvas, 30) || null; }
         catch (error) { console.warn('Neo multiplayer native media:', error); }
@@ -68,6 +73,7 @@
                 destination.stream.getAudioTracks().forEach(track => mediaStream.addTrack(track));
             }
         } catch (error) { console.warn('Neo multiplayer audio:', error); }
+        console.info('Neo multiplayer media:', { videoTracks:mediaStream.getVideoTracks().length, audioTracks:mediaStream.getAudioTracks().length });
         return mediaStream;
     }
 

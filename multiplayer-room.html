@@ -22,6 +22,8 @@
       body {
         display: grid;
         grid-template-rows: auto 1fr auto;
+        height: 100dvh;
+        overflow: hidden;
         min-height: 100dvh;
       }
       header {
@@ -46,7 +48,7 @@
       .viewer video {
         width: 100%;
         height: 100%;
-        max-height: 65dvh;
+        max-height: none;
         object-fit: contain;
       }
       .waiting {
@@ -155,6 +157,9 @@
         .controls {
           padding: 9px;
         }
+        header {
+          padding: 7px 12px;
+        }
       }
       @media (max-height: 500px) and (orientation: landscape) {
         body {
@@ -255,12 +260,33 @@
         const send = (data) => {
           if (socket?.readyState === 1) socket.send(JSON.stringify(data));
         };
+        let playbackUnlocked = false;
+        async function unlockPlayback() {
+          if (playbackUnlocked || !video.srcObject) return;
+          if (
+            document.fullscreenEnabled &&
+            !document.fullscreenElement &&
+            matchMedia("(max-width: 900px)").matches
+          )
+            void document.documentElement.requestFullscreen().catch(() => {});
+          video.muted = false;
+          try {
+            await video.play();
+            playbackUnlocked = true;
+          } catch (_) {
+            video.muted = true;
+            await video.play().catch(() => {});
+          }
+        }
         const input = (index, value) => {
+          void unlockPlayback();
           const data = { type: "input", index: Number(index), value };
           if (channel?.readyState === "open")
             channel.send(JSON.stringify(data));
           else send(data);
         };
+        addEventListener("pointerdown", unlockPlayback, { passive: true });
+        addEventListener("keydown", unlockPlayback);
         const keyboardMap = {
           ArrowUp: 4,
           ArrowDown: 5,
@@ -359,31 +385,14 @@
             currentPeer.ontrack = async (e) => {
               video.srcObject = e.streams[0];
               videoReady = true;
-              video.muted = true;
+              waiting.hidden = true;
+              video.muted = false;
               try {
                 await video.play();
-                waiting.hidden = false;
-                waiting.replaceChildren();
-                const copy = document.createElement("div");
-                copy.textContent =
-                  "Vídeo conectado. Toque abaixo para ativar o som.";
-                const start = document.createElement("button");
-                start.type = "button";
-                start.textContent = "ATIVAR SOM E JOGAR";
-                start.onclick = async () => {
-                  video.muted = false;
-                  await video.play().catch(() => {});
-                  waiting.hidden = true;
-                };
-                waiting.append(copy, start);
+                playbackUnlocked = true;
               } catch (_) {
-                waiting.hidden = false;
-                waiting.textContent = "Toque na tela para iniciar o vídeo.";
-                waiting.onclick = async () => {
-                  video.muted = true;
-                  await video.play().catch(() => {});
-                  waiting.hidden = true;
-                };
+                video.muted = true;
+                await video.play().catch(() => {});
               }
             };
             currentPeer.onconnectionstatechange = () => {

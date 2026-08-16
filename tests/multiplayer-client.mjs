@@ -36,7 +36,7 @@ assert.match(social, /presence-dot/);
 assert.match(social, /player\.online/);
 assert.match(host, /EJS_emulator\?\.canvas/);
 assert.match(host, /requestFrame/);
-assert.match(guest, /ATIVAR SOM E JOGAR/);
+assert.doesNotMatch(guest, /ATIVAR SOM E JOGAR/);
 assert.match(guest, /onconnectionstatechange/);
 assert.match(guest, /if \(!peer\)\s+peer = new RTCPeerConnection/);
 assert.match(guest, /const currentPeer = peer/);
@@ -45,5 +45,8 @@ assert.match(host, /Module\?\.AL\?\.currentCtx/);
 assert.match(guest, /keyboardMap/);
 assert.match(guest, /navigator\.getGamepads/);
 assert.match(guest, /if \(!videoReady\)/);
+assert.match(host, /audioTracks:mediaStream\.getAudioTracks/);
+assert.match(guest, /function unlockPlayback/);
+assert.match(guest, /requestFullscreen/);
 
-console.log('multiplayer client and room: 38 checks passed');
+console.log('multiplayer client and room: 41 checks passed');
