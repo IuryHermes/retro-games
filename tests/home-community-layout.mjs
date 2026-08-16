@@ -13,5 +13,6 @@ assert.match(index, /class="mobile-community-actions"/);
 assert.match(index, /\.search-container \{ flex:0 0 100%/);
 assert.match(index, /\.community-shortcuts-pc/);
 assert.match(index, /'multiplayer-hub-trigger-desktop'/);
+assert.match(index, /\.multiplayer-hub-trigger \{[^}]*background:var\(--sidebar-bg\)/);
 
-console.log('home community layout: 8 checks passed');
+console.log('home community layout: 9 checks passed');
