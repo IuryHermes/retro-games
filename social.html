@@ -119,6 +119,19 @@
         color: var(--bright);
         margin: 3px 0 8px;
       }
+      .presence-dot {
+        display: inline-block;
+        width: 9px;
+        height: 9px;
+        margin-right: 7px;
+        border-radius: 50%;
+        background: #ff4055;
+        box-shadow: 0 0 8px #ff405588;
+      }
+      .player.online .presence-dot {
+        background: #42ff70;
+        box-shadow: 0 0 8px #42ff70aa;
+      }
       .player small {
         color: var(--muted);
       }

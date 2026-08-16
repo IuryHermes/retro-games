@@ -323,11 +323,21 @@ var src_default = {
         return json({ presence });
       }
       if (request.method === "GET" && url.pathname === "/social/players") {
-        const directory = await listAll(env, "social/presence/");
-        const players = (await Promise.all(directory.slice(-200).map(async (object) => {
+        const [profileDirectory, presenceDirectory] = await Promise.all([listAll(env, "profiles/v1/"), listAll(env, "social/presence/")]);
+        const presence = (await Promise.all(presenceDirectory.slice(-500).map(async (object) => {
           const record = await env.GAMES.get(object.key);
           return record ? await record.json().catch(() => null) : null;
-        }))).filter((player) => player && player.uid !== account.uid && Date.now() - player.updatedAt < 9e4).slice(0, 100);
+        }))).filter(Boolean);
+        const presenceByUid = new Map(presence.map((player) => [player.uid, player]));
+        const players = (await Promise.all(profileDirectory.slice(-500).map(async (object) => {
+          const record = await env.GAMES.get(object.key);
+          const candidate = record ? await record.json().catch(() => null) : null;
+          if (!candidate || candidate.uid === account.uid)
+            return null;
+          const live = presenceByUid.get(candidate.uid);
+          const online = Boolean(live && Date.now() - live.updatedAt < 9e4);
+          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
+        }))).filter(Boolean).sort((a, b) => Number(b.online) - Number(a.online) || a.name.localeCompare(b.name, "pt-BR")).slice(0, 500);
         return json({ self: { uid: account.uid, name: profile.name, avatar: profile.avatar }, players });
       }
       if (request.method === "GET" && url.pathname === "/social/events")

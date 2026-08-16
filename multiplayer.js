@@ -169,8 +169,9 @@
             await request('/social/heartbeat', { method:'POST', body:JSON.stringify({ page:'game' }) });
             const data = await request('/social/players');
             list.replaceChildren();
-            if (!data.players?.length) { list.textContent = 'Nenhum outro jogador online agora.'; return; }
-            data.players.forEach(player => {
+            const onlinePlayers = (data.players || []).filter(player => player.online);
+            if (!onlinePlayers.length) { list.textContent = 'Nenhum outro jogador online agora.'; return; }
+            onlinePlayers.forEach(player => {
                 const row = document.createElement('div'); row.className = 'neo-multi-person';
                 const name = document.createElement('span'); name.textContent = player.name;
                 const invite = document.createElement('button'); invite.type = 'button'; invite.textContent = 'CONVIDAR';

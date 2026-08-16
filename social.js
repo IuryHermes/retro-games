@@ -5,14 +5,11 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const API = "https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev";
-const app = initializeApp(
-  {
-    apiKey: "AIzaSyCx_OllbDYkua9BbMOj2oJP5V1UcbxmnbI",
-    authDomain: "neoterminalroom.firebaseapp.com",
-    projectId: "neoterminalroom",
-  },
-  "neo-social",
-);
+const app = initializeApp({
+  apiKey: "AIzaSyCx_OllbDYkua9BbMOj2oJP5V1UcbxmnbI",
+  authDomain: "neoterminalroom.firebaseapp.com",
+  projectId: "neoterminalroom",
+});
 const auth = getAuth(app);
 const state = {
   firebase: null,
@@ -85,25 +82,31 @@ async function loadPlayers() {
     const data = await api("/social/players");
     state.players = data.players || [];
     el("players").replaceChildren();
+    const onlineCount = state.players.filter((player) => player.online).length;
     el("status").textContent =
-      `${state.players.length} jogador(es) disponível(is) agora`;
+      `${onlineCount} online · ${state.players.length} perfil(is) cadastrado(s)`;
     if (!state.players.length) {
       el("players").innerHTML =
-        '<div class="empty">Nenhum outro jogador apareceu nos últimos 90 segundos.</div>';
+        '<div class="empty">Ainda não existem outros perfis cadastrados.</div>';
       return;
     }
     for (const player of state.players) {
       const card = document.createElement("article");
-      card.className = "player";
+      card.className = `player${player.online ? " online" : ""}`;
       const image = document.createElement("img");
       image.src = avatar(player.avatar);
       image.alt = "";
       const info = document.createElement("div");
       const name = document.createElement("strong");
-      name.textContent = player.name;
+      const dot = document.createElement("span");
+      dot.className = "presence-dot";
+      name.append(dot, document.createTextNode(player.name));
       const page = document.createElement("small");
-      page.textContent =
-        player.page === "game" ? "Jogando agora" : "Navegando no site";
+      page.textContent = player.online
+        ? player.page === "game"
+          ? "Online · jogando agora"
+          : "Online · navegando no site"
+        : "Offline";
       info.append(name, page);
       const buttons = document.createElement("div");
       buttons.className = "buttons";
@@ -112,6 +115,10 @@ async function loadPlayers() {
       chat.onclick = () => openChat(player);
       const invite = document.createElement("button");
       invite.textContent = "CONVIDAR";
+      invite.disabled = !player.online;
+      invite.title = player.online
+        ? "Convidar para sua sala"
+        : "Jogador offline";
       invite.onclick = () => invitePlayer(player);
       buttons.append(chat, invite);
       card.append(image, info, buttons);

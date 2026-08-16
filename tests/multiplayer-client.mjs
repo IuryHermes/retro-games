@@ -30,5 +30,9 @@ assert.match(host, /\.ejs_menu_bar/);
 assert.match(worker, /class SocialPlayer/);
 assert.match(worker, /\/social\/invite/);
 assert.match(social, /\/social\/messages/);
+assert.match(worker, /profiles\/v1\//);
+assert.match(worker, /presenceByUid/);
+assert.match(social, /presence-dot/);
+assert.match(social, /player\.online/);
 
-console.log('multiplayer client and room: 23 checks passed');
+console.log('multiplayer client and room: 27 checks passed');
