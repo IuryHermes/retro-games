@@ -452,14 +452,22 @@
         let keyboardMap = { ...defaultKeyboardMap };
         let gamepadButtons = { ...defaultGamepadButtons };
         let captureBindingIndex = null;
-        const bindingActions = [["CIMA",4],["BAIXO",5],["ESQUERDA",6],["DIREITA",7],["A",8],["B",0],["X",9],["Y",1],["START",3],["SELECT",2],["L",10],["R",11]];
-        const bindingStorageKey = () => `neo_multiplayer_bindings_${roomSystem || "default"}`;
+        const bindingActions = () => roomSystem === "n64"
+          ? [["ANALÓGICO CIMA",19],["ANALÓGICO BAIXO",18],["ANALÓGICO ESQUERDA",17],["ANALÓGICO DIREITA",16],["D-PAD CIMA",4],["D-PAD BAIXO",5],["D-PAD ESQUERDA",6],["D-PAD DIREITA",7],["A",0],["B",1],["START",3],["Z",12],["L",10],["R",11],["C CIMA",23],["C BAIXO",22],["C ESQUERDA",21],["C DIREITA",20]]
+          : [["CIMA",4],["BAIXO",5],["ESQUERDA",6],["DIREITA",7],["A",8],["B",0],["X",9],["Y",1],["START",3],["SELECT",2],["L",10],["R",11]];
+        const bindingStorageKey = () => `neo_multiplayer_bindings_v2_${roomSystem || "default"}`;
+        function defaultBindings() {
+          if (roomSystem === "n64") return {
+            keyboardMap: { ...defaultKeyboardMap, ArrowUp:19, ArrowDown:18, ArrowLeft:17, ArrowRight:16, z:0, x:1, a:12, s:23, d:22, c:21, v:20 },
+            gamepadButtons: { ...defaultGamepadButtons, 0:0, 1:1, 2:12, 3:23, 4:10, 5:11, 8:12, 9:3, 12:19, 13:18, 14:17, 15:16 },
+          };
+          return { keyboardMap:{ ...defaultKeyboardMap }, gamepadButtons:{ ...defaultGamepadButtons } };
+        }
         function saveBindings() {
           localStorage.setItem(bindingStorageKey(), JSON.stringify({ keyboardMap, gamepadButtons }));
         }
         function loadBindings() {
-          keyboardMap = { ...defaultKeyboardMap };
-          gamepadButtons = { ...defaultGamepadButtons };
+          ({ keyboardMap, gamepadButtons } = defaultBindings());
           try {
             const saved = JSON.parse(localStorage.getItem(bindingStorageKey()) || "null");
             if (saved?.keyboardMap) keyboardMap = saved.keyboardMap;
@@ -469,7 +477,7 @@
         }
         function renderBindings() {
           bindingList.replaceChildren();
-          for (const [label, index] of bindingActions) {
+          for (const [label, index] of bindingActions()) {
             const key = Object.entries(keyboardMap).find(([, value]) => value === index)?.[0] || "—";
             const buttonNumber = Object.entries(gamepadButtons).find(([, value]) => value === index)?.[0];
             const button = document.createElement("button");
@@ -559,15 +567,9 @@
         }
         const input = (index, value) => {
           void unlockPlayback();
-          let inputIndex = Number(index);
+          const inputIndex = Number(index);
           let inputValue = Number(value);
-          if (roomSystem === "n64") {
-            const n64Stick = { 4: 19, 5: 18, 6: 17, 7: 16 };
-            if (n64Stick[inputIndex] !== undefined) {
-              inputIndex = n64Stick[inputIndex];
-              inputValue = inputValue ? 0x7fff : 0;
-            }
-          }
+          if (roomSystem === "n64" && inputIndex >= 16 && inputIndex <= 23) inputValue = inputValue ? (inputValue === 1 ? 0x7fff : inputValue) : 0;
           const data = { type: "input", index: inputIndex, value: inputValue };
           if (channel?.readyState === "open")
             channel.send(JSON.stringify(data));
@@ -744,6 +746,14 @@
               throw new Error(data.erro || "Sala indisponível.");
             roomSystem = String(data.room.system || "").toLowerCase();
             loadBindings();
+            if (roomSystem === "n64") {
+              const directions = [[".up",19],[".down",18],[".left",17],[".right",16]];
+              for (const [selector,index] of directions) controller.querySelector(selector).dataset.index = String(index);
+              const actions = controller.querySelectorAll(".actions .control");
+              [["B",1],["C↑",23],["A",0],["C↓",22]].forEach(([label,index],position) => { actions[position].textContent = label; actions[position].dataset.index = String(index); });
+              const meta = controller.querySelectorAll(".meta .control");
+              meta[1].textContent = "Z"; meta[1].dataset.index = "12";
+            }
             document.getElementById("room-title").textContent = data.room.title;
             socket = new WebSocket(
               `${API.replace("https:", "wss:")}/multiplayer/rooms/${roomId}/ws?ticket=${encodeURIComponent(data.ticket)}`,
@@ -778,7 +788,7 @@
         join();
         document.getElementById("open-control-config").onclick = () => { renderBindings(); controlConfig.showModal(); };
         document.getElementById("close-control-config").onclick = () => { captureBindingIndex = null; controlConfig.close(); };
-        document.getElementById("reset-bindings").onclick = () => { keyboardMap = { ...defaultKeyboardMap }; gamepadButtons = { ...defaultGamepadButtons }; saveBindings(); renderBindings(); bindingStatus.textContent = "Configuração padrão restaurada."; };
+        document.getElementById("reset-bindings").onclick = () => { ({ keyboardMap, gamepadButtons } = defaultBindings()); saveBindings(); renderBindings(); bindingStatus.textContent = "Configuração padrão restaurada."; };
         void pollSocialEvents();
         setInterval(pollSocialEvents, 7000);
       })();
