@@ -427,6 +427,7 @@
                 <button class="profile-tab" id="profile-cloud-tab" type="button" role="tab" aria-selected="false">SAVES NA NUVEM</button>
             </div>
             <div class="history-list" id="history-list"></div>
+            <button class="auth-action" id="profile-logout" type="button" style="width:100%;margin-top:14px;border-color:#ff4f61;color:#ff8390">SAIR DA CONTA</button>
         </div>
     </div>
 
@@ -830,7 +831,18 @@
     document.getElementById('auth-google').onclick = () => completeSocialLogin(new GoogleAuthProvider());
     document.getElementById('auth-discord').onclick = () => { location.href = `${ACCOUNT_API}/account/discord/login`; };
     document.getElementById('auth-save-profile').onclick = saveProfile;
-    document.getElementById('auth-logout').onclick = async () => { if (auth.currentUser) await signOut(auth); sessionStorage.removeItem('neo_club_access'); sessionStorage.removeItem('neo_account_access'); discordAccountToken = ''; accountProfile = null; applyProfile(); closeAuth(); };
+    async function logoutAccount() {
+        if (auth.currentUser) await signOut(auth);
+        clearInterval(socialTimer); socialTimer = 0;
+        sessionStorage.removeItem('neo_club_access');
+        sessionStorage.removeItem('neo_account_access');
+        sessionStorage.removeItem('neo_discord_link');
+        sessionStorage.removeItem('neo_pending_multiplayer_room');
+        discordAccountToken = ''; accountProfile = null; applyProfile(); closeAuth(); closeHistory();
+        location.reload();
+    }
+    document.getElementById('auth-logout').onclick = logoutAccount;
+    document.getElementById('profile-logout').onclick = logoutAccount;
     onAuthStateChanged(auth, async user => {
         document.getElementById('auth-logout').style.display = user || discordAccountToken ? 'block' : 'none';
         document.getElementById('auth-save-profile').style.display = user || discordAccountToken ? 'block' : 'none';

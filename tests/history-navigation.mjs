@@ -14,5 +14,7 @@ assert.match(cloudSaves, /automaticChoice\(session\)/);
 assert.match(cloudSaves, /automaticEnabled = false/);
 assert.match(index, /SAVES NA NUVEM/);
 assert.match(index, /\/club\/library/);
+assert.match(index, /id="profile-logout"/);
+assert.match(index, /function logoutAccount/);
 
-console.log('history navigation/profile: 10 checks passed');
+console.log('history navigation/profile: 12 checks passed');
