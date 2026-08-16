@@ -8,7 +8,9 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(registrations => Promise.all(registrations.map(registration => {
                 const script = registration.active?.scriptURL || registration.waiting?.scriptURL || registration.installing?.scriptURL || '';
-                return registration.scope === `${location.origin}/` && script.endsWith('/coi-serviceworker.js') ? registration.unregister() : false;
+                let isCoiWorker = false;
+                try { isCoiWorker = new URL(script).pathname.endsWith('/coi-serviceworker.js'); } catch (_) {}
+                return registration.scope === `${location.origin}/` && isCoiWorker ? registration.unregister() : false;
             }))).then(results => {
                 if (results.some(Boolean) && navigator.serviceWorker.controller && !sessionStorage.getItem('neoCoiRootRemoved')) {
                     sessionStorage.setItem('neoCoiRootRemoved', '1'); location.reload();

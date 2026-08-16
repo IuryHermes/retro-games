@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 const player = await readFile(new URL('../player-universal.html', import.meta.url), 'utf8');
 const cloudSaves = await readFile(new URL('../cloud-saves.js', import.meta.url), 'utf8');
 
-assert.match(player, /src="coi-serviceworker\.js"/);
+assert.match(player, /src="coi-serviceworker\.js\?v=2"/);
 const coiWorker = await readFile(new URL('../coi-serviceworker.js', import.meta.url), 'utf8');
 assert.match(coiWorker, /scope: "\/player-universal\.html"/);
 assert.match(player, /window\.crossOriginIsolated/);
