@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile, stat } from 'node:fs/promises';
 
 const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
-const onlineIcon = await stat(new URL('../assets/imagens-videos/imagens do menu/online-transparent.png', import.meta.url));
+const onlineIcon = await stat(new URL('../assets/imagens-videos/imagens do menu/jogar-online.png', import.meta.url));
 const playersIcon = await stat(new URL('../assets/imagens-videos/imagens do menu/on-transparent.png', import.meta.url));
 const supportIcon = await stat(new URL('../assets/imagens-videos/imagens do menu/apoiar-projeto.png', import.meta.url));
 
