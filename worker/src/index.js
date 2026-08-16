@@ -188,7 +188,9 @@ class MultiplayerRoom {
     const uid = request.headers.get("X-Multiplayer-Uid") || "";
     const name = decodeURIComponent(request.headers.get("X-Multiplayer-Name") || "Jogador").slice(0, 20);
     const host = request.headers.get("X-Multiplayer-Host") === "1" && uid === room.hostUid;
-    if (!host && this.participants().filter((person) => !person.host).length >= room.maxPlayers - 1)
+    const currentParticipants = this.participants();
+    const otherGuests = currentParticipants.filter((person) => !person.host && person.uid !== uid);
+    if (!host && otherGuests.length >= room.maxPlayers - 1)
       return json({ erro: "Sala lotada." }, 409);
     for (const socket of this.ctx.getWebSockets()) {
       const person = socket.deserializeAttachment();
@@ -197,10 +199,16 @@ class MultiplayerRoom {
     }
     const pair = new WebSocketPair();
     const [client, server] = Object.values(pair);
-    const attachment = { clientId: crypto.randomUUID(), uid, name, host, seat: host ? 1 : 0, approved: host };
+    const usedSeats = new Set(otherGuests.map((person) => person.seat));
+    const automaticSeat = host ? 1 : Array.from({ length: room.maxPlayers - 1 }, (_, index) => index + 2).find((seat) => !usedSeats.has(seat));
+    if (!automaticSeat)
+      return json({ erro: "Nao ha controle disponivel nesta sala." }, 409);
+    const attachment = { clientId: crypto.randomUUID(), uid, name, host, seat: automaticSeat, approved: true };
     server.serializeAttachment(attachment);
     this.ctx.acceptWebSocket(server, [host ? "host" : "guest"]);
     server.send(JSON.stringify({ type: "welcome", clientId: attachment.clientId, roomId: room.id, host }));
+    if (!host)
+      server.send(JSON.stringify({ type: "assignment", seat: automaticSeat, approved: true }));
     queueMicrotask(() => this.broadcast(this.state(room)));
     return new Response(null, { status: 101, webSocket: client });
   }
@@ -221,21 +229,6 @@ class MultiplayerRoom {
       const target = this.find(data.to);
       if (target)
         target.send(JSON.stringify({ type: "signal", from: sender.clientId, data: data.data }));
-      return;
-    }
-    if (data.type === "assign" && sender.host) {
-      const target = this.find(String(data.clientId || ""));
-      const seat = Number(data.seat);
-      if (!target || !Number.isInteger(seat) || seat < 0 || seat > room.maxPlayers)
-        return;
-      if (seat > 1 && this.participants().some((person) => person.clientId !== data.clientId && person.seat === seat))
-        return;
-      const targetState = target.deserializeAttachment();
-      targetState.seat = seat;
-      targetState.approved = seat > 1;
-      target.serializeAttachment(targetState);
-      target.send(JSON.stringify({ type: "assignment", seat, approved: targetState.approved }));
-      this.broadcast(this.state(room));
       return;
     }
     if (data.type === "kick" && sender.host) {

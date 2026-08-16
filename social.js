@@ -17,6 +17,7 @@ const state = {
   players: [],
   chat: null,
   since: Date.now() - 60000,
+  invited: new Set(),
 };
 const el = (id) => document.getElementById(id);
 const avatar = (value) =>
@@ -90,7 +91,9 @@ async function loadPlayers() {
         '<div class="empty">Ainda não existem outros perfis cadastrados.</div>';
       return;
     }
-    for (const player of state.players) {
+    for (const player of state.players.filter(
+      (candidate) => !state.invited.has(candidate.uid),
+    )) {
       const card = document.createElement("article");
       card.className = `player${player.online ? " online" : ""}`;
       const image = document.createElement("img");
@@ -143,6 +146,8 @@ async function invitePlayer(player) {
       method: "POST",
       body: JSON.stringify({ toUid: player.uid, roomId: room }),
     });
+    state.invited.add(player.uid);
+    await loadPlayers();
     alert(`Convite enviado para ${player.name}.`);
   } catch (error) {
     alert(error.message);

@@ -130,9 +130,6 @@
             row.appendChild(label);
             if (!person.host) {
                 const actions = document.createElement('span');
-                for (let seat = 2; seat <= room.maxPlayers; seat++) {
-                    const button = document.createElement('button'); button.type = 'button'; button.textContent = String(seat); button.title = `Atribuir controle ${seat}`; button.onclick = () => send({ type:'assign', clientId:person.clientId, seat }); actions.appendChild(button);
-                }
                 const kick = document.createElement('button'); kick.type = 'button'; kick.textContent = '×'; kick.title = 'Remover jogador'; kick.onclick = () => send({ type:'kick', clientId:person.clientId }); actions.appendChild(kick); row.appendChild(actions);
                 void ensurePeer(person).catch(error => setStatus(error.message));
             }
@@ -190,7 +187,7 @@
                 const row = document.createElement('div'); row.className = 'neo-multi-person';
                 const name = document.createElement('span'); name.textContent = player.name;
                 const invite = document.createElement('button'); invite.type = 'button'; invite.textContent = 'CONVIDAR';
-                invite.onclick = async () => { invite.disabled = true; try { await request('/social/invite', { method:'POST', body:JSON.stringify({ toUid:player.uid, roomId:room.id }) }); invite.textContent = 'ENVIADO ✓'; } catch (error) { invite.disabled = false; setStatus(error.message); } };
+                invite.onclick = async () => { invite.disabled = true; try { await request('/social/invite', { method:'POST', body:JSON.stringify({ toUid:player.uid, roomId:room.id }) }); row.remove(); setStatus(`Convite enviado para ${player.name}.`); document.getElementById('neo-multiplayer-panel')?.classList.remove('open'); } catch (error) { invite.disabled = false; setStatus(error.message); } };
                 row.append(name, invite); list.appendChild(row);
             });
         } catch (error) { list.textContent = error.message; }
