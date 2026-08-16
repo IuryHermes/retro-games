@@ -83,5 +83,12 @@ assert.match(host, /if \(audioTrack\) mediaStream\.addTrack\(audioTrack\)/);
 assert.match(guest, /const audioPlayback = audioTrackReceived[\s\S]*remoteAudio\.play\(\)[\s\S]*const videoPlayback = video\.play\(\)/);
 assert.match(guest, /addEventListener\("touchstart", unlockPlayback/);
 assert.doesNotMatch(guest, /async function unlockPlayback/);
+assert.match(host, /audioCaptureContext !== context/);
+assert.match(host, /sender\.replaceTrack\(replacementTrack\)/);
+assert.match(guest, /track\.onmute/);
+assert.match(guest, /track\.onunmute/);
+assert.match(guest, /function resumeRemoteAudio/);
+assert.match(guest, /remoteAudio\.addEventListener\("stalled"/);
+assert.match(guest, /document\.addEventListener\("visibilitychange"/);
 
-console.log('multiplayer client and room: 77 checks passed');
+console.log('multiplayer client and room: 84 checks passed');

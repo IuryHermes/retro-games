@@ -10,8 +10,9 @@
     let clientId = '';
     let mediaStream = null;
     let audioCaptureDestination = null;
+    let audioCaptureContext = null;
     let audioCaptureTimer = 0;
-    const capturedAudioNodes = new WeakSet();
+    let capturedAudioNodes = new WeakSet();
     let iceServersPromise = null;
     let iceServersExpiresAt = 0;
     const seenParticipants = new Set();
@@ -54,7 +55,20 @@
         const state = audioState();
         const context = state?.audioCtx;
         if (!context || !state?.sources) return null;
-        if (!audioCaptureDestination) audioCaptureDestination = context.createMediaStreamDestination();
+        if (!audioCaptureDestination || audioCaptureContext !== context) {
+            audioCaptureContext = context;
+            audioCaptureDestination = context.createMediaStreamDestination();
+            capturedAudioNodes = new WeakSet();
+            const replacementTrack = audioCaptureDestination.stream.getAudioTracks()[0];
+            if (replacementTrack && mediaStream?.getAudioTracks().length) {
+                for (const oldTrack of mediaStream.getAudioTracks()) mediaStream.removeTrack(oldTrack);
+                mediaStream.addTrack(replacementTrack);
+                for (const peer of peers.values()) {
+                    const sender = peer.pc.getSenders().find(candidate => candidate.track?.kind === 'audio');
+                    if (sender) void sender.replaceTrack(replacementTrack).catch(error => console.warn('Neo multiplayer audio replace:', error));
+                }
+            }
+        }
         const sources = state.sources instanceof Map ? Array.from(state.sources.values()) : Object.values(state.sources);
         for (const item of sources.flat ? sources.flat(Infinity) : sources) {
             const node = item?.gain || item?.node || item;

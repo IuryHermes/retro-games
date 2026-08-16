@@ -402,7 +402,11 @@
             return;
           }
           audioTrackReceived = true;
-          for (const track of tracks) track.contentHint = "music";
+          for (const track of tracks) {
+            track.contentHint = "music";
+            track.onmute = () => { status.textContent = "Vídeo conectado · recuperando áudio..."; };
+            track.onunmute = () => { void resumeRemoteAudio(); };
+          }
           if (remoteAudio.srcObject !== stream) remoteAudio.srcObject = stream;
           remoteAudio.muted = false;
           remoteAudio.volume = 1;
@@ -411,6 +415,18 @@
             status.textContent = "Vídeo e áudio conectados";
           }).catch(() => {
             status.textContent = "Vídeo conectado · pressione uma tecla para liberar o áudio";
+          });
+        }
+        function resumeRemoteAudio() {
+          if (!audioTrackReceived || !remoteAudio.srcObject) return Promise.resolve();
+          remoteAudio.muted = false;
+          remoteAudio.volume = 1;
+          return remoteAudio.play().then(() => {
+            playbackUnlocked = true;
+            status.textContent = "Vídeo e áudio conectados";
+          }).catch(() => {
+            playbackUnlocked = false;
+            status.textContent = "Vídeo conectado · toque no controle para liberar o áudio";
           });
         }
         function unlockPlayback() {
@@ -448,6 +464,9 @@
         addEventListener("pointerdown", unlockPlayback, { passive: true });
         addEventListener("touchstart", unlockPlayback, { passive: true });
         addEventListener("keydown", unlockPlayback);
+        remoteAudio.addEventListener("pause", () => { if (audioTrackReceived && !document.hidden) void resumeRemoteAudio(); });
+        remoteAudio.addEventListener("stalled", () => { if (audioTrackReceived) void resumeRemoteAudio(); });
+        document.addEventListener("visibilitychange", () => { if (!document.hidden && audioTrackReceived) void resumeRemoteAudio(); });
         const keyboardMap = {
           ArrowUp: 4,
           ArrowDown: 5,
