@@ -121,7 +121,7 @@ if (typeof window === 'undefined') {
             return;
         }
 
-        n.serviceWorker.register(window.document.currentScript.src).then(
+        n.serviceWorker.register(window.document.currentScript.src, { scope: "/player-universal.html" }).then(
             (registration) => {
                 !coi.quiet && console.log("COOP/COEP Service Worker registered", registration.scope);
 
