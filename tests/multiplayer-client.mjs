@@ -14,7 +14,9 @@ assert.match(guest, /new RTCPeerConnection/);
 assert.match(guest, /SOLICITAR|Aguardando aprovação/);
 assert.match(index, /JOGAR ONLINE/);
 assert.match(index, /\/multiplayer\/rooms/);
+assert.match(index, /neo_pending_multiplayer_room/);
+assert.match(guest, /voltará automaticamente/);
 assert.match(worker, /class MultiplayerRoom/);
 assert.match(worker, /MULTIPLAYER_ROOMS\.getByName/);
 
-console.log('multiplayer client and room: 10 checks passed');
+console.log('multiplayer client and room: 12 checks passed');

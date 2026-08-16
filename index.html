@@ -810,7 +810,11 @@
         document.getElementById('auth-logout').style.display = user || discordAccountToken ? 'block' : 'none';
         document.getElementById('auth-save-profile').style.display = user || discordAccountToken ? 'block' : 'none';
         if (!user && !discordAccountToken) { accountProfile = null; sessionStorage.removeItem('neo_club_access'); applyProfile(); return; }
-        try { const data = await profileRequest('GET'); accountProfile = data.profile; applyProfile(); closeAuth(); }
+        try {
+            const data = await profileRequest('GET'); accountProfile = data.profile; applyProfile(); closeAuth();
+            const pendingRoom = sessionStorage.getItem('neo_pending_multiplayer_room');
+            if (/^[a-f0-9]{12}$/.test(pendingRoom || '')) { sessionStorage.removeItem('neo_pending_multiplayer_room'); location.href = `multiplayer-room.html?room=${encodeURIComponent(pendingRoom)}`; }
+        }
         catch (_) { accountProfile = null; applyProfile(); document.getElementById('auth-copy').textContent = 'Escolha seu nome e avatar para concluir o cadastro e liberar 3 saves.'; openAuth(); }
     });
 
