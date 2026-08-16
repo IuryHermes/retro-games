@@ -48,5 +48,8 @@ assert.match(guest, /if \(!videoReady\)/);
 assert.match(host, /audioTracks:mediaStream\.getAudioTracks/);
 assert.match(guest, /function unlockPlayback/);
 assert.match(guest, /requestFullscreen/);
+assert.match(guest, /attachRemoteAudio/);
+assert.match(guest, /createMediaStreamSource/);
+assert.match(guest, /áudio não recebido do anfitrião/);
 
-console.log('multiplayer client and room: 41 checks passed');
+console.log('multiplayer client and room: 44 checks passed');

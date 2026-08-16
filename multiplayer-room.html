@@ -239,6 +239,9 @@
           seat = 0,
           iceServersPromise,
           videoReady = false,
+          audioTrackReceived = false,
+          remoteAudioContext,
+          remoteAudioSource,
           iceServersExpiresAt = 0;
         const iceServers = () =>
           iceServersPromise && Date.now() < iceServersExpiresAt
@@ -261,6 +264,23 @@
           if (socket?.readyState === 1) socket.send(JSON.stringify(data));
         };
         let playbackUnlocked = false;
+        function attachRemoteAudio(stream) {
+          const tracks = stream?.getAudioTracks?.() || [];
+          if (!tracks.length) {
+            status.textContent =
+              "Vídeo conectado · áudio não recebido do anfitrião";
+            return;
+          }
+          audioTrackReceived = true;
+          status.textContent = "Vídeo e áudio conectados";
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContext || remoteAudioSource) return;
+          remoteAudioContext = new AudioContext();
+          remoteAudioSource =
+            remoteAudioContext.createMediaStreamSource(stream);
+          remoteAudioSource.connect(remoteAudioContext.destination);
+          void remoteAudioContext.resume().catch(() => {});
+        }
         async function unlockPlayback() {
           if (playbackUnlocked || !video.srcObject) return;
           if (
@@ -269,10 +289,13 @@
             matchMedia("(max-width: 900px)").matches
           )
             void document.documentElement.requestFullscreen().catch(() => {});
-          video.muted = false;
+          video.muted = true;
+          if (remoteAudioContext?.state !== "running")
+            await remoteAudioContext?.resume().catch(() => {});
           try {
             await video.play();
-            playbackUnlocked = true;
+            playbackUnlocked =
+              !remoteAudioContext || remoteAudioContext.state === "running";
           } catch (_) {
             video.muted = true;
             await video.play().catch(() => {});
@@ -383,13 +406,16 @@
                 });
             };
             currentPeer.ontrack = async (e) => {
-              video.srcObject = e.streams[0];
+              const stream = e.streams[0];
+              video.srcObject = stream;
               videoReady = true;
               waiting.hidden = true;
-              video.muted = false;
+              video.muted = true;
+              attachRemoteAudio(stream);
               try {
                 await video.play();
-                playbackUnlocked = true;
+                if (remoteAudioContext?.state === "running")
+                  playbackUnlocked = true;
               } catch (_) {
                 video.muted = true;
                 await video.play().catch(() => {});
@@ -398,7 +424,9 @@
             currentPeer.onconnectionstatechange = () => {
               const labels = {
                 connecting: "Conectando vídeo...",
-                connected: "Vídeo conectado",
+                connected: audioTrackReceived
+                  ? "Vídeo e áudio conectados"
+                  : "Vídeo conectado · aguardando áudio",
                 disconnected: "Reconectando vídeo...",
                 failed:
                   "Falha no vídeo. Peça ao anfitrião para reabrir a sala.",
