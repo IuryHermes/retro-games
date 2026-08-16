@@ -7,8 +7,11 @@
     const INTERVAL_MS = 60000;
     let token = sessionStorage.getItem(TOKEN_KEY) || '';
     let gameId = '';
+    let gameName = '';
+    let gameSystem = '';
     let lastHash = '';
     let saving = false;
+    let automaticEnabled = false;
     let timer = 0;
 
     function rememberToken() {
@@ -77,10 +80,15 @@
         try {
             const response = await fetch(endpoint(slot), {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/octet-stream', 'X-Save-Name': name || '' },
+                headers: { 'Content-Type': 'application/octet-stream', 'X-Save-Name': name || '', 'X-Game-Name': encodeURIComponent(gameName), 'X-Game-System': gameSystem },
                 body: bytes
             });
             if (response.status === 401) sessionStorage.removeItem(TOKEN_KEY);
+            if (slot === 'auto' && response.status === 409) {
+                automaticEnabled = false;
+                setStatus('Limite de autosaves atingido');
+                return false;
+            }
             if (!response.ok) throw new Error(`Cloud save HTTP ${response.status}`);
             if (slot === 'auto') lastHash = hash;
             setStatus(slot === 'auto' ? 'Autosave salvo' : 'Slot salvo');
@@ -108,8 +116,28 @@
     }
 
     async function autosave() {
+        if (!automaticEnabled) return;
         const state = await currentState();
         if (state) await upload('auto', state, 'Autosave');
+    }
+
+    function automaticChoice(session) {
+        return new Promise(resolve => {
+            const limit = session.automaticGameLimit;
+            const remaining = limit === null ? 'Autosaves ilimitados no seu plano.' : `${Math.max(0, limit - session.automaticGamesUsed)} vaga(s) de autosave livre(s) para outros jogos.`;
+            const overlay = document.createElement('div');
+            overlay.style.cssText = 'position:fixed;inset:0;z-index:10000000;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;padding:18px;font-family:monospace;color:#eaffef';
+            const box = document.createElement('div');
+            box.style.cssText = 'width:min(460px,96vw);border:2px solid #00cc44;background:#061109;padding:22px;border-radius:8px;box-shadow:0 0 30px rgba(0,204,68,.35);text-align:center';
+            const title = document.createElement('h2'); title.textContent = 'SAVE AUTOMÁTICO ENCONTRADO'; title.style.cssText = 'color:#55ff88;font-size:17px;line-height:1.5;margin:0 0 12px';
+            const copy = document.createElement('p'); copy.textContent = `Deseja continuar ${gameName} de onde parou? ${remaining}`; copy.style.cssText = 'line-height:1.6;margin:0 0 18px';
+            const resume = document.createElement('button'); resume.type = 'button'; resume.textContent = 'CONTINUAR DE ONDE PAROU'; resume.style.cssText = 'width:100%;padding:13px;background:#00cc44;color:#001b09;border:0;font-weight:bold;cursor:pointer;margin-bottom:9px';
+            const fresh = document.createElement('button'); fresh.type = 'button'; fresh.textContent = 'COMEÇAR SEM CARREGAR'; fresh.style.cssText = 'width:100%;padding:12px;background:#111;color:#fff;border:1px solid #aaa;font-weight:bold;cursor:pointer';
+            const note = document.createElement('small'); note.textContent = 'Começar sem carregar pausa o autosave nesta sessão e preserva o progresso anterior.'; note.style.cssText = 'display:block;color:#aaa;line-height:1.5;margin-top:10px';
+            const finish = choice => { overlay.remove(); resolve(choice); };
+            resume.onclick = () => finish(true); fresh.onclick = () => finish(false);
+            box.append(title, copy, resume, fresh, note); overlay.appendChild(box); document.body.appendChild(overlay); resume.focus();
+        });
     }
 
     async function loadSlot(slot) {
@@ -142,7 +170,8 @@
         const panel = document.createElement('div');
         panel.id = 'neo-cloud-panel';
         const planLimit = session ? session.manualSaveLimit : 0;
-        const planText = session ? (planLimit === null ? 'Slots ilimitados' : `${planLimit} slots manuais`) : 'Entre no Clube para salvar';
+        const autoText = session ? (session.automaticGameLimit === null ? 'autosaves ilimitados' : `${session.automaticGamesUsed}/${session.automaticGameLimit} jogos com autosave`) : '';
+        const planText = session ? `${planLimit === null ? 'Slots manuais ilimitados' : `${planLimit} slots manuais`} · ${autoText}` : 'Entre no Clube para salvar';
         panel.innerHTML = `<button id="neo-cloud-toggle" type="button">☁ SAVES</button><div id="neo-cloud-menu"><div id="neo-cloud-status">${planText}</div><div class="neo-cloud-grid"></div></div>`;
         document.body.appendChild(panel);
         const grid = panel.querySelector('.neo-cloud-grid');
@@ -166,19 +195,25 @@
     async function prepare(options) {
         rememberToken();
         gameId = stableGameId(options.game, options.core);
+        gameName = String(options.name || gameId).slice(0, 100);
+        gameSystem = String(options.system || options.core || '').toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 20);
         await flushPendingHistory();
         let session = null;
         try { session = await sessionInfo(); } catch (_) {}
         if (token && !session) { sessionStorage.removeItem(TOKEN_KEY); token = ''; }
         createControls(session);
         window.EJS_gameID = Array.from(gameId).reduce((hash, char) => ((hash * 31 + char.charCodeAt(0)) >>> 0), 7);
+        automaticEnabled = Boolean(token && session && (session.automaticGameLimit === null || session.automaticGamesUsed < session.automaticGameLimit));
         if (token) {
             try {
                 const automatic = await download('auto');
                 if (automatic) {
-                    const blobUrl = URL.createObjectURL(new Blob([automatic], { type: 'application/octet-stream' }));
-                    window.EJS_loadStateURL = blobUrl;
-                    lastHash = await digest(automatic);
+                    automaticEnabled = true;
+                    if (await automaticChoice(session)) {
+                        const blobUrl = URL.createObjectURL(new Blob([automatic], { type: 'application/octet-stream' }));
+                        window.EJS_loadStateURL = blobUrl;
+                        lastHash = await digest(automatic);
+                    } else automaticEnabled = false;
                 }
             } catch (error) { console.warn('Neo autosave load:', error); }
         }
@@ -190,7 +225,7 @@
         window.EJS_onGameStart = function () {
             if (typeof previousStart === 'function') previousStart.apply(this, arguments);
             clearInterval(timer);
-            if (token) timer = setInterval(autosave, INTERVAL_MS);
+            if (token && automaticEnabled) timer = setInterval(autosave, INTERVAL_MS);
         };
         addEventListener('pagehide', () => { clearInterval(timer); });
     }

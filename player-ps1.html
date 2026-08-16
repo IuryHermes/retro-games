@@ -55,7 +55,7 @@
         window.EJS_mouse = false;         // Desativa mouse para economizar recursos
         window.EJS_multitap = false;      // Desativa multitap para ganhar velocidade
         window.EJS_startOnLoaded = true;
-        window.NeoCloudSaves.prepare({ game: window.EJS_gameUrl, core: window.EJS_core }).finally(() => {
+        window.NeoCloudSaves.prepare({ game: window.EJS_gameUrl, core: window.EJS_core, name: params.get('title'), system: params.get('system') }).finally(() => {
             const loaderScript = document.createElement('script');
             loaderScript.src = 'https://cdn.emulatorjs.org/latest/data/loader.js';
             document.body.appendChild(loaderScript);

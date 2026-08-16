@@ -346,6 +346,16 @@
         .history-meta { display:block; margin-top:6px; color:var(--accent-color); font:8px 'Press Start 2P',cursive; }
         .history-date { display:block; margin-top:5px; color:var(--text-muted); font:8px monospace; }
         .history-empty { grid-column:1/-1; padding:35px 15px; border:1px dashed var(--border-color); color:var(--text-muted); text-align:center; font:12px monospace; line-height:1.6; }
+        .profile-tabs { display:flex; gap:8px; margin:14px 0; }
+        .profile-tab { flex:1; min-height:38px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-muted); border-radius:5px; cursor:pointer; font:bold 10px monospace; }
+        .profile-tab.active { border-color:var(--accent-color); background:rgba(0,204,68,.15); color:var(--text-color); }
+        .cloud-summary { grid-column:1/-1; padding:12px; border:1px solid var(--accent-color); background:rgba(0,204,68,.08); border-radius:6px; color:var(--text-color); font:11px monospace; line-height:1.6; }
+        .cloud-game { border:1px solid var(--border-color); background:var(--input-bg); border-radius:6px; padding:12px; min-width:0; }
+        .cloud-game-title { color:var(--text-color); font:bold 11px monospace; overflow-wrap:anywhere; }
+        .cloud-game-system { color:var(--accent-color); font:8px 'Press Start 2P',cursive; margin-top:5px; }
+        .cloud-slot { display:grid; grid-template-columns:1fr auto; gap:8px; align-items:center; padding-top:9px; margin-top:9px; border-top:1px solid var(--border-color); }
+        .cloud-slot-copy { color:var(--text-muted); font:9px monospace; line-height:1.45; }
+        .cloud-delete { border:1px solid #ff4f61; background:rgba(255,79,97,.1); color:#ff6b7b; border-radius:4px; padding:7px 9px; cursor:pointer; font:bold 9px monospace; }
         @media(max-width:1024px){ .top-account-mobile{display:flex;width:38px;min-height:38px;height:38px}.top-account-mobile .account-avatar{width:28px;height:28px;flex-basis:28px}.top-account-mobile .account-copy{display:none} }
         @media(max-width:768px){ .avatar-grid{grid-template-columns:repeat(2,1fr);max-height:360px} }
         @media (orientation: landscape) and (max-width: 1366px) and (pointer: coarse), (max-height: 700px) {
@@ -390,7 +400,11 @@
         <div class="history-panel">
             <button class="game-info-close" id="history-close" type="button">X</button>
             <h2 id="history-title">CONTINUE JOGANDO</h2>
-            <p class="history-subtitle">Seus jogos, do mais recente para o mais antigo.</p>
+            <p class="history-subtitle" id="profile-subtitle">Seus jogos, do mais recente para o mais antigo.</p>
+            <div class="profile-tabs" role="tablist" aria-label="Conteúdo do perfil">
+                <button class="profile-tab active" id="profile-history-tab" type="button" role="tab" aria-selected="true">JOGOS RECENTES</button>
+                <button class="profile-tab" id="profile-cloud-tab" type="button" role="tab" aria-selected="false">SAVES NA NUVEM</button>
+            </div>
             <div class="history-list" id="history-list"></div>
         </div>
     </div>
@@ -609,6 +623,9 @@
     authModal.onclick = event => { if (event.target === authModal) closeAuth(); };
     const historyModal = document.getElementById('history-modal');
     const historyList = document.getElementById('history-list');
+    const historyTab = document.getElementById('profile-history-tab');
+    const cloudTab = document.getElementById('profile-cloud-tab');
+    const profileSubtitle = document.getElementById('profile-subtitle');
     const closeHistory = () => { historyModal.style.display = 'none'; };
     document.getElementById('history-close').onclick = closeHistory;
     historyModal.onclick = event => { if (event.target === historyModal) closeHistory(); };
@@ -621,8 +638,14 @@
         if (!response.ok) throw new Error(data.erro || 'Não foi possível carregar seus jogos.');
         return data;
     }
-    async function openHistory() {
-        historyModal.style.display = 'flex';
+    function selectProfileTab(tab) {
+        const historyActive = tab === 'history';
+        historyTab.classList.toggle('active', historyActive); cloudTab.classList.toggle('active', !historyActive);
+        historyTab.setAttribute('aria-selected', String(historyActive)); cloudTab.setAttribute('aria-selected', String(!historyActive));
+    }
+    async function loadHistory() {
+        selectProfileTab('history');
+        profileSubtitle.textContent = 'Seus jogos, do mais recente para o mais antigo.';
         historyList.innerHTML = '<div class="history-empty">CARREGANDO HISTÓRICO...</div>';
         try {
             const data = await historyRequest();
@@ -640,6 +663,42 @@
                 info.append(name, system, date); card.append(image, info); historyList.appendChild(card);
             });
         } catch (error) { historyList.innerHTML = ''; const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = error.message; historyList.appendChild(empty); }
+    }
+    async function cloudRequest(path, method = 'GET') {
+        const token = auth.currentUser ? await auth.currentUser.getIdToken() : discordAccountToken;
+        const response = await fetch(`${ACCOUNT_API}${path}`, { method, headers:{ Authorization:`Bearer ${token}` }, cache:'no-store' });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.erro || 'Não foi possível acessar seus saves.');
+        return data;
+    }
+    async function loadCloudLibrary() {
+        selectProfileTab('cloud'); profileSubtitle.textContent = 'Gerencie autosaves e slots manuais armazenados na nuvem.';
+        historyList.innerHTML = '<div class="history-empty">CARREGANDO SAVES...</div>';
+        try {
+            const data = await cloudRequest('/club/library'); historyList.replaceChildren();
+            const summary = document.createElement('div'); summary.className = 'cloud-summary';
+            summary.textContent = data.automaticGameLimit === null ? `Autosaves: ${data.automaticGamesUsed} jogos · ilimitados no seu plano. Saves manuais: ilimitados por jogo.` : `Autosaves: ${data.automaticGamesUsed} de ${data.automaticGameLimit} jogos · ${Math.max(0, data.automaticGameLimit - data.automaticGamesUsed)} vagas livres. Saves manuais: ${data.manualSaveLimit} por jogo.`;
+            historyList.appendChild(summary);
+            if (!data.games?.length) { const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = 'Nenhum save armazenado na nuvem.'; historyList.appendChild(empty); return; }
+            data.games.forEach(game => {
+                const card = document.createElement('section'); card.className = 'cloud-game';
+                const title = document.createElement('div'); title.className = 'cloud-game-title'; title.textContent = game.name;
+                const system = document.createElement('div'); system.className = 'cloud-game-system'; system.textContent = String(game.system || 'JOGO').toUpperCase(); card.append(title, system);
+                game.slots.forEach(slot => {
+                    const row = document.createElement('div'); row.className = 'cloud-slot';
+                    const copy = document.createElement('div'); copy.className = 'cloud-slot-copy'; const size = slot.size < 1048576 ? `${Math.ceil(slot.size / 1024)} KB` : `${(slot.size / 1048576).toFixed(1)} MB`;
+                    copy.textContent = `${slot.slot === 'auto' ? 'AUTOSAVE CONTÍNUO' : slot.name} · ${size} · ${new Date(slot.updatedAt).toLocaleString('pt-BR')}`;
+                    const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'cloud-delete'; remove.textContent = slot.slot === 'auto' ? 'LIBERAR VAGA' : 'EXCLUIR';
+                    remove.onclick = async () => { if (!confirm(`Excluir ${slot.slot === 'auto' ? 'o autosave' : 'este save'} de ${game.name}?`)) return; remove.disabled = true; try { await cloudRequest(`/club/save?game=${encodeURIComponent(game.id)}&slot=${encodeURIComponent(slot.slot)}`, 'DELETE'); await loadCloudLibrary(); } catch (error) { alert(error.message); remove.disabled = false; } };
+                    row.append(copy, remove); card.appendChild(row);
+                }); historyList.appendChild(card);
+            });
+        } catch (error) { historyList.innerHTML = ''; const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = error.message; historyList.appendChild(empty); }
+    }
+    historyTab.onclick = loadHistory; cloudTab.onclick = loadCloudLibrary;
+    async function openHistory() {
+        historyModal.style.display = 'flex';
+        await loadHistory();
     }
     async function recordPlayedGame(game, playUrl) {
         if (!accountProfile || (!auth.currentUser && !discordAccountToken)) return;
@@ -989,6 +1048,7 @@
     document.addEventListener("click", (e) => { if (emojiPicker.style.display === "flex" && !emojiPicker.contains(e.target) && e.target !== emojiBtn) emojiPicker.style.display = "none"; });
 
     const coreMap = { 'nes': 'nes', 'snes': 'snes', 'gba': 'gba', 'n64': 'n64', 'megadrive': 'segaMD', 'ps1': 'psx' };
+    const playerUrl = (playerFile, gameUrl, core, title, system) => `${playerFile}?${new URLSearchParams({ nocache:Date.now(), game:gameUrl, core, title:title || '', system:system || '' })}`;
 
     const top10Games = [
         { id: 'super_mario_world', nome: 'Super Mario World', sysId: 'snes', path: 'systems/snes/', rom: 'roms/super_mario_world_(usa).zip', cats: 'Aventura <span>•</span> Plataforma <span>•</span> SNES' },
@@ -1012,7 +1072,7 @@
         slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
         const coreToUse = coreMap[game.sysId] || 'snes';
         const playerFile = game.sysId === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
-        const playUrl = `${playerFile}?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + game.path + game.rom)}&core=${coreToUse}`;
+        const playUrl = playerUrl(playerFile, R2_URL + game.path + game.rom, coreToUse, game.nome, game.sysId);
         const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
 
         slide.innerHTML = `
@@ -1116,7 +1176,7 @@
 
                 const coreToUse = coreMap[sys.id] || 'snes';
                 const playerFile = sys.id === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
-                const playUrl = `${playerFile}?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + sys.path + g.rom)}&core=${coreToUse}`;
+                const playUrl = playerUrl(playerFile, R2_URL + sys.path + g.rom, coreToUse, g.nome, sys.id);
 
                 card.dataset.url = playUrl;
 
@@ -1183,7 +1243,7 @@
 
                 const coreToUse = coreMap[h.sysId] || 'snes';
                 const playerFile = h.sysId === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
-                const playUrl = `${playerFile}?nocache=${Date.now()}&game=${encodeURIComponent(R2_URL + h.sysPath + h.rom)}&core=${coreToUse}`;
+                const playUrl = playerUrl(playerFile, R2_URL + h.sysPath + h.rom, coreToUse, h.nome, h.sysId);
 
                 div.dataset.url = playUrl; div.onclick = () => window.openGameModal(h, playUrl);
                 searchResults.appendChild(div);

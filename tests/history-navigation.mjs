@@ -10,5 +10,9 @@ assert.match(index, /await historyRequest\('POST', pending\)/);
 assert.match(cloudSaves, /async function flushPendingHistory\(\)/);
 assert.match(cloudSaves, /fetch\(`\$\{API\}\/account\/history`/);
 assert.match(cloudSaves, /await flushPendingHistory\(\);[\s\S]*?sessionInfo\(\)/);
+assert.match(cloudSaves, /automaticChoice\(session\)/);
+assert.match(cloudSaves, /automaticEnabled = false/);
+assert.match(index, /SAVES NA NUVEM/);
+assert.match(index, /\/club\/library/);
 
-console.log('history navigation retry: 6 checks passed');
+console.log('history navigation/profile: 10 checks passed');

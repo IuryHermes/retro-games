@@ -20,12 +20,16 @@ const env = {
   DISCORD_CLIENT_SECRET: 'test-secret',
   GAMES: {
     async get(key) {
-      const value = objects.get(key);
-      return value === undefined ? null : { size: value.length, httpEtag: 'test', uploaded: new Date(), customMetadata: {}, body: value, async json() { return JSON.parse(Buffer.from(value).toString()); } };
+      const entry = objects.get(key);
+      return entry === undefined ? null : { size: entry.value.length, httpEtag: 'test', uploaded: entry.uploaded, customMetadata: entry.customMetadata, body: entry.value, async json() { return JSON.parse(entry.value.toString()); } };
     },
-    async put(key, value) { objects.set(key, Buffer.from(value)); return { httpEtag: 'test' }; },
+    async head(key) {
+      const entry = objects.get(key);
+      return entry === undefined ? null : { size:entry.value.length, uploaded:entry.uploaded, customMetadata:entry.customMetadata };
+    },
+    async put(key, value, options = {}) { objects.set(key, { value:Buffer.from(value), uploaded:new Date(), customMetadata:options.customMetadata || {} }); return { httpEtag: 'test' }; },
     async delete(key) { objects.delete(key); },
-    async list() { return { objects: [] }; }
+    async list({ prefix = '' } = {}) { return { truncated:false, objects:Array.from(objects, ([key, entry]) => ({ key, size:entry.value.length, uploaded:entry.uploaded, customMetadata:entry.customMetadata })).filter(object => object.key.startsWith(prefix)) }; }
   }
 };
 
@@ -64,6 +68,21 @@ response = await worker.fetch(new Request('https://worker/account/history', { he
 const history = await response.json();
 assert.deepEqual(history.games.map(game => game.id), ['game-one', 'game-two']);
 
+const putAuto = game => worker.fetch(new Request(`https://worker/club/save?game=${game}&slot=auto`, { method:'PUT', headers:{ ...auth(tokenFor()), 'Content-Length':'3', 'X-Game-Name':encodeURIComponent(game), 'X-Game-System':'snes' }, body:new Uint8Array([1, 2, 3]) }), env);
+assert.equal((await putAuto('auto-one')).status, 200);
+assert.equal((await putAuto('auto-two')).status, 200);
+assert.equal((await putAuto('auto-three')).status, 200);
+response = await putAuto('auto-four');
+assert.equal(response.status, 409);
+assert.equal((await response.json()).automaticGameLimit, 3);
+response = await worker.fetch(new Request('https://worker/club/library', { headers:auth(tokenFor()) }), env);
+const library = await response.json();
+assert.equal(library.automaticGamesUsed, 3);
+assert.equal(library.games.find(game => game.id === 'auto-one').name, 'auto-one');
+response = await worker.fetch(new Request('https://worker/club/save?game=auto-one&slot=auto', { method:'DELETE', headers:auth(tokenFor()) }), env);
+assert.equal(response.status, 200);
+assert.equal((await putAuto('auto-four')).status, 200);
+
 response = await worker.fetch(new Request('https://worker/account/profile', { method:'PUT', headers:{ ...auth(discordToken), 'Content-Type':'application/json' }, body:JSON.stringify({ name:'Discord Player', avatar:'avatar-02' }) }), env);
 assert.equal(response.status, 200);
 response = await worker.fetch(new Request('https://worker/club/session', { headers:auth(discordToken) }), env);
@@ -71,4 +90,4 @@ const discordSession = await response.json();
 assert.equal(discordSession.plan, 'registered');
 assert.equal(discordSession.manualSaveLimit, 3);
 
-console.log('worker auth/history/discord: 11 checks passed');
+console.log('worker auth/history/discord/cloud library: 21 checks passed');

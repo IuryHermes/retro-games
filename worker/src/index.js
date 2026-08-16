@@ -24,7 +24,7 @@ var WEEKLY_POLLS = [
   { question: "Qual formato de novidade interessa mais?", answers: ["Jogo homebrew", "Lista tem\xE1tica", "Curiosidade retr\xF4", "Desafio da comunidade"] }
 ];
 var PLANS = { cafe: { title: "Cafe", amount: 5 }, cartucho: { title: "Cartucho", amount: 12 }, arcade: { title: "Arcade", amount: 25 } };
-var cors = { "Access-Control-Allow-Origin": SITE, "Access-Control-Allow-Headers": "Authorization, Content-Type, Range, X-Save-Name", "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS", "Access-Control-Expose-Headers": "Content-Length, Content-Range, Accept-Ranges, ETag, Last-Modified, X-Save-Name" };
+var cors = { "Access-Control-Allow-Origin": SITE, "Access-Control-Allow-Headers": "Authorization, Content-Type, Range, X-Save-Name, X-Game-Name, X-Game-System", "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS", "Access-Control-Expose-Headers": "Content-Length, Content-Range, Accept-Ranges, ETag, Last-Modified, X-Save-Name" };
 var json = /* @__PURE__ */ __name((data, status = 200) => Response.json(data, { status, headers: cors }), "json");
 async function discordMessage(env, channelId, body) {
   return fetch(`https://discord.com/api/v10/channels/${channelId}/messages`, { method: "POST", headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}`, "Content-Type": "application/json" }, body: JSON.stringify({ allowed_mentions: { parse: ["roles", "users"] }, ...body }) });
@@ -114,6 +114,21 @@ function manualSaveLimit(plan) {
   return plan === "registered" || plan === "cafe" ? 3 : plan === "cartucho" ? 7 : null;
 }
 __name(manualSaveLimit, "manualSaveLimit");
+function automaticGameLimit(plan) {
+  return plan === "registered" || plan === "cafe" ? 3 : plan === "cartucho" ? 7 : null;
+}
+__name(automaticGameLimit, "automaticGameLimit");
+async function listAll(env, prefix, include = []) {
+  const objects = [];
+  let cursor;
+  do {
+    const page = await env.GAMES.list({ prefix, limit: 1e3, include, ...cursor ? { cursor } : {} });
+    objects.push(...page.objects);
+    cursor = page.truncated ? page.cursor : void 0;
+  } while (cursor);
+  return objects;
+}
+__name(listAll, "listAll");
 function slotAllowed(slot, plan) {
   if (slot === "auto")
     return true;
@@ -215,7 +230,10 @@ var src_default = {
         const profileObject = await env.GAMES.get(`profiles/v1/${access.firebaseUid || access.accountUid}.json`);
         profile = profileObject ? await profileObject.json() : null;
       }
-      return json({ conectado: true, username: profile?.name || access.username || "", avatar: profile?.avatar || "", plan: access.plan, manualSaveLimit: manualSaveLimit(access.plan), expiresAt: access.exp });
+      const savePrefix = `saves/v1/${access.discordId}/`;
+      const savedObjects = await listAll(env, savePrefix, ["customMetadata"]);
+      const automaticGames = new Set(savedObjects.filter((object) => object.key.endsWith("/auto.state")).map((object) => object.key.slice(savePrefix.length).split("/")[0]));
+      return json({ conectado: true, username: profile?.name || access.username || "", avatar: profile?.avatar || "", plan: access.plan, manualSaveLimit: manualSaveLimit(access.plan), automaticGameLimit: automaticGameLimit(access.plan), automaticGamesUsed: automaticGames.size, expiresAt: access.exp });
     }
     if (url.pathname === "/account/profile" && ["GET", "PUT"].includes(request.method)) {
       const account = await accountAccess(request, env);
@@ -270,6 +288,33 @@ var src_default = {
       const result = await env.GAMES.list({ prefix: `saves/v1/${access.discordId}/${game}/`, limit: 1e3, include: ["customMetadata"] });
       return json({ game, manualSaveLimit: manualSaveLimit(access.plan), saves: result.objects.map((object) => ({ slot: object.customMetadata?.slot || object.key.split("/").pop()?.replace(/\.state$/, ""), name: object.customMetadata?.name || "", size: object.size, updatedAt: object.customMetadata?.updatedAt || object.uploaded.toISOString(), etag: object.httpEtag })) });
     }
+    if (url.pathname === "/club/library" && request.method === "GET") {
+      const access = await clubAccess(request, url, env);
+      if (!access)
+        return json({ erro: "Acesso expirado." }, 401);
+      const prefix = `saves/v1/${access.discordId}/`;
+      const objects = await listAll(env, prefix, ["customMetadata"]);
+      const games = /* @__PURE__ */ new Map();
+      for (const object of objects) {
+        const relative = object.key.slice(prefix.length);
+        const separator = relative.lastIndexOf("/");
+        if (separator < 1)
+          continue;
+        const gameId = relative.slice(0, separator);
+        const slot = relative.slice(separator + 1).replace(/\.state$/, "");
+        const metadata = object.customMetadata || {};
+        const game = games.get(gameId) || { id: gameId, name: metadata.gameName || gameId, system: metadata.gameSystem || "", slots: [] };
+        if (metadata.gameName)
+          game.name = metadata.gameName;
+        if (metadata.gameSystem)
+          game.system = metadata.gameSystem;
+        game.slots.push({ slot, name: metadata.name || (slot === "auto" ? "Autosave" : slot), size: object.size, updatedAt: metadata.updatedAt || object.uploaded.toISOString() });
+        games.set(gameId, game);
+      }
+      const automaticLimit = automaticGameLimit(access.plan);
+      const result = Array.from(games.values()).map((game) => ({ ...game, slots: game.slots.sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt))) })).sort((a, b) => String(b.slots[0]?.updatedAt || "").localeCompare(String(a.slots[0]?.updatedAt || "")));
+      return json({ games: result, automaticGameLimit: automaticLimit, automaticGamesUsed: result.filter((game) => game.slots.some((slot) => slot.slot === "auto")).length, manualSaveLimit: manualSaveLimit(access.plan) });
+    }
     if (url.pathname === "/club/save" && ["GET", "PUT", "DELETE"].includes(request.method)) {
       const access = await clubAccess(request, url, env);
       if (!access)
@@ -293,8 +338,6 @@ var src_default = {
         return new Response(object2.body, { headers });
       }
       if (request.method === "DELETE") {
-        if (target.slot === "auto")
-          return json({ erro: "O autosave nao pode ser excluido." }, 400);
         await env.GAMES.delete(target.key);
         return json({ removido: true, game: target.game, slot: target.slot });
       }
@@ -306,7 +349,24 @@ var src_default = {
         return json({ erro: "Tamanho do save invalido." }, 400);
       const updatedAt = (/* @__PURE__ */ new Date()).toISOString();
       const name = (request.headers.get("X-Save-Name") || "").trim().slice(0, 60);
-      const object = await env.GAMES.put(target.key, data, { httpMetadata: { contentType: "application/octet-stream" }, customMetadata: { game: target.game, slot: target.slot, name, updatedAt } });
+      let gameName = "";
+      try {
+        gameName = decodeURIComponent(request.headers.get("X-Game-Name") || "").trim().slice(0, 100);
+      } catch {
+        gameName = "";
+      }
+      const gameSystem = (request.headers.get("X-Game-System") || "").trim().toLowerCase().slice(0, 20);
+      if (target.slot === "auto") {
+        const existing = await env.GAMES.head(target.key);
+        if (!existing) {
+          const prefix = `saves/v1/${access.discordId}/`;
+          const automaticGames = new Set((await listAll(env, prefix)).filter((item) => item.key.endsWith("/auto.state")).map((item) => item.key.slice(prefix.length).split("/")[0]));
+          const limit = automaticGameLimit(access.plan);
+          if (limit !== null && automaticGames.size >= limit)
+            return json({ erro: "Limite de jogos com autosave atingido.", automaticGameLimit: limit, automaticGamesUsed: automaticGames.size }, 409);
+        }
+      }
+      const object = await env.GAMES.put(target.key, data, { httpMetadata: { contentType: "application/octet-stream" }, customMetadata: { game: target.game, slot: target.slot, name, gameName, gameSystem, updatedAt } });
       return json({ salvo: true, game: target.game, slot: target.slot, size: data.byteLength, updatedAt, etag: object?.httpEtag });
     }
     if (request.method === "POST" && url.pathname === "/admin/setup-discord") {

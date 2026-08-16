@@ -154,7 +154,7 @@
                     buttonStyle: "modern" 
                 };
             }
-            window.NeoCloudSaves.prepare({ game: window.EJS_gameUrl, core: window.EJS_core }).finally(() => {
+            window.NeoCloudSaves.prepare({ game: window.EJS_gameUrl, core: window.EJS_core, name: params.get('title'), system: params.get('system') }).finally(() => {
                 const loaderScript = document.createElement('script');
                 loaderScript.src = 'https://cdn.emulatorjs.org/stable/data/loader.js';
                 document.body.appendChild(loaderScript);
