@@ -153,11 +153,13 @@
         .pix-trigger-pc { display: flex; align-items: center; gap: 15px; padding: 10px; border-radius: 8px; cursor: pointer; color: var(--text-muted); background: transparent; border: 1px solid transparent; justify-content: center; flex-shrink: 0; transition: 0.3s; margin-bottom: 15px; text-decoration: none; }
         @media(min-width: 769px) { .pix-trigger-pc { justify-content: flex-start; } }
         .pix-trigger-pc:hover { background: rgba(0, 153, 51, 0.15); color: var(--text-color); border: 1px solid var(--accent-color); }
+        .pix-trigger-pc img { width:30px; height:30px; object-fit:contain; flex:0 0 30px; }
         .pix-text-pc { display: none; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
         .community-shortcuts-pc { display:flex; flex-direction:column; gap:6px; padding:8px 4px 12px; margin:0 0 8px; border-top:1px dashed var(--border-color); border-bottom:1px dashed var(--border-color); }
         .community-shortcuts-title { display:none; opacity:0; padding:2px 7px 5px; color:var(--accent-color); font:7px 'Press Start 2P',cursive; line-height:1.5; white-space:nowrap; }
-        .community-shortcut { min-height:46px; display:flex; align-items:center; justify-content:center; gap:11px; padding:6px; border:1px solid var(--border-color); border-radius:8px; background:transparent; color:var(--text-color); text-decoration:none; cursor:pointer; transition:.2s; overflow:hidden; }
-        .community-shortcut:hover { border-color:var(--accent-color); background:rgba(0,204,68,.12); box-shadow:0 0 12px rgba(0,204,68,.18); }
+        .community-shortcut { min-height:46px; display:flex; align-items:center; justify-content:center; gap:11px; padding:6px; border:0; background:transparent; color:var(--text-color); text-decoration:none; cursor:pointer; transition:.2s; overflow:hidden; }
+        .community-shortcut:hover { background:transparent; box-shadow:none; color:var(--accent-color); transform:translateX(2px); }
+        .community-shortcut:hover img { filter:drop-shadow(0 0 7px var(--accent-color)); }
         .community-shortcut img { width:36px; height:36px; object-fit:contain; flex:0 0 36px; }
         .community-shortcut-copy { display:none; opacity:0; min-width:0; text-align:left; }
         .community-shortcut-copy strong { display:block; font:8px 'Press Start 2P',cursive; color:var(--text-color); line-height:1.4; }
@@ -297,8 +299,9 @@
             .brand { width: 100%; text-align: center; display: block !important; font-size: 16px !important; margin-bottom: 5px; }
             .top-bar-controls { display: flex; flex-flow:row wrap !important; width: 100%; justify-content:center; align-items:center; gap:7px; margin-top:5px; }
             .mobile-community-actions { display:flex; order:1; }
-            .mobile-community-actions .multiplayer-hub-trigger { width:42px; flex:0 0 42px; }
+            .mobile-community-actions .multiplayer-hub-trigger { width:42px; flex:0 0 42px; border:0; border-radius:0; background:transparent; box-shadow:none; }
             .pix-trigger-mobile { display: flex !important; width: 38px !important; height: 38px !important; flex-shrink: 0 !important; border: 1px solid var(--accent-color); border-radius: 6px; background: rgba(0, 153, 51, 0.1); align-items: center; justify-content: center; cursor: pointer; order: 0; }
+            .pix-trigger-mobile img { width:25px; height:25px; object-fit:contain; }
             .chat-trigger-mobile { display: flex !important; width: 38px !important; height: 38px !important; flex-shrink: 0 !important; border: 1px solid var(--accent-color); border-radius: 6px; background: var(--sidebar-bg); align-items: center; justify-content: center; cursor: pointer; order: 2; }
             .chat-trigger-mobile img { width: 22px; height: 22px; object-fit: contain; image-rendering: pixelated; }
             .search-container { flex:0 0 100%; box-sizing:border-box; width:100%; max-width:none; order:10; height:40px; }
@@ -554,7 +557,7 @@
             </div>
 
             <a class="pix-trigger-pc" href="apoie.html" title="Clube NeoTerminalRoom">
-                <span style="font-size: 24px; line-height: 1;">☕</span>
+                <img src="assets/imagens-videos/imagens do menu/apoiar-projeto.png" alt="">
                 <span class="pix-text-pc">Apoiar Projeto</span>
             </a>
 
@@ -611,7 +614,7 @@
                         <a class="multiplayer-hub-trigger" href="social.html" title="Jogadores online" aria-label="Jogadores online" style="text-decoration:none;display:grid;place-items:center"><img src="assets/imagens-videos/imagens do menu/on-transparent.png" alt=""></a>
                     </div>
                     <a class="pix-trigger-mobile" href="apoie.html" title="Clube NeoTerminalRoom">
-                        <span style="font-size: 18px; line-height: 1;">☕</span>
+                        <img src="assets/imagens-videos/imagens do menu/apoiar-projeto.png" alt="">
                     </a>
                     <div class="chat-trigger-mobile" onclick="openMobileChat()">
                         <img src="assets/imagens-videos/imagens do menu/chat.png" alt="Chat">
