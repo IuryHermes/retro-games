@@ -131,7 +131,9 @@
     }
 
     function applyInput(seat, index, value) {
-        if (!Number.isInteger(seat) || seat < 2 || seat > 4 || !Number.isInteger(index) || index < 0 || index > 15 || ![0, 1].includes(value)) return;
+        const digital = index >= 0 && index <= 15 && [0, 1].includes(value);
+        const analog = index >= 16 && index <= 23 && Number.isInteger(value) && value >= 0 && value <= 0x7fff;
+        if (!Number.isInteger(seat) || seat < 2 || seat > 4 || !Number.isInteger(index) || (!digital && !analog)) return;
         const manager = window.EJS_emulator?.gameManager;
         if (manager?.simulateInput) manager.simulateInput(seat - 1, index, value);
     }

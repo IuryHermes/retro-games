@@ -37,6 +37,20 @@
       header strong {
         color: #55ff88;
       }
+      header div {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      header button,
+      .control-config button {
+        padding: 7px 9px;
+        border: 1px solid #00cc44;
+        background: #102417;
+        color: #fff;
+        font: inherit;
+        cursor: pointer;
+      }
       .viewer {
         position: relative;
         display: flex;
@@ -201,6 +215,33 @@
         color: #55ff88;
         box-shadow: 0 0 20px rgba(0, 204, 68, 0.25);
       }
+      .control-config {
+        width: min(92vw, 560px);
+        max-height: 85dvh;
+        overflow: auto;
+        border: 1px solid #00cc44;
+        border-radius: 8px;
+        background: #061109;
+        color: #e7ffed;
+      }
+      .control-config::backdrop {
+        background: rgba(0, 0, 0, 0.78);
+      }
+      .binding-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
+        margin: 15px 0;
+      }
+      .binding-list button {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        text-align: left;
+      }
+      .binding-list small {
+        color: #55ff88;
+      }
       @media (hover: hover) and (pointer: fine) {
         .controller,
         .meta {
@@ -244,7 +285,7 @@
   <body>
     <header>
       <strong id="room-title">MULTIPLAYER</strong
-      ><span id="room-status">Conectando...</span>
+      ><div><span id="room-status">Conectando...</span><button id="open-control-config" type="button">CONFIGURAR CONTROLE</button></div>
     </header>
     <main class="viewer">
       <video id="remote-video" autoplay playsinline></video>
@@ -289,6 +330,14 @@
       </div>
     </aside>
     <button class="pending-invites" id="pending-invites" type="button" hidden></button>
+    <dialog class="control-config" id="control-config">
+      <strong>CONFIGURAR CONTROLE</strong>
+      <p>Escolha uma função e pressione a tecla ou o botão do controle que deseja usar.</p>
+      <div class="binding-list" id="binding-list"></div>
+      <p id="binding-status">As alterações ficam salvas neste aparelho.</p>
+      <button id="reset-bindings" type="button">RESTAURAR PADRÃO</button>
+      <button id="close-control-config" type="button">CONCLUIR</button>
+    </dialog>
     <script>
       (() => {
         "use strict";
@@ -308,6 +357,7 @@
           videoReady = false,
           audioTrackReceived = false,
           iceServersExpiresAt = 0,
+          roomSystem = "",
           socialSince = Date.now(),
           socialHeartbeatAt = 0;
         const iceServers = () =>
@@ -333,6 +383,9 @@
           inviteLater = document.getElementById("match-invite-later"),
           inviteJoin = document.getElementById("match-invite-join"),
           pendingInvitesButton = document.getElementById("pending-invites");
+        const controlConfig = document.getElementById("control-config"),
+          bindingList = document.getElementById("binding-list"),
+          bindingStatus = document.getElementById("binding-status");
         const pendingInvites = [];
         let visibleInvite = null;
         const send = (data) => {
@@ -394,6 +447,56 @@
         inviteJoin.addEventListener("click", leaveAndJoinInvite);
         pendingInvitesButton.addEventListener("click", openPendingInvite);
         let playbackUnlocked = false;
+        const defaultKeyboardMap = { ArrowUp: 4, ArrowDown: 5, ArrowLeft: 6, ArrowRight: 7, z: 0, x: 8, a: 1, s: 9, Enter: 3, Shift: 2, q: 10, e: 11 };
+        const defaultGamepadButtons = { 0: 0, 1: 8, 2: 1, 3: 9, 4: 10, 5: 11, 8: 2, 9: 3, 12: 4, 13: 5, 14: 6, 15: 7 };
+        let keyboardMap = { ...defaultKeyboardMap };
+        let gamepadButtons = { ...defaultGamepadButtons };
+        let captureBindingIndex = null;
+        const bindingActions = [["CIMA",4],["BAIXO",5],["ESQUERDA",6],["DIREITA",7],["A",8],["B",0],["X",9],["Y",1],["START",3],["SELECT",2],["L",10],["R",11]];
+        const bindingStorageKey = () => `neo_multiplayer_bindings_${roomSystem || "default"}`;
+        function saveBindings() {
+          localStorage.setItem(bindingStorageKey(), JSON.stringify({ keyboardMap, gamepadButtons }));
+        }
+        function loadBindings() {
+          keyboardMap = { ...defaultKeyboardMap };
+          gamepadButtons = { ...defaultGamepadButtons };
+          try {
+            const saved = JSON.parse(localStorage.getItem(bindingStorageKey()) || "null");
+            if (saved?.keyboardMap) keyboardMap = saved.keyboardMap;
+            if (saved?.gamepadButtons) gamepadButtons = saved.gamepadButtons;
+          } catch (_) {}
+          renderBindings();
+        }
+        function renderBindings() {
+          bindingList.replaceChildren();
+          for (const [label, index] of bindingActions) {
+            const key = Object.entries(keyboardMap).find(([, value]) => value === index)?.[0] || "—";
+            const buttonNumber = Object.entries(gamepadButtons).find(([, value]) => value === index)?.[0];
+            const button = document.createElement("button");
+            button.type = "button";
+            button.dataset.bindingIndex = String(index);
+            const value = document.createElement("small");
+            value.textContent = `${key} · ${buttonNumber === undefined ? "sem botão" : `botão ${buttonNumber}`}`;
+            button.append(document.createTextNode(label), value);
+            button.onclick = () => {
+              captureBindingIndex = index;
+              bindingStatus.textContent = `Pressione agora a tecla ou botão para ${label}.`;
+            };
+            bindingList.appendChild(button);
+          }
+        }
+        function setKeyboardBinding(key) {
+          for (const [savedKey, index] of Object.entries(keyboardMap)) if (index === captureBindingIndex) delete keyboardMap[savedKey];
+          keyboardMap[key] = captureBindingIndex;
+          captureBindingIndex = null;
+          saveBindings(); renderBindings(); bindingStatus.textContent = "Tecla configurada e salva.";
+        }
+        function setGamepadBinding(buttonNumber) {
+          for (const [savedButton, index] of Object.entries(gamepadButtons)) if (index === captureBindingIndex) delete gamepadButtons[savedButton];
+          gamepadButtons[buttonNumber] = captureBindingIndex;
+          captureBindingIndex = null;
+          saveBindings(); renderBindings(); bindingStatus.textContent = "Botão configurado e salvo.";
+        }
         function attachRemoteAudio(stream) {
           const tracks = stream?.getAudioTracks?.() || [];
           if (!tracks.length) {
@@ -456,7 +559,16 @@
         }
         const input = (index, value) => {
           void unlockPlayback();
-          const data = { type: "input", index: Number(index), value };
+          let inputIndex = Number(index);
+          let inputValue = Number(value);
+          if (roomSystem === "n64") {
+            const n64Stick = { 4: 19, 5: 18, 6: 17, 7: 16 };
+            if (n64Stick[inputIndex] !== undefined) {
+              inputIndex = n64Stick[inputIndex];
+              inputValue = inputValue ? 0x7fff : 0;
+            }
+          }
+          const data = { type: "input", index: inputIndex, value: inputValue };
           if (channel?.readyState === "open")
             channel.send(JSON.stringify(data));
           else send(data);
@@ -467,24 +579,13 @@
         remoteAudio.addEventListener("pause", () => { if (audioTrackReceived && !document.hidden) void resumeRemoteAudio(); });
         remoteAudio.addEventListener("stalled", () => { if (audioTrackReceived) void resumeRemoteAudio(); });
         document.addEventListener("visibilitychange", () => { if (!document.hidden && audioTrackReceived) void resumeRemoteAudio(); });
-        const keyboardMap = {
-          ArrowUp: 4,
-          ArrowDown: 5,
-          ArrowLeft: 6,
-          ArrowRight: 7,
-          z: 0,
-          x: 8,
-          a: 1,
-          s: 9,
-          Enter: 3,
-          Shift: 2,
-          q: 10,
-          e: 11,
-        };
         const pressedKeys = new Set();
         const keyboardInput = (event) => {
           const key =
             event.key.length === 1 ? event.key.toLowerCase() : event.key;
+          if (event.type === "keydown" && captureBindingIndex !== null) {
+            event.preventDefault(); setKeyboardBinding(key); return;
+          }
           const index = keyboardMap[key];
           if (index === undefined || !seat) return;
           event.preventDefault();
@@ -500,24 +601,19 @@
         addEventListener("keydown", keyboardInput);
         addEventListener("keyup", keyboardInput);
         const gamepadState = new Map();
-        const gamepadButtons = {
-          0: 0,
-          1: 8,
-          2: 1,
-          3: 9,
-          4: 10,
-          5: 11,
-          8: 2,
-          9: 3,
-          12: 4,
-          13: 5,
-          14: 6,
-          15: 7,
-        };
+        const gamepadAxisState = new Map();
+        const captureGamepadState = new Map();
         const pollGamepad = () => {
           const gamepad = Array.from(navigator.getGamepads?.() || []).find(
             Boolean,
           );
+          if (gamepad && captureBindingIndex !== null) {
+            for (let buttonNumber = 0; buttonNumber < gamepad.buttons.length; buttonNumber++) {
+              const pressed = gamepad.buttons[buttonNumber]?.pressed ? 1 : 0;
+              if (pressed && captureGamepadState.get(buttonNumber) !== 1) { setGamepadBinding(String(buttonNumber)); break; }
+              captureGamepadState.set(buttonNumber, pressed);
+            }
+          }
           if (gamepad && seat)
             for (const [button, index] of Object.entries(gamepadButtons)) {
               const value = gamepad.buttons[Number(button)]?.pressed ? 1 : 0;
@@ -526,6 +622,20 @@
                 input(index, value);
               }
             }
+          if (gamepad && seat && roomSystem === "n64") {
+            const x = Math.abs(gamepad.axes[0] || 0) >= 0.2 ? gamepad.axes[0] : 0;
+            const y = Math.abs(gamepad.axes[1] || 0) >= 0.2 ? gamepad.axes[1] : 0;
+            const axes = { 16: Math.max(0, x), 17: Math.max(0, -x), 18: Math.max(0, y), 19: Math.max(0, -y) };
+            for (const [index, amount] of Object.entries(axes)) {
+              const value = Math.round(amount * 0x7fff);
+              if (gamepadAxisState.get(index) !== value) {
+                gamepadAxisState.set(index, value);
+                const data = { type: "input", index: Number(index), value };
+                if (channel?.readyState === "open") channel.send(JSON.stringify(data));
+                else send(data);
+              }
+            }
+          }
           requestAnimationFrame(pollGamepad);
         };
         requestAnimationFrame(pollGamepad);
@@ -632,6 +742,8 @@
             const data = await response.json();
             if (!response.ok)
               throw new Error(data.erro || "Sala indisponível.");
+            roomSystem = String(data.room.system || "").toLowerCase();
+            loadBindings();
             document.getElementById("room-title").textContent = data.room.title;
             socket = new WebSocket(
               `${API.replace("https:", "wss:")}/multiplayer/rooms/${roomId}/ws?ticket=${encodeURIComponent(data.ticket)}`,
@@ -664,6 +776,9 @@
           }
         }
         join();
+        document.getElementById("open-control-config").onclick = () => { renderBindings(); controlConfig.showModal(); };
+        document.getElementById("close-control-config").onclick = () => { captureBindingIndex = null; controlConfig.close(); };
+        document.getElementById("reset-bindings").onclick = () => { keyboardMap = { ...defaultKeyboardMap }; gamepadButtons = { ...defaultGamepadButtons }; saveBindings(); renderBindings(); bindingStatus.textContent = "Configuração padrão restaurada."; };
         void pollSocialEvents();
         setInterval(pollSocialEvents, 7000);
       })();
