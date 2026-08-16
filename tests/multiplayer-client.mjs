@@ -63,5 +63,12 @@ assert.match(host, /data-share="instagram"/);
 assert.match(host, /data-share="facebook"/);
 assert.match(host, /navigator\.share/);
 assert.match(social, /Seu convite foi enviado com sucesso/);
+assert.match(guest, /\/social\/events\?since=/);
+assert.match(guest, /\/social\/heartbeat/);
+assert.match(guest, /VER DEPOIS/);
+assert.match(guest, /SAIR E ENTRAR/);
+assert.match(guest, /Sua partida atual continuará normalmente/);
+assert.match(guest, /pendingInvites/);
+assert.match(guest, /socket\?\.close\(1000, "Entrando em outra sala"\)/);
 
-console.log('multiplayer client and room: 57 checks passed');
+console.log('multiplayer client and room: 64 checks passed');

@@ -146,6 +146,61 @@
         text-align: center;
         color: #9adbaa;
       }
+      .match-invite {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: grid;
+        place-items: center;
+        padding: 18px;
+        background: rgba(0, 0, 0, 0.72);
+      }
+      .match-invite[hidden],
+      .pending-invites[hidden] {
+        display: none;
+      }
+      .match-invite-card {
+        width: min(92vw, 430px);
+        padding: 22px;
+        border: 1px solid #00cc44;
+        border-radius: 9px;
+        background: #061109;
+        box-shadow: 0 0 28px rgba(0, 204, 68, 0.35);
+        text-align: center;
+      }
+      .match-invite-card strong {
+        display: block;
+        margin-bottom: 10px;
+        color: #55ff88;
+        font-size: 15px;
+      }
+      .match-invite-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 9px;
+        margin-top: 18px;
+      }
+      .match-invite button,
+      .pending-invites {
+        padding: 11px;
+        border: 1px solid #00cc44;
+        background: #102417;
+        color: #fff;
+        font: inherit;
+        cursor: pointer;
+      }
+      .match-invite-join {
+        background: #00aa3a !important;
+      }
+      .pending-invites {
+        position: fixed;
+        right: 12px;
+        top: 58px;
+        z-index: 19;
+        border-radius: 6px;
+        color: #55ff88;
+        box-shadow: 0 0 20px rgba(0, 204, 68, 0.25);
+      }
       @media (hover: hover) and (pointer: fine) {
         .controller,
         .meta {
@@ -222,6 +277,17 @@
         ><button class="control" data-index="11">R</button>
       </div>
     </section>
+    <aside class="match-invite" id="match-invite" role="dialog" aria-modal="true" aria-labelledby="match-invite-title" hidden>
+      <div class="match-invite-card">
+        <strong id="match-invite-title">NOVO CONVITE</strong>
+        <div id="match-invite-text"></div>
+        <div class="match-invite-actions">
+          <button id="match-invite-later" type="button">VER DEPOIS</button>
+          <button class="match-invite-join" id="match-invite-join" type="button">SAIR E ENTRAR</button>
+        </div>
+      </div>
+    </aside>
+    <button class="pending-invites" id="pending-invites" type="button" hidden></button>
     <script>
       (() => {
         "use strict";
@@ -241,8 +307,10 @@
           videoReady = false,
           audioTrackReceived = false,
           remoteAudioContext,
-          remoteAudioSource,
-          iceServersExpiresAt = 0;
+           remoteAudioSource,
+          iceServersExpiresAt = 0,
+          socialSince = Date.now(),
+          socialHeartbeatAt = 0;
         const iceServers = () =>
           iceServersPromise && Date.now() < iceServersExpiresAt
             ? iceServersPromise
@@ -260,9 +328,71 @@
           waiting = document.getElementById("waiting"),
           controller = document.getElementById("controller"),
           video = document.getElementById("remote-video");
+        const inviteDialog = document.getElementById("match-invite"),
+          inviteText = document.getElementById("match-invite-text"),
+          inviteLater = document.getElementById("match-invite-later"),
+          inviteJoin = document.getElementById("match-invite-join"),
+          pendingInvitesButton = document.getElementById("pending-invites");
+        const pendingInvites = [];
+        let visibleInvite = null;
         const send = (data) => {
           if (socket?.readyState === 1) socket.send(JSON.stringify(data));
         };
+        function updatePendingInvites() {
+          pendingInvitesButton.hidden = pendingInvites.length === 0;
+          pendingInvitesButton.textContent = `${pendingInvites.length} CONVITE${pendingInvites.length === 1 ? "" : "S"} PENDENTE${pendingInvites.length === 1 ? "" : "S"}`;
+        }
+        function showInvite(event) {
+          if (visibleInvite) {
+            pendingInvites.push(event);
+            updatePendingInvites();
+            return;
+          }
+          visibleInvite = event;
+          inviteText.textContent = `${event.fromName} convidou você para jogar ${event.title}. Sua partida atual continuará normalmente enquanto você decide.`;
+          inviteDialog.hidden = false;
+        }
+        function postponeInvite() {
+          if (visibleInvite) pendingInvites.push(visibleInvite);
+          visibleInvite = null;
+          inviteDialog.hidden = true;
+          updatePendingInvites();
+        }
+        function openPendingInvite() {
+          if (visibleInvite || !pendingInvites.length) return;
+          const event = pendingInvites.shift();
+          updatePendingInvites();
+          showInvite(event);
+        }
+        function leaveAndJoinInvite() {
+          if (!visibleInvite?.roomId) return;
+          const destination = `multiplayer-room.html?room=${encodeURIComponent(visibleInvite.roomId)}`;
+          socket?.close(1000, "Entrando em outra sala");
+          peer?.close();
+          location.assign(destination);
+        }
+        async function pollSocialEvents() {
+          if (!access) return;
+          try {
+            const heartbeatDue = Date.now() - socialHeartbeatAt >= 30000;
+            if (heartbeatDue) socialHeartbeatAt = Date.now();
+            const [eventsResponse] = await Promise.all([
+              fetch(`${API}/social/events?since=${socialSince}`, { headers: { Authorization: `Bearer ${access}` }, cache: "no-store" }),
+              heartbeatDue
+                ? fetch(`${API}/social/heartbeat`, { method: "POST", headers: { Authorization: `Bearer ${access}`, "Content-Type": "application/json" }, body: JSON.stringify({ page: "multiplayer" }) })
+                : Promise.resolve(),
+            ]);
+            if (!eventsResponse.ok) return;
+            const data = await eventsResponse.json();
+            for (const event of data.events || []) {
+              socialSince = Math.max(socialSince, Number(event.createdAt) || 0);
+              if (event.type === "invite" && event.roomId !== roomId) showInvite(event);
+            }
+          } catch (_) {}
+        }
+        inviteLater.addEventListener("click", postponeInvite);
+        inviteJoin.addEventListener("click", leaveAndJoinInvite);
+        pendingInvitesButton.addEventListener("click", openPendingInvite);
         let playbackUnlocked = false;
         function attachRemoteAudio(stream) {
           const tracks = stream?.getAudioTracks?.() || [];
@@ -509,6 +639,8 @@
           }
         }
         join();
+        void pollSocialEvents();
+        setInterval(pollSocialEvents, 7000);
       })();
     </script>
   </body>
