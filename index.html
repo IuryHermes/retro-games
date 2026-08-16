@@ -138,6 +138,7 @@
             .sidebar:hover .nav-text { display: inline-block; opacity: 1; }
             .sidebar:hover .sidebar-chat { display: flex; }
             .sidebar:hover .pix-text-pc { display: inline-block; opacity: 1; transition: 0.3s; }
+            .sidebar:hover .community-shortcuts-title, .sidebar:hover .community-shortcut-copy { display: block; opacity: 1; }
             .sidebar:hover #sidebar-hall-container.ativo { display: flex; }
         }
 
@@ -153,6 +154,15 @@
         @media(min-width: 769px) { .pix-trigger-pc { justify-content: flex-start; } }
         .pix-trigger-pc:hover { background: rgba(0, 153, 51, 0.15); color: var(--text-color); border: 1px solid var(--accent-color); }
         .pix-text-pc { display: none; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
+        .community-shortcuts-pc { display:flex; flex-direction:column; gap:6px; padding:8px 4px 12px; margin:0 0 8px; border-top:1px dashed var(--border-color); border-bottom:1px dashed var(--border-color); }
+        .community-shortcuts-title { display:none; opacity:0; padding:2px 7px 5px; color:var(--accent-color); font:7px 'Press Start 2P',cursive; line-height:1.5; white-space:nowrap; }
+        .community-shortcut { min-height:46px; display:flex; align-items:center; justify-content:center; gap:11px; padding:6px; border:1px solid var(--border-color); border-radius:8px; background:var(--input-bg); color:var(--text-color); text-decoration:none; cursor:pointer; transition:.2s; overflow:hidden; }
+        .community-shortcut:hover { border-color:var(--accent-color); background:rgba(0,204,68,.12); box-shadow:0 0 12px rgba(0,204,68,.18); }
+        .community-shortcut img { width:36px; height:36px; object-fit:contain; flex:0 0 36px; }
+        .community-shortcut-copy { display:none; opacity:0; min-width:0; text-align:left; }
+        .community-shortcut-copy strong { display:block; font:8px 'Press Start 2P',cursive; color:var(--text-color); line-height:1.4; }
+        .community-shortcut-copy small { display:block; margin-top:4px; color:var(--text-muted); font:9px monospace; white-space:nowrap; }
+        .mobile-community-actions { display:none; align-items:center; gap:6px; }
 
         .sidebar-chat { background: var(--bg-color); border: 1px solid var(--accent-color); padding: 10px; border-radius: 4px; height: 350px; min-height: 350px; display: none; flex-direction: column; width: 100%; flex-shrink: 0; margin-bottom: 20px; margin-top: auto; position: relative; }
         .close-chat-btn { display: none; }
@@ -276,17 +286,20 @@
             .close-chat-btn:hover { background: #ff3333; color: #fff; }
 
             .mobile-marquee-wrapper { display: block; }
+            .pix-trigger-pc, .community-shortcuts-pc { display:none !important; }
         }
 
         @media (max-width: 768px) {
             .top-bar { flex-direction: column; align-items: center; padding: 10px 15px; margin: 0; text-align: center; gap: 10px; }
             .brand { width: 100%; text-align: center; display: block !important; font-size: 16px !important; margin-bottom: 5px; }
-            .top-bar-controls { display: flex; flex-direction: row !important; width: 100%; justify-content: space-between; align-items: center; gap: 5px; margin-top: 5px; }
+            .top-bar-controls { display: flex; flex-flow:row wrap !important; width: 100%; justify-content:center; align-items:center; gap:7px; margin-top:5px; }
+            .mobile-community-actions { display:flex; order:1; }
+            .mobile-community-actions .multiplayer-hub-trigger { width:42px; flex:0 0 42px; }
             .pix-trigger-mobile { display: flex !important; width: 38px !important; height: 38px !important; flex-shrink: 0 !important; border: 1px solid var(--accent-color); border-radius: 6px; background: rgba(0, 153, 51, 0.1); align-items: center; justify-content: center; cursor: pointer; order: 0; }
-            .chat-trigger-mobile { display: flex !important; width: 38px !important; height: 38px !important; flex-shrink: 0 !important; border: 1px solid var(--accent-color); border-radius: 6px; background: var(--sidebar-bg); align-items: center; justify-content: center; cursor: pointer; order: 1; }
+            .chat-trigger-mobile { display: flex !important; width: 38px !important; height: 38px !important; flex-shrink: 0 !important; border: 1px solid var(--accent-color); border-radius: 6px; background: var(--sidebar-bg); align-items: center; justify-content: center; cursor: pointer; order: 2; }
             .chat-trigger-mobile img { width: 22px; height: 22px; object-fit: contain; image-rendering: pixelated; }
-            .search-container { flex: 1; width: auto; max-width: none; order: 2; height: 38px; }
-            .theme-container { order: 3; display: flex !important; }
+            .search-container { flex:0 0 100%; box-sizing:border-box; width:100%; max-width:none; order:10; height:40px; }
+            .theme-container { order:3; display:flex !important; }
             .row-header { justify-content: space-between; padding-right: 15px; }
             .view-all-btn { font-size: 8px; padding: 6px 10px; }
             .hero-section { height: 400px; min-height: auto; max-height: none; }
@@ -313,10 +326,10 @@
             .hero-content { padding: 0 20px; padding-bottom: 20px;}
             .hero-title { font-size: 18px; margin-bottom: 5px; }
             .hero-play-btn { padding: 8px 20px; font-size: 12px; margin-top: 5px; }
-            .top-bar { padding: 5px 20px !important; flex-direction: row !important; }
+            .top-bar { padding:5px 12px !important; flex-direction:column !important; gap:4px; }
             .brand { font-size: 14px !important; width: auto; margin-bottom: 0; text-align: left; }
-            .top-bar-controls { margin-top: 0 !important; width: auto !important; justify-content: flex-end; }
-            .search-container { width: 200px; padding: 4px 10px; height: 30px; }
+            .top-bar-controls { margin-top:0 !important; width:100% !important; justify-content:center; }
+            .search-container { flex-basis:100%; width:100%; padding:4px 10px; height:32px; }
             .chat-trigger-mobile, .pix-trigger-mobile { width: 30px !important; height: 30px !important; }
             .chat-trigger-mobile img { width: 16px; height: 16px; }
             .catalog { padding-top: 10px; }
@@ -540,6 +553,18 @@
                 <span class="pix-text-pc">Apoiar Projeto</span>
             </a>
 
+            <div class="community-shortcuts-pc" aria-label="Área social do site">
+                <div class="community-shortcuts-title">ÁREA SOCIAL · FORA DO EMULADOR</div>
+                <button class="community-shortcut" id="multiplayer-hub-trigger-desktop" type="button" title="Encontrar partida online">
+                    <img src="assets/imagens-videos/imagens do menu/online-transparent.png" alt="">
+                    <span class="community-shortcut-copy"><strong>JOGAR ONLINE</strong><small>Encontre ou crie uma sala</small></span>
+                </button>
+                <a class="community-shortcut" href="social.html" title="Ver jogadores online">
+                    <img src="assets/imagens-videos/imagens do menu/on-transparent.png" alt="">
+                    <span class="community-shortcut-copy"><strong>COMUNIDADE</strong><small>Jogadores, convites e chat</small></span>
+                </a>
+            </div>
+
             <div class="nav-list" id="nav-list"></div>
 
             <div id="sidebar-hall-container">
@@ -576,8 +601,10 @@
 
                 <div class="top-bar-controls">
                     <button class="account-button top-account-mobile" id="account-button-mobile" type="button" aria-label="Entrar ou criar cadastro"><img class="account-avatar" src="assets/imagens-videos/logo-discord.gif?v=2" alt=""><span class="account-copy"><span class="account-name">LOGIN / CADASTRO</span></span></button>
-                    <button class="multiplayer-hub-trigger" id="multiplayer-hub-trigger" type="button" title="Encontrar partida" aria-label="Jogar online"><img src="assets/imagens-videos/imagens do menu/online-transparent.png" alt=""></button>
-                    <a class="multiplayer-hub-trigger" href="social.html" title="Jogadores online" aria-label="Jogadores online" style="text-decoration:none;display:grid;place-items:center"><img src="assets/imagens-videos/imagens do menu/on-transparent.png" alt=""></a>
+                    <div class="mobile-community-actions">
+                        <button class="multiplayer-hub-trigger" id="multiplayer-hub-trigger" type="button" title="Encontrar partida" aria-label="Jogar online"><img src="assets/imagens-videos/imagens do menu/online-transparent.png" alt=""></button>
+                        <a class="multiplayer-hub-trigger" href="social.html" title="Jogadores online" aria-label="Jogadores online" style="text-decoration:none;display:grid;place-items:center"><img src="assets/imagens-videos/imagens do menu/on-transparent.png" alt=""></a>
+                    </div>
                     <a class="pix-trigger-mobile" href="apoie.html" title="Clube NeoTerminalRoom">
                         <span style="font-size: 18px; line-height: 1;">☕</span>
                     </a>
@@ -701,7 +728,7 @@
         clearInterval(multiplayerRefreshTimer); multiplayerRefreshTimer = setInterval(loadMultiplayerRooms, 15000);
     }
     function closeMultiplayerHub() { multiplayerModal.style.display = 'none'; clearInterval(multiplayerRefreshTimer); }
-    document.getElementById('multiplayer-hub-trigger').onclick = openMultiplayerHub;
+    ['multiplayer-hub-trigger', 'multiplayer-hub-trigger-desktop'].forEach(id => { document.getElementById(id).onclick = openMultiplayerHub; });
     document.getElementById('multiplayer-close').onclick = closeMultiplayerHub;
     multiplayerModal.onclick = event => { if (event.target === multiplayerModal) closeMultiplayerHub(); };
     document.getElementById('multiplayer-select-game').onclick = () => { closeMultiplayerHub(); document.getElementById('global-search').focus(); document.getElementById('global-search').placeholder = 'Escolha um jogo e abra o menu ONLINE...'; };

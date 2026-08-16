@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import { readFile, stat } from 'node:fs/promises';
+
+const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+const onlineIcon = await stat(new URL('../assets/imagens-videos/imagens do menu/online-transparent.png', import.meta.url));
+const playersIcon = await stat(new URL('../assets/imagens-videos/imagens do menu/on-transparent.png', import.meta.url));
+
+assert.ok(onlineIcon.size > 100_000);
+assert.ok(playersIcon.size > 100_000);
+assert.match(index, /ÁREA SOCIAL · FORA DO EMULADOR/);
+assert.match(index, /id="multiplayer-hub-trigger-desktop"/);
+assert.match(index, /class="mobile-community-actions"/);
+assert.match(index, /\.search-container \{ flex:0 0 100%/);
+assert.match(index, /\.community-shortcuts-pc/);
+assert.match(index, /'multiplayer-hub-trigger-desktop'/);
+
+console.log('home community layout: 8 checks passed');
