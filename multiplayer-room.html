@@ -139,6 +139,23 @@
         padding: 8px 15px;
         font-size: 12px;
       }
+      .desktop-input-hint {
+        display: none;
+        text-align: center;
+        color: #9adbaa;
+      }
+      @media (hover: hover) and (pointer: fine) {
+        .controller,
+        .meta {
+          display: none !important;
+        }
+        .desktop-input-hint {
+          display: block;
+        }
+        .controls {
+          padding: 9px;
+        }
+      }
       @media (max-height: 500px) and (orientation: landscape) {
         body {
           grid-template-columns: 1fr 360px;
@@ -176,6 +193,9 @@
       </div>
     </main>
     <section class="controls" id="controller" hidden>
+      <div class="desktop-input-hint">
+        CONTROLE CONECTADO — use teclado ou gamepad USB/Bluetooth
+      </div>
       <div class="controller">
         <div class="dpad">
           <button class="control up" data-index="4">▲</button
@@ -213,6 +233,7 @@
           peer,
           seat = 0,
           iceServersPromise,
+          videoReady = false,
           iceServersExpiresAt = 0;
         const iceServers = () =>
           iceServersPromise && Date.now() < iceServersExpiresAt
@@ -240,6 +261,68 @@
             channel.send(JSON.stringify(data));
           else send(data);
         };
+        const keyboardMap = {
+          ArrowUp: 4,
+          ArrowDown: 5,
+          ArrowLeft: 6,
+          ArrowRight: 7,
+          z: 0,
+          x: 8,
+          a: 1,
+          s: 9,
+          Enter: 3,
+          Shift: 2,
+          q: 10,
+          e: 11,
+        };
+        const pressedKeys = new Set();
+        const keyboardInput = (event) => {
+          const key =
+            event.key.length === 1 ? event.key.toLowerCase() : event.key;
+          const index = keyboardMap[key];
+          if (index === undefined || !seat) return;
+          event.preventDefault();
+          if (event.type === "keydown") {
+            if (pressedKeys.has(key)) return;
+            pressedKeys.add(key);
+            input(index, 1);
+          } else {
+            pressedKeys.delete(key);
+            input(index, 0);
+          }
+        };
+        addEventListener("keydown", keyboardInput);
+        addEventListener("keyup", keyboardInput);
+        const gamepadState = new Map();
+        const gamepadButtons = {
+          0: 0,
+          1: 8,
+          2: 1,
+          3: 9,
+          4: 10,
+          5: 11,
+          8: 2,
+          9: 3,
+          12: 4,
+          13: 5,
+          14: 6,
+          15: 7,
+        };
+        const pollGamepad = () => {
+          const gamepad = Array.from(navigator.getGamepads?.() || []).find(
+            Boolean,
+          );
+          if (gamepad && seat)
+            for (const [button, index] of Object.entries(gamepadButtons)) {
+              const value = gamepad.buttons[Number(button)]?.pressed ? 1 : 0;
+              if (gamepadState.get(index) !== value) {
+                gamepadState.set(index, value);
+                input(index, value);
+              }
+            }
+          requestAnimationFrame(pollGamepad);
+        };
+        requestAnimationFrame(pollGamepad);
         document.querySelectorAll(".control").forEach((button) => {
           const down = (e) => {
             e.preventDefault();
@@ -275,6 +358,7 @@
             };
             currentPeer.ontrack = async (e) => {
               video.srcObject = e.streams[0];
+              videoReady = true;
               video.muted = true;
               try {
                 await video.play();
@@ -368,10 +452,12 @@
               if (message.type === "assignment") {
                 seat = message.seat;
                 controller.hidden = !message.approved;
-                waiting.hidden = false;
-                waiting.textContent = message.approved
-                  ? `Você é o controle ${seat}. Aguardando vídeo...`
-                  : "Aguardando aprovação do anfitrião.";
+                if (!videoReady) {
+                  waiting.hidden = false;
+                  waiting.textContent = message.approved
+                    ? `Você é o controle ${seat}. Aguardando vídeo...`
+                    : "Aguardando aprovação do anfitrião.";
+                }
               }
               if (message.type === "signal") void signal(message);
             };

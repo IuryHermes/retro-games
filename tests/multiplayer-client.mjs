@@ -40,5 +40,10 @@ assert.match(guest, /ATIVAR SOM E JOGAR/);
 assert.match(guest, /onconnectionstatechange/);
 assert.match(guest, /if \(!peer\)\s+peer = new RTCPeerConnection/);
 assert.match(guest, /const currentPeer = peer/);
+assert.match(host, /collectScreenRecordingMediaTracks/);
+assert.match(host, /Module\?\.AL\?\.currentCtx/);
+assert.match(guest, /keyboardMap/);
+assert.match(guest, /navigator\.getGamepads/);
+assert.match(guest, /if \(!videoReady\)/);
 
-console.log('multiplayer client and room: 33 checks passed');
+console.log('multiplayer client and room: 38 checks passed');
