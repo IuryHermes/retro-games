@@ -5,6 +5,7 @@
     const TOKEN_KEY = 'neo_club_access';
     const PENDING_HISTORY_KEY = 'neo_pending_history';
     const INTERVAL_MS = 60000;
+    const IMAGE_INTERVAL_MS = 10 * 60000;
     let token = sessionStorage.getItem(TOKEN_KEY) || '';
     let gameId = '';
     let gameName = '';
@@ -14,6 +15,8 @@
     let automaticEnabled = false;
     let timer = 0;
     let autosavePending = false;
+    let autosaveImagePending = false;
+    let lastAutosaveImageAt = 0;
 
     function rememberToken() {
         const hash = new URLSearchParams(location.hash.slice(1));
@@ -132,12 +135,32 @@
         }
     }
 
+    function scheduleAutosaveImage() {
+        const now = Date.now();
+        if (autosaveImagePending || now - lastAutosaveImageAt < IMAGE_INTERVAL_MS) return;
+        autosaveImagePending = true;
+        const run = async () => {
+            try {
+                if (await uploadAutosaveImage()) lastAutosaveImageAt = Date.now();
+            } finally {
+                autosaveImagePending = false;
+            }
+        };
+        // The save state remains every minute. Only the decorative hero image
+        // is captured separately and at most once every ten minutes.
+        if (typeof requestIdleCallback === 'function') {
+            requestIdleCallback(() => { void run(); }, { timeout: 10000 });
+        } else {
+            setTimeout(() => { void run(); }, 1500);
+        }
+    }
+
     async function autosave() {
         if (!automaticEnabled || autosavePending) return;
         autosavePending = true;
         try {
             const state = await currentState();
-            if (state && await upload('auto', state, 'Autosave')) await uploadAutosaveImage();
+            if (state && await upload('auto', state, 'Autosave')) scheduleAutosaveImage();
         } finally {
             autosavePending = false;
         }

@@ -10,10 +10,17 @@ assert.match(coiWorker, /scope: "\/player-universal\.html"/);
 assert.match(player, /window\.crossOriginIsolated/);
 assert.match(player, /typeof window\.SharedArrayBuffer === 'function'/);
 assert.doesNotMatch(player, /localStorage\.removeItem\(key\)/);
+assert.match(player, /"mupen64plus-43screensize": "320x240"/);
+assert.match(player, /"mupen64plus-ThreadedRenderer": "True"/);
+assert.match(player, /"mupen64plus-MultiSampling": "0"/);
+assert.match(player, /"mupen64plus-EnableNativeResFactor": "0"/);
+assert.doesNotMatch(player, /EJS_VirtualGamepadSettings\s*=/);
 assert.match(cloudSaves, /const INTERVAL_MS = 60000/);
+assert.match(cloudSaves, /const IMAGE_INTERVAL_MS = 10 \* 60000/);
 assert.match(cloudSaves, /setInterval\(scheduleAutosave, INTERVAL_MS\)/);
 assert.match(cloudSaves, /requestIdleCallback\(run, \{ timeout: 4000 \}\)/);
 assert.match(cloudSaves, /autosavePending/);
+assert.match(cloudSaves, /scheduleAutosaveImage\(\)/);
 assert.match(cloudSaves, /document\.visibilityState === 'hidden'/);
 
-console.log('n64 performance/autosave: 10 checks passed');
+console.log('n64 performance/autosave: 17 checks passed');

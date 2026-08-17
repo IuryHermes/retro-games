@@ -63,7 +63,7 @@
 
     <div id="game"></div>
 
-    <script src="cloud-saves.js"></script>
+    <script src="cloud-saves.js?v=2"></script>
     <script>
         // ==========================================
         // LÓGICA DA SETA DE VOLTAR (Navegador/Celular)
@@ -136,7 +136,33 @@
             
             // Agora o emulador só vai ter botão de Menu e Config na interface interna dele
             window.EJS_buttons = { save_state: true, load_state: true, full_screen: true, fast_forward: true, settings: true, menu: true };
-            window.EJS_defaultOptions = { "vsync": false };
+
+            // Keep N64 close to the console's native workload. These defaults
+            // avoid costly enhancements that make Zelda and other 3D games
+            // stutter badly on browsers and mobile GPUs.
+            window.EJS_defaultOptions = core === 'n64' ? {
+                "vsync": false,
+                "shader": "disabled",
+                "rewindEnabled": "disabled",
+                "webgl2Enabled": "enabled",
+                "mupen64plus-aspect": "4:3",
+                "mupen64plus-43screensize": "320x240",
+                "mupen64plus-169screensize": "640x360",
+                "mupen64plus-EnableNativeResFactor": "0",
+                "mupen64plus-ThreadedRenderer": "True",
+                "mupen64plus-MultiSampling": "0",
+                "mupen64plus-FXAA": "0",
+                "mupen64plus-EnableHWLighting": "False",
+                "mupen64plus-EnableNativeResTexrects": "Disabled",
+                "mupen64plus-txFilterMode": "None",
+                "mupen64plus-txEnhancementMode": "None",
+                "mupen64plus-txHiresEnable": "False",
+                "mupen64plus-EnableEnhancedTextureStorage": "False",
+                "mupen64plus-EnableEnhancedHighResStorage": "False",
+                "mupen64plus-EnableLegacyBlending": "True",
+                "mupen64plus-EnableCopyColorToRDRAM": "Async",
+                "mupen64plus-Framerate": "Original"
+            } : { "vsync": false };
 
             // ==========================================
             // FORÇANDO O CONTROLE DO PLAYSTATION
@@ -146,17 +172,6 @@
                 
                 // Força nas duas variáveis conhecidas do EmulatorJS
                 window.EJS_gamepadStyle = "playstation";
-                window.EJS_VirtualGamepadSettings = { 
-                    opacity: 0.5, 
-                    hideOnKeyboardInfo: false, 
-                    buttonStyle: "playstation" 
-                };
-            } else {
-                window.EJS_VirtualGamepadSettings = { 
-                    opacity: 0.5, 
-                    hideOnKeyboardInfo: false, 
-                    buttonStyle: "modern" 
-                };
             }
             window.NeoCloudSaves.prepare({ game: window.EJS_gameUrl, core: window.EJS_core, name: params.get('title'), system: params.get('system') }).finally(() => {
                 const loaderScript = document.createElement('script');
