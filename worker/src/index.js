@@ -192,6 +192,28 @@ async function listAll(env, prefix, include = []) {
   return objects;
 }
 __name(listAll, "listAll");
+async function readJsonDirectory(env, prefix, limit = 500) {
+  const objects = (await listAll(env, prefix)).slice(-limit);
+  return (await Promise.all(objects.map(async (object) => {
+    const record = await env.GAMES.get(object.key);
+    if (!record) return null;
+    const value = await record.json().catch(() => null);
+    return value ? { key: object.key, size: object.size, uploaded: object.uploaded?.toISOString?.() || "", value } : null;
+  }))).filter(Boolean);
+}
+__name(readJsonDirectory, "readJsonDirectory");
+function catalogOverrideId(system, rom) {
+  const name = String(rom || "").split("/").pop() || "game";
+  return `${system}-${name}`.toLowerCase().replace(/\.[a-z0-9]+$/i, "").replace(/[^a-z0-9._-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 120);
+}
+__name(catalogOverrideId, "catalogOverrideId");
+async function adminAudit(env, action, target, detail = {}) {
+  const now = Date.now();
+  const record = { id: crypto.randomUUID(), action, target: String(target || "").slice(0, 180), detail, createdAt: now };
+  await env.GAMES.put(`admin/audit/${String(now).padStart(16, "0")}-${record.id}.json`, JSON.stringify(record), { httpMetadata: { contentType: "application/json" } });
+  return record;
+}
+__name(adminAudit, "adminAudit");
 function slotAllowed(slot, plan) {
   if (slot === "auto")
     return true;
@@ -254,6 +276,14 @@ class MultiplayerRoom {
       const participants = this.participants();
       const hostOnline = participants.some((person) => person.host);
       return json({ ...room, status: hostOnline ? "waiting" : "offline", online: participants.length, seatsUsed: participants.filter((person) => person.approved && !person.spectator).length, spectators: participants.filter((person) => person.spectator).length });
+    }
+    if (request.method === "POST" && url.pathname === "/admin-close") {
+      const room = await this.room();
+      if (!room) return Response.json({ closed: false }, { status: 404 });
+      room.status = "closed";
+      await this.ctx.storage.put("room", room);
+      for (const socket of this.ctx.getWebSockets()) socket.close(1000, "Sala encerrada pela administracao");
+      return Response.json({ closed: true, roomId: room.id });
     }
     if (url.pathname !== "/ws" || request.headers.get("Upgrade") !== "websocket")
       return json({ erro: "Upgrade WebSocket necessario." }, 426);
@@ -395,6 +425,144 @@ __name(SocialPlayer, "SocialPlayer");
 var src_default = {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (request.method === "GET" && url.pathname === "/catalog/overrides") {
+      const system = String(url.searchParams.get("system") || "").toLowerCase();
+      if (!/^(nes|snes|n64|gba|megadrive|ps1)$/.test(system)) return json({ erro: "Sistema invalido." }, 400);
+      const records = await readJsonDirectory(env, `catalog/overrides/${system}/`, 2e3);
+      return json({ system, overrides: Object.fromEntries(records.map((record) => [record.value.id, record.value])) });
+    }
+    if (request.method === "POST" && url.pathname === "/internal/admin-console") {
+      const provided = request.headers.get("X-Admin-Key") || "";
+      if (!env.ADMIN_PANEL_KEY || !await timingSafeStringEqual(provided, env.ADMIN_PANEL_KEY)) return json({ erro: "Nao autorizado." }, 401);
+      const clientIp = request.headers.get("CF-Connecting-IP") || "admin";
+      const limited = await enforceRateLimit(env, clientIp, "admin-console", 120, 60e3);
+      if (limited) return limited;
+      const body = await request.json().catch(() => ({}));
+      const action = String(body.action || "");
+      const validUid = (value) => /^[a-zA-Z0-9._:@-]{2,180}$/.test(String(value || ""));
+      if (action === "overview") {
+        const prefixes = ["profiles/v1/", "social/presence/", "multiplayer/rooms/", "saves/v1/", "save-images/v1/", "history/v1/", "live/verified/", "live/rewards/"];
+        const directories = await Promise.all(prefixes.map((prefix) => listAll(env, prefix)));
+        const now = Date.now();
+        const presence = await readJsonDirectory(env, "social/presence/", 500);
+        const online = presence.filter((record) => now - Number(record.value.updatedAt || 0) < 9e4).length;
+        const paymentsResponse = await fetch(`${FIREBASE}.json`);
+        const payments = paymentsResponse.ok ? await paymentsResponse.json() || {} : {};
+        const approved = Object.values(payments).filter((record) => record?.status === "aprovado").length;
+        return json({ counts: Object.fromEntries(prefixes.map((prefix, index) => [prefix, directories[index].length])), online, approvedPayments: approved, generatedAt: now });
+      }
+      if (action === "accounts") {
+        const [profiles, presence, rewards, saveObjects] = await Promise.all([readJsonDirectory(env, "profiles/v1/", 500), readJsonDirectory(env, "social/presence/", 500), readJsonDirectory(env, "live/rewards/", 500), listAll(env, "saves/v1/")]);
+        const presenceMap = new Map(presence.map((record) => [record.value.uid, record.value]));
+        const rewardMap = new Map(rewards.map((record) => [record.key.slice("live/rewards/".length).replace(/\.json$/, ""), record.value]));
+        const saveCounts = new Map();
+        for (const object of saveObjects) { const uid = object.key.slice("saves/v1/".length).split("/")[0]; saveCounts.set(uid, (saveCounts.get(uid) || 0) + 1); }
+        const now = Date.now();
+        return json({ accounts: profiles.map((record) => { const profile = record.value; const live = presenceMap.get(profile.uid); return { ...profile, online: Boolean(live && now - Number(live.updatedAt || 0) < 9e4), presence: live || null, rewards: rewardMap.get(profile.uid) || null, saves: saveCounts.get(profile.uid) || 0 }; }).sort((a, b) => Number(b.online) - Number(a.online) || String(a.name).localeCompare(String(b.name), "pt-BR")) });
+      }
+      if (action === "profile-update") {
+        const uid = String(body.uid || "");
+        if (!validUid(uid)) return json({ erro: "Conta invalida." }, 400);
+        const key = `profiles/v1/${encodeURIComponent(uid)}.json`;
+        const object = await env.GAMES.get(key);
+        if (!object) return json({ erro: "Perfil nao encontrado." }, 404);
+        const current = await object.json();
+        const patch = body.profile || {};
+        const next = { ...current, name: cleanProfileText(patch.name ?? current.name, 20), locality: cleanProfileText(patch.locality ?? current.locality, 80), bio: cleanProfileText(patch.bio ?? current.bio, 280), phone: cleanProfileText(patch.phone ?? current.phone, 30), instagram: safeProfileUrl(patch.instagram ?? current.instagram), youtube: safeProfileUrl(patch.youtube ?? current.youtube), facebook: safeProfileUrl(patch.facebook ?? current.facebook), tiktok: safeProfileUrl(patch.tiktok ?? current.tiktok), updatedAt: Date.now() };
+        if (!next.name || next.name.length < 2) return json({ erro: "Nome invalido." }, 400);
+        await env.GAMES.put(key, JSON.stringify(next), { httpMetadata: { contentType: "application/json" } });
+        await adminAudit(env, action, uid, { fields: Object.keys(patch) });
+        return json({ profile: next });
+      }
+      if (action === "entitlements-update") {
+        const uid = String(body.uid || "");
+        if (!validUid(uid)) return json({ erro: "Conta invalida." }, 400);
+        const key = `live/rewards/${encodeURIComponent(uid)}.json`;
+        const object = await env.GAMES.get(key);
+        const current = object ? await object.json().catch(() => ({})) : {};
+        const bonusManualSlots = Math.max(0, Math.min(999, Math.floor(Number(body.bonusManualSlots) || 0)));
+        const bonusAutoGames = Math.max(0, Math.min(999, Math.floor(Number(body.bonusAutoGames) || 0)));
+        const minutes = Math.max(0, Math.min(1e7, Number(body.minutes ?? current.minutes) || 0));
+        const next = { ...current, minutes, bonusManualSlots, bonusAutoGames, awarded: Array.isArray(current.awarded) ? current.awarded : [], updatedAt: Date.now() };
+        await env.GAMES.put(key, JSON.stringify(next), { httpMetadata: { contentType: "application/json" } });
+        await adminAudit(env, action, uid, { bonusManualSlots, bonusAutoGames, minutes });
+        return json({ rewards: next });
+      }
+      if (action === "account-saves") {
+        const uid = String(body.uid || "");
+        if (!validUid(uid)) return json({ erro: "Conta invalida." }, 400);
+        const objects = await listAll(env, `saves/v1/${encodeURIComponent(uid)}/`, ["customMetadata"]);
+        return json({ saves: objects.map((object) => ({ key: object.key, size: object.size, uploaded: object.uploaded?.toISOString?.() || "", metadata: object.customMetadata || {} })) });
+      }
+      if (action === "save-delete") {
+        const uid = String(body.uid || ""); const key = String(body.key || "");
+        if (!validUid(uid) || !key.startsWith(`saves/v1/${encodeURIComponent(uid)}/`) || body.confirm !== key) return json({ erro: "Confirmacao de save invalida." }, 400);
+        await env.GAMES.delete(key); await adminAudit(env, action, uid, { key });
+        return json({ deleted: true, key });
+      }
+      if (action === "account-delete-data") {
+        const uid = String(body.uid || "");
+        if (!validUid(uid) || body.confirm !== uid) return json({ erro: "Confirmacao de conta invalida." }, 400);
+        const prefixes = [`saves/v1/${encodeURIComponent(uid)}/`, `save-images/v1/${encodeURIComponent(uid)}/`];
+        const children = (await Promise.all(prefixes.map((prefix) => listAll(env, prefix)))).flat();
+        await Promise.all(children.map((object) => env.GAMES.delete(object.key)));
+        await Promise.all([`profiles/v1/${encodeURIComponent(uid)}.json`, `history/v1/${encodeURIComponent(uid)}.json`, `social/presence/${encodeURIComponent(uid)}.json`, `live/rewards/${encodeURIComponent(uid)}.json`, `live/verified/${encodeURIComponent(uid)}.json`].map((key) => env.GAMES.delete(key)));
+        await adminAudit(env, action, uid, { deletedObjects: children.length + 5 });
+        return json({ deleted: true, uid, objects: children.length + 5 });
+      }
+      if (action === "rooms") {
+        const directory = await listAll(env, "multiplayer/rooms/");
+        const rooms = (await Promise.all(directory.slice(-100).map(async (object) => { const roomId = object.key.split("/").pop()?.replace(/\.json$/, "") || ""; if (!/^[a-f0-9]{12}$/.test(roomId)) return null; const response = await env.MULTIPLAYER_ROOMS.getByName(roomId).fetch(new Request("https://room/summary")); return response.ok ? await response.json() : null; }))).filter(Boolean);
+        return json({ rooms: rooms.sort((a, b) => b.createdAt - a.createdAt) });
+      }
+      if (action === "room-close") {
+        const roomId = String(body.roomId || "");
+        if (!/^[a-f0-9]{12}$/.test(roomId) || body.confirm !== roomId) return json({ erro: "Sala invalida." }, 400);
+        const response = await env.MULTIPLAYER_ROOMS.getByName(roomId).fetch(new Request("https://room/admin-close", { method: "POST" }));
+        await env.GAMES.delete(`multiplayer/rooms/${roomId}.json`); await adminAudit(env, action, roomId);
+        return json({ closed: response.ok, roomId });
+      }
+      if (action === "lives") {
+        const [verified, rewards, presence, profiles] = await Promise.all([readJsonDirectory(env, "live/verified/", 500), readJsonDirectory(env, "live/rewards/", 500), readJsonDirectory(env, "social/presence/", 500), readJsonDirectory(env, "profiles/v1/", 500)]);
+        const byUid = (records) => new Map(records.map((record) => [record.value.uid || record.key.split("/").pop().replace(/\.json$/, ""), record.value]));
+        const profileMap = byUid(profiles); const presenceMap = byUid(presence);
+        const rewardMap = new Map(rewards.map((record) => [record.key.split("/").pop().replace(/\.json$/, ""), record.value]));
+        return json({ lives: verified.map((record) => { const uid = `discord-${record.value.discordId}`; return { uid, ...record.value, profile: profileMap.get(uid) || null, presence: presenceMap.get(uid) || null, rewards: rewardMap.get(uid) || null, watchUrl: presenceMap.get(uid)?.roomId ? `${SITE}/multiplayer-room.html?room=${encodeURIComponent(presenceMap.get(uid).roomId)}&spectator=1` : "", discordUrl: `https://discord.com/channels/${DISCORD_GUILD_ID}/${DISCORD_CHANNELS.live}` }; }) });
+      }
+      if (action === "payments") {
+        const response = await fetch(`${FIREBASE}.json`); const values = response.ok ? await response.json() || {} : {};
+        const payments = Object.entries(values).map(([id, record]) => ({ id, plano: record?.plano || "", valor: Number(record?.valor || record?.valorEsperado || 0), status: record?.status || "", nome: record?.anonimo ? "Anonimo" : cleanProfileText(record?.nome, 40), discordId: record?.discordId || "", criadoEm: record?.criadoEm || 0, aprovadoEm: record?.aprovadoEm || 0, validoAte: record?.validoAte || 0, discordStatus: record?.discordStatus || "" })).sort((a, b) => Number(b.criadoEm) - Number(a.criadoEm)).slice(0, 500);
+        return json({ payments });
+      }
+      if (action === "discord-plan") {
+        const discordId = String(body.discordId || ""); const plan = String(body.plan || "none");
+        if (!/^\d{10,25}$/.test(discordId) || !["none", "cafe", "cartucho", "arcade"].includes(plan)) return json({ erro: "Cargo invalido." }, 400);
+        const headers = { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` };
+        for (const roleId of Object.values(DISCORD_ROLES)) await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/members/${discordId}/roles/${roleId}`, { method: "DELETE", headers });
+        if (plan !== "none") { const response = await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/members/${discordId}/roles/${DISCORD_ROLES[plan]}`, { method: "PUT", headers }); if (!response.ok) return json({ erro: "Discord recusou o cargo.", detalhe: await response.text() }, 502); }
+        await adminAudit(env, action, discordId, { plan }); return json({ updated: true, discordId, plan });
+      }
+      if (action === "games") {
+        const system = String(body.system || "snes").toLowerCase();
+        if (!/^(nes|snes|n64|gba|megadrive|ps1)$/.test(system)) return json({ erro: "Sistema invalido." }, 400);
+        const [catalogResponse, overrides] = await Promise.all([fetch(`${SITE}/systems/${system}/games.json`, { cf: { cacheTtl: 300 } }), readJsonDirectory(env, `catalog/overrides/${system}/`, 2e3)]);
+        if (!catalogResponse.ok) return json({ erro: "Catalogo indisponivel." }, 502);
+        const overrideMap = new Map(overrides.map((record) => [record.value.id, record.value]));
+        const games = (await catalogResponse.json()).map((game) => { const id = catalogOverrideId(system, game.rom); return { id, system, ...game, override: overrideMap.get(id) || null }; });
+        return json({ system, games });
+      }
+      if (action === "game-override") {
+        const system = String(body.system || "").toLowerCase(); const rom = String(body.rom || "");
+        if (!/^(nes|snes|n64|gba|megadrive|ps1)$/.test(system) || !rom || rom.length > 300) return json({ erro: "Jogo invalido." }, 400);
+        const id = catalogOverrideId(system, rom); const input = body.override || {};
+        const override = { id, system, rom, nome: cleanProfileText(input.nome, 100), descricao: cleanProfileText(input.descricao, 2e3), nota: cleanProfileText(input.nota, 10), hidden: Boolean(input.hidden), updatedAt: Date.now() };
+        if (!override.nome && !override.descricao && !override.nota && !override.hidden) await env.GAMES.delete(`catalog/overrides/${system}/${id}.json`);
+        else await env.GAMES.put(`catalog/overrides/${system}/${id}.json`, JSON.stringify(override), { httpMetadata: { contentType: "application/json" } });
+        await adminAudit(env, action, id, { system, hidden: override.hidden }); return json({ override });
+      }
+      if (action === "audit") return json({ audit: (await readJsonDirectory(env, "admin/audit/", 300)).map((record) => record.value).reverse() });
+      return json({ erro: "Acao administrativa desconhecida." }, 404);
+    }
     if (request.method === "POST" && url.pathname === "/internal/discord-live") {
       const monitorSecret = env.DISCORD_MONITOR_SECRET || "";
       if (!monitorSecret || !timingSafeStringEqual(request.headers.get("X-Monitor-Secret") || "", monitorSecret)) return json({ erro: "Nao autorizado." }, 401);
@@ -445,9 +613,28 @@ var src_default = {
           for (const [threshold, id, field, amount] of tiers) if (minutes >= threshold && !awarded.includes(id)) { awarded.push(id); next[field] += amount; earned.push(`${amount} ${field === "bonusAutoGames" ? "jogo(s) com autosave" : "slot(s) manual(is)"}`); }
           await env.GAMES.put(rewardKey, JSON.stringify(next), { httpMetadata: { contentType: "application/json" } });
           if (!continuing) await discordMessage(env, DISCORD_CHANNELS.live, { content: `🎥 **${profile.name}** está transmitindo **${presence.roomTitle || "uma gameplay"}** no NeoTerminalRoom. Assista no site: ${SITE}/multiplayer-room.html?room=${roomId}&spectator=1` }).catch(() => {});
-          if (earned.length) await discordMessage(env, DISCORD_CHANNELS.live, { content: `🏆 ${profile.name} desbloqueou ${earned.join(" e ")} por tempo acumulado de transmissão no NeoTerminalRoom.` }).catch(() => {});
+          if (earned.length) {
+            await discordMessage(env, DISCORD_CHANNELS.live, { content: `🏆 ${profile.name} desbloqueou ${earned.join(" e ")} por tempo acumulado de transmissão no NeoTerminalRoom.` }).catch(() => {});
+            await Promise.all(earned.map((prize, index) => fetch(`https://neoterminalroom-default-rtdb.firebaseio.com/hall_cadastros/${encodeURIComponent(`live-${account.uid}-${awarded[awarded.length - earned.length + index]}`)}.json`, {
+              method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ nome: profile.name, avatar: profile.avatar || "avatar-01", mensagem: `🏆 Conquistou ${prize} ajudando o projeto com uma transmissão ao vivo.`, origem: "live", timestamp: now })
+            }).catch(() => null)));
+          }
         }
-        return json({ presence });
+        const verified = presence.page === "game" && roomId ? Boolean(await env.GAMES.head(`live/verified/${encodeURIComponent(account.uid)}.json`)) : false;
+        const rewardObject = await env.GAMES.get(`live/rewards/${encodeURIComponent(account.uid)}.json`);
+        return json({ presence, liveVerified: verified, rewards: rewardObject ? await rewardObject.json().catch(() => null) : null });
+      }
+      if (request.method === "GET" && url.pathname === "/social/live-participation") {
+        const [verifiedObject, rewardObject, presenceObject] = await Promise.all([
+          env.GAMES.get(`live/verified/${encodeURIComponent(account.uid)}.json`),
+          env.GAMES.get(`live/rewards/${encodeURIComponent(account.uid)}.json`),
+          env.GAMES.get(`social/presence/${encodeURIComponent(account.uid)}.json`)
+        ]);
+        const verified = verifiedObject ? await verifiedObject.json().catch(() => null) : null;
+        const rewards = rewardObject ? await rewardObject.json().catch(() => null) : null;
+        const presence = presenceObject ? await presenceObject.json().catch(() => null) : null;
+        const active = Boolean(verified?.streaming && Date.now() - Number(verified.updatedAt || 0) < 9e4 && presence?.page === "game" && presence?.roomId && Date.now() - Number(presence.updatedAt || 0) < 9e4);
+        return json({ active, discordLinked: account.provider === "discord" || String(account.uid).startsWith("discord-"), discordUrl: `https://discord.com/channels/${DISCORD_GUILD_ID}/${DISCORD_CHANNELS.live}`, channel: "live-arcade", roomId: presence?.roomId || "", minutes: Number(rewards?.minutes) || 0, rewards: rewards || null, message: active ? "Participação confirmada. Seu tempo está sendo contabilizado automaticamente." : "Abra sua transmissão no canal #live-arcade e mantenha esta sala online; a confirmação aparecerá automaticamente." });
       }
       if (request.method === "GET" && url.pathname === "/social/players") {
         const [profileDirectory, presenceDirectory, verifiedLiveDirectory] = await Promise.all([listAll(env, "profiles/v1/"), listAll(env, "social/presence/"), listAll(env, "live/verified/")]);

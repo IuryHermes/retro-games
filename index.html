@@ -1321,9 +1321,18 @@
         wrapper.innerHTML = `<div class="row-header"><span class="row-title-text">${sys.name}</span><button class="view-all-btn selectable-item" id="btn-${sys.id}" onclick="toggleGrid('${sys.id}')">⊞ VER TODOS</button></div><div class="row-container"><button class="scroll-btn left-btn" onclick="document.getElementById('carousel-${sys.id}').scrollBy(-300,0)">❮</button><div class="game-carousel" id="carousel-${sys.id}"></div><button class="scroll-btn right-btn" onclick="document.getElementById('carousel-${sys.id}').scrollBy(300,0)">❯</button></div>`;
         catalog.appendChild(wrapper);
 
-        let p = fetch(`${sys.path}games.json?v=${new Date().getTime()}`)
-        .then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); })
-        .then(games => {
+        const overrideId = rom => `${sys.id}-${String(rom || '').split('/').pop() || 'game'}`.toLowerCase().replace(/\.[a-z0-9]+$/i, '').replace(/[^a-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 120);
+        let p = Promise.all([
+            fetch(`${sys.path}games.json?v=${new Date().getTime()}`).then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); }),
+            fetch(`${ACCOUNT_API}/catalog/overrides?system=${encodeURIComponent(sys.id)}`, { cache:'no-store' }).then(response => response.ok ? response.json() : {overrides:{}}).catch(() => ({overrides:{}}))
+        ])
+        .then(([games, overrideData]) => {
+            const overrides = overrideData.overrides || {};
+            games = games.map(game => {
+                const custom = overrides[overrideId(game.rom)];
+                if (!custom) return game;
+                return {...game, ...(custom.nome ? {nome:custom.nome} : {}), ...(custom.descricao ? {descricao:custom.descricao} : {}), ...(custom.nota ? {nota:custom.nota} : {}), _adminHidden:Boolean(custom.hidden)};
+            }).filter(game => !game._adminHidden);
             const car = document.getElementById(`carousel-${sys.id}`);
             const uniqueByRom = new Map();
             games.forEach(g => {
