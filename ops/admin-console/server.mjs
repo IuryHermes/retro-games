@@ -1,5 +1,5 @@
 import http from 'node:http';
-import { readFile, writeFile, rename } from 'node:fs/promises';
+import { readFile, writeFile, rename, unlink } from 'node:fs/promises';
 import { randomBytes, scrypt as scryptCallback, timingSafeEqual } from 'node:crypto';
 import { promisify } from 'node:util';
 import { fileURLToPath } from 'node:url';
@@ -88,7 +88,7 @@ const server=http.createServer(async (req,res)=>{
       if(!requireSession(req,res,true))return; const input=await body(req);
       if(!await verify(String(input.current||'')).catch(()=>false))return send(res,403,{erro:'Senha atual incorreta.'});
       if(String(input.password||'').length<12)return send(res,400,{erro:'Use pelo menos 12 caracteres.'});
-      const temp=`${passwordFile}.new`; await writeFile(temp,await makeHash(String(input.password)),{mode:0o600}); await rename(temp,passwordFile); sessions.clear();
+      const temp=`${passwordFile}.new`; await writeFile(temp,await makeHash(String(input.password)),{mode:0o600}); await rename(temp,passwordFile); await unlink(join(root,'INITIAL_PASSWORD.txt')).catch(()=>{}); sessions.clear();
       return send(res,200,{ok:true,mensagem:'Senha alterada. Entre novamente.'},{'Set-Cookie':'neo_admin=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0'});
     }
     if (req.method==='POST' && url.pathname==='/api/admin') { if(!requireSession(req,res,true))return; const result=await proxyAdmin(await body(req)); return send(res,result.status,result.data); }
