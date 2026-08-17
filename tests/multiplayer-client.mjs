@@ -117,5 +117,10 @@ assert.match(guest, /localStorage\.setItem\(bindingStorageKey\(\)/);
 assert.match(guest, /RESTAURAR PADRÃO/);
 assert.match(guest, /neo_multiplayer_bindings_v2_/);
 assert.match(guest, /\[\["B",1\],\["C↑",23\],\["A",0\],\["C↓",22\]\]/);
+assert.match(guest, /@media \(max-width: 900px\) and \(orientation: portrait\)/);
+assert.match(guest, /transform: scale\(1\.33334\)/);
+assert.match(guest, /grid-template-columns: 1fr;/);
+assert.doesNotMatch(guest, /grid-template-columns: 1fr 360px/);
+assert.match(guest, /position: fixed;[\s\S]*max-height: 44dvh/);
 
-console.log('multiplayer client and room: 111 checks passed');
+console.log('multiplayer client and room: 116 checks passed');
