@@ -1,6 +1,8 @@
 /* Lightweight Discord Gateway monitor for the live-arcade channel.
  * Run with: DISCORD_BOT_TOKEN=... WORKER_URL=... MONITOR_SECRET=... node discord-live-monitor.mjs
  */
+import WebSocket from "ws";
+
 const token = process.env.DISCORD_BOT_TOKEN;
 const worker = (process.env.WORKER_URL || "https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev").replace(/\/$/, "");
 const secret = process.env.MONITOR_SECRET;
