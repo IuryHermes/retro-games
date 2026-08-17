@@ -11,8 +11,11 @@ assert.match(player, /window\.crossOriginIsolated/);
 assert.match(player, /typeof window\.SharedArrayBuffer === 'function'/);
 assert.doesNotMatch(player, /localStorage\.removeItem\(key\)/);
 assert.match(player, /"mupen64plus-43screensize": "320x240"/);
-assert.match(player, /"mupen64plus-aspect": "16:9"/);
+assert.match(player, /"mupen64plus-aspect": "4:3"/);
 assert.match(player, /"mupen64plus-169screensize": "640x360"/);
+assert.match(player, /body\.n64-widescreen #game \.ejs_canvas/);
+assert.match(player, /transform: scaleX\(1\.33334\)/);
+assert.match(player, /if \(core === 'n64'\) document\.body\.classList\.add\('n64-widescreen'\)/);
 assert.match(player, /"mupen64plus-ThreadedRenderer": "True"/);
 assert.match(player, /"mupen64plus-MultiSampling": "0"/);
 assert.match(player, /"mupen64plus-EnableNativeResFactor": "0"/);
@@ -25,4 +28,4 @@ assert.match(cloudSaves, /autosavePending/);
 assert.match(cloudSaves, /scheduleAutosaveImage\(\)/);
 assert.match(cloudSaves, /document\.visibilityState === 'hidden'/);
 
-console.log('n64 performance/autosave: 19 checks passed');
+console.log('n64 performance/autosave: 22 checks passed');
