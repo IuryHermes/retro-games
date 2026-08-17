@@ -395,6 +395,21 @@ __name(SocialPlayer, "SocialPlayer");
 var src_default = {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (request.method === "POST" && url.pathname === "/internal/discord-live") {
+      const monitorSecret = env.DISCORD_MONITOR_SECRET || "";
+      if (!monitorSecret || !timingSafeStringEqual(request.headers.get("X-Monitor-Secret") || "", monitorSecret)) return json({ erro: "Nao autorizado." }, 401);
+      const body = await request.json().catch(() => ({}));
+      const discordId = String(body.discordId || "");
+      const channelId = String(body.channelId || "");
+      if (!/^\d{10,25}$/.test(discordId)) return json({ erro: "Usuario Discord invalido." }, 400);
+      const verifiedKey = `live/verified/discord-${discordId}.json`;
+      if (channelId !== DISCORD_CHANNELS.live || !body.streaming) {
+        await env.GAMES.delete(verifiedKey);
+        return json({ verified: false });
+      }
+      await env.GAMES.put(verifiedKey, JSON.stringify({ discordId, channelId, streaming: true, updatedAt: Date.now() }), { httpMetadata: { contentType: "application/json" } });
+      return json({ verified: true });
+    }
     if (request.method === "OPTIONS")
       return new Response(null, { status: 204, headers: cors });
     if (url.pathname.startsWith("/social/")) {
@@ -412,6 +427,8 @@ var src_default = {
         const presence = { uid: account.uid, name: profile.name, avatar: profile.avatar, page: String(body.page || "site").slice(0, 30), roomId, roomTitle: cleanProfileText(body.roomTitle, 100), updatedAt: Date.now() };
         await env.GAMES.put(`social/presence/${encodeURIComponent(account.uid)}.json`, JSON.stringify(presence), { httpMetadata: { contentType: "application/json" } });
         if (presence.page === "game" && roomId) {
+          const verifiedLive = await env.GAMES.get(`live/verified/${encodeURIComponent(account.uid)}.json`);
+          if (!verifiedLive) return json({ presence, liveVerified: false });
           const rewardKey = `live/rewards/${encodeURIComponent(account.uid)}.json`;
           const rewardObject = await env.GAMES.get(rewardKey);
           const reward = rewardObject ? await rewardObject.json().catch(() => ({})) : {};
