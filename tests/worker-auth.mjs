@@ -17,6 +17,7 @@ const tokenFor = (overrides = {}) => {
 
 const objects = new Map();
 const multiplayerRooms = new Map();
+const rateBuckets = new Map();
 const env = {
   DISCORD_CLIENT_SECRET: 'test-secret',
   TURN_KEY_ID: 'turn-test-id',
@@ -41,6 +42,21 @@ const env = {
         if (request.method === 'POST' && url.pathname === '/create') { const room = await request.json(); multiplayerRooms.set(id, room); return Response.json({ room }, { status:201 }); }
         if (url.pathname === '/summary') { const room = multiplayerRooms.get(id); return room ? Response.json({ ...room, status:'waiting', online:1, seatsUsed:1 }) : Response.json({ erro:'missing' }, { status:404 }); }
         return Response.json({ erro:'unsupported' }, { status:400 });
+      }};
+    }
+  },
+  SOCIAL_PLAYERS: {
+    getByName(id) {
+      return { async fetch(request) {
+        const url = new URL(request.url);
+        if (request.method !== 'POST' || url.pathname !== '/rate/check') return Response.json({ erro:'unsupported' }, { status:400 });
+        const body = await request.json();
+        const key = `${id}:${body.action}`;
+        const now = Date.now();
+        const bucket = rateBuckets.get(key);
+        const current = !bucket || bucket.resetAt <= now ? { count:0, resetAt:now + body.windowMs } : bucket;
+        current.count += 1; rateBuckets.set(key, current);
+        return current.count > body.limit ? Response.json({ erro:'rate' }, { status:429, headers:{ 'Retry-After':'60' } }) : Response.json({ permitido:true });
       }};
     }
   }
@@ -69,6 +85,9 @@ assert.equal(response.status, 200);
 assert.equal(ice.relay, true);
 assert.equal(ice.iceServers[1].urls.length, 1);
 assert.equal(response.headers.get('Cache-Control'), 'no-store');
+assert.equal(response.headers.get('X-Content-Type-Options'), 'nosniff');
+assert.equal(response.headers.get('X-Frame-Options'), 'DENY');
+assert.equal(response.headers.get('Referrer-Policy'), 'no-referrer');
 response = await worker.fetch(new Request('https://worker/account/profile', { method: 'PUT', headers: { ...auth(tokenFor()), 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Iury Player', avatar: 'avatar-01' }) }), env);
 assert.equal(response.status, 200);
 assert.equal((await response.json()).created, true);
@@ -133,8 +152,15 @@ response = await worker.fetch(new Request('https://worker/multiplayer/rooms'), e
 const publicRooms = await response.json();
 assert.equal(publicRooms.rooms.length, 1);
 assert.equal(publicRooms.rooms[0].title, 'Super Mario World');
+assert.equal(publicRooms.rooms[0].hostUid, undefined);
 response = await worker.fetch(new Request(`https://worker/multiplayer/rooms/${createdRoom.room.id}/join`, { method:'POST', headers:auth(tokenFor()) }), env);
 assert.equal(response.status, 200);
-assert.ok((await response.json()).ticket);
+const joinedRoom = await response.json();
+assert.ok(joinedRoom.ticket);
+assert.equal(joinedRoom.room.hostUid, undefined);
 
-console.log('worker auth/history/discord/cloud/multiplayer: 34 checks passed');
+for (let attempt = 0; attempt < 13; attempt++) response = await worker.fetch(new Request('https://worker/multiplayer/ice-servers', { headers:auth(discordToken) }), env);
+assert.equal(response.status, 429);
+assert.ok(Number(response.headers.get('Retry-After')) > 0);
+
+console.log('worker auth/history/discord/cloud/multiplayer: 42 checks passed');

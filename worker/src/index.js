@@ -25,7 +25,20 @@ var WEEKLY_POLLS = [
   { question: "Qual formato de novidade interessa mais?", answers: ["Jogo homebrew", "Lista tem\xE1tica", "Curiosidade retr\xF4", "Desafio da comunidade"] }
 ];
 var PLANS = { cafe: { title: "Cafe", amount: 5 }, cartucho: { title: "Cartucho", amount: 12 }, arcade: { title: "Arcade", amount: 25 } };
-var cors = { "Access-Control-Allow-Origin": SITE, "Access-Control-Allow-Headers": "Authorization, Content-Type, Range, X-Save-Name, X-Game-Name, X-Game-System", "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS", "Access-Control-Expose-Headers": "Content-Length, Content-Range, Accept-Ranges, ETag, Last-Modified, X-Save-Name" };
+var cors = {
+  "Access-Control-Allow-Origin": SITE,
+  "Access-Control-Allow-Headers": "Authorization, Content-Type, Range, X-Save-Name, X-Game-Name, X-Game-System",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+  "Access-Control-Expose-Headers": "Content-Length, Content-Range, Accept-Ranges, ETag, Last-Modified, X-Save-Name",
+  "Cache-Control": "no-store",
+  "Content-Security-Policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'",
+  "Cross-Origin-Resource-Policy": "same-site",
+  "Permissions-Policy": "camera=(), geolocation=(), microphone=()",
+  "Referrer-Policy": "no-referrer",
+  "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY"
+};
 var json = /* @__PURE__ */ __name((data, status = 200) => Response.json(data, { status, headers: cors }), "json");
 async function discordMessage(env, channelId, body) {
   return fetch(`https://discord.com/api/v10/channels/${channelId}/messages`, { method: "POST", headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}`, "Content-Type": "application/json" }, body: JSON.stringify({ allowed_mentions: { parse: ["roles", "users"] }, ...body }) });
@@ -39,6 +52,21 @@ async function sign(value, secret) {
   return b64url(new Uint8Array(await crypto.subtle.sign("HMAC", key, encoder.encode(value))));
 }
 __name(sign, "sign");
+async function timingSafeStringEqual(provided, expected) {
+  const [providedHash, expectedHash] = await Promise.all([
+    crypto.subtle.digest("SHA-256", encoder.encode(String(provided || ""))),
+    crypto.subtle.digest("SHA-256", encoder.encode(String(expected || "")))
+  ]);
+  if (typeof crypto.subtle.timingSafeEqual === "function")
+    return crypto.subtle.timingSafeEqual(providedHash, expectedHash);
+  const providedBytes = new Uint8Array(providedHash);
+  const expectedBytes = new Uint8Array(expectedHash);
+  let mismatch = 0;
+  for (let index = 0; index < providedBytes.length; index += 1)
+    mismatch |= providedBytes[index] ^ expectedBytes[index];
+  return mismatch === 0;
+}
+__name(timingSafeStringEqual, "timingSafeStringEqual");
 async function makeToken(data, secret) {
   const payload = b64url(encoder.encode(JSON.stringify(data)));
   return `${payload}.${await sign(payload, secret)}`;
@@ -47,7 +75,7 @@ __name(makeToken, "makeToken");
 async function readToken(token, secret) {
   try {
     const [payload, signature] = token.split(".");
-    if (!payload || !signature || await sign(payload, secret) !== signature)
+    if (!payload || !signature || !await timingSafeStringEqual(signature, await sign(payload, secret)))
       return null;
     const data = JSON.parse(new TextDecoder().decode(fromB64url(payload)));
     return data.exp > Date.now() ? data : null;
@@ -138,6 +166,15 @@ function slotAllowed(slot, plan) {
   return Number.isSafeInteger(number) && number > 0 && (limit === null || number <= limit);
 }
 __name(slotAllowed, "slotAllowed");
+async function enforceRateLimit(env, identity, action, limit, windowMs) {
+  const response = await env.SOCIAL_PLAYERS.getByName(`rate:${identity}`).fetch(new Request("https://internal/rate/check", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action, limit, windowMs })
+  }));
+  return response.ok ? null : response;
+}
+__name(enforceRateLimit, "enforceRateLimit");
 class MultiplayerRoom {
   constructor(ctx, env) {
     this.ctx = ctx;
@@ -239,9 +276,13 @@ class MultiplayerRoom {
       return;
     }
     if (data.type === "input" && sender.approved && sender.seat > 1) {
+      const index = Number(data.index);
+      const value = Number(data.value);
+      if (!Number.isInteger(index) || index < 0 || index > 29 || !Number.isFinite(value) || value < -32767 || value > 32767)
+        return;
       const hostSocket = this.ctx.getWebSockets("host")[0];
       if (hostSocket)
-        hostSocket.send(JSON.stringify({ type: "input", seat: sender.seat, index: Number(data.index), value: Number(data.value) }));
+        hostSocket.send(JSON.stringify({ type: "input", seat: sender.seat, index, value }));
       return;
     }
     if (data.type === "close" && sender.host) {
@@ -271,6 +312,26 @@ class SocialPlayer {
   async fetch(request) {
     const url = new URL(request.url);
     const events = await this.ctx.storage.get("events") || [];
+    if (request.method === "POST" && url.pathname === "/rate/check") {
+      const body = await request.json().catch(() => ({}));
+      const action = String(body.action || "").replace(/[^a-z0-9_-]/gi, "").slice(0, 40);
+      const limit = Math.max(1, Math.min(120, Number(body.limit) || 1));
+      const windowMs = Math.max(1e3, Math.min(864e5, Number(body.windowMs) || 6e4));
+      if (!action)
+        return json({ erro: "Limite invalido." }, 400);
+      const now = Date.now();
+      const key = `rate:${action}`;
+      const current = await this.ctx.storage.get(key);
+      const bucket = !current || current.resetAt <= now ? { count: 0, resetAt: now + windowMs } : current;
+      bucket.count += 1;
+      await this.ctx.storage.put(key, bucket);
+      if (bucket.count > limit) {
+        const headers = new Headers(cors);
+        headers.set("Retry-After", String(Math.max(1, Math.ceil((bucket.resetAt - now) / 1e3))));
+        return new Response(JSON.stringify({ erro: "Muitas tentativas. Aguarde e tente novamente." }), { status: 429, headers });
+      }
+      return json({ permitido: true, restante: limit - bucket.count });
+    }
     if (request.method === "POST" && url.pathname === "/event") {
       const event = await request.json();
       const next = [...events, { ...event, id: crypto.randomUUID(), createdAt: Date.now() }].slice(-100);
@@ -341,6 +402,9 @@ var src_default = {
         return own.fetch(new Request(`https://social/messages?with=${encodeURIComponent(withUid)}`));
       }
       if (request.method === "POST" && url.pathname === "/social/invite") {
+        const limited = await enforceRateLimit(env, account.uid, "social-invite", 10, 10 * 60 * 1e3);
+        if (limited)
+          return limited;
         const body = await request.json().catch(() => ({}));
         const toUid = String(body.toUid || "").slice(0, 160);
         const roomId = String(body.roomId || "");
@@ -360,6 +424,9 @@ var src_default = {
         return json({ enviado: true });
       }
       if (request.method === "POST" && url.pathname === "/social/messages") {
+        const limited = await enforceRateLimit(env, account.uid, "social-message", 20, 60 * 1e3);
+        if (limited)
+          return limited;
         const body = await request.json().catch(() => ({}));
         const toUid = String(body.toUid || "").slice(0, 160);
         const text = String(body.text || "").trim().slice(0, 500);
@@ -381,6 +448,9 @@ var src_default = {
       const account = await accountAccess(request, env);
       if (!account)
         return json({ erro: "Entre na sua conta para usar o multiplayer." }, 401);
+      const limited = await enforceRateLimit(env, account.uid, "turn-credentials", 12, 10 * 60 * 1e3);
+      if (limited)
+        return limited;
       const fallback = [{ urls: ["stun:stun.cloudflare.com:3478"] }];
       if (!env.TURN_KEY_ID || !env.TURN_KEY_API_TOKEN)
         return json({ iceServers: fallback, relay: false });
@@ -404,6 +474,9 @@ var src_default = {
       const account = await accountAccess(request, env);
       if (!account)
         return json({ erro: "Entre na sua conta para abrir uma sala." }, 401);
+      const limited = await enforceRateLimit(env, account.uid, "multiplayer-room", 6, 10 * 60 * 1e3);
+      if (limited)
+        return limited;
       const profileObject = await env.GAMES.get(`profiles/v1/${account.uid}.json`);
       const profile = profileObject ? await profileObject.json() : null;
       if (!profile)
@@ -433,7 +506,10 @@ var src_default = {
         if (!response.ok)
           return null;
         const summary = await response.json();
-        return summary.isPublic && summary.status === "waiting" && summary.online < summary.maxPlayers ? summary : null;
+        if (!summary.isPublic || summary.status !== "waiting" || summary.online >= summary.maxPlayers)
+          return null;
+        const { hostUid, ...publicSummary } = summary;
+        return publicSummary;
       }));
       return json({ rooms: summaries.filter(Boolean).sort((a, b) => b.createdAt - a.createdAt).slice(0, 50) });
     }
@@ -454,7 +530,8 @@ var src_default = {
       if (room.status !== "waiting" || room.online >= room.maxPlayers)
         return json({ erro: "Sala indisponivel ou lotada." }, 409);
       const ticket = await makeToken({ purpose: "multiplayer", roomId, uid: account.uid, name: profile.name, host: false, exp: Date.now() + 4 * 60 * 60 * 1e3 }, env.DISCORD_CLIENT_SECRET);
-      return json({ room, ticket });
+      const { hostUid, ...publicRoom } = room;
+      return json({ room: publicRoom, ticket });
     }
     const socketMatch = url.pathname.match(/^\/multiplayer\/rooms\/([a-f0-9]{12})\/ws$/);
     if (request.method === "GET" && socketMatch) {
@@ -494,7 +571,7 @@ var src_default = {
       return Response.redirect(authorize.toString(), 302);
     }
     if (request.method === "POST" && url.pathname === "/admin/publish-poll") {
-      if (!env.HERMES_PUBLISH_KEY || request.headers.get("Authorization") !== `Bearer ${env.HERMES_PUBLISH_KEY}`)
+      if (!env.HERMES_PUBLISH_KEY || !await timingSafeStringEqual(request.headers.get("Authorization") || "", `Bearer ${env.HERMES_PUBLISH_KEY}`))
         return json({ erro: "Nao autorizado." }, 401);
       const body = await request.json();
       const question = String(body.question || "").trim().slice(0, 300);
@@ -663,11 +740,17 @@ var src_default = {
         return new Response(object2.body, { headers });
       }
       if (request.method === "DELETE") {
+        const limited = await enforceRateLimit(env, access.discordId, "save-delete", 30, 10 * 60 * 1e3);
+        if (limited)
+          return limited;
         await env.GAMES.delete(target.key);
         if (target.slot === "auto")
           await env.GAMES.delete(`save-images/v1/${access.discordId}/${target.game}.png`);
         return json({ removido: true, game: target.game, slot: target.slot });
       }
+      const limited = await enforceRateLimit(env, access.discordId, "save-upload", 30, 10 * 60 * 1e3);
+      if (limited)
+        return limited;
       const contentLength = Number(request.headers.get("Content-Length") || 0);
       if (!Number.isSafeInteger(contentLength) || contentLength < 1 || contentLength > MAX_SAVE_BYTES)
         return json({ erro: "Save vazio ou maior que 16 MB." }, 413);
@@ -714,6 +797,9 @@ var src_default = {
         headers.set("Cache-Control", "private, no-store");
         return new Response(image.body, { headers });
       }
+      const limited = await enforceRateLimit(env, access.discordId, "save-image", 12, 10 * 60 * 1e3);
+      if (limited)
+        return limited;
       const contentLength = Number(request.headers.get("Content-Length") || 0);
       if (!Number.isSafeInteger(contentLength) || contentLength < 1 || contentLength > MAX_SAVE_IMAGE_BYTES)
         return json({ erro: "Imagem vazia ou maior que 4 MB." }, 413);
@@ -725,7 +811,10 @@ var src_default = {
     }
     if (request.method === "POST" && url.pathname === "/admin/setup-discord") {
       const authorization = request.headers.get("Authorization");
-      const authorized = env.ADMIN_SETUP_KEY && authorization === `Bearer ${env.ADMIN_SETUP_KEY}` || env.HERMES_PUBLISH_KEY && authorization === `Bearer ${env.HERMES_PUBLISH_KEY}`;
+      const authorized = Boolean(
+        env.ADMIN_SETUP_KEY && await timingSafeStringEqual(authorization || "", `Bearer ${env.ADMIN_SETUP_KEY}`) ||
+        env.HERMES_PUBLISH_KEY && await timingSafeStringEqual(authorization || "", `Bearer ${env.HERMES_PUBLISH_KEY}`)
+      );
       if (!authorized)
         return json({ erro: "Nao autorizado." }, 401);
       const { guildId } = await request.json();
@@ -827,6 +916,10 @@ var src_default = {
       return json({ configurado: true, guildId, roles: Object.fromEntries(Object.entries(roleMap).map(([name, role]) => [name, role.id])), channels: Object.fromEntries(Object.keys(channelAccess).map((name) => [name, findChannel(name).id])) });
     }
     if (request.method === "POST" && url.pathname === "/gerar-link") {
+      const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
+      const limited = await enforceRateLimit(env, `payment:${clientIp}`, "payment-link", 10, 10 * 60 * 1e3);
+      if (limited)
+        return limited;
       try {
         const body = await request.json();
         const requestedPlan = String(body.plano || "").toLowerCase();
