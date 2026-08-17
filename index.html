@@ -838,7 +838,8 @@
         try {
             const data = await cloudRequest('/club/library'); historyList.replaceChildren();
             const summary = document.createElement('div'); summary.className = 'cloud-summary';
-            summary.textContent = data.automaticGameLimit === null ? `Autosaves: ${data.automaticGamesUsed} jogos · ilimitados no seu plano. Saves manuais: ilimitados por jogo.` : `Autosaves: ${data.automaticGamesUsed} de ${data.automaticGameLimit} jogos · ${Math.max(0, data.automaticGameLimit - data.automaticGamesUsed)} vagas livres. Saves manuais: ${data.manualSaveLimit} por jogo.`;
+            const streamText = `Transmissões acumuladas: ${Math.floor(data.streamMinutes || 0)} min · recompensas aplicadas automaticamente.`;
+            summary.textContent = data.automaticGameLimit === null ? `Autosaves: ${data.automaticGamesUsed} jogos · ilimitados no seu plano. Saves manuais: ilimitados por jogo. ${streamText}` : `Autosaves: ${data.automaticGamesUsed} de ${data.automaticGameLimit} jogos · ${Math.max(0, data.automaticGameLimit - data.automaticGamesUsed)} vagas livres. Saves manuais: ${data.manualSaveLimit} por jogo. ${streamText}`;
             historyList.appendChild(summary);
             if (!data.games?.length) { const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = 'Nenhum save armazenado na nuvem.'; historyList.appendChild(empty); return; }
             data.games.forEach(game => {

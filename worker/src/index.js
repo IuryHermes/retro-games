@@ -174,6 +174,13 @@ function automaticGameLimit(plan) {
   return plan === "registered" || plan === "cafe" ? 3 : plan === "cartucho" ? 7 : null;
 }
 __name(automaticGameLimit, "automaticGameLimit");
+async function streamRewards(env, discordId) {
+  const object = await env.GAMES.get(`live/rewards/${encodeURIComponent(discordId)}.json`);
+  if (!object) return { minutes: 0, bonusAutoGames: 0, bonusManualSlots: 0, awarded: [] };
+  const value = await object.json().catch(() => ({}));
+  return { minutes: Number(value.minutes) || 0, bonusAutoGames: Number(value.bonusAutoGames) || 0, bonusManualSlots: Number(value.bonusManualSlots) || 0, awarded: Array.isArray(value.awarded) ? value.awarded : [] };
+}
+__name(streamRewards, "streamRewards");
 async function listAll(env, prefix, include = []) {
   const objects = [];
   let cursor;
@@ -404,6 +411,25 @@ var src_default = {
         const roomId = /^[a-f0-9]{12}$/.test(String(body.roomId || "")) ? String(body.roomId) : "";
         const presence = { uid: account.uid, name: profile.name, avatar: profile.avatar, page: String(body.page || "site").slice(0, 30), roomId, roomTitle: cleanProfileText(body.roomTitle, 100), updatedAt: Date.now() };
         await env.GAMES.put(`social/presence/${encodeURIComponent(account.uid)}.json`, JSON.stringify(presence), { httpMetadata: { contentType: "application/json" } });
+        if (presence.page === "game" && roomId) {
+          const rewardKey = `live/rewards/${encodeURIComponent(account.uid)}.json`;
+          const rewardObject = await env.GAMES.get(rewardKey);
+          const reward = rewardObject ? await rewardObject.json().catch(() => ({})) : {};
+          const now = Date.now();
+          const lastSeenAt = Number(reward.lastSeenAt) || 0;
+          const activeRoomId = String(reward.activeRoomId || "");
+          const continuing = activeRoomId === roomId && lastSeenAt > now - 90e3;
+          const addedMinutes = continuing ? Math.min(2, Math.max(0, (now - lastSeenAt) / 6e4)) : 0;
+          const minutes = (Number(reward.minutes) || 0) + addedMinutes;
+          const awarded = Array.isArray(reward.awarded) ? reward.awarded : [];
+          const next = { ...reward, activeRoomId: roomId, lastSeenAt: now, minutes, awarded, bonusAutoGames: Number(reward.bonusAutoGames) || 0, bonusManualSlots: Number(reward.bonusManualSlots) || 0 };
+          const tiers = [[30, "30m-auto", "bonusAutoGames", 1], [120, "120m-manual", "bonusManualSlots", 2], [300, "300m-auto", "bonusAutoGames", 2]];
+          const earned = [];
+          for (const [threshold, id, field, amount] of tiers) if (minutes >= threshold && !awarded.includes(id)) { awarded.push(id); next[field] += amount; earned.push(`${amount} ${field === "bonusAutoGames" ? "jogo(s) com autosave" : "slot(s) manual(is)"}`); }
+          await env.GAMES.put(rewardKey, JSON.stringify(next), { httpMetadata: { contentType: "application/json" } });
+          if (!continuing) await discordMessage(env, DISCORD_CHANNELS.live, { content: `🎥 **${profile.name}** está transmitindo **${presence.roomTitle || "uma gameplay"}** no NeoTerminalRoom. Assista no site: ${SITE}/multiplayer-room.html?room=${roomId}&spectator=1` }).catch(() => {});
+          if (earned.length) await discordMessage(env, DISCORD_CHANNELS.live, { content: `🏆 ${profile.name} desbloqueou ${earned.join(" e ")} por tempo acumulado de transmissão no NeoTerminalRoom.` }).catch(() => {});
+        }
         return json({ presence });
       }
       if (request.method === "GET" && url.pathname === "/social/players") {
@@ -666,7 +692,8 @@ var src_default = {
       const savePrefix = `saves/v1/${access.discordId}/`;
       const savedObjects = await listAll(env, savePrefix, ["customMetadata"]);
       const automaticGames = new Set(savedObjects.filter((object) => object.key.endsWith("/auto.state")).map((object) => object.key.slice(savePrefix.length).split("/")[0]));
-      return json({ conectado: true, username: profile?.name || access.username || "", avatar: profile?.avatar || "", plan: access.plan, manualSaveLimit: manualSaveLimit(access.plan), automaticGameLimit: automaticGameLimit(access.plan), automaticGamesUsed: automaticGames.size, expiresAt: access.exp });
+      const rewards = await streamRewards(env, access.discordId);
+      return json({ conectado: true, username: profile?.name || access.username || "", avatar: profile?.avatar || "", plan: access.plan, manualSaveLimit: manualSaveLimit(access.plan) === null ? null : manualSaveLimit(access.plan) + rewards.bonusManualSlots, automaticGameLimit: automaticGameLimit(access.plan) === null ? null : automaticGameLimit(access.plan) + rewards.bonusAutoGames, automaticGamesUsed: automaticGames.size, streamMinutes: Math.floor(rewards.minutes), streamRewards: rewards, expiresAt: access.exp });
     }
     if (url.pathname === "/account/profile" && ["GET", "PUT"].includes(request.method)) {
       const account = await accountAccess(request, env);
@@ -756,9 +783,10 @@ var src_default = {
         game.slots.push({ slot, name: metadata.name || (slot === "auto" ? "Autosave" : slot), size: object.size, updatedAt: metadata.updatedAt || object.uploaded.toISOString() });
         games.set(gameId, game);
       }
-      const automaticLimit = automaticGameLimit(access.plan);
+      const rewards = await streamRewards(env, access.discordId);
+      const automaticLimit = automaticGameLimit(access.plan) === null ? null : automaticGameLimit(access.plan) + rewards.bonusAutoGames;
       const result = Array.from(games.values()).map((game) => ({ ...game, slots: game.slots.sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt))) })).sort((a, b) => String(b.slots[0]?.updatedAt || "").localeCompare(String(a.slots[0]?.updatedAt || "")));
-      return json({ games: result, automaticGameLimit: automaticLimit, automaticGamesUsed: result.filter((game) => game.slots.some((slot) => slot.slot === "auto")).length, manualSaveLimit: manualSaveLimit(access.plan) });
+      return json({ games: result, automaticGameLimit: automaticLimit, automaticGamesUsed: result.filter((game) => game.slots.some((slot) => slot.slot === "auto")).length, manualSaveLimit: manualSaveLimit(access.plan) === null ? null : manualSaveLimit(access.plan) + rewards.bonusManualSlots, streamMinutes: Math.floor(rewards.minutes), streamRewards: rewards });
     }
     if (url.pathname === "/club/save" && ["GET", "PUT", "DELETE"].includes(request.method)) {
       const access = await clubAccess(request, url, env);
@@ -814,7 +842,8 @@ var src_default = {
         if (!existing) {
           const prefix = `saves/v1/${access.discordId}/`;
           const automaticGames = new Set((await listAll(env, prefix)).filter((item) => item.key.endsWith("/auto.state")).map((item) => item.key.slice(prefix.length).split("/")[0]));
-          const limit = automaticGameLimit(access.plan);
+          const rewards = await streamRewards(env, access.discordId);
+          const limit = automaticGameLimit(access.plan) === null ? null : automaticGameLimit(access.plan) + rewards.bonusAutoGames;
           if (limit !== null && automaticGames.size >= limit)
             return json({ erro: "Limite de jogos com autosave atingido.", automaticGameLimit: limit, automaticGamesUsed: automaticGames.size }, 409);
         }
