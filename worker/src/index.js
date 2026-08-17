@@ -246,7 +246,7 @@ class MultiplayerRoom {
     if (request.method === "GET" && url.pathname === "/summary") {
       const participants = this.participants();
       const hostOnline = participants.some((person) => person.host);
-      return json({ ...room, status: hostOnline ? "waiting" : "offline", online: participants.length, seatsUsed: participants.filter((person) => person.approved).length });
+      return json({ ...room, status: hostOnline ? "waiting" : "offline", online: participants.length, seatsUsed: participants.filter((person) => person.approved && !person.spectator).length, spectators: participants.filter((person) => person.spectator).length });
     }
     if (url.pathname !== "/ws" || request.headers.get("Upgrade") !== "websocket")
       return json({ erro: "Upgrade WebSocket necessario." }, 426);
@@ -254,8 +254,9 @@ class MultiplayerRoom {
     const name = decodeURIComponent(request.headers.get("X-Multiplayer-Name") || "Jogador").slice(0, 20);
     const host = request.headers.get("X-Multiplayer-Host") === "1" && uid === room.hostUid;
     const currentParticipants = this.participants();
-    const otherGuests = currentParticipants.filter((person) => !person.host && person.uid !== uid);
-    if (!host && otherGuests.length >= room.maxPlayers - 1)
+    const spectator = request.headers.get("X-Multiplayer-Spectator") === "1";
+    const otherGuests = currentParticipants.filter((person) => !person.host && !person.spectator && person.uid !== uid);
+    if (!host && !spectator && otherGuests.length >= room.maxPlayers - 1)
       return json({ erro: "Sala lotada." }, 409);
     for (const socket of this.ctx.getWebSockets()) {
       const person = socket.deserializeAttachment();
@@ -265,14 +266,14 @@ class MultiplayerRoom {
     const pair = new WebSocketPair();
     const [client, server] = Object.values(pair);
     const usedSeats = new Set(otherGuests.map((person) => person.seat));
-    const automaticSeat = host ? 1 : Array.from({ length: room.maxPlayers - 1 }, (_, index) => index + 2).find((seat) => !usedSeats.has(seat));
-    if (!automaticSeat)
+    const automaticSeat = host ? 1 : spectator ? 0 : Array.from({ length: room.maxPlayers - 1 }, (_, index) => index + 2).find((seat) => !usedSeats.has(seat));
+    if (!spectator && !automaticSeat)
       return json({ erro: "Nao ha controle disponivel nesta sala." }, 409);
-    const attachment = { clientId: crypto.randomUUID(), uid, name, host, seat: automaticSeat, approved: true };
+    const attachment = { clientId: crypto.randomUUID(), uid, name, host, spectator, seat: automaticSeat, approved: true };
     server.serializeAttachment(attachment);
     this.ctx.acceptWebSocket(server, [host ? "host" : "guest"]);
     server.send(JSON.stringify({ type: "welcome", clientId: attachment.clientId, roomId: room.id, host }));
-    if (!host)
+    if (!host && !spectator)
       server.send(JSON.stringify({ type: "assignment", seat: automaticSeat, approved: true }));
     queueMicrotask(() => this.broadcast(this.state(room)));
     return new Response(null, { status: 101, webSocket: client });
@@ -302,7 +303,7 @@ class MultiplayerRoom {
         target.close(4003, "Removido pelo anfitriao");
       return;
     }
-    if (data.type === "input" && sender.approved && sender.seat > 1) {
+    if (data.type === "input" && sender.approved && !sender.spectator && sender.seat > 1) {
       const index = Number(data.index);
       const value = Number(data.value);
       if (!Number.isInteger(index) || index < 0 || index > 29 || !Number.isFinite(value) || value < -32767 || value > 32767)
@@ -400,7 +401,8 @@ var src_default = {
       const own = env.SOCIAL_PLAYERS.getByName(account.uid);
       if (request.method === "POST" && url.pathname === "/social/heartbeat") {
         const body = await request.json().catch(() => ({}));
-        const presence = { uid: account.uid, name: profile.name, avatar: profile.avatar, page: String(body.page || "site").slice(0, 30), updatedAt: Date.now() };
+        const roomId = /^[a-f0-9]{12}$/.test(String(body.roomId || "")) ? String(body.roomId) : "";
+        const presence = { uid: account.uid, name: profile.name, avatar: profile.avatar, page: String(body.page || "site").slice(0, 30), roomId, roomTitle: cleanProfileText(body.roomTitle, 100), updatedAt: Date.now() };
         await env.GAMES.put(`social/presence/${encodeURIComponent(account.uid)}.json`, JSON.stringify(presence), { httpMetadata: { contentType: "application/json" } });
         return json({ presence });
       }
@@ -418,7 +420,7 @@ var src_default = {
             return null;
           const live = presenceByUid.get(candidate.uid);
           const online = Boolean(live && Date.now() - live.updatedAt < 9e4);
-          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, age: profileAge(candidate.birthDate), locality: candidate.locality || "", bio: candidate.bio || "", instagram: candidate.instagram || "", youtube: candidate.youtube || "", facebook: candidate.facebook || "", tiktok: candidate.tiktok || "", online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
+          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, age: profileAge(candidate.birthDate), locality: candidate.locality || "", bio: candidate.bio || "", instagram: candidate.instagram || "", youtube: candidate.youtube || "", facebook: candidate.facebook || "", tiktok: candidate.tiktok || "", watchRoomId: online && live?.page === "game" ? live.roomId || "" : "", watchTitle: online && live?.page === "game" ? live.roomTitle || "" : "", online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
         }))).filter(Boolean).sort((a, b) => Number(b.online) - Number(a.online) || a.name.localeCompare(b.name, "pt-BR")).slice(0, 500);
         return json({ self: { uid: account.uid, name: profile.name, avatar: profile.avatar }, players });
       }
@@ -533,7 +535,7 @@ var src_default = {
         if (!response.ok)
           return null;
         const summary = await response.json();
-        if (!summary.isPublic || summary.status !== "waiting" || summary.online >= summary.maxPlayers)
+        if (!summary.isPublic || summary.status !== "waiting" || summary.seatsUsed >= summary.maxPlayers)
           return null;
         const { hostUid, ...publicSummary } = summary;
         return publicSummary;
@@ -550,13 +552,14 @@ var src_default = {
       if (!profile)
         return json({ erro: "Complete seu perfil primeiro." }, 403);
       const roomId = joinMatch[1];
+      const spectator = url.searchParams.get("spectator") === "1";
       const summaryResponse = await env.MULTIPLAYER_ROOMS.getByName(roomId).fetch(new Request("https://room/summary"));
       if (!summaryResponse.ok)
         return json({ erro: "Sala nao encontrada." }, 404);
       const room = await summaryResponse.json();
-      if (room.status !== "waiting" || room.online >= room.maxPlayers)
+      if (room.status !== "waiting" || !spectator && room.seatsUsed >= room.maxPlayers)
         return json({ erro: "Sala indisponivel ou lotada." }, 409);
-      const ticket = await makeToken({ purpose: "multiplayer", roomId, uid: account.uid, name: profile.name, host: false, exp: Date.now() + 4 * 60 * 60 * 1e3 }, env.DISCORD_CLIENT_SECRET);
+      const ticket = await makeToken({ purpose: "multiplayer", roomId, uid: account.uid, name: profile.name, host: false, spectator, exp: Date.now() + 4 * 60 * 60 * 1e3 }, env.DISCORD_CLIENT_SECRET);
       const { hostUid, ...publicRoom } = room;
       return json({ room: publicRoom, ticket });
     }
@@ -569,6 +572,7 @@ var src_default = {
       headers.set("X-Multiplayer-Uid", ticket.uid);
       headers.set("X-Multiplayer-Name", encodeURIComponent(ticket.name || "Jogador"));
       headers.set("X-Multiplayer-Host", ticket.host ? "1" : "0");
+      headers.set("X-Multiplayer-Spectator", ticket.spectator ? "1" : "0");
       return env.MULTIPLAYER_ROOMS.getByName(socketMatch[1]).fetch(new Request("https://room/ws", { method: "GET", headers }));
     }
     if (request.method === "GET" && url.pathname === "/discord/app-info") {

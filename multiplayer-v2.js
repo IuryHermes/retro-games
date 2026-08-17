@@ -212,6 +212,7 @@
 
     async function createRoom() {
         const button = document.getElementById('neo-multi-create');
+        if (!window.confirm('Transmitir a gameplay deste jogo para os participantes e espectadores no site?')) return;
         button.disabled = true; setStatus('Abrindo sala segura...');
         try {
             await collectMedia();
@@ -259,7 +260,7 @@
         if (!list || !room) return;
         list.textContent = 'Consultando jogadores online...';
         try {
-            await request('/social/heartbeat', { method:'POST', body:JSON.stringify({ page:'game' }) });
+            await request('/social/heartbeat', { method:'POST', body:JSON.stringify({ page:'game', roomId:room?.id || '', roomTitle:room?.title || gameName }) });
             const data = await request('/social/players');
             list.replaceChildren();
             const onlinePlayers = (data.players || []).filter(player => player.online);

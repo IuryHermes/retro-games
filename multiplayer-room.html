@@ -403,6 +403,7 @@
         const API =
           "https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev";
         const roomId = new URLSearchParams(location.search).get("room") || "";
+        const spectatorMode = new URLSearchParams(location.search).get("spectator") === "1";
         const access =
           sessionStorage.getItem("neo_club_access") ||
           sessionStorage.getItem("neo_account_access") ||
@@ -796,7 +797,7 @@
           }
           try {
             const response = await fetch(
-              `${API}/multiplayer/rooms/${encodeURIComponent(roomId)}/join`,
+              `${API}/multiplayer/rooms/${encodeURIComponent(roomId)}/join${spectatorMode ? "?spectator=1" : ""}`,
               {
                 method: "POST",
                 headers: { Authorization: `Bearer ${access}` },
@@ -806,7 +807,7 @@
             if (!response.ok)
               throw new Error(data.erro || "Sala indisponível.");
             roomSystem = String(data.room.system || "").toLowerCase();
-            loadBindings();
+            if (!spectatorMode) loadBindings();
             if (roomSystem === "n64") {
               const directions = [[".up",19],[".down",18],[".left",17],[".right",16]];
               for (const [selector,index] of directions) controller.querySelector(selector).dataset.index = String(index);
@@ -815,7 +816,13 @@
               const meta = controller.querySelectorAll(".meta .control");
               meta[1].textContent = "Z"; meta[1].dataset.index = "12";
             }
-            document.getElementById("room-title").textContent = data.room.title;
+            document.getElementById("room-title").textContent = spectatorMode ? `ASSISTINDO · ${data.room.title}` : data.room.title;
+            if (spectatorMode) {
+              controller.hidden = true;
+              document.getElementById("open-control-config").hidden = true;
+              waiting.hidden = false;
+              waiting.textContent = "Modo espectador · aguardando a gameplay do anfitrião...";
+            }
             socket = new WebSocket(
               `${API.replace("https:", "wss:")}/multiplayer/rooms/${roomId}/ws?ticket=${encodeURIComponent(data.ticket)}`,
             );
