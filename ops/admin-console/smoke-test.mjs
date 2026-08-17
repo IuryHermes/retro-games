@@ -1,0 +1,11 @@
+import { readFile } from 'node:fs/promises';
+const base='http://127.0.0.1:8790';
+const password=(await readFile(new URL('./INITIAL_PASSWORD.txt',import.meta.url),'utf8')).trim();
+const login=await fetch(`${base}/api/login`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username:'admin',password})});
+const loginData=await login.json();
+if(!login.ok)throw new Error(`login HTTP ${login.status}`);
+const cookie=login.headers.get('set-cookie')?.split(';')[0]||'';
+const admin=await fetch(`${base}/api/admin`,{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':loginData.csrf,Cookie:cookie},body:JSON.stringify({action:'overview'})});
+const data=await admin.json();
+if(!admin.ok)throw new Error(`admin HTTP ${admin.status}: ${data.erro||''}`);
+console.log(JSON.stringify({login:login.status,admin:admin.status,accounts:data.counts?.['profiles/v1/']||0,online:data.online||0}));
