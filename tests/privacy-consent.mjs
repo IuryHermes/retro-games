@@ -2,11 +2,11 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
 const pages = ['index.html', 'apoie.html', 'antecipado.html', 'social.html', 'multiplayer-room.html', 'player-universal.html', 'player-ps1.html'];
-const consent = await readFile(new URL('../privacy-consent.js', import.meta.url), 'utf8');
+const consent = await readFile(new URL('../privacy-consent-v2.js', import.meta.url), 'utf8');
 const privacy = await readFile(new URL('../politica-de-privacidade.html', import.meta.url), 'utf8');
 const cookies = await readFile(new URL('../politica-de-cookies.html', import.meta.url), 'utf8');
 
-for (const page of pages) assert.match(await readFile(new URL(`../${page}`, import.meta.url), 'utf8'), /privacy-consent\.js/);
+for (const page of pages) assert.match(await readFile(new URL(`../${page}`, import.meta.url), 'utf8'), /privacy-consent-v2\.js/);
 assert.match(consent, /neo_privacy_consent_v1/);
 assert.match(consent, /analytics: false, marketing: false/);
 assert.match(consent, /Somente necessários/);
