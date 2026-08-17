@@ -15,6 +15,7 @@ const state = {
   firebase: null,
   discord: sessionStorage.getItem("neo_account_access") || "",
   players: [],
+  self: null,
   chat: null,
   since: Date.now() - 60000,
   invited: new Set(),
@@ -71,8 +72,8 @@ function toast(event) {
   }
   box.classList.remove("hidden");
   setTimeout(() => box.classList.add("hidden"), 12000);
-  if (Notification.permission === "granted")
-    new Notification("NeoTerminalRoom", { body: text.textContent });
+  if ("Notification" in window && Notification.permission === "granted")
+    new Notification("NeoTerminalRoom", { body: text.textContent, icon: avatar(event.fromAvatar), tag: event.type === "invite" ? `neo-invite-${event.roomId}` : `neo-message-${event.fromUid}` });
 }
 async function pollEvents() {
   try {
@@ -87,6 +88,7 @@ async function loadPlayers() {
   try {
     await heartbeat();
     const data = await api("/social/players");
+    state.self = data.self || state.self;
     state.players = data.players || [];
     el("players").replaceChildren();
     const onlineCount = state.players.filter((player) => player.online).length;
@@ -172,12 +174,20 @@ async function loadMessages() {
   );
   el("messages").replaceChildren();
   for (const message of data.messages || []) {
+    const mine = message.fromUid === state.self?.uid;
     const row = document.createElement("div");
-    row.className = `message${message.toUid === state.chat.uid ? " mine" : ""}`;
-    row.textContent = message.text;
+    row.className = `message-row${mine ? " mine" : ""}`;
+    const image = document.createElement("img");
+    image.className = "message-avatar";
+    image.src = avatar(message.fromAvatar || (mine ? state.self?.avatar : state.chat.avatar));
+    image.alt = "";
+    const bubble = document.createElement("div");
+    bubble.className = "message";
+    bubble.textContent = message.text;
     const time = document.createElement("small");
     time.textContent = `${message.fromName} · ${new Date(message.createdAt).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
-    row.appendChild(time);
+    bubble.appendChild(time);
+    row.append(image, bubble);
     el("messages").appendChild(row);
   }
   el("messages").scrollTop = el("messages").scrollHeight;

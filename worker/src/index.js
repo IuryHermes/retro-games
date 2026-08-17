@@ -356,7 +356,7 @@ var src_default = {
         const room = await summaryResponse.json();
         if (room.hostUid !== account.uid || room.status !== "waiting")
           return json({ erro: "Somente o anfitriao pode convidar para esta sala." }, 403);
-        await env.SOCIAL_PLAYERS.getByName(toUid).fetch(new Request("https://social/event", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "invite", fromUid: account.uid, fromName: profile.name, roomId, title: room.title }) }));
+        await env.SOCIAL_PLAYERS.getByName(toUid).fetch(new Request("https://social/event", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "invite", fromUid: account.uid, fromName: profile.name, fromAvatar: profile.avatar, roomId, title: room.title }) }));
         return json({ enviado: true });
       }
       if (request.method === "POST" && url.pathname === "/social/messages") {
@@ -367,11 +367,11 @@ var src_default = {
           return json({ erro: "Mensagem invalida." }, 400);
         if (!await env.GAMES.head(`profiles/v1/${toUid}.json`))
           return json({ erro: "Jogador nao encontrado." }, 404);
-        const message = { id: crypto.randomUUID(), fromUid: account.uid, fromName: profile.name, toUid, text, createdAt: Date.now() };
+        const message = { id: crypto.randomUUID(), fromUid: account.uid, fromName: profile.name, fromAvatar: profile.avatar, toUid, text, createdAt: Date.now() };
         await Promise.all([
           own.fetch(new Request("https://social/message", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...message, withUid: toUid }) })),
           env.SOCIAL_PLAYERS.getByName(toUid).fetch(new Request("https://social/message", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...message, withUid: account.uid }) })),
-          env.SOCIAL_PLAYERS.getByName(toUid).fetch(new Request("https://social/event", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "message", fromUid: account.uid, fromName: profile.name, preview: text.slice(0, 80) }) }))
+          env.SOCIAL_PLAYERS.getByName(toUid).fetch(new Request("https://social/event", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "message", fromUid: account.uid, fromName: profile.name, fromAvatar: profile.avatar, preview: text.slice(0, 80) }) }))
         ]);
         return json({ message }, 201);
       }

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
-const host = await readFile(new URL('../multiplayer.js', import.meta.url), 'utf8');
+const host = await readFile(new URL('../multiplayer-v2.js', import.meta.url), 'utf8');
 const guest = await readFile(new URL('../multiplayer-room.html', import.meta.url), 'utf8');
 const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const worker = await readFile(new URL('../worker/src/index.js', import.meta.url), 'utf8');
@@ -32,6 +32,12 @@ assert.match(host, /\.ejs_menu_bar/);
 assert.match(worker, /class SocialPlayer/);
 assert.match(worker, /\/social\/invite/);
 assert.match(social, /\/social\/messages/);
+assert.match(social, /message-avatar/);
+assert.match(social, /message\.fromAvatar/);
+assert.match(social, /new Notification/);
+assert.match(host, /jogar-online\.png/);
+assert.match(host, /Notification\.requestPermission/);
+assert.match(worker, /fromAvatar: profile\.avatar/);
 assert.match(worker, /profiles\/v1\//);
 assert.match(worker, /presenceByUid/);
 assert.match(social, /presence-dot/);
@@ -112,4 +118,4 @@ assert.match(guest, /RESTAURAR PADRÃO/);
 assert.match(guest, /neo_multiplayer_bindings_v2_/);
 assert.match(guest, /\[\["B",1\],\["C↑",23\],\["A",0\],\["C↓",22\]\]/);
 
-console.log('multiplayer client and room: 105 checks passed');
+console.log('multiplayer client and room: 111 checks passed');

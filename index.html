@@ -704,6 +704,7 @@
         const text = document.createElement('div'); text.textContent = event.type === 'invite' ? `${event.fromName} convidou você para ${event.title}.` : `Mensagem privada de ${event.fromName}: ${event.preview}`; toast.appendChild(text);
         if (event.type === 'invite') { const link = document.createElement('a'); link.href = `multiplayer-room.html?room=${encodeURIComponent(event.roomId)}`; link.textContent = ' ENTRAR NA PARTIDA'; link.style.cssText='display:block;color:#55ff88;margin-top:9px'; toast.appendChild(link); }
         document.body.appendChild(toast); setTimeout(() => toast.remove(), 15000);
+        if (event.type === 'invite' && 'Notification' in window && Notification.permission === 'granted') new Notification('Convite para jogar online', { body:`${event.fromName} convidou você para ${event.title}.`, icon:`assets/avatars/${event.fromAvatar || 'avatar-01'}.png`, tag:`neo-invite-${event.roomId}` });
     }
     async function socialPulse() {
         try {
@@ -734,6 +735,7 @@
         } catch (_) { multiplayerRooms.innerHTML = '<div class="history-empty">Não foi possível consultar as salas agora.</div>'; }
     }
     function openMultiplayerHub() {
+        if ('Notification' in window && Notification.permission === 'default') void Notification.requestPermission();
         multiplayerModal.style.display = 'flex'; void loadMultiplayerRooms();
         clearInterval(multiplayerRefreshTimer); multiplayerRefreshTimer = setInterval(loadMultiplayerRooms, 15000);
     }

@@ -289,6 +289,10 @@
     }
 
     let socialSince = Date.now() - 60000;
+    function systemNotification(event) {
+        if (!("Notification" in window) || Notification.permission !== 'granted' || event.type !== 'invite') return;
+        new Notification('Convite para jogar online', { body:`${event.fromName} convidou você para ${event.title}.`, icon:`assets/avatars/${event.fromAvatar || 'avatar-01'}.png`, tag:`neo-invite-${event.roomId}` });
+    }
     async function socialPulse() {
         if (!token()) return;
         try {
@@ -301,6 +305,7 @@
                 notice.textContent = event.type === 'invite' ? `${event.fromName} convidou você para ${event.title}. ` : `Mensagem de ${event.fromName}: ${event.preview}`;
                 if (event.type === 'invite') { const link = document.createElement('a'); link.href = `multiplayer-room.html?room=${encodeURIComponent(event.roomId)}`; link.textContent = 'ENTRAR'; link.style.color = '#55ff88'; notice.appendChild(link); }
                 document.body.appendChild(notice); setTimeout(() => notice.remove(), 15000);
+                systemNotification(event);
             }
         } catch (_) {}
     }
@@ -313,8 +318,8 @@
         const panel = document.createElement('section'); panel.id = 'neo-multiplayer-panel';
         panel.innerHTML = `<button id="neo-multi-toggle" type="button">🌐 JOGAR ONLINE</button><div id="neo-multi-menu"><strong>MULTIPLAYER</strong><div id="neo-multi-status">Abra uma sala e transforme visitantes em controles remotos.</div><div id="neo-multi-create-box"><label>Jogadores <select id="neo-multi-max"><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label><label><input id="neo-multi-public" type="checkbox" checked> Sala pública</label><button id="neo-multi-create" type="button">ABRIR SALA</button></div><div id="neo-multi-room" hidden><div id="neo-multi-count"></div><input id="neo-multi-link" readonly><button id="neo-multi-copy" type="button">COPIAR CONVITE</button><div id="neo-multi-share"><button type="button" data-share="whatsapp">WHATSAPP</button><button type="button" data-share="discord">DISCORD</button><button type="button" data-share="instagram">INSTAGRAM</button><button type="button" data-share="facebook">FACEBOOK</button><button type="button" data-share="outros">OUTROS APPS</button></div><strong>CONVIDAR JOGADORES ONLINE</strong><div id="neo-multi-online-list"></div><div id="neo-multi-players"></div><button id="neo-multi-close" type="button">ENCERRAR SALA</button></div></div>`;
         document.body.appendChild(panel);
-        panel.querySelector('#neo-multi-toggle').innerHTML = '<img src="assets/imagens-videos/imagens do menu/online-transparent.png" alt=""><span>JOGAR ONLINE</span>';
-        panel.querySelector('#neo-multi-toggle').onclick = () => panel.classList.toggle('open');
+        panel.querySelector('#neo-multi-toggle').innerHTML = '<img src="assets/imagens-videos/imagens do menu/jogar-online.png" alt=""><span>JOGAR ONLINE</span>';
+        panel.querySelector('#neo-multi-toggle').onclick = () => { panel.classList.toggle('open'); if ("Notification" in window && Notification.permission === 'default') void Notification.requestPermission(); };
         panel.querySelector('#neo-multi-create').onclick = createRoom;
         panel.querySelector('#neo-multi-copy').onclick = async () => { await navigator.clipboard.writeText(panel.querySelector('#neo-multi-link').value); setStatus('Convite copiado.'); };
         panel.querySelectorAll('[data-share]').forEach(button => { button.onclick = () => void shareInvite(button.dataset.share).catch(error => setStatus(error.message)); });

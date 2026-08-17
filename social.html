@@ -182,8 +182,10 @@
         border-radius: 8px;
         background: #14231a;
       }
-      .message.mine {
-        align-self: flex-end;
+      .message-row { display:flex; align-items:flex-end; gap:10px; width:100%; }
+      .message-row.mine { flex-direction:row-reverse; }
+      .message-avatar { width:46px; height:46px; flex:0 0 46px; border-radius:10px; object-fit:cover; border:1px solid #2d7340; image-rendering:pixelated; }
+      .message-row.mine .message {
         background: #104b24;
       }
       .message small {

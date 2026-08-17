@@ -397,6 +397,7 @@
           pendingInvitesButton.textContent = `${pendingInvites.length} CONVITE${pendingInvites.length === 1 ? "" : "S"} PENDENTE${pendingInvites.length === 1 ? "" : "S"}`;
         }
         function showInvite(event) {
+          if ("Notification" in window && Notification.permission === "granted") new Notification("Convite para jogar online", { body: `${event.fromName} convidou você para ${event.title}.`, icon: `assets/avatars/${event.fromAvatar || "avatar-01"}.png`, tag: `neo-invite-${event.roomId}` });
           if (visibleInvite) {
             pendingInvites.push(event);
             updatePendingInvites();
@@ -406,6 +407,7 @@
           inviteText.textContent = `${event.fromName} convidou você para jogar ${event.title}. Sua partida atual continuará normalmente enquanto você decide.`;
           inviteDialog.hidden = false;
         }
+        document.addEventListener("click", () => { if ("Notification" in window && Notification.permission === "default") void Notification.requestPermission(); }, { once: true });
         function postponeInvite() {
           if (visibleInvite) pendingInvites.push(visibleInvite);
           visibleInvite = null;
