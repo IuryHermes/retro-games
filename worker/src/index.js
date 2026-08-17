@@ -16,6 +16,24 @@ var FIREBASE_PROJECT_ID = "neoterminalroom";
 var FIREBASE_ISSUER = `https://securetoken.google.com/${FIREBASE_PROJECT_ID}`;
 var FIREBASE_JWKS = "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com";
 var PROFILE_AVATARS = Array.from({ length: 40 }, (_, index) => `avatar-${String(index + 1).padStart(2, "0")}`);
+function cleanProfileText(value, max) {
+  return String(value || "").trim().replace(/\s+/g, " ").slice(0, max);
+}
+function validBirthDate(value) {
+  const text = String(value || "");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) return false;
+  const date = new Date(`${text}T00:00:00Z`);
+  const now = new Date();
+  return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === text && date <= now && date >= new Date(`${now.getUTCFullYear() - 120}-01-01T00:00:00Z`);
+}
+function safeProfileUrl(value) {
+  const text = String(value || "").trim().slice(0, 300);
+  if (!text) return "";
+  try {
+    const parsed = new URL(text);
+    return ["https:", "http:"].includes(parsed.protocol) ? parsed.toString() : "";
+  } catch (_) { return ""; }
+}
 var MAX_SAVE_BYTES = 16 * 1024 * 1024;
 var MAX_SAVE_IMAGE_BYTES = 4 * 1024 * 1024;
 var WEEKLY_POLLS = [
@@ -391,7 +409,7 @@ var src_default = {
             return null;
           const live = presenceByUid.get(candidate.uid);
           const online = Boolean(live && Date.now() - live.updatedAt < 9e4);
-          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
+          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, locality: candidate.locality || "", bio: candidate.bio || "", instagram: candidate.instagram || "", youtube: candidate.youtube || "", facebook: candidate.facebook || "", tiktok: candidate.tiktok || "", online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
         }))).filter(Boolean).sort((a, b) => Number(b.online) - Number(a.online) || a.name.localeCompare(b.name, "pt-BR")).slice(0, 500);
         return json({ self: { uid: account.uid, name: profile.name, avatar: profile.avatar }, players });
       }
@@ -651,7 +669,19 @@ var src_default = {
       const avatar = String(body.avatar || "").toLowerCase();
       if (!/^[\p{L}\p{N}][\p{L}\p{N} _.-]{1,19}$/u.test(name) || !PROFILE_AVATARS.includes(avatar))
         return json({ erro: "Escolha um nome de 2 a 20 caracteres e um avatar valido." }, 400);
-      const profile = { uid: account.uid, name, avatar, provider: account.provider, createdAt: current?.createdAt || Date.now(), updatedAt: Date.now() };
+      const birthDate = String(body.birthDate || current?.birthDate || "");
+      const locality = cleanProfileText(body.locality ?? current?.locality, 80);
+      const bio = cleanProfileText(body.bio ?? current?.bio, 280);
+      const phone = cleanProfileText(body.phone ?? current?.phone, 30);
+      const instagram = safeProfileUrl(body.instagram ?? current?.instagram);
+      const youtube = safeProfileUrl(body.youtube ?? current?.youtube);
+      const facebook = safeProfileUrl(body.facebook ?? current?.facebook);
+      const tiktok = safeProfileUrl(body.tiktok ?? current?.tiktok);
+      if (!validBirthDate(birthDate) || locality.length < 2)
+        return json({ erro: "Informe uma data de nascimento valida e sua localidade." }, 400);
+      if ([instagram, youtube, facebook, tiktok].some((value, index) => String(body[["instagram", "youtube", "facebook", "tiktok"][index]] || "").trim() && !value))
+        return json({ erro: "Use links validos começando com http:// ou https://." }, 400);
+      const profile = { uid: account.uid, name, avatar, birthDate, locality, bio, phone, instagram, youtube, facebook, tiktok, provider: account.provider, createdAt: current?.createdAt || Date.now(), updatedAt: Date.now() };
       await env.GAMES.put(key, JSON.stringify(profile), { httpMetadata: { contentType: "application/json" } });
       if (!current) {
         await fetch(`https://neoterminalroom-default-rtdb.firebaseio.com/hall_cadastros/${encodeURIComponent(account.uid)}.json`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ nome: name, avatar, mensagem: `Bem-vindo(a), ${name}! Um novo jogador entrou na sala.`, timestamp: Date.now() }) });

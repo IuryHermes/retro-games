@@ -88,7 +88,7 @@ assert.equal(response.headers.get('Cache-Control'), 'no-store');
 assert.equal(response.headers.get('X-Content-Type-Options'), 'nosniff');
 assert.equal(response.headers.get('X-Frame-Options'), 'DENY');
 assert.equal(response.headers.get('Referrer-Policy'), 'no-referrer');
-response = await worker.fetch(new Request('https://worker/account/profile', { method: 'PUT', headers: { ...auth(tokenFor()), 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Iury Player', avatar: 'avatar-01' }) }), env);
+response = await worker.fetch(new Request('https://worker/account/profile', { method: 'PUT', headers: { ...auth(tokenFor()), 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Iury Player', avatar: 'avatar-01', birthDate: '1990-01-01', locality: 'São Paulo', bio: 'Jogador retrô', instagram: 'https://instagram.com/iury' }) }), env);
 assert.equal(response.status, 200);
 assert.equal((await response.json()).created, true);
 
@@ -136,7 +136,7 @@ response = await worker.fetch(new Request('https://worker/club/save-image?game=a
 assert.equal(response.status, 404);
 assert.equal((await putAuto('auto-four')).status, 200);
 
-response = await worker.fetch(new Request('https://worker/account/profile', { method:'PUT', headers:{ ...auth(discordToken), 'Content-Type':'application/json' }, body:JSON.stringify({ name:'Discord Player', avatar:'avatar-02' }) }), env);
+response = await worker.fetch(new Request('https://worker/account/profile', { method:'PUT', headers:{ ...auth(discordToken), 'Content-Type':'application/json' }, body:JSON.stringify({ name:'Discord Player', avatar:'avatar-02', birthDate:'1992-02-02', locality:'Rio de Janeiro', bio:'Jogador online' }) }), env);
 assert.equal(response.status, 200);
 response = await worker.fetch(new Request('https://worker/club/session', { headers:auth(discordToken) }), env);
 const discordSession = await response.json();

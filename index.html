@@ -363,7 +363,8 @@
         .auth-panel h2 { color: var(--accent-color); font: 14px 'Press Start 2P', cursive; text-align: center; line-height: 1.6; }
         .auth-panel p { color: var(--text-muted); font: 12px monospace; text-align: center; line-height: 1.5; }
         .auth-fields { display: grid; gap: 9px; }
-        .auth-fields input { width: 100%; box-sizing: border-box; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 11px; border-radius: 4px; }
+        .auth-fields input, .auth-fields textarea { width: 100%; box-sizing: border-box; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 11px; border-radius: 4px; font: inherit; }
+        .auth-fields label { display:grid; gap:4px; color:var(--text-muted); font:10px monospace; }
         .auth-action { border: 1px solid var(--accent-color); background: #0a2814; color: #fff; padding: 10px 6px; border-radius: 4px; cursor: pointer; font: bold 11px monospace; }
         .auth-action-primary { min-height: 48px; background: #00c853; color: #001b09; border: 2px solid #003d16; font: 12px 'Press Start 2P', monospace; line-height: 1.45; text-shadow: none; box-shadow: 0 4px 0 #006b2b, 0 0 18px rgba(0,200,83,.4); }
         .auth-action-primary:hover, .auth-action-primary:focus-visible { background: #39ff7a; color: #001b09; outline: 3px solid #fff; outline-offset: 2px; transform: translateY(-1px); }
@@ -451,6 +452,14 @@
             <p id="auth-copy">Crie sua conta e ganhe 3 slots de save por jogo.</p>
             <div class="auth-fields">
                 <input id="auth-name" maxlength="20" autocomplete="nickname" placeholder="Nome no chat (2 a 20)">
+                <label>Data de nascimento <input id="auth-birth-date" type="date" autocomplete="bday" required></label>
+                <input id="auth-locality" maxlength="80" autocomplete="address-level2" placeholder="Cidade/estado ou país">
+                <textarea id="auth-bio" maxlength="280" rows="3" placeholder="Bio (até 280 caracteres)"></textarea>
+                <input id="auth-phone" maxlength="30" autocomplete="tel" placeholder="Telefone (opcional)">
+                <input id="auth-instagram" type="url" maxlength="300" placeholder="Instagram (link opcional)">
+                <input id="auth-youtube" type="url" maxlength="300" placeholder="YouTube (link opcional)">
+                <input id="auth-facebook" type="url" maxlength="300" placeholder="Facebook (link opcional)">
+                <input id="auth-tiktok" type="url" maxlength="300" placeholder="TikTok (link opcional)">
             </div>
             <div class="avatar-grid" id="avatar-grid" aria-label="Escolha seu avatar"></div>
             <button class="auth-social google" id="auth-google" type="button">Continuar com Google</button>
@@ -471,6 +480,7 @@
                 <button class="profile-tab" id="profile-cloud-tab" type="button" role="tab" aria-selected="false">SAVES NA NUVEM</button>
             </div>
             <div class="history-list" id="history-list"></div>
+            <button class="auth-action" id="profile-edit" type="button" style="width:100%;margin-top:14px">EDITAR PERFIL</button>
             <button class="auth-action" id="profile-logout" type="button" style="width:100%;margin-top:14px;border-color:#ff4f61;color:#ff8390">SAIR DA CONTA</button>
         </div>
     </div>
@@ -755,7 +765,18 @@
     const chooseAvatar = avatar => { selectedAvatar = avatar; avatarGrid.querySelectorAll('.avatar-choice').forEach(button => button.classList.toggle('selected', button.dataset.avatar === avatar)); };
     AVATARS.forEach(avatar => { const button = document.createElement('button'); button.type = 'button'; button.className = 'avatar-choice'; button.dataset.avatar = avatar; button.setAttribute('aria-label', `Avatar ${avatar}`); const image = document.createElement('img'); image.src = avatarUrl(avatar); image.alt = ''; button.appendChild(image); button.onclick = () => chooseAvatar(avatar); avatarGrid.appendChild(button); });
     chooseAvatar(selectedAvatar);
-    const openAuth = () => { authModal.style.display = 'flex'; setAuthStatus(''); };
+    const profileFieldIds = ['auth-name','auth-birth-date','auth-locality','auth-bio','auth-phone','auth-instagram','auth-youtube','auth-facebook','auth-tiktok'];
+    const openAuth = () => {
+        authModal.style.display = 'flex'; setAuthStatus('');
+        if (accountProfile) {
+            document.getElementById('auth-name').value = accountProfile.name || '';
+            document.getElementById('auth-birth-date').value = accountProfile.birthDate || '';
+            document.getElementById('auth-locality').value = accountProfile.locality || '';
+            document.getElementById('auth-bio').value = accountProfile.bio || '';
+            document.getElementById('auth-phone').value = accountProfile.phone || '';
+            ['instagram','youtube','facebook','tiktok'].forEach(key => { document.getElementById(`auth-${key}`).value = accountProfile[key] || ''; });
+        }
+    };
     const closeAuth = () => { authModal.style.display = 'none'; };
     const accountButtons = [document.getElementById('account-button'), document.getElementById('account-button-mobile')].filter(Boolean);
     accountButtons.forEach(button => { button.onclick = () => accountProfile ? openHistory() : openAuth(); });
@@ -870,8 +891,10 @@
     }
     async function saveProfile() {
         const name = document.getElementById('auth-name').value.trim();
+        const body = { name, avatar: selectedAvatar, birthDate: document.getElementById('auth-birth-date').value, locality: document.getElementById('auth-locality').value.trim(), bio: document.getElementById('auth-bio').value.trim(), phone: document.getElementById('auth-phone').value.trim() };
+        ['instagram','youtube','facebook','tiktok'].forEach(key => { body[key] = document.getElementById(`auth-${key}`).value.trim(); });
         setAuthStatus('Salvando perfil...');
-        try { const data = await profileRequest('PUT', { name, avatar: selectedAvatar }); accountProfile = data.profile; applyProfile(); void refreshPersonalHero(); setAuthStatus(data.created ? `Bem-vindo(a), ${accountProfile.name}!` : 'Perfil atualizado.'); setTimeout(closeAuth, 900); }
+        try { const data = await profileRequest('PUT', body); accountProfile = data.profile; applyProfile(); void refreshPersonalHero(); setAuthStatus(data.created ? `Bem-vindo(a), ${accountProfile.name}!` : 'Perfil atualizado.'); setTimeout(closeAuth, 900); }
         catch (error) { setAuthStatus(error.message); }
     }
     function applyProfile() {
@@ -907,12 +930,15 @@
     }
     document.getElementById('auth-logout').onclick = logoutAccount;
     document.getElementById('profile-logout').onclick = logoutAccount;
+    document.getElementById('profile-edit').onclick = () => { closeHistory(); openAuth(); };
     onAuthStateChanged(auth, async user => {
         document.getElementById('auth-logout').style.display = user || discordAccountToken ? 'block' : 'none';
         document.getElementById('auth-save-profile').style.display = user || discordAccountToken ? 'block' : 'none';
         if (!user && !discordAccountToken) { accountProfile = null; sessionStorage.removeItem('neo_club_access'); applyProfile(); return; }
         try {
-            const data = await profileRequest('GET'); accountProfile = data.profile; applyProfile(); closeAuth();
+            const data = await profileRequest('GET'); accountProfile = data.profile; applyProfile();
+            if (accountProfile && (!accountProfile.birthDate || !accountProfile.locality)) { document.getElementById('auth-copy').textContent = 'Atualize seu perfil para continuar usando a área social.'; openAuth(); }
+            else closeAuth();
             startSocialPresence();
             void refreshPersonalHero();
             const pendingRoom = sessionStorage.getItem('neo_pending_multiplayer_room');

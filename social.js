@@ -117,8 +117,19 @@ async function loadPlayers() {
         ? player.page === "game"
           ? "Online · jogando agora"
           : "Online · navegando no site"
-        : "Offline";
+          : "Offline";
       info.append(name, page);
+      if (player.locality) {
+        const locality = document.createElement("small");
+        locality.textContent = `📍 ${player.locality}`;
+        info.append(locality);
+      }
+      if (player.bio) {
+        const bio = document.createElement("small");
+        bio.className = "player-bio";
+        bio.textContent = player.bio;
+        info.append(bio);
+      }
       const buttons = document.createElement("div");
       buttons.className = "buttons";
       const chat = document.createElement("button");
