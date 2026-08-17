@@ -13,9 +13,10 @@ assert.match(consent, /Somente necessários/);
 assert.match(consent, /Aceitar opcionais/);
 assert.match(consent, /Salvar preferências/);
 assert.match(consent, /neo:consent-changed/);
+assert.doesNotMatch(consent, /neo-privacy-settings/);
 assert.match(privacy, /Direitos do titular/);
 assert.match(privacy, /Crianças e adolescentes/);
 assert.match(cookies, /IndexedDB/);
 assert.match(cookies, /Atualmente não existe ferramenta de analytics ativa/);
 
-console.log(`privacy consent: ${pages.length + 10} checks passed`);
+console.log(`privacy consent: ${pages.length + 11} checks passed`);

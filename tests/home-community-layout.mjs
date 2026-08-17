@@ -18,8 +18,8 @@ assert.match(index, /'multiplayer-hub-trigger-desktop'/);
 assert.match(index, /\.multiplayer-hub-trigger \{[^}]*background:var\(--sidebar-bg\)/);
 assert.match(index, /\.community-shortcut \{[^}]*background:transparent/);
 assert.match(index, /height: 245px; min-height: 220px/);
-assert.match(index, /function scrollChatToLatest\(\)/);
-assert.match(index, /addEventListener\('mouseenter', scrollChatToLatest\)/);
+assert.match(index, /out\.prepend\(row\)/);
+assert.ok(index.indexOf('class="chat-controls"') < index.indexOf('id="terminal-output"'));
 assert.match(index, /\.community-shortcut \{[^}]*border:0;[^}]*background:transparent/);
 assert.match(index, /apoiar-projeto\.png/);
 

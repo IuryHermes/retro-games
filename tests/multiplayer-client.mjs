@@ -14,7 +14,7 @@ assert.doesNotMatch(host, /type:'assign'/);
 assert.match(guest, /new RTCPeerConnection/);
 assert.match(guest, /SOLICITAR|Aguardando aprovação/);
 assert.match(index, /JOGAR ONLINE/);
-assert.match(index, /online-transparent\.png/);
+assert.match(index, /jogar-online\.png/);
 assert.match(index, /on-transparent\.png/);
 assert.match(index, /\/multiplayer\/rooms/);
 assert.match(index, /neo_pending_multiplayer_room/);
