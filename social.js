@@ -113,13 +113,15 @@ async function loadPlayers() {
       dot.className = "presence-dot";
       name.append(dot, document.createTextNode(player.name));
       const page = document.createElement("small");
-      page.textContent = player.online
+      const presence = player.online
         ? player.page === "game"
           ? "Online · jogando agora"
           : "Online · navegando no site"
           : "Offline";
+      const details = [player.age ? `${player.age} anos` : "", player.locality ? `Cidade: ${player.locality}` : ""].filter(Boolean).join(" Â· ");
+      page.textContent = details ? `${presence} Â· ${details}` : presence;
       info.append(name, page);
-      if (player.locality) {
+      if (false && player.locality) {
         const locality = document.createElement("small");
         locality.textContent = `📍 ${player.locality}`;
         info.append(locality);

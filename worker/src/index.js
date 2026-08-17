@@ -26,6 +26,15 @@ function validBirthDate(value) {
   const now = new Date();
   return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === text && date <= now && date >= new Date(`${now.getUTCFullYear() - 120}-01-01T00:00:00Z`);
 }
+function profileAge(value) {
+  if (!validBirthDate(value)) return null;
+  const birth = new Date(`${value}T00:00:00Z`);
+  const now = new Date();
+  let age = now.getUTCFullYear() - birth.getUTCFullYear();
+  const month = now.getUTCMonth() - birth.getUTCMonth();
+  if (month < 0 || month === 0 && now.getUTCDate() < birth.getUTCDate()) age--;
+  return age >= 0 && age <= 120 ? age : null;
+}
 function safeProfileUrl(value) {
   const text = String(value || "").trim().slice(0, 300);
   if (!text) return "";
@@ -409,7 +418,7 @@ var src_default = {
             return null;
           const live = presenceByUid.get(candidate.uid);
           const online = Boolean(live && Date.now() - live.updatedAt < 9e4);
-          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, locality: candidate.locality || "", bio: candidate.bio || "", instagram: candidate.instagram || "", youtube: candidate.youtube || "", facebook: candidate.facebook || "", tiktok: candidate.tiktok || "", online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
+          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, age: profileAge(candidate.birthDate), locality: candidate.locality || "", bio: candidate.bio || "", instagram: candidate.instagram || "", youtube: candidate.youtube || "", facebook: candidate.facebook || "", tiktok: candidate.tiktok || "", online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
         }))).filter(Boolean).sort((a, b) => Number(b.online) - Number(a.online) || a.name.localeCompare(b.name, "pt-BR")).slice(0, 500);
         return json({ self: { uid: account.uid, name: profile.name, avatar: profile.avatar }, players });
       }
