@@ -138,7 +138,7 @@
             .sidebar:hover .nav-text { display: inline-block; opacity: 1; }
             .sidebar:hover .sidebar-chat { display: flex; }
             .sidebar:hover .pix-text-pc { display: inline-block; opacity: 1; transition: 0.3s; }
-            .sidebar:hover .community-shortcuts-title, .sidebar:hover .community-shortcut-copy { display: block; opacity: 1; }
+            .sidebar:hover .community-shortcuts-title, .sidebar:hover .community-shortcut-copy, .sidebar:hover .emulators-title { display: block; opacity: 1; }
             .sidebar:hover #sidebar-hall-container.ativo { display: flex; }
         }
 
@@ -157,6 +157,7 @@
         .pix-text-pc { display: none; font-size: 11px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
         .community-shortcuts-pc { display:flex; flex-direction:column; gap:6px; padding:8px 4px 12px; margin:0 0 8px; border-top:1px dashed var(--border-color); border-bottom:1px dashed var(--border-color); }
         .community-shortcuts-title { display:none; opacity:0; padding:2px 7px 5px; color:var(--accent-color); font:7px 'Press Start 2P',cursive; line-height:1.5; white-space:nowrap; }
+        .emulators-title { display:none; opacity:0; padding:2px 11px 0; color:var(--accent-color); font:7px 'Press Start 2P',cursive; line-height:1.5; white-space:nowrap; }
         .community-shortcut { min-height:46px; display:flex; align-items:center; justify-content:center; gap:11px; padding:6px; border:0; background:transparent; color:var(--text-color); text-decoration:none; cursor:pointer; transition:.2s; overflow:hidden; }
         .community-shortcut:hover { background:transparent; box-shadow:none; color:var(--accent-color); transform:translateX(2px); }
         .community-shortcut:hover img { filter:drop-shadow(0 0 7px var(--accent-color)); }
@@ -562,7 +563,7 @@
             </a>
 
             <div class="community-shortcuts-pc" aria-label="Área social do site">
-                <div class="community-shortcuts-title">ÁREA SOCIAL · FORA DO EMULADOR</div>
+                <div class="community-shortcuts-title">ÁREA SOCIAL</div>
                 <button class="community-shortcut" id="multiplayer-hub-trigger-desktop" type="button" title="Encontrar partida online">
                     <img src="assets/imagens-videos/imagens do menu/jogar-online.png" alt="">
                     <span class="community-shortcut-copy"><strong>JOGAR ONLINE</strong><small>Encontre ou crie uma sala</small></span>
@@ -573,6 +574,7 @@
                 </a>
             </div>
 
+            <div class="emulators-title">EMULADORES</div>
             <div class="nav-list" id="nav-list"></div>
 
             <div id="sidebar-hall-container">
@@ -1422,7 +1424,7 @@
             const eyebrow = document.createElement('div'); eyebrow.className = 'hero-eyebrow'; eyebrow.textContent = `OLÁ, ${accountProfile.name}`;
             const title = document.createElement('h1'); title.className = 'hero-title'; title.textContent = recent.name;
             const meta = document.createElement('div'); meta.className = 'hero-categories'; meta.textContent = `${String(recent.system || '').toUpperCase()} · SEU ÚLTIMO JOGO`;
-            const note = document.createElement('div'); note.className = 'hero-resume-note'; note.textContent = savedFrame ? 'Esta é a tela do seu último autosave. Continue exatamente de onde parou.' : 'Volte ao jogo. A imagem da partida aparecerá aqui depois do próximo autosave.';
+            const note = document.createElement('div'); note.className = 'hero-resume-note'; note.textContent = 'Continue sua partida de onde parou.';
             const button = document.createElement('button'); button.type = 'button'; button.className = 'hero-play-btn selectable-item'; button.innerHTML = '<span>▶</span> CONTINUAR';
             button.onclick = () => {
                 void historyRequest('POST', { id:recent.id, name:recent.name, system:recent.system, cover:recent.cover || media, playUrl:recent.playUrl }).catch(() => {});
@@ -1469,7 +1471,7 @@
                 const eyebrow = document.createElement('div'); eyebrow.className = 'hero-eyebrow'; eyebrow.textContent = `OLÁ, ${accountProfile.name}`;
                 const title = document.createElement('h1'); title.className = 'hero-title'; title.textContent = recent.name;
                 const meta = document.createElement('div'); meta.className = 'hero-categories'; meta.textContent = `${String(recent.system || '').toUpperCase()} · RECENTE ${recentIndex + 1} DE ${recentGames.length}`;
-                const note = document.createElement('div'); note.className = 'hero-resume-note'; note.textContent = savedFrame ? 'Esta é a tela do seu autosave. Continue exatamente de onde parou.' : 'Volte ao jogo. A imagem da partida aparecerá aqui depois do próximo autosave.';
+                const note = document.createElement('div'); note.className = 'hero-resume-note'; note.textContent = 'Continue sua partida de onde parou.';
                 const button = document.createElement('button'); button.type = 'button'; button.className = 'hero-play-btn selectable-item'; button.innerHTML = '<span>▶</span> CONTINUAR';
                 button.onclick = () => {
                     void historyRequest('POST', { id:recent.id, name:recent.name, system:recent.system, cover:recent.cover || media, playUrl:recent.playUrl }).catch(() => {});

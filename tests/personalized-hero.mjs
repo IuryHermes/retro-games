@@ -22,5 +22,6 @@ assert.match(index, /RECENTE \$\{recentIndex \+ 1\} DE \$\{recentGames\.length\}
 assert.match(index, /id = `personalized-hero-\$\{recentIndex\}`/);
 assert.match(index, /id="hero-prev"/);
 assert.match(index, /id="hero-next"/);
+assert.doesNotMatch(index, /imagem da partida aparecerá aqui depois do próximo autosave/);
 
-console.log('personalized hero: 19 checks passed');
+console.log('personalized hero: 20 checks passed');

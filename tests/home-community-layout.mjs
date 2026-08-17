@@ -9,7 +9,8 @@ const supportIcon = await stat(new URL('../assets/imagens-videos/imagens do menu
 assert.ok(onlineIcon.size > 100_000);
 assert.ok(playersIcon.size > 100_000);
 assert.ok(supportIcon.size > 20_000);
-assert.match(index, /ÁREA SOCIAL · FORA DO EMULADOR/);
+assert.match(index, />ÁREA SOCIAL<\/div>/);
+assert.match(index, /class="emulators-title">EMULADORES<\/div>/);
 assert.match(index, /id="multiplayer-hub-trigger-desktop"/);
 assert.match(index, /class="mobile-community-actions"/);
 assert.match(index, /\.search-container \{ flex:0 0 100%/);
@@ -23,4 +24,4 @@ assert.ok(index.indexOf('class="chat-controls"') < index.indexOf('id="terminal-o
 assert.match(index, /\.community-shortcut \{[^}]*border:0;[^}]*background:transparent/);
 assert.match(index, /apoiar-projeto-v2\.png/);
 
-console.log('home community layout: 16 checks passed');
+console.log('home community layout: 17 checks passed');
