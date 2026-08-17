@@ -89,7 +89,31 @@
         const params = new URLSearchParams(window.location.search);
         const core = params.get("core");   
         const game = params.get("game");
-        if (core === 'n64') document.body.classList.add('n64-widescreen');
+        if (core === 'n64') {
+            document.body.classList.add('n64-widescreen');
+
+            // One-time repair for the incompatible 16:9 core option briefly
+            // published in August 2026. EmulatorJS stores per-game options
+            // ahead of defaults, so repair only that value and preserve the
+            // player's controls, cheats, volume and every other preference.
+            const repairKey = 'neo_n64_aspect_repair_v1';
+            if (!localStorage.getItem(repairKey)) {
+                for (let index = 0; index < localStorage.length; index += 1) {
+                    const key = localStorage.key(index);
+                    if (!key || !key.startsWith('ejs-') || !key.endsWith('-settings')) continue;
+                    try {
+                        const saved = JSON.parse(localStorage.getItem(key));
+                        if (saved?.settings?.['mupen64plus-aspect'] === '16:9') {
+                            delete saved.settings['mupen64plus-aspect'];
+                            localStorage.setItem(key, JSON.stringify(saved));
+                        }
+                    } catch (error) {
+                        console.warn('Neo N64 settings repair:', error);
+                    }
+                }
+                localStorage.setItem(repairKey, '1');
+            }
+        }
 
         // ==========================================
         // LOADING ASSINTÓTICO + PONTINHOS ANIMADOS

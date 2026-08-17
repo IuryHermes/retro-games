@@ -15,7 +15,11 @@ assert.match(player, /"mupen64plus-aspect": "4:3"/);
 assert.match(player, /"mupen64plus-169screensize": "640x360"/);
 assert.match(player, /body\.n64-widescreen #game \.ejs_canvas/);
 assert.match(player, /transform: scaleX\(1\.33334\)/);
-assert.match(player, /if \(core === 'n64'\) document\.body\.classList\.add\('n64-widescreen'\)/);
+assert.match(player, /if \(core === 'n64'\) \{[\s\S]*document\.body\.classList\.add\('n64-widescreen'\)/);
+assert.match(player, /neo_n64_aspect_repair_v1/);
+assert.match(player, /saved\?\.settings\?\.\['mupen64plus-aspect'\] === '16:9'/);
+assert.match(player, /delete saved\.settings\['mupen64plus-aspect'\]/);
+assert.doesNotMatch(player, /localStorage\.removeItem\(/);
 assert.match(player, /"mupen64plus-ThreadedRenderer": "True"/);
 assert.match(player, /"mupen64plus-MultiSampling": "0"/);
 assert.match(player, /"mupen64plus-EnableNativeResFactor": "0"/);
@@ -28,4 +32,4 @@ assert.match(cloudSaves, /autosavePending/);
 assert.match(cloudSaves, /scheduleAutosaveImage\(\)/);
 assert.match(cloudSaves, /document\.visibilityState === 'hidden'/);
 
-console.log('n64 performance/autosave: 22 checks passed');
+console.log('n64 performance/autosave: 26 checks passed');
