@@ -22,6 +22,8 @@ assert.match(index, /height: 245px; min-height: 220px/);
 assert.match(index, /out\.prepend\(row\)/);
 assert.ok(index.indexOf('class="chat-controls"') < index.indexOf('id="terminal-output"'));
 assert.match(index, /\.community-shortcut \{[^}]*border:0;[^}]*background:transparent/);
+assert.match(index, /\.community-shortcut \{[^}]*justify-content:flex-start/);
+assert.match(index, /\.community-shortcut \{[^}]*width:100%;[^}]*text-align:left/);
 assert.match(index, /apoiar-projeto-v2\.png/);
 
-console.log('home community layout: 17 checks passed');
+console.log('home community layout: 19 checks passed');
