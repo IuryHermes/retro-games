@@ -98,6 +98,23 @@
         grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
         gap: 12px;
       }
+      .live-zone {
+        margin: 0 0 28px;
+        padding: 18px;
+        border: 1px solid #ff5368;
+        border-radius: 12px;
+        background: linear-gradient(145deg, rgba(91, 8, 22, 0.5), rgba(7, 18, 11, 0.96));
+      }
+      .live-zone h2 { margin: 0 0 5px; color: #ff7182; }
+      .live-zone > p { margin: 0 0 14px; color: var(--muted); line-height: 1.5; }
+      .live-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+      .live-card { display: grid; grid-template-columns: 48px 1fr; gap: 11px; padding: 13px; border: 1px solid #8c2636; border-radius: 9px; background: #12070a; }
+      .live-card img { width: 48px; height: 48px; border-radius: 7px; object-fit: cover; image-rendering: pixelated; }
+      .live-card strong { color: #fff; }
+      .live-card small { display: block; margin-top: 5px; color: #ff9aa7; }
+      .live-actions { grid-column: 1/-1; display: flex; gap: 7px; }
+      .live-actions .watch-live { flex: 1; border-color: #ff5368; color: #fff; background: #741526; }
+      .live-actions .discord-live { text-decoration: none; border: 1px solid #5865f2; color: #fff; background: #30398b; border-radius: 6px; padding: 10px 12px; }
       .player {
         display: grid;
         grid-template-columns: 52px 1fr;
@@ -261,6 +278,11 @@
         </div>
       </section>
       <div class="status" id="status">Conectando sua conta...</div>
+      <section class="live-zone" aria-labelledby="lives-title">
+        <h2 id="lives-title">🔴 AO VIVO AGORA</h2>
+        <p>Assista aqui às gameplays que estão sendo transmitidas no canal #live-arcade do Discord e em uma sala do NeoTerminalRoom.</p>
+        <div class="live-list" id="live-players"><div class="empty">Procurando transmissões...</div></div>
+      </section>
       <section class="players" id="players"></section>
     </main>
     <dialog id="chat">

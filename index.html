@@ -404,6 +404,9 @@
         .multiplayer-hub-trigger img { width:32px; height:32px; display:block; object-fit:contain; }
         .multiplayer-panel { width:min(820px,96vw); max-height:88dvh; overflow:auto; background:var(--sidebar-bg); border:2px solid var(--accent-color); border-radius:8px; padding:22px; color:var(--text-color); box-shadow:0 0 35px rgba(0,204,68,.3); }
         .multiplayer-panel h2 { color:var(--accent-color); font:14px 'Press Start 2P',cursive; line-height:1.5; padding-right:45px; }
+        .stream-reward-callout { margin:12px 0 15px; padding:13px; border:1px solid #ffd166; border-radius:7px; background:linear-gradient(135deg,rgba(255,209,102,.12),rgba(0,204,68,.08)); font:11px/1.55 monospace; }
+        .stream-reward-callout strong { display:block; color:#ffd166; margin-bottom:4px; }
+        .stream-reward-callout a { color:var(--accent-color); font-weight:bold; }
         .multiplayer-toolbar { display:flex; justify-content:space-between; align-items:center; gap:10px; margin:14px 0; padding:10px; border:1px solid var(--border-color); background:var(--input-bg); border-radius:6px; font:11px monospace; }
         .multiplayer-toolbar button { border:1px solid var(--accent-color); background:var(--accent-color); color:#001b09; padding:9px 12px; border-radius:4px; cursor:pointer; font-weight:bold; }
         .multiplayer-rooms { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:12px; }
@@ -440,6 +443,7 @@
             <button class="game-info-close" id="multiplayer-close" type="button">X</button>
             <h2 id="multiplayer-title">JOGAR ONLINE</h2>
             <p class="history-subtitle">Entre como controle remoto de outro jogador ou abra um jogo para criar sua própria sala.</p>
+            <div class="stream-reward-callout"><strong>🏆 AJUDE SEM GASTAR: TRANSMITA E GANHE SAVES</strong>Abra uma sala, transmita no <b>#live-arcade</b> do Discord e acumule prêmios: 30 min dão +1 autosave, 2 h dão +2 slots manuais e 5 h dão +2 autosaves. <a href="apoie.html#premios-live">Ver como funciona</a>.</div>
             <div class="multiplayer-toolbar"><span id="multiplayer-online-count">Buscando jogadores...</span><button id="multiplayer-select-game" type="button">SELECIONAR MEU JOGO</button></div>
             <div class="multiplayer-rooms" id="multiplayer-rooms"></div>
         </section>

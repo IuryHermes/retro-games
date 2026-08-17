@@ -167,11 +167,11 @@ function saveTarget(url, discordId) {
 }
 __name(saveTarget, "saveTarget");
 function manualSaveLimit(plan) {
-  return plan === "registered" || plan === "cafe" ? 3 : plan === "cartucho" ? 7 : null;
+  return plan === "registered" ? 3 : plan === "cafe" ? 7 : plan === "cartucho" ? 20 : null;
 }
 __name(manualSaveLimit, "manualSaveLimit");
 function automaticGameLimit(plan) {
-  return plan === "registered" || plan === "cafe" ? 3 : plan === "cartucho" ? 7 : null;
+  return plan === "registered" ? 3 : plan === "cafe" ? 5 : plan === "cartucho" ? 15 : null;
 }
 __name(automaticGameLimit, "automaticGameLimit");
 async function streamRewards(env, discordId) {
@@ -450,12 +450,13 @@ var src_default = {
         return json({ presence });
       }
       if (request.method === "GET" && url.pathname === "/social/players") {
-        const [profileDirectory, presenceDirectory] = await Promise.all([listAll(env, "profiles/v1/"), listAll(env, "social/presence/")]);
+        const [profileDirectory, presenceDirectory, verifiedLiveDirectory] = await Promise.all([listAll(env, "profiles/v1/"), listAll(env, "social/presence/"), listAll(env, "live/verified/")]);
         const presence = (await Promise.all(presenceDirectory.slice(-500).map(async (object) => {
           const record = await env.GAMES.get(object.key);
           return record ? await record.json().catch(() => null) : null;
         }))).filter(Boolean);
         const presenceByUid = new Map(presence.map((player) => [player.uid, player]));
+        const verifiedLiveUids = new Set(verifiedLiveDirectory.map((object) => object.key.slice("live/verified/".length).replace(/\.json$/, "")));
         const players = (await Promise.all(profileDirectory.slice(-500).map(async (object) => {
           const record = await env.GAMES.get(object.key);
           const candidate = record ? await record.json().catch(() => null) : null;
@@ -463,7 +464,8 @@ var src_default = {
             return null;
           const live = presenceByUid.get(candidate.uid);
           const online = Boolean(live && Date.now() - live.updatedAt < 9e4);
-          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, age: profileAge(candidate.birthDate), locality: candidate.locality || "", bio: candidate.bio || "", instagram: candidate.instagram || "", youtube: candidate.youtube || "", facebook: candidate.facebook || "", tiktok: candidate.tiktok || "", watchRoomId: online && live?.page === "game" ? live.roomId || "" : "", watchTitle: online && live?.page === "game" ? live.roomTitle || "" : "", online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
+          const streaming = Boolean(online && live?.page === "game" && live?.roomId && verifiedLiveUids.has(candidate.uid));
+          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, age: profileAge(candidate.birthDate), locality: candidate.locality || "", bio: candidate.bio || "", instagram: candidate.instagram || "", youtube: candidate.youtube || "", facebook: candidate.facebook || "", tiktok: candidate.tiktok || "", watchRoomId: online && live?.page === "game" ? live.roomId || "" : "", watchTitle: online && live?.page === "game" ? live.roomTitle || "" : "", streaming, online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
         }))).filter(Boolean).sort((a, b) => Number(b.online) - Number(a.online) || a.name.localeCompare(b.name, "pt-BR")).slice(0, 500);
         return json({ self: { uid: account.uid, name: profile.name, avatar: profile.avatar }, players });
       }
@@ -909,7 +911,16 @@ var src_default = {
       const { guildId } = await request.json();
       if (guildId !== DISCORD_GUILD_ID)
         return json({ erro: "Servidor invalido." }, 400);
-      const discord = /* @__PURE__ */ __name(async (path, init = {}) => fetch(`https://discord.com/api/v10${path}`, { ...init, headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}`, "Content-Type": "application/json", ...init.headers || {} } }), "discord");
+      const discord = /* @__PURE__ */ __name(async (path, init = {}) => {
+        for (let attempt = 0; attempt < 3; attempt++) {
+          const response = await fetch(`https://discord.com/api/v10${path}`, { ...init, headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}`, "Content-Type": "application/json", ...init.headers || {} } });
+          if (response.status !== 429 || attempt === 2)
+            return response;
+          const limited = await response.clone().json().catch(() => ({}));
+          const retryMs = Math.min(15e3, Math.max(1e3, Number(limited.retry_after || 1) * 1e3 + 250));
+          await new Promise((resolve) => setTimeout(resolve, retryMs));
+        }
+      }, "discord");
       const [rolesResponse, channelsResponse, botResponse] = await Promise.all([discord(`/guilds/${guildId}/roles`), discord(`/guilds/${guildId}/channels`), discord("/users/@me")]);
       if (!rolesResponse.ok || !channelsResponse.ok || !botResponse.ok)
         return json({ erro: "O bot nao conseguiu ler o servidor. Confirme se ele foi instalado." }, 502);
@@ -923,13 +934,13 @@ var src_default = {
       const normalize = /* @__PURE__ */ __name((value) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]/g, ""), "normalize");
       const findRole = /* @__PURE__ */ __name((name) => roles.find((role) => normalize(role.name) === normalize(name)), "findRole");
       const findChannel = /* @__PURE__ */ __name((name) => channels.find((channel) => normalize(channel.name) === normalize(name)), "findChannel");
-      const roleMap = { continue: findRole("Continue"), cartucho: findRole("Cartucho"), arcade: findRole("Arcade") };
+      const roleMap = { member: findRole("Membro"), continue: findRole("Continue"), cartucho: findRole("Cartucho"), arcade: findRole("Arcade") };
       const botRoles = roles.filter((role) => botMember.roles.includes(role.id));
-      const channelAccess = { agradecimentos: ["continue", "cartucho", "arcade"], enquetes: ["cartucho", "arcade"], "live-arcade": ["continue", "cartucho", "arcade"], "sugestoes-prioritarias": ["arcade"] };
+      const channelAccess = { agradecimentos: ["continue", "cartucho", "arcade"], enquetes: ["cartucho", "arcade"], "live-arcade": ["member", "continue", "cartucho", "arcade"], "sugestoes-prioritarias": ["arcade"] };
       const missingRoles = Object.entries(roleMap).filter(([, role]) => !role).map(([name]) => name);
       const missingChannels = Object.keys(channelAccess).filter((name) => !findChannel(name));
       if (missingRoles.length)
-        return json({ erro: "Cargos pagos nao encontrados.", missingRoles }, 409);
+        return json({ erro: "Cargos do servidor nao encontrados.", missingRoles }, 409);
       let clubCategory = channels.find((channel) => channel.type === 4 && normalize(channel.name) === normalize("CLUBE NEOTERMINALROOM"));
       if (!clubCategory) {
         const createdCategory = await discord(`/guilds/${guildId}/channels`, { method: "POST", body: JSON.stringify({ name: "CLUBE NEOTERMINALROOM", type: 4 }) });
@@ -992,14 +1003,11 @@ var src_default = {
         if (channelName === "live-arcade") {
           const watch = 1024n + 1048576n;
           const speakAndStream = 2097152n + 512n;
-          for (const role of [roleMap.continue, roleMap.cartucho]) {
-            const response = await discord(`/channels/${channel.id}/permissions/${role.id}`, { method: "PUT", body: JSON.stringify({ type: 0, allow: String(watch), deny: String(speakAndStream) }) });
+          for (const role of [roleMap.member, roleMap.continue, roleMap.cartucho, roleMap.arcade]) {
+            const response = await discord(`/channels/${channel.id}/permissions/${role.id}`, { method: "PUT", body: JSON.stringify({ type: 0, allow: String(watch + speakAndStream), deny: "0" }) });
             if (!response.ok)
-              return json({ erro: "Falha ao configurar espectadores da sala.", detalhe: await response.text() }, 502);
+              return json({ erro: "Falha ao liberar transmissoes da comunidade.", detalhe: await response.text() }, 502);
           }
-          const broadcaster = await discord(`/channels/${channel.id}/permissions/${roleMap.arcade.id}`, { method: "PUT", body: JSON.stringify({ type: 0, allow: String(watch + speakAndStream), deny: "0" }) });
-          if (!broadcaster.ok)
-            return json({ erro: "Falha ao configurar transmissores Arcade.", detalhe: await broadcaster.text() }, 502);
         }
       }
       return json({ configurado: true, guildId, roles: Object.fromEntries(Object.entries(roleMap).map(([name, role]) => [name, role.id])), channels: Object.fromEntries(Object.keys(channelAccess).map((name) => [name, findChannel(name).id])) });
@@ -1111,7 +1119,7 @@ var src_default = {
       }
     }
     if (now.getUTCDate() === 1 && state.ultimoLembreteLive !== dayKey) {
-      const live = await discordMessage(env, DISCORD_CHANNELS.live, { content: `<@&${DISCORD_ROLES.arcade}> \u2014 a sala comunit\xE1ria est\xE1 dispon\xEDvel: apoiadores Arcade podem abrir uma transmiss\xE3o aqui, e os demais membros podem entrar para assistir. Respeitem as regras do servidor e n\xE3o transmitam conte\xFAdo sem autoriza\xE7\xE3o.` });
+      const live = await discordMessage(env, DISCORD_CHANNELS.live, { content: `A sala comunit\xE1ria est\xE1 dispon\xEDvel: qualquer membro pode abrir uma transmiss\xE3o do NeoTerminalRoom, ajudar a comunidade sem gastar e acumular recompensas de saves. Respeitem as regras do servidor e n\xE3o transmitam conte\xFAdo sem autoriza\xE7\xE3o.` });
       if (live.ok) {
         await discordMessage(env, DISCORD_CHANNELS.sugestoes, { content: `<@&${DISCORD_ROLES.arcade}> Use este canal para enviar sua sugest\xE3o priorit\xE1ria do m\xEAs. Inclua nome, sistema e motivo. A equipe far\xE1 a curadoria antes de publicar qualquer conte\xFAdo.` });
         await fetch(`${BOT_STATE}.json`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ultimoLembreteLive: dayKey }) });
