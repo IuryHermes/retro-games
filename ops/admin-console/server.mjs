@@ -103,7 +103,7 @@ const server=http.createServer(async (req,res)=>{
       const temp=`${usernameFile}.new`; await writeFile(temp,`${username}\n`,{mode:0o600}); await rename(temp,usernameFile); sessions.clear();
       return send(res,200,{ok:true,username,mensagem:'Usuário alterado. Entre novamente.'},{'Set-Cookie':'neo_admin=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0'});
     }
-    if (req.method==='POST' && url.pathname==='/api/admin') { if(!requireSession(req,res,true))return; const result=await proxyAdmin(await body(req)); return send(res,result.status,result.data); }
+    if (req.method==='POST' && url.pathname==='/api/admin') { if(!requireSession(req,res,true))return; const payload=await body(req); const result=await proxyAdmin({...payload,adminActor:await adminUsername()}); return send(res,result.status,result.data); }
     if (req.method==='GET' && url.pathname==='/api/health') { if(!requireSession(req,res))return; const result=await proxyAdmin({action:'overview'}); return send(res,result.status,{...result.data,console:{up:true,startedAt:started}}); }
     if (req.method==='GET') return serve(req,res,url.pathname);
     send(res,405,{erro:'Método não permitido.'});

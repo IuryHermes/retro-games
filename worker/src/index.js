@@ -130,7 +130,7 @@ async function firebaseAccess(token) {
       return null;
     const key = await crypto.subtle.importKey("jwk", jwk, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["verify"]);
     const verified = await crypto.subtle.verify("RSASSA-PKCS1-v1_5", key, fromB64url(parts[2]), encoder.encode(`${parts[0]}.${parts[1]}`));
-    return verified ? { uid: claims.sub, email: claims.email || "", provider: claims.firebase?.sign_in_provider || "" } : null;
+    return verified ? { uid: claims.sub, email: claims.email || "", emailVerified: claims.email_verified === true, provider: claims.firebase?.sign_in_provider || "" } : null;
   } catch {
     return null;
   }
@@ -141,7 +141,7 @@ async function accountAccess(request, env) {
   const token = authorization.startsWith("Bearer ") ? authorization.slice(7) : "";
   const discord = await readToken(token, env.DISCORD_CLIENT_SECRET);
   if (discord?.purpose === "account" && /^discord-\d{10,25}$/.test(discord.accountId))
-    return { uid: discord.accountId, email: "", provider: "discord.com", username: discord.username || "" };
+    return { uid: discord.accountId, email: "", emailVerified: true, provider: "discord.com", username: discord.username || "" };
   const firebase = await firebaseAccess(token);
   return firebase ? { ...firebase, username: firebase.email.split("@")[0] } : null;
 }
@@ -245,7 +245,10 @@ function catalogOverrideId(system, rom) {
 __name(catalogOverrideId, "catalogOverrideId");
 async function adminAudit(env, action, target, detail = {}) {
   const now = Date.now();
-  const record = { id: crypto.randomUUID(), action, target: String(target || "").slice(0, 180), detail, createdAt: now };
+  const actor = cleanProfileText(detail?.actor, 64) || "admin";
+  const safeDetail = { ...detail };
+  delete safeDetail.actor;
+  const record = { id: crypto.randomUUID(), actor, action, target: String(target || "").slice(0, 180), detail: safeDetail, createdAt: now };
   await env.GAMES.put(`admin/audit/${String(now).padStart(16, "0")}-${record.id}.json`, JSON.stringify(record), { httpMetadata: { contentType: "application/json" } });
   return record;
 }
@@ -475,7 +478,10 @@ var src_default = {
       if (limited) return limited;
       const body = await request.json().catch(() => ({}));
       const action = String(body.action || "");
+      const actor = cleanProfileText(body.adminActor, 64) || "admin";
+      const audit = (auditAction, target, detail = {}) => adminAudit(env, auditAction, target, { ...detail, actor });
       const validUid = (value) => /^[a-zA-Z0-9._:@-]{2,180}$/.test(String(value || ""));
+      const storageIds = (uid) => String(uid).startsWith("discord-") ? [String(uid)] : [String(uid), `firebase-${uid}`];
       if (action === "overview") {
         const prefixes = ["profiles/v1/", "social/presence/", "saves/v1/", "save-images/v1/", "history/v1/", "referrals/rewards/"];
         const [directories, activeRooms] = await Promise.all([Promise.all(prefixes.map((prefix) => listAll(env, prefix))), activeRoomSummaries(env)]);
@@ -490,9 +496,9 @@ var src_default = {
       if (action === "accounts") {
         const [profiles, presence, rewards, saveObjects] = await Promise.all([readJsonDirectory(env, "profiles/v1/", 500), readJsonDirectory(env, "social/presence/", 500), readJsonDirectory(env, "referrals/rewards/", 500), listAll(env, "saves/v1/")]);
         const presenceMap = new Map(presence.map((record) => [record.value.uid, record.value]));
-        const rewardMap = new Map(rewards.map((record) => [record.key.slice("referrals/rewards/".length).replace(/\.json$/, ""), record.value]));
+        const rewardMap = new Map(rewards.map((record) => [decodeURIComponent(record.key.slice("referrals/rewards/".length).replace(/\.json$/, "")), record.value]));
         const saveCounts = new Map();
-        for (const object of saveObjects) { const uid = object.key.slice("saves/v1/".length).split("/")[0]; saveCounts.set(uid, (saveCounts.get(uid) || 0) + 1); }
+        for (const object of saveObjects) { const storedUid = object.key.slice("saves/v1/".length).split("/")[0]; const uid = storedUid.startsWith("firebase-") ? storedUid.slice("firebase-".length) : storedUid; saveCounts.set(uid, (saveCounts.get(uid) || 0) + 1); }
         const now = Date.now();
         return json({ accounts: profiles.map((record) => { const profile = record.value; const live = presenceMap.get(profile.uid); return { ...profile, online: Boolean(live && now - Number(live.updatedAt || 0) < 9e4), presence: live || null, rewards: rewardMap.get(profile.uid) || null, saves: saveCounts.get(profile.uid) || 0 }; }).sort((a, b) => Number(b.online) - Number(a.online) || String(a.name).localeCompare(String(b.name), "pt-BR")) });
       }
@@ -504,10 +510,13 @@ var src_default = {
         if (!object) return json({ erro: "Perfil nao encontrado." }, 404);
         const current = await object.json();
         const patch = body.profile || {};
-        const next = { ...current, name: cleanProfileText(patch.name ?? current.name, 20), locality: cleanProfileText(patch.locality ?? current.locality, 80), bio: cleanProfileText(patch.bio ?? current.bio, 280), phone: cleanProfileText(patch.phone ?? current.phone, 30), instagram: safeProfileUrl(patch.instagram ?? current.instagram), youtube: safeProfileUrl(patch.youtube ?? current.youtube), facebook: safeProfileUrl(patch.facebook ?? current.facebook), tiktok: safeProfileUrl(patch.tiktok ?? current.tiktok), updatedAt: Date.now() };
+        const avatar = cleanProfileText(patch.avatar ?? current.avatar, 40).toLowerCase();
+        if (patch.avatar != null && !PROFILE_AVATARS.includes(avatar)) return json({ erro: "Avatar invalido." }, 400);
+        for (const field of ["instagram", "youtube", "facebook", "tiktok"]) if (String(patch[field] || "").trim() && !safeProfileUrl(patch[field])) return json({ erro: `Link de ${field} invalido.` }, 400);
+        const next = { ...current, name: cleanProfileText(patch.name ?? current.name, 20), avatar, locality: cleanProfileText(patch.locality ?? current.locality, 80), bio: cleanProfileText(patch.bio ?? current.bio, 280), phone: cleanProfileText(patch.phone ?? current.phone, 30), instagram: safeProfileUrl(patch.instagram ?? current.instagram), youtube: safeProfileUrl(patch.youtube ?? current.youtube), facebook: safeProfileUrl(patch.facebook ?? current.facebook), tiktok: safeProfileUrl(patch.tiktok ?? current.tiktok), updatedAt: Date.now() };
         if (!next.name || next.name.length < 2) return json({ erro: "Nome invalido." }, 400);
         await env.GAMES.put(key, JSON.stringify(next), { httpMetadata: { contentType: "application/json" } });
-        await adminAudit(env, action, uid, { fields: Object.keys(patch) });
+        await audit(action, uid, { before: current, after: next });
         return json({ profile: next });
       }
       if (action === "entitlements-update") {
@@ -519,32 +528,46 @@ var src_default = {
         const bonusManualSlots = Math.max(0, Math.min(999, Math.floor(Number(body.bonusManualSlots) || 0)));
         const bonusAutoGames = Math.max(0, Math.min(999, Math.floor(Number(body.bonusAutoGames) || 0)));
         const points = Math.max(0, Math.min(1e7, Number(body.points ?? current.points) || 0));
-        const next = { ...current, points, bonusManualSlots, bonusAutoGames, awarded: Array.isArray(current.awarded) ? current.awarded : [], updatedAt: Date.now() };
+        const tiered = applyReferralTiers({ ...current, points, bonusManualSlots, bonusAutoGames, awarded: Array.isArray(current.awarded) ? current.awarded : [] });
+        const next = { ...tiered.next, updatedAt: Date.now() };
         await env.GAMES.put(key, JSON.stringify(next), { httpMetadata: { contentType: "application/json" } });
-        await adminAudit(env, action, uid, { bonusManualSlots, bonusAutoGames, points });
+        await audit(action, uid, { before: current, after: next, earned: tiered.earned });
         return json({ rewards: next });
       }
       if (action === "account-saves") {
         const uid = String(body.uid || "");
         if (!validUid(uid)) return json({ erro: "Conta invalida." }, 400);
-        const objects = await listAll(env, `saves/v1/${encodeURIComponent(uid)}/`, ["customMetadata"]);
+        const objects = (await Promise.all(storageIds(uid).map((id) => listAll(env, `saves/v1/${encodeURIComponent(id)}/`, ["customMetadata"])))).flat();
         return json({ saves: objects.map((object) => ({ key: object.key, size: object.size, uploaded: object.uploaded?.toISOString?.() || "", metadata: object.customMetadata || {} })) });
       }
       if (action === "save-delete") {
         const uid = String(body.uid || ""); const key = String(body.key || "");
-        if (!validUid(uid) || !key.startsWith(`saves/v1/${encodeURIComponent(uid)}/`) || body.confirm !== key) return json({ erro: "Confirmacao de save invalida." }, 400);
-        await env.GAMES.delete(key); await adminAudit(env, action, uid, { key });
+        if (!validUid(uid) || !storageIds(uid).some((id) => key.startsWith(`saves/v1/${encodeURIComponent(id)}/`)) || body.confirm !== key) return json({ erro: "Confirmacao de save invalida." }, 400);
+        await env.GAMES.delete(key); await audit(action, uid, { key });
         return json({ deleted: true, key });
       }
       if (action === "account-delete-data") {
         const uid = String(body.uid || "");
         if (!validUid(uid) || body.confirm !== uid) return json({ erro: "Confirmacao de conta invalida." }, 400);
-        const prefixes = [`saves/v1/${encodeURIComponent(uid)}/`, `save-images/v1/${encodeURIComponent(uid)}/`];
+        const profileObject = await env.GAMES.get(`profiles/v1/${encodeURIComponent(uid)}.json`);
+        const profile = profileObject ? await profileObject.json().catch(() => null) : null;
+        if (profile?.referrerUid) {
+          const rewardKey = `referrals/rewards/${encodeURIComponent(profile.referrerUid)}.json`;
+          const reward = await referralRewards(env, profile.referrerUid);
+          await env.GAMES.put(rewardKey, JSON.stringify({ ...reward, referrals: Math.max(0, reward.referrals - 1), points: Math.max(0, reward.points - 10), updatedAt: Date.now() }), { httpMetadata: { contentType: "application/json" } });
+        }
+        const ids = storageIds(uid);
+        const prefixes = ids.flatMap((id) => [`saves/v1/${encodeURIComponent(id)}/`, `save-images/v1/${encodeURIComponent(id)}/`]);
         const children = (await Promise.all(prefixes.map((prefix) => listAll(env, prefix)))).flat();
+        const ownerKey = `referrals/owners/${encodeURIComponent(uid)}.json`;
+        const ownerObject = await env.GAMES.get(ownerKey);
+        const owner = ownerObject ? await ownerObject.json().catch(() => null) : null;
         await Promise.all(children.map((object) => env.GAMES.delete(object.key)));
-        await Promise.all([`profiles/v1/${encodeURIComponent(uid)}.json`, `history/v1/${encodeURIComponent(uid)}.json`, `social/presence/${encodeURIComponent(uid)}.json`, `referrals/rewards/${encodeURIComponent(uid)}.json`, `referrals/owners/${encodeURIComponent(uid)}.json`].map((key) => env.GAMES.delete(key)));
-        await adminAudit(env, action, uid, { deletedObjects: children.length + 5 });
-        return json({ deleted: true, uid, objects: children.length + 5 });
+        const directKeys = [`profiles/v1/${encodeURIComponent(uid)}.json`, `history/v1/${encodeURIComponent(uid)}.json`, `social/presence/${encodeURIComponent(uid)}.json`, `referrals/rewards/${encodeURIComponent(uid)}.json`, `referrals/claims/${encodeURIComponent(uid)}.json`, ownerKey, ...(owner?.code ? [`referrals/codes/${owner.code}.json`] : [])];
+        await Promise.all(directKeys.map((key) => env.GAMES.delete(key)));
+        await fetch(`https://neoterminalroom-default-rtdb.firebaseio.com/hall_cadastros/${encodeURIComponent(uid)}.json`, { method: "DELETE" });
+        await audit(action, uid, { deletedObjects: children.length + directKeys.length });
+        return json({ deleted: true, uid, objects: children.length + directKeys.length });
       }
       if (action === "rooms") {
         return json({ rooms: await activeRoomSummaries(env) });
@@ -553,7 +576,7 @@ var src_default = {
         const roomId = String(body.roomId || "");
         if (!/^[a-f0-9]{12}$/.test(roomId) || body.confirm !== roomId) return json({ erro: "Sala invalida." }, 400);
         const response = await env.MULTIPLAYER_ROOMS.getByName(roomId).fetch(new Request("https://room/admin-close", { method: "POST" }));
-        await env.GAMES.delete(`multiplayer/rooms/${roomId}.json`); await adminAudit(env, action, roomId);
+        await env.GAMES.delete(`multiplayer/rooms/${roomId}.json`); await audit(action, roomId);
         return json({ closed: response.ok, roomId });
       }
       if (action === "payments") {
@@ -567,7 +590,25 @@ var src_default = {
         const headers = { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` };
         for (const roleId of Object.values(DISCORD_ROLES)) await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/members/${discordId}/roles/${roleId}`, { method: "DELETE", headers });
         if (plan !== "none") { const response = await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/members/${discordId}/roles/${DISCORD_ROLES[plan]}`, { method: "PUT", headers }); if (!response.ok) return json({ erro: "Discord recusou o cargo.", detalhe: await response.text() }, 502); }
-        await adminAudit(env, action, discordId, { plan }); return json({ updated: true, discordId, plan });
+        await audit(action, discordId, { plan }); return json({ updated: true, discordId, plan });
+      }
+      if (action === "payment-update") {
+        const paymentId = String(body.paymentId || ""); const plan = String(body.plan || "none");
+        if (!/^MSG-[0-9]{10,}$/.test(paymentId) || !["none", "cafe", "cartucho", "arcade"].includes(plan)) return json({ erro: "Pagamento ou plano invalido." }, 400);
+        const recordResponse = await fetch(`${FIREBASE}/${encodeURIComponent(paymentId)}.json`);
+        const record = recordResponse.ok ? await recordResponse.json() : null;
+        if (!record) return json({ erro: "Pagamento nao encontrado." }, 404);
+        const discordId = String(record.discordId || "");
+        if (!/^\d{10,25}$/.test(discordId)) return json({ erro: "Pagamento sem conta Discord valida." }, 409);
+        const headers = { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` };
+        for (const roleId of Object.values(DISCORD_ROLES)) await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/members/${discordId}/roles/${roleId}`, { method: "DELETE", headers });
+        if (plan !== "none") { const role = await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/members/${discordId}/roles/${DISCORD_ROLES[plan]}`, { method: "PUT", headers }); if (!role.ok) return json({ erro: "Discord recusou o cargo." }, 502); }
+        const now = Date.now();
+        const patch = plan === "none" ? { plano: record.plano, status: "expirado", validoAte: now, discordStatus: "cargo_removido" } : { plano: plan, status: "aprovado", aprovadoEm: Number(record.aprovadoEm) || now, validoAte: Number(body.validUntil) > now ? Number(body.validUntil) : now + 30 * 24 * 60 * 60 * 1e3, discordStatus: "cargo_liberado" };
+        const update = await fetch(`${FIREBASE}/${encodeURIComponent(paymentId)}.json`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(patch) });
+        if (!update.ok) return json({ erro: "Cargo alterado, mas o pagamento nao foi sincronizado." }, 502);
+        await audit(action, paymentId, { before: { plano: record.plano, status: record.status, validoAte: record.validoAte }, after: patch, discordId });
+        return json({ updated: true, paymentId, plan, payment: { ...record, ...patch } });
       }
       if (action === "games") {
         const system = String(body.system || "snes").toLowerCase();
@@ -585,9 +626,40 @@ var src_default = {
         const override = { id, system, rom, nome: cleanProfileText(input.nome, 100), descricao: cleanProfileText(input.descricao, 2e3), nota: cleanProfileText(input.nota, 10), hidden: Boolean(input.hidden), updatedAt: Date.now() };
         if (!override.nome && !override.descricao && !override.nota && !override.hidden) await env.GAMES.delete(`catalog/overrides/${system}/${id}.json`);
         else await env.GAMES.put(`catalog/overrides/${system}/${id}.json`, JSON.stringify(override), { httpMetadata: { contentType: "application/json" } });
-        await adminAudit(env, action, id, { system, hidden: override.hidden }); return json({ override });
+        await audit(action, id, { system, hidden: override.hidden }); return json({ override });
       }
-      if (action === "audit") return json({ audit: (await readJsonDirectory(env, "admin/audit/", 300)).map((record) => record.value).reverse() });
+      if (action === "referrals-admin") {
+        const [profiles, rewards, owners] = await Promise.all([readJsonDirectory(env, "profiles/v1/", 1e3), readJsonDirectory(env, "referrals/rewards/", 1e3), readJsonDirectory(env, "referrals/owners/", 1e3)]);
+        const profileMap = new Map(profiles.map((record) => [record.value.uid, record.value]));
+        const rewardMap = new Map(rewards.map((record) => [decodeURIComponent(record.key.slice("referrals/rewards/".length).replace(/\.json$/, "")), record.value]));
+        const ownerMap = new Map(owners.map((record) => [record.value.uid, record.value]));
+        return json({ referrals: profiles.filter((record) => record.value.referrerUid).map((record) => ({ uid: record.value.uid, name: record.value.name, createdAt: record.value.createdAt, referrerUid: record.value.referrerUid, referrerName: profileMap.get(record.value.referrerUid)?.name || "", code: ownerMap.get(record.value.referrerUid)?.code || "" })), rewards: [...rewardMap].map(([uid, reward]) => ({ uid, name: profileMap.get(uid)?.name || "", ...reward })) });
+      }
+      if (action === "referral-revoke") {
+        const uid = String(body.uid || "");
+        if (!validUid(uid) || body.confirm !== uid) return json({ erro: "Confirmacao de indicacao invalida." }, 400);
+        const profileKey = `profiles/v1/${encodeURIComponent(uid)}.json`;
+        const object = await env.GAMES.get(profileKey);
+        if (!object) return json({ erro: "Perfil nao encontrado." }, 404);
+        const profile = await object.json();
+        const referrerUid = String(profile.referrerUid || "");
+        if (!referrerUid) return json({ erro: "A conta nao possui indicacao ativa." }, 409);
+        const rewardKey = `referrals/rewards/${encodeURIComponent(referrerUid)}.json`;
+        const current = await referralRewards(env, referrerUid);
+        const next = { ...current, referrals: Math.max(0, current.referrals - 1), points: Math.max(0, current.points - 10), updatedAt: Date.now() };
+        const { referrerUid: _removed, ...nextProfile } = profile;
+        await Promise.all([env.GAMES.put(profileKey, JSON.stringify(nextProfile), { httpMetadata: { contentType: "application/json" } }), env.GAMES.put(rewardKey, JSON.stringify(next), { httpMetadata: { contentType: "application/json" } }), env.GAMES.delete(`referrals/claims/${encodeURIComponent(uid)}.json`)]);
+        await audit(action, uid, { referrerUid, pointsRemoved: 10 });
+        return json({ revoked: true, uid, referrerUid, rewards: next });
+      }
+      if (action === "account-export") {
+        const uid = String(body.uid || "");
+        if (!validUid(uid)) return json({ erro: "Conta invalida." }, 400);
+        const [profile, history, rewards, saves] = await Promise.all([env.GAMES.get(`profiles/v1/${encodeURIComponent(uid)}.json`).then((o) => o?.json() || null), env.GAMES.get(`history/v1/${encodeURIComponent(uid)}.json`).then((o) => o?.json() || null), referralRewards(env, uid), Promise.all(storageIds(uid).map((id) => listAll(env, `saves/v1/${encodeURIComponent(id)}/`, ["customMetadata"]))).then((groups) => groups.flat())]);
+        await audit(action, uid, { saves: saves.length });
+        return json({ exportedAt: Date.now(), uid, profile, history, rewards, saves: saves.map((item) => ({ key: item.key, size: item.size, uploaded: item.uploaded?.toISOString?.() || "", metadata: item.customMetadata || {} })) });
+      }
+      if (action === "audit") return json({ audit: (await readJsonDirectory(env, "admin/audit/", 1e3)).map((record) => record.value).reverse() });
       return json({ erro: "Acao administrativa desconhecida." }, 404);
     }
     if (request.method === "OPTIONS")
@@ -918,7 +990,7 @@ var src_default = {
       if ([instagram, youtube, facebook, tiktok].some((value, index) => String(body[["instagram", "youtube", "facebook", "tiktok"][index]] || "").trim() && !value))
         return json({ erro: "Use links validos começando com http:// ou https://." }, 400);
       let referrerUid = current?.referrerUid || "";
-      if (!current && /^[a-f0-9]{12}$/.test(String(body.referralCode || ""))) {
+      if (!current && account.emailVerified && /^[a-f0-9]{12}$/.test(String(body.referralCode || ""))) {
         const codeObject = await env.GAMES.get(`referrals/codes/${body.referralCode}.json`);
         const codeRecord = codeObject ? await codeObject.json().catch(() => null) : null;
         if (codeRecord?.uid && codeRecord.uid !== account.uid && await env.GAMES.head(`profiles/v1/${encodeURIComponent(codeRecord.uid)}.json`)) referrerUid = codeRecord.uid;
@@ -929,10 +1001,12 @@ var src_default = {
         await fetch(`https://neoterminalroom-default-rtdb.firebaseio.com/hall_cadastros/${encodeURIComponent(account.uid)}.json`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ nome: name, avatar, mensagem: `Bem-vindo(a), ${name}! Um novo jogador entrou na sala.`, timestamp: Date.now() }) });
         if (referrerUid) {
           const referrerKey = `referrals/rewards/${encodeURIComponent(referrerUid)}.json`;
+          const claimKey = `referrals/claims/${encodeURIComponent(account.uid)}.json`;
+          if (await env.GAMES.head(claimKey)) return json({ profile, created: true });
           let referrerRewards = await referralRewards(env, referrerUid);
           referrerRewards = { ...referrerRewards, referrals: referrerRewards.referrals + 1, points: referrerRewards.points + 10, updatedAt: Date.now() };
           const result = applyReferralTiers(referrerRewards);
-          await env.GAMES.put(referrerKey, JSON.stringify(result.next), { httpMetadata: { contentType: "application/json" } });
+          await Promise.all([env.GAMES.put(referrerKey, JSON.stringify(result.next), { httpMetadata: { contentType: "application/json" } }), env.GAMES.put(claimKey, JSON.stringify({ uid: account.uid, referrerUid, createdAt: Date.now() }), { httpMetadata: { contentType: "application/json" } })]);
         }
       }
       return json({ profile, created: !current });

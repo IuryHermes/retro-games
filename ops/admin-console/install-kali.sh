@@ -26,5 +26,6 @@ fi
 chmod 600 "$config" "$password_file" "$username_file" "$HOME/.config/neo-admin-worker.secret"
 cp "$base/neo-admin-console.service" "$HOME/.config/systemd/user/neo-admin-console.service"
 systemctl --user daemon-reload
-systemctl --user enable --now neo-admin-console.service
+systemctl --user enable neo-admin-console.service
+systemctl --user restart neo-admin-console.service
 systemctl --user is-active neo-admin-console.service
