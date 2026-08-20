@@ -860,9 +860,8 @@
             historyList.appendChild(summary);
             const promo = document.createElement('aside'); promo.className = 'cloud-plan-promo';
             promo.innerHTML = '<strong>PRECISA DE MAIS ESPAÇO?</strong>Os planos Continue e Cartucho aumentam seus slots manuais e jogos com autosave. O plano Arcade deixa saves manuais e automáticos ilimitados.<br><a href="apoie.html#planos">VER PLANOS E AUMENTAR MEUS SAVES</a>';
-            historyList.appendChild(promo);
             const games = (data.games || []).map(game => ({ ...game, slots: (game.slots || []).filter(slot => automaticOnly ? slot.slot === 'auto' : slot.slot !== 'auto') })).filter(game => game.slots.length);
-            if (!games.length) { const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = automaticOnly ? 'Você ainda não possui saves automáticos na nuvem.' : 'Você ainda não possui saves manuais na nuvem.'; historyList.appendChild(empty); return; }
+            if (!games.length) { const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = automaticOnly ? 'Você ainda não possui saves automáticos na nuvem.' : 'Você ainda não possui saves manuais na nuvem.'; historyList.appendChild(empty); }
             games.forEach(game => {
                 const card = document.createElement('section'); card.className = 'cloud-game';
                 const catalogGame = indexData.find(item => catalogHistoryId(item) === game.id);
@@ -883,6 +882,7 @@
                     row.append(copy, remove); card.appendChild(row);
                 }); historyList.appendChild(card);
             });
+            historyList.appendChild(promo);
         } catch (error) { historyList.innerHTML = ''; const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = error.message; historyList.appendChild(empty); }
     }
     historyTab.onclick = loadHistory; cloudTab.onclick = () => loadCloudLibrary('cloud'); autoTab.onclick = () => loadCloudLibrary('auto');
