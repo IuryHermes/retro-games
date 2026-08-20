@@ -400,6 +400,9 @@
         .profile-top-actions { display:flex; justify-content:flex-start; margin:8px 0 4px; }
         .profile-top-actions .auth-action { width:auto; margin:0; padding:8px 12px; }
         .cloud-game { border:1px solid var(--border-color); background:var(--input-bg); border-radius:6px; padding:12px; min-width:0; }
+        .cloud-game-head { display:flex; align-items:center; gap:11px; margin-bottom:9px; }
+        .cloud-game-cover { width:54px; height:70px; flex:0 0 54px; object-fit:cover; border:1px solid var(--border-color); border-radius:4px; background:#000; }
+        .cloud-game-heading { min-width:0; }
         .cloud-game-title { color:var(--text-color); font:bold 11px monospace; overflow-wrap:anywhere; }
         .cloud-game-system { color:var(--accent-color); font:8px 'Press Start 2P',cursive; margin-top:5px; }
         .cloud-slot { display:grid; grid-template-columns:1fr auto; gap:8px; align-items:center; padding-top:9px; margin-top:9px; border-top:1px solid var(--border-color); }
@@ -850,7 +853,7 @@
         selectProfileTab(mode); profileSubtitle.textContent = automaticOnly ? 'Seus jogos protegidos por save automático contínuo.' : 'Gerencie seus slots manuais armazenados na nuvem.';
         historyList.innerHTML = '<div class="history-empty">CARREGANDO SAVES...</div>';
         try {
-            const data = await cloudRequest('/club/library'); historyList.replaceChildren();
+            const [data, historyData] = await Promise.all([cloudRequest('/club/library'), historyRequest().catch(() => ({ games:[] })), Promise.allSettled(fetchPromises)]); historyList.replaceChildren();
             const summary = document.createElement('div'); summary.className = 'cloud-summary';
             const referralText = `Indicações: ${Math.floor(data.referralPoints || 0)} pontos · bônus aplicados automaticamente.`;
             summary.textContent = data.automaticGameLimit === null ? `Autosaves: ${data.automaticGamesUsed} jogos · ilimitados no seu plano. Saves manuais: ilimitados por jogo. ${referralText}` : `Autosaves: ${data.automaticGamesUsed} de ${data.automaticGameLimit} jogos · ${Math.max(0, data.automaticGameLimit - data.automaticGamesUsed)} vagas livres. Saves manuais: ${data.manualSaveLimit} por jogo. ${referralText}`;
@@ -862,8 +865,15 @@
             if (!games.length) { const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = automaticOnly ? 'Você ainda não possui saves automáticos na nuvem.' : 'Você ainda não possui saves manuais na nuvem.'; historyList.appendChild(empty); return; }
             games.forEach(game => {
                 const card = document.createElement('section'); card.className = 'cloud-game';
+                const catalogGame = indexData.find(item => catalogHistoryId(item) === game.id);
+                const recentGame = (historyData.games || []).find(item => item.id === game.id);
+                const coverName = catalogGame?.capa ? catalogGame.capa.split('/').pop() : '';
+                const coverUrl = recentGame?.cover || (coverName ? `${R2_URL}${catalogGame.sysPath}capas/${encodeURIComponent(coverName)}` : 'assets/imagens-videos/logo-discord.gif');
+                const head = document.createElement('div'); head.className = 'cloud-game-head';
+                const cover = document.createElement('img'); cover.className = 'cloud-game-cover'; cover.src = coverUrl; cover.alt = `Capa de ${game.name}`; cover.loading = 'lazy'; cover.onerror = () => { cover.onerror = null; cover.src = 'assets/imagens-videos/logo-discord.gif'; };
+                const heading = document.createElement('div'); heading.className = 'cloud-game-heading';
                 const title = document.createElement('div'); title.className = 'cloud-game-title'; title.textContent = game.name;
-                const system = document.createElement('div'); system.className = 'cloud-game-system'; system.textContent = String(game.system || 'JOGO').toUpperCase(); card.append(title, system);
+                const system = document.createElement('div'); system.className = 'cloud-game-system'; system.textContent = String(game.system || 'JOGO').toUpperCase(); heading.append(title, system); head.append(cover, heading); card.append(head);
                 game.slots.forEach(slot => {
                     const row = document.createElement('div'); row.className = 'cloud-slot';
                     const copy = document.createElement('div'); copy.className = 'cloud-slot-copy'; const size = slot.size < 1048576 ? `${Math.ceil(slot.size / 1024)} KB` : `${(slot.size / 1048576).toFixed(1)} MB`;
