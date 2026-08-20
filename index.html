@@ -1286,7 +1286,7 @@
         const slide = document.createElement('div');
         slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
         const coreToUse = coreMap[game.sysId] || 'snes';
-        const playerFile = game.sysId === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
+        const playerFile = 'player-universal.html';
         const playUrl = playerUrl(playerFile, R2_URL + game.path + game.rom, coreToUse, game.nome, game.sysId);
         const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
 
@@ -1402,7 +1402,7 @@
                 const gifPath = gifNome ? `${R2_URL}${sys.path}previews/${encodeURIComponent(gifNome)}` : '';
 
                 const coreToUse = coreMap[sys.id] || 'snes';
-                const playerFile = sys.id === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
+                const playerFile = 'player-universal.html';
                 const playUrl = playerUrl(playerFile, R2_URL + sys.path + g.rom, coreToUse, g.nome, sys.id);
 
                 card.dataset.url = playUrl;
@@ -1584,7 +1584,7 @@
                 div.innerHTML = `<img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';"><span style="font-size:10px; font-weight:bold; margin-left:10px;">${escapeHTML(h.nome)} <span style="color:var(--accent-color); font-size:8px;">[${escapeHTML(h.sysName)}]</span></span>`;
 
                 const coreToUse = coreMap[h.sysId] || 'snes';
-                const playerFile = h.sysId === 'ps1' ? 'player-ps1.html' : 'player-universal.html';
+                const playerFile = 'player-universal.html';
                 const playUrl = playerUrl(playerFile, R2_URL + h.sysPath + h.rom, coreToUse, h.nome, h.sysId);
 
                 div.dataset.url = playUrl; div.onclick = () => window.openGameModal(h, playUrl);

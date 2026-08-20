@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob:; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data: blob:; media-src 'self' https: blob:; connect-src 'self' https: wss: blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self' https://discord.com https://www.mercadopago.com; upgrade-insecure-requests">
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob:; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data: blob:; media-src 'self' https: blob:; connect-src 'self' https: wss: blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self' https://discord.com https://www.mercadopago.com; upgrade-insecure-requests">
     <title>NeoTerminal Room - Player</title>
     <script>
         // GitHub Pages cannot set COOP/COEP response headers. This service worker
@@ -53,6 +53,7 @@
         .blink { animation: blink 1.5s infinite; color: #00ff44;}
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
         #neo-cloud-panel{position:fixed;left:8px;top:8px;z-index:9999999;color:#dfffe8;font:12px monospace}#neo-cloud-toggle,#neo-cloud-menu button{border:1px solid #00cc44;background:#061109;color:#55ff88;padding:8px;cursor:pointer}#neo-cloud-menu{display:none;width:210px;margin-top:5px;padding:8px;border:1px solid #00cc44;background:rgba(0,0,0,.94)}#neo-cloud-panel.open #neo-cloud-menu{display:block}.neo-cloud-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:8px}#neo-cloud-status{padding:5px 0}.neo-cloud-login{display:block;color:#55ff88;margin:7px 0}
+        #compat-error{position:fixed;inset:0;z-index:10000001;display:none;place-items:center;padding:22px;background:#020503;color:#fff;text-align:center}#compat-error.show{display:grid}#compat-error>div{max-width:520px;border:1px solid #00cc44;background:#07120b;padding:24px}#compat-error button{border:1px solid #00cc44;background:#123d20;color:#fff;padding:12px 18px;font:700 14px monospace}
     </style>
     <script src="privacy-consent-v2.js" defer></script>
 </head>
@@ -73,6 +74,7 @@
     </div>
 
     <div id="game"></div>
+    <div id="compat-error"><div><h2>O JOGO NÃO CONSEGUIU INICIAR</h2><p id="compat-error-text">Atualize o navegador e tente novamente.</p><button type="button" onclick="window.location.reload()">TENTAR NOVAMENTE</button></div></div>
 
     <script src="cloud-saves.js?v=2"></script>
     <script>
@@ -89,6 +91,13 @@
         const params = new URLSearchParams(window.location.search);
         const core = params.get("core");   
         const game = params.get("game");
+        const showCompatibilityError = message => {
+            clearInterval(loadingInterval);
+            const overlay = document.getElementById('loader-overlay');
+            if (overlay) overlay.style.display = 'none';
+            document.getElementById('compat-error-text').textContent = message;
+            document.getElementById('compat-error').classList.add('show');
+        };
         if (core === 'n64') {
             document.body.classList.add('n64-widescreen');
 
@@ -209,11 +218,20 @@
                 // Força nas duas variáveis conhecidas do EmulatorJS
                 window.EJS_gamepadStyle = "playstation";
             }
-            window.NeoCloudSaves.prepare({ game: window.EJS_gameUrl, core: window.EJS_core, name: params.get('title'), system: params.get('system') }).finally(() => {
+            window.EJS_onLoadError = error => showCompatibilityError(`Falha ao carregar o emulador: ${String(error?.message || error || 'erro desconhecido')}`);
+            const cloudPreparation = Promise.race([
+                window.NeoCloudSaves.prepare({ game: window.EJS_gameUrl, core: window.EJS_core, name: params.get('title'), system: params.get('system') }),
+                new Promise(resolve => setTimeout(resolve, 5000))
+            ]);
+            cloudPreparation.catch(error => console.warn('Neo cloud startup:', error)).finally(() => {
                 const loaderScript = document.createElement('script');
                 loaderScript.src = 'https://cdn.emulatorjs.org/stable/data/loader.js';
+                loaderScript.onerror = () => showCompatibilityError('Não foi possível baixar o emulador. Verifique a conexão, desative bloqueadores para este site e tente novamente.');
                 document.body.appendChild(loaderScript);
             });
+            setTimeout(() => { if (!window.EJS_emulator) showCompatibilityError('O Safari demorou demais para iniciar o jogo. Atualize o iOS, feche outras abas e tente novamente.'); }, 45000);
+        } else {
+            setTimeout(() => showCompatibilityError('O endereço do jogo está incompleto. Volte ao catálogo e abra o jogo novamente.'), 0);
         }
     </script>
     <script src="multiplayer-v2.js?v=20260820-referrals1"></script>
