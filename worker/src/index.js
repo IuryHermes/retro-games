@@ -524,6 +524,12 @@ var src_default = {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (request.method === "GET" && url.pathname === "/affiliate/products") {
+      const account = await accountAccess(request, env);
+      if (!account)
+        return json({ erro: "Entre ou cadastre-se para acessar as ofertas." }, 401);
+      const profile = await env.GAMES.head(`profiles/v1/${encodeURIComponent(account.uid)}.json`);
+      if (!profile)
+        return json({ erro: "Complete seu cadastro para acessar as ofertas." }, 403);
       const saved = await readJsonDirectory(env, "affiliate/products/", 500);
       const merged = new Map(DEFAULT_AFFILIATE_PRODUCTS.map((product) => [product.id, product]));
       for (const record of saved) merged.set(record.value.id, { ...(merged.get(record.value.id) || {}), ...record.value, image: record.value.image || merged.get(record.value.id)?.image || "" });
