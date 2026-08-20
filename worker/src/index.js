@@ -60,12 +60,12 @@ var AFFILIATE_BOT_SEARCHES = [
   { query: "ssd nvme gamer", category: "armazenamento" }, { query: "headset gamer", category: "audio" },
   { query: "pc gamer acessorios", category: "pc-gamer" }, { query: "gadgets tecnologia", category: "gadgets" }
 ];
-var DEFAULT_AFFILIATE_PRODUCTS = [
-  { id: "ml-oferta-1", title: "Oferta gamer Mercado Livre", description: "Acessório selecionado para quem joga no celular, computador ou console.", url: "https://meli.la/1eNR6GB", image: "/assets/affiliate/oferta-gamer.png", category: "destaques", tags: ["gamer", "oferta"], featured: true, active: true, position: 1, publishedAt: 1787262588899, expiresAt: 1787867388907 },
-  { id: "ml-oferta-2", title: "Tecnologia em oferta", description: "Produto de tecnologia recomendado pelo NeoTerminalRoom.", url: "https://meli.la/2HD21Wi", image: "/assets/affiliate/gadgets-tech.png", category: "gadgets", tags: ["tecnologia"], featured: true, active: true, position: 2, publishedAt: 1787262588899, expiresAt: 1787867388907 },
-  { id: "ml-oferta-3", title: "Acessório para seu setup", description: "Complete seu espaço de jogos com uma oferta do Mercado Livre.", url: "https://meli.la/1GQhiTZ", image: "/assets/affiliate/setup-pc.png", category: "pc-gamer", tags: ["setup", "gamer"], featured: true, active: true, position: 3, publishedAt: 1787262588899, expiresAt: 1787867388907 },
-  { id: "ml-oferta-4", title: "Achado NeoTerminalRoom", description: "Oferta escolhida para a comunidade de jogos e tecnologia.", url: "https://meli.la/1Ld2GkU", image: "/assets/affiliate/retro-tech.png", category: "retro", tags: ["retro", "oferta"], featured: true, active: true, position: 4, publishedAt: 1787262588899, expiresAt: 1787867388907 }
-];
+var DEFAULT_AFFILIATE_PRODUCTS = [];
+function isCompleteAffiliateProduct(product, now = Date.now()) {
+  const image = String(product?.image || "");
+  return product?.active !== false && Number(product?.price) > 0 && /^https:\/\//i.test(image) && (!product.expiresAt || Number(product.expiresAt) > now);
+}
+__name(isCompleteAffiliateProduct, "isCompleteAffiliateProduct");
 async function affiliateBotState(env) {
   const [state, config] = await Promise.all([env.GAMES.get("affiliate/bot/state.json"), env.GAMES.get("affiliate/bot/config.json")]);
   return { state: state ? await state.json().catch(() => ({})) : {}, config: config ? await config.json().catch(() => ({})) : { active: false, expiresHours: 36, searches: AFFILIATE_BOT_SEARCHES } };
@@ -86,8 +86,9 @@ async function runAffiliateBot(env) {
     for (const item of data.results || []) {
       const price = Number(item.price || 0), originalPrice = Number(item.original_price || 0);
       const discount = originalPrice > price && price > 0 ? Math.round((1 - price / originalPrice) * 100) : 0;
-      if (!item.id || !item.title || !item.permalink || price <= 0) continue;
-      collected.push({ id: String(item.id), title: cleanProfileText(item.title, 120), permalink: String(item.permalink).slice(0, 1e3), image: String(item.thumbnail || "").replace(/^http:/, "https:").slice(0, 1e3), price, originalPrice: originalPrice > price ? originalPrice : 0, discount, freeShipping: Boolean(item.shipping?.free_shipping), category: AFFILIATE_CATEGORIES.includes(search.category) ? search.category : "destaques", score: discount * 3 + (item.shipping?.free_shipping ? 20 : 0) + Math.min(20, Number(item.sold_quantity || 0) / 10) });
+      const image = String(item.thumbnail || "").replace(/^http:/, "https:").slice(0, 1e3);
+      if (!item.id || !item.title || !item.permalink || price <= 0 || !/^https:\/\//i.test(image)) continue;
+      collected.push({ id: String(item.id), title: cleanProfileText(item.title, 120), permalink: String(item.permalink).slice(0, 1e3), image, price, originalPrice: originalPrice > price ? originalPrice : 0, discount, freeShipping: Boolean(item.shipping?.free_shipping), category: AFFILIATE_CATEGORIES.includes(search.category) ? search.category : "destaques", score: discount * 3 + (item.shipping?.free_shipping ? 20 : 0) + Math.min(20, Number(item.sold_quantity || 0) / 10) });
     }
   }
   const unique = [...new Map(collected.map((item) => [item.id, item])).values()].sort((a, b) => b.score - a.score).slice(0, 80);
@@ -534,7 +535,7 @@ var src_default = {
       const merged = new Map(DEFAULT_AFFILIATE_PRODUCTS.map((product) => [product.id, product]));
       for (const record of saved) merged.set(record.value.id, { ...(merged.get(record.value.id) || {}), ...record.value, image: record.value.image || merged.get(record.value.id)?.image || "" });
       const now = Date.now();
-      const products = [...merged.values()].filter((product) => product.active !== false && (!product.expiresAt || product.expiresAt > now)).sort((a, b) => Number(b.publishedAt || 0) - Number(a.publishedAt || 0) || Number(a.position || 999) - Number(b.position || 999));
+      const products = [...merged.values()].filter((product) => isCompleteAffiliateProduct(product, now)).sort((a, b) => Number(b.publishedAt || 0) - Number(a.publishedAt || 0) || Number(a.position || 999) - Number(b.position || 999));
       return json({ products, categories: AFFILIATE_CATEGORIES, disclosure: "Alguns links sao afiliados. O NeoTerminalRoom pode receber comissao, sem custo adicional para voce." });
     }
     const affiliateImageMatch = url.pathname.match(/^\/affiliate\/image\/([a-z0-9._-]{3,80})\.(avif|jpe?g|png|webp)$/i);
@@ -757,7 +758,9 @@ var src_default = {
         if (affiliateUrl.protocol !== "https:" || !/(^|\.)(meli\.la|mercadolivre\.com\.br)$/i.test(affiliateUrl.hostname)) return json({ erro: "Use um link afiliado HTTPS do Mercado Livre." }, 400);
         const id = `achado-${candidate.id.toLowerCase().replace(/[^a-z0-9._-]/g, "-")}`.slice(0, 80), now = Date.now();
         const description = `${candidate.discount ? `${candidate.discount}% de desconto. ` : ""}${candidate.freeShipping ? "Frete grátis. " : ""}Preço e disponibilidade podem mudar no Mercado Livre.`;
+        if (!(Number(candidate.price) > 0) || !/^https:\/\//i.test(String(candidate.image || ""))) return json({ erro: "O produto precisa ter preço e imagem original válidos." }, 409);
         const ownImage = await storeAffiliateImage(env, id, candidate.image);
+        if (!ownImage) return json({ erro: "Não foi possível validar e armazenar a imagem original do produto." }, 502);
         const product = { id, title: candidate.title, description, url: affiliateUrl.toString(), image: ownImage, category: candidate.category, tags: ["achado-neoterminal", candidate.category], featured: candidate.score >= 50, active: true, position: 1, price: candidate.price, originalPrice: candidate.originalPrice, discount: candidate.discount, freeShipping: candidate.freeShipping, publishedAt: now, expiresAt: now + Math.max(12, Math.min(168, Number(config.expiresHours) || 36)) * 36e5, sourceId: candidate.id, updatedAt: now };
         await env.GAMES.put(`affiliate/products/${id}.json`, JSON.stringify(product), { httpMetadata: { contentType: "application/json" } });
         await audit(action, id, { sourceId: candidate.id, expiresAt: product.expiresAt }); return json({ product });
@@ -771,8 +774,11 @@ var src_default = {
         if (productUrl.protocol !== "https:" || !/(^|\.)(meli\.la|mercadolivre\.com\.br)$/i.test(productUrl.hostname)) return json({ erro: "Use um link HTTPS do Mercado Livre ou meli.la." }, 400);
         if (String(input.image || "").trim()) { try { const parsed = new URL(String(input.image)); if (parsed.protocol !== "https:") throw new Error(); image = parsed.toString().slice(0, 1000); } catch (_) { return json({ erro: "Imagem invalida. Use HTTPS." }, 400); } }
         if (!id || title.length < 3 || !AFFILIATE_CATEGORIES.includes(category)) return json({ erro: "Produto ou categoria invalida." }, 400);
+        const price = Number(input.price);
+        if (!(price > 0)) return json({ erro: "O preço atual é obrigatório e deve ser maior que zero." }, 400);
+        if (!image) return json({ erro: "A imagem original HTTPS do produto é obrigatória." }, 400);
         const now = Date.now();
-        const product = { id, title, description, url: productUrl.toString(), image, category, tags: Array.isArray(input.tags) ? input.tags.map((tag) => cleanProfileText(tag, 30)).filter(Boolean).slice(0, 12) : [], featured: Boolean(input.featured), active: input.active !== false, position: Math.max(1, Math.min(9999, Math.floor(Number(input.position) || 999))), price: Math.max(0, Number(input.price) || 0), originalPrice: Math.max(0, Number(input.originalPrice) || 0), publishedAt: Number(input.publishedAt) || now, expiresAt: Number(input.expiresAt) || now + 36 * 36e5, updatedAt: now };
+        const product = { id, title, description, url: productUrl.toString(), image, category, tags: Array.isArray(input.tags) ? input.tags.map((tag) => cleanProfileText(tag, 30)).filter(Boolean).slice(0, 12) : [], featured: Boolean(input.featured), active: input.active !== false, position: Math.max(1, Math.min(9999, Math.floor(Number(input.position) || 999))), price, originalPrice: Math.max(0, Number(input.originalPrice) || 0), publishedAt: Number(input.publishedAt) || now, expiresAt: Number(input.expiresAt) || now + 36 * 36e5, updatedAt: now };
         await env.GAMES.put(`affiliate/products/${id}.json`, JSON.stringify(product), { httpMetadata: { contentType: "application/json" } });
         await audit(action, id, { title, category, active: product.active });
         return json({ product });
