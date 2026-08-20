@@ -688,6 +688,12 @@
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
     const R2_URL = "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/";
+    const catalogCoverUrl = (game, systemPath = '') => {
+        const value = String(game?.capa || '').trim();
+        if (/^https:\/\//i.test(value)) return value;
+        const name = value ? value.split('/').pop() : '';
+        return name ? `${R2_URL}${systemPath || game?.sysPath || game?.path || ''}capas/${encodeURIComponent(name)}` : '';
+    };
     const blockRegex = /\.m3u|([._\-\s](cd|disc|disco)\s*[0-9]+)/i;
     const escapeHTML = (value) => String(value ?? '').replace(/[&<>\"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]));
 
@@ -867,7 +873,7 @@
                 const catalogGame = indexData.find(item => catalogHistoryId(item) === game.id);
                 const recentGame = (historyData.games || []).find(item => item.id === game.id);
                 const coverName = catalogGame?.capa ? catalogGame.capa.split('/').pop() : '';
-                const coverUrl = recentGame?.cover || (coverName ? `${R2_URL}${catalogGame.sysPath}capas/${encodeURIComponent(coverName)}` : 'assets/imagens-videos/logo-discord.gif');
+                const coverUrl = recentGame?.cover || catalogCoverUrl(catalogGame) || 'assets/imagens-videos/logo-discord.gif';
                 const head = document.createElement('div'); head.className = 'cloud-game-head';
                 const cover = document.createElement('img'); cover.className = 'cloud-game-cover'; cover.src = coverUrl; cover.alt = `Capa de ${game.name}`; cover.loading = 'lazy'; cover.onerror = () => { cover.onerror = null; cover.src = 'assets/imagens-videos/logo-discord.gif'; };
                 const heading = document.createElement('div'); heading.className = 'cloud-game-heading';
@@ -893,7 +899,7 @@
     async function recordPlayedGame(game, playUrl) {
         if (!accountProfile || (!auth.currentUser && !discordAccountToken)) return;
         const coverName = game.capa ? game.capa.split('/').pop() : '';
-        const cover = game.cover || (coverName ? `${R2_URL}${game.sysPath || game.path || ''}capas/${encodeURIComponent(coverName)}` : '');
+        const cover = game.cover || catalogCoverUrl(game);
         const historyId = String(game.id || `${game.sysId}-${String(game.rom || '').split('/').pop()}`).toLowerCase().replace(/\.[a-z0-9]+$/i, '').replace(/[^a-z0-9._,-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 120);
         const pending = { id: historyId, name: game.nomeOriginal || game.nome, system: game.sysId, cover, playUrl };
         sessionStorage.setItem(PENDING_HISTORY_KEY, JSON.stringify(pending));
@@ -1163,7 +1169,7 @@
         let capaNome = gameObj.capa ? gameObj.capa.split('/').pop() : '';
 
         const localCoverPath = capaNome ? `${gameObj.sysPath}capas/${encodeURIComponent(capaNome)}` : 'assets/imagens-videos/logo-discord.gif';
-        const mediaPath = gifNome ? `${R2_URL}${gameObj.sysPath}previews/${encodeURIComponent(gifNome)}` : (capaNome ? `${R2_URL}${gameObj.sysPath}capas/${encodeURIComponent(capaNome)}` : 'assets/imagens-videos/logo-discord.gif');
+        const mediaPath = gifNome ? `${R2_URL}${gameObj.sysPath}previews/${encodeURIComponent(gifNome)}` : (catalogCoverUrl(gameObj) || 'assets/imagens-videos/logo-discord.gif');
 
         const modalImage = document.getElementById('modal-game-img');
         modalImage.onerror = () => { modalImage.onerror = () => { modalImage.src = 'assets/imagens-videos/logo-discord.gif'; }; modalImage.src = localCoverPath; };
@@ -1355,7 +1361,7 @@
             games = games.map(game => {
                 const custom = overrides[overrideId(game.rom)];
                 if (!custom) return game;
-                return {...game, ...(custom.nome ? {nome:custom.nome} : {}), ...(custom.descricao ? {descricao:custom.descricao} : {}), ...(custom.nota ? {nota:custom.nota} : {}), _adminHidden:Boolean(custom.hidden)};
+                return {...game, ...(custom.nome ? {nome:custom.nome} : {}), ...(custom.descricao ? {descricao:custom.descricao} : {}), ...(custom.nota ? {nota:custom.nota} : {}), ...(custom.capa ? {capa:custom.capa} : {}), _adminHidden:Boolean(custom.hidden)};
             }).filter(game => !game._adminHidden);
             const car = document.getElementById(`carousel-${sys.id}`);
             const uniqueByRom = new Map();
@@ -1391,7 +1397,7 @@
                 let capaNome = g.capa ? g.capa.split('/').pop() : '';
                 let gifNome = g.preview ? g.preview.split('/').pop() : '';
 
-                const imgPath = capaNome ? `${R2_URL}${sys.path}capas/${encodeURIComponent(capaNome)}` : '';
+                const imgPath = catalogCoverUrl(g, sys.path);
                 const localCoverPath = capaNome ? `${sys.path}capas/${encodeURIComponent(capaNome)}` : 'assets/imagens-videos/logo-discord.gif';
                 const gifPath = gifNome ? `${R2_URL}${sys.path}previews/${encodeURIComponent(gifNome)}` : '';
 
@@ -1467,7 +1473,7 @@
             if (!recent) return;
             const catalogGame = indexData.find(game => catalogHistoryId(game) === recent.id);
             const coverName = catalogGame?.capa ? catalogGame.capa.split('/').pop() : '';
-            const catalogCover = coverName ? `${R2_URL}${catalogGame.sysPath}capas/${encodeURIComponent(coverName)}` : '';
+            const catalogCover = catalogCoverUrl(catalogGame);
             const featured = top10Games.find(game => game.id === recent.id);
             const savedFrame = await autosaveHeroImage(recent.id).catch(() => '');
             const media = savedFrame || (featured ? `assets/wallpapers_hero/${featured.id}.jpg` : (recent.cover || catalogCover || 'assets/imagens-videos/logo-discord.gif'));
@@ -1519,7 +1525,7 @@
             recentGames.forEach((recent, recentIndex) => {
                 const catalogGame = indexData.find(game => catalogHistoryId(game) === recent.id);
                 const coverName = catalogGame?.capa ? catalogGame.capa.split('/').pop() : '';
-                const catalogCover = coverName ? `${R2_URL}${catalogGame.sysPath}capas/${encodeURIComponent(coverName)}` : '';
+                const catalogCover = catalogCoverUrl(catalogGame);
                 const featured = top10Games.find(game => game.id === recent.id);
                 const savedFrame = savedFrames[recentIndex];
                 const media = savedFrame || (featured ? `assets/wallpapers_hero/${featured.id}.jpg` : (recent.cover || catalogCover || 'assets/imagens-videos/logo-discord.gif'));
@@ -1573,7 +1579,7 @@
 
                 const div = document.createElement('div'); div.className = 'search-item selectable-item';
                 let capaNomeBusca = h.capa ? h.capa.split('/').pop() : '';
-                const imgPath = capaNomeBusca ? `${R2_URL}${h.sysPath}capas/${encodeURIComponent(capaNomeBusca)}` : 'assets/imagens-videos/logo-discord.gif';
+                const imgPath = catalogCoverUrl(h) || 'assets/imagens-videos/logo-discord.gif';
 
                 div.innerHTML = `<img src="${imgPath}" onerror="this.onerror=null; this.src='assets/imagens-videos/logo-discord.gif';"><span style="font-size:10px; font-weight:bold; margin-left:10px;">${escapeHTML(h.nome)} <span style="color:var(--accent-color); font-size:8px;">[${escapeHTML(h.sysName)}]</span></span>`;
 

@@ -623,10 +623,12 @@ var src_default = {
         const system = String(body.system || "").toLowerCase(); const rom = String(body.rom || "");
         if (!/^(nes|snes|n64|gba|megadrive|ps1)$/.test(system) || !rom || rom.length > 300) return json({ erro: "Jogo invalido." }, 400);
         const id = catalogOverrideId(system, rom); const input = body.override || {};
-        const override = { id, system, rom, nome: cleanProfileText(input.nome, 100), descricao: cleanProfileText(input.descricao, 2e3), nota: cleanProfileText(input.nota, 10), hidden: Boolean(input.hidden), updatedAt: Date.now() };
-        if (!override.nome && !override.descricao && !override.nota && !override.hidden) await env.GAMES.delete(`catalog/overrides/${system}/${id}.json`);
+        const capa = cleanProfileText(input.capa, 500);
+        if (capa && !/^[^<>"'\r\n]+\.(?:avif|gif|jpe?g|png|webp)(?:\?[^<>"'\r\n]*)?$/i.test(capa)) return json({ erro: "Capa invalida. Use um arquivo de imagem ou URL de imagem." }, 400);
+        const override = { id, system, rom, nome: cleanProfileText(input.nome, 100), descricao: cleanProfileText(input.descricao, 2e3), nota: cleanProfileText(input.nota, 10), capa, hidden: Boolean(input.hidden), updatedAt: Date.now() };
+        if (!override.nome && !override.descricao && !override.nota && !override.capa && !override.hidden) await env.GAMES.delete(`catalog/overrides/${system}/${id}.json`);
         else await env.GAMES.put(`catalog/overrides/${system}/${id}.json`, JSON.stringify(override), { httpMetadata: { contentType: "application/json" } });
-        await audit(action, id, { system, hidden: override.hidden }); return json({ override });
+        await audit(action, id, { system, hidden: override.hidden, capa: override.capa }); return json({ override });
       }
       if (action === "referrals-admin") {
         const [profiles, rewards, owners] = await Promise.all([readJsonDirectory(env, "profiles/v1/", 1e3), readJsonDirectory(env, "referrals/rewards/", 1e3), readJsonDirectory(env, "referrals/owners/", 1e3)]);
