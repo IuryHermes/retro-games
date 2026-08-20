@@ -470,6 +470,44 @@ var src_default = {
       const records = await readJsonDirectory(env, `catalog/overrides/${system}/`, 2e3);
       return json({ system, overrides: Object.fromEntries(records.map((record) => [record.value.id, record.value])) });
     }
+    const adminCoverMatch = url.pathname.match(/^\/catalog\/admin-cover\/(nes|snes|n64|gba|megadrive|ps1)\/([a-z0-9._-]+)\.(avif|gif|jpe?g|png|webp)$/i);
+    if (request.method === "GET" && adminCoverMatch) {
+      const key = `catalog/admin-covers/${adminCoverMatch[1].toLowerCase()}/${adminCoverMatch[2].toLowerCase()}.${adminCoverMatch[3].toLowerCase()}`;
+      const object = await env.GAMES.get(key);
+      if (!object) return json({ erro: "Capa nao encontrada." }, 404);
+      const headers = new Headers(cors);
+      object.writeHttpMetadata(headers);
+      headers.set("Content-Type", object.httpMetadata?.contentType || "image/jpeg");
+      headers.set("Cache-Control", "public, max-age=31536000, immutable");
+      headers.set("ETag", object.httpEtag);
+      return new Response(object.body, { headers });
+    }
+    if (request.method === "POST" && url.pathname === "/internal/admin-cover") {
+      const provided = request.headers.get("X-Admin-Key") || "";
+      if (!env.ADMIN_PANEL_KEY || !await timingSafeStringEqual(provided, env.ADMIN_PANEL_KEY)) return json({ erro: "Nao autorizado." }, 401);
+      const system = String(request.headers.get("X-Game-System") || "").toLowerCase();
+      const rom = decodeURIComponent(request.headers.get("X-Game-Rom") || "");
+      const contentType = String(request.headers.get("Content-Type") || "").split(";")[0].toLowerCase();
+      const extensions = { "image/avif": "avif", "image/gif": "gif", "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
+      const length = Number(request.headers.get("Content-Length") || 0);
+      if (!/^(nes|snes|n64|gba|megadrive|ps1)$/.test(system) || !rom || rom.length > 300) return json({ erro: "Jogo invalido." }, 400);
+      if (!extensions[contentType]) return json({ erro: "Use uma imagem AVIF, GIF, JPG, PNG ou WEBP." }, 415);
+      if (!Number.isSafeInteger(length) || length < 1 || length > MAX_SAVE_IMAGE_BYTES) return json({ erro: "A capa deve ter no maximo 4 MB." }, 413);
+      const bytes = await request.arrayBuffer();
+      if (bytes.byteLength !== length || bytes.byteLength > MAX_SAVE_IMAGE_BYTES) return json({ erro: "Tamanho da capa invalido." }, 400);
+      const id = catalogOverrideId(system, rom);
+      const extension = extensions[contentType];
+      const imageKey = `catalog/admin-covers/${system}/${id}.${extension}`;
+      const overrideKey = `catalog/overrides/${system}/${id}.json`;
+      const currentObject = await env.GAMES.get(overrideKey);
+      const current = currentObject ? await currentObject.json().catch(() => ({})) : {};
+      const version = Date.now();
+      const capa = `${WORKER}/catalog/admin-cover/${system}/${id}.${extension}?v=${version}`;
+      const override = { ...current, id, system, rom, capa, updatedAt: version };
+      const oldCoverKeys = ["avif", "gif", "jpg", "jpeg", "png", "webp"].filter((item) => item !== extension).map((item) => `catalog/admin-covers/${system}/${id}.${item}`);
+      await Promise.all([...oldCoverKeys.map((key) => env.GAMES.delete(key)), env.GAMES.put(imageKey, bytes, { httpMetadata: { contentType, cacheControl: "public, max-age=31536000, immutable" } }), env.GAMES.put(overrideKey, JSON.stringify(override), { httpMetadata: { contentType: "application/json" } }), adminAudit(env, "game-cover-upload", id, { system, actor: cleanProfileText(request.headers.get("X-Admin-Actor"), 64) || "admin", bytes: bytes.byteLength })]);
+      return json({ capa, override });
+    }
     if (request.method === "POST" && url.pathname === "/internal/admin-console") {
       const provided = request.headers.get("X-Admin-Key") || "";
       if (!env.ADMIN_PANEL_KEY || !await timingSafeStringEqual(provided, env.ADMIN_PANEL_KEY)) return json({ erro: "Nao autorizado." }, 401);

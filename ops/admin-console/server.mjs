@@ -14,11 +14,12 @@ const usernameFile = process.env.ADMIN_USERNAME_FILE || join(root, '.admin-usern
 const sessions = new Map();
 const attempts = new Map();
 const maxBody = 256 * 1024;
+const maxCoverBody = 4 * 1024 * 1024;
 const mime = { '.html':'text/html; charset=utf-8', '.js':'text/javascript; charset=utf-8', '.css':'text/css; charset=utf-8', '.svg':'image/svg+xml' };
 const securityHeaders = {
   'Cache-Control':'no-store', 'X-Content-Type-Options':'nosniff', 'X-Frame-Options':'DENY',
   'Referrer-Policy':'no-referrer', 'Permissions-Policy':'camera=(), microphone=(), geolocation=()',
-  'Content-Security-Policy':"default-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+  'Content-Security-Policy':"default-src 'self'; connect-src 'self'; img-src 'self' https: data: blob:; style-src 'self'; script-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
 };
 
 function send(res, status, body, headers={}) {
@@ -35,6 +36,11 @@ async function body(req) {
   const chunks=[]; let size=0;
   for await (const chunk of req) { size += chunk.length; if (size > maxBody) throw new Error('BODY_TOO_LARGE'); chunks.push(chunk); }
   return JSON.parse(Buffer.concat(chunks).toString('utf8') || '{}');
+}
+async function rawBody(req, limit) {
+  const chunks=[]; let size=0;
+  for await (const chunk of req) { size += chunk.length; if (size > limit) throw new Error('BODY_TOO_LARGE'); chunks.push(chunk); }
+  return Buffer.concat(chunks);
 }
 async function makeHash(password) {
   const salt=randomBytes(16); const derived=await scrypt(password, salt, 64);
@@ -67,6 +73,11 @@ async function proxyAdmin(payload) {
   const response=await fetch(`${workerUrl}/internal/admin-console`,{method:'POST',headers:{'Content-Type':'application/json','X-Admin-Key':process.env.WORKER_ADMIN_KEY || ''},body:JSON.stringify(payload),signal:AbortSignal.timeout(20000)});
   const data=await response.json().catch(()=>({erro:`Worker respondeu HTTP ${response.status}`}));
   return { status:response.status, data };
+}
+async function proxyAdminCover(data,{system,rom,contentType,actor}) {
+  const response=await fetch(`${workerUrl}/internal/admin-cover`,{method:'POST',headers:{'Content-Type':contentType,'Content-Length':String(data.length),'X-Admin-Key':process.env.WORKER_ADMIN_KEY||'','X-Admin-Actor':actor,'X-Game-System':system,'X-Game-Rom':encodeURIComponent(rom)},body:data,signal:AbortSignal.timeout(30000)});
+  const result=await response.json().catch(()=>({erro:`Worker respondeu HTTP ${response.status}`}));
+  return {status:response.status,data:result};
 }
 async function serve(req,res,path) {
   const file=path==='/'?'index.html':path.slice(1);
@@ -104,6 +115,15 @@ const server=http.createServer(async (req,res)=>{
       return send(res,200,{ok:true,username,mensagem:'Usuário alterado. Entre novamente.'},{'Set-Cookie':'neo_admin=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0'});
     }
     if (req.method==='POST' && url.pathname==='/api/admin') { if(!requireSession(req,res,true))return; const payload=await body(req); const result=await proxyAdmin({...payload,adminActor:await adminUsername()}); return send(res,result.status,result.data); }
+    if (req.method==='POST' && url.pathname==='/api/admin-cover') {
+      if(!requireSession(req,res,true))return;
+      const system=String(url.searchParams.get('system')||'').toLowerCase(); const rom=String(url.searchParams.get('rom')||'');
+      const contentType=String(req.headers['content-type']||'').split(';')[0].toLowerCase();
+      if(!/^(nes|snes|n64|gba|megadrive|ps1)$/.test(system)||!rom||rom.length>300)return send(res,400,{erro:'Jogo inválido.'});
+      if(!['image/avif','image/gif','image/jpeg','image/png','image/webp'].includes(contentType))return send(res,415,{erro:'Use AVIF, GIF, JPG, PNG ou WEBP.'});
+      const data=await rawBody(req,maxCoverBody); if(!data.length)return send(res,400,{erro:'Escolha uma imagem.'});
+      const result=await proxyAdminCover(data,{system,rom,contentType,actor:await adminUsername()}); return send(res,result.status,result.data);
+    }
     if (req.method==='GET' && url.pathname==='/api/health') { if(!requireSession(req,res))return; const result=await proxyAdmin({action:'overview'}); return send(res,result.status,{...result.data,console:{up:true,startedAt:started}}); }
     if (req.method==='GET') return serve(req,res,url.pathname);
     send(res,405,{erro:'Método não permitido.'});
