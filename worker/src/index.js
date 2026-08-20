@@ -54,10 +54,10 @@ var WEEKLY_POLLS = [
 var PLANS = { cafe: { title: "Cafe", amount: 5 }, cartucho: { title: "Cartucho", amount: 12 }, arcade: { title: "Arcade", amount: 25 } };
 var AFFILIATE_CATEGORIES = ["destaques", "controles", "ps5", "xbox", "nintendo", "pc-gamer", "monitores", "audio", "armazenamento", "celulares", "smart-home", "streaming", "retro", "gadgets"];
 var DEFAULT_AFFILIATE_PRODUCTS = [
-  { id: "ml-oferta-1", title: "Oferta gamer Mercado Livre", description: "Acessório selecionado para quem joga no celular, computador ou console.", url: "https://meli.la/1eNR6GB", image: "", category: "destaques", tags: ["gamer", "oferta"], featured: true, active: true, position: 1 },
-  { id: "ml-oferta-2", title: "Tecnologia em oferta", description: "Produto de tecnologia recomendado pelo NeoTerminalRoom.", url: "https://meli.la/2HD21Wi", image: "", category: "gadgets", tags: ["tecnologia"], featured: true, active: true, position: 2 },
-  { id: "ml-oferta-3", title: "Acessório para seu setup", description: "Complete seu espaço de jogos com uma oferta do Mercado Livre.", url: "https://meli.la/1GQhiTZ", image: "", category: "pc-gamer", tags: ["setup", "gamer"], featured: true, active: true, position: 3 },
-  { id: "ml-oferta-4", title: "Achado NeoTerminalRoom", description: "Oferta escolhida para a comunidade de jogos e tecnologia.", url: "https://meli.la/1Ld2GkU", image: "", category: "retro", tags: ["retro", "oferta"], featured: true, active: true, position: 4 }
+  { id: "ml-oferta-1", title: "Oferta gamer Mercado Livre", description: "Acessório selecionado para quem joga no celular, computador ou console.", url: "https://meli.la/1eNR6GB", image: "/assets/affiliate/oferta-gamer.png", category: "destaques", tags: ["gamer", "oferta"], featured: true, active: true, position: 1 },
+  { id: "ml-oferta-2", title: "Tecnologia em oferta", description: "Produto de tecnologia recomendado pelo NeoTerminalRoom.", url: "https://meli.la/2HD21Wi", image: "/assets/affiliate/gadgets-tech.png", category: "gadgets", tags: ["tecnologia"], featured: true, active: true, position: 2 },
+  { id: "ml-oferta-3", title: "Acessório para seu setup", description: "Complete seu espaço de jogos com uma oferta do Mercado Livre.", url: "https://meli.la/1GQhiTZ", image: "/assets/affiliate/setup-pc.png", category: "pc-gamer", tags: ["setup", "gamer"], featured: true, active: true, position: 3 },
+  { id: "ml-oferta-4", title: "Achado NeoTerminalRoom", description: "Oferta escolhida para a comunidade de jogos e tecnologia.", url: "https://meli.la/1Ld2GkU", image: "/assets/affiliate/retro-tech.png", category: "retro", tags: ["retro", "oferta"], featured: true, active: true, position: 4 }
 ];
 var cors = {
   "Access-Control-Allow-Origin": SITE,
@@ -474,7 +474,7 @@ var src_default = {
     if (request.method === "GET" && url.pathname === "/affiliate/products") {
       const saved = await readJsonDirectory(env, "affiliate/products/", 500);
       const merged = new Map(DEFAULT_AFFILIATE_PRODUCTS.map((product) => [product.id, product]));
-      for (const record of saved) merged.set(record.value.id, record.value);
+      for (const record of saved) merged.set(record.value.id, { ...(merged.get(record.value.id) || {}), ...record.value, image: record.value.image || merged.get(record.value.id)?.image || "" });
       const products = [...merged.values()].filter((product) => product.active !== false).sort((a, b) => Number(a.position || 999) - Number(b.position || 999));
       return json({ products, categories: AFFILIATE_CATEGORIES, disclosure: "O NeoTerminalRoom pode receber comissao pelas compras, sem custo adicional para voce." });
     }
