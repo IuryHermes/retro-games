@@ -71,17 +71,47 @@ async function affiliateBotState(env) {
   return { state: state ? await state.json().catch(() => ({})) : {}, config: config ? await config.json().catch(() => ({})) : { active: false, expiresHours: 36, searches: AFFILIATE_BOT_SEARCHES } };
 }
 __name(affiliateBotState, "affiliateBotState");
+async function mercadoLivreAccessToken(env) {
+  if (env.ML_ACCESS_TOKEN) return env.ML_ACCESS_TOKEN;
+  const savedObject = await env.GAMES.get("affiliate/bot/oauth.json");
+  const saved = savedObject ? await savedObject.json().catch(() => null) : null;
+  if (saved?.accessToken && Number(saved.expiresAt) > Date.now() + 5 * 60 * 1e3) return saved.accessToken;
+  if (saved?.refreshToken && env.ML_CLIENT_ID && env.ML_CLIENT_SECRET) {
+    const refreshBody = new URLSearchParams({ grant_type: "refresh_token", client_id: env.ML_CLIENT_ID, client_secret: env.ML_CLIENT_SECRET, refresh_token: saved.refreshToken });
+    const refreshed = await fetch("https://api.mercadolibre.com/oauth/token", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: refreshBody });
+    if (refreshed.ok) {
+      const data = await refreshed.json();
+      const token = { accessToken: String(data.access_token || ""), refreshToken: String(data.refresh_token || saved.refreshToken), expiresAt: Date.now() + Math.max(300, Number(data.expires_in) || 21600) * 1e3, userId: String(data.user_id || saved.userId || ""), updatedAt: Date.now() };
+      await env.GAMES.put("affiliate/bot/oauth.json", JSON.stringify(token), { httpMetadata: { contentType: "application/json" } });
+      return token.accessToken;
+    }
+  }
+  if (!env.ML_CLIENT_ID || !env.ML_CLIENT_SECRET) return "";
+  const body = new URLSearchParams({ grant_type: "client_credentials", client_id: env.ML_CLIENT_ID, client_secret: env.ML_CLIENT_SECRET });
+  const response = await fetch("https://api.mercadolibre.com/oauth/token", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body });
+  if (!response.ok) {
+    console.error(JSON.stringify({ event: "affiliate_token_error", status: response.status }));
+    return "";
+  }
+  const data = await response.json();
+  return String(data.access_token || "");
+}
+__name(mercadoLivreAccessToken, "mercadoLivreAccessToken");
 async function runAffiliateBot(env) {
   const { config } = await affiliateBotState(env);
   if (!config.active) return { ok: false, reason: "inactive", candidates: [] };
-  if (!env.ML_ACCESS_TOKEN) return { ok: false, reason: "missing_token", candidates: [] };
+  const accessToken = await mercadoLivreAccessToken(env);
+  if (!accessToken) return { ok: false, reason: "missing_token", candidates: [] };
   const searches = Array.isArray(config.searches) && config.searches.length ? config.searches.slice(0, 12) : AFFILIATE_BOT_SEARCHES;
   const collected = [];
   for (const search of searches) {
     const endpoint = new URL("https://api.mercadolibre.com/sites/MLB/search");
     endpoint.searchParams.set("q", cleanProfileText(search.query, 80)); endpoint.searchParams.set("limit", "12");
-    const response = await fetch(endpoint, { headers: { Authorization: `Bearer ${env.ML_ACCESS_TOKEN}` } });
-    if (!response.ok) continue;
+    const response = await fetch(endpoint, { headers: { Authorization: `Bearer ${accessToken}` } });
+    if (!response.ok) {
+      console.error(JSON.stringify({ event: "affiliate_search_error", status: response.status, query: search.query, detail: (await response.text()).slice(0, 300) }));
+      continue;
+    }
     const data = await response.json();
     for (const item of data.results || []) {
       const price = Number(item.price || 0), originalPrice = Number(item.original_price || 0);
@@ -524,6 +554,21 @@ __name(SocialPlayer, "SocialPlayer");
 var src_default = {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (request.method === "GET" && url.pathname === "/affiliate/oauth/callback") {
+      const code = String(url.searchParams.get("code") || ""), state = String(url.searchParams.get("state") || "");
+      const stateObject = state ? await env.GAMES.get(`affiliate/bot/oauth-state/${state}.json`) : null;
+      const savedState = stateObject ? await stateObject.json().catch(() => null) : null;
+      if (!code || !savedState || Date.now() - Number(savedState.createdAt) > 10 * 60 * 1e3) return json({ erro: "Autorização inválida ou expirada." }, 400);
+      await env.GAMES.delete(`affiliate/bot/oauth-state/${state}.json`);
+      const redirectUri = `${WORKER}/affiliate/oauth/callback`;
+      const tokenResponse = await fetch("https://api.mercadolibre.com/oauth/token", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ grant_type: "authorization_code", client_id: env.ML_CLIENT_ID, client_secret: env.ML_CLIENT_SECRET, code, redirect_uri: redirectUri }) });
+      if (!tokenResponse.ok) return json({ erro: "O Mercado Livre recusou a autorização." }, 502);
+      const data = await tokenResponse.json();
+      const token = { accessToken: String(data.access_token || ""), refreshToken: String(data.refresh_token || ""), expiresAt: Date.now() + Math.max(300, Number(data.expires_in) || 21600) * 1e3, userId: String(data.user_id || ""), updatedAt: Date.now() };
+      if (!token.accessToken || !token.refreshToken) return json({ erro: "Autorização incompleta." }, 502);
+      await env.GAMES.put("affiliate/bot/oauth.json", JSON.stringify(token), { httpMetadata: { contentType: "application/json" } });
+      return new Response("<!doctype html><meta charset=utf-8><title>Neo Terminal</title><style>body{background:#030805;color:#55ff88;font:20px Consolas;padding:60px;text-align:center}</style><h1>NEO TERMINAL</h1><p>Mercado Livre conectado. Você pode fechar esta aba.</p>", { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" } });
+    }
     if (request.method === "GET" && url.pathname === "/affiliate/products") {
       const account = await accountAccess(request, env);
       if (!account)
@@ -737,7 +782,16 @@ var src_default = {
       }
       if (action === "affiliate-bot-status") {
         const bot = await affiliateBotState(env);
-        return json({ ...bot, tokenConfigured: Boolean(env.ML_ACCESS_TOKEN), defaultSearches: AFFILIATE_BOT_SEARCHES });
+        const oauth = await env.GAMES.head("affiliate/bot/oauth.json");
+        return json({ ...bot, tokenConfigured: Boolean(env.ML_ACCESS_TOKEN || oauth || env.ML_CLIENT_ID && env.ML_CLIENT_SECRET), accountAuthorized: Boolean(env.ML_ACCESS_TOKEN || oauth), defaultSearches: AFFILIATE_BOT_SEARCHES });
+      }
+      if (action === "affiliate-oauth-start") {
+        if (!env.ML_CLIENT_ID || !env.ML_CLIENT_SECRET) return json({ erro: "Aplicação do Mercado Livre não configurada." }, 409);
+        const state = crypto.randomUUID();
+        await env.GAMES.put(`affiliate/bot/oauth-state/${state}.json`, JSON.stringify({ createdAt: Date.now() }), { httpMetadata: { contentType: "application/json" } });
+        const authorize = new URL("https://auth.mercadolivre.com.br/authorization");
+        authorize.searchParams.set("response_type", "code"); authorize.searchParams.set("client_id", env.ML_CLIENT_ID); authorize.searchParams.set("redirect_uri", `${WORKER}/affiliate/oauth/callback`); authorize.searchParams.set("state", state);
+        return json({ url: authorize.toString() });
       }
       if (action === "affiliate-bot-config") {
         const searches = Array.isArray(body.searches) ? body.searches.map((item) => ({ query: cleanProfileText(item.query, 80), category: AFFILIATE_CATEGORIES.includes(item.category) ? item.category : "destaques" })).filter((item) => item.query).slice(0, 12) : AFFILIATE_BOT_SEARCHES;
