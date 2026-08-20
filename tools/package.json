@@ -1,8 +1,0 @@
-{
-  "name": "neo-discord-live-monitor",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "ws": "^8.18.3"
-  }
-}

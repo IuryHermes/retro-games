@@ -90,50 +90,10 @@ async function loadPlayers() {
     const data = await api("/social/players");
     state.self = data.self || state.self;
     state.players = data.players || [];
-    const streamers = state.players.filter(
-      (player) => player.streaming && player.watchRoomId,
-    );
-    const liveList = el("live-players");
-    liveList.replaceChildren();
-    if (!streamers.length) {
-      liveList.innerHTML =
-        '<div class="empty">Nenhuma transmissão validada agora. Quando alguém entrar ao vivo no Discord, ela aparecerá aqui.</div>';
-    } else {
-      for (const player of streamers) {
-        const card = document.createElement("article");
-        card.className = "live-card";
-        const image = document.createElement("img");
-        image.src = avatar(player.avatar);
-        image.alt = "";
-        const info = document.createElement("div");
-        const name = document.createElement("strong");
-        name.textContent = `🔴 ${player.name}`;
-        const title = document.createElement("small");
-        title.textContent = player.watchTitle || "Gameplay ao vivo";
-        info.append(name, title);
-        const actions = document.createElement("div");
-        actions.className = "live-actions";
-        const watch = document.createElement("button");
-        watch.className = "watch-live";
-        watch.textContent = "ASSISTIR NO SITE";
-        watch.onclick = () => {
-          window.location.href = `multiplayer-room.html?room=${encodeURIComponent(player.watchRoomId)}&spectator=1`;
-        };
-        const discord = document.createElement("a");
-        discord.className = "discord-live";
-        discord.href = "https://discord.com/channels/1206797125854167110/1537280728922849332";
-        discord.target = "_blank";
-        discord.rel = "noopener";
-        discord.textContent = "DISCORD";
-        actions.append(watch, discord);
-        card.append(image, info, actions);
-        liveList.appendChild(card);
-      }
-    }
     el("players").replaceChildren();
     const onlineCount = state.players.filter((player) => player.online).length;
     el("status").textContent =
-      `${onlineCount} online · ${streamers.length} ao vivo · ${state.players.length} perfil(is) cadastrado(s)`;
+      `${onlineCount} online · ${state.players.length} perfil(is) cadastrado(s)`;
     if (!state.players.length) {
       el("players").innerHTML =
         '<div class="empty">Ainda não existem outros perfis cadastrados.</div>';

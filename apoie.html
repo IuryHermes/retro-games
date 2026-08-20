@@ -12,8 +12,8 @@
     h1{font-size:clamp(30px,6vw,58px);line-height:1.05;margin:0 0 16px;max-width:780px}.lead{color:var(--muted);font-size:18px;max-width:720px;margin-bottom:34px}.intro{display:grid;grid-template-columns:1.5fr 1fr;gap:28px;align-items:end;margin-bottom:46px}.note{border:1px solid #265d3a;border-radius:12px;padding:18px;background:#0c1712;color:#c9e9d0}.note strong{color:var(--green)}
     .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.plan{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid #244536;border-radius:14px;padding:24px;display:flex;flex-direction:column;min-height:350px}.plan.featured{border-color:var(--green);box-shadow:0 0 28px #00cc4420;transform:translateY(-8px)}.plan h2{margin:0;color:var(--green);font-size:22px}.price{font-size:34px;font-weight:800;margin:14px 0;color:#fff}.price small{font-size:14px;color:var(--muted);font-weight:400}.plan ul{padding-left:20px;color:var(--muted);flex:1}.plan li{margin:8px 0}.btn{display:inline-block;text-align:center;text-decoration:none;border:1px solid var(--green);border-radius:8px;padding:11px 14px;color:#031108;background:var(--green);font-weight:800}.btn:hover{filter:brightness(1.15)}.btn.alt{background:transparent;color:var(--green)}
     .how{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.how article{background:#0c1418;border:1px solid #1d3030;border-radius:12px;padding:18px}.how h3{color:var(--gold);margin-top:0}.rewards{margin-top:42px;padding:24px;border:1px solid #5e5125;border-radius:14px;background:linear-gradient(145deg,#17160e,#0c1412)}.rewards h2{margin:0 0 8px;color:var(--gold)}.rewards-lead{color:var(--muted);max-width:820px}.reward-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}.reward{padding:18px;border:1px solid #40391f;border-radius:10px;background:#0b1110}.reward strong{display:block;color:var(--gold);font-size:22px}.reward span{color:var(--muted)}.reward-steps{margin:0;padding-left:22px;color:#c9e9d0}.reward-steps li{margin:8px 0}.privacy{margin-top:32px;color:var(--muted);font-size:14px;border-top:1px solid #1d3030;padding-top:20px}.privacy strong{color:var(--text)}
-    .rewards + .note{margin-top:28px}
-    @media(max-width:800px){.intro,.plans,.how,.reward-grid{grid-template-columns:1fr}.plan.featured{transform:none}.top{margin-bottom:30px}}
+    .rewards + .note{margin-top:28px}.share-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}.share-actions button{border:1px solid var(--green);border-radius:8px;padding:11px 8px;background:#0b1710;color:var(--text);font-weight:700;cursor:pointer}.share-actions button:hover{background:#123020}.ref-box{display:flex;gap:8px;margin:16px 0}.ref-box input{min-width:0;flex:1;border:1px solid #315843;border-radius:8px;background:#07100b;color:#fff;padding:11px}.ref-status{min-height:24px;color:var(--gold)}
+    @media(max-width:800px){.intro,.plans,.how,.reward-grid{grid-template-columns:1fr}.share-actions{grid-template-columns:repeat(2,1fr)}.plan.featured{transform:none}.top{margin-bottom:30px}}
   </style>
 <script src="privacy-consent-v2.js" defer></script>
 </head>
@@ -24,22 +24,24 @@
       <div><h1>Ajude a manter o arcade ligado.</h1><p class="lead">O Clube NeoTerminalRoom transforma a paixão por jogos retrô em manutenção, conteúdo e melhorias para toda a comunidade.</p></div>
       <div class="note"><strong>Você escolhe como aparecer.</strong><br>Use um apelido ou marque a contribuição como anônima. Seu nome civil não é publicado no mural.</div>
     </section>
-    <section class="rewards" aria-labelledby="premios-live">
-      <h2 id="premios-live">🏆 Ajude o projeto sem gastar: transmita gameplay</h2>
-      <p class="rewards-lead">Antes das opções de doação, existe uma forma gratuita de fortalecer a comunidade: qualquer membro do Discord pode acumular tempo transmitindo suas partidas do NeoTerminalRoom no canal <strong>#live-arcade</strong>. O sistema valida a transmissão, divulga a live para quem quer assistir e libera espaço extra de saves automaticamente.</p>
+    <section class="rewards" aria-labelledby="indicacoes">
+      <h2 id="indicacoes">🏆 Ajude o projeto sem gastar: compartilhe e indique</h2>
+      <p class="rewards-lead">Crie seu link pessoal, compartilhe o NeoTerminalRoom e traga novos jogadores. Cada rede usada de forma válida rende 1 ponto por semana; quando uma pessoa nova conclui o cadastro pelo seu link, você recebe 10 pontos.</p>
       <div class="reward-grid">
-        <article class="reward"><strong>30 minutos</strong><span>+1 jogo com autosave na nuvem</span></article>
-        <article class="reward"><strong>2 horas</strong><span>+2 slots manuais por jogo</span></article>
-        <article class="reward"><strong>5 horas</strong><span>+2 jogos com autosave na nuvem</span></article>
+        <article class="reward"><strong>5 pontos</strong><span>+1 jogo com autosave na nuvem</span></article>
+        <article class="reward"><strong>15 pontos</strong><span>+2 slots manuais por jogo</span></article>
+        <article class="reward"><strong>30 pontos</strong><span>+2 jogos com autosave na nuvem</span></article>
       </div>
+      <div class="ref-box"><input id="ref-link" readonly value="Entre na sua conta para gerar seu link"><button class="btn" id="ref-copy" type="button">COPIAR</button></div>
+      <div class="share-actions" id="share-actions"><button data-share="whatsapp">WhatsApp</button><button data-share="facebook">Facebook</button><button data-share="instagram">Instagram</button><button data-share="telegram">Telegram</button><button data-share="x">X / Twitter</button><button data-share="bluesky">Bluesky</button><button data-share="threads">Threads</button><button data-share="linkedin">LinkedIn</button><button data-share="reddit">Reddit</button><button data-share="email">E-mail</button><button data-share="native">Outros apps</button><button data-share="copy">Copiar link</button></div>
+      <p class="ref-status" id="ref-status" aria-live="polite"></p>
       <ol class="reward-steps">
-        <li>Entre no site usando a mesma conta do Discord que possui o cargo Arcade.</li>
-        <li>Abra uma sala em <strong>Jogar Online</strong> e compartilhe a gameplay no canal <strong>#live-arcade</strong>.</li>
-        <li>Quem estiver na área <strong>Comunidade</strong> poderá ver que você está ao vivo e assistir pelo site.</li>
-        <li>O tempo é acumulado entre transmissões válidas. Ao alcançar cada marco, o prêmio entra automaticamente na sua conta e o Discord publica a conquista.</li>
-        <li>Consulte os minutos acumulados e os novos limites na área <strong>☁ SAVES</strong> do seu perfil.</li>
+        <li>Entre ou crie seu cadastro no site e volte a esta página.</li>
+        <li>Escolha uma rede acima. O texto e o seu link pessoal serão preparados automaticamente.</li>
+        <li>Seu amigo abre o link e conclui um cadastro novo; nesse momento os 10 pontos entram na sua conta.</li>
+        <li>Ao alcançar cada marco, o espaço extra de saves é liberado automaticamente.</li>
       </ol>
-      <p class="privacy"><strong>Validação:</strong> só conta o período em que a transmissão está ativa no canal oficial e a conta permanece jogando em uma sala do site. Transmita apenas conteúdo permitido e siga as regras da comunidade. Os bônus são cumulativos: ao completar cinco horas, a conta terá recebido três vagas adicionais de autosave e duas vagas manuais.</p>
+      <p class="privacy"><strong>Validação e uso justo:</strong> cada rede pontua no máximo uma vez a cada sete dias. Abrir o compartilhamento não garante alcance, e cadastros próprios, repetidos ou sem perfil concluído não contam. Não envie spam. Os bônus são cumulativos e ficam ligados à conta.</p>
     </section>
     <section class="note" style="margin-bottom:32px"><h2 style="margin-top:0;color:var(--green)">Faça um apoio livre</h2><p>Ajude o NeoTerminalRoom com qualquer valor a partir de R$ 1, sem precisar usar Discord. Essa é uma doação voluntária, sem cargo, canais exclusivos ou outros benefícios — você contribui apenas para manter e melhorar o projeto.</p><a class="btn" href="index.html?apoio=livre#apoio">Escolher quanto quero apoiar</a></section>
     <section aria-labelledby="planos"><h2 id="planos">Escolha seu plano</h2><div class="plans">
@@ -49,7 +51,36 @@
     </div></section>
     <section class="note" style="margin-top:20px"><h2 style="margin-top:0;color:var(--green)">Quer os benefícios do Clube?</h2><p><strong>Antes de pagar:</strong> entre no servidor pelo botão Discord do site, aceite as regras clicando no ✅ para receber o cargo Membro, volte ao formulário, escolha Continue, Cartucho ou Arcade e clique em Conectar Discord. Depois que o Mercado Pago aprovar, o cargo comprado e os canais correspondentes serão liberados automaticamente por 30 dias.</p><p>Se você nunca usou Discord, ele é um aplicativo gratuito de comunidades. Crie uma conta, entre no servidor NeoTerminalRoom e siga as instruções do canal de regras.</p></section>
     <section class="how"><article><h3>1. Conecte</h3><p>Entre no Discord, aceite as regras para receber Membro e conecte sua conta no formulário.</p></article><article><h3>2. Confirmação</h3><p>Após a aprovação do Pix, o mural é atualizado e os 30 dias começam a contar.</p></article><article><h3>3. Acesso automático</h3><p>O bot entrega Continue, Cartucho ou Arcade automaticamente e libera os canais correspondentes.</p></article></section>
-    <p class="privacy"><strong>Como cada benefício é entregue:</strong> após o login, o autosave e os slots do plano ficam disponíveis no botão ☁ SAVES dentro do player. Continue oferece 7 slots manuais por jogo e autosave em 5 jogos; Cartucho oferece 20 slots por jogo e autosave em 15 jogos; Arcade deixa ambos ilimitados. O autosave é separado e não consome um slot manual. Lives e suas recompensas são gratuitas para todos os membros; o Pix é opcional e libera os limites e benefícios do plano escolhido. O mural e o cargo são automáticos, e as enquetes ficam nos canais Cartucho. O cargo pago é removido automaticamente após 30 dias e pode ser renovado com um novo apoio.<br><br><strong>Compatibilidade dos saves:</strong> o recurso depende do suporte do núcleo do emulador ao estado do jogo. O autosave roda a cada 60 segundos quando o estado muda.<br><br><strong>Privacidade:</strong> o mural mostra apenas o apelido/mensagem escolhidos. A conta Discord identifica o dono de cada save e entrega o cargo comprado. Dados reais solicitados pela plataforma de pagamento não são publicados.<br><br><strong>Transparência:</strong> o pagamento atual é avulso e concede 30 dias de benefícios; não existe renovação automática.</p>
+    <p class="privacy"><strong>Como cada benefício é entregue:</strong> após o login, o autosave e os slots do plano ficam disponíveis no botão ☁ SAVES dentro do player. Continue oferece 7 slots manuais por jogo e autosave em 5 jogos; Cartucho oferece 20 slots por jogo e autosave em 15 jogos; Arcade deixa ambos ilimitados. O autosave é separado e não consome um slot manual. Compartilhamentos e indicações são gratuitos; o Pix é opcional e libera os limites e benefícios do plano escolhido. O mural e o cargo são automáticos, e as enquetes ficam nos canais Cartucho. O cargo pago é removido automaticamente após 30 dias e pode ser renovado com um novo apoio.<br><br><strong>Compatibilidade dos saves:</strong> o recurso depende do suporte do núcleo do emulador ao estado do jogo. O autosave roda a cada 60 segundos quando o estado muda.<br><br><strong>Privacidade:</strong> o programa registra a rede escolhida, o momento do compartilhamento e a relação entre indicador e novo cadastro; não publica esses dados. O mural mostra apenas o apelido/mensagem escolhidos. Dados reais solicitados pela plataforma de pagamento não são publicados.<br><br><strong>Transparência:</strong> o pagamento atual é avulso e concede 30 dias de benefícios; não existe renovação automática.</p>
   </main>
+  <script>
+  (() => {
+    const API='https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev', link=document.getElementById('ref-link'), status=document.getElementById('ref-status');
+    let data=null;
+    const token=()=>sessionStorage.getItem('neo_account_access')||sessionStorage.getItem('neo_club_access')||'';
+    async function referral(method='GET',platform=''){
+      const access=token(); if(!access) throw new Error('Entre ou crie seu cadastro no site e volte a esta página.');
+      const response=await fetch(`${API}/account/referrals`,{method,headers:{Authorization:`Bearer ${access}`,...(method==='POST'?{'Content-Type':'application/json'}:{})},body:method==='POST'?JSON.stringify({platform}):undefined,cache:'no-store'});
+      const result=await response.json().catch(()=>({})); if(!response.ok) throw new Error(result.erro||'Não foi possível carregar seu link.'); return result;
+    }
+    function render(result){data=result;link.value=result.shareUrl;const r=result.rewards;status.textContent=`${r.points} pontos · ${r.shares} compartilhamentos válidos · ${r.referrals} novos cadastros pelo seu link`;}
+    async function copy(){await navigator.clipboard.writeText(data.shareUrl);status.textContent='Link copiado. Agora escolha onde publicar.';}
+    async function share(platform){
+      if(!data) throw new Error('Seu link ainda não foi carregado.');
+      render(await referral('POST',platform));
+      const u=encodeURIComponent(data.shareUrl), text=encodeURIComponent('Conheça o NeoTerminalRoom: jogos retrô direto no navegador, comunidade e saves na nuvem!');
+      const urls={whatsapp:`https://wa.me/?text=${text}%20${u}`,facebook:`https://www.facebook.com/sharer/sharer.php?u=${u}`,telegram:`https://t.me/share/url?url=${u}&text=${text}`,x:`https://twitter.com/intent/tweet?text=${text}&url=${u}`,bluesky:`https://bsky.app/intent/compose?text=${text}%20${u}`,linkedin:`https://www.linkedin.com/sharing/share-offsite/?url=${u}`,reddit:`https://www.reddit.com/submit?url=${u}&title=${text}`,email:`mailto:?subject=NeoTerminalRoom&body=${text}%0A%0A${u}`};
+      if(platform==='copy'){await copy();return;}
+      if(platform==='native'||platform==='instagram'||platform==='threads'){
+        if(navigator.share){await navigator.share({title:'NeoTerminalRoom',text:'Conheça o NeoTerminalRoom: jogos retrô direto no navegador!',url:data.shareUrl});return;}
+        await copy(); status.textContent='Link copiado. Cole no app escolhido.'; return;
+      }
+      window.open(urls[platform],'_blank','noopener,noreferrer');
+    }
+    document.getElementById('ref-copy').onclick=()=>copy().catch(error=>status.textContent=error.message);
+    document.querySelectorAll('[data-share]').forEach(button=>button.onclick=()=>share(button.dataset.share).catch(error=>status.textContent=error.message));
+    referral().then(render).catch(error=>status.textContent=error.message);
+  })();
+  </script>
 </body>
 </html>

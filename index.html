@@ -394,6 +394,11 @@
         .profile-tab { flex:1; min-height:38px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-muted); border-radius:5px; cursor:pointer; font:bold 10px monospace; }
         .profile-tab.active { border-color:var(--accent-color); background:rgba(0,204,68,.15); color:var(--text-color); }
         .cloud-summary { grid-column:1/-1; padding:12px; border:1px solid var(--accent-color); background:rgba(0,204,68,.08); border-radius:6px; color:var(--text-color); font:11px monospace; line-height:1.6; }
+        .cloud-plan-promo { grid-column:1/-1; padding:15px; border:1px solid #ffd166; background:linear-gradient(135deg,rgba(255,209,102,.13),rgba(0,204,68,.07)); border-radius:7px; color:var(--text-color); font:11px/1.65 monospace; }
+        .cloud-plan-promo strong { display:block; color:#ffd166; font-size:12px; }
+        .cloud-plan-promo a { display:inline-block; margin-top:9px; padding:8px 12px; border-radius:5px; background:#ffd166; color:#171207; text-decoration:none; font-weight:bold; }
+        .profile-top-actions { display:flex; justify-content:flex-start; margin:8px 0 4px; }
+        .profile-top-actions .auth-action { width:auto; margin:0; padding:8px 12px; }
         .cloud-game { border:1px solid var(--border-color); background:var(--input-bg); border-radius:6px; padding:12px; min-width:0; }
         .cloud-game-title { color:var(--text-color); font:bold 11px monospace; overflow-wrap:anywhere; }
         .cloud-game-system { color:var(--accent-color); font:8px 'Press Start 2P',cursive; margin-top:5px; }
@@ -443,7 +448,7 @@
             <button class="game-info-close" id="multiplayer-close" type="button">X</button>
             <h2 id="multiplayer-title">JOGAR ONLINE</h2>
             <p class="history-subtitle">Entre como controle remoto de outro jogador ou abra um jogo para criar sua própria sala.</p>
-            <div class="stream-reward-callout"><strong>🏆 AJUDE SEM GASTAR: TRANSMITA E GANHE SAVES</strong>Abra uma sala, transmita no <b>#live-arcade</b> do Discord e acumule prêmios: 30 min dão +1 autosave, 2 h dão +2 slots manuais e 5 h dão +2 autosaves. <a href="apoie.html#premios-live">Ver como funciona</a>.</div>
+            <div class="stream-reward-callout"><strong>🏆 AJUDE SEM GASTAR: COMPARTILHE E GANHE SAVES</strong>Divulgue o NeoTerminalRoom nas suas redes e convide novos jogadores. Compartilhamentos válidos geram pontos e cadastros feitos pelo seu link valem ainda mais. <a href="apoie.html#indicacoes">Criar meu link</a>.</div>
             <div class="multiplayer-toolbar"><span id="multiplayer-online-count">Buscando jogadores...</span><button id="multiplayer-select-game" type="button">SELECIONAR MEU JOGO</button></div>
             <div class="multiplayer-rooms" id="multiplayer-rooms"></div>
         </section>
@@ -478,13 +483,14 @@
         <div class="history-panel">
             <button class="game-info-close" id="history-close" type="button">X</button>
             <h2 id="history-title">CONTINUE JOGANDO</h2>
+            <div class="profile-top-actions"><button class="auth-action" id="profile-edit" type="button">EDITAR PERFIL</button></div>
             <p class="history-subtitle" id="profile-subtitle">Seus jogos, do mais recente para o mais antigo.</p>
             <div class="profile-tabs" role="tablist" aria-label="Conteúdo do perfil">
                 <button class="profile-tab active" id="profile-history-tab" type="button" role="tab" aria-selected="true">JOGOS RECENTES</button>
                 <button class="profile-tab" id="profile-cloud-tab" type="button" role="tab" aria-selected="false">SAVES NA NUVEM</button>
+                <button class="profile-tab" id="profile-auto-tab" type="button" role="tab" aria-selected="false">SAVES AUTOMÁTICOS</button>
             </div>
             <div class="history-list" id="history-list"></div>
-            <button class="auth-action" id="profile-edit" type="button" style="width:100%;margin-top:14px">EDITAR PERFIL</button>
             <button class="auth-action" id="profile-logout" type="button" style="width:100%;margin-top:14px;border-color:#ff4f61;color:#ff8390">SAIR DA CONTA</button>
         </div>
     </div>
@@ -697,6 +703,8 @@
     const supportersRef = ref(db, 'apoiadores_cafe');
     const registrationsRef = ref(db, 'hall_cadastros');
     const ACCOUNT_API = 'https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev';
+    const incomingReferral = new URLSearchParams(location.search).get('ref');
+    if (/^[a-f0-9]{12}$/.test(incomingReferral || '')) localStorage.setItem('neo_referral_code', incomingReferral);
     const PENDING_HISTORY_KEY = 'neo_pending_history';
     const AVATARS = Array.from({ length: 40 }, (_, index) => `avatar-${String(index + 1).padStart(2, '0')}`);
     let accountProfile = null;
@@ -790,6 +798,7 @@
     const historyList = document.getElementById('history-list');
     const historyTab = document.getElementById('profile-history-tab');
     const cloudTab = document.getElementById('profile-cloud-tab');
+    const autoTab = document.getElementById('profile-auto-tab');
     const profileSubtitle = document.getElementById('profile-subtitle');
     const closeHistory = () => { historyModal.style.display = 'none'; };
     document.getElementById('history-close').onclick = closeHistory;
@@ -804,9 +813,9 @@
         return data;
     }
     function selectProfileTab(tab) {
-        const historyActive = tab === 'history';
-        historyTab.classList.toggle('active', historyActive); cloudTab.classList.toggle('active', !historyActive);
-        historyTab.setAttribute('aria-selected', String(historyActive)); cloudTab.setAttribute('aria-selected', String(!historyActive));
+        [[historyTab,'history'],[cloudTab,'cloud'],[autoTab,'auto']].forEach(([button,name]) => {
+            const active = tab === name; button.classList.toggle('active', active); button.setAttribute('aria-selected', String(active));
+        });
     }
     async function loadHistory() {
         selectProfileTab('history');
@@ -836,17 +845,22 @@
         if (!response.ok) throw new Error(data.erro || 'Não foi possível acessar seus saves.');
         return data;
     }
-    async function loadCloudLibrary() {
-        selectProfileTab('cloud'); profileSubtitle.textContent = 'Gerencie autosaves e slots manuais armazenados na nuvem.';
+    async function loadCloudLibrary(mode = 'cloud') {
+        const automaticOnly = mode === 'auto';
+        selectProfileTab(mode); profileSubtitle.textContent = automaticOnly ? 'Seus jogos protegidos por save automático contínuo.' : 'Gerencie seus slots manuais armazenados na nuvem.';
         historyList.innerHTML = '<div class="history-empty">CARREGANDO SAVES...</div>';
         try {
             const data = await cloudRequest('/club/library'); historyList.replaceChildren();
             const summary = document.createElement('div'); summary.className = 'cloud-summary';
-            const streamText = `Transmissões acumuladas: ${Math.floor(data.streamMinutes || 0)} min · recompensas aplicadas automaticamente.`;
-            summary.textContent = data.automaticGameLimit === null ? `Autosaves: ${data.automaticGamesUsed} jogos · ilimitados no seu plano. Saves manuais: ilimitados por jogo. ${streamText}` : `Autosaves: ${data.automaticGamesUsed} de ${data.automaticGameLimit} jogos · ${Math.max(0, data.automaticGameLimit - data.automaticGamesUsed)} vagas livres. Saves manuais: ${data.manualSaveLimit} por jogo. ${streamText}`;
+            const referralText = `Indicações: ${Math.floor(data.referralPoints || 0)} pontos · bônus aplicados automaticamente.`;
+            summary.textContent = data.automaticGameLimit === null ? `Autosaves: ${data.automaticGamesUsed} jogos · ilimitados no seu plano. Saves manuais: ilimitados por jogo. ${referralText}` : `Autosaves: ${data.automaticGamesUsed} de ${data.automaticGameLimit} jogos · ${Math.max(0, data.automaticGameLimit - data.automaticGamesUsed)} vagas livres. Saves manuais: ${data.manualSaveLimit} por jogo. ${referralText}`;
             historyList.appendChild(summary);
-            if (!data.games?.length) { const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = 'Nenhum save armazenado na nuvem.'; historyList.appendChild(empty); return; }
-            data.games.forEach(game => {
+            const promo = document.createElement('aside'); promo.className = 'cloud-plan-promo';
+            promo.innerHTML = '<strong>PRECISA DE MAIS ESPAÇO?</strong>Os planos Continue e Cartucho aumentam seus slots manuais e jogos com autosave. O plano Arcade deixa saves manuais e automáticos ilimitados.<br><a href="apoie.html#planos">VER PLANOS E AUMENTAR MEUS SAVES</a>';
+            historyList.appendChild(promo);
+            const games = (data.games || []).map(game => ({ ...game, slots: (game.slots || []).filter(slot => automaticOnly ? slot.slot === 'auto' : slot.slot !== 'auto') })).filter(game => game.slots.length);
+            if (!games.length) { const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = automaticOnly ? 'Você ainda não possui saves automáticos na nuvem.' : 'Você ainda não possui saves manuais na nuvem.'; historyList.appendChild(empty); return; }
+            games.forEach(game => {
                 const card = document.createElement('section'); card.className = 'cloud-game';
                 const title = document.createElement('div'); title.className = 'cloud-game-title'; title.textContent = game.name;
                 const system = document.createElement('div'); system.className = 'cloud-game-system'; system.textContent = String(game.system || 'JOGO').toUpperCase(); card.append(title, system);
@@ -855,13 +869,13 @@
                     const copy = document.createElement('div'); copy.className = 'cloud-slot-copy'; const size = slot.size < 1048576 ? `${Math.ceil(slot.size / 1024)} KB` : `${(slot.size / 1048576).toFixed(1)} MB`;
                     copy.textContent = `${slot.slot === 'auto' ? 'AUTOSAVE CONTÍNUO' : slot.name} · ${size} · ${new Date(slot.updatedAt).toLocaleString('pt-BR')}`;
                     const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'cloud-delete'; remove.textContent = slot.slot === 'auto' ? 'LIBERAR VAGA' : 'EXCLUIR';
-                    remove.onclick = async () => { if (!confirm(`Excluir ${slot.slot === 'auto' ? 'o autosave' : 'este save'} de ${game.name}?`)) return; remove.disabled = true; try { await cloudRequest(`/club/save?game=${encodeURIComponent(game.id)}&slot=${encodeURIComponent(slot.slot)}`, 'DELETE'); await loadCloudLibrary(); } catch (error) { alert(error.message); remove.disabled = false; } };
+                    remove.onclick = async () => { if (!confirm(`Excluir ${slot.slot === 'auto' ? 'o autosave' : 'este save'} de ${game.name}?`)) return; remove.disabled = true; try { await cloudRequest(`/club/save?game=${encodeURIComponent(game.id)}&slot=${encodeURIComponent(slot.slot)}`, 'DELETE'); await loadCloudLibrary(mode); } catch (error) { alert(error.message); remove.disabled = false; } };
                     row.append(copy, remove); card.appendChild(row);
                 }); historyList.appendChild(card);
             });
         } catch (error) { historyList.innerHTML = ''; const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = error.message; historyList.appendChild(empty); }
     }
-    historyTab.onclick = loadHistory; cloudTab.onclick = loadCloudLibrary;
+    historyTab.onclick = loadHistory; cloudTab.onclick = () => loadCloudLibrary('cloud'); autoTab.onclick = () => loadCloudLibrary('auto');
     async function openHistory() {
         historyModal.style.display = 'flex';
         await loadHistory();
@@ -896,10 +910,10 @@
     }
     async function saveProfile() {
         const name = document.getElementById('auth-name').value.trim();
-        const body = { name, avatar: selectedAvatar, birthDate: document.getElementById('auth-birth-date').value, locality: document.getElementById('auth-locality').value.trim(), bio: document.getElementById('auth-bio').value.trim(), phone: document.getElementById('auth-phone').value.trim() };
+        const body = { name, avatar: selectedAvatar, birthDate: document.getElementById('auth-birth-date').value, locality: document.getElementById('auth-locality').value.trim(), bio: document.getElementById('auth-bio').value.trim(), phone: document.getElementById('auth-phone').value.trim(), referralCode: localStorage.getItem('neo_referral_code') || '' };
         ['instagram','youtube','facebook','tiktok'].forEach(key => { body[key] = document.getElementById(`auth-${key}`).value.trim(); });
         setAuthStatus('Salvando perfil...');
-        try { const data = await profileRequest('PUT', body); accountProfile = data.profile; applyProfile(); void refreshPersonalHero(); setAuthStatus(data.created ? `Bem-vindo(a), ${accountProfile.name}!` : 'Perfil atualizado.'); setTimeout(closeAuth, 900); }
+        try { const data = await profileRequest('PUT', body); if (data.created) localStorage.removeItem('neo_referral_code'); accountProfile = data.profile; applyProfile(); void refreshPersonalHero(); setAuthStatus(data.created ? `Bem-vindo(a), ${accountProfile.name}!` : 'Perfil atualizado.'); setTimeout(closeAuth, 900); }
         catch (error) { setAuthStatus(error.message); }
     }
     function applyProfile() {

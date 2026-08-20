@@ -210,54 +210,6 @@
         if (status) status.textContent = message;
     }
 
-    let liveConfirmationTimer = 0;
-    let knownLiveAwards = null;
-    const liveAwardNames = {
-        '30m-auto': '+1 jogo com autosave',
-        '120m-manual': '+2 slots de save manual',
-        '300m-auto': '+2 jogos com autosave'
-    };
-    function showLiveAward(id) {
-        const notice = document.createElement('div');
-        notice.className = 'neo-live-award-toast';
-        notice.setAttribute('role', 'status');
-        notice.textContent = `🏆 CICLO CONCLUÍDO: você ganhou ${liveAwardNames[id] || 'uma nova recompensa'}. Conquista adicionada ao Hall da Fama.`;
-        document.body.appendChild(notice);
-        requestAnimationFrame(() => notice.classList.add('visible'));
-        setTimeout(() => { notice.classList.remove('visible'); setTimeout(() => notice.remove(), 350); }, 6500);
-    }
-    async function updateLiveParticipation(openDiscord = false) {
-        const button = document.getElementById('neo-live-participate');
-        const status = document.getElementById('neo-live-confirmation');
-        if (!button || !status) return;
-        if (openDiscord) window.open('https://discord.com/channels/1206797125854167110/1537280728922849332', '_blank', 'noopener,noreferrer');
-        if (!room?.id) {
-            status.textContent = 'Canal aberto. Agora abra uma sala aqui e, no Discord, clique em Transmitir sua tela / Go Live.';
-            return;
-        }
-        button.disabled = true;
-        try {
-            await request('/social/heartbeat', { method:'POST', body:JSON.stringify({ page:'game', roomId:room.id, roomTitle:room.title || gameName }) });
-            const data = await request('/social/live-participation');
-            const awards = Array.isArray(data.rewards?.awarded) ? data.rewards.awarded : [];
-            if (knownLiveAwards) awards.filter(id => !knownLiveAwards.has(id)).forEach(showLiveAward);
-            knownLiveAwards = new Set(awards);
-            status.textContent = data.active
-                ? `✅ PARTICIPAÇÃO CONFIRMADA · ${Math.floor(data.minutes)} min contabilizados. Os prêmios irão para o Hall da Fama.`
-                : data.discordLinked
-                    ? '⏳ Aguardando você iniciar a transmissão no canal #live-arcade. A confirmação é automática.'
-                    : '⚠ Entre no site com sua conta Discord para ligar a transmissão ao seu perfil e contabilizar o tempo.';
-            status.classList.toggle('confirmed', Boolean(data.active));
-        } catch (error) { status.textContent = error.message; }
-        finally { button.disabled = false; }
-    }
-
-    function beginLiveConfirmation() {
-        clearInterval(liveConfirmationTimer);
-        void updateLiveParticipation(false);
-        liveConfirmationTimer = setInterval(() => void updateLiveParticipation(false), 15000);
-    }
-
     async function createRoom() {
         const button = document.getElementById('neo-multi-create');
         if (!window.confirm('Transmitir a gameplay deste jogo para os participantes e espectadores no site?')) return;
@@ -273,7 +225,6 @@
             const link = `${location.origin}/multiplayer-room.html?room=${encodeURIComponent(room.id)}`;
             document.getElementById('neo-multi-link').value = link;
             setStatus(isPublic ? 'Sala pública aberta. Aguarde jogadores.' : 'Sala privada aberta. Compartilhe o convite.');
-            beginLiveConfirmation();
             void loadOnlinePlayers();
         } catch (error) { setStatus(error.message); button.disabled = false; }
     }
@@ -363,18 +314,17 @@
     function createPanel() {
         const style = document.createElement('style');
         style.textContent = '#neo-multiplayer-panel{position:fixed;right:8px;top:8px;z-index:9999999;color:#dfffe8;font:12px monospace}#neo-multi-toggle,#neo-multi-menu button,#neo-multi-menu select{border:1px solid #00cc44;background:#061109;color:#55ff88;padding:8px;cursor:pointer}#neo-multi-toggle.ejs_menu_button{position:static;width:auto;height:auto;min-width:46px;border:0;background:transparent;padding:0 8px;font-size:11px}#neo-multi-menu{display:none;width:min(350px,92vw);max-height:80dvh;overflow:auto;margin-top:5px;padding:10px;border:1px solid #00cc44;background:rgba(0,0,0,.96);box-shadow:0 0 22px rgba(0,204,68,.25)}#neo-multiplayer-panel.open #neo-multi-menu{display:block}#neo-multi-status{color:#a9cdb2;line-height:1.45;margin:8px 0}#neo-multi-rewards{margin:8px 0;padding:9px;border:1px solid #ffd166;border-radius:5px;background:#171407;color:#dfffe8;line-height:1.45}#neo-multi-rewards strong{display:block;color:#ffd166}#neo-live-participate{display:block;width:100%;margin:8px 0 5px;border-color:#5865f2!important;background:#5865f2!important;color:#fff!important;font-weight:bold}#neo-live-confirmation{display:block;color:#ffdca0;font-size:11px}#neo-live-confirmation.confirmed{color:#55ff88}#neo-multi-create-box{display:grid;gap:8px}#neo-multi-create-box label{display:flex;align-items:center;justify-content:space-between;gap:10px}#neo-multi-room input{width:100%;margin:7px 0;background:#111;border:1px solid #555;color:#fff;padding:7px}.neo-multi-person{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #253129}.neo-multi-person button{padding:4px 7px;margin-left:3px}#neo-multi-online-list{max-height:180px;overflow:auto;border-top:1px solid #253129;margin-top:8px}#neo-multi-share{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin:7px 0 12px}#neo-multi-share button{margin:0}#neo-multi-close{width:100%;margin-top:9px;border-color:#ff4f61!important;color:#ff6b7b!important}#neo-multi-toast{position:fixed;left:50%;top:18px;z-index:10000001;max-width:min(90vw,520px);padding:13px 18px;transform:translate(-50%,-150%);opacity:0;border:1px solid #00cc44;border-radius:6px;background:#061109;color:#fff;box-shadow:0 0 24px rgba(0,204,68,.35);font:600 13px monospace;text-align:center;transition:.22s ease;pointer-events:none}#neo-multi-toast.visible{transform:translate(-50%,0);opacity:1}';
-        style.textContent += '#neo-multi-toggle img{width:30px;height:30px;display:block;object-fit:contain}.neo-live-award-toast{position:fixed;right:12px;bottom:12px;z-index:10000002;width:min(320px,calc(100vw - 24px));padding:11px 13px;border:1px solid #ffd166;border-radius:6px;background:rgba(13,15,8,.94);color:#fff3c4;box-shadow:0 0 18px rgba(255,209,102,.22);font:11px/1.45 monospace;opacity:0;transform:translateY(14px);transition:.3s;pointer-events:none}.neo-live-award-toast.visible{opacity:1;transform:none}';
+        style.textContent += '#neo-multi-toggle img{width:30px;height:30px;display:block;object-fit:contain}#neo-referral-link{display:block;margin-top:8px;color:#55ff88;font-weight:bold}';
         document.head.appendChild(style);
         const panel = document.createElement('section'); panel.id = 'neo-multiplayer-panel';
-        panel.innerHTML = `<button id="neo-multi-toggle" type="button">🌐 JOGAR ONLINE</button><div id="neo-multi-menu"><strong>MULTIPLAYER</strong><div id="neo-multi-status">Abra uma sala e transforme visitantes em controles remotos.</div><div id="neo-multi-rewards"><strong>🏆 AJUDE SEM GASTAR</strong>Abra uma sala e transmita no #live-arcade. O tempo e os prêmios são automáticos e cada conquista vai para o Hall da Fama.<button id="neo-live-participate" type="button">🎥 ABRIR #LIVE-ARCADE NO DISCORD</button><span id="neo-live-confirmation" aria-live="polite">Abra uma sala aqui e depois inicie o Go Live no Discord.</span></div><div id="neo-multi-create-box"><label>Jogadores <select id="neo-multi-max"><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label><label><input id="neo-multi-public" type="checkbox" checked> Sala pública</label><button id="neo-multi-create" type="button">ABRIR SALA</button></div><div id="neo-multi-room" hidden><div id="neo-multi-count"></div><input id="neo-multi-link" readonly><button id="neo-multi-copy" type="button">COPIAR CONVITE</button><div id="neo-multi-share"><button type="button" data-share="whatsapp">WHATSAPP</button><button type="button" data-share="discord">DISCORD</button><button type="button" data-share="instagram">INSTAGRAM</button><button type="button" data-share="facebook">FACEBOOK</button><button type="button" data-share="outros">OUTROS APPS</button></div><strong>CONVIDAR JOGADORES ONLINE</strong><div id="neo-multi-online-list"></div><div id="neo-multi-players"></div><button id="neo-multi-close" type="button">ENCERRAR SALA</button></div></div>`;
+        panel.innerHTML = `<button id="neo-multi-toggle" type="button">🌐 JOGAR ONLINE</button><div id="neo-multi-menu"><strong>MULTIPLAYER</strong><div id="neo-multi-status">Abra uma sala e transforme visitantes em controles remotos.</div><div id="neo-multi-rewards"><strong>🏆 AJUDE SEM GASTAR</strong>Compartilhe o site e convide novos jogadores para ganhar espaço extra de saves.<a id="neo-referral-link" href="apoie.html#indicacoes">CRIAR MEU LINK DE INDICAÇÃO →</a></div><div id="neo-multi-create-box"><label>Jogadores <select id="neo-multi-max"><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label><label><input id="neo-multi-public" type="checkbox" checked> Sala pública</label><button id="neo-multi-create" type="button">ABRIR SALA</button></div><div id="neo-multi-room" hidden><div id="neo-multi-count"></div><input id="neo-multi-link" readonly><button id="neo-multi-copy" type="button">COPIAR CONVITE</button><div id="neo-multi-share"><button type="button" data-share="whatsapp">WHATSAPP</button><button type="button" data-share="discord">DISCORD</button><button type="button" data-share="instagram">INSTAGRAM</button><button type="button" data-share="facebook">FACEBOOK</button><button type="button" data-share="outros">OUTROS APPS</button></div><strong>CONVIDAR JOGADORES ONLINE</strong><div id="neo-multi-online-list"></div><div id="neo-multi-players"></div><button id="neo-multi-close" type="button">ENCERRAR SALA</button></div></div>`;
         document.body.appendChild(panel);
         panel.querySelector('#neo-multi-toggle').innerHTML = '<img src="assets/imagens-videos/imagens do menu/jogar-online.png" alt=""><span>JOGAR ONLINE</span>';
         panel.querySelector('#neo-multi-toggle').onclick = () => { panel.classList.toggle('open'); if ("Notification" in window && Notification.permission === 'default') void Notification.requestPermission(); };
         panel.querySelector('#neo-multi-create').onclick = createRoom;
-        panel.querySelector('#neo-live-participate').onclick = () => void updateLiveParticipation(true);
         panel.querySelector('#neo-multi-copy').onclick = async () => { await navigator.clipboard.writeText(panel.querySelector('#neo-multi-link').value); setStatus('Convite copiado.'); };
         panel.querySelectorAll('[data-share]').forEach(button => { button.onclick = () => void shareInvite(button.dataset.share).catch(error => setStatus(error.message)); });
-        panel.querySelector('#neo-multi-close').onclick = () => { send({ type:'close' }); socket?.close(); };
+        panel.querySelector('#neo-multi-close').onclick = () => { send({ type:'close' }); socket?.close(); room=null; };
         if (system === 'n64') panel.querySelector('#neo-multi-max').value = '4';
         dockOnlineButton(panel);
         void socialPulse(); setInterval(socialPulse, 15000);

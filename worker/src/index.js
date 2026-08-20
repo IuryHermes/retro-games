@@ -9,7 +9,7 @@ var WORKER = "https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev";
 var DISCORD_APP_ID = "1537269100114350182";
 var DISCORD_GUILD_ID = "1206797125854167110";
 var DISCORD_ROLES = { cafe: "1537272991585534093", cartucho: "1537273232665612418", arcade: "1537273467026673674" };
-var DISCORD_CHANNELS = { agradecimentos: "1537275305717272706", enquetes: "1537275369160319027", live: "1537280728922849332", sugestoes: "1537275481122938981" };
+var DISCORD_CHANNELS = { agradecimentos: "1537275305717272706", enquetes: "1537275369160319027", sugestoes: "1537275481122938981" };
 var BOT_STATE = "https://neoterminalroom-default-rtdb.firebaseio.com/bot_clube";
 var CLUB_PLANS = ["registered", "owner", "cafe", "cartucho", "arcade"];
 var FIREBASE_PROJECT_ID = "neoterminalroom";
@@ -174,13 +174,34 @@ function automaticGameLimit(plan) {
   return plan === "registered" ? 3 : plan === "cafe" ? 5 : plan === "cartucho" ? 15 : null;
 }
 __name(automaticGameLimit, "automaticGameLimit");
-async function streamRewards(env, discordId) {
-  const object = await env.GAMES.get(`live/rewards/${encodeURIComponent(discordId)}.json`);
-  if (!object) return { minutes: 0, bonusAutoGames: 0, bonusManualSlots: 0, awarded: [] };
+async function referralRewards(env, uid) {
+  const object = await env.GAMES.get(`referrals/rewards/${encodeURIComponent(uid)}.json`);
+  if (!object) return { points: 0, shares: 0, referrals: 0, bonusAutoGames: 0, bonusManualSlots: 0, awarded: [] };
   const value = await object.json().catch(() => ({}));
-  return { minutes: Number(value.minutes) || 0, bonusAutoGames: Number(value.bonusAutoGames) || 0, bonusManualSlots: Number(value.bonusManualSlots) || 0, awarded: Array.isArray(value.awarded) ? value.awarded : [] };
+  return { ...value, points: Number(value.points) || 0, shares: Number(value.shares) || 0, referrals: Number(value.referrals) || 0, bonusAutoGames: Number(value.bonusAutoGames) || 0, bonusManualSlots: Number(value.bonusManualSlots) || 0, awarded: Array.isArray(value.awarded) ? value.awarded : [] };
 }
-__name(streamRewards, "streamRewards");
+__name(referralRewards, "referralRewards");
+function applyReferralTiers(reward) {
+  const next = { ...reward, awarded: [...(reward.awarded || [])] };
+  const earned = [];
+  for (const [threshold, id, field, amount] of [[5, "share-5", "bonusAutoGames", 1], [15, "community-15", "bonusManualSlots", 2], [30, "community-30", "bonusAutoGames", 2]]) {
+    if (next.points >= threshold && !next.awarded.includes(id)) { next.awarded.push(id); next[field] = (Number(next[field]) || 0) + amount; earned.push(id); }
+  }
+  return { next, earned };
+}
+__name(applyReferralTiers, "applyReferralTiers");
+async function referralCode(env, uid) {
+  const ownerKey = `referrals/owners/${encodeURIComponent(uid)}.json`;
+  const current = await env.GAMES.get(ownerKey);
+  if (current) return String((await current.json()).code || "");
+  const code = crypto.randomUUID().replace(/-/g, "").slice(0, 12);
+  await Promise.all([
+    env.GAMES.put(ownerKey, JSON.stringify({ code, uid, createdAt: Date.now() }), { httpMetadata: { contentType: "application/json" } }),
+    env.GAMES.put(`referrals/codes/${code}.json`, JSON.stringify({ uid, createdAt: Date.now() }), { httpMetadata: { contentType: "application/json" } })
+  ]);
+  return code;
+}
+__name(referralCode, "referralCode");
 async function listAll(env, prefix, include = []) {
   const objects = [];
   let cursor;
@@ -202,6 +223,21 @@ async function readJsonDirectory(env, prefix, limit = 500) {
   }))).filter(Boolean);
 }
 __name(readJsonDirectory, "readJsonDirectory");
+async function activeRoomSummaries(env, limit = 100) {
+  const directory = (await listAll(env, "multiplayer/rooms/")).slice(-limit);
+  const checked = await Promise.all(directory.map(async (object) => {
+    const roomId = object.key.split("/").pop()?.replace(/\.json$/, "") || "";
+    if (!/^[a-f0-9]{12}$/.test(roomId)) return { object, summary: null, stale: true };
+    const response = await env.MULTIPLAYER_ROOMS.getByName(roomId).fetch(new Request("https://room/summary"));
+    if (!response.ok) return { object, summary: null, stale: response.status === 404 };
+    const summary = await response.json();
+    const active = summary.status === "waiting" && Number(summary.online) > 0;
+    return { object, summary: active ? summary : null, stale: !active };
+  }));
+  await Promise.all(checked.filter((entry) => entry.stale).map((entry) => env.GAMES.delete(entry.object.key)));
+  return checked.map((entry) => entry.summary).filter(Boolean).sort((a, b) => b.createdAt - a.createdAt);
+}
+__name(activeRoomSummaries, "activeRoomSummaries");
 function catalogOverrideId(system, rom) {
   const name = String(rom || "").split("/").pop() || "game";
   return `${system}-${name}`.toLowerCase().replace(/\.[a-z0-9]+$/i, "").replace(/[^a-z0-9._-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 120);
@@ -441,20 +477,20 @@ var src_default = {
       const action = String(body.action || "");
       const validUid = (value) => /^[a-zA-Z0-9._:@-]{2,180}$/.test(String(value || ""));
       if (action === "overview") {
-        const prefixes = ["profiles/v1/", "social/presence/", "multiplayer/rooms/", "saves/v1/", "save-images/v1/", "history/v1/", "live/verified/", "live/rewards/"];
-        const directories = await Promise.all(prefixes.map((prefix) => listAll(env, prefix)));
+        const prefixes = ["profiles/v1/", "social/presence/", "saves/v1/", "save-images/v1/", "history/v1/", "referrals/rewards/"];
+        const [directories, activeRooms] = await Promise.all([Promise.all(prefixes.map((prefix) => listAll(env, prefix))), activeRoomSummaries(env)]);
         const now = Date.now();
         const presence = await readJsonDirectory(env, "social/presence/", 500);
         const online = presence.filter((record) => now - Number(record.value.updatedAt || 0) < 9e4).length;
         const paymentsResponse = await fetch(`${FIREBASE}.json`);
         const payments = paymentsResponse.ok ? await paymentsResponse.json() || {} : {};
         const approved = Object.values(payments).filter((record) => record?.status === "aprovado").length;
-        return json({ counts: Object.fromEntries(prefixes.map((prefix, index) => [prefix, directories[index].length])), online, approvedPayments: approved, generatedAt: now });
+        return json({ counts: { ...Object.fromEntries(prefixes.map((prefix, index) => [prefix, directories[index].length])), "multiplayer/rooms/": activeRooms.length }, online, approvedPayments: approved, generatedAt: now });
       }
       if (action === "accounts") {
-        const [profiles, presence, rewards, saveObjects] = await Promise.all([readJsonDirectory(env, "profiles/v1/", 500), readJsonDirectory(env, "social/presence/", 500), readJsonDirectory(env, "live/rewards/", 500), listAll(env, "saves/v1/")]);
+        const [profiles, presence, rewards, saveObjects] = await Promise.all([readJsonDirectory(env, "profiles/v1/", 500), readJsonDirectory(env, "social/presence/", 500), readJsonDirectory(env, "referrals/rewards/", 500), listAll(env, "saves/v1/")]);
         const presenceMap = new Map(presence.map((record) => [record.value.uid, record.value]));
-        const rewardMap = new Map(rewards.map((record) => [record.key.slice("live/rewards/".length).replace(/\.json$/, ""), record.value]));
+        const rewardMap = new Map(rewards.map((record) => [record.key.slice("referrals/rewards/".length).replace(/\.json$/, ""), record.value]));
         const saveCounts = new Map();
         for (const object of saveObjects) { const uid = object.key.slice("saves/v1/".length).split("/")[0]; saveCounts.set(uid, (saveCounts.get(uid) || 0) + 1); }
         const now = Date.now();
@@ -477,15 +513,15 @@ var src_default = {
       if (action === "entitlements-update") {
         const uid = String(body.uid || "");
         if (!validUid(uid)) return json({ erro: "Conta invalida." }, 400);
-        const key = `live/rewards/${encodeURIComponent(uid)}.json`;
+        const key = `referrals/rewards/${encodeURIComponent(uid)}.json`;
         const object = await env.GAMES.get(key);
         const current = object ? await object.json().catch(() => ({})) : {};
         const bonusManualSlots = Math.max(0, Math.min(999, Math.floor(Number(body.bonusManualSlots) || 0)));
         const bonusAutoGames = Math.max(0, Math.min(999, Math.floor(Number(body.bonusAutoGames) || 0)));
-        const minutes = Math.max(0, Math.min(1e7, Number(body.minutes ?? current.minutes) || 0));
-        const next = { ...current, minutes, bonusManualSlots, bonusAutoGames, awarded: Array.isArray(current.awarded) ? current.awarded : [], updatedAt: Date.now() };
+        const points = Math.max(0, Math.min(1e7, Number(body.points ?? current.points) || 0));
+        const next = { ...current, points, bonusManualSlots, bonusAutoGames, awarded: Array.isArray(current.awarded) ? current.awarded : [], updatedAt: Date.now() };
         await env.GAMES.put(key, JSON.stringify(next), { httpMetadata: { contentType: "application/json" } });
-        await adminAudit(env, action, uid, { bonusManualSlots, bonusAutoGames, minutes });
+        await adminAudit(env, action, uid, { bonusManualSlots, bonusAutoGames, points });
         return json({ rewards: next });
       }
       if (action === "account-saves") {
@@ -506,14 +542,12 @@ var src_default = {
         const prefixes = [`saves/v1/${encodeURIComponent(uid)}/`, `save-images/v1/${encodeURIComponent(uid)}/`];
         const children = (await Promise.all(prefixes.map((prefix) => listAll(env, prefix)))).flat();
         await Promise.all(children.map((object) => env.GAMES.delete(object.key)));
-        await Promise.all([`profiles/v1/${encodeURIComponent(uid)}.json`, `history/v1/${encodeURIComponent(uid)}.json`, `social/presence/${encodeURIComponent(uid)}.json`, `live/rewards/${encodeURIComponent(uid)}.json`, `live/verified/${encodeURIComponent(uid)}.json`].map((key) => env.GAMES.delete(key)));
+        await Promise.all([`profiles/v1/${encodeURIComponent(uid)}.json`, `history/v1/${encodeURIComponent(uid)}.json`, `social/presence/${encodeURIComponent(uid)}.json`, `referrals/rewards/${encodeURIComponent(uid)}.json`, `referrals/owners/${encodeURIComponent(uid)}.json`].map((key) => env.GAMES.delete(key)));
         await adminAudit(env, action, uid, { deletedObjects: children.length + 5 });
         return json({ deleted: true, uid, objects: children.length + 5 });
       }
       if (action === "rooms") {
-        const directory = await listAll(env, "multiplayer/rooms/");
-        const rooms = (await Promise.all(directory.slice(-100).map(async (object) => { const roomId = object.key.split("/").pop()?.replace(/\.json$/, "") || ""; if (!/^[a-f0-9]{12}$/.test(roomId)) return null; const response = await env.MULTIPLAYER_ROOMS.getByName(roomId).fetch(new Request("https://room/summary")); return response.ok ? await response.json() : null; }))).filter(Boolean);
-        return json({ rooms: rooms.sort((a, b) => b.createdAt - a.createdAt) });
+        return json({ rooms: await activeRoomSummaries(env) });
       }
       if (action === "room-close") {
         const roomId = String(body.roomId || "");
@@ -521,13 +555,6 @@ var src_default = {
         const response = await env.MULTIPLAYER_ROOMS.getByName(roomId).fetch(new Request("https://room/admin-close", { method: "POST" }));
         await env.GAMES.delete(`multiplayer/rooms/${roomId}.json`); await adminAudit(env, action, roomId);
         return json({ closed: response.ok, roomId });
-      }
-      if (action === "lives") {
-        const [verified, rewards, presence, profiles] = await Promise.all([readJsonDirectory(env, "live/verified/", 500), readJsonDirectory(env, "live/rewards/", 500), readJsonDirectory(env, "social/presence/", 500), readJsonDirectory(env, "profiles/v1/", 500)]);
-        const byUid = (records) => new Map(records.map((record) => [record.value.uid || record.key.split("/").pop().replace(/\.json$/, ""), record.value]));
-        const profileMap = byUid(profiles); const presenceMap = byUid(presence);
-        const rewardMap = new Map(rewards.map((record) => [record.key.split("/").pop().replace(/\.json$/, ""), record.value]));
-        return json({ lives: verified.map((record) => { const uid = `discord-${record.value.discordId}`; return { uid, ...record.value, profile: profileMap.get(uid) || null, presence: presenceMap.get(uid) || null, rewards: rewardMap.get(uid) || null, watchUrl: presenceMap.get(uid)?.roomId ? `${SITE}/multiplayer-room.html?room=${encodeURIComponent(presenceMap.get(uid).roomId)}&spectator=1` : "", discordUrl: `https://discord.com/channels/${DISCORD_GUILD_ID}/${DISCORD_CHANNELS.live}` }; }) });
       }
       if (action === "payments") {
         const response = await fetch(`${FIREBASE}.json`); const values = response.ok ? await response.json() || {} : {};
@@ -563,21 +590,6 @@ var src_default = {
       if (action === "audit") return json({ audit: (await readJsonDirectory(env, "admin/audit/", 300)).map((record) => record.value).reverse() });
       return json({ erro: "Acao administrativa desconhecida." }, 404);
     }
-    if (request.method === "POST" && url.pathname === "/internal/discord-live") {
-      const monitorSecret = env.DISCORD_MONITOR_SECRET || "";
-      if (!monitorSecret || !timingSafeStringEqual(request.headers.get("X-Monitor-Secret") || "", monitorSecret)) return json({ erro: "Nao autorizado." }, 401);
-      const body = await request.json().catch(() => ({}));
-      const discordId = String(body.discordId || "");
-      const channelId = String(body.channelId || "");
-      if (!/^\d{10,25}$/.test(discordId)) return json({ erro: "Usuario Discord invalido." }, 400);
-      const verifiedKey = `live/verified/discord-${discordId}.json`;
-      if (channelId !== DISCORD_CHANNELS.live || !body.streaming) {
-        await env.GAMES.delete(verifiedKey);
-        return json({ verified: false });
-      }
-      await env.GAMES.put(verifiedKey, JSON.stringify({ discordId, channelId, streaming: true, updatedAt: Date.now() }), { httpMetadata: { contentType: "application/json" } });
-      return json({ verified: true });
-    }
     if (request.method === "OPTIONS")
       return new Response(null, { status: 204, headers: cors });
     if (url.pathname.startsWith("/social/")) {
@@ -594,56 +606,15 @@ var src_default = {
         const roomId = /^[a-f0-9]{12}$/.test(String(body.roomId || "")) ? String(body.roomId) : "";
         const presence = { uid: account.uid, name: profile.name, avatar: profile.avatar, page: String(body.page || "site").slice(0, 30), roomId, roomTitle: cleanProfileText(body.roomTitle, 100), updatedAt: Date.now() };
         await env.GAMES.put(`social/presence/${encodeURIComponent(account.uid)}.json`, JSON.stringify(presence), { httpMetadata: { contentType: "application/json" } });
-        if (presence.page === "game" && roomId) {
-          const verifiedLive = await env.GAMES.get(`live/verified/${encodeURIComponent(account.uid)}.json`);
-          if (!verifiedLive) return json({ presence, liveVerified: false });
-          const rewardKey = `live/rewards/${encodeURIComponent(account.uid)}.json`;
-          const rewardObject = await env.GAMES.get(rewardKey);
-          const reward = rewardObject ? await rewardObject.json().catch(() => ({})) : {};
-          const now = Date.now();
-          const lastSeenAt = Number(reward.lastSeenAt) || 0;
-          const activeRoomId = String(reward.activeRoomId || "");
-          const continuing = activeRoomId === roomId && lastSeenAt > now - 90e3;
-          const addedMinutes = continuing ? Math.min(2, Math.max(0, (now - lastSeenAt) / 6e4)) : 0;
-          const minutes = (Number(reward.minutes) || 0) + addedMinutes;
-          const awarded = Array.isArray(reward.awarded) ? reward.awarded : [];
-          const next = { ...reward, activeRoomId: roomId, lastSeenAt: now, minutes, awarded, bonusAutoGames: Number(reward.bonusAutoGames) || 0, bonusManualSlots: Number(reward.bonusManualSlots) || 0 };
-          const tiers = [[30, "30m-auto", "bonusAutoGames", 1], [120, "120m-manual", "bonusManualSlots", 2], [300, "300m-auto", "bonusAutoGames", 2]];
-          const earned = [];
-          for (const [threshold, id, field, amount] of tiers) if (minutes >= threshold && !awarded.includes(id)) { awarded.push(id); next[field] += amount; earned.push(`${amount} ${field === "bonusAutoGames" ? "jogo(s) com autosave" : "slot(s) manual(is)"}`); }
-          await env.GAMES.put(rewardKey, JSON.stringify(next), { httpMetadata: { contentType: "application/json" } });
-          if (!continuing) await discordMessage(env, DISCORD_CHANNELS.live, { content: `🎥 **${profile.name}** está transmitindo **${presence.roomTitle || "uma gameplay"}** no NeoTerminalRoom. Assista no site: ${SITE}/multiplayer-room.html?room=${roomId}&spectator=1` }).catch(() => {});
-          if (earned.length) {
-            await discordMessage(env, DISCORD_CHANNELS.live, { content: `🏆 ${profile.name} desbloqueou ${earned.join(" e ")} por tempo acumulado de transmissão no NeoTerminalRoom.` }).catch(() => {});
-            await Promise.all(earned.map((prize, index) => fetch(`https://neoterminalroom-default-rtdb.firebaseio.com/hall_cadastros/${encodeURIComponent(`live-${account.uid}-${awarded[awarded.length - earned.length + index]}`)}.json`, {
-              method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ nome: profile.name, avatar: profile.avatar || "avatar-01", mensagem: `🏆 Conquistou ${prize} ajudando o projeto com uma transmissão ao vivo.`, origem: "live", timestamp: now })
-            }).catch(() => null)));
-          }
-        }
-        const verified = presence.page === "game" && roomId ? Boolean(await env.GAMES.head(`live/verified/${encodeURIComponent(account.uid)}.json`)) : false;
-        const rewardObject = await env.GAMES.get(`live/rewards/${encodeURIComponent(account.uid)}.json`);
-        return json({ presence, liveVerified: verified, rewards: rewardObject ? await rewardObject.json().catch(() => null) : null });
-      }
-      if (request.method === "GET" && url.pathname === "/social/live-participation") {
-        const [verifiedObject, rewardObject, presenceObject] = await Promise.all([
-          env.GAMES.get(`live/verified/${encodeURIComponent(account.uid)}.json`),
-          env.GAMES.get(`live/rewards/${encodeURIComponent(account.uid)}.json`),
-          env.GAMES.get(`social/presence/${encodeURIComponent(account.uid)}.json`)
-        ]);
-        const verified = verifiedObject ? await verifiedObject.json().catch(() => null) : null;
-        const rewards = rewardObject ? await rewardObject.json().catch(() => null) : null;
-        const presence = presenceObject ? await presenceObject.json().catch(() => null) : null;
-        const active = Boolean(verified?.streaming && Date.now() - Number(verified.updatedAt || 0) < 9e4 && presence?.page === "game" && presence?.roomId && Date.now() - Number(presence.updatedAt || 0) < 9e4);
-        return json({ active, discordLinked: account.provider === "discord" || String(account.uid).startsWith("discord-"), discordUrl: `https://discord.com/channels/${DISCORD_GUILD_ID}/${DISCORD_CHANNELS.live}`, channel: "live-arcade", roomId: presence?.roomId || "", minutes: Number(rewards?.minutes) || 0, rewards: rewards || null, message: active ? "Participação confirmada. Seu tempo está sendo contabilizado automaticamente." : "Abra sua transmissão no canal #live-arcade e mantenha esta sala online; a confirmação aparecerá automaticamente." });
+        return json({ presence });
       }
       if (request.method === "GET" && url.pathname === "/social/players") {
-        const [profileDirectory, presenceDirectory, verifiedLiveDirectory] = await Promise.all([listAll(env, "profiles/v1/"), listAll(env, "social/presence/"), listAll(env, "live/verified/")]);
+        const [profileDirectory, presenceDirectory] = await Promise.all([listAll(env, "profiles/v1/"), listAll(env, "social/presence/")]);
         const presence = (await Promise.all(presenceDirectory.slice(-500).map(async (object) => {
           const record = await env.GAMES.get(object.key);
           return record ? await record.json().catch(() => null) : null;
         }))).filter(Boolean);
         const presenceByUid = new Map(presence.map((player) => [player.uid, player]));
-        const verifiedLiveUids = new Set(verifiedLiveDirectory.map((object) => object.key.slice("live/verified/".length).replace(/\.json$/, "")));
         const players = (await Promise.all(profileDirectory.slice(-500).map(async (object) => {
           const record = await env.GAMES.get(object.key);
           const candidate = record ? await record.json().catch(() => null) : null;
@@ -651,8 +622,7 @@ var src_default = {
             return null;
           const live = presenceByUid.get(candidate.uid);
           const online = Boolean(live && Date.now() - live.updatedAt < 9e4);
-          const streaming = Boolean(online && live?.page === "game" && live?.roomId && verifiedLiveUids.has(candidate.uid));
-          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, age: profileAge(candidate.birthDate), locality: candidate.locality || "", bio: candidate.bio || "", instagram: candidate.instagram || "", youtube: candidate.youtube || "", facebook: candidate.facebook || "", tiktok: candidate.tiktok || "", watchRoomId: online && live?.page === "game" ? live.roomId || "" : "", watchTitle: online && live?.page === "game" ? live.roomTitle || "" : "", streaming, online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
+          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, age: profileAge(candidate.birthDate), locality: candidate.locality || "", bio: candidate.bio || "", instagram: candidate.instagram || "", youtube: candidate.youtube || "", facebook: candidate.facebook || "", tiktok: candidate.tiktok || "", watchRoomId: online && live?.page === "game" ? live.roomId || "" : "", watchTitle: online && live?.page === "game" ? live.roomTitle || "" : "", online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
         }))).filter(Boolean).sort((a, b) => Number(b.online) - Number(a.online) || a.name.localeCompare(b.name, "pt-BR")).slice(0, 500);
         return json({ self: { uid: account.uid, name: profile.name, avatar: profile.avatar }, players });
       }
@@ -758,20 +728,12 @@ var src_default = {
       return json({ room, ticket }, 201);
     }
     if (request.method === "GET" && url.pathname === "/multiplayer/rooms") {
-      const directory = await listAll(env, "multiplayer/rooms/");
-      const summaries = await Promise.all(directory.slice(-100).map(async (object) => {
-        const roomId = object.key.split("/").pop()?.replace(/\.json$/, "") || "";
-        if (!/^[a-f0-9]{12}$/.test(roomId))
-          return null;
-        const response = await env.MULTIPLAYER_ROOMS.getByName(roomId).fetch(new Request("https://room/summary"));
-        if (!response.ok)
-          return null;
-        const summary = await response.json();
+      const summaries = (await activeRoomSummaries(env)).map((summary) => {
         if (!summary.isPublic || summary.status !== "waiting" || summary.seatsUsed >= summary.maxPlayers)
           return null;
         const { hostUid, ...publicSummary } = summary;
         return publicSummary;
-      }));
+      });
       return json({ rooms: summaries.filter(Boolean).sort((a, b) => b.createdAt - a.createdAt).slice(0, 50) });
     }
     const joinMatch = url.pathname.match(/^\/multiplayer\/rooms\/([a-f0-9]{12})\/join$/);
@@ -898,8 +860,36 @@ var src_default = {
       const savePrefix = `saves/v1/${access.discordId}/`;
       const savedObjects = await listAll(env, savePrefix, ["customMetadata"]);
       const automaticGames = new Set(savedObjects.filter((object) => object.key.endsWith("/auto.state")).map((object) => object.key.slice(savePrefix.length).split("/")[0]));
-      const rewards = await streamRewards(env, access.discordId);
-      return json({ conectado: true, username: profile?.name || access.username || "", avatar: profile?.avatar || "", plan: access.plan, manualSaveLimit: manualSaveLimit(access.plan) === null ? null : manualSaveLimit(access.plan) + rewards.bonusManualSlots, automaticGameLimit: automaticGameLimit(access.plan) === null ? null : automaticGameLimit(access.plan) + rewards.bonusAutoGames, automaticGamesUsed: automaticGames.size, streamMinutes: Math.floor(rewards.minutes), streamRewards: rewards, expiresAt: access.exp });
+      const rewards = await referralRewards(env, access.accountUid || access.firebaseUid || access.discordId);
+      return json({ conectado: true, username: profile?.name || access.username || "", avatar: profile?.avatar || "", plan: access.plan, manualSaveLimit: manualSaveLimit(access.plan) === null ? null : manualSaveLimit(access.plan) + rewards.bonusManualSlots, automaticGameLimit: automaticGameLimit(access.plan) === null ? null : automaticGameLimit(access.plan) + rewards.bonusAutoGames, automaticGamesUsed: automaticGames.size, referralPoints: rewards.points, referralRewards: rewards, expiresAt: access.exp });
+    }
+    if (url.pathname === "/account/referrals" && ["GET", "POST"].includes(request.method)) {
+      const account = await accountAccess(request, env);
+      if (!account) return json({ erro: "Entre na sua conta para compartilhar e acompanhar seus bônus." }, 401);
+      const profileObject = await env.GAMES.get(`profiles/v1/${account.uid}.json`);
+      if (!profileObject) return json({ erro: "Complete seu perfil primeiro." }, 403);
+      const code = await referralCode(env, account.uid);
+      const rewardKey = `referrals/rewards/${encodeURIComponent(account.uid)}.json`;
+      let rewards = await referralRewards(env, account.uid);
+      let earned = [];
+      if (request.method === "POST") {
+        const body = await request.json().catch(() => ({}));
+        const platform = String(body.platform || "").toLowerCase();
+        const platforms = ["whatsapp", "facebook", "instagram", "telegram", "x", "bluesky", "threads", "linkedin", "reddit", "email", "native", "copy"];
+        if (!platforms.includes(platform)) return json({ erro: "Rede social inválida." }, 400);
+        const limited = await enforceRateLimit(env, account.uid, "referral-share", 20, 24 * 60 * 60 * 1e3);
+        if (limited) return limited;
+        const week = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1e3));
+        const shareEvents = Object.fromEntries(Object.entries(rewards.shareEvents && typeof rewards.shareEvents === "object" ? rewards.shareEvents : {}).filter(([id]) => id.startsWith(`${week}:`)));
+        const eventId = `${week}:${platform}`;
+        if (!shareEvents[eventId]) {
+          shareEvents[eventId] = Date.now();
+          rewards = { ...rewards, shareEvents, shares: rewards.shares + 1, points: rewards.points + 1, updatedAt: Date.now() };
+          ({ next: rewards, earned } = applyReferralTiers(rewards));
+          await env.GAMES.put(rewardKey, JSON.stringify(rewards), { httpMetadata: { contentType: "application/json" } });
+        }
+      }
+      return json({ code, shareUrl: `${SITE}/?ref=${code}`, rewards, earned, rules: { sharePoints: 1, signupPoints: 10, shareWindowDays: 7 } });
     }
     if (url.pathname === "/account/profile" && ["GET", "PUT"].includes(request.method)) {
       const account = await accountAccess(request, env);
@@ -927,10 +917,23 @@ var src_default = {
         return json({ erro: "Informe uma data de nascimento valida e sua localidade." }, 400);
       if ([instagram, youtube, facebook, tiktok].some((value, index) => String(body[["instagram", "youtube", "facebook", "tiktok"][index]] || "").trim() && !value))
         return json({ erro: "Use links validos começando com http:// ou https://." }, 400);
-      const profile = { uid: account.uid, name, avatar, birthDate, locality, bio, phone, instagram, youtube, facebook, tiktok, provider: account.provider, createdAt: current?.createdAt || Date.now(), updatedAt: Date.now() };
+      let referrerUid = current?.referrerUid || "";
+      if (!current && /^[a-f0-9]{12}$/.test(String(body.referralCode || ""))) {
+        const codeObject = await env.GAMES.get(`referrals/codes/${body.referralCode}.json`);
+        const codeRecord = codeObject ? await codeObject.json().catch(() => null) : null;
+        if (codeRecord?.uid && codeRecord.uid !== account.uid && await env.GAMES.head(`profiles/v1/${encodeURIComponent(codeRecord.uid)}.json`)) referrerUid = codeRecord.uid;
+      }
+      const profile = { uid: account.uid, name, avatar, birthDate, locality, bio, phone, instagram, youtube, facebook, tiktok, provider: account.provider, ...(referrerUid ? { referrerUid } : {}), createdAt: current?.createdAt || Date.now(), updatedAt: Date.now() };
       await env.GAMES.put(key, JSON.stringify(profile), { httpMetadata: { contentType: "application/json" } });
       if (!current) {
         await fetch(`https://neoterminalroom-default-rtdb.firebaseio.com/hall_cadastros/${encodeURIComponent(account.uid)}.json`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ nome: name, avatar, mensagem: `Bem-vindo(a), ${name}! Um novo jogador entrou na sala.`, timestamp: Date.now() }) });
+        if (referrerUid) {
+          const referrerKey = `referrals/rewards/${encodeURIComponent(referrerUid)}.json`;
+          let referrerRewards = await referralRewards(env, referrerUid);
+          referrerRewards = { ...referrerRewards, referrals: referrerRewards.referrals + 1, points: referrerRewards.points + 10, updatedAt: Date.now() };
+          const result = applyReferralTiers(referrerRewards);
+          await env.GAMES.put(referrerKey, JSON.stringify(result.next), { httpMetadata: { contentType: "application/json" } });
+        }
       }
       return json({ profile, created: !current });
     }
@@ -989,10 +992,10 @@ var src_default = {
         game.slots.push({ slot, name: metadata.name || (slot === "auto" ? "Autosave" : slot), size: object.size, updatedAt: metadata.updatedAt || object.uploaded.toISOString() });
         games.set(gameId, game);
       }
-      const rewards = await streamRewards(env, access.discordId);
+      const rewards = await referralRewards(env, access.accountUid || access.firebaseUid || access.discordId);
       const automaticLimit = automaticGameLimit(access.plan) === null ? null : automaticGameLimit(access.plan) + rewards.bonusAutoGames;
       const result = Array.from(games.values()).map((game) => ({ ...game, slots: game.slots.sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt))) })).sort((a, b) => String(b.slots[0]?.updatedAt || "").localeCompare(String(a.slots[0]?.updatedAt || "")));
-      return json({ games: result, automaticGameLimit: automaticLimit, automaticGamesUsed: result.filter((game) => game.slots.some((slot) => slot.slot === "auto")).length, manualSaveLimit: manualSaveLimit(access.plan) === null ? null : manualSaveLimit(access.plan) + rewards.bonusManualSlots, streamMinutes: Math.floor(rewards.minutes), streamRewards: rewards });
+      return json({ games: result, automaticGameLimit: automaticLimit, automaticGamesUsed: result.filter((game) => game.slots.some((slot) => slot.slot === "auto")).length, manualSaveLimit: manualSaveLimit(access.plan) === null ? null : manualSaveLimit(access.plan) + rewards.bonusManualSlots, referralPoints: rewards.points, referralRewards: rewards });
     }
     if (url.pathname === "/club/save" && ["GET", "PUT", "DELETE"].includes(request.method)) {
       const access = await clubAccess(request, url, env);
@@ -1048,7 +1051,7 @@ var src_default = {
         if (!existing) {
           const prefix = `saves/v1/${access.discordId}/`;
           const automaticGames = new Set((await listAll(env, prefix)).filter((item) => item.key.endsWith("/auto.state")).map((item) => item.key.slice(prefix.length).split("/")[0]));
-          const rewards = await streamRewards(env, access.discordId);
+          const rewards = await referralRewards(env, access.accountUid || access.firebaseUid || access.discordId);
           const limit = automaticGameLimit(access.plan) === null ? null : automaticGameLimit(access.plan) + rewards.bonusAutoGames;
           if (limit !== null && automaticGames.size >= limit)
             return json({ erro: "Limite de jogos com autosave atingido.", automaticGameLimit: limit, automaticGamesUsed: automaticGames.size }, 409);
@@ -1123,7 +1126,7 @@ var src_default = {
       const findChannel = /* @__PURE__ */ __name((name) => channels.find((channel) => normalize(channel.name) === normalize(name)), "findChannel");
       const roleMap = { member: findRole("Membro"), continue: findRole("Continue"), cartucho: findRole("Cartucho"), arcade: findRole("Arcade") };
       const botRoles = roles.filter((role) => botMember.roles.includes(role.id));
-      const channelAccess = { agradecimentos: ["continue", "cartucho", "arcade"], enquetes: ["cartucho", "arcade"], "live-arcade": ["member", "continue", "cartucho", "arcade"], "sugestoes-prioritarias": ["arcade"] };
+      const channelAccess = { agradecimentos: ["continue", "cartucho", "arcade"], enquetes: ["cartucho", "arcade"], "sugestoes-prioritarias": ["arcade"] };
       const missingRoles = Object.entries(roleMap).filter(([, role]) => !role).map(([name]) => name);
       const missingChannels = Object.keys(channelAccess).filter((name) => !findChannel(name));
       if (missingRoles.length)
@@ -1138,7 +1141,7 @@ var src_default = {
       }
       if (missingChannels.length) {
         for (const name of missingChannels) {
-          const created = await discord(`/guilds/${guildId}/channels`, { method: "POST", body: JSON.stringify({ name, type: name === "live-arcade" ? 2 : 0, parent_id: clubCategory.id }) });
+          const created = await discord(`/guilds/${guildId}/channels`, { method: "POST", body: JSON.stringify({ name, type: 0, parent_id: clubCategory.id }) });
           if (!created.ok)
             return json({ erro: `Falha ao criar ${name}.`, detalhe: await created.text() }, 502);
           channels.push(await created.json());
@@ -1186,15 +1189,6 @@ var src_default = {
           const response = await discord(`/channels/${channel.id}/permissions/${role.id}`, { method: "PUT", body: payload(channel, role.id, permitted) });
           if (!response.ok)
             return json({ erro: `Falha em ${channelName}/${planName}.`, detalhe: await response.text() }, 502);
-        }
-        if (channelName === "live-arcade") {
-          const watch = 1024n + 1048576n;
-          const speakAndStream = 2097152n + 512n;
-          for (const role of [roleMap.member, roleMap.continue, roleMap.cartucho, roleMap.arcade]) {
-            const response = await discord(`/channels/${channel.id}/permissions/${role.id}`, { method: "PUT", body: JSON.stringify({ type: 0, allow: String(watch + speakAndStream), deny: "0" }) });
-            if (!response.ok)
-              return json({ erro: "Falha ao liberar transmissoes da comunidade.", detalhe: await response.text() }, 502);
-          }
         }
       }
       return json({ configurado: true, guildId, roles: Object.fromEntries(Object.entries(roleMap).map(([name, role]) => [name, role.id])), channels: Object.fromEntries(Object.keys(channelAccess).map((name) => [name, findChannel(name).id])) });
@@ -1303,13 +1297,6 @@ var src_default = {
       if (poll.ok) {
         state.ultimaEnquete = dayKey;
         await fetch(`${BOT_STATE}.json`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ultimaEnquete: dayKey }) });
-      }
-    }
-    if (now.getUTCDate() === 1 && state.ultimoLembreteLive !== dayKey) {
-      const live = await discordMessage(env, DISCORD_CHANNELS.live, { content: `A sala comunit\xE1ria est\xE1 dispon\xEDvel: qualquer membro pode abrir uma transmiss\xE3o do NeoTerminalRoom, ajudar a comunidade sem gastar e acumular recompensas de saves. Respeitem as regras do servidor e n\xE3o transmitam conte\xFAdo sem autoriza\xE7\xE3o.` });
-      if (live.ok) {
-        await discordMessage(env, DISCORD_CHANNELS.sugestoes, { content: `<@&${DISCORD_ROLES.arcade}> Use este canal para enviar sua sugest\xE3o priorit\xE1ria do m\xEAs. Inclua nome, sistema e motivo. A equipe far\xE1 a curadoria antes de publicar qualquer conte\xFAdo.` });
-        await fetch(`${BOT_STATE}.json`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ultimoLembreteLive: dayKey }) });
       }
     }
   }
