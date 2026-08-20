@@ -52,6 +52,13 @@ var WEEKLY_POLLS = [
   { question: "Qual formato de novidade interessa mais?", answers: ["Jogo homebrew", "Lista tem\xE1tica", "Curiosidade retr\xF4", "Desafio da comunidade"] }
 ];
 var PLANS = { cafe: { title: "Cafe", amount: 5 }, cartucho: { title: "Cartucho", amount: 12 }, arcade: { title: "Arcade", amount: 25 } };
+var AFFILIATE_CATEGORIES = ["destaques", "controles", "ps5", "xbox", "nintendo", "pc-gamer", "monitores", "audio", "armazenamento", "celulares", "smart-home", "streaming", "retro", "gadgets"];
+var DEFAULT_AFFILIATE_PRODUCTS = [
+  { id: "ml-oferta-1", title: "Oferta gamer Mercado Livre", description: "Acessório selecionado para quem joga no celular, computador ou console.", url: "https://meli.la/1eNR6GB", image: "", category: "destaques", tags: ["gamer", "oferta"], featured: true, active: true, position: 1 },
+  { id: "ml-oferta-2", title: "Tecnologia em oferta", description: "Produto de tecnologia recomendado pelo NeoTerminalRoom.", url: "https://meli.la/2HD21Wi", image: "", category: "gadgets", tags: ["tecnologia"], featured: true, active: true, position: 2 },
+  { id: "ml-oferta-3", title: "Acessório para seu setup", description: "Complete seu espaço de jogos com uma oferta do Mercado Livre.", url: "https://meli.la/1GQhiTZ", image: "", category: "pc-gamer", tags: ["setup", "gamer"], featured: true, active: true, position: 3 },
+  { id: "ml-oferta-4", title: "Achado NeoTerminalRoom", description: "Oferta escolhida para a comunidade de jogos e tecnologia.", url: "https://meli.la/1Ld2GkU", image: "", category: "retro", tags: ["retro", "oferta"], featured: true, active: true, position: 4 }
+];
 var cors = {
   "Access-Control-Allow-Origin": SITE,
   "Access-Control-Allow-Headers": "Authorization, Content-Type, Range, X-Save-Name, X-Game-Name, X-Game-System",
@@ -464,6 +471,13 @@ __name(SocialPlayer, "SocialPlayer");
 var src_default = {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (request.method === "GET" && url.pathname === "/affiliate/products") {
+      const saved = await readJsonDirectory(env, "affiliate/products/", 500);
+      const merged = new Map(DEFAULT_AFFILIATE_PRODUCTS.map((product) => [product.id, product]));
+      for (const record of saved) merged.set(record.value.id, record.value);
+      const products = [...merged.values()].filter((product) => product.active !== false).sort((a, b) => Number(a.position || 999) - Number(b.position || 999));
+      return json({ products, categories: AFFILIATE_CATEGORIES, disclosure: "O NeoTerminalRoom pode receber comissao pelas compras, sem custo adicional para voce." });
+    }
     if (request.method === "GET" && url.pathname === "/catalog/overrides") {
       const system = String(url.searchParams.get("system") || "").toLowerCase();
       if (!/^(nes|snes|n64|gba|megadrive|ps1)$/.test(system)) return json({ erro: "Sistema invalido." }, 400);
@@ -647,6 +661,33 @@ var src_default = {
         if (!update.ok) return json({ erro: "Cargo alterado, mas o pagamento nao foi sincronizado." }, 502);
         await audit(action, paymentId, { before: { plano: record.plano, status: record.status, validoAte: record.validoAte }, after: patch, discordId });
         return json({ updated: true, paymentId, plan, payment: { ...record, ...patch } });
+      }
+      if (action === "affiliate-products") {
+        const saved = await readJsonDirectory(env, "affiliate/products/", 500);
+        const merged = new Map(DEFAULT_AFFILIATE_PRODUCTS.map((product) => [product.id, product]));
+        for (const record of saved) merged.set(record.value.id, record.value);
+        return json({ products: [...merged.values()].sort((a, b) => Number(a.position || 999) - Number(b.position || 999)), categories: AFFILIATE_CATEGORIES });
+      }
+      if (action === "affiliate-upsert") {
+        const input = body.product || {};
+        const id = String(input.id || crypto.randomUUID()).toLowerCase().replace(/[^a-z0-9._-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80);
+        const title = cleanProfileText(input.title, 120); const description = cleanProfileText(input.description, 300); const category = String(input.category || "destaques").toLowerCase();
+        let productUrl; let image = "";
+        try { productUrl = new URL(String(input.url || "")); } catch (_) { return json({ erro: "Link afiliado invalido." }, 400); }
+        if (productUrl.protocol !== "https:" || !/(^|\.)(meli\.la|mercadolivre\.com\.br)$/i.test(productUrl.hostname)) return json({ erro: "Use um link HTTPS do Mercado Livre ou meli.la." }, 400);
+        if (String(input.image || "").trim()) { try { const parsed = new URL(String(input.image)); if (parsed.protocol !== "https:") throw new Error(); image = parsed.toString().slice(0, 1000); } catch (_) { return json({ erro: "Imagem invalida. Use HTTPS." }, 400); } }
+        if (!id || title.length < 3 || !AFFILIATE_CATEGORIES.includes(category)) return json({ erro: "Produto ou categoria invalida." }, 400);
+        const product = { id, title, description, url: productUrl.toString(), image, category, tags: Array.isArray(input.tags) ? input.tags.map((tag) => cleanProfileText(tag, 30)).filter(Boolean).slice(0, 12) : [], featured: Boolean(input.featured), active: input.active !== false, position: Math.max(1, Math.min(9999, Math.floor(Number(input.position) || 999))), updatedAt: Date.now() };
+        await env.GAMES.put(`affiliate/products/${id}.json`, JSON.stringify(product), { httpMetadata: { contentType: "application/json" } });
+        await audit(action, id, { title, category, active: product.active });
+        return json({ product });
+      }
+      if (action === "affiliate-delete") {
+        const id = String(body.id || "");
+        if (!/^[a-z0-9._-]{3,80}$/.test(id) || body.confirm !== id) return json({ erro: "Confirmacao invalida." }, 400);
+        await env.GAMES.put(`affiliate/products/${id}.json`, JSON.stringify({ id, active: false, position: 9999, updatedAt: Date.now() }), { httpMetadata: { contentType: "application/json" } });
+        await audit(action, id);
+        return json({ deleted: true, id });
       }
       if (action === "games") {
         const system = String(body.system || "snes").toLowerCase();
