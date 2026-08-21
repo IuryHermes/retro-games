@@ -3,14 +3,12 @@ var __name = (target, value) => __defProp(target, "name", { value, configurable:
 
 // src/index.ts
 var SITE = "https://neoterminalroom.com.br";
-var FIREBASE = "https://neoterminalroom-default-rtdb.firebaseio.com/apoiadores_cafe";
 var WEBHOOK = "https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev/webhook";
 var WORKER = "https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev";
 var DISCORD_APP_ID = "1537269100114350182";
 var DISCORD_GUILD_ID = "1206797125854167110";
 var DISCORD_ROLES = { cafe: "1537272991585534093", cartucho: "1537273232665612418", arcade: "1537273467026673674" };
 var DISCORD_CHANNELS = { agradecimentos: "1537275305717272706", enquetes: "1537275369160319027", sugestoes: "1537275481122938981" };
-var BOT_STATE = "https://neoterminalroom-default-rtdb.firebaseio.com/bot_clube";
 var CLUB_PLANS = ["registered", "owner", "cafe", "cartucho", "arcade"];
 var FIREBASE_PROJECT_ID = "neoterminalroom";
 var FIREBASE_ISSUER = `https://securetoken.google.com/${FIREBASE_PROJECT_ID}`;
@@ -61,6 +59,28 @@ var AFFILIATE_BOT_SEARCHES = [
   { query: "pc gamer acessorios", category: "pc-gamer" }, { query: "gadgets tecnologia", category: "gadgets" }
 ];
 var DEFAULT_AFFILIATE_PRODUCTS = [];
+var paymentKey = (id) => `payments/v1/${encodeURIComponent(String(id))}.json`;
+async function getPayment(env, id) {
+  const object = await env.GAMES.get(paymentKey(id));
+  if (object) return object.json().catch(() => null);
+  const migration = await env.GAMES.get("payments/migration-backup.json");
+  const legacy = migration ? await migration.json().catch(() => ({})) : {};
+  return legacy?.[id] || null;
+}
+async function putPayment(env, id, value) {
+  await env.GAMES.put(paymentKey(id), JSON.stringify(value), { httpMetadata: { contentType: "application/json" } });
+  return value;
+}
+async function patchPayment(env, id, patch) {
+  const current = await getPayment(env, id);
+  if (!current) return null;
+  return putPayment(env, id, { ...current, ...patch });
+}
+async function allPayments(env) {
+  const [records, migration] = await Promise.all([readJsonDirectory(env, "payments/v1/", 1e3), env.GAMES.get("payments/migration-backup.json")]);
+  const legacy = migration ? await migration.json().catch(() => ({})) : {};
+  return { ...legacy, ...Object.fromEntries(records.map(({ key, value }) => [decodeURIComponent(key.slice("payments/v1/".length).replace(/\.json$/, "")), value])) };
+}
 function isCompleteAffiliateProduct(product, now = Date.now()) {
   const image = String(product?.image || "");
   return product?.active !== false && Number(product?.price) > 0 && /^https:\/\//i.test(image) && (!product.expiresAt || Number(product.expiresAt) > now);
@@ -588,6 +608,14 @@ var src_default = {
       const activeCategories = AFFILIATE_CATEGORIES.filter((category) => products.some((product) => product.category === category));
       return json({ products, categories: activeCategories, disclosure: "Alguns links sao afiliados. O NeoTerminalRoom pode receber comissao, sem custo adicional para voce." });
     }
+    if (request.method === "GET" && url.pathname === "/public/hall") {
+      const now = Date.now();
+      const [payments, registrations, migration] = await Promise.all([allPayments(env), readJsonDirectory(env, "hall/registrations/", 200), env.GAMES.get("hall/registrations-backup.json")]);
+      const legacyRegistrations = migration ? await migration.json().catch(() => ({})) : {};
+      const supporters = Object.values(payments).filter((record) => record?.status === "aprovado" && (!record.validoAte || Number(record.validoAte) > now)).map((record) => ({ nome: cleanProfileText(record.anonimo ? "Anonimo" : record.nome, 40), mensagem: cleanProfileText(record.mensagem, 240), valor: Number(record.valor || 0), validoAte: Number(record.validoAte || 0) })).slice(-10).reverse();
+      const members = [...Object.values(legacyRegistrations), ...registrations.map((record) => record.value)].sort((a, b) => Number(b.timestamp || 0) - Number(a.timestamp || 0)).slice(0, 5).map((record) => ({ nome: cleanProfileText(record.nome, 40), mensagem: cleanProfileText(record.mensagem, 100), avatar: PROFILE_AVATARS.includes(record.avatar) ? record.avatar : "avatar-01" }));
+      return json({ supporters, members, updatedAt: now });
+    }
     const affiliateImageMatch = url.pathname.match(/^\/affiliate\/image\/([a-z0-9._-]{3,80})\.(avif|jpe?g|png|webp)$/i);
     if (request.method === "GET" && affiliateImageMatch) {
       const key = `affiliate/images/${affiliateImageMatch[1].toLowerCase()}.${affiliateImageMatch[2].toLowerCase()}`;
@@ -657,8 +685,7 @@ var src_default = {
         const now = Date.now();
         const presence = await readJsonDirectory(env, "social/presence/", 500);
         const online = presence.filter((record) => now - Number(record.value.updatedAt || 0) < 9e4).length;
-        const paymentsResponse = await fetch(`${FIREBASE}.json`);
-        const payments = paymentsResponse.ok ? await paymentsResponse.json() || {} : {};
+        const payments = await allPayments(env);
         const approved = Object.values(payments).filter((record) => record?.status === "aprovado").length;
         return json({ counts: { ...Object.fromEntries(prefixes.map((prefix, index) => [prefix, directories[index].length])), "multiplayer/rooms/": activeRooms.length }, online, approvedPayments: approved, generatedAt: now });
       }
@@ -734,7 +761,7 @@ var src_default = {
         await Promise.all(children.map((object) => env.GAMES.delete(object.key)));
         const directKeys = [`profiles/v1/${encodeURIComponent(uid)}.json`, `history/v1/${encodeURIComponent(uid)}.json`, `social/presence/${encodeURIComponent(uid)}.json`, `referrals/rewards/${encodeURIComponent(uid)}.json`, `referrals/claims/${encodeURIComponent(uid)}.json`, ownerKey, ...(owner?.code ? [`referrals/codes/${owner.code}.json`] : [])];
         await Promise.all(directKeys.map((key) => env.GAMES.delete(key)));
-        await fetch(`https://neoterminalroom-default-rtdb.firebaseio.com/hall_cadastros/${encodeURIComponent(uid)}.json`, { method: "DELETE" });
+        await env.GAMES.delete(`hall/registrations/${encodeURIComponent(uid)}.json`);
         await audit(action, uid, { deletedObjects: children.length + directKeys.length });
         return json({ deleted: true, uid, objects: children.length + directKeys.length });
       }
@@ -749,7 +776,7 @@ var src_default = {
         return json({ closed: response.ok, roomId });
       }
       if (action === "payments") {
-        const response = await fetch(`${FIREBASE}.json`); const values = response.ok ? await response.json() || {} : {};
+        const values = await allPayments(env);
         const payments = Object.entries(values).map(([id, record]) => ({ id, plano: record?.plano || "", valor: Number(record?.valor || record?.valorEsperado || 0), status: record?.status || "", nome: record?.anonimo ? "Anonimo" : cleanProfileText(record?.nome, 40), discordId: record?.discordId || "", criadoEm: record?.criadoEm || 0, aprovadoEm: record?.aprovadoEm || 0, validoAte: record?.validoAte || 0, discordStatus: record?.discordStatus || "" })).sort((a, b) => Number(b.criadoEm) - Number(a.criadoEm)).slice(0, 500);
         return json({ payments });
       }
@@ -764,8 +791,7 @@ var src_default = {
       if (action === "payment-update") {
         const paymentId = String(body.paymentId || ""); const plan = String(body.plan || "none");
         if (!/^MSG-[0-9]{10,}$/.test(paymentId) || !["none", "cafe", "cartucho", "arcade"].includes(plan)) return json({ erro: "Pagamento ou plano invalido." }, 400);
-        const recordResponse = await fetch(`${FIREBASE}/${encodeURIComponent(paymentId)}.json`);
-        const record = recordResponse.ok ? await recordResponse.json() : null;
+        const record = await getPayment(env, paymentId);
         if (!record) return json({ erro: "Pagamento nao encontrado." }, 404);
         const discordId = String(record.discordId || "");
         if (!/^\d{10,25}$/.test(discordId)) return json({ erro: "Pagamento sem conta Discord valida." }, 409);
@@ -774,8 +800,7 @@ var src_default = {
         if (plan !== "none") { const role = await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/members/${discordId}/roles/${DISCORD_ROLES[plan]}`, { method: "PUT", headers }); if (!role.ok) return json({ erro: "Discord recusou o cargo." }, 502); }
         const now = Date.now();
         const patch = plan === "none" ? { plano: record.plano, status: "expirado", validoAte: now, discordStatus: "cargo_removido" } : { plano: plan, status: "aprovado", aprovadoEm: Number(record.aprovadoEm) || now, validoAte: Number(body.validUntil) > now ? Number(body.validUntil) : now + 30 * 24 * 60 * 60 * 1e3, discordStatus: "cargo_liberado" };
-        const update = await fetch(`${FIREBASE}/${encodeURIComponent(paymentId)}.json`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(patch) });
-        if (!update.ok) return json({ erro: "Cargo alterado, mas o pagamento nao foi sincronizado." }, 502);
+        await patchPayment(env, paymentId, patch);
         await audit(action, paymentId, { before: { plano: record.plano, status: record.status, validoAte: record.validoAte }, after: patch, discordId });
         return json({ updated: true, paymentId, plan, payment: { ...record, ...patch } });
       }
@@ -1241,7 +1266,7 @@ var src_default = {
       const profile = { uid: account.uid, name, avatar, birthDate, locality, bio, phone, instagram, youtube, facebook, tiktok, provider: account.provider, ...(referrerUid ? { referrerUid } : {}), createdAt: current?.createdAt || Date.now(), updatedAt: Date.now() };
       await env.GAMES.put(key, JSON.stringify(profile), { httpMetadata: { contentType: "application/json" } });
       if (!current) {
-        await fetch(`https://neoterminalroom-default-rtdb.firebaseio.com/hall_cadastros/${encodeURIComponent(account.uid)}.json`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ nome: name, avatar, mensagem: `Bem-vindo(a), ${name}! Um novo jogador entrou na sala.`, timestamp: Date.now() }) });
+        await env.GAMES.put(`hall/registrations/${encodeURIComponent(account.uid)}.json`, JSON.stringify({ nome: name, avatar, mensagem: `Bem-vindo(a), ${name}! Um novo jogador entrou na sala.`, timestamp: Date.now() }), { httpMetadata: { contentType: "application/json" } });
         if (referrerUid) {
           const referrerKey = `referrals/rewards/${encodeURIComponent(referrerUid)}.json`;
           const claimKey = `referrals/claims/${encodeURIComponent(account.uid)}.json`;
@@ -1539,9 +1564,7 @@ var src_default = {
         if (!mpResponse.ok || !preference.init_point)
           return json({ erro: "Mercado Pago recusou a preferencia." }, 502);
         const pendingRecord = isFree ? { valor: amount, plano: "livre", status: "pendente", timestamp: Date.now(), exibirMural: false } : { nome: name, mensagem: message, valor: amount, plano: planKey, status: "pendente", timestamp: Date.now(), discordId: discord.discordId, discordUsuario: discord.username, exibirMural: true };
-        const pending = await fetch(`${FIREBASE}/${encodeURIComponent(id)}.json`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(pendingRecord) });
-        if (!pending.ok)
-          return json({ erro: "Nao foi possivel registrar o apoio." }, 502);
+        await putPayment(env, id, pendingRecord);
         return json({ link: preference.init_point });
       } catch {
         return json({ erro: "Erro ao gerar pagamento." }, 500);
@@ -1561,13 +1584,12 @@ var src_default = {
         const amount = Number(payment.transaction_amount);
         if (payment.status !== "approved" || !/^MSG-[0-9]{10,}$/.test(id))
           return json({ recebido: true });
-        const recordResponse = await fetch(`${FIREBASE}/${encodeURIComponent(id)}.json`);
-        const record = await recordResponse.json();
+        const record = await getPayment(env, id);
         if (!record || Math.abs(Number(record.valor) - amount) > 1e-3)
           return json({ erro: "Valor do pagamento divergente." }, 409);
         if (record.plano === "livre") {
-          const update2 = await fetch(`${FIREBASE}/${encodeURIComponent(id)}.json`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status: "doacao_aprovada", aprovadoEm: Date.now() }) });
-          return update2.ok ? json({ recebido: true }) : json({ erro: "Falha ao confirmar doacao." }, 502);
+          await patchPayment(env, id, { status: "doacao_aprovada", aprovadoEm: Date.now() });
+          return json({ recebido: true });
         }
         if (!Object.values(PLANS).some((p) => p.amount === amount))
           return json({ erro: "Valor de plano invalido." }, 409);
@@ -1581,9 +1603,7 @@ var src_default = {
         const discordStatus = roleResponse.ok ? "cargo_liberado" : "falha_ao_liberar";
         if (roleResponse.ok)
           await discordMessage(env, DISCORD_CHANNELS.agradecimentos, { content: `\u{1F3AE} Obrigado, <@${record.discordId}>! Seu apoio **${record.plano === "cafe" ? "Continue" : record.plano === "cartucho" ? "Cartucho" : "Arcade"}** foi confirmado. O cargo e os benef\xEDcios est\xE3o ativos por 30 dias.` });
-        const update = await fetch(`${FIREBASE}/${encodeURIComponent(id)}.json`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status: "aprovado", valor: amount, aprovadoEm: approvedAt, validoAte: approvedAt + 30 * 24 * 60 * 60 * 1e3, discordStatus }) });
-        if (!update.ok)
-          return json({ erro: "Falha ao liberar apoio." }, 502);
+        await patchPayment(env, id, { status: "aprovado", valor: amount, aprovadoEm: approvedAt, validoAte: approvedAt + 30 * 24 * 60 * 60 * 1e3, discordStatus });
         return json({ recebido: true });
       } catch {
         return json({ erro: "Webhook invalido." }, 400);
@@ -1592,20 +1612,17 @@ var src_default = {
     return json({ erro: "Nao encontrado." }, 404);
   },
   async scheduled(_event, env) {
-    const response = await fetch(`${FIREBASE}.json`);
-    if (!response.ok)
-      return;
-    const records = await response.json();
+    const records = await allPayments(env);
     for (const [id, record] of Object.entries(records || {})) {
       if (record.status !== "aprovado" || !record.validoAte || record.validoAte > Date.now() || !record.discordId || !record.plano)
         continue;
       await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/members/${record.discordId}/roles/${DISCORD_ROLES[record.plano]}`, { method: "DELETE", headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` } });
-      await fetch(`${FIREBASE}/${encodeURIComponent(id)}.json`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status: "expirado", discordStatus: "cargo_removido" }) });
+      await patchPayment(env, id, { status: "expirado", discordStatus: "cargo_removido" });
     }
     const now = /* @__PURE__ */ new Date();
     const dayKey = now.toISOString().slice(0, 10);
-    const stateResponse = await fetch(`${BOT_STATE}.json`);
-    const state = stateResponse.ok ? await stateResponse.json() || {} : {};
+    const stateObject = await env.GAMES.get("club/bot-state.json");
+    const state = stateObject ? await stateObject.json().catch(() => ({})) : {};
     if (now.getUTCDay() === 1 && state.ultimaEnquete !== dayKey) {
       const start = Date.UTC(now.getUTCFullYear(), 0, 1);
       const week = Math.floor((now.getTime() - start) / 6048e5);
@@ -1613,7 +1630,7 @@ var src_default = {
       const poll = await discordMessage(env, DISCORD_CHANNELS.enquetes, { content: `<@&${DISCORD_ROLES.cartucho}> <@&${DISCORD_ROLES.arcade}> \u2014 enquete semanal do Clube:`, poll: { question: { text: topic.question }, answers: topic.answers.map((text) => ({ poll_media: { text } })), duration: 168, allow_multiselect: false } });
       if (poll.ok) {
         state.ultimaEnquete = dayKey;
-        await fetch(`${BOT_STATE}.json`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ultimaEnquete: dayKey }) });
+        await env.GAMES.put("club/bot-state.json", JSON.stringify(state), { httpMetadata: { contentType: "application/json" } });
       }
     }
     await runAffiliateBot(env);
