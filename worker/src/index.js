@@ -50,7 +50,7 @@ var WEEKLY_POLLS = [
   { question: "Qual formato de novidade interessa mais?", answers: ["Jogo homebrew", "Lista tem\xE1tica", "Curiosidade retr\xF4", "Desafio da comunidade"] }
 ];
 var PLANS = { cafe: { title: "Cafe", amount: 5 }, cartucho: { title: "Cartucho", amount: 12 }, arcade: { title: "Arcade", amount: 25 } };
-var AFFILIATE_CATEGORIES = ["destaques", "console-ps5", "console-xbox", "console-nintendo", "controles", "ps5", "xbox", "nintendo", "pc-gamer", "monitores", "audio", "armazenamento", "celulares", "smart-home", "streaming", "retro", "gadgets"];
+var AFFILIATE_CATEGORIES = ["cupons", "destaques", "console-ps5", "console-xbox", "console-nintendo", "controles", "ps5", "xbox", "nintendo", "pc-gamer", "monitores", "audio", "armazenamento", "celulares", "smart-home", "streaming", "retro", "gadgets"];
 var AFFILIATE_BOT_SEARCHES = [
   { query: "jogos midia fisica ps5", category: "ps5" }, { query: "jogos midia fisica xbox", category: "xbox" },
   { query: "jogos midia fisica nintendo switch", category: "nintendo" }, { query: "gift card playstation xbox nintendo", category: "destaques" },
@@ -83,7 +83,9 @@ async function allPayments(env) {
 }
 function isCompleteAffiliateProduct(product, now = Date.now()) {
   const image = String(product?.image || "");
-  return product?.active !== false && Number(product?.price) > 0 && /^https:\/\//i.test(image) && (!product.expiresAt || Number(product.expiresAt) > now);
+  const couponComplete = product?.kind === "coupon" && /^[A-Z0-9][A-Z0-9_-]{3,29}$/i.test(String(product?.couponCode || "")) && /^https:\/\//i.test(String(product?.url || ""));
+  const productComplete = product?.kind !== "coupon" && Number(product?.price) > 0 && /^https:\/\//i.test(image);
+  return product?.active !== false && (couponComplete || productComplete) && (!product.expiresAt || Number(product.expiresAt) > now);
 }
 __name(isCompleteAffiliateProduct, "isCompleteAffiliateProduct");
 async function affiliateBotState(env) {
@@ -851,21 +853,24 @@ var src_default = {
       }
       if (action === "affiliate-upsert") {
         const input = body.product || {};
+        const kind = input.kind === "coupon" ? "coupon" : "product";
         const id = String(input.id || crypto.randomUUID()).toLowerCase().replace(/[^a-z0-9._-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80);
         const title = cleanProfileText(input.title, 120); const description = cleanProfileText(input.description, 300); const category = String(input.category || "destaques").toLowerCase();
         let productUrl; let image = "";
         try { productUrl = new URL(String(input.url || "")); } catch (_) { return json({ erro: "Link afiliado invalido." }, 400); }
         const isMercadoLivre = productUrl.protocol === "https:" && /(^|\.)(meli\.la|mercadolivre\.com\.br)$/i.test(productUrl.hostname);
         const isAmazon = productUrl.protocol === "https:" && /(^|\.)amazon\.com\.br$/i.test(productUrl.hostname)
-          && productUrl.searchParams.get("tag") === "neoterminalro-20" && /^\/dp\/[A-Z0-9]{10}(?:\/|$)/i.test(productUrl.pathname);
+          && productUrl.searchParams.get("tag") === "neoterminalro-20" && (kind === "coupon" || /^\/dp\/[A-Z0-9]{10}(?:\/|$)/i.test(productUrl.pathname));
         if (!isMercadoLivre && !isAmazon) return json({ erro: "Use um link afiliado HTTPS válido do Mercado Livre ou Amazon Brasil." }, 400);
         if (String(input.image || "").trim()) { try { const parsed = new URL(String(input.image)); if (parsed.protocol !== "https:") throw new Error(); image = parsed.toString().slice(0, 1000); } catch (_) { return json({ erro: "Imagem invalida. Use HTTPS." }, 400); } }
         if (!id || title.length < 3 || !AFFILIATE_CATEGORIES.includes(category)) return json({ erro: "Produto ou categoria invalida." }, 400);
         const price = Number(input.price);
-        if (!(price > 0)) return json({ erro: "O preço atual é obrigatório e deve ser maior que zero." }, 400);
-        if (!image) return json({ erro: "A imagem original HTTPS do produto é obrigatória." }, 400);
+        const couponCode = cleanProfileText(input.couponCode, 30).toUpperCase(); const terms = cleanProfileText(input.terms, 500); const merchant = cleanProfileText(input.merchant, 30);
+        if (kind === "product" && !(price > 0)) return json({ erro: "O preço atual é obrigatório e deve ser maior que zero." }, 400);
+        if (kind === "product" && !image) return json({ erro: "A imagem original HTTPS do produto é obrigatória." }, 400);
+        if (kind === "coupon" && (!/^[A-Z0-9][A-Z0-9_-]{3,29}$/.test(couponCode) || terms.length < 8)) return json({ erro: "Cupom precisa de código e regras válidas." }, 400);
         const now = Date.now();
-        const product = { id, title, description, url: productUrl.toString(), image, category, tags: Array.isArray(input.tags) ? input.tags.map((tag) => cleanProfileText(tag, 30)).filter(Boolean).slice(0, 12) : [], featured: Boolean(input.featured), active: input.active !== false, position: Math.max(1, Math.min(9999, Math.floor(Number(input.position) || 999))), price, originalPrice: Math.max(0, Number(input.originalPrice) || 0), publishedAt: Number(input.publishedAt) || now, expiresAt: Number(input.expiresAt) || now + 36 * 36e5, updatedAt: now };
+        const product = { id, kind, title, description, url: productUrl.toString(), image: kind === "coupon" ? "" : image, category: kind === "coupon" ? "cupons" : category, couponCode: kind === "coupon" ? couponCode : "", terms: kind === "coupon" ? terms : "", merchant: kind === "coupon" ? merchant : "", tags: Array.isArray(input.tags) ? input.tags.map((tag) => cleanProfileText(tag, 30)).filter(Boolean).slice(0, 12) : [], featured: Boolean(input.featured), active: input.active !== false, position: Math.max(1, Math.min(9999, Math.floor(Number(input.position) || 999))), price: kind === "coupon" ? 0 : price, originalPrice: kind === "coupon" ? 0 : Math.max(0, Number(input.originalPrice) || 0), discount: Math.max(0, Math.min(100, Number(input.discount) || 0)), publishedAt: Number(input.publishedAt) || now, expiresAt: Number(input.expiresAt) || now + 36 * 36e5, updatedAt: now };
         await env.GAMES.put(`affiliate/products/${id}.json`, JSON.stringify(product), { httpMetadata: { contentType: "application/json" } });
         await audit(action, id, { title, category, active: product.active });
         return json({ product });
