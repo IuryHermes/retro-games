@@ -84,8 +84,9 @@ async function allPayments(env) {
 function isCompleteAffiliateProduct(product, now = Date.now()) {
   const image = String(product?.image || "");
   const couponComplete = product?.kind === "coupon" && /^[A-Z0-9][A-Z0-9_-]{3,29}$/i.test(String(product?.couponCode || "")) && /^https:\/\//i.test(String(product?.url || ""));
-  const productComplete = product?.kind !== "coupon" && Number(product?.price) > 0 && /^https:\/\//i.test(image);
-  return product?.active !== false && (couponComplete || productComplete) && (!product.expiresAt || Number(product.expiresAt) > now);
+  const linkComplete = product?.kind === "link" && /^https:\/\//i.test(String(product?.url || ""));
+  const productComplete = product?.kind !== "coupon" && product?.kind !== "link" && Number(product?.price) > 0 && /^https:\/\//i.test(image);
+  return product?.active !== false && (couponComplete || linkComplete || productComplete) && (!product.expiresAt || Number(product.expiresAt) > now);
 }
 __name(isCompleteAffiliateProduct, "isCompleteAffiliateProduct");
 async function affiliateBotState(env) {
@@ -853,7 +854,7 @@ var src_default = {
       }
       if (action === "affiliate-upsert") {
         const input = body.product || {};
-        const kind = input.kind === "coupon" ? "coupon" : "product";
+        const kind = input.kind === "coupon" ? "coupon" : input.kind === "link" ? "link" : "product";
         const id = String(input.id || crypto.randomUUID()).toLowerCase().replace(/[^a-z0-9._-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80);
         const title = cleanProfileText(input.title, 120); const description = cleanProfileText(input.description, 300); const category = String(input.category || "destaques").toLowerCase();
         let productUrl; let image = "";
@@ -870,7 +871,7 @@ var src_default = {
         if (kind === "product" && !image) return json({ erro: "A imagem original HTTPS do produto é obrigatória." }, 400);
         if (kind === "coupon" && (!/^[A-Z0-9][A-Z0-9_-]{3,29}$/.test(couponCode) || terms.length < 8)) return json({ erro: "Cupom precisa de código e regras válidas." }, 400);
         const now = Date.now();
-        const product = { id, kind, title, description, url: productUrl.toString(), image: kind === "coupon" ? "" : image, category: kind === "coupon" ? "cupons" : category, couponCode: kind === "coupon" ? couponCode : "", terms: kind === "coupon" ? terms : "", merchant: kind === "coupon" ? merchant : "", tags: Array.isArray(input.tags) ? input.tags.map((tag) => cleanProfileText(tag, 30)).filter(Boolean).slice(0, 12) : [], featured: Boolean(input.featured), active: input.active !== false, position: Math.max(1, Math.min(9999, Math.floor(Number(input.position) || 999))), price: kind === "coupon" ? 0 : price, originalPrice: kind === "coupon" ? 0 : Math.max(0, Number(input.originalPrice) || 0), discount: Math.max(0, Math.min(100, Number(input.discount) || 0)), publishedAt: Number(input.publishedAt) || now, expiresAt: Number(input.expiresAt) || now + 36 * 36e5, updatedAt: now };
+        const product = { id, kind, title, description, url: productUrl.toString(), image: kind === "product" ? image : "", category: kind === "coupon" ? "cupons" : category, couponCode: kind === "coupon" ? couponCode : "", terms: kind === "coupon" ? terms : "", merchant: kind === "coupon" ? merchant : "", tags: Array.isArray(input.tags) ? input.tags.map((tag) => cleanProfileText(tag, 30)).filter(Boolean).slice(0, 12) : [], featured: Boolean(input.featured), active: input.active !== false, position: Math.max(1, Math.min(9999, Math.floor(Number(input.position) || 999))), price: kind === "product" ? price : 0, originalPrice: kind === "product" ? Math.max(0, Number(input.originalPrice) || 0) : 0, discount: Math.max(0, Math.min(100, Number(input.discount) || 0)), publishedAt: Number(input.publishedAt) || now, expiresAt: Number(input.expiresAt) || now + 36 * 36e5, updatedAt: now };
         await env.GAMES.put(`affiliate/products/${id}.json`, JSON.stringify(product), { httpMetadata: { contentType: "application/json" } });
         await audit(action, id, { title, category, active: product.active });
         return json({ product });
