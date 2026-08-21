@@ -585,7 +585,8 @@ var src_default = {
         return original > price && price > 0 ? (original - price) / original : 0;
       };
       const products = [...merged.values()].filter((product) => isCompleteAffiliateProduct(product, now)).sort((a, b) => discountOf(b) - discountOf(a) || Number(a.price || Infinity) - Number(b.price || Infinity) || Number(b.publishedAt || 0) - Number(a.publishedAt || 0));
-      return json({ products, categories: AFFILIATE_CATEGORIES, disclosure: "Alguns links sao afiliados. O NeoTerminalRoom pode receber comissao, sem custo adicional para voce." });
+      const activeCategories = AFFILIATE_CATEGORIES.filter((category) => products.some((product) => product.category === category));
+      return json({ products, categories: activeCategories, disclosure: "Alguns links sao afiliados. O NeoTerminalRoom pode receber comissao, sem custo adicional para voce." });
     }
     const affiliateImageMatch = url.pathname.match(/^\/affiliate\/image\/([a-z0-9._-]{3,80})\.(avif|jpe?g|png|webp)$/i);
     if (request.method === "GET" && affiliateImageMatch) {
