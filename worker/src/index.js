@@ -862,7 +862,8 @@ var src_default = {
         const isMercadoLivre = productUrl.protocol === "https:" && /(^|\.)(meli\.la|mercadolivre\.com\.br)$/i.test(productUrl.hostname);
         const isAmazon = productUrl.protocol === "https:" && /(^|\.)amazon\.com\.br$/i.test(productUrl.hostname)
           && productUrl.searchParams.get("tag") === "neoterminalro-20" && (kind === "coupon" || /^\/dp\/[A-Z0-9]{10}(?:\/|$)/i.test(productUrl.pathname));
-        if (!isMercadoLivre && !isAmazon) return json({ erro: "Use um link afiliado HTTPS válido do Mercado Livre ou Amazon Brasil." }, 400);
+        const isShopee = productUrl.protocol === "https:" && productUrl.hostname.toLowerCase() === "s.shopee.com.br" && /^\/[A-Za-z0-9_-]{6,32}\/?$/.test(productUrl.pathname);
+        if (!isMercadoLivre && !isAmazon && !isShopee) return json({ erro: "Use um link afiliado HTTPS válido do Mercado Livre, Amazon Brasil ou Shopee." }, 400);
         if (String(input.image || "").trim()) { try { const parsed = new URL(String(input.image)); if (parsed.protocol !== "https:") throw new Error(); image = parsed.toString().slice(0, 1000); } catch (_) { return json({ erro: "Imagem invalida. Use HTTPS." }, 400); } }
         if (!id || title.length < 3 || !AFFILIATE_CATEGORIES.includes(category)) return json({ erro: "Produto ou categoria invalida." }, 400);
         const price = Number(input.price);

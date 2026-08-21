@@ -50,7 +50,7 @@
           article.append(media);
         }
         const copy=document.createElement('div');copy.className='copy';
-        const tag=document.createElement('span');tag.className='tag';tag.textContent=isCoupon?`CUPOM · ${p.merchant||'ACHADOS NEOTERMINAL'}`:isLink?'MEGA OFERTA · AMAZON':labels[p.category]||p.category;
+        const tag=document.createElement('span');tag.className='tag';const host=(()=>{try{return new URL(p.url).hostname}catch{return''}})();const store=/shopee/i.test(host)?'SHOPEE':/amazon/i.test(host)?'AMAZON':/(?:meli\.la|mercadolivre)/i.test(host)?'MERCADO LIVRE':'';tag.textContent=isCoupon?`CUPOM · ${p.merchant||'ACHADOS NEOTERMINAL'}`:isLink?'MEGA OFERTA · AMAZON':store?`${store} · ${labels[p.category]||p.category}`:labels[p.category]||p.category;
         const title=document.createElement('h2');title.textContent=p.title;copy.append(tag,title);
         if(isCoupon){
           const code=document.createElement('div');code.className='coupon-code';code.textContent=p.couponCode;
