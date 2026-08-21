@@ -118,8 +118,7 @@ async function loadPlayers() {
           ? "Online · jogando agora"
           : "Online · navegando no site"
           : "Offline";
-      const details = [player.age ? `${player.age} anos` : "", player.locality ? `Cidade: ${player.locality}` : ""].filter(Boolean).join(" Â· ");
-      page.textContent = details ? `${presence} Â· ${details}` : presence;
+      page.textContent = [presence, player.age ? `${player.age} anos` : "", player.locality ? `Cidade: ${player.locality}` : ""].filter(Boolean).join("\n");
       info.append(name, page);
       if (false && player.locality) {
         const locality = document.createElement("small");
