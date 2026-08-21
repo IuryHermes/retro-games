@@ -855,7 +855,10 @@ var src_default = {
         const title = cleanProfileText(input.title, 120); const description = cleanProfileText(input.description, 300); const category = String(input.category || "destaques").toLowerCase();
         let productUrl; let image = "";
         try { productUrl = new URL(String(input.url || "")); } catch (_) { return json({ erro: "Link afiliado invalido." }, 400); }
-        if (productUrl.protocol !== "https:" || !/(^|\.)(meli\.la|mercadolivre\.com\.br)$/i.test(productUrl.hostname)) return json({ erro: "Use um link HTTPS do Mercado Livre ou meli.la." }, 400);
+        const isMercadoLivre = productUrl.protocol === "https:" && /(^|\.)(meli\.la|mercadolivre\.com\.br)$/i.test(productUrl.hostname);
+        const isAmazon = productUrl.protocol === "https:" && /(^|\.)amazon\.com\.br$/i.test(productUrl.hostname)
+          && productUrl.searchParams.get("tag") === "neoterminalro-20" && /^\/dp\/[A-Z0-9]{10}(?:\/|$)/i.test(productUrl.pathname);
+        if (!isMercadoLivre && !isAmazon) return json({ erro: "Use um link afiliado HTTPS válido do Mercado Livre ou Amazon Brasil." }, 400);
         if (String(input.image || "").trim()) { try { const parsed = new URL(String(input.image)); if (parsed.protocol !== "https:") throw new Error(); image = parsed.toString().slice(0, 1000); } catch (_) { return json({ erro: "Imagem invalida. Use HTTPS." }, 400); } }
         if (!id || title.length < 3 || !AFFILIATE_CATEGORIES.includes(category)) return json({ erro: "Produto ou categoria invalida." }, 400);
         const price = Number(input.price);
