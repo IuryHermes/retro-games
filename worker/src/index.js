@@ -52,7 +52,7 @@ var WEEKLY_POLLS = [
   { question: "Qual formato de novidade interessa mais?", answers: ["Jogo homebrew", "Lista tem\xE1tica", "Curiosidade retr\xF4", "Desafio da comunidade"] }
 ];
 var PLANS = { cafe: { title: "Cafe", amount: 5 }, cartucho: { title: "Cartucho", amount: 12 }, arcade: { title: "Arcade", amount: 25 } };
-var AFFILIATE_CATEGORIES = ["destaques", "controles", "ps5", "xbox", "nintendo", "pc-gamer", "monitores", "audio", "armazenamento", "celulares", "smart-home", "streaming", "retro", "gadgets"];
+var AFFILIATE_CATEGORIES = ["destaques", "console-ps5", "console-xbox", "console-nintendo", "controles", "ps5", "xbox", "nintendo", "pc-gamer", "monitores", "audio", "armazenamento", "celulares", "smart-home", "streaming", "retro", "gadgets"];
 var AFFILIATE_BOT_SEARCHES = [
   { query: "jogos midia fisica ps5", category: "ps5" }, { query: "jogos midia fisica xbox", category: "xbox" },
   { query: "jogos midia fisica nintendo switch", category: "nintendo" }, { query: "gift card playstation xbox nintendo", category: "destaques" },
@@ -580,7 +580,11 @@ var src_default = {
       const merged = new Map(DEFAULT_AFFILIATE_PRODUCTS.map((product) => [product.id, product]));
       for (const record of saved) merged.set(record.value.id, { ...(merged.get(record.value.id) || {}), ...record.value, image: record.value.image || merged.get(record.value.id)?.image || "" });
       const now = Date.now();
-      const products = [...merged.values()].filter((product) => isCompleteAffiliateProduct(product, now)).sort((a, b) => Number(b.publishedAt || 0) - Number(a.publishedAt || 0) || Number(a.position || 999) - Number(b.position || 999));
+      const discountOf = (product) => {
+        const price = Number(product.price || 0), original = Number(product.originalPrice || 0);
+        return original > price && price > 0 ? (original - price) / original : 0;
+      };
+      const products = [...merged.values()].filter((product) => isCompleteAffiliateProduct(product, now)).sort((a, b) => discountOf(b) - discountOf(a) || Number(a.price || Infinity) - Number(b.price || Infinity) || Number(b.publishedAt || 0) - Number(a.publishedAt || 0));
       return json({ products, categories: AFFILIATE_CATEGORIES, disclosure: "Alguns links sao afiliados. O NeoTerminalRoom pode receber comissao, sem custo adicional para voce." });
     }
     const affiliateImageMatch = url.pathname.match(/^\/affiliate\/image\/([a-z0-9._-]{3,80})\.(avif|jpe?g|png|webp)$/i);
