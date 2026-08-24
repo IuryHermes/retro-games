@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://neoterminalroom.com.br/sitemap-games.xml
+Sitemap: https://neoterminalroom.com.br/sitemap.xml

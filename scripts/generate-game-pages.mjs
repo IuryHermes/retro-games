@@ -37,4 +37,6 @@ for (const system of systems) {
 await mkdir(join(root,'jogos'),{recursive:true});
 await writeFile(join(root,'jogos','index.html'), '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Jogos online | NeoTerminalRoom</title><link rel="canonical" href="https://neoterminalroom.com.br/jogos/"><meta http-equiv="refresh" content="0;url=/"></head><body><a href="/">Ver catálogo de jogos</a></body></html>');
 await writeFile(join(root,'sitemap-games.xml'), `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemap.join('')}</urlset>`);
+await writeFile(join(root,'sitemap-static.xml'), `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${site}/</loc><changefreq>daily</changefreq><priority>1.0</priority></url><url><loc>${site}/social.html</loc><changefreq>daily</changefreq><priority>0.8</priority></url><url><loc>${site}/ofertas.html</loc><changefreq>daily</changefreq><priority>0.7</priority></url></urlset>`);
+await writeFile(join(root,'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>${site}/sitemap-static.xml</loc></sitemap><sitemap><loc>${site}/sitemap-games.xml</loc></sitemap></sitemapindex>`);
 console.log(`generated ${generated} game pages`);
