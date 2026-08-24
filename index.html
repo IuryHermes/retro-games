@@ -1535,9 +1535,10 @@
     async function refreshSinglePersonalHero() {
         if (!accountProfile) return;
         try {
-            const [historyData] = await Promise.all([historyRequest(), Promise.allSettled(fetchPromises)]);
+            const [historyData, saveLibrary] = await Promise.all([historyRequest(), cloudRequest('/club/library').catch(() => ({ games:[] })), Promise.allSettled(fetchPromises)]);
             const recent = historyData.games?.[0];
             if (!recent) return;
+            const hasAutoSave = (saveLibrary.games || []).some(game => game.id === recent.id && (game.slots || []).some(slot => slot.slot === 'auto'));
             const catalogGame = indexData.find(game => catalogHistoryId(game) === recent.id);
             const coverName = catalogGame?.capa ? catalogGame.capa.split('/').pop() : '';
             const catalogCover = catalogCoverUrl(catalogGame);
@@ -1561,8 +1562,8 @@
             const eyebrow = document.createElement('div'); eyebrow.className = 'hero-eyebrow'; eyebrow.textContent = `OLÁ, ${accountProfile.name}`;
             const title = document.createElement('h1'); title.className = 'hero-title'; title.textContent = recent.name;
             const meta = document.createElement('div'); meta.className = 'hero-categories'; meta.textContent = `${String(recent.system || '').toUpperCase()} · SEU ÚLTIMO JOGO`;
-            const note = document.createElement('div'); note.className = 'hero-resume-note'; note.textContent = 'Continue sua partida de onde parou.';
-            const button = document.createElement('button'); button.type = 'button'; button.className = 'hero-play-btn selectable-item'; button.innerHTML = '<span>▶</span> CONTINUAR';
+            const note = document.createElement('div'); note.className = 'hero-resume-note'; note.textContent = hasAutoSave ? 'Continue sua partida de onde parou.' : 'Jogue novamente desde o início.';
+            const button = document.createElement('button'); button.type = 'button'; button.className = 'hero-play-btn selectable-item'; button.innerHTML = hasAutoSave ? '<span>▶</span> CONTINUAR' : '<span>▶</span> JOGAR NOVAMENTE';
             button.onclick = () => {
                 void historyRequest('POST', { id:recent.id, name:recent.name, system:recent.system, cover:recent.cover || media, playUrl:recent.playUrl }).catch(() => {});
                 window.startGame(recent.playUrl);
@@ -1576,7 +1577,7 @@
     refreshPersonalHero = async function () {
         if (!accountProfile) return;
         try {
-            const [historyData] = await Promise.all([historyRequest(), Promise.allSettled(fetchPromises)]);
+            const [historyData, saveLibrary] = await Promise.all([historyRequest(), cloudRequest('/club/library').catch(() => ({ games:[] })), Promise.allSettled(fetchPromises)]);
             const recentGames = (historyData.games || []).slice(0, 3);
             if (!recentGames.length) return;
 
@@ -1590,6 +1591,7 @@
             const slides = document.createDocumentFragment();
             const dots = document.createDocumentFragment();
             recentGames.forEach((recent, recentIndex) => {
+                const hasAutoSave = (saveLibrary.games || []).some(game => game.id === recent.id && (game.slots || []).some(slot => slot.slot === 'auto'));
                 const catalogGame = indexData.find(game => catalogHistoryId(game) === recent.id);
                 const coverName = catalogGame?.capa ? catalogGame.capa.split('/').pop() : '';
                 const catalogCover = catalogCoverUrl(catalogGame);
@@ -1608,8 +1610,8 @@
                 const eyebrow = document.createElement('div'); eyebrow.className = 'hero-eyebrow'; eyebrow.textContent = `OLÁ, ${accountProfile.name}`;
                 const title = document.createElement('h1'); title.className = 'hero-title'; title.textContent = recent.name;
                 const meta = document.createElement('div'); meta.className = 'hero-categories'; meta.textContent = `${String(recent.system || '').toUpperCase()} · RECENTE ${recentIndex + 1} DE ${recentGames.length}`;
-                const note = document.createElement('div'); note.className = 'hero-resume-note'; note.textContent = 'Continue sua partida de onde parou.';
-                const button = document.createElement('button'); button.type = 'button'; button.className = 'hero-play-btn selectable-item'; button.innerHTML = '<span>▶</span> CONTINUAR';
+                const note = document.createElement('div'); note.className = 'hero-resume-note'; note.textContent = hasAutoSave ? 'Continue sua partida de onde parou.' : 'Jogue novamente desde o início.';
+                const button = document.createElement('button'); button.type = 'button'; button.className = 'hero-play-btn selectable-item'; button.innerHTML = hasAutoSave ? '<span>▶</span> CONTINUAR' : '<span>▶</span> JOGAR NOVAMENTE';
                 button.onclick = () => {
                     void historyRequest('POST', { id:recent.id, name:recent.name, system:recent.system, cover:recent.cover || media, playUrl:recent.playUrl }).catch(() => {});
                     window.startGame(recent.playUrl);

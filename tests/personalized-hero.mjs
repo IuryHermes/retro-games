@@ -6,7 +6,9 @@ const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 assert.match(index, /refreshPersonalHero = async function/);
 assert.match(index, /const recent = historyData\.games\?\.\[0\]/);
 assert.match(index, /id = 'personalized-hero'/);
-assert.match(index, /button\.innerHTML = '<span>▶<\/span> CONTINUAR'/);
+assert.match(index, /button\.innerHTML = hasAutoSave \? '<span>▶<\/span> CONTINUAR' : '<span>▶<\/span> JOGAR NOVAMENTE'/);
+assert.match(index, /cloudRequest\('\/club\/library'\)/);
+assert.match(index, /slot\.slot === 'auto'/);
 assert.match(index, /SEU ÚLTIMO JOGO/);
 assert.match(index, /Promise\.allSettled\(fetchPromises\)/);
 assert.match(index, /recent\.cover \|\| catalogCover/);
@@ -24,4 +26,4 @@ assert.match(index, /id="hero-prev"/);
 assert.match(index, /id="hero-next"/);
 assert.doesNotMatch(index, /imagem da partida aparecerá aqui depois do próximo autosave/);
 
-console.log('personalized hero: 20 checks passed');
+console.log('personalized hero: 22 checks passed');
