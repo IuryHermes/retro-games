@@ -126,7 +126,13 @@
         font-size: 18px;
         touch-action: none;
         user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
       }
+      .md-extra { display: none; }
+      .controls.megadrive .actions { grid-template-columns: repeat(3, 58px); }
+      .controls.megadrive .md-extra { display: block; }
       .control:active,
       .control.pressed {
         background: #00cc44;
@@ -370,7 +376,9 @@
           <button class="control" data-index="1">Y</button
           ><button class="control" data-index="9">X</button
           ><button class="control" data-index="0">B</button
-          ><button class="control" data-index="8">A</button>
+          ><button class="control" data-index="8">A</button
+          ><button class="control md-extra" data-index="10">X</button
+          ><button class="control md-extra" data-index="11">Z</button>
         </div>
       </div>
       <div class="meta">
@@ -518,7 +526,9 @@
         let captureBindingIndex = null;
         const bindingActions = () => roomSystem === "n64"
           ? [["ANALÓGICO CIMA",19],["ANALÓGICO BAIXO",18],["ANALÓGICO ESQUERDA",17],["ANALÓGICO DIREITA",16],["D-PAD CIMA",4],["D-PAD BAIXO",5],["D-PAD ESQUERDA",6],["D-PAD DIREITA",7],["A",0],["B",1],["START",3],["Z",12],["L",10],["R",11],["C CIMA",23],["C BAIXO",22],["C ESQUERDA",21],["C DIREITA",20]]
-          : [["CIMA",4],["BAIXO",5],["ESQUERDA",6],["DIREITA",7],["A",8],["B",0],["X",9],["Y",1],["START",3],["SELECT",2],["L",10],["R",11]];
+          : roomSystem === "megadrive"
+            ? [["CIMA",4],["BAIXO",5],["ESQUERDA",6],["DIREITA",7],["A",1],["B",0],["C",8],["X",10],["Y",9],["Z",11],["START",3]]
+            : [["CIMA",4],["BAIXO",5],["ESQUERDA",6],["DIREITA",7],["A",8],["B",0],["X",9],["Y",1],["START",3],["SELECT",2],["L",10],["R",11]];
         const bindingStorageKey = () => `neo_multiplayer_bindings_v2_${roomSystem || "default"}`;
         function defaultBindings() {
           if (roomSystem === "n64") return {
@@ -721,6 +731,8 @@
           button.addEventListener("pointerup", up);
           button.addEventListener("pointercancel", up);
           button.addEventListener("pointerleave", up);
+          button.addEventListener("contextmenu", (event) => event.preventDefault());
+          button.addEventListener("selectstart", (event) => event.preventDefault());
         });
         async function signal(message) {
           if (!peer) {
@@ -817,6 +829,12 @@
               [["B",1],["C↑",23],["A",0],["C↓",22]].forEach(([label,index],position) => { actions[position].textContent = label; actions[position].dataset.index = String(index); });
               const meta = controller.querySelectorAll(".meta .control");
               meta[1].textContent = "Z"; meta[1].dataset.index = "12";
+            } else if (roomSystem === "megadrive") {
+              controller.classList.add("megadrive");
+              const actions = controller.querySelectorAll(".actions .control");
+              [["A",1],["B",0],["C",8],["X",10],["Y",9],["Z",11]].forEach(([label,index],position) => { actions[position].textContent = label; actions[position].dataset.index = String(index); });
+              const meta = controller.querySelectorAll(".meta .control");
+              meta[0].hidden = true; meta[1].hidden = true; meta[3].hidden = true;
             }
             document.getElementById("room-title").textContent = spectatorMode ? `ASSISTINDO · ${data.room.title}` : data.room.title;
             if (spectatorMode) {
