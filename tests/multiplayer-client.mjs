@@ -23,6 +23,7 @@ assert.match(host, /function renderInviteQr/);
 assert.match(host, /neo-multi-qr-code/);
 assert.match(host, /qrcodejs\/1\.0\.0\/qrcode\.min\.js/);
 assert.match(host, /ENTRAR PELO CELULAR/);
+assert.match(host, /neo-multi-qr-code canvas\{display:none!important\}/);
 assert.match(host, /async function autoCreateRoom/);
 assert.match(host, /skipConfirmation:true/);
 assert.match(host, /PREPARANDO SALA ONLINE/);
