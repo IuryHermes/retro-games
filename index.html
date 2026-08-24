@@ -1254,7 +1254,8 @@
     // =======================================================================
     const coreMap = { 'nes': 'nes', 'snes': 'snes', 'gba': 'gba', 'n64': 'n64', 'megadrive': 'segaMD', 'ps1': 'psx' };
     const playerUrl = (playerFile, gameUrl, core, title, system) => `${playerFile}?${new URLSearchParams({ nocache:Date.now(), game:gameUrl, core, title:title || '', system:system || '' })}`;
-    const publicGameSlug = value => String(value || 'jogo').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80) || 'jogo';
+    const normalizeGameName = value => String(value || 'Jogo').replace(/\bII\b/gi, '2').replace(/\bFirered\b/gi, 'FireRed');
+    const publicGameSlug = value => normalizeGameName(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80) || 'jogo';
     const publicGameUrl = (system, name, occurrence = 1) => `/jogos/${system}/${publicGameSlug(name)}${occurrence > 1 ? `-${occurrence}` : ''}/`;
 
     const top10Games = [
@@ -1365,7 +1366,7 @@
             });
             const uniqueGames = [...uniqueByRom.values()];
             const nameCounts = new Map();
-            uniqueGames.forEach(g => { const key = String(g.nome || '').trim().toLowerCase(); nameCounts.set(key, (nameCounts.get(key) || 0) + 1); });
+            uniqueGames.forEach(g => { const key = normalizeGameName(g.nome).trim().toLowerCase(); nameCounts.set(key, (nameCounts.get(key) || 0) + 1); });
             const nameSeen = new Map();
             const usedPublicSlugs = new Set();
             const variantLabel = (game) => {
@@ -1379,11 +1380,12 @@
 
                 if (sys.id === 'ps1' && blockRegex.test(g.rom)) { return; }
 
-                const nameKey = String(g.nome || '').trim().toLowerCase();
+                const publicName = normalizeGameName(g.nome);
+                const nameKey = publicName.trim().toLowerCase();
                 const occurrence = (nameSeen.get(nameKey) || 0) + 1;
                 nameSeen.set(nameKey, occurrence);
-                const displayName = nameCounts.get(nameKey) > 1 ? `${g.nome} · ${variantLabel(g)} ${occurrence}` : g.nome;
-                const gameObjFull = {...g, nomeOriginal: g.nome, nome: displayName, sysPath: sys.path, sysName: sys.name, sysId: sys.id};
+                const displayName = nameCounts.get(nameKey) > 1 ? `${publicName} · ${variantLabel(g)} ${occurrence}` : publicName;
+                const gameObjFull = {...g, nomeOriginal: publicName, nome: displayName, sysPath: sys.path, sysName: sys.name, sysId: sys.id};
                 indexData.push(gameObjFull);
                 const card = document.createElement("div"); card.className = "game-card selectable-item";
 
@@ -1396,7 +1398,7 @@
 
                 const coreToUse = coreMap[sys.id] || 'snes';
                 const playerFile = 'player-universal.html';
-                const urlSlug = publicGameSlug(g.nome);
+                const urlSlug = publicGameSlug(publicName);
                 let publicSlug = urlSlug;
                 let publicSlugSuffix = 2;
                 while (usedPublicSlugs.has(publicSlug)) publicSlug = `${urlSlug}-${publicSlugSuffix++}`;
