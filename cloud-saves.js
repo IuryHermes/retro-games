@@ -14,6 +14,7 @@
     let saving = false;
     let automaticEnabled = false;
     let timer = 0;
+    let initialAutosaveTimer = 0;
     let autosavePending = false;
     let autosaveImagePending = false;
     let lastAutosaveImageAt = 0;
@@ -282,12 +283,18 @@
         window.EJS_onGameStart = function () {
             if (typeof previousStart === 'function') previousStart.apply(this, arguments);
             clearInterval(timer);
-            if (token && automaticEnabled) timer = setInterval(scheduleAutosave, INTERVAL_MS);
+            clearTimeout(initialAutosaveTimer);
+            if (token && automaticEnabled) {
+                // Register a newly played game promptly in the account library.
+                // Previously it appeared only after a full minute of gameplay.
+                initialAutosaveTimer = setTimeout(scheduleAutosave, 10000);
+                timer = setInterval(scheduleAutosave, INTERVAL_MS);
+            }
         };
         addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'hidden' && token && automaticEnabled) void autosave();
         });
-        addEventListener('pagehide', () => { clearInterval(timer); });
+        addEventListener('pagehide', () => { clearTimeout(initialAutosaveTimer); clearInterval(timer); });
     }
 
     window.NeoCloudSaves = { prepare, autosave, loadSlot };
