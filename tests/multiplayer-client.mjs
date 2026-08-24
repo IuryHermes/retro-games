@@ -8,8 +8,15 @@ const worker = await readFile(new URL('../worker/src/index.js', import.meta.url)
 const social = await readFile(new URL('../social.js', import.meta.url), 'utf8');
 
 assert.match(host, /canvas\.captureStream\(30\)/);
-assert.match(host, /matchMedia\('\(max-width: 768px\), \(pointer: coarse\)'\)/);
 assert.match(host, /#neo-multiplayer-panel\{top:auto/);
+assert.match(host, /save\|salvar/i);
+assert.match(host, /anchor\.after\(toggle\)/);
+assert.match(host, /event\.composedPath\(\)/);
+assert.match(host, /!path\.includes\(panel\) && !path\.includes\(toggle\)/);
+assert.match(host, /function resetRoomUi/);
+assert.match(host, /function closeRoom/);
+assert.match(host, /setTimeout\(\(\) => \{/);
+assert.match(host, /Sessão online encerrada/);
 assert.match(host, /createDataChannel\('neo-controls'/);
 assert.match(host, /manager\.simulateInput\(seat - 1, index, value\)/);
 assert.doesNotMatch(host, /type:'assign'/);
@@ -125,4 +132,4 @@ assert.match(guest, /grid-template-columns: 1fr;/);
 assert.doesNotMatch(guest, /grid-template-columns: 1fr 360px/);
 assert.match(guest, /position: fixed;[\s\S]*max-height: 44dvh/);
 
-console.log('multiplayer client and room: 116 checks passed');
+console.log('multiplayer client and room: 123 checks passed');

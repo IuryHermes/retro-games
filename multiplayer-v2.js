@@ -202,12 +202,48 @@
             if (message.type === 'signal') void handleSignal(message).catch(error => console.warn('Neo multiplayer signal:', error));
             if (message.type === 'input') applyInput(Number(message.seat), Number(message.index), Number(message.value));
         };
-        socket.onclose = event => { setStatus(event.code === 1000 ? 'Sala encerrada.' : 'Conexão multiplayer encerrada.'); peers.forEach(peer => peer.pc.close()); peers.clear(); if (audioCaptureTimer) { clearInterval(audioCaptureTimer); audioCaptureTimer = 0; } };
+        socket.onclose = event => { resetRoomUi(event.code === 1000 ? 'Sala encerrada.' : 'Conexão multiplayer encerrada.'); };
     }
 
     function setStatus(message) {
         const status = document.getElementById('neo-multi-status');
         if (status) status.textContent = message;
+    }
+
+    function resetRoomUi(message = 'Sala encerrada.') {
+        peers.forEach(peer => peer.pc.close());
+        peers.clear();
+        seenParticipants.clear();
+        if (audioCaptureTimer) { clearInterval(audioCaptureTimer); audioCaptureTimer = 0; }
+        if (mediaStream) mediaStream.getTracks().forEach(track => track.stop());
+        mediaStream = null; audioCaptureDestination = null; audioCaptureContext = null;
+        socket = null; room = null; ticket = ''; clientId = '';
+        const createBox = document.getElementById('neo-multi-create-box');
+        const roomBox = document.getElementById('neo-multi-room');
+        const createButton = document.getElementById('neo-multi-create');
+        if (createBox) createBox.hidden = false;
+        if (roomBox) roomBox.hidden = true;
+        if (createButton) createButton.disabled = false;
+        document.getElementById('neo-multi-players')?.replaceChildren();
+        const link = document.getElementById('neo-multi-link');
+        if (link) link.value = '';
+        setStatus(message);
+    }
+
+    function closeRoom() {
+        const activeSocket = socket;
+        const closeButton = document.getElementById('neo-multi-close');
+        if (closeButton) closeButton.disabled = true;
+        setStatus('Encerrando sala...');
+        if (activeSocket?.readyState === WebSocket.OPEN) {
+            activeSocket.send(JSON.stringify({ type:'close' }));
+            setTimeout(() => {
+                if (activeSocket.readyState === WebSocket.OPEN || activeSocket.readyState === WebSocket.CONNECTING) activeSocket.close(1000, 'Sala encerrada');
+            }, 180);
+        }
+        resetRoomUi('Sala encerrada. Você pode abrir outra quando quiser.');
+        document.getElementById('neo-multiplayer-panel')?.classList.remove('open');
+        showToast('Sessão online encerrada.', 2500);
     }
 
     async function createRoom() {
@@ -278,12 +314,17 @@
     function dockOnlineButton(panel) {
         const toggle = panel.querySelector('#neo-multi-toggle');
         const attach = () => {
-            // A barra do EmulatorJS recolhe no celular. O botao precisa
-            // permanecer no painel fixo para continuar visivel.
-            if (window.matchMedia('(max-width: 768px), (pointer: coarse)').matches) return true;
             const menu = document.querySelector('.ejs_menu_bar');
             if (!menu || toggle.parentElement === menu) return Boolean(menu);
-            toggle.classList.add('ejs_menu_button'); menu.appendChild(toggle); return true;
+            toggle.classList.add('ejs_menu_button');
+            const saveControl = Array.from(menu.querySelectorAll('button,[role="button"],[title],[aria-label]')).find(control => {
+                const label = `${control.getAttribute('title') || ''} ${control.getAttribute('aria-label') || ''} ${control.textContent || ''}`;
+                return /save|salvar/i.test(label);
+            });
+            const anchor = saveControl?.closest('.ejs_menu_button') || saveControl;
+            if (anchor?.parentElement === menu) anchor.after(toggle);
+            else menu.appendChild(toggle);
+            return true;
         };
         if (!attach()) {
             const observer = new MutationObserver(() => { if (attach()) observer.disconnect(); });
@@ -317,17 +358,24 @@
     function createPanel() {
         const style = document.createElement('style');
         style.textContent = '#neo-multiplayer-panel{position:fixed;right:8px;top:8px;z-index:9999999;color:#dfffe8;font:12px monospace}#neo-multi-toggle,#neo-multi-menu button,#neo-multi-menu select{border:1px solid #00cc44;background:#061109;color:#55ff88;padding:8px;cursor:pointer}#neo-multi-toggle.ejs_menu_button{position:static;width:auto;height:auto;min-width:46px;border:0;background:transparent;padding:0 8px;font-size:11px}#neo-multi-menu{display:none;width:min(350px,92vw);max-height:80dvh;overflow:auto;margin-top:5px;padding:10px;border:1px solid #00cc44;background:rgba(0,0,0,.96);box-shadow:0 0 22px rgba(0,204,68,.25)}#neo-multiplayer-panel.open #neo-multi-menu{display:block}#neo-multi-status{color:#a9cdb2;line-height:1.45;margin:8px 0}#neo-multi-rewards{margin:8px 0;padding:9px;border:1px solid #ffd166;border-radius:5px;background:#171407;color:#dfffe8;line-height:1.45}#neo-multi-rewards strong{display:block;color:#ffd166}#neo-live-participate{display:block;width:100%;margin:8px 0 5px;border-color:#5865f2!important;background:#5865f2!important;color:#fff!important;font-weight:bold}#neo-live-confirmation{display:block;color:#ffdca0;font-size:11px}#neo-live-confirmation.confirmed{color:#55ff88}#neo-multi-create-box{display:grid;gap:8px}#neo-multi-create-box label{display:flex;align-items:center;justify-content:space-between;gap:10px}#neo-multi-room input{width:100%;margin:7px 0;background:#111;border:1px solid #555;color:#fff;padding:7px}.neo-multi-person{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #253129}.neo-multi-person button{padding:4px 7px;margin-left:3px}#neo-multi-online-list{max-height:180px;overflow:auto;border-top:1px solid #253129;margin-top:8px}#neo-multi-share{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin:7px 0 12px}#neo-multi-share button{margin:0}#neo-multi-close{width:100%;margin-top:9px;border-color:#ff4f61!important;color:#ff6b7b!important}#neo-multi-toast{position:fixed;left:50%;top:18px;z-index:10000001;max-width:min(90vw,520px);padding:13px 18px;transform:translate(-50%,-150%);opacity:0;border:1px solid #00cc44;border-radius:6px;background:#061109;color:#fff;box-shadow:0 0 24px rgba(0,204,68,.35);font:600 13px monospace;text-align:center;transition:.22s ease;pointer-events:none}#neo-multi-toast.visible{transform:translate(-50%,0);opacity:1}';
-        style.textContent += '#neo-multi-toggle img{width:30px;height:30px;display:block;object-fit:contain}#neo-referral-link{display:block;margin-top:8px;color:#55ff88;font-weight:bold}@media(max-width:768px),(pointer:coarse){#neo-multiplayer-panel{top:auto;right:max(8px,env(safe-area-inset-right));bottom:max(8px,env(safe-area-inset-bottom))}#neo-multi-toggle{display:flex!important;align-items:center;gap:6px;min-height:46px;border-radius:7px;background:#061109!important}#neo-multi-menu{position:absolute;right:0;bottom:52px;margin:0}}';
+        style.textContent += '#neo-multi-toggle img{width:30px;height:30px;display:block;object-fit:contain}#neo-referral-link{display:block;margin-top:8px;color:#55ff88;font-weight:bold}@media(max-width:768px),(pointer:coarse){#neo-multiplayer-panel{top:auto;right:max(8px,env(safe-area-inset-right));bottom:max(8px,env(safe-area-inset-bottom))}#neo-multi-toggle.ejs_menu_button{display:flex!important;align-items:center;justify-content:center;min-width:42px;min-height:42px;padding:0 5px!important}#neo-multi-toggle.ejs_menu_button img{width:27px;height:27px}#neo-multi-toggle.ejs_menu_button span{display:none}#neo-multi-menu{position:absolute;right:0;bottom:8px;margin:0}}';
         document.head.appendChild(style);
         const panel = document.createElement('section'); panel.id = 'neo-multiplayer-panel';
         panel.innerHTML = `<button id="neo-multi-toggle" type="button">🌐 JOGAR ONLINE</button><div id="neo-multi-menu"><strong>MULTIPLAYER</strong><div id="neo-multi-status">Abra uma sala e transforme visitantes em controles remotos.</div><div id="neo-multi-rewards"><strong>🏆 AJUDE SEM GASTAR</strong>Compartilhe o site e convide novos jogadores para ganhar espaço extra de saves.<a id="neo-referral-link" href="apoie.html#indicacoes">CRIAR MEU LINK DE INDICAÇÃO →</a></div><div id="neo-multi-create-box"><label>Jogadores <select id="neo-multi-max"><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label><label><input id="neo-multi-public" type="checkbox" checked> Sala pública</label><button id="neo-multi-create" type="button">ABRIR SALA</button></div><div id="neo-multi-room" hidden><div id="neo-multi-count"></div><input id="neo-multi-link" readonly><button id="neo-multi-copy" type="button">COPIAR CONVITE</button><div id="neo-multi-share"><button type="button" data-share="whatsapp">WHATSAPP</button><button type="button" data-share="discord">DISCORD</button><button type="button" data-share="instagram">INSTAGRAM</button><button type="button" data-share="facebook">FACEBOOK</button><button type="button" data-share="outros">OUTROS APPS</button></div><strong>CONVIDAR JOGADORES ONLINE</strong><div id="neo-multi-online-list"></div><div id="neo-multi-players"></div><button id="neo-multi-close" type="button">ENCERRAR SALA</button></div></div>`;
         document.body.appendChild(panel);
         panel.querySelector('#neo-multi-toggle').innerHTML = '<img src="assets/imagens-videos/imagens do menu/jogar-online.png" alt=""><span>JOGAR ONLINE</span>';
-        panel.querySelector('#neo-multi-toggle').onclick = () => { panel.classList.toggle('open'); if ("Notification" in window && Notification.permission === 'default') void Notification.requestPermission(); };
+        const toggle = panel.querySelector('#neo-multi-toggle');
+        toggle.onclick = event => { event.stopPropagation(); panel.classList.toggle('open'); if ("Notification" in window && Notification.permission === 'default') void Notification.requestPermission(); };
         panel.querySelector('#neo-multi-create').onclick = createRoom;
         panel.querySelector('#neo-multi-copy').onclick = async () => { await navigator.clipboard.writeText(panel.querySelector('#neo-multi-link').value); setStatus('Convite copiado.'); };
         panel.querySelectorAll('[data-share]').forEach(button => { button.onclick = () => void shareInvite(button.dataset.share).catch(error => setStatus(error.message)); });
-        panel.querySelector('#neo-multi-close').onclick = () => { send({ type:'close' }); socket?.close(); room=null; };
+        panel.querySelector('#neo-multi-close').onclick = closeRoom;
+        document.addEventListener('pointerdown', event => {
+            if (!panel.classList.contains('open')) return;
+            const path = event.composedPath();
+            if (!path.includes(panel) && !path.includes(toggle)) panel.classList.remove('open');
+        }, true);
+        document.addEventListener('keydown', event => { if (event.key === 'Escape') panel.classList.remove('open'); });
         if (system === 'n64') panel.querySelector('#neo-multi-max').value = '4';
         dockOnlineButton(panel);
         void socialPulse(); setInterval(socialPulse, 15000);
