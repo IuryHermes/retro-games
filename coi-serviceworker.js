@@ -1,5 +1,10 @@
 /*! coi-serviceworker v0.1.7 - Guido Zuidhof and contributors, licensed under MIT */
-let coepCredentialless = false;
+// The player configures credentialless mode. Start the worker in that same
+// mode so the very first navigation after a browser/worker restart does not
+// receive require-corp and block the cross-origin N64 ROM. Previously the
+// message that enabled credentialless arrived only after the document loaded,
+// making alternating attempts show a black screen.
+let coepCredentialless = true;
 if (typeof window === 'undefined') {
     self.addEventListener("install", () => self.skipWaiting());
     self.addEventListener("activate", (event) => event.waitUntil(self.clients.claim()));

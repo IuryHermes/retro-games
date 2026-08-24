@@ -4,9 +4,10 @@ import { readFile } from 'node:fs/promises';
 const player = await readFile(new URL('../player-universal.html', import.meta.url), 'utf8');
 const cloudSaves = await readFile(new URL('../cloud-saves.js', import.meta.url), 'utf8');
 
-assert.match(player, /src="coi-serviceworker\.js\?v=2"/);
+assert.match(player, /src="coi-serviceworker\.js\?v=3"/);
 const coiWorker = await readFile(new URL('../coi-serviceworker.js', import.meta.url), 'utf8');
 assert.match(coiWorker, /scope: "\/player-universal\.html"/);
+assert.match(coiWorker, /let coepCredentialless = true/);
 assert.match(player, /window\.crossOriginIsolated/);
 assert.match(player, /typeof window\.SharedArrayBuffer === 'function'/);
 assert.match(player, /mobileN64/);
