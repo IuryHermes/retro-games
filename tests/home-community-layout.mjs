@@ -28,5 +28,7 @@ assert.match(index, /\.community-shortcut \{[^}]*border:0;[^}]*background:transp
 assert.match(index, /\.community-shortcut \{[^}]*justify-content:flex-start/);
 assert.match(index, /\.community-shortcut \{[^}]*width:100%;[^}]*text-align:left/);
 assert.match(index, /apoiar-projeto-v2\.png/);
+assert.doesNotMatch(index, /<a class="chat-trigger-mobile"/);
+assert.match(index, /href="social\.html"[^>]*aria-label="Comunidade"/);
 
-console.log('home community layout: 21 checks passed');
+console.log('home community layout: 23 checks passed');
