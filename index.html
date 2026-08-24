@@ -457,7 +457,6 @@
 </head>
 <body>
 
-    <div id="chat-mobile-backdrop" onclick="closeMobileChat()"></div>
 
     <div id="multiplayer-modal" class="modal-bg" role="dialog" aria-modal="true" aria-labelledby="multiplayer-title">
         <section class="multiplayer-panel">
@@ -624,20 +623,6 @@
                 <div id="hall-members-sidebar" style="display:flex;flex-direction:column;gap:6px"></div>
             </div>
 
-            <div class="sidebar-chat" id="chat-container">
-                <button class="close-chat-btn" onclick="closeMobileChat()">X</button>
-                <div style="font-size:10px; color:var(--accent-color); text-align:center; margin-bottom:10px; font-family: 'Press Start 2P', cursive;">CHAT GLOBAL</div>
-                <div class="chat-controls">
-                    <input id="chat-nick" placeholder="Nick" maxlength="20">
-                    <input id="chat-msg" placeholder="Mensagem..." disabled>
-                    <button id="emoji-btn" title="Adicionar Emoji">😀</button>
-                    <div id="emoji-picker">
-                        <span class="emoji-item">🎮</span><span class="emoji-item">🕹️</span><span class="emoji-item">👾</span><span class="emoji-item">🔥</span><span class="emoji-item">😎</span><span class="emoji-item">💀</span><span class="emoji-item">👍</span><span class="emoji-item">🏆</span><span class="emoji-item">🚀</span><span class="emoji-item">🤬</span><span class="emoji-item">❤️</span>
-                    </div>
-                    <button id="send-btn">➤</button>
-                </div>
-                <div id="terminal-output"></div>
-            </div>
         </nav>
 
         <main class="main-content">
@@ -661,10 +646,10 @@
                         <img src="assets/imagens-videos/imagens do menu/apoiar-projeto-v2.png" alt="">
                         <span class="mobile-action-label">Apoiar</span>
                     </a>
-                    <div class="chat-trigger-mobile" onclick="openMobileChat()">
+                    <a class="chat-trigger-mobile" href="social.html#global-chat">
                         <img src="assets/imagens-videos/imagens do menu/chat.png" alt="Chat">
                         <span class="mobile-action-label">Chat</span>
-                    </div>
+                    </a>
                     </div>
                     <div class="search-container">
                         <span style="color:var(--accent-color); margin-right:10px;">#</span>
@@ -956,7 +941,6 @@
         catch (error) { setAuthStatus(error.message); }
     }
     function applyProfile() {
-        const nick = document.getElementById('chat-nick');
         accountButtons.forEach(button => {
             const image = button.querySelector('.account-avatar');
             const name = button.querySelector('.account-name');
@@ -966,8 +950,7 @@
             if (hint) hint.textContent = accountProfile ? 'perfil, avatar e saves' : '3 saves grátis por jogo';
             button.setAttribute('aria-label', accountProfile ? `Abrir perfil de ${accountProfile.name}` : 'Entrar ou criar cadastro');
         });
-        if (accountProfile) { nick.value = accountProfile.name; nick.readOnly = true; document.getElementById('chat-msg').disabled = false; document.getElementById('auth-name').value = accountProfile.name; chooseAvatar(accountProfile.avatar); }
-        else { nick.readOnly = false; }
+        if (accountProfile) { document.getElementById('auth-name').value = accountProfile.name; chooseAvatar(accountProfile.avatar); }
     }
     async function completeSocialLogin(provider) {
         setAuthStatus('Abrindo login seguro...');
@@ -1189,19 +1172,6 @@
         else { btn.innerHTML = "⊞ VER TODOS"; if(lBtn) lBtn.style.display = 'flex'; if(rBtn) rBtn.style.display = 'flex'; }
     };
 
-    window.openMobileChat = () => {
-        const chat = document.getElementById('chat-container');
-        document.body.appendChild(chat);
-        chat.classList.add('chat-modal-mobile');
-        document.getElementById('chat-mobile-backdrop').style.display = 'block';
-    };
-    window.closeMobileChat = () => {
-        const chat = document.getElementById('chat-container');
-        chat.classList.remove('chat-modal-mobile');
-        document.getElementById('chat-mobile-backdrop').style.display = 'none';
-        document.getElementById('main-sidebar').appendChild(chat);
-    };
-
     window.openPixModal = () => { document.getElementById('pix-modal').style.display = 'flex'; };
     window.closePixModal = () => { document.getElementById('pix-modal').style.display = 'none'; };
 
@@ -1282,41 +1252,6 @@
     // =======================================================================
     // LÓGICA DO CHAT (COM CORREÇÃO DE AUTO-SCROLL)
     // =======================================================================
-    const out = document.getElementById("terminal-output");
-    const nickInput = document.getElementById("chat-nick");
-    const msgInput = document.getElementById("chat-msg");
-    const sendBtn = document.getElementById("send-btn");
-
-    if(localStorage.getItem("neo_nick")) { nickInput.value = localStorage.getItem("neo_nick"); msgInput.disabled = false; }
-    nickInput.oninput = () => { msgInput.disabled = (nickInput.value.trim().length === 0); };
-
-    onChildAdded(query(chatRef, limitToLast(100)), (snap) => {
-        const d = snap.val();
-        const row = document.createElement('div');
-        if (d.time) { const time = document.createElement('span'); time.className = 'chat-time'; time.textContent = `[${String(d.time).slice(0, 40)}]`; row.appendChild(time); }
-        if (d.avatar && AVATARS.includes(d.avatar)) { const avatar = document.createElement('img'); avatar.className = 'chat-avatar'; avatar.src = avatarUrl(d.avatar); avatar.alt = ''; row.appendChild(avatar); }
-        const user = document.createElement('strong'); user.style.color = 'var(--text-color)'; user.textContent = `${String(d.user || '').slice(0, 40)}:`;
-        row.append(user, document.createTextNode(` ${String(d.text || '').slice(0, 240)}`)); out.prepend(row);
-    });
-
-    function sendMessage() {
-        const user = nickInput.value.trim(); const text = msgInput.value.trim();
-        if(!auth.currentUser) { alert("Entre na sua conta para enviar mensagens no chat."); return; }
-        if(!user) { alert("Digite um Nick primeiro!"); return; }
-        if(!text || user.length > 40 || text.length > 240) return;
-        const now = new Date(); const timeStr = now.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: '2-digit' }) + ' ' + now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-        localStorage.setItem("neo_nick", user);
-        push(chatRef, {user, text, time: timeStr, ...(accountProfile ? { avatar: accountProfile.avatar, uid: accountProfile.uid } : {})}); msgInput.value = "";
-    }
-    sendBtn.onclick = sendMessage;
-    msgInput.onkeydown = (e) => { if(e.key === "Enter") sendMessage(); }
-
-    const emojiBtn = document.getElementById("emoji-btn");
-    const emojiPicker = document.getElementById("emoji-picker");
-    emojiBtn.onclick = (e) => { e.stopPropagation(); emojiPicker.style.display = emojiPicker.style.display === "flex" ? "none" : "flex"; };
-    document.querySelectorAll(".emoji-item").forEach(em => { em.onclick = (e) => { e.stopPropagation(); if (!msgInput.disabled) { msgInput.value += em.innerText; msgInput.focus(); } }; });
-    document.addEventListener("click", (e) => { if (emojiPicker.style.display === "flex" && !emojiPicker.contains(e.target) && e.target !== emojiBtn) emojiPicker.style.display = "none"; });
-
     const coreMap = { 'nes': 'nes', 'snes': 'snes', 'gba': 'gba', 'n64': 'n64', 'megadrive': 'segaMD', 'ps1': 'psx' };
     const playerUrl = (playerFile, gameUrl, core, title, system) => `${playerFile}?${new URLSearchParams({ nocache:Date.now(), game:gameUrl, core, title:title || '', system:system || '' })}`;
 

@@ -3,14 +3,17 @@ import {
   getAuth,
   onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getDatabase, ref, push, onChildAdded, query, limitToLast } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const API = "https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev";
 const app = initializeApp({
   apiKey: "AIzaSyCx_OllbDYkua9BbMOj2oJP5V1UcbxmnbI",
   authDomain: "neoterminalroom.firebaseapp.com",
+  databaseURL: "https://neoterminalroom-default-rtdb.firebaseio.com",
   projectId: "neoterminalroom",
 });
 const auth = getAuth(app);
+const globalChat = ref(getDatabase(app), 'mensagens');
 const state = {
   firebase: null,
   discord: sessionStorage.getItem("neo_account_access") || "",
@@ -23,6 +26,28 @@ const state = {
 const el = (id) => document.getElementById(id);
 const avatar = (value) =>
   `assets/avatars/${/^avatar-\d{2}$/.test(value || "") ? value : "avatar-01"}.png`;
+onChildAdded(query(globalChat, limitToLast(100)), snapshot => {
+  const message = snapshot.val() || {};
+  const row = document.createElement('article'); row.className = 'global-message';
+  const image = document.createElement('img'); image.src = avatar(message.avatar); image.alt = '';
+  const content = document.createElement('div');
+  const name = document.createElement('strong'); name.textContent = String(message.user || 'Jogador').slice(0, 40);
+  const time = document.createElement('small'); time.textContent = String(message.time || '').slice(0, 40);
+  const text = document.createElement('p'); text.textContent = String(message.text || '').slice(0, 240);
+  content.append(name, time, text); row.append(image, content); el('global-messages').appendChild(row);
+  el('global-messages').scrollTop = el('global-messages').scrollHeight;
+});
+
+el('global-composer').onsubmit = async event => {
+  event.preventDefault();
+  const text = el('global-message').value.trim();
+  if (!state.firebase) return alert('Entre com Google na página inicial para enviar mensagens no chat global.');
+  if (!state.self?.name || !text) return;
+  const now = new Date();
+  const time = `${now.toLocaleDateString('pt-BR', { day:'2-digit', month:'2-digit', year:'2-digit' })} ${now.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' })}`;
+  await push(globalChat, { user:state.self.name.slice(0,40), text:text.slice(0,240), time, avatar:state.self.avatar || 'avatar-01', uid:state.self.uid });
+  el('global-message').value = '';
+};
 function successToast(message) {
   const box = el("toast");
   box.replaceChildren(document.createTextNode(message));
@@ -89,6 +114,8 @@ async function loadPlayers() {
     await heartbeat();
     const data = await api("/social/players");
     state.self = data.self || state.self;
+    el('global-message').disabled = !state.firebase;
+    el('global-message').placeholder = state.firebase ? 'Mensagem para toda a comunidade...' : 'Entre com Google na página inicial para conversar...';
     state.players = data.players || [];
     el("players").replaceChildren();
     const onlineCount = state.players.filter((player) => player.online).length;

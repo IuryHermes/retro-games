@@ -171,6 +171,18 @@
         text-align: center;
         color: var(--muted);
       }
+      .global-chat { margin:0 0 28px; border:1px solid var(--green); border-radius:12px; overflow:hidden; background:rgba(7,18,11,.96); }
+      .global-chat-head { padding:15px 16px; border-bottom:1px solid #255630; }
+      .global-chat-head h2 { margin:0 0 5px; color:var(--bright); }
+      .global-chat-head p { margin:0; color:var(--muted); }
+      .global-messages { height:min(42dvh,380px); overflow:auto; padding:14px; display:flex; flex-direction:column; gap:8px; }
+      .global-message { display:grid; grid-template-columns:34px 1fr; gap:9px; align-items:start; padding:9px; border-radius:8px; background:#101c14; }
+      .global-message img { width:34px; height:34px; border-radius:6px; object-fit:cover; image-rendering:pixelated; }
+      .global-message strong { color:var(--bright); margin-right:8px; }
+      .global-message small { color:var(--muted); }
+      .global-message p { margin:4px 0 0; overflow-wrap:anywhere; line-height:1.45; }
+      .global-composer { display:flex; gap:8px; padding:12px; border-top:1px solid #255630; }
+      .global-composer input { flex:1; min-width:0; }
       dialog {
         width: min(560px, 94vw);
         border: 1px solid var(--green);
@@ -283,6 +295,11 @@
         </div>
       </section>
       <div class="status" id="status">Conectando sua conta...</div>
+      <section class="global-chat" id="global-chat" aria-labelledby="global-chat-title">
+        <div class="global-chat-head"><h2 id="global-chat-title">CHAT GLOBAL</h2><p>Converse com toda a comunidade em um só lugar.</p></div>
+        <div class="global-messages" id="global-messages" aria-live="polite"></div>
+        <form class="global-composer" id="global-composer"><input id="global-message" maxlength="240" autocomplete="off" placeholder="Entre na sua conta para conversar..." disabled><button type="submit">ENVIAR</button></form>
+      </section>
       <section class="live-zone" aria-labelledby="share-title">
         <h2 id="share-title">🏆 FORTALEÇA A COMUNIDADE</h2>
         <p>Compartilhe seu link pessoal, traga novos jogadores e ganhe bônus de saves.</p>
