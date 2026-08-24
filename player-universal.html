@@ -122,6 +122,32 @@
                 }
                 localStorage.setItem(repairKey, '1');
             }
+
+            // Repair renderer options left by older N64 builds. They are local
+            // to the browser (not the account/cloud save) and can keep only a
+            // specific signed-in browser on a black canvas. Preserve controls,
+            // audio, cheats and every unrelated preference.
+            const rendererRepairKey = 'neo_n64_renderer_repair_v2';
+            if (!localStorage.getItem(rendererRepairKey)) {
+                const rendererKeys = new Set(['vsync', 'shader', 'rewindEnabled', 'webgl2Enabled', 'threads']);
+                for (let index = 0; index < localStorage.length; index += 1) {
+                    const key = localStorage.key(index);
+                    if (!key || !key.startsWith('ejs-') || !key.endsWith('-settings')) continue;
+                    try {
+                        const saved = JSON.parse(localStorage.getItem(key));
+                        const settings = saved?.settings;
+                        if (!settings || typeof settings !== 'object') continue;
+                        let changed = false;
+                        for (const option of Object.keys(settings)) {
+                            if (rendererKeys.has(option) || option.startsWith('mupen64plus-')) {
+                                delete settings[option]; changed = true;
+                            }
+                        }
+                        if (changed) localStorage.setItem(key, JSON.stringify(saved));
+                    } catch (error) { console.warn('Neo N64 renderer repair:', error); }
+                }
+                localStorage.setItem(rendererRepairKey, '1');
+            }
         }
 
         // ==========================================
