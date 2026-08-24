@@ -16,6 +16,8 @@
     let iceServersExpiresAt = 0;
     const seenParticipants = new Set();
     let toastTimer = 0;
+    let autoStartTimer = 0;
+    let matchStarted = false;
 
     const token = () => sessionStorage.getItem(TOKEN_KEY) || sessionStorage.getItem('neo_account_access') || '';
     const params = new URLSearchParams(location.search);
@@ -173,27 +175,22 @@
         const list = document.getElementById('neo-multi-players');
         const count = document.getElementById('neo-multi-count');
         const lobbyState = document.getElementById('neo-multi-lobby-state');
-        const startButton = document.getElementById('neo-multi-start');
         const sessionButton = document.getElementById('neo-multi-session');
         if (!list) return;
         count.textContent = `${state.participants.length}/${room.maxPlayers} online`;
         const guests = state.participants.filter(person => !person.host);
-        const nextPlayer = Math.min(state.participants.length + 1, room.maxPlayers);
-        if (lobbyState) lobbyState.innerHTML = guests.length === 0
+        if (lobbyState && !matchStarted) lobbyState.innerHTML = guests.length === 0
             ? '<strong>AGUARDANDO JOGADOR 2</strong><span class="neo-wait-dots" aria-hidden="true"><i></i><i></i><i></i></span><small>A partida ficará pronta assim que o jogador convidado entrar na sala.</small>'
-            : state.participants.length >= room.maxPlayers
-                ? '<strong>LOBBY COMPLETO!</strong><small>Todos os jogadores chegaram. A partida já pode começar.</small>'
-                : `<strong>AGUARDANDO JOGADOR ${nextPlayer}</strong><span class="neo-wait-dots" aria-hidden="true"><i></i><i></i><i></i></span><small>${guests.length} jogador${guests.length === 1 ? '' : 'es'} conectado${guests.length === 1 ? '' : 's'}. Você já pode iniciar ou aguardar mais um convidado.</small>`;
-        if (startButton) startButton.disabled = guests.length === 0;
+            : `<strong>✓ ${guests[0].name.toUpperCase()} ENTROU NA SALA!</strong><small>Controle ${guests[0].seat} atribuído automaticamente. A partida vai começar agora.</small>`;
         if (sessionButton) sessionButton.textContent = `🟢 ONLINE ${state.participants.length}/${room.maxPlayers}`;
         list.replaceChildren();
         state.participants.forEach(person => {
             if (!person.host && !seenParticipants.has(person.clientId)) {
-                showToast(`${person.name} está conectado à sua sala como controle ${person.seat}.`, 5000);
+                showToast(`✓ ${person.name} entrou na sala! Controle ${person.seat} atribuído automaticamente.`, 5000);
             }
             seenParticipants.add(person.clientId);
             const row = document.createElement('div'); row.className = 'neo-multi-person';
-            const label = document.createElement('span'); label.textContent = `${person.host ? '👑 ' : ''}${person.name} · ${person.seat ? `CONTROLE ${person.seat}` : 'AGUARDANDO'}`;
+            const label = document.createElement('span'); label.textContent = `${person.host ? '👑 ' : '✓ '}${person.name}`;
             row.appendChild(label);
             if (!person.host) {
                 const actions = document.createElement('span');
@@ -202,6 +199,16 @@
             }
             list.appendChild(row);
         });
+        if (guests.length && !matchStarted && !autoStartTimer) {
+            autoStartTimer = setTimeout(() => {
+                autoStartTimer = 0;
+                matchStarted = true;
+                const panel = document.getElementById('neo-multiplayer-panel');
+                panel?.classList.remove('lobby', 'open');
+                panel?.classList.add('playing');
+                showToast(`PARTIDA INICIADA — ${guests[0].name} está no controle ${guests[0].seat}.`, 5000);
+            }, 2200);
+        }
     }
 
     function connect() {
@@ -243,20 +250,16 @@
         peers.forEach(peer => peer.pc.close());
         peers.clear();
         seenParticipants.clear();
+        if (autoStartTimer) { clearTimeout(autoStartTimer); autoStartTimer = 0; }
+        matchStarted = false;
         if (audioCaptureTimer) { clearInterval(audioCaptureTimer); audioCaptureTimer = 0; }
         if (mediaStream) mediaStream.getTracks().forEach(track => track.stop());
         mediaStream = null; audioCaptureDestination = null; audioCaptureContext = null;
         socket = null; room = null; ticket = ''; clientId = '';
-        const createBox = document.getElementById('neo-multi-create-box');
         const roomBox = document.getElementById('neo-multi-room');
-        const createButton = document.getElementById('neo-multi-create');
-        if (createBox) createBox.hidden = false;
         if (roomBox) roomBox.hidden = true;
-        if (createButton) createButton.disabled = false;
         const panel = document.getElementById('neo-multiplayer-panel');
         panel?.classList.remove('open', 'lobby', 'playing');
-        const startButton = document.getElementById('neo-multi-start');
-        if (startButton) startButton.disabled = true;
         const sessionButton = document.getElementById('neo-multi-session');
         if (sessionButton) sessionButton.textContent = '🟢 ONLINE';
         document.getElementById('neo-multi-players')?.replaceChildren();
@@ -282,17 +285,14 @@
         showToast('Sessão online encerrada.', 2500);
     }
 
-    async function createRoom({ skipConfirmation = false } = {}) {
-        const button = document.getElementById('neo-multi-create');
-        if (!skipConfirmation && !window.confirm('Transmitir a gameplay deste jogo para os participantes e espectadores no site?')) return;
-        button.disabled = true; setStatus('Abrindo sala segura...');
+    async function createRoom() {
+        setStatus('Abrindo sala segura...');
         try {
             await collectMedia();
-            const maxPlayers = Number(document.getElementById('neo-multi-max').value);
-            const isPublic = document.getElementById('neo-multi-public').checked;
+            const maxPlayers = system === 'n64' ? 4 : 2;
+            const isPublic = true;
             const data = await request('/multiplayer/rooms', { method:'POST', body:JSON.stringify({ gameId, title:gameName, system, maxPlayers, isPublic }) });
             room = data.room; ticket = data.ticket; connect();
-            document.getElementById('neo-multi-create-box').hidden = true;
             document.getElementById('neo-multi-room').hidden = false;
             document.getElementById('neo-multiplayer-panel')?.classList.add('open', 'lobby');
             const link = `${location.origin}/multiplayer-room.html?room=${encodeURIComponent(room.id)}`;
@@ -301,32 +301,23 @@
             setStatus(isPublic ? 'Sala pública aberta. Aguarde jogadores.' : 'Sala privada aberta. Compartilhe o convite.');
             void loadOnlinePlayers();
         } catch (error) {
-            setStatus(`${error.message} Tente novamente em ABRIR SALA.`);
-            button.disabled = false;
-            document.getElementById('neo-multiplayer-panel')?.classList.remove('lobby');
-            document.getElementById('neo-multi-create-box').hidden = false;
-            document.getElementById('neo-multi-room').hidden = true;
+            setStatus(`${error.message} Recarregue o jogo para tentar novamente.`);
         }
     }
 
     async function autoCreateRoom() {
         const panel = document.getElementById('neo-multiplayer-panel');
-        const createBox = document.getElementById('neo-multi-create-box');
         const roomBox = document.getElementById('neo-multi-room');
-        createBox.hidden = true;
         roomBox.hidden = false;
         panel.classList.add('open', 'lobby');
         document.getElementById('neo-multi-lobby-state').innerHTML = '<strong>PREPARANDO SALA ONLINE</strong><span class="neo-wait-dots" aria-hidden="true"><i></i><i></i><i></i></span><small>O lobby abrirá automaticamente assim que o jogo estiver pronto.</small>';
         setStatus('Iniciando o jogo e preparando o lobby...');
         for (let attempt = 0; attempt < 90; attempt++) {
             const canvas = window.EJS_emulator?.canvas || window.EJS_emulator?.gameManager?.Module?.canvas || Array.from(document.querySelectorAll('#game canvas, canvas')).find(candidate => candidate.width > 0 && candidate.height > 0);
-            if (canvas?.captureStream) { await createRoom({ skipConfirmation:true }); return; }
+            if (canvas?.captureStream) { await createRoom(); return; }
             await new Promise(resolve => setTimeout(resolve, 500));
         }
-        setStatus('O jogo demorou para iniciar. Use ABRIR SALA para tentar novamente.');
-        panel.classList.remove('lobby');
-        createBox.hidden = false;
-        roomBox.hidden = true;
+        setStatus('O jogo demorou para iniciar. Recarregue a página para tentar novamente.');
     }
 
     function invitationText() {
@@ -404,23 +395,15 @@
         style.textContent += '#neo-multi-qr-code canvas{display:none!important}#neo-multi-qr-code img{display:block!important;width:156px!important;height:156px!important;max-width:100%}';
         document.head.appendChild(style);
         const panel = document.createElement('section'); panel.id = 'neo-multiplayer-panel';
-        panel.innerHTML = `<div id="neo-multi-menu"><strong>CRIAR PARTIDA ONLINE</strong><div id="neo-multi-status">Configure a sala deste jogo.</div><div id="neo-multi-rewards"><strong>🏆 AJUDE SEM GASTAR</strong>Compartilhe o site e convide novos jogadores para ganhar espaço extra de saves.<a id="neo-referral-link" href="apoie.html#indicacoes">CRIAR MEU LINK DE INDICAÇÃO →</a></div><div id="neo-multi-create-box"><label>Jogadores <select id="neo-multi-max"><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label><label><input id="neo-multi-public" type="checkbox" checked> Sala pública</label><button id="neo-multi-create" type="button">ABRIR SALA</button></div><div id="neo-multi-room" hidden><div id="neo-multi-count"></div><input id="neo-multi-link" readonly><button id="neo-multi-copy" type="button">COPIAR CONVITE</button><div id="neo-multi-share"><button type="button" data-share="whatsapp">WHATSAPP</button><button type="button" data-share="discord">DISCORD</button><button type="button" data-share="instagram">INSTAGRAM</button><button type="button" data-share="facebook">FACEBOOK</button><button type="button" data-share="outros">OUTROS APPS</button></div><strong>CONVIDAR JOGADORES ONLINE</strong><div id="neo-multi-online-list"></div><div id="neo-multi-players"></div><button id="neo-multi-close" type="button">ENCERRAR SALA</button></div></div>`;
+        panel.innerHTML = `<div id="neo-multi-menu"><strong>PARTIDA ONLINE</strong><div id="neo-multi-status">Preparando o lobby...</div><div id="neo-multi-room" hidden><div id="neo-multi-count"></div><input id="neo-multi-link" readonly><button id="neo-multi-copy" type="button">COPIAR CONVITE</button><div id="neo-multi-share"><button type="button" data-share="whatsapp">WHATSAPP</button><button type="button" data-share="discord">DISCORD</button><button type="button" data-share="instagram">INSTAGRAM</button><button type="button" data-share="facebook">FACEBOOK</button><button type="button" data-share="outros">OUTROS APPS</button></div><strong>CONVIDAR JOGADORES ONLINE</strong><div id="neo-multi-online-list"></div><div id="neo-multi-players"></div><button id="neo-multi-close" type="button">ENCERRAR SALA</button></div></div>`;
         panel.insertAdjacentHTML('afterbegin', '<button id="neo-multi-session" type="button">🟢 ONLINE</button>');
         const roomBox = panel.querySelector('#neo-multi-room');
         roomBox.insertAdjacentHTML('afterbegin', '<div id="neo-multi-lobby-title">LOBBY DA PARTIDA</div><div id="neo-multi-lobby-state"><strong>AGUARDANDO JOGADOR 2</strong><span class="neo-wait-dots" aria-hidden="true"><i></i><i></i><i></i></span><small>A partida ficará pronta assim que o jogador convidado entrar na sala.</small></div>');
         panel.querySelector('#neo-multi-link').insertAdjacentHTML('beforebegin', '<div id="neo-multi-invite-qr"><div id="neo-multi-qr-code" aria-label="QR Code do convite"></div><div id="neo-multi-qr-copy"><strong>ENTRAR PELO CELULAR</strong><small>Aponte a câmera do smartphone para este código e abra o convite.</small></div></div>');
-        panel.querySelector('#neo-multi-close').insertAdjacentHTML('beforebegin', '<button id="neo-multi-start" type="button" disabled>INICIAR PARTIDA</button>');
         document.body.appendChild(panel);
-        panel.querySelector('#neo-multi-create').onclick = createRoom;
         panel.querySelector('#neo-multi-copy').onclick = async () => { await navigator.clipboard.writeText(panel.querySelector('#neo-multi-link').value); setStatus('Convite copiado.'); };
         panel.querySelectorAll('[data-share]').forEach(button => { button.onclick = () => void shareInvite(button.dataset.share).catch(error => setStatus(error.message)); });
         panel.querySelector('#neo-multi-close').onclick = closeRoom;
-        panel.querySelector('#neo-multi-start').onclick = () => {
-            if (!room) return;
-            panel.classList.remove('lobby', 'open');
-            panel.classList.add('playing');
-            showToast('Partida online iniciada.', 2500);
-        };
         panel.querySelector('#neo-multi-session').onclick = () => panel.classList.toggle('open');
         document.addEventListener('pointerdown', event => {
             if (!panel.classList.contains('open')) return;
@@ -428,7 +411,6 @@
             if (!path.includes(panel) && !room) panel.classList.remove('open');
         }, true);
         document.addEventListener('keydown', event => { if (event.key === 'Escape' && !room) panel.classList.remove('open'); });
-        if (system === 'n64') panel.querySelector('#neo-multi-max').value = '4';
         try {
             const pending = JSON.parse(sessionStorage.getItem('neo_multiplayer_create_pending') || 'null');
             sessionStorage.removeItem('neo_multiplayer_create_pending');

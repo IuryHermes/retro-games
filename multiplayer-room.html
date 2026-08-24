@@ -352,7 +352,7 @@
       <video id="remote-video" autoplay playsinline></video>
       <audio id="remote-audio" autoplay playsinline></audio>
       <div class="waiting" id="waiting">
-        Entre na sua conta no site e aguarde o anfitrião liberar um controle.
+        Entre na sua conta. Seu controle será atribuído automaticamente pela ordem de entrada.
       </div>
     </main>
     <section class="controls" id="controller" hidden>
@@ -839,8 +839,8 @@
                 if (!videoReady) {
                   waiting.hidden = false;
                   waiting.textContent = message.approved
-                    ? `Você é o controle ${seat}. Aguardando vídeo...`
-                    : "Aguardando aprovação do anfitrião.";
+                    ? `Controle ${seat} atribuído automaticamente. Aguardando vídeo...`
+                    : "Conectando à partida...";
                 }
               }
               if (message.type === "signal") void signal(message);
