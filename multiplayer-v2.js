@@ -282,9 +282,9 @@
         showToast('Sessão online encerrada.', 2500);
     }
 
-    async function createRoom() {
+    async function createRoom({ skipConfirmation = false } = {}) {
         const button = document.getElementById('neo-multi-create');
-        if (!window.confirm('Transmitir a gameplay deste jogo para os participantes e espectadores no site?')) return;
+        if (!skipConfirmation && !window.confirm('Transmitir a gameplay deste jogo para os participantes e espectadores no site?')) return;
         button.disabled = true; setStatus('Abrindo sala segura...');
         try {
             await collectMedia();
@@ -300,7 +300,33 @@
             renderInviteQr(link);
             setStatus(isPublic ? 'Sala pública aberta. Aguarde jogadores.' : 'Sala privada aberta. Compartilhe o convite.');
             void loadOnlinePlayers();
-        } catch (error) { setStatus(error.message); button.disabled = false; }
+        } catch (error) {
+            setStatus(`${error.message} Tente novamente em ABRIR SALA.`);
+            button.disabled = false;
+            document.getElementById('neo-multiplayer-panel')?.classList.remove('lobby');
+            document.getElementById('neo-multi-create-box').hidden = false;
+            document.getElementById('neo-multi-room').hidden = true;
+        }
+    }
+
+    async function autoCreateRoom() {
+        const panel = document.getElementById('neo-multiplayer-panel');
+        const createBox = document.getElementById('neo-multi-create-box');
+        const roomBox = document.getElementById('neo-multi-room');
+        createBox.hidden = true;
+        roomBox.hidden = false;
+        panel.classList.add('open', 'lobby');
+        document.getElementById('neo-multi-lobby-state').innerHTML = '<strong>PREPARANDO SALA ONLINE</strong><span class="neo-wait-dots" aria-hidden="true"><i></i><i></i><i></i></span><small>O lobby abrirá automaticamente assim que o jogo estiver pronto.</small>';
+        setStatus('Iniciando o jogo e preparando o lobby...');
+        for (let attempt = 0; attempt < 90; attempt++) {
+            const canvas = window.EJS_emulator?.canvas || window.EJS_emulator?.gameManager?.Module?.canvas || Array.from(document.querySelectorAll('#game canvas, canvas')).find(candidate => candidate.width > 0 && candidate.height > 0);
+            if (canvas?.captureStream) { await createRoom({ skipConfirmation:true }); return; }
+            await new Promise(resolve => setTimeout(resolve, 500));
+        }
+        setStatus('O jogo demorou para iniciar. Use ABRIR SALA para tentar novamente.');
+        panel.classList.remove('lobby');
+        createBox.hidden = false;
+        roomBox.hidden = true;
     }
 
     function invitationText() {
@@ -405,7 +431,7 @@
         try {
             const pending = JSON.parse(sessionStorage.getItem('neo_multiplayer_create_pending') || 'null');
             sessionStorage.removeItem('neo_multiplayer_create_pending');
-            if (pending?.expiresAt > Date.now()) panel.classList.add('open');
+            if (pending?.expiresAt > Date.now()) void autoCreateRoom();
         } catch (_) { sessionStorage.removeItem('neo_multiplayer_create_pending'); }
         void socialPulse(); setInterval(socialPulse, 15000);
     }
