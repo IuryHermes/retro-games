@@ -1254,7 +1254,7 @@
     // =======================================================================
     const coreMap = { 'nes': 'nes', 'snes': 'snes', 'gba': 'gba', 'n64': 'n64', 'megadrive': 'segaMD', 'ps1': 'psx' };
     const playerUrl = (playerFile, gameUrl, core, title, system) => `${playerFile}?${new URLSearchParams({ nocache:Date.now(), game:gameUrl, core, title:title || '', system:system || '' })}`;
-    const normalizeGameName = value => String(value || 'Jogo').replace(/\bII\b/gi, '2').replace(/\bFirered\b/gi, 'FireRed');
+    const normalizeGameName = value => String(value || 'Jogo').replace(/\bII\b/gi, '2').replace(/\bI(?=\s*&\s*2\b)/gi, '1').replace(/\bFirered\b/gi, 'FireRed');
     const publicGameSlug = value => normalizeGameName(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80) || 'jogo';
     const publicGameUrl = (system, name, occurrence = 1) => `/jogos/${system}/${publicGameSlug(name)}${occurrence > 1 ? `-${occurrence}` : ''}/`;
 

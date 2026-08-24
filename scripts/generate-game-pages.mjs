@@ -8,7 +8,7 @@ const cores = { nes:'nes', snes:'snes', n64:'n64', gba:'gba', megadrive:'segaMD'
 const platformLabels = { nes:'NES', snes:'SNES', n64:'Nintendo 64', gba:'GBA', megadrive:'Mega Drive', ps1:'PS1' };
 const r2 = 'https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/';
 const site = 'https://neoterminalroom.com.br';
-const normalizeGameName = value => String(value || 'Jogo').replace(/\bII\b/gi, '2').replace(/\bFirered\b/gi, 'FireRed');
+const normalizeGameName = value => String(value || 'Jogo').replace(/\bII\b/gi, '2').replace(/\bI(?=\s*&\s*2\b)/gi, '1').replace(/\bFirered\b/gi, 'FireRed');
 const slugify = value => String(value || 'jogo').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80) || 'jogo';
 const escape = value => String(value || '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 
