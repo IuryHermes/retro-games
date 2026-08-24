@@ -28,7 +28,9 @@ for (const system of systems) {
     usedSlugs.add(slug);
     const canonical = `${site}/jogos/${system}/${slug}/`;
     const rom = `${r2}systems/${system}/${game.rom}`;
-    const player = `/player-universal.html?${new URLSearchParams({ game:rom, core:cores[system], title:gameName, system, embedded:'1' })}`;
+    const playerParams = { game:rom, core:cores[system], title:gameName, system, embedded:'1' };
+    if (Array.isArray(game.discs) && game.discs.length > 1) playerParams.discs = JSON.stringify(game.discs.map(disc => `${r2}systems/${system}/${disc}`));
+    const player = `/player-universal.html?${new URLSearchParams(playerParams)}`;
     const coverName = String(game.capa || '').split('/').pop();
     const cover = coverName ? `${r2}systems/${system}/capas/${encodeURIComponent(coverName)}` : `${site}/assets/imagens-videos/logo-discord.gif`;
     const description = String(game.descricao || `Jogue ${gameName} online no NeoTerminalRoom.`).replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim().slice(0, 500);

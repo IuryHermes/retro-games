@@ -199,6 +199,14 @@
             };
 
             window.EJS_gameUrl = game.trim().startsWith("http") ? game.trim() : baseUrl + game.trim();
+            if ((core === 'psx' || core === 'pcsx_rearmed') && params.get('discs')) {
+                try {
+                    const discUrls = JSON.parse(params.get('discs'));
+                    if (!Array.isArray(discUrls) || discUrls.length < 2 || discUrls.some(url => !/^https:\/\//.test(url))) throw new Error('Lista de discos inválida.');
+                    window.EJS_externalFiles = Object.fromEntries(discUrls.map(url => [`/${new URL(url).pathname.split('/').pop()}`, url]));
+                    if (textEl) textEl.innerHTML = `PREPARANDO ${discUrls.length} DISCOS<span id="loading-dots"></span><br><span class="blink" style="font-size:12px">[ O PRIMEIRO CARREGAMENTO PODE DEMORAR ]</span>`;
+                } catch (error) { showCompatibilityError(`Falha na lista multidisco: ${error.message}`); }
+            }
             window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
             window.EJS_startOnLoaded = true;
             window.EJS_language = "pt-BR";

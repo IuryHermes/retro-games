@@ -14,5 +14,7 @@ assert.match(universal, /Promise\.race\(\[/, 'cloud startup must have a timeout'
 assert.match(universal, /loaderScript\.onerror/, 'loader download failures must be visible');
 assert.match(universal, /id="compat-error"/, 'player must provide a visible compatibility error');
 assert.match(universal, /name="viewport"/, 'player must set the mobile viewport');
+assert.match(universal, /EJS_externalFiles/, 'multi-disc PS1 games must preload their CHD files into the emulator filesystem');
+assert.match(universal, /params\.get\('discs'\)/, 'multi-disc metadata must come from the game route');
 
-console.log('iOS Safari player: 7 checks passed');
+console.log('iOS Safari player: 9 checks passed');

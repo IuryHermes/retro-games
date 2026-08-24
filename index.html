@@ -707,6 +707,7 @@
         return name ? `${R2_URL}${systemPath || game?.sysPath || game?.path || ''}capas/${encodeURIComponent(name)}` : '';
     };
     const blockRegex = /\.m3u|([._\-\s](cd|disc|disco)\s*[0-9]+)/i;
+    const hiddenPs1Disc = game => game?.sysId === 'ps1' && blockRegex.test(game.rom) && !/\.m3u$/i.test(game.rom);
     const escapeHTML = (value) => String(value ?? '').replace(/[&<>\"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]));
 
     const themeToggle = document.getElementById('theme-toggle');
@@ -794,7 +795,7 @@
     multiplayerModal.onclick = event => { if (event.target === multiplayerModal) closeMultiplayerHub(); };
     function renderMultiplayerGames(query = '') {
         const term = query.trim().toLowerCase();
-        const games = indexData.filter(game => game.playUrl && !(game.sysId === 'ps1' && blockRegex.test(game.rom)) && (!term || game.nome.toLowerCase().includes(term))).slice(0, 120);
+        const games = indexData.filter(game => game.playUrl && !hiddenPs1Disc(game) && (!term || game.nome.toLowerCase().includes(term))).slice(0, 120);
         multiplayerGameGrid.replaceChildren();
         if (!games.length) { multiplayerGameGrid.innerHTML = '<div class="history-empty">Nenhum jogo encontrado.</div>'; return; }
         games.forEach(game => {
@@ -1359,7 +1360,7 @@
         { id: 'n64', name: 'NINTENDO 64', icon: 'assets/imagens-videos/imagens do menu/n64.png', path: 'systems/n64/' },
         { id: 'gba', name: 'GAME BOY ADV', icon: 'assets/imagens-videos/imagens do menu/gba.png', path: 'systems/gba/' },
         { id: 'megadrive', name: 'MEGA DRIVE', icon: 'assets/imagens-videos/imagens do menu/megadrive.png', path: 'systems/megadrive/' },
-        //{ id: 'ps1', name: 'PLAYSTATION 1', icon: 'assets/imagens-videos/imagens do menu/ps1.png', path: 'systems/ps1/' }
+        { id: 'ps1', name: 'PLAYSTATION 1', icon: 'assets/imagens-videos/imagens do menu/ps1.png', path: 'systems/ps1/' }
     ];
 
     const catalog = document.getElementById("catalog-area");
@@ -1416,7 +1417,7 @@
             };
             uniqueGames.forEach(g => {
 
-                if (sys.id === 'ps1' && blockRegex.test(g.rom)) { return; }
+                if (hiddenPs1Disc({...g, sysId:sys.id})) { return; }
 
                 const publicName = normalizeGameName(g.nome);
                 const nameKey = publicName.trim().toLowerCase();
@@ -1628,7 +1629,7 @@
             searchResults.style.display = 'flex';
             hits.slice(0, 10).forEach(h => {
 
-                if (h.sysId === 'ps1' && blockRegex.test(h.rom)) { return; }
+                if (hiddenPs1Disc(h)) { return; }
 
                 const div = document.createElement('div'); div.className = 'search-item selectable-item';
                 let capaNomeBusca = h.capa ? h.capa.split('/').pop() : '';

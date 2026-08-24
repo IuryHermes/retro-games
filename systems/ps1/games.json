@@ -641,8 +641,12 @@
         "descricao": "Mega Man X5 é um jogo de plataforma de ação desenvolvido pela Capcom e lançado em 1997 para a PlayStation. É o quinto jogo da série Mega Man X e segue a história de Zero, um androide criado por Dr. Wily, que busca vingança contra o Dr. Light e o Dr. Wily.\n\nO jogo apresenta gráficos em 3D e uma jogabilidade mais rápida do que os jogos anteriores da série. Mega Man X5 também inclui uma nova mecânica de combate e uma variedade de armas e poderes para Zero."
     },
     {
-        "nome": "Metal Gear Solid Em Portugu S Pt Br.M3U",
-        "rom": "roms/metal_gear_solid_em_portugu_s_pt_br.chd",
+        "nome": "Metal Gear Solid em Português PT-BR",
+        "rom": "roms/metal_gear_solid_em_portugu_s_pt_br.m3u",
+        "discs": [
+            "roms/metal_gear_solid_em_portugu_s_pt_br_cd1.chd",
+            "roms/metal_gear_solid_em_portugu_s_pt_br_cd2.chd"
+        ],
         "capa": "metal-gear-solid-em-portugu-s-pt-br.jpg",
         "preview": "metal-gear-solid-em-portugu-s-pt-br.gif",
         "nota": "8.8"
