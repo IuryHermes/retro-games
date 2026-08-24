@@ -265,8 +265,16 @@
             try {
                 const automatic = await download('auto');
                 if (automatic) {
-                    automaticEnabled = true;
-                    if (await automaticChoice(session)) {
+                    // N64 states are sensitive to changes in renderer, threads
+                    // and core version. Loading one before the first rendered
+                    // frame can leave the core alive with a permanently black
+                    // canvas. Preserve the existing cloud file, start clean,
+                    // and pause autosave so the good old state is not replaced.
+                    if (options.core === 'n64') {
+                        automaticEnabled = false;
+                        console.info('Neo N64: autosave preservado; inicio limpo para evitar tela preta.');
+                    } else if (await automaticChoice(session)) {
+                        automaticEnabled = true;
                         const blobUrl = URL.createObjectURL(new Blob([automatic], { type: 'application/octet-stream' }));
                         window.EJS_loadStateURL = blobUrl;
                         lastHash = await digest(automatic);
