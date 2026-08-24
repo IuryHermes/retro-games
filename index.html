@@ -1254,6 +1254,8 @@
     // =======================================================================
     const coreMap = { 'nes': 'nes', 'snes': 'snes', 'gba': 'gba', 'n64': 'n64', 'megadrive': 'segaMD', 'ps1': 'psx' };
     const playerUrl = (playerFile, gameUrl, core, title, system) => `${playerFile}?${new URLSearchParams({ nocache:Date.now(), game:gameUrl, core, title:title || '', system:system || '' })}`;
+    const publicGameSlug = value => String(value || 'jogo').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80) || 'jogo';
+    const publicGameUrl = (system, name, occurrence = 1) => `/jogos/${system}/${publicGameSlug(name)}${occurrence > 1 ? `-${occurrence}` : ''}/`;
 
     const top10Games = [
         { id: 'super_mario_world', nome: 'Super Mario World', sysId: 'snes', path: 'systems/snes/', rom: 'roms/super_mario_world_(usa).zip', cats: 'Aventura <span>•</span> Plataforma <span>•</span> SNES' },
@@ -1277,7 +1279,7 @@
         slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
         const coreToUse = coreMap[game.sysId] || 'snes';
         const playerFile = 'player-universal.html';
-        const playUrl = playerUrl(playerFile, R2_URL + game.path + game.rom, coreToUse, game.nome, game.sysId);
+        const playUrl = publicGameUrl(game.sysId, game.nome);
         const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
 
         slide.innerHTML = `
@@ -1365,6 +1367,7 @@
             const nameCounts = new Map();
             uniqueGames.forEach(g => { const key = String(g.nome || '').trim().toLowerCase(); nameCounts.set(key, (nameCounts.get(key) || 0) + 1); });
             const nameSeen = new Map();
+            const usedPublicSlugs = new Set();
             const variantLabel = (game) => {
                 const rom = String(game.rom || '').toLowerCase();
                 if (/pt[-_ ]?br|br\.gba|traduz|dublad|narra/.test(rom)) return 'PT-BR';
@@ -1393,7 +1396,13 @@
 
                 const coreToUse = coreMap[sys.id] || 'snes';
                 const playerFile = 'player-universal.html';
-                const playUrl = playerUrl(playerFile, R2_URL + sys.path + g.rom, coreToUse, g.nome, sys.id);
+                const urlSlug = publicGameSlug(g.nome);
+                let publicSlug = urlSlug;
+                let publicSlugSuffix = 2;
+                while (usedPublicSlugs.has(publicSlug)) publicSlug = `${urlSlug}-${publicSlugSuffix++}`;
+                usedPublicSlugs.add(publicSlug);
+                const playUrl = `/jogos/${sys.id}/${publicSlug}/`;
+                gameObjFull.playUrl = playUrl;
 
                 card.dataset.url = playUrl;
 
@@ -1589,7 +1598,7 @@
 
                 const coreToUse = coreMap[h.sysId] || 'snes';
                 const playerFile = 'player-universal.html';
-                const playUrl = playerUrl(playerFile, R2_URL + h.sysPath + h.rom, coreToUse, h.nome, h.sysId);
+                const playUrl = h.playUrl || publicGameUrl(h.sysId, h.nomeOriginal || h.nome);
 
                 div.dataset.url = playUrl; div.onclick = () => window.openGameModal(h, playUrl);
                 searchResults.appendChild(div);

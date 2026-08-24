@@ -84,7 +84,11 @@
         window.history.pushState({page: 1}, "", ""); // Empurra um estado falso pra fila
         window.addEventListener('popstate', function(event) {
             // Se o usuário apertar voltar, manda pro index.html
-            window.location.href = "index.html";
+            if (new URLSearchParams(window.location.search).get('embedded') === '1' && window.top !== window) {
+                window.top.location.href = '/';
+            } else {
+                window.location.href = "index.html";
+            }
         });
 
         // Pega os parâmetros do jogo

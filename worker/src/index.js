@@ -1304,7 +1304,8 @@ var src_default = {
       const system = String(body.system || "").trim().toLowerCase().slice(0, 20);
       const cover = String(body.cover || "").trim().slice(0, 1e3);
       const playUrl = String(body.playUrl || "").trim().slice(0, 2e3);
-      if (!/^[a-z0-9][a-z0-9._,-]{0,119}$/.test(id) || !name || !/^[a-z0-9-]{2,20}$/.test(system) || !/^player-(universal|ps1)\.html\?/.test(playUrl) || cover && !/^(https:\/\/pub-[a-z0-9]+\.r2\.dev\/|systems\/|assets\/)/.test(cover))
+      const validPlayUrl = /^player-(universal|ps1)\.html\?/.test(playUrl) || /^\/?jogos\/(nes|snes|n64|gba|megadrive|ps1)\/[a-z0-9][a-z0-9-]{0,89}\/$/.test(playUrl);
+      if (!/^[a-z0-9][a-z0-9._,-]{0,119}$/.test(id) || !name || !/^[a-z0-9-]{2,20}$/.test(system) || !validPlayUrl || cover && !/^(https:\/\/pub-[a-z0-9]+\.r2\.dev\/|systems\/|assets\/)/.test(cover))
         return json({ erro: "Jogo invalido." }, 400);
       const game = { id, name, system, cover, playUrl: playUrl.replace(/([?&])nocache=[^&]*&?/, "$1").replace(/[?&]$/, ""), playedAt: Date.now() };
       const next = [game, ...(Array.isArray(history) ? history : []).filter((item) => item?.id !== id)].slice(0, 50);
