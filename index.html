@@ -757,6 +757,7 @@
     const multiplayerModal = document.getElementById('multiplayer-modal');
     const multiplayerRooms = document.getElementById('multiplayer-rooms');
     let multiplayerRefreshTimer = 0;
+    let multiplayerSelectMode = false;
     async function loadMultiplayerRooms() {
         try {
             const response = await fetch(`${ACCOUNT_API}/multiplayer/rooms`, { cache:'no-store' });
@@ -764,7 +765,7 @@
             multiplayerRooms.replaceChildren();
             const online = (data.rooms || []).reduce((total, room) => total + room.online, 0);
             document.getElementById('multiplayer-online-count').textContent = `${online} pessoa(s) em ${(data.rooms || []).length} sala(s) aguardando`;
-            if (!data.rooms?.length) { multiplayerRooms.innerHTML = '<div class="history-empty">Nenhuma sala pública aguardando agora.<br>Escolha um jogo, abra o menu ONLINE e seja o primeiro anfitrião.</div>'; return; }
+            if (!data.rooms?.length) { multiplayerRooms.innerHTML = '<div class="history-empty">Nenhuma sala pública aguardando agora.<br>Selecione um jogo para criar a primeira partida.</div>'; return; }
             data.rooms.forEach(room => {
                 const card = document.createElement('article'); card.className = 'multiplayer-room-card';
                 const title = document.createElement('strong'); title.textContent = room.title;
@@ -783,7 +784,13 @@
     ['multiplayer-hub-trigger', 'multiplayer-hub-trigger-desktop'].forEach(id => { document.getElementById(id).onclick = openMultiplayerHub; });
     document.getElementById('multiplayer-close').onclick = closeMultiplayerHub;
     multiplayerModal.onclick = event => { if (event.target === multiplayerModal) closeMultiplayerHub(); };
-    document.getElementById('multiplayer-select-game').onclick = () => { closeMultiplayerHub(); document.getElementById('global-search').focus(); document.getElementById('global-search').placeholder = 'Escolha um jogo e abra o menu ONLINE...'; };
+    document.getElementById('multiplayer-select-game').onclick = () => {
+        multiplayerSelectMode = true;
+        closeMultiplayerHub();
+        const search = document.getElementById('global-search');
+        search.focus();
+        search.placeholder = 'Pesquise e escolha o jogo da partida online...';
+    };
 
     const avatarUrl = avatar => `assets/avatars/${AVATARS.includes(avatar) ? avatar : 'avatar-01'}.png`;
     const authModal = document.getElementById('auth-modal');
@@ -1240,7 +1247,17 @@
         btnShopee.onclick = (e) => { e.target.href = shopeeLinks[Math.floor(Math.random() * shopeeLinks.length)]; };
         btnMl.onclick = (e) => { e.target.href = mlLinks[Math.floor(Math.random() * mlLinks.length)]; };
 
-        document.getElementById('modal-play-btn').onclick = () => { window.closeGameModal(); playAndRemember(gameObj, playUrl); };
+        const playButton = document.getElementById('modal-play-btn');
+        const createOnline = multiplayerSelectMode;
+        playButton.innerHTML = createOnline ? '🌐 CRIAR PARTIDA ONLINE' : '▶ JOGAR AGORA';
+        playButton.onclick = () => {
+            if (createOnline) {
+                sessionStorage.setItem('neo_multiplayer_create_pending', JSON.stringify({ expiresAt:Date.now() + 5 * 60 * 1000 }));
+                multiplayerSelectMode = false;
+            }
+            window.closeGameModal();
+            playAndRemember(gameObj, playUrl);
+        };
         document.getElementById('game-info-modal').style.display = 'flex';
     };
 
