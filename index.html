@@ -707,7 +707,7 @@
         return name ? `${R2_URL}${systemPath || game?.sysPath || game?.path || ''}capas/${encodeURIComponent(name)}` : '';
     };
     const blockRegex = /\.m3u|([._\-\s](cd|disc|disco)\s*[0-9]+)/i;
-    const hiddenPs1Disc = game => game?.sysId === 'ps1' && blockRegex.test(game.rom) && !/\.m3u$/i.test(game.rom);
+    const hiddenPs1Disc = game => game?.sysId === 'ps1' && blockRegex.test(game.rom);
     const escapeHTML = (value) => String(value ?? '').replace(/[&<>\"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]));
 
     const themeToggle = document.getElementById('theme-toggle');
