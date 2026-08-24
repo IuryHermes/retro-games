@@ -892,8 +892,9 @@
             if (!games.length) { const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = automaticOnly ? 'Você ainda não possui saves automáticos na nuvem.' : 'Você ainda não possui saves manuais na nuvem.'; historyList.appendChild(empty); }
             games.forEach(game => {
                 const card = document.createElement('section'); card.className = 'cloud-game';
-                const catalogGame = indexData.find(item => catalogHistoryId(item) === game.id);
-                const recentGame = (historyData.games || []).find(item => item.id === game.id);
+                const catalogGame = indexData.find(item => catalogMatchesSave(item, game));
+                const catalogId = catalogGame ? catalogHistoryId(catalogGame) : '';
+                const recentGame = (historyData.games || []).find(item => item.id === game.id || item.id === catalogId);
                 const coverName = catalogGame?.capa ? catalogGame.capa.split('/').pop() : '';
                 const coverUrl = recentGame?.cover || catalogCoverUrl(catalogGame) || 'assets/imagens-videos/logo-discord.gif';
                 const head = document.createElement('div'); head.className = 'cloud-game-head';
@@ -1506,6 +1507,18 @@
         return String(game.id || `${game.sysId}-${String(game.rom || '').split('/').pop()}`)
             .toLowerCase().replace(/\.[a-z0-9]+$/i, '').replace(/[^a-z0-9._,-]+/g, '-')
             .replace(/^-+|-+$/g, '').slice(0, 120);
+    }
+    function catalogMatchesSave(game, saved) {
+        if (catalogHistoryId(game) === saved.id) return true;
+        const systemAliases = { segamd:'megadrive', megadrive:'megadrive', n64:'n64', nes:'nes', snes:'snes', gba:'gba', psx:'ps1', ps1:'ps1' };
+        const savedSystem = systemAliases[String(saved.system || '').toLowerCase()]
+            || systemAliases[String(saved.id || '').split('-')[0]] || '';
+        const catalogSystem = systemAliases[String(game.sysId || '').toLowerCase()] || '';
+        if (!savedSystem || savedSystem !== catalogSystem) return false;
+        const savedRom = String(saved.id || '').replace(/^(?:segamd|megadrive|n64|nes|snes|gba|psx|ps1)-/, '');
+        const catalogRom = String(game.rom || '').split('/').pop().toLowerCase()
+            .replace(/\.[a-z0-9]+$/i, '').replace(/[^a-z0-9._,-]+/g, '-').replace(/^-+|-+$/g, '');
+        return savedRom === catalogRom;
     }
     function rebindHeroIndicators() {
         [...heroIndicators.children].forEach((dot, index) => { dot.onclick = () => goToSlide(index); });
