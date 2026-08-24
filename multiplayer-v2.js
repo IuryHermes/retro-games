@@ -172,8 +172,20 @@
         room = state.room;
         const list = document.getElementById('neo-multi-players');
         const count = document.getElementById('neo-multi-count');
+        const lobbyState = document.getElementById('neo-multi-lobby-state');
+        const startButton = document.getElementById('neo-multi-start');
+        const sessionButton = document.getElementById('neo-multi-session');
         if (!list) return;
         count.textContent = `${state.participants.length}/${room.maxPlayers} online`;
+        const guests = state.participants.filter(person => !person.host);
+        const nextPlayer = Math.min(state.participants.length + 1, room.maxPlayers);
+        if (lobbyState) lobbyState.textContent = guests.length === 0
+            ? 'Aguardando jogador 2 entrar...'
+            : state.participants.length >= room.maxPlayers
+                ? 'Lobby completo. Todos os jogadores chegaram.'
+                : `${guests.length} jogador${guests.length === 1 ? '' : 'es'} conectado${guests.length === 1 ? '' : 's'}. Aguardando jogador ${nextPlayer}...`;
+        if (startButton) startButton.disabled = guests.length === 0;
+        if (sessionButton) sessionButton.textContent = `🟢 ONLINE ${state.participants.length}/${room.maxPlayers}`;
         list.replaceChildren();
         state.participants.forEach(person => {
             if (!person.host && !seenParticipants.has(person.clientId)) {
@@ -224,6 +236,12 @@
         if (createBox) createBox.hidden = false;
         if (roomBox) roomBox.hidden = true;
         if (createButton) createButton.disabled = false;
+        const panel = document.getElementById('neo-multiplayer-panel');
+        panel?.classList.remove('open', 'lobby', 'playing');
+        const startButton = document.getElementById('neo-multi-start');
+        if (startButton) startButton.disabled = true;
+        const sessionButton = document.getElementById('neo-multi-session');
+        if (sessionButton) sessionButton.textContent = '🟢 ONLINE';
         document.getElementById('neo-multi-players')?.replaceChildren();
         const link = document.getElementById('neo-multi-link');
         if (link) link.value = '';
@@ -258,6 +276,7 @@
             room = data.room; ticket = data.ticket; connect();
             document.getElementById('neo-multi-create-box').hidden = true;
             document.getElementById('neo-multi-room').hidden = false;
+            document.getElementById('neo-multiplayer-panel')?.classList.add('open', 'lobby');
             const link = `${location.origin}/multiplayer-room.html?room=${encodeURIComponent(room.id)}`;
             document.getElementById('neo-multi-link').value = link;
             setStatus(isPublic ? 'Sala pública aberta. Aguarde jogadores.' : 'Sala privada aberta. Compartilhe o convite.');
@@ -336,14 +355,26 @@
     function createPanel() {
         const style = document.createElement('style');
         style.textContent = '#neo-multiplayer-panel{position:fixed;right:8px;top:8px;z-index:9999999;color:#dfffe8;font:12px monospace}#neo-multi-menu button,#neo-multi-menu select{border:1px solid #00cc44;background:#061109;color:#55ff88;padding:8px;cursor:pointer}#neo-multi-menu{display:none;width:min(350px,92vw);max-height:80dvh;overflow:auto;padding:10px;border:1px solid #00cc44;background:rgba(0,0,0,.96);box-shadow:0 0 22px rgba(0,204,68,.25)}#neo-multiplayer-panel.open #neo-multi-menu{display:block}#neo-multi-status{color:#a9cdb2;line-height:1.45;margin:8px 0}#neo-multi-rewards{margin:8px 0;padding:9px;border:1px solid #ffd166;border-radius:5px;background:#171407;color:#dfffe8;line-height:1.45}#neo-multi-rewards strong{display:block;color:#ffd166}#neo-live-participate{display:block;width:100%;margin:8px 0 5px;border-color:#5865f2!important;background:#5865f2!important;color:#fff!important;font-weight:bold}#neo-live-confirmation{display:block;color:#ffdca0;font-size:11px}#neo-live-confirmation.confirmed{color:#55ff88}#neo-multi-create-box{display:grid;gap:8px}#neo-multi-create-box label{display:flex;align-items:center;justify-content:space-between;gap:10px}#neo-multi-room input{width:100%;margin:7px 0;background:#111;border:1px solid #555;color:#fff;padding:7px}.neo-multi-person{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #253129}.neo-multi-person button{padding:4px 7px;margin-left:3px}#neo-multi-online-list{max-height:180px;overflow:auto;border-top:1px solid #253129;margin-top:8px}#neo-multi-share{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin:7px 0 12px}#neo-multi-share button{margin:0}#neo-multi-close{width:100%;margin-top:9px;border-color:#ff4f61!important;color:#ff6b7b!important}#neo-multi-toast{position:fixed;left:50%;top:18px;z-index:10000001;max-width:min(90vw,520px);padding:13px 18px;transform:translate(-50%,-150%);opacity:0;border:1px solid #00cc44;border-radius:6px;background:#061109;color:#fff;box-shadow:0 0 24px rgba(0,204,68,.35);font:600 13px monospace;text-align:center;transition:.22s ease;pointer-events:none}#neo-multi-toast.visible{transform:translate(-50%,0);opacity:1}#neo-referral-link{display:block;margin-top:8px;color:#55ff88;font-weight:bold}@media(max-width:768px),(pointer:coarse){#neo-multiplayer-panel{top:auto;right:max(8px,env(safe-area-inset-right));bottom:max(8px,env(safe-area-inset-bottom))}#neo-multi-menu{margin:0}}';
+        style.textContent += '#neo-multi-session{display:none;border:1px solid #00cc44;background:#061109;color:#55ff88;padding:9px;font:700 12px monospace;cursor:pointer;box-shadow:0 0 18px rgba(0,204,68,.35)}#neo-multiplayer-panel.playing #neo-multi-session{display:block}#neo-multiplayer-panel.lobby{inset:0;display:grid;place-items:center;background:rgba(0,0,0,.86);backdrop-filter:blur(5px)}#neo-multiplayer-panel.lobby #neo-multi-menu{display:block;width:min(620px,92vw);max-height:90dvh;padding:clamp(16px,4vw,30px)}#neo-multi-lobby-title{color:#55ff88;font-size:clamp(18px,4vw,28px);font-weight:900;letter-spacing:.08em;text-align:center;margin-bottom:7px}#neo-multi-lobby-state{padding:13px;margin:8px 0;border:1px solid #285c38;background:#09170e;color:#fff;text-align:center;font-size:14px}#neo-multi-start{width:100%;margin:12px 0 3px;font-weight:900;font-size:14px}#neo-multi-start:disabled{opacity:.42;cursor:not-allowed}@media(max-width:768px),(pointer:coarse){#neo-multiplayer-panel.lobby{top:0;right:0;bottom:0}}';
         document.head.appendChild(style);
         const panel = document.createElement('section'); panel.id = 'neo-multiplayer-panel';
         panel.innerHTML = `<div id="neo-multi-menu"><strong>CRIAR PARTIDA ONLINE</strong><div id="neo-multi-status">Configure a sala deste jogo.</div><div id="neo-multi-rewards"><strong>🏆 AJUDE SEM GASTAR</strong>Compartilhe o site e convide novos jogadores para ganhar espaço extra de saves.<a id="neo-referral-link" href="apoie.html#indicacoes">CRIAR MEU LINK DE INDICAÇÃO →</a></div><div id="neo-multi-create-box"><label>Jogadores <select id="neo-multi-max"><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label><label><input id="neo-multi-public" type="checkbox" checked> Sala pública</label><button id="neo-multi-create" type="button">ABRIR SALA</button></div><div id="neo-multi-room" hidden><div id="neo-multi-count"></div><input id="neo-multi-link" readonly><button id="neo-multi-copy" type="button">COPIAR CONVITE</button><div id="neo-multi-share"><button type="button" data-share="whatsapp">WHATSAPP</button><button type="button" data-share="discord">DISCORD</button><button type="button" data-share="instagram">INSTAGRAM</button><button type="button" data-share="facebook">FACEBOOK</button><button type="button" data-share="outros">OUTROS APPS</button></div><strong>CONVIDAR JOGADORES ONLINE</strong><div id="neo-multi-online-list"></div><div id="neo-multi-players"></div><button id="neo-multi-close" type="button">ENCERRAR SALA</button></div></div>`;
+        panel.insertAdjacentHTML('afterbegin', '<button id="neo-multi-session" type="button">🟢 ONLINE</button>');
+        const roomBox = panel.querySelector('#neo-multi-room');
+        roomBox.insertAdjacentHTML('afterbegin', '<div id="neo-multi-lobby-title">LOBBY DA PARTIDA</div><div id="neo-multi-lobby-state">Aguardando jogador 2 entrar...</div>');
+        panel.querySelector('#neo-multi-close').insertAdjacentHTML('beforebegin', '<button id="neo-multi-start" type="button" disabled>INICIAR PARTIDA</button>');
         document.body.appendChild(panel);
         panel.querySelector('#neo-multi-create').onclick = createRoom;
         panel.querySelector('#neo-multi-copy').onclick = async () => { await navigator.clipboard.writeText(panel.querySelector('#neo-multi-link').value); setStatus('Convite copiado.'); };
         panel.querySelectorAll('[data-share]').forEach(button => { button.onclick = () => void shareInvite(button.dataset.share).catch(error => setStatus(error.message)); });
         panel.querySelector('#neo-multi-close').onclick = closeRoom;
+        panel.querySelector('#neo-multi-start').onclick = () => {
+            if (!room) return;
+            panel.classList.remove('lobby', 'open');
+            panel.classList.add('playing');
+            showToast('Partida online iniciada.', 2500);
+        };
+        panel.querySelector('#neo-multi-session').onclick = () => panel.classList.toggle('open');
         document.addEventListener('pointerdown', event => {
             if (!panel.classList.contains('open')) return;
             const path = event.composedPath();
