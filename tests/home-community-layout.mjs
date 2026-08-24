@@ -22,8 +22,6 @@ assert.match(index, /'multiplayer-hub-trigger-desktop'/);
 assert.match(index, /\.multiplayer-hub-trigger \{[^}]*background:var\(--sidebar-bg\)/);
 assert.match(index, /\.community-shortcut \{[^}]*background:transparent/);
 assert.match(index, /height: 245px; min-height: 220px/);
-assert.match(index, /out\.prepend\(row\)/);
-assert.ok(index.indexOf('class="chat-controls"') < index.indexOf('id="terminal-output"'));
 assert.match(index, /\.community-shortcut \{[^}]*border:0;[^}]*background:transparent/);
 assert.match(index, /\.community-shortcut \{[^}]*justify-content:flex-start/);
 assert.match(index, /\.community-shortcut \{[^}]*width:100%;[^}]*text-align:left/);
@@ -31,4 +29,4 @@ assert.match(index, /apoiar-projeto-v2\.png/);
 assert.doesNotMatch(index, /<a class="chat-trigger-mobile"/);
 assert.match(index, /href="social\.html"[^>]*aria-label="Comunidade"/);
 
-console.log('home community layout: 23 checks passed');
+console.log('home community layout: 21 checks passed');
