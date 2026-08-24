@@ -1167,10 +1167,16 @@
     };
     // =======================================================================
 
+    let gameNavigationPending = false;
     window.startGame = (url) => {
-        document.getElementById('loader-overlay').style.display = 'flex';
-        setTimeout(() => { window.location.href = url; }, 1500);
+        if (gameNavigationPending) return;
+        gameNavigationPending = true;
+        const overlay = document.getElementById('loader-overlay');
+        if (overlay) overlay.style.display = 'flex';
+        // Evita empilhar aberturas de jogos diferentes no celular.
+        window.setTimeout(() => window.location.assign(url), 120);
     };
+    window.addEventListener('pageshow', () => { gameNavigationPending = false; });
 
     window.toggleGrid = (sysId) => {
         const car = document.getElementById(`carousel-${sysId}`);

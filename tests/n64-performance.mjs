@@ -9,6 +9,10 @@ const coiWorker = await readFile(new URL('../coi-serviceworker.js', import.meta.
 assert.match(coiWorker, /scope: "\/player-universal\.html"/);
 assert.match(player, /window\.crossOriginIsolated/);
 assert.match(player, /typeof window\.SharedArrayBuffer === 'function'/);
+assert.match(player, /mobileN64/);
+assert.match(player, /&& !mobileN64/);
+assert.match(player, /addEventListener\('pagehide'/);
+assert.match(player, /gameManager\?\.exitGame/);
 assert.doesNotMatch(player, /localStorage\.removeItem\(key\)/);
 assert.match(player, /"mupen64plus-43screensize": "320x240"/);
 assert.match(player, /"mupen64plus-aspect": "4:3"/);

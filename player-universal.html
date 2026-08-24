@@ -175,9 +175,12 @@
             window.EJS_loadStateOnStart = false;    
             // Use the threaded N64 build only when the browser confirms that
             // cross-origin isolation and SharedArrayBuffer are available.
+            const mobileN64 = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+                || window.matchMedia('(pointer: coarse)').matches;
             window.EJS_threads = core === 'n64'
                 && window.crossOriginIsolated
-                && typeof window.SharedArrayBuffer === 'function';
+                && typeof window.SharedArrayBuffer === 'function'
+                && !mobileN64;
             
             // Agora o emulador só vai ter botão de Menu e Config na interface interna dele
             window.EJS_buttons = { save_state: true, load_state: true, full_screen: true, fast_forward: true, settings: true, menu: true };
@@ -233,7 +236,16 @@
         } else {
             setTimeout(() => showCompatibilityError('O endereço do jogo está incompleto. Volte ao catálogo e abra o jogo novamente.'), 0);
         }
+
+        // Libera a instancia WebAssembly/WebGL antes de abrir outro jogo. Sem
+        // isso alguns celulares restauram o N64 anterior pelo bfcache.
+        addEventListener('pagehide', () => {
+            clearInterval(loadingInterval);
+            try { window.EJS_emulator?.gameManager?.exitGame?.(); } catch (_) {}
+            try { window.EJS_emulator?.stop?.(); } catch (_) {}
+        });
+        addEventListener('unload', () => {});
     </script>
-    <script src="multiplayer-v2.js?v=20260820-referrals1"></script>
+    <script src="multiplayer-v2.js?v=20260824-mobile-fix1"></script>
 </body>
 </html>

@@ -8,6 +8,8 @@ const worker = await readFile(new URL('../worker/src/index.js', import.meta.url)
 const social = await readFile(new URL('../social.js', import.meta.url), 'utf8');
 
 assert.match(host, /canvas\.captureStream\(30\)/);
+assert.match(host, /matchMedia\('\(max-width: 768px\), \(pointer: coarse\)'\)/);
+assert.match(host, /#neo-multiplayer-panel\{top:auto/);
 assert.match(host, /createDataChannel\('neo-controls'/);
 assert.match(host, /manager\.simulateInput\(seat - 1, index, value\)/);
 assert.doesNotMatch(host, /type:'assign'/);
