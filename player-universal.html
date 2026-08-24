@@ -248,11 +248,22 @@
                 window.EJS_gamepadStyle = "playstation";
             }
             window.EJS_onLoadError = error => showCompatibilityError(`Falha ao carregar o emulador: ${String(error?.message || error || 'erro desconhecido')}`);
+            const cacheRepairKey = 'neo_n64_emulator_cache_repair_v1';
+            const emulatorCacheRepair = core !== 'n64' || localStorage.getItem(cacheRepairKey)
+                ? Promise.resolve()
+                : Promise.all(['EmulatorJS-core', 'EmulatorJS-roms'].map(name => new Promise(resolve => {
+                    const request = indexedDB.deleteDatabase(name);
+                    const finish = () => resolve();
+                    request.onsuccess = finish;
+                    request.onerror = finish;
+                    request.onblocked = finish;
+                    setTimeout(finish, 3000);
+                }))).finally(() => localStorage.setItem(cacheRepairKey, '1'));
             const cloudPreparation = Promise.race([
                 window.NeoCloudSaves.prepare({ game: window.EJS_gameUrl, core: window.EJS_core, name: params.get('title'), system: params.get('system') }),
                 new Promise(resolve => setTimeout(resolve, 5000))
             ]);
-            cloudPreparation.catch(error => console.warn('Neo cloud startup:', error)).finally(() => {
+            Promise.all([cloudPreparation.catch(error => console.warn('Neo cloud startup:', error)), emulatorCacheRepair]).finally(() => {
                 const loaderScript = document.createElement('script');
                 loaderScript.src = 'https://cdn.emulatorjs.org/stable/data/loader.js';
                 loaderScript.onerror = () => showCompatibilityError('Não foi possível baixar o emulador. Verifique a conexão, desative bloqueadores para este site e tente novamente.');
