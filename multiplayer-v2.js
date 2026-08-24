@@ -315,22 +315,27 @@
         const toggle = panel.querySelector('#neo-multi-toggle');
         const attach = () => {
             const menu = document.querySelector('.ejs_menu_bar');
-            if (!menu || toggle.parentElement === menu) return Boolean(menu);
-            toggle.classList.add('ejs_menu_button');
+            if (!menu) return false;
             const saveControl = Array.from(menu.querySelectorAll('button,[role="button"],[title],[aria-label]')).find(control => {
                 const label = `${control.getAttribute('title') || ''} ${control.getAttribute('aria-label') || ''} ${control.textContent || ''}`;
                 return /save|salvar/i.test(label);
             });
             const anchor = saveControl?.closest('.ejs_menu_button') || saveControl;
-            if (anchor?.parentElement === menu) anchor.after(toggle);
-            else menu.appendChild(toggle);
+            const correctlyDocked = anchor?.parentElement === menu
+                ? anchor.nextElementSibling === toggle
+                : toggle.parentElement === menu;
+            if (!correctlyDocked) {
+                toggle.classList.add('ejs_menu_button');
+                if (anchor?.parentElement === menu) anchor.after(toggle);
+                else menu.appendChild(toggle);
+            }
             return true;
         };
-        if (!attach()) {
-            const observer = new MutationObserver(() => { if (attach()) observer.disconnect(); });
-            observer.observe(document.documentElement, { childList:true, subtree:true });
-            setTimeout(() => observer.disconnect(), 30000);
-        }
+        attach();
+        // O EmulatorJS recria a barra durante a inicialização e ao alternar tela
+        // cheia. Mantenha o botão ligado à barra ativa, inclusive no celular.
+        const observer = new MutationObserver(attach);
+        observer.observe(document.documentElement, { childList:true, subtree:true });
     }
 
     let socialSince = Date.now() - 60000;
@@ -365,6 +370,8 @@
         document.body.appendChild(panel);
         panel.querySelector('#neo-multi-toggle').innerHTML = '<img src="assets/imagens-videos/imagens do menu/jogar-online.png" alt=""><span>JOGAR ONLINE</span>';
         const toggle = panel.querySelector('#neo-multi-toggle');
+        toggle.title = 'Jogar Online';
+        toggle.setAttribute('aria-label', 'Jogar Online');
         toggle.onclick = event => { event.stopPropagation(); panel.classList.toggle('open'); if ("Notification" in window && Notification.permission === 'default') void Notification.requestPermission(); };
         panel.querySelector('#neo-multi-create').onclick = createRoom;
         panel.querySelector('#neo-multi-copy').onclick = async () => { await navigator.clipboard.writeText(panel.querySelector('#neo-multi-link').value); setStatus('Convite copiado.'); };

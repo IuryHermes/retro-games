@@ -11,6 +11,9 @@ assert.match(host, /canvas\.captureStream\(30\)/);
 assert.match(host, /#neo-multiplayer-panel\{top:auto/);
 assert.match(host, /save\|salvar/i);
 assert.match(host, /anchor\.after\(toggle\)/);
+assert.match(host, /anchor\.nextElementSibling === toggle/);
+assert.match(host, /new MutationObserver\(attach\)/);
+assert.match(host, /aria-label', 'Jogar Online'/);
 assert.match(host, /event\.composedPath\(\)/);
 assert.match(host, /!path\.includes\(panel\) && !path\.includes\(toggle\)/);
 assert.match(host, /function resetRoomUi/);
@@ -132,4 +135,4 @@ assert.match(guest, /grid-template-columns: 1fr;/);
 assert.doesNotMatch(guest, /grid-template-columns: 1fr 360px/);
 assert.match(guest, /position: fixed;[\s\S]*max-height: 44dvh/);
 
-console.log('multiplayer client and room: 123 checks passed');
+console.log('multiplayer client and room: 126 checks passed');
