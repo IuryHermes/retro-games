@@ -1351,7 +1351,10 @@
         let capaNome = gameObj.capa ? gameObj.capa.split('/').pop() : '';
 
         const localCoverPath = capaNome ? `${gameObj.sysPath}capas/${encodeURIComponent(capaNome)}` : 'assets/imagens-videos/logo-discord.gif';
-        const mediaPath = gifNome ? `${catalogAssetBase(gameObj.sysPath)}${gameObj.sysPath}previews/${encodeURIComponent(gifNome)}` : (catalogCoverUrl(gameObj) || 'assets/imagens-videos/logo-discord.gif');
+        const coverPath = catalogCoverUrl(gameObj) || localCoverPath;
+        const mediaPath = gameObj.sysId === 'atari2600'
+            ? coverPath
+            : (gifNome ? `${catalogAssetBase(gameObj.sysPath)}${gameObj.sysPath}previews/${encodeURIComponent(gifNome)}` : coverPath);
 
         const modalImage = document.getElementById('modal-game-img');
         modalImage.onerror = () => { modalImage.onerror = () => { modalImage.src = 'assets/imagens-videos/logo-discord.gif'; }; modalImage.src = localCoverPath; };

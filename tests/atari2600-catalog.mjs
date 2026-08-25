@@ -20,6 +20,7 @@ const [index, player, preflight, worker] = await Promise.all([
 ]);
 assert.match(index, /atari2600': 'atari2600'/);
 assert.match(index, /ATARI 2600/);
+assert.match(index, /gameObj\.sysId === 'atari2600'[\s\S]*?\? coverPath/);
 assert.match(player, /atari2600:'atari2600'/);
 assert.match(preflight, /atari2600: \['a26', 'bin', 'zip'\]/);
 assert.match(worker, /ps1\|atari2600/);
