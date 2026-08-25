@@ -412,6 +412,9 @@
         .cloud-plan-promo a { display:inline-block; margin-top:9px; padding:8px 12px; border-radius:5px; background:#ffd166; color:#171207; text-decoration:none; font-weight:bold; }
         .profile-top-actions { display:flex; justify-content:flex-start; margin:8px 0 4px; }
         .profile-top-actions .auth-action { width:auto; margin:0; padding:8px 12px; }
+        .profile-tools { display:grid; grid-template-columns:1fr auto; gap:8px; margin:10px 0; }
+        .profile-search { min-width:0; border:1px solid var(--border-color); border-radius:5px; background:var(--input-bg); color:var(--text-color); padding:10px 12px; font:11px monospace; }
+        .profile-search:focus { outline:1px solid var(--accent-color); border-color:var(--accent-color); }
         .cloud-game { border:1px solid var(--border-color); background:var(--input-bg); border-radius:6px; padding:12px; min-width:0; }
         .cloud-game-head { display:flex; align-items:center; gap:11px; margin-bottom:9px; }
         .cloud-game-cover { width:54px; height:70px; flex:0 0 54px; object-fit:cover; border:1px solid var(--border-color); border-radius:4px; background:#000; }
@@ -509,6 +512,7 @@
             <h2 id="history-title">CONTINUE JOGANDO</h2>
             <div class="profile-top-actions"><button class="auth-action" id="profile-edit" type="button">EDITAR PERFIL</button></div>
             <p class="history-subtitle" id="profile-subtitle">Seus jogos, do mais recente para o mais antigo.</p>
+            <div class="profile-tools"><input class="profile-search" id="profile-search" type="search" placeholder="Buscar jogo, console ou save" aria-label="Buscar no perfil"><button class="auth-action" id="profile-diagnostic" type="button">VERIFICAR SAVES</button></div>
             <div class="profile-tabs" role="tablist" aria-label="Conteúdo do perfil">
                 <button class="profile-tab active" id="profile-history-tab" type="button" role="tab" aria-selected="true">JOGOS RECENTES</button>
                 <button class="profile-tab" id="profile-cloud-tab" type="button" role="tab" aria-selected="false">SAVES NA NUVEM</button>
@@ -853,6 +857,13 @@
     const cloudTab = document.getElementById('profile-cloud-tab');
     const autoTab = document.getElementById('profile-auto-tab');
     const profileSubtitle = document.getElementById('profile-subtitle');
+    const profileSearch = document.getElementById('profile-search');
+    const normalizeProfileSearch = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const applyProfileSearch = () => {
+        const query = normalizeProfileSearch(profileSearch.value).trim();
+        historyList.querySelectorAll('[data-profile-search]').forEach(card => { card.hidden = Boolean(query && !normalizeProfileSearch(card.dataset.profileSearch).includes(query)); });
+    };
+    profileSearch.addEventListener('input', applyProfileSearch);
     const closeHistory = () => { historyModal.style.display = 'none'; };
     document.getElementById('history-close').onclick = closeHistory;
     historyModal.onclick = event => { if (event.target === historyModal) closeHistory(); };
@@ -879,7 +890,7 @@
             historyList.replaceChildren();
             if (!data.games?.length) { historyList.innerHTML = '<div class="history-empty">Você ainda não jogou nenhum título com esta conta.<br>Escolha um jogo e ele aparecerá aqui.</div>'; return; }
             data.games.forEach(game => {
-                const card = document.createElement('a'); card.className = 'history-card'; card.href = game.playUrl;
+                const card = document.createElement('a'); card.className = 'history-card'; card.href = game.playUrl; card.dataset.profileSearch = `${game.name} ${game.system} jogo recente`;
                 const image = document.createElement('img'); image.className = 'history-cover'; image.src = game.cover || 'assets/imagens-videos/logo-discord.gif'; image.alt = '';
                 image.onerror = () => { image.onerror = null; image.src = 'assets/imagens-videos/logo-discord.gif'; };
                 const info = document.createElement('span');
@@ -889,6 +900,7 @@
                 card.onclick = event => { event.preventDefault(); void historyRequest('POST', { id:game.id, name:game.name, system:game.system, cover:game.cover || '', playUrl:game.playUrl }).catch(() => {}); closeHistory(); window.startGame(game.playUrl); };
                 info.append(name, system, date); card.append(image, info); historyList.appendChild(card);
             });
+            applyProfileSearch();
         } catch (error) { historyList.innerHTML = ''; const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = error.message; historyList.appendChild(empty); }
     }
     async function cloudRequest(path, method = 'GET') {
@@ -913,7 +925,7 @@
             const games = (data.games || []).map(game => ({ ...game, slots: (game.slots || []).filter(slot => automaticOnly ? slot.slot === 'auto' : slot.slot !== 'auto') })).filter(game => game.slots.length);
             if (!games.length) { const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = automaticOnly ? 'Você ainda não possui saves automáticos na nuvem.' : 'Você ainda não possui saves manuais na nuvem.'; historyList.appendChild(empty); }
             games.forEach(game => {
-                const card = document.createElement('section'); card.className = 'cloud-game';
+                const card = document.createElement('section'); card.className = 'cloud-game'; card.dataset.profileSearch = `${game.name} ${game.system} ${game.id} ${game.slots.map(slot => `${slot.slot} ${slot.name}`).join(' ')}`;
                 const catalogGame = indexData.find(item => catalogMatchesSave(item, game));
                 const catalogId = catalogGame ? catalogHistoryId(catalogGame) : '';
                 const recentGame = (historyData.games || []).find(item => item.id === game.id || item.id === catalogId);
@@ -933,10 +945,27 @@
                     row.append(copy, remove); card.appendChild(row);
                 }); historyList.appendChild(card);
             });
-            historyList.appendChild(promo);
+            historyList.appendChild(promo); applyProfileSearch();
         } catch (error) { historyList.innerHTML = ''; const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = error.message; historyList.appendChild(empty); }
     }
     historyTab.onclick = loadHistory; cloudTab.onclick = () => loadCloudLibrary('cloud'); autoTab.onclick = () => loadCloudLibrary('auto');
+    document.getElementById('profile-diagnostic').onclick = async () => {
+        const button = document.getElementById('profile-diagnostic'); button.disabled = true; button.textContent = 'VERIFICANDO...';
+        try {
+            const data = await cloudRequest('/club/library');
+            const games = data.games || [];
+            const activeIds = new Set(games.map(game => game.id));
+            const legacy = games.filter(game => activeIds.has(`${game.id}-core2`) || activeIds.has(`${game.id}-disc2`));
+            const checkpoints = games.reduce((count, game) => count + (game.slots || []).filter(slot => slot.slot === 'previous').length, 0);
+            const invalid = games.flatMap(game => (game.slots || []).filter(slot => !Number.isFinite(slot.size) || slot.size < 1).map(slot => `${game.name}: ${slot.name}`));
+            const report = document.createElement('div'); report.className = 'cloud-summary';
+            report.textContent = invalid.length
+                ? `Atenção: ${invalid.length} save(s) inválido(s) foram isolados. Abra o jogo em modo seguro. Saves legados protegidos: ${legacy.length}. Checkpoints disponíveis: ${checkpoints}.`
+                : `Verificação concluída: nenhum save vazio ou inválido. ${legacy.length} geração(ões) antiga(s) estão isoladas para não travar o emulador. ${checkpoints} checkpoint(s) anterior(es) estão protegidos.`;
+            historyList.prepend(report);
+        } catch (error) { alert(error.message); }
+        finally { button.disabled = false; button.textContent = 'VERIFICAR SAVES'; }
+    };
     async function openHistory() {
         historyModal.style.display = 'flex';
         await loadHistory();

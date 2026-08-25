@@ -80,6 +80,7 @@
     <div id="compat-error"><div><h2>O JOGO NÃO CONSEGUIU INICIAR</h2><p id="compat-error-text">Atualize o navegador e tente novamente.</p><button type="button" onclick="window.location.reload()">TENTAR NOVAMENTE</button><button type="button" onclick="neoStartSafeRecovery()" style="margin-left:8px;border-color:#e9b949;background:#3b2b08">INICIAR EM MODO SEGURO</button><p style="color:#aaa;font-size:12px;line-height:1.5">O modo seguro preserva seu progresso anterior e inicia sem carregar o autosave que pode ter travado.</p></div></div>
 
     <script src="cloud-saves.js?v=11"></script>
+    <script src="emulator-preflight.js?v=1"></script>
     <script>
         // ==========================================
         // LÓGICA DA SETA DE VOLTAR (Navegador/Celular)
@@ -464,12 +465,13 @@
                 window.NeoCloudSaves.prepare({ game: window.EJS_gameUrl, core: window.EJS_core, name: params.get('title'), system: params.get('system'), multidisc: ps1DiscUrls.length > 1 }),
                 new Promise(resolve => setTimeout(resolve, 5000))
             ]);
-            Promise.all([cloudPreparation.catch(error => console.warn('Neo cloud startup:', error)), emulatorCacheRepair]).finally(() => {
+            const preflight = window.NeoEmulatorPreflight.check({ core: window.EJS_core, gameUrl: window.EJS_gameUrl, discs: ps1DiscUrls });
+            Promise.all([cloudPreparation.catch(error => console.warn('Neo cloud startup:', error)), emulatorCacheRepair, preflight]).then(() => {
                 const loaderScript = document.createElement('script');
                 loaderScript.src = 'https://cdn.emulatorjs.org/stable/data/loader.js';
                 loaderScript.onerror = () => showCompatibilityError('Não foi possível baixar o emulador. Verifique a conexão, desative bloqueadores para este site e tente novamente.');
                 document.body.appendChild(loaderScript);
-            });
+            }).catch(error => showCompatibilityError(`Verificação preventiva: ${String(error?.message || error)}`));
             setTimeout(() => { if (!window.EJS_emulator) showCompatibilityError('O Safari demorou demais para iniciar o jogo. Atualize o iOS, feche outras abas e tente novamente.'); }, 45000);
         } else {
             setTimeout(() => showCompatibilityError('O endereço do jogo está incompleto. Volte ao catálogo e abra o jogo novamente.'), 0);
