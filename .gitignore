@@ -16,3 +16,5 @@ __pycache__/
 .wrangler/
 worker-backup/
 .atari-staging/
+.catalog-metadata/
+.gba-media-staging/

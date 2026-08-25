@@ -71,7 +71,7 @@
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
         /* MODAL VITRINE E PIX */
-        .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100000; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 20px; }
+        .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100000; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 20px; overflow-y:auto; overscroll-behavior:contain; }
         .modal-content-box { background: var(--sidebar-bg); border: 2px solid var(--accent-color); border-radius: 8px; width: 100%; max-width: 600px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 0 30px rgba(0,204,68,0.5); position: relative; }
         .game-info-close { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #ff3333; border: 1px solid #ff3333; font-family: monospace; font-size: 16px; padding: 5px 12px; cursor: pointer; border-radius: 4px; font-weight: bold; z-index: 10; transition: 0.3s; }
         .game-info-close:hover { background: #ff3333; color: #fff; }
@@ -372,7 +372,7 @@
         .account-name { display:block; max-width:175px; overflow:hidden; text-overflow:ellipsis; color:var(--text-color); font:bold 10px monospace; white-space:nowrap; }
         .account-hint { display:block; color:var(--text-muted); font:8px monospace; white-space:nowrap; }
         @media(min-width:1025px){ .sidebar:hover .account-button{width:245px;justify-content:flex-start;padding:7px}.sidebar:hover .account-copy{display:block}.top-account-mobile{display:none!important} }
-        .auth-panel { width: min(430px, 94vw); background: var(--top-bar-bg); border: 2px solid var(--accent-color); border-radius: 8px; padding: 24px; box-shadow: 0 0 35px rgba(0,204,68,.25); }
+        .auth-panel { width: min(430px, 94vw); max-height:calc(100dvh - 40px); overflow-y:auto; overscroll-behavior:contain; position:relative; margin:auto 0; background: var(--top-bar-bg); border: 2px solid var(--accent-color); border-radius: 8px; padding: 24px; box-shadow: 0 0 35px rgba(0,204,68,.25); scrollbar-color:var(--accent-color) var(--input-bg); }
         .auth-panel h2 { color: var(--accent-color); font: 14px 'Press Start 2P', cursive; text-align: center; line-height: 1.6; }
         .auth-panel p { color: var(--text-muted); font: 12px monospace; text-align: center; line-height: 1.5; }
         .auth-fields { display: grid; gap: 9px; }
@@ -1320,7 +1320,13 @@
         const lBtn = document.querySelector(`#section-${sysId} .left-btn`);
         const rBtn = document.querySelector(`#section-${sysId} .right-btn`);
         car.classList.toggle('grid-view');
-        if(car.classList.contains('grid-view')) { btn.innerHTML = "⊞ VOLTAR"; if(lBtn) lBtn.style.display = 'none'; if(rBtn) rBtn.style.display = 'none'; }
+        const alphabetical = car.classList.contains('grid-view');
+        [...car.children].sort((a,b) => alphabetical
+            ? a.dataset.gameName.localeCompare(b.dataset.gameName, 'pt-BR', { sensitivity:'base', numeric:true })
+            : Number(b.dataset.popularity || 0) - Number(a.dataset.popularity || 0) || a.dataset.gameName.localeCompare(b.dataset.gameName, 'pt-BR', { sensitivity:'base', numeric:true })
+        ).forEach(card => car.appendChild(card));
+        car.scrollLeft = 0;
+        if(alphabetical) { btn.innerHTML = "⊞ VOLTAR"; if(lBtn) lBtn.style.display = 'none'; if(rBtn) rBtn.style.display = 'none'; }
         else { btn.innerHTML = "⊞ VER TODOS"; if(lBtn) lBtn.style.display = 'flex'; if(rBtn) rBtn.style.display = 'flex'; }
     };
 
@@ -1353,7 +1359,7 @@
         document.getElementById('modal-game-title').innerText = gameObj.nome;
         document.getElementById('modal-game-sys').innerText = "SISTEMA: " + gameObj.sysId.toUpperCase();
         let nota = gameObj.nota || 'S/N';
-        document.getElementById('modal-game-rating').textContent = `⭐ ${String(nota).slice(0, 20)} / 10`;
+        document.getElementById('modal-game-rating').textContent = nota === 'S/N' ? '⭐ SEM NOTA PÚBLICA' : `⭐ ${String(nota).slice(0, 20)} / 10`;
 
         const descContainer = document.getElementById('modal-game-desc');
         const fullText = gameObj.descricao || "ACESSANDO BANCO DE DADOS...\n> Uma aventura épica espera por você.";
@@ -1539,6 +1545,17 @@
                 const region = rom.match(/(usa|europe|japan|world|korea)/);
                 return region ? region[1].toUpperCase() : 'VARIANTE';
             };
+            const popularitySorted = uniqueGames.sort((a,b) => Number(b.popularidade || 0) - Number(a.popularidade || 0)
+                || Number(/pt[-_ ]?br|br\./i.test(String(b.rom || ''))) - Number(/pt[-_ ]?br|br\./i.test(String(a.rom || '')))
+                || normalizeGameName(a.nome,sys.id).localeCompare(normalizeGameName(b.nome,sys.id),'pt-BR',{sensitivity:'base',numeric:true}));
+            const featuredGames = []; const catalogVariants = []; const featuredFamilies = new Set();
+            popularitySorted.forEach(game => {
+                const titleFamily = normalizeGameName(game.nome,sys.id).replace(/\s*\((?:pt-br|ingl.s|usa|europe|japan|variante[^)]*)\)\s*$/i,'').trim().toLowerCase();
+                const familyKey = game.metadataId ? `metadata:${game.metadataId}` : `title:${titleFamily}`;
+                if (featuredFamilies.has(familyKey)) catalogVariants.push(game);
+                else { featuredFamilies.add(familyKey); featuredGames.push(game); }
+            });
+            uniqueGames.splice(0, uniqueGames.length, ...featuredGames, ...catalogVariants);
             uniqueGames.forEach(g => {
 
                 const publicName = normalizeGameName(g.nome, sys.id);
@@ -1549,6 +1566,8 @@
                 const gameObjFull = {...g, nomeOriginal: publicName, nome: displayName, sysPath: sys.path, sysName: sys.name, sysId: sys.id};
                 indexData.push(gameObjFull);
                 const card = document.createElement("div"); card.className = "game-card selectable-item";
+                card.dataset.gameName = displayName;
+                card.dataset.popularity = String(g.popularidade || 0);
 
                 let capaNome = g.capa ? g.capa.split('/').pop() : '';
                 let gifNome = g.preview ? g.preview.split('/').pop() : '';
