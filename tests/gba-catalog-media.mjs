@@ -3,6 +3,11 @@ import { readFile } from 'node:fs/promises';
 
 const games = JSON.parse(await readFile('systems/gba/games.json', 'utf8'));
 const byRom = new Map(games.map(game => [game.rom, game]));
+assert.equal(games.some(game => /\(Inglês\)/i.test(game.nome)), false, 'GBA must not expose English duplicate labels');
+for (const rom of [
+  'roms/final-fantasy-i-ii-dawn-of-souls.gba', 'roms/lady-sia.gba', 'roms/pokemon-fire-red-version.gba',
+  'roms/spongebob-squarepants-supersponge.gba', 'roms/the-legend-of-zelda-the-minish-cap.gba'
+]) assert.equal(byRom.has(rom), false, `English duplicate must be removed: ${rom}`);
 const expected = {
   'roms/crash-bandicoot-2-n-tranced.gba': ['Crash Bandicoot 2: N-Tranced', 'crash-bandicoot-2-n-tranced'],
   'roms/donkey-kong-country.gba': ['Donkey Kong Country', 'donkey-kong-country'],
