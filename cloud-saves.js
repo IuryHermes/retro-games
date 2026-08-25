@@ -18,6 +18,13 @@
     let autosavePending = false;
     let autosaveImagePending = false;
     let lastAutosaveImageAt = 0;
+    const recoveryMode = new URLSearchParams(location.search).get('recovery') === '1';
+
+    function startRecovery() {
+        const url = new URL(location.href);
+        url.searchParams.set('recovery', '1');
+        location.replace(url.href);
+    }
 
     function rememberToken() {
         const hash = new URLSearchParams(location.hash.slice(1));
@@ -248,6 +255,15 @@
             grid.appendChild(more);
         }
         panel.querySelector('#neo-cloud-toggle').onclick = () => panel.classList.toggle('open');
+        const recovery = document.createElement('button');
+        recovery.type = 'button';
+        recovery.textContent = recoveryMode ? 'SESSÃO SEGURA ATIVA' : 'JOGO TRAVOU? RECUPERAR';
+        recovery.style.cssText = 'width:100%;margin-top:8px;border-color:#e9b949;color:#ffe29a';
+        recovery.disabled = recoveryMode;
+        recovery.onclick = () => {
+            if (confirm('O jogo será reiniciado sem carregar o autosave. Seu progresso anterior ficará guardado e não será apagado. Continuar?')) startRecovery();
+        };
+        panel.querySelector('#neo-cloud-menu').appendChild(recovery);
     }
 
     async function prepare(options) {
@@ -261,10 +277,10 @@
         if (token && !session) { sessionStorage.removeItem(TOKEN_KEY); token = ''; }
         createControls(session);
         window.EJS_gameID = Array.from(gameId).reduce((hash, char) => ((hash * 31 + char.charCodeAt(0)) >>> 0), 7);
-        automaticEnabled = Boolean(token && session && (session.automaticGameLimit === null || session.automaticGamesUsed < session.automaticGameLimit));
+        automaticEnabled = Boolean(!recoveryMode && token && session && (session.automaticGameLimit === null || session.automaticGamesUsed < session.automaticGameLimit));
         const migratedPs1Multidisc = options.system === 'ps1' && options.multidisc;
         const incompatibleLegacyDoom64 = gameId === 'n64-doom_64';
-        if (token && !migratedPs1Multidisc && !incompatibleLegacyDoom64) {
+        if (token && !recoveryMode && !migratedPs1Multidisc && !incompatibleLegacyDoom64) {
             try {
                 const automatic = await download('auto');
                 if (automatic) {
@@ -283,6 +299,10 @@
             // screen. Pause autosave so the preserved file is not overwritten.
             automaticEnabled = false;
             console.info('Neo Doom 64: autosave legado preservado; início limpo habilitado.');
+        }
+        if (recoveryMode) {
+            automaticEnabled = false;
+            setStatus('Sessão segura: autosave anterior preservado');
         }
         window.EJS_onSaveState = event => {
             const state = Array.isArray(event) ? event[1] : event && (event.state || event.save);

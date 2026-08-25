@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 
 const player = await readFile(new URL('../player-universal.html', import.meta.url), 'utf8');
 const cloudSaves = await readFile(new URL('../cloud-saves.js', import.meta.url), 'utf8');
-assert.match(player, /src="cloud-saves\.js\?v=7"/);
+assert.match(player, /src="cloud-saves\.js\?v=8"/);
 
 assert.match(player, /src="coi-serviceworker\.js\?v=3"/);
 const coiWorker = await readFile(new URL('../coi-serviceworker.js', import.meta.url), 'utf8');
@@ -46,10 +46,17 @@ assert.match(cloudSaves, /setInterval\(scheduleAutosave, INTERVAL_MS\)/);
 assert.match(cloudSaves, /setTimeout\(scheduleAutosave, 10000\)/);
 assert.match(cloudSaves, /requestIdleCallback\(run, \{ timeout: 4000 \}\)/);
 assert.match(cloudSaves, /autosavePending/);
-assert.match(cloudSaves, /token && !migratedPs1Multidisc/);
+assert.match(cloudSaves, /token && !recoveryMode && !migratedPs1Multidisc/);
 assert.match(cloudSaves, /gameId === 'n64-doom_64'/);
 assert.match(cloudSaves, /incompatibleLegacyDoom64[\s\S]*automaticEnabled = false/);
+assert.match(cloudSaves, /recoveryMode/);
+assert.match(cloudSaves, /JOGO TRAVOU\? RECUPERAR/);
+assert.match(cloudSaves, /!recoveryMode && !migratedPs1Multidisc/);
+assert.match(player, /INICIAR EM MODO SEGURO/);
+assert.match(player, /safeRecoveryMode/);
+assert.match(player, /shouldRepairEmulatorCache/);
+assert.match(player, /Neo safe recovery settings/);
 assert.match(cloudSaves, /scheduleAutosaveImage\(\)/);
 assert.match(cloudSaves, /document\.visibilityState === 'hidden'/);
 
-console.log('n64 performance/autosave: 29 checks passed');
+console.log('n64 performance/autosave: 36 checks passed');

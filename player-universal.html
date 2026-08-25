@@ -77,9 +77,9 @@
 
     <div id="game"></div>
     <div id="ps1-disc-manager" aria-live="polite"><button id="ps1-disc-toggle" type="button" aria-expanded="false">💿 DISCO 1</button><div id="ps1-disc-menu"><div class="ps1-disc-title">TROCA DE DISCO</div><div class="ps1-disc-help">Quando o jogo pedir o próximo disco, escolha-o aqui. O console continuará ligado e o progresso será preservado.</div><div id="ps1-disc-options"></div><div id="ps1-disc-status">Disco 1 inserido.</div><div class="ps1-disc-progress"><span id="ps1-disc-progress-fill"></span></div></div></div>
-    <div id="compat-error"><div><h2>O JOGO NÃO CONSEGUIU INICIAR</h2><p id="compat-error-text">Atualize o navegador e tente novamente.</p><button type="button" onclick="window.location.reload()">TENTAR NOVAMENTE</button></div></div>
+    <div id="compat-error"><div><h2>O JOGO NÃO CONSEGUIU INICIAR</h2><p id="compat-error-text">Atualize o navegador e tente novamente.</p><button type="button" onclick="window.location.reload()">TENTAR NOVAMENTE</button><button type="button" onclick="neoStartSafeRecovery()" style="margin-left:8px;border-color:#e9b949;background:#3b2b08">INICIAR EM MODO SEGURO</button><p style="color:#aaa;font-size:12px;line-height:1.5">O modo seguro preserva seu progresso anterior e inicia sem carregar o autosave que pode ter travado.</p></div></div>
 
-    <script src="cloud-saves.js?v=7"></script>
+    <script src="cloud-saves.js?v=8"></script>
     <script>
         // ==========================================
         // LÓGICA DA SETA DE VOLTAR (Navegador/Celular)
@@ -96,6 +96,11 @@
 
         // Pega os parâmetros do jogo
         const params = new URLSearchParams(window.location.search);
+        function neoStartSafeRecovery() {
+            const url = new URL(window.location.href);
+            url.searchParams.set('recovery', '1');
+            window.location.replace(url.href);
+        }
         // Large PS1 CHDs make concurrent emulator tabs exhaust browser memory.
         // The newest instance retires older ones before the core is loaded.
         const emulatorInstanceId = `${Date.now()}-${Math.random()}`;
@@ -113,7 +118,27 @@
         localStorage.setItem('neo-active-emulator', emulatorInstanceId);
         const core = params.get("core");   
         const game = params.get("game");
+        const safeRecoveryMode = params.get('recovery') === '1';
         const isDoom64 = core === 'n64' && /(?:^|[\/_-])doom(?:[_-]?64)?(?:\.|[?&#_-])/i.test(game || '');
+        if (safeRecoveryMode) {
+            const unsafeOptions = new Set(['vsync', 'shader', 'rewindEnabled', 'webgl2Enabled', 'threads']);
+            for (let index = 0; index < localStorage.length; index += 1) {
+                const key = localStorage.key(index);
+                if (!key || !key.startsWith('ejs-') || !key.endsWith('-settings')) continue;
+                try {
+                    const saved = JSON.parse(localStorage.getItem(key));
+                    const settings = saved?.settings;
+                    if (!settings || typeof settings !== 'object') continue;
+                    let changed = false;
+                    for (const option of Object.keys(settings)) {
+                        if (unsafeOptions.has(option) || option.startsWith('mupen64plus-')) {
+                            delete settings[option]; changed = true;
+                        }
+                    }
+                    if (changed) localStorage.setItem(key, JSON.stringify(saved));
+                } catch (error) { console.warn('Neo safe recovery settings:', error); }
+            }
+        }
         let ps1DiscUrls = [];
         let ps1CurrentDisc = Math.max(0, Number.parseInt(params.get('disc') || '0', 10) || 0);
         const ps1LoadedDiscs = new Set([ps1CurrentDisc]);
@@ -424,7 +449,8 @@
             }
             window.EJS_onLoadError = error => showCompatibilityError(`Falha ao carregar o emulador: ${String(error?.message || error || 'erro desconhecido')}`);
             const cacheRepairKey = 'neo_n64_emulator_cache_repair_v1';
-            const emulatorCacheRepair = core !== 'n64' || localStorage.getItem(cacheRepairKey)
+            const shouldRepairEmulatorCache = safeRecoveryMode || (core === 'n64' && !localStorage.getItem(cacheRepairKey));
+            const emulatorCacheRepair = !shouldRepairEmulatorCache
                 ? Promise.resolve()
                 : Promise.all(['EmulatorJS-core', 'EmulatorJS-roms'].map(name => new Promise(resolve => {
                     const request = indexedDB.deleteDatabase(name);
@@ -433,7 +459,7 @@
                     request.onerror = finish;
                     request.onblocked = finish;
                     setTimeout(finish, 3000);
-                }))).finally(() => localStorage.setItem(cacheRepairKey, '1'));
+                }))).finally(() => { if (core === 'n64') localStorage.setItem(cacheRepairKey, '1'); });
             const cloudPreparation = Promise.race([
                 window.NeoCloudSaves.prepare({ game: window.EJS_gameUrl, core: window.EJS_core, name: params.get('title'), system: params.get('system'), multidisc: ps1DiscUrls.length > 1 }),
                 new Promise(resolve => setTimeout(resolve, 5000))
