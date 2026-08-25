@@ -14,7 +14,10 @@ assert.match(universal, /Promise\.race\(\[/, 'cloud startup must have a timeout'
 assert.match(universal, /loaderScript\.onerror/, 'loader download failures must be visible');
 assert.match(universal, /id="compat-error"/, 'player must provide a visible compatibility error');
 assert.match(universal, /name="viewport"/, 'player must set the mobile viewport');
-assert.match(universal, /EJS_externalFiles/, 'multi-disc PS1 games must preload their CHD files into the emulator filesystem');
+assert.match(universal, /EJS_externalFiles = \{ \[ps1DiscPath\(ps1DiscUrls\[0\]\)\]: ps1DiscUrls\[0\] \}/, 'multi-disc PS1 games must preload only disc 1');
 assert.match(universal, /params\.get\('discs'\)/, 'multi-disc metadata must come from the game route');
+assert.match(universal, /manager\.FS\.writeFile/, 'the requested next disc must be loaded into the running emulator filesystem');
+assert.match(universal, /manager\.setCurrentDisk\(index\)/, 'disc selection must use the emulator core without restarting the console');
+assert.match(universal, /getCurrentDisk/, 'disc changes must be confirmed by the emulator core');
 
-console.log('iOS Safari player: 9 checks passed');
+console.log('iOS Safari player: 12 checks passed');

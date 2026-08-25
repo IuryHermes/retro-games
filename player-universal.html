@@ -54,6 +54,7 @@
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
         #neo-cloud-panel{position:fixed;left:8px;top:8px;z-index:9999999;color:#dfffe8;font:12px monospace}#neo-cloud-toggle,#neo-cloud-menu button{border:1px solid #00cc44;background:#061109;color:#55ff88;padding:8px;cursor:pointer}#neo-cloud-menu{display:none;width:210px;margin-top:5px;padding:8px;border:1px solid #00cc44;background:rgba(0,0,0,.94)}#neo-cloud-panel.open #neo-cloud-menu{display:block}.neo-cloud-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:8px}#neo-cloud-status{padding:5px 0}.neo-cloud-login{display:block;color:#55ff88;margin:7px 0}
         #compat-error{position:fixed;inset:0;z-index:10000001;display:none;place-items:center;padding:22px;background:#020503;color:#fff;text-align:center}#compat-error.show{display:grid}#compat-error>div{max-width:520px;border:1px solid #00cc44;background:#07120b;padding:24px}#compat-error button{border:1px solid #00cc44;background:#123d20;color:#fff;padding:12px 18px;font:700 14px monospace}
+        #ps1-disc-manager{position:fixed;right:10px;top:10px;z-index:10000000;display:none;color:#fff;font:700 13px monospace}#ps1-disc-toggle{border:1px solid #66ff8a;border-radius:8px;background:#07170c;color:#8dffa7;padding:10px 13px;box-shadow:0 0 14px #00cc4455;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none}#ps1-disc-menu{display:none;margin-top:7px;width:min(300px,calc(100vw - 20px));padding:12px;border:1px solid #36d65d;border-radius:8px;background:rgba(3,12,6,.97);box-shadow:0 8px 30px #000}#ps1-disc-manager.open #ps1-disc-menu{display:block}.ps1-disc-title{color:#8dffa7;margin-bottom:8px}.ps1-disc-help{color:#b8c9bd;font-weight:400;line-height:1.35;margin-bottom:10px}.ps1-disc-option{display:block;width:100%;margin:6px 0;padding:11px;border:1px solid #42634b;border-radius:6px;background:#101b13;color:#fff;text-align:left;font:700 13px monospace;cursor:pointer;touch-action:manipulation}.ps1-disc-option.current{border-color:#5cff80;background:#164522}.ps1-disc-option:disabled{opacity:.55;cursor:wait}#ps1-disc-status{min-height:34px;margin-top:9px;color:#d7ffe0;font-weight:400;line-height:1.35}.ps1-disc-progress{height:7px;margin-top:7px;border:1px solid #3fa755;background:#020503}.ps1-disc-progress>span{display:block;width:0;height:100%;background:#4cff72;transition:width .15s}
     </style>
     <script src="privacy-consent-v2.js" defer></script>
 </head>
@@ -74,6 +75,7 @@
     </div>
 
     <div id="game"></div>
+    <div id="ps1-disc-manager" aria-live="polite"><button id="ps1-disc-toggle" type="button" aria-expanded="false">💿 DISCO 1</button><div id="ps1-disc-menu"><div class="ps1-disc-title">TROCA DE DISCO</div><div class="ps1-disc-help">Quando o jogo pedir o próximo disco, escolha-o aqui. O console continuará ligado e o progresso será preservado.</div><div id="ps1-disc-options"></div><div id="ps1-disc-status">Disco 1 inserido.</div><div class="ps1-disc-progress"><span id="ps1-disc-progress-fill"></span></div></div></div>
     <div id="compat-error"><div><h2>O JOGO NÃO CONSEGUIU INICIAR</h2><p id="compat-error-text">Atualize o navegador e tente novamente.</p><button type="button" onclick="window.location.reload()">TENTAR NOVAMENTE</button></div></div>
 
     <script src="cloud-saves.js?v=5"></script>
@@ -95,6 +97,82 @@
         const params = new URLSearchParams(window.location.search);
         const core = params.get("core");   
         const game = params.get("game");
+        let ps1DiscUrls = [];
+        const ps1LoadedDiscs = new Set([0]);
+        let ps1DiscBusy = false;
+        const ps1DiscPath = url => `/${new URL(url).pathname.split('/').pop()}`;
+        const ps1DiscUI = (message, percent) => {
+            const status = document.getElementById('ps1-disc-status');
+            const fill = document.getElementById('ps1-disc-progress-fill');
+            if (status && message) status.textContent = message;
+            if (fill && Number.isFinite(percent)) fill.style.width = `${Math.max(0, Math.min(100, percent))}%`;
+        };
+        const refreshPs1DiscUI = current => {
+            document.querySelectorAll('.ps1-disc-option').forEach((button, index) => {
+                button.classList.toggle('current', index === current);
+                button.disabled = ps1DiscBusy;
+                button.textContent = `${index === current ? '▶ ' : ''}DISCO ${index + 1}${ps1LoadedDiscs.has(index) ? ' — pronto' : ' — baixar ao trocar'}`;
+            });
+            const toggle = document.getElementById('ps1-disc-toggle');
+            if (toggle) toggle.textContent = `💿 DISCO ${current + 1}`;
+        };
+        async function neoPs1ChangeDisc(index) {
+            if (ps1DiscBusy || index < 0 || index >= ps1DiscUrls.length) return false;
+            const manager = window.EJS_emulator?.gameManager;
+            if (!manager?.FS || typeof manager.setCurrentDisk !== 'function') throw new Error('O gerenciador de discos ainda não está pronto.');
+            if (manager.getCurrentDisk?.() === index) { ps1DiscUI(`Disco ${index + 1} já está inserido.`, 100); return true; }
+            ps1DiscBusy = true; refreshPs1DiscUI(manager.getCurrentDisk?.() ?? 0);
+            try {
+                if (!ps1LoadedDiscs.has(index)) {
+                    ps1DiscUI(`Baixando Disco ${index + 1}… 0%`, 0);
+                    const response = await fetch(ps1DiscUrls[index]);
+                    if (!response.ok) throw new Error(`download respondeu ${response.status}`);
+                    const total = Number(response.headers.get('content-length')) || 0;
+                    const reader = response.body?.getReader();
+                    if (!reader || !total) throw new Error('servidor não informou o tamanho do disco');
+                    const bytes = new Uint8Array(total);
+                    let received = 0;
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+                        bytes.set(value, received); received += value.byteLength;
+                        const percent = Math.round((received / total) * 100);
+                        ps1DiscUI(`Baixando Disco ${index + 1}… ${percent}%`, percent);
+                    }
+                    manager.FS.writeFile(ps1DiscPath(ps1DiscUrls[index]), bytes);
+                    ps1LoadedDiscs.add(index);
+                }
+                ps1DiscUI(`Inserindo Disco ${index + 1} sem desligar o console…`, 100);
+                manager.setCurrentDisk(index);
+                await new Promise(resolve => setTimeout(resolve, 350));
+                const current = manager.getCurrentDisk?.();
+                if (Number.isInteger(current) && current !== index) throw new Error('o núcleo não confirmou a troca');
+                ps1DiscUI(`Disco ${index + 1} inserido. Volte ao jogo para continuar.`, 100);
+                refreshPs1DiscUI(index);
+                return true;
+            } catch (error) {
+                ps1DiscUI(`Falha ao trocar: ${error.message}. Tente novamente.`, 0);
+                console.error('Neo PS1 disc switch:', error);
+                return false;
+            } finally {
+                ps1DiscBusy = false; refreshPs1DiscUI(window.EJS_emulator?.gameManager?.getCurrentDisk?.() ?? 0);
+            }
+        }
+        window.neoPs1ChangeDisc = neoPs1ChangeDisc;
+        const setupPs1DiscManager = () => {
+            if (ps1DiscUrls.length < 2) return;
+            const panel = document.getElementById('ps1-disc-manager');
+            const toggle = document.getElementById('ps1-disc-toggle');
+            const options = document.getElementById('ps1-disc-options');
+            panel.style.display = 'block';
+            toggle.onclick = event => { event.stopPropagation(); panel.classList.toggle('open'); toggle.setAttribute('aria-expanded', String(panel.classList.contains('open'))); };
+            options.replaceChildren(...ps1DiscUrls.map((url, index) => {
+                const button = document.createElement('button'); button.type = 'button'; button.className = 'ps1-disc-option';
+                button.onclick = () => neoPs1ChangeDisc(index); return button;
+            }));
+            document.addEventListener('pointerdown', event => { if (!panel.contains(event.target)) { panel.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); } });
+            refreshPs1DiscUI(window.EJS_emulator?.gameManager?.getCurrentDisk?.() ?? 0);
+        };
         const showCompatibilityError = message => {
             clearInterval(loadingInterval);
             const overlay = document.getElementById('loader-overlay');
@@ -191,6 +269,7 @@
                 if(textEl) textEl.innerHTML = "<span style='color:#00ff44;'>START!</span>";
                 
                 dispararAnuncio(); 
+                setupPs1DiscManager();
 
                 setTimeout(() => {
                     const loader = document.getElementById('loader-overlay');
@@ -201,10 +280,10 @@
             window.EJS_gameUrl = game.trim().startsWith("http") ? game.trim() : baseUrl + game.trim();
             if ((core === 'psx' || core === 'pcsx_rearmed') && params.get('discs')) {
                 try {
-                    const discUrls = JSON.parse(params.get('discs'));
-                    if (!Array.isArray(discUrls) || discUrls.length < 2 || discUrls.some(url => !/^https:\/\//.test(url))) throw new Error('Lista de discos inválida.');
-                    window.EJS_externalFiles = Object.fromEntries(discUrls.map(url => [`/${new URL(url).pathname.split('/').pop()}`, url]));
-                    if (textEl) textEl.innerHTML = `PREPARANDO ${discUrls.length} DISCOS<span id="loading-dots"></span><br><span class="blink" style="font-size:12px">[ O PRIMEIRO CARREGAMENTO PODE DEMORAR ]</span>`;
+                    ps1DiscUrls = JSON.parse(params.get('discs'));
+                    if (!Array.isArray(ps1DiscUrls) || ps1DiscUrls.length < 2 || ps1DiscUrls.some(url => !/^https:\/\//.test(url))) throw new Error('Lista de discos inválida.');
+                    window.EJS_externalFiles = { [ps1DiscPath(ps1DiscUrls[0])]: ps1DiscUrls[0] };
+                    if (textEl) textEl.innerHTML = `PREPARANDO DISCO 1<span id="loading-dots"></span><br><span class="blink" style="font-size:12px">[ OS OUTROS DISCOS SERÃO BAIXADOS SOMENTE NA TROCA ]</span>`;
                 } catch (error) { showCompatibilityError(`Falha na lista multidisco: ${error.message}`); }
             }
             window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
@@ -221,7 +300,7 @@
                 && !mobileN64;
             
             // Agora o emulador só vai ter botão de Menu e Config na interface interna dele
-            window.EJS_buttons = { save_state: true, load_state: true, full_screen: true, fast_forward: true, settings: true, menu: true };
+            window.EJS_buttons = { save_state: true, load_state: true, full_screen: true, fast_forward: true, settings: true, menu: true, diskButton: ps1DiscUrls.length < 2 };
 
             // Keep N64 close to the console's native workload. These defaults
             // avoid costly enhancements that make Zelda and other 3D games
