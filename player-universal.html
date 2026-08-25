@@ -96,6 +96,21 @@
 
         // Pega os parâmetros do jogo
         const params = new URLSearchParams(window.location.search);
+        // Large PS1 CHDs make concurrent emulator tabs exhaust browser memory.
+        // The newest instance retires older ones before the core is loaded.
+        const emulatorInstanceId = `${Date.now()}-${Math.random()}`;
+        const retireEmulatorInstance = id => {
+            if (id && id !== emulatorInstanceId) window.location.replace('/emulator-closed.html');
+        };
+        window.addEventListener('storage', event => {
+            if (event.key === 'neo-active-emulator') retireEmulatorInstance(event.newValue);
+        });
+        try {
+            const emulatorChannel = new BroadcastChannel('neo-active-emulator');
+            emulatorChannel.onmessage = event => retireEmulatorInstance(event.data);
+            emulatorChannel.postMessage(emulatorInstanceId);
+        } catch (error) { console.debug('BroadcastChannel unavailable:', error); }
+        localStorage.setItem('neo-active-emulator', emulatorInstanceId);
         const core = params.get("core");   
         const game = params.get("game");
         let ps1DiscUrls = [];

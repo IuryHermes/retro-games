@@ -28,5 +28,6 @@ assert.match(universal, /EJS_emulator\?\.menu\?\.close/, 'the gray EmulatorJS me
 assert.match(universal, /window\.EJS_Buttons = \{ diskButton: \{ visible:/, 'the native disk menu must use the supported configuration name');
 assert.doesNotMatch(universal, /window\.EJS_buttons\s*=/, 'the obsolete lowercase button option must not be used');
 assert.match(universal, /button\.disabled = ps1DiscBusy \|\| index === current/, 'the inserted disc must not be selectable again');
+assert.match(universal, /neo-active-emulator/, 'a new emulator tab must retire older memory-heavy instances');
 
-console.log('iOS Safari player: 21 checks passed');
+console.log('iOS Safari player: 22 checks passed');
