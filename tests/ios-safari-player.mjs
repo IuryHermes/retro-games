@@ -19,5 +19,7 @@ assert.match(universal, /params\.get\('discs'\)/, 'multi-disc metadata must come
 assert.match(universal, /manager\.FS\.writeFile/, 'the requested next disc must be loaded into the running emulator filesystem');
 assert.match(universal, /manager\.setCurrentDisk\(index\)/, 'disc selection must use the emulator core without restarting the console');
 assert.match(universal, /getCurrentDisk/, 'disc changes must be confirmed by the emulator core');
+assert.match(universal, /window\.EJS_biosUrl = ''/, 'PS1 must use HLE instead of the invalid 4 MiB BIOS object');
+assert.doesNotMatch(universal, /EJS_biosUrl = 'https:[^']+scph5501\.bin'/, 'the invalid renamed BIOS must never be loaded');
 
-console.log('iOS Safari player: 12 checks passed');
+console.log('iOS Safari player: 14 checks passed');
