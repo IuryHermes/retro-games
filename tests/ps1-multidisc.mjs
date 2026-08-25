@@ -9,7 +9,9 @@ for (const game of multidisc) {
   if (!Array.isArray(game.discs) || game.discs.length < 2) throw new Error(`${game.nome} has no ordered disc list`);
   const playlistPath = new URL(`../ops/ps1-playlists/${basename(game.rom)}`, import.meta.url);
   const lines = (await readFile(playlistPath, 'utf8')).trim().split(/\r?\n/);
-  const expected = game.discs.map((disc, index) => `/${basename(disc)}|Disco ${index + 1}`);
+  // Keep playlists strictly compatible with RetroArch/PCSX-ReARMed. Labels
+  // appended with `|` are interpreted by the core as part of the CHD path.
+  const expected = game.discs.map(disc => `/${basename(disc)}`);
   if (lines.join('\n') !== expected.join('\n')) throw new Error(`${game.nome} playlist differs from catalog metadata`);
 }
 
