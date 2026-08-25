@@ -263,7 +263,8 @@
         window.EJS_gameID = Array.from(gameId).reduce((hash, char) => ((hash * 31 + char.charCodeAt(0)) >>> 0), 7);
         automaticEnabled = Boolean(token && session && (session.automaticGameLimit === null || session.automaticGamesUsed < session.automaticGameLimit));
         const migratedPs1Multidisc = options.system === 'ps1' && options.multidisc;
-        if (token && !migratedPs1Multidisc) {
+        const incompatibleLegacyDoom64 = gameId === 'n64-doom_64';
+        if (token && !migratedPs1Multidisc && !incompatibleLegacyDoom64) {
             try {
                 const automatic = await download('auto');
                 if (automatic) {
@@ -275,6 +276,13 @@
                     } else automaticEnabled = false;
                 }
             } catch (error) { console.warn('Neo autosave load:', error); }
+        }
+        if (token && incompatibleLegacyDoom64) {
+            // Preserve Iury's legacy state instead of injecting it into the
+            // newer Mupen64Plus build, where it leaves Doom 64 on a black
+            // screen. Pause autosave so the preserved file is not overwritten.
+            automaticEnabled = false;
+            console.info('Neo Doom 64: autosave legado preservado; início limpo habilitado.');
         }
         window.EJS_onSaveState = event => {
             const state = Array.isArray(event) ? event[1] : event && (event.state || event.save);
