@@ -24,5 +24,9 @@ assert.doesNotMatch(universal, /EJS_biosUrl = 'https:[^']+scph5501\.bin'/, 'the 
 assert.match(universal, /getElementById\('game'\)\.appendChild\(panel\)/, 'disc controls must remain inside the emulator in fullscreen');
 assert.match(universal, /EJS_controlScheme = controlSchemes/, 'each system must select its native virtual controller scheme');
 assert.match(universal, /text:'△'[\s\S]*text:'□'[\s\S]*text:'○'[\s\S]*text:'×'/, 'PS1 must expose PlayStation face-button symbols');
+assert.match(universal, /EJS_emulator\?\.menu\?\.close/, 'the gray EmulatorJS menu must close after automatic boot');
+assert.match(universal, /window\.EJS_Buttons = \{ diskButton: \{ visible:/, 'the native disk menu must use the supported configuration name');
+assert.doesNotMatch(universal, /window\.EJS_buttons\s*=/, 'the obsolete lowercase button option must not be used');
+assert.match(universal, /button\.disabled = ps1DiscBusy \|\| index === current/, 'the inserted disc must not be selectable again');
 
-console.log('iOS Safari player: 17 checks passed');
+console.log('iOS Safari player: 21 checks passed');

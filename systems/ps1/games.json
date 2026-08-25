@@ -302,16 +302,17 @@
         "descricao": "Driver, um jogo de corrida em terceira pessoa que nos transporta para o mundo sombrio dos anos 90. Com gráficos polidos e uma trilha sonora eletrônica, você assume o papel de um policial corrupto que precisa resolver crimes e caçar criminosos. Mas, é só uma fachada... 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR! A verdadeira ação acontece nas ruas de Nova York, onde a polícia é corrupta e os criminosos são mais fortes do que nunca."
     },
     {
-        "nome": "Driver 2",
-        "rom": "roms/driver_2_pt.chd",
+        "nome": "Driver 2 PT-BR — Disco 1",
+        "rom": "roms/driver_2_pt_br_cd1.chd",
         "capa": "driver-2-pt.jpg",
         "preview": "driver-2-pt.gif",
         "nota": "7.5",
         "descricao": "Você está pronto para enfrentar a cidade de New York em seu melhor carro? Driver 2 é um jogo de corrida e ação que desafia você a provar sua habilidade atrás do volante. Com gráficos realistas e uma trilha sonora eletrizante, você não pode perder essa oportunidade de se tornar o melhor motorista da cidade.\n\nMas lembre-se, a cidade não é um lugar seguro. Você precisará lidar com criminosos perigosos e obstáculos inesperados. Sua habilidade e reflexos serão testados em cada curva e em cada confronto. Você está pronto para se tornar o Driver 2?"
     },
     {
-        "nome": "Driver 2 PT-BR",
-        "rom": "roms/driver_2_pt.chd",
+        "nome": "Driver 2 em Português PT-BR",
+        "rom": "roms/driver_2_pt_br.m3u",
+        "discs": ["roms/driver_2_pt_br_cd1.chd", "roms/driver_2_pt_br_cd2.chd"],
         "capa": "driver-2-pt.jpg",
         "preview": "driver-2-pt.gif",
         "nota": "8.1",

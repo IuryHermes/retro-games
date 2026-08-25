@@ -101,6 +101,7 @@
         let ps1DiscUrls = [];
         const ps1LoadedDiscs = new Set([0]);
         let ps1DiscBusy = false;
+        let ps1CurrentDisc = 0;
         const ps1DiscPath = url => `/${new URL(url).pathname.split('/').pop()}`;
         const ps1DiscUI = (message, percent) => {
             const status = document.getElementById('ps1-disc-status');
@@ -111,7 +112,7 @@
         const refreshPs1DiscUI = current => {
             document.querySelectorAll('.ps1-disc-option').forEach((button, index) => {
                 button.classList.toggle('current', index === current);
-                button.disabled = ps1DiscBusy;
+                button.disabled = ps1DiscBusy || index === current;
                 button.textContent = `${index === current ? '▶ ' : ''}DISCO ${index + 1}${ps1LoadedDiscs.has(index) ? ' — pronto' : ' — baixar ao trocar'}`;
             });
             const toggle = document.getElementById('ps1-disc-toggle');
@@ -121,8 +122,8 @@
             if (ps1DiscBusy || index < 0 || index >= ps1DiscUrls.length) return false;
             const manager = window.EJS_emulator?.gameManager;
             if (!manager?.FS || typeof manager.setCurrentDisk !== 'function') throw new Error('O gerenciador de discos ainda não está pronto.');
-            if (manager.getCurrentDisk?.() === index) { ps1DiscUI(`Disco ${index + 1} já está inserido.`, 100); return true; }
-            ps1DiscBusy = true; refreshPs1DiscUI(manager.getCurrentDisk?.() ?? 0);
+            if (ps1CurrentDisc === index) { ps1DiscUI(`Disco ${index + 1} já está inserido.`, 100); return true; }
+            ps1DiscBusy = true; refreshPs1DiscUI(ps1CurrentDisc);
             try {
                 if (!ps1LoadedDiscs.has(index)) {
                     ps1DiscUI(`Baixando Disco ${index + 1}… 0%`, 0);
@@ -148,6 +149,7 @@
                 await new Promise(resolve => setTimeout(resolve, 350));
                 const current = manager.getCurrentDisk?.();
                 if (Number.isInteger(current) && current !== index) throw new Error('o núcleo não confirmou a troca');
+                ps1CurrentDisc = index;
                 ps1DiscUI(`Disco ${index + 1} inserido. Volte ao jogo para continuar.`, 100);
                 refreshPs1DiscUI(index);
                 return true;
@@ -156,7 +158,7 @@
                 console.error('Neo PS1 disc switch:', error);
                 return false;
             } finally {
-                ps1DiscBusy = false; refreshPs1DiscUI(window.EJS_emulator?.gameManager?.getCurrentDisk?.() ?? 0);
+                ps1DiscBusy = false; refreshPs1DiscUI(ps1CurrentDisc);
             }
         }
         window.neoPs1ChangeDisc = neoPs1ChangeDisc;
@@ -173,7 +175,7 @@
                 button.onclick = () => neoPs1ChangeDisc(index); return button;
             }));
             document.addEventListener('pointerdown', event => { if (!panel.contains(event.target)) { panel.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); } });
-            refreshPs1DiscUI(window.EJS_emulator?.gameManager?.getCurrentDisk?.() ?? 0);
+            refreshPs1DiscUI(ps1CurrentDisc);
         };
         const showCompatibilityError = message => {
             clearInterval(loadingInterval);
@@ -272,6 +274,9 @@
                 
                 dispararAnuncio(); 
                 setupPs1DiscManager();
+                // EmulatorJS opens its gray settings menu after every boot.
+                // Close it so selecting a catalog game goes straight to Disc 1.
+                setTimeout(() => window.EJS_emulator?.menu?.close?.(), 50);
 
                 setTimeout(() => {
                     const loader = document.getElementById('loader-overlay');
@@ -304,7 +309,7 @@
                 && !mobileN64;
             
             // Agora o emulador só vai ter botão de Menu e Config na interface interna dele
-            window.EJS_buttons = { save_state: true, load_state: true, full_screen: true, fast_forward: true, settings: true, menu: true, diskButton: ps1DiscUrls.length < 2 };
+            window.EJS_Buttons = { diskButton: { visible: ps1DiscUrls.length < 2 } };
 
             // Keep N64 close to the console's native workload. These defaults
             // avoid costly enhancements that make Zelda and other 3D games
