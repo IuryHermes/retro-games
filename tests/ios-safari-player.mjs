@@ -17,7 +17,7 @@ assert.match(universal, /name="viewport"/, 'player must set the mobile viewport'
 assert.match(universal, /EJS_externalFiles = \{ \[ps1DiscPath\(ps1DiscUrls\[0\]\)\]: ps1DiscUrls\[0\] \}/, 'multi-disc PS1 games must preload only disc 1');
 assert.match(universal, /params\.get\('discs'\)/, 'multi-disc metadata must come from the game route');
 assert.match(universal, /manager\.FS\.writeFile/, 'the requested next disc must be loaded into the running emulator filesystem');
-assert.match(universal, /manager\.setCurrentDisk\(index\)/, 'disc selection must use the emulator core without restarting the console');
+assert.match(universal, /manager\.setCurrentDisk\(0\)/, 'disc selection must reinsert the replaced reader slot without restarting the console');
 assert.match(universal, /getCurrentDisk/, 'disc changes must be confirmed by the emulator core');
 assert.match(universal, /window\.EJS_biosUrl = ''/, 'PS1 must use HLE instead of the invalid 4 MiB BIOS object');
 assert.doesNotMatch(universal, /EJS_biosUrl = 'https:[^']+scph5501\.bin'/, 'the invalid renamed BIOS must never be loaded');
@@ -30,8 +30,8 @@ assert.doesNotMatch(universal, /window\.EJS_buttons\s*=/, 'the obsolete lowercas
 assert.match(universal, /button\.disabled = ps1DiscBusy \|\| index === current/, 'the inserted disc must not be selectable again');
 assert.match(universal, /neo-active-emulator/, 'a new emulator tab must retire older memory-heavy instances');
 assert.match(universal, /multidisc: ps1DiscUrls\.length > 1/, 'cloud saves must know when PS1 migrated away from M3U boot');
-assert.match(universal, /FS\.symlink\(firstPath, path\)/, 'undownloaded discs must have lightweight boot placeholders');
-assert.match(universal, /setCurrentDisk\(-1\)[\s\S]*setCurrentDisk\(index\)/, 'disc changes must eject before inserting the selected disc');
+assert.doesNotMatch(universal, /FS\.symlink\(firstPath, path\)/, 'PS1 boot must not depend on unsupported M3U placeholders');
+assert.match(universal, /setCurrentDisk\(-1\)[\s\S]*setCurrentDisk\(0\)/, 'disc changes must eject before reinserting the replaced reader slot');
 assert.match(universal, /baixar e trocar/, 'disc action must clearly describe download and swap');
 
 console.log('iOS Safari player: 26 checks passed');

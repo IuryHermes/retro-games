@@ -118,6 +118,7 @@
         const ps1LoadedDiscs = new Set([ps1CurrentDisc]);
         let ps1DiscBusy = false;
         const ps1DiscPath = url => `/${new URL(url).pathname.split('/').pop()}`;
+        const ps1CoreSlotPath = game ? ps1DiscPath(game) : '';
         const ps1DiscUI = (message, percent) => {
             const status = document.getElementById('ps1-disc-status');
             const fill = document.getElementById('ps1-disc-progress-fill');
@@ -138,17 +139,15 @@
             const manager = window.EJS_emulator?.gameManager;
             if (!manager?.FS || typeof manager.setCurrentDisk !== 'function') throw new Error('O gerenciador de discos ainda não está pronto.');
             if (ps1CurrentDisc === index) { ps1DiscUI(`Disco ${index + 1} já está inserido.`, 100); return true; }
-            if (!(manager.getDiskCount?.() > 1)) throw new Error('A lista de discos não foi reconhecida pelo núcleo.');
+            if (!(manager.getDiskCount?.() >= 1)) throw new Error('O núcleo não disponibilizou o leitor de discos.');
             ps1DiscBusy = true; refreshPs1DiscUI(ps1CurrentDisc);
             try {
                 if (!ps1LoadedDiscs.has(index)) {
                     ps1DiscUI(`Ejetando Disco ${ps1CurrentDisc + 1}…`, 0);
                     manager.setCurrentDisk(-1);
                     await new Promise(resolve => setTimeout(resolve, 700));
-                    const targetPath = ps1DiscPath(ps1DiscUrls[index]);
-                    const oldPath = ps1DiscPath(ps1DiscUrls[ps1CurrentDisc]);
+                    const targetPath = ps1CoreSlotPath;
                     try { manager.FS.unlink(targetPath); } catch (_) {}
-                    try { manager.FS.unlink(oldPath); } catch (_) {}
                     ps1LoadedDiscs.clear();
                     ps1DiscUI(`Baixando Disco ${index + 1}… 0%`, 0);
                     const response = await fetch(ps1DiscUrls[index]);
@@ -169,10 +168,12 @@
                     ps1LoadedDiscs.add(index);
                 }
                 ps1DiscUI(`Inserindo Disco ${index + 1} sem desligar o console…`, 100);
-                manager.setCurrentDisk(index);
+                // The browser core has one physical reader slot. Its backing
+                // CHD was replaced while ejected, so reinsert slot zero.
+                manager.setCurrentDisk(0);
                 await new Promise(resolve => setTimeout(resolve, 350));
                 const current = manager.getCurrentDisk?.();
-                if (Number.isInteger(current) && current !== index) throw new Error('o núcleo não confirmou a troca');
+                if (Number.isInteger(current) && current !== 0) throw new Error('o núcleo não confirmou a troca');
                 ps1CurrentDisc = index;
                 ps1DiscUI(`Disco ${index + 1} inserido. Volte ao jogo para continuar.`, 100);
                 refreshPs1DiscUI(index);
@@ -328,16 +329,6 @@
             window.EJS_startOnLoaded = true;
             window.EJS_language = "pt-BR";
             window.EJS_loadStateOnStart = false;    
-            window.EJS_ready = function() {
-                window.EJS_emulator?.on?.('saveDatabaseLoaded', FS => {
-                    if (ps1DiscUrls.length < 2) return;
-                    const firstPath = ps1DiscPath(ps1DiscUrls[0]);
-                    ps1DiscUrls.slice(1).forEach(url => {
-                        const path = ps1DiscPath(url);
-                        try { if (!FS.analyzePath(path).exists) FS.symlink(firstPath, path); } catch (error) { console.warn('Neo PS1 disc placeholder:', error); }
-                    });
-                });
-            };
             const controlSchemes = { nes:'nes', snes:'snes', n64:'n64', gba:'gba', megadrive:'segaMD' };
             window.EJS_controlScheme = controlSchemes[params.get('system')] || controlSchemes[core] || undefined;
             // Use the threaded N64 build only when the browser confirms that

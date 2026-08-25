@@ -33,9 +33,9 @@ for (const system of systems) {
     usedSlugs.add(slug);
     const canonical = `${site}/jogos/${system}/${slug}/`;
     const multidisc = Array.isArray(game.discs) && game.discs.length > 1;
-    // The M3U provides persistent disc indexes. The player creates lightweight
-    // placeholders for discs that have not been downloaded yet.
-    const bootRom = game.rom;
+    // Boot directly from Disc 1. Browser PCSX-ReARMed does not reliably accept
+    // M3Us whose later large CHDs are intentionally loaded on demand.
+    const bootRom = multidisc ? game.discs[0] : game.rom;
     const rom = `${r2}systems/${system}/${bootRom}`;
     const playerParams = { game:rom, core:cores[system], title:gameName, system, embedded:'1' };
     if (multidisc) playerParams.discs = JSON.stringify(game.discs.map(disc => `${r2}systems/${system}/${disc}`));
