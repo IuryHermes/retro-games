@@ -30,5 +30,8 @@ assert.doesNotMatch(universal, /window\.EJS_buttons\s*=/, 'the obsolete lowercas
 assert.match(universal, /button\.disabled = ps1DiscBusy \|\| index === current/, 'the inserted disc must not be selectable again');
 assert.match(universal, /neo-active-emulator/, 'a new emulator tab must retire older memory-heavy instances');
 assert.match(universal, /multidisc: ps1DiscUrls\.length > 1/, 'cloud saves must know when PS1 migrated away from M3U boot');
+assert.match(universal, /FS\.symlink\(firstPath, path\)/, 'undownloaded discs must have lightweight boot placeholders');
+assert.match(universal, /setCurrentDisk\(-1\)[\s\S]*setCurrentDisk\(index\)/, 'disc changes must eject before inserting the selected disc');
+assert.match(universal, /baixar e trocar/, 'disc action must clearly describe download and swap');
 
-console.log('iOS Safari player: 23 checks passed');
+console.log('iOS Safari player: 26 checks passed');

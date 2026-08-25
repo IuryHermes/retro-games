@@ -128,7 +128,7 @@
             document.querySelectorAll('.ps1-disc-option').forEach((button, index) => {
                 button.classList.toggle('current', index === current);
                 button.disabled = ps1DiscBusy || index === current;
-                button.textContent = `${index === current ? '▶ ' : ''}DISCO ${index + 1}${ps1LoadedDiscs.has(index) ? ' — pronto' : ' — baixar ao trocar'}`;
+                button.textContent = `${index === current ? '▶ ' : ''}DISCO ${index + 1}${ps1LoadedDiscs.has(index) ? ' — pronto' : ' — baixar e trocar'}`;
             });
             const toggle = document.getElementById('ps1-disc-toggle');
             if (toggle) toggle.textContent = `💿 DISCO ${current + 1}`;
@@ -138,19 +138,18 @@
             const manager = window.EJS_emulator?.gameManager;
             if (!manager?.FS || typeof manager.setCurrentDisk !== 'function') throw new Error('O gerenciador de discos ainda não está pronto.');
             if (ps1CurrentDisc === index) { ps1DiscUI(`Disco ${index + 1} já está inserido.`, 100); return true; }
-            if (!(manager.getDiskCount?.() > 1)) {
-                ps1DiscBusy = true; refreshPs1DiscUI(ps1CurrentDisc);
-                ps1DiscUI(`Preparando Disco ${index + 1}…`, 35);
-                try { manager.saveSaveFiles?.(); } catch (error) { console.warn('Neo PS1 save before disc reload:', error); }
-                const next = new URL(window.location.href);
-                next.searchParams.set('game', ps1DiscUrls[index]);
-                next.searchParams.set('disc', String(index));
-                setTimeout(() => window.location.replace(next.href), 450);
-                return true;
-            }
+            if (!(manager.getDiskCount?.() > 1)) throw new Error('A lista de discos não foi reconhecida pelo núcleo.');
             ps1DiscBusy = true; refreshPs1DiscUI(ps1CurrentDisc);
             try {
                 if (!ps1LoadedDiscs.has(index)) {
+                    ps1DiscUI(`Ejetando Disco ${ps1CurrentDisc + 1}…`, 0);
+                    manager.setCurrentDisk(-1);
+                    await new Promise(resolve => setTimeout(resolve, 700));
+                    const targetPath = ps1DiscPath(ps1DiscUrls[index]);
+                    const oldPath = ps1DiscPath(ps1DiscUrls[ps1CurrentDisc]);
+                    try { manager.FS.unlink(targetPath); } catch (_) {}
+                    try { manager.FS.unlink(oldPath); } catch (_) {}
+                    ps1LoadedDiscs.clear();
                     ps1DiscUI(`Baixando Disco ${index + 1}… 0%`, 0);
                     const response = await fetch(ps1DiscUrls[index]);
                     if (!response.ok) throw new Error(`download respondeu ${response.status}`);
@@ -166,7 +165,7 @@
                         const percent = Math.round((received / total) * 100);
                         ps1DiscUI(`Baixando Disco ${index + 1}… ${percent}%`, percent);
                     }
-                    manager.FS.writeFile(ps1DiscPath(ps1DiscUrls[index]), bytes);
+                    manager.FS.writeFile(targetPath, bytes, { canOwn: true });
                     ps1LoadedDiscs.add(index);
                 }
                 ps1DiscUI(`Inserindo Disco ${index + 1} sem desligar o console…`, 100);
@@ -179,7 +178,7 @@
                 refreshPs1DiscUI(index);
                 return true;
             } catch (error) {
-                ps1DiscUI(`Falha ao trocar: ${error.message}. Tente novamente.`, 0);
+                ps1DiscUI(`Falha ao trocar: ${error.message}. Recarregue o jogo para reinserir o disco anterior.`, 0);
                 console.error('Neo PS1 disc switch:', error);
                 return false;
             } finally {
@@ -329,6 +328,16 @@
             window.EJS_startOnLoaded = true;
             window.EJS_language = "pt-BR";
             window.EJS_loadStateOnStart = false;    
+            window.EJS_ready = function() {
+                window.EJS_emulator?.on?.('saveDatabaseLoaded', FS => {
+                    if (ps1DiscUrls.length < 2) return;
+                    const firstPath = ps1DiscPath(ps1DiscUrls[0]);
+                    ps1DiscUrls.slice(1).forEach(url => {
+                        const path = ps1DiscPath(url);
+                        try { if (!FS.analyzePath(path).exists) FS.symlink(firstPath, path); } catch (error) { console.warn('Neo PS1 disc placeholder:', error); }
+                    });
+                });
+            };
             const controlSchemes = { nes:'nes', snes:'snes', n64:'n64', gba:'gba', megadrive:'segaMD' };
             window.EJS_controlScheme = controlSchemes[params.get('system')] || controlSchemes[core] || undefined;
             // Use the threaded N64 build only when the browser confirms that
