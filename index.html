@@ -928,10 +928,11 @@
                 const catalogGame = indexData.find(item => catalogMatchesSave(item, game));
                 const catalogId = catalogGame ? catalogHistoryId(catalogGame) : '';
                 const recentGame = (historyData.games || []).find(item => item.id === game.id || item.id === catalogId);
-                const coverName = catalogGame?.capa ? catalogGame.capa.split('/').pop() : '';
-                const coverUrl = recentGame?.cover || catalogCoverUrl(catalogGame) || 'assets/imagens-videos/logo-discord.gif';
+                const catalogCover = catalogCoverUrl(catalogGame);
+                const coverCandidates = [...new Set([recentGame?.cover, catalogCover].filter(Boolean))];
+                const coverUrl = coverCandidates.shift() || 'assets/imagens-videos/logo-discord.gif';
                 const head = document.createElement('div'); head.className = 'cloud-game-head';
-                const cover = document.createElement('img'); cover.className = 'cloud-game-cover'; cover.src = coverUrl; cover.alt = `Capa de ${game.name}`; cover.loading = 'lazy'; cover.onerror = () => { cover.onerror = null; cover.src = 'assets/imagens-videos/logo-discord.gif'; };
+                const cover = document.createElement('img'); cover.className = 'cloud-game-cover'; cover.src = coverUrl; cover.alt = `Capa de ${game.name}`; cover.loading = 'lazy'; cover.onerror = () => { const next = coverCandidates.shift(); if (next) cover.src = next; else { cover.onerror = null; cover.src = catalogCover || 'assets/imagens-videos/logo-discord.gif'; } };
                 const heading = document.createElement('div'); heading.className = 'cloud-game-heading';
                 const title = document.createElement('div'); title.className = 'cloud-game-title'; title.textContent = game.name;
                 const system = document.createElement('div'); system.className = 'cloud-game-system'; system.textContent = String(game.system || 'JOGO').toUpperCase(); heading.append(title, system); head.append(cover, heading); card.append(head);
@@ -1523,17 +1524,25 @@
             .toLowerCase().replace(/\.[a-z0-9]+$/i, '').replace(/[^a-z0-9._,-]+/g, '-')
             .replace(/^-+|-+$/g, '').slice(0, 120);
     }
+    function normalizedSaveCatalogKey(value) {
+        return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+            .replace(/\.(zip|7z|chd|bin|cue|gba|gbc|gb|nes|sfc|smc|z64|n64|v64|md|gen)$/i, '')
+            .replace(/-(?:core|disc)\d+$/i, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    }
     function catalogMatchesSave(game, saved) {
-        if (catalogHistoryId(game) === saved.id) return true;
+        const savedId = normalizedSaveCatalogKey(saved.id);
+        if (normalizedSaveCatalogKey(catalogHistoryId(game)) === savedId) return true;
         const systemAliases = { segamd:'megadrive', megadrive:'megadrive', n64:'n64', nes:'nes', snes:'snes', gba:'gba', psx:'ps1', ps1:'ps1' };
         const savedSystem = systemAliases[String(saved.system || '').toLowerCase()]
             || systemAliases[String(saved.id || '').split('-')[0]] || '';
         const catalogSystem = systemAliases[String(game.sysId || '').toLowerCase()] || '';
         if (!savedSystem || savedSystem !== catalogSystem) return false;
-        const savedRom = String(saved.id || '').replace(/^(?:segamd|megadrive|n64|nes|snes|gba|psx|ps1)-/, '');
-        const catalogRom = String(game.rom || '').split('/').pop().toLowerCase()
-            .replace(/\.[a-z0-9]+$/i, '').replace(/[^a-z0-9._,-]+/g, '-').replace(/^-+|-+$/g, '');
-        return savedRom === catalogRom;
+        const savedRom = savedId.replace(/^(?:segamd|megadrive|n64|nes|snes|gba|psx|ps1)-/, '');
+        const catalogRom = normalizedSaveCatalogKey(String(game.rom || '').split('/').pop());
+        if (savedRom === catalogRom) return true;
+        const withoutDisc = value => value.replace(/-(?:cd|disc|disco)-?\d+$/i, '');
+        if (withoutDisc(savedRom) === withoutDisc(catalogRom)) return true;
+        return normalizedSaveCatalogKey(saved.name) === normalizedSaveCatalogKey(game.nomeOriginal || game.nome);
     }
     function rebindHeroIndicators() {
         [...heroIndicators.children].forEach((dot, index) => { dot.onclick = () => goToSlide(index); });

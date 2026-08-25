@@ -19,5 +19,8 @@ assert.match(index, /id="profile-search"/);
 assert.match(index, /applyProfileSearch/);
 assert.match(index, /id="profile-diagnostic"/);
 assert.match(index, /slot\.slot === 'previous'/);
+assert.match(index, /normalizedSaveCatalogKey/);
+assert.match(index, /const coverCandidates/);
+assert.match(index, /withoutDisc/);
 
-console.log('emulator preflight/profile search: 14 checks passed');
+console.log('emulator preflight/profile search: 17 checks passed');
