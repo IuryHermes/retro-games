@@ -13,6 +13,7 @@ assert.match(player, /window\.crossOriginIsolated/);
 assert.match(player, /typeof window\.SharedArrayBuffer === 'function'/);
 assert.match(player, /mobileN64/);
 assert.match(player, /&& !mobileN64/);
+assert.match(player, /&& !isDoom64/);
 assert.match(player, /addEventListener\('pagehide'/);
 assert.match(player, /gameManager\?\.exitGame/);
 assert.doesNotMatch(player, /localStorage\.removeItem\(key\)/);
@@ -33,7 +34,9 @@ assert.match(player, /rendererKeys\.has\(option\)/);
 assert.match(player, /saved\?\.settings\?\.\['mupen64plus-aspect'\] === '16:9'/);
 assert.match(player, /delete saved\.settings\['mupen64plus-aspect'\]/);
 assert.doesNotMatch(player, /localStorage\.removeItem\(/);
-assert.match(player, /"mupen64plus-ThreadedRenderer": "True"/);
+assert.match(player, /"mupen64plus-ThreadedRenderer": isDoom64 \? "False" : "True"/);
+assert.match(player, /"mupen64plus-EnableCopyColorToRDRAM": isDoom64 \? "Sync" : "Async"/);
+assert.match(player, /Neo Doom 64 renderer repair/);
 assert.match(player, /"mupen64plus-MultiSampling": "0"/);
 assert.match(player, /"mupen64plus-EnableNativeResFactor": "0"/);
 assert.match(player, /if \(core === 'psx' \|\| core === 'pcsx_rearmed'\)[\s\S]*EJS_VirtualGamepadSettings\s*=/);
@@ -49,4 +52,4 @@ assert.match(cloudSaves, /incompatibleLegacyDoom64[\s\S]*automaticEnabled = fals
 assert.match(cloudSaves, /scheduleAutosaveImage\(\)/);
 assert.match(cloudSaves, /document\.visibilityState === 'hidden'/);
 
-console.log('n64 performance/autosave: 26 checks passed');
+console.log('n64 performance/autosave: 29 checks passed');

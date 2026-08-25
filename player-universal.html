@@ -113,6 +113,7 @@
         localStorage.setItem('neo-active-emulator', emulatorInstanceId);
         const core = params.get("core");   
         const game = params.get("game");
+        const isDoom64 = core === 'n64' && /(?:^|[\/_-])doom(?:[_-]?64)?(?:\.|[?&#_-])/i.test(game || '');
         let ps1DiscUrls = [];
         let ps1CurrentDisc = Math.max(0, Number.parseInt(params.get('disc') || '0', 10) || 0);
         const ps1LoadedDiscs = new Set([ps1CurrentDisc]);
@@ -259,6 +260,30 @@
                 }
                 localStorage.setItem(rendererRepairKey, '1');
             }
+
+            // Doom 64 exercises framebuffer paths that are more sensitive than
+            // most N64 titles. Remove only cached renderer overrides whenever
+            // this ROM opens, so an old per-game option cannot win over the
+            // safe defaults below. Controls, sound and cheats are preserved.
+            if (isDoom64) {
+                const doomRendererKeys = new Set(['vsync', 'shader', 'rewindEnabled', 'webgl2Enabled', 'threads']);
+                for (let index = 0; index < localStorage.length; index += 1) {
+                    const key = localStorage.key(index);
+                    if (!key || !key.startsWith('ejs-') || !key.endsWith('-settings')) continue;
+                    try {
+                        const saved = JSON.parse(localStorage.getItem(key));
+                        const settings = saved?.settings;
+                        if (!settings || typeof settings !== 'object') continue;
+                        let changed = false;
+                        for (const option of Object.keys(settings)) {
+                            if (doomRendererKeys.has(option) || option.startsWith('mupen64plus-')) {
+                                delete settings[option]; changed = true;
+                            }
+                        }
+                        if (changed) localStorage.setItem(key, JSON.stringify(saved));
+                    } catch (error) { console.warn('Neo Doom 64 renderer repair:', error); }
+                }
+            }
         }
 
         // ==========================================
@@ -338,7 +363,8 @@
             window.EJS_threads = core === 'n64'
                 && window.crossOriginIsolated
                 && typeof window.SharedArrayBuffer === 'function'
-                && !mobileN64;
+                && !mobileN64
+                && !isDoom64;
             
             // Agora o emulador só vai ter botão de Menu e Config na interface interna dele
             window.EJS_Buttons = { diskButton: { visible: ps1DiscUrls.length < 2 } };
@@ -355,7 +381,7 @@
                 "mupen64plus-43screensize": "320x240",
                 "mupen64plus-169screensize": "640x360",
                 "mupen64plus-EnableNativeResFactor": "0",
-                "mupen64plus-ThreadedRenderer": "True",
+                "mupen64plus-ThreadedRenderer": isDoom64 ? "False" : "True",
                 "mupen64plus-MultiSampling": "0",
                 "mupen64plus-FXAA": "0",
                 "mupen64plus-EnableHWLighting": "False",
@@ -366,7 +392,7 @@
                 "mupen64plus-EnableEnhancedTextureStorage": "False",
                 "mupen64plus-EnableEnhancedHighResStorage": "False",
                 "mupen64plus-EnableLegacyBlending": "True",
-                "mupen64plus-EnableCopyColorToRDRAM": "Async",
+                "mupen64plus-EnableCopyColorToRDRAM": isDoom64 ? "Sync" : "Async",
                 "mupen64plus-Framerate": "Original"
             } : { "vsync": false };
 
