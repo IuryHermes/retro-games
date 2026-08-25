@@ -186,23 +186,10 @@
         }
     }
 
-    function automaticChoice(session) {
-        return new Promise(resolve => {
-            const limit = session.automaticGameLimit;
-            const remaining = limit === null ? 'Autosaves ilimitados no seu plano.' : `${Math.max(0, limit - session.automaticGamesUsed)} vaga(s) de autosave livre(s) para outros jogos.`;
-            const overlay = document.createElement('div');
-            overlay.style.cssText = 'position:fixed;inset:0;z-index:10000000;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;padding:18px;font-family:monospace;color:#eaffef';
-            const box = document.createElement('div');
-            box.style.cssText = 'width:min(460px,96vw);border:2px solid #00cc44;background:#061109;padding:22px;border-radius:8px;box-shadow:0 0 30px rgba(0,204,68,.35);text-align:center';
-            const title = document.createElement('h2'); title.textContent = 'SAVE AUTOMÁTICO ENCONTRADO'; title.style.cssText = 'color:#55ff88;font-size:17px;line-height:1.5;margin:0 0 12px';
-            const copy = document.createElement('p'); copy.textContent = `Deseja continuar ${gameName} de onde parou? ${remaining}`; copy.style.cssText = 'line-height:1.6;margin:0 0 18px';
-            const resume = document.createElement('button'); resume.type = 'button'; resume.textContent = 'CONTINUAR DE ONDE PAROU'; resume.style.cssText = 'width:100%;padding:13px;background:#00cc44;color:#001b09;border:0;font-weight:bold;cursor:pointer;margin-bottom:9px';
-            const fresh = document.createElement('button'); fresh.type = 'button'; fresh.textContent = 'COMEÇAR SEM CARREGAR'; fresh.style.cssText = 'width:100%;padding:12px;background:#111;color:#fff;border:1px solid #aaa;font-weight:bold;cursor:pointer';
-            const note = document.createElement('small'); note.textContent = 'Começar sem carregar pausa o autosave nesta sessão e preserva o progresso anterior.'; note.style.cssText = 'display:block;color:#aaa;line-height:1.5;margin-top:10px';
-            const finish = choice => { overlay.remove(); resolve(choice); };
-            resume.onclick = () => finish(true); fresh.onclick = () => finish(false);
-            box.append(title, copy, resume, fresh, note); overlay.appendChild(box); document.body.appendChild(overlay); resume.focus();
-        });
+    async function automaticChoice() {
+        // Autosave means continue automatically. A broken state can still be
+        // bypassed safely through the recovery action, which never deletes it.
+        return true;
     }
 
     async function loadSlot(slot) {
@@ -269,6 +256,8 @@
     async function prepare(options) {
         rememberToken();
         gameId = stableGameId(options.game, options.core);
+        const doom64SaveGeneration = gameId === 'n64-doom_64';
+        if (doom64SaveGeneration) gameId = `${gameId}-v2`;
         gameName = String(options.name || gameId).slice(0, 100);
         gameSystem = String(options.system || options.core || '').toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 20);
         await flushPendingHistory();
@@ -278,9 +267,7 @@
         createControls(session);
         window.EJS_gameID = Array.from(gameId).reduce((hash, char) => ((hash * 31 + char.charCodeAt(0)) >>> 0), 7);
         automaticEnabled = Boolean(!recoveryMode && token && session && (session.automaticGameLimit === null || session.automaticGamesUsed < session.automaticGameLimit));
-        const migratedPs1Multidisc = options.system === 'ps1' && options.multidisc;
-        const incompatibleLegacyDoom64 = gameId === 'n64-doom_64';
-        if (token && !recoveryMode && !migratedPs1Multidisc && !incompatibleLegacyDoom64) {
+        if (token && !recoveryMode) {
             try {
                 const automatic = await download('auto');
                 if (automatic) {
@@ -288,17 +275,11 @@
                         automaticEnabled = true;
                         const blobUrl = URL.createObjectURL(new Blob([automatic], { type: 'application/octet-stream' }));
                         window.EJS_loadStateURL = blobUrl;
+                        window.EJS_loadStateOnStart = true;
                         lastHash = await digest(automatic);
                     } else automaticEnabled = false;
                 }
             } catch (error) { console.warn('Neo autosave load:', error); }
-        }
-        if (token && incompatibleLegacyDoom64) {
-            // Preserve Iury's legacy state instead of injecting it into the
-            // newer Mupen64Plus build, where it leaves Doom 64 on a black
-            // screen. Pause autosave so the preserved file is not overwritten.
-            automaticEnabled = false;
-            console.info('Neo Doom 64: autosave legado preservado; início limpo habilitado.');
         }
         if (recoveryMode) {
             automaticEnabled = false;
