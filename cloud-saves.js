@@ -48,6 +48,33 @@
         return `${API}/club/save?game=${encodeURIComponent(gameId)}&slot=${encodeURIComponent(slot)}&token=${encodeURIComponent(token)}`;
     }
 
+    function localSaveDatabase() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open('neo-local-saves', 1);
+            request.onupgradeneeded = () => request.result.createObjectStore('states');
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+        });
+    }
+
+    async function localSaveGet() {
+        const database = await localSaveDatabase();
+        return new Promise((resolve, reject) => {
+            const request = database.transaction('states').objectStore('states').get(gameId);
+            request.onsuccess = () => resolve(stateBytes(request.result));
+            request.onerror = () => reject(request.error);
+        }).finally(() => database.close());
+    }
+
+    async function localSavePut(bytes) {
+        const database = await localSaveDatabase();
+        return new Promise((resolve, reject) => {
+            const request = database.transaction('states', 'readwrite').objectStore('states').put(bytes, gameId);
+            request.onsuccess = () => resolve(true);
+            request.onerror = () => reject(request.error);
+        }).finally(() => database.close());
+    }
+
     async function flushPendingHistory() {
         if (!token) return false;
         let pending;
@@ -85,11 +112,16 @@
 
     async function upload(slot, state, name) {
         const bytes = stateBytes(state);
-        if (!token || !bytes || !bytes.byteLength || saving) return false;
+        if (!bytes || !bytes.byteLength || saving) return false;
         const hash = await digest(bytes);
         if (slot === 'auto' && hash === lastHash) return true;
         saving = true;
         try {
+            if (!token && slot === 'auto') {
+                await localSavePut(bytes);
+                lastHash = hash; setStatus('Autosave salvo neste aparelho'); return true;
+            }
+            if (!token) return false;
             const response = await fetch(endpoint(slot), {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/octet-stream', 'X-Save-Name': name || '', 'X-Game-Name': encodeURIComponent(gameName), 'X-Game-System': gameSystem },
@@ -208,7 +240,7 @@
         if (!element) return;
         element.textContent = message;
         clearTimeout(element._clearTimer);
-        element._clearTimer = setTimeout(() => { element.textContent = token ? 'Nuvem conectada' : 'Entre no Clube para salvar'; }, 2500);
+        element._clearTimer = setTimeout(() => { element.textContent = token ? 'Nuvem conectada' : 'Autosave neste aparelho'; }, 2500);
     }
 
     async function sessionInfo() {
@@ -223,7 +255,7 @@
         panel.id = 'neo-cloud-panel';
         const planLimit = session ? session.manualSaveLimit : 0;
         const autoText = session ? (session.automaticGameLimit === null ? 'autosaves ilimitados' : `${session.automaticGamesUsed}/${session.automaticGameLimit} jogos com autosave`) : '';
-        const planText = session ? `${planLimit === null ? 'Slots manuais ilimitados' : `${planLimit} slots manuais`} · ${autoText}` : 'Entre no Clube para salvar';
+        const planText = session ? `${planLimit === null ? 'Slots manuais ilimitados' : `${planLimit} slots manuais`} · ${autoText}` : 'Autosave protegido neste aparelho';
         panel.innerHTML = `<button id="neo-cloud-toggle" type="button">☁ SAVES</button><div id="neo-cloud-menu"><div id="neo-cloud-status">${planText}</div><div class="neo-cloud-grid"></div></div>`;
         document.body.appendChild(panel);
         const grid = panel.querySelector('.neo-cloud-grid');
@@ -277,7 +309,17 @@
         if (token && !session) { sessionStorage.removeItem(TOKEN_KEY); token = ''; }
         createControls(session);
         window.EJS_gameID = Array.from(gameId).reduce((hash, char) => ((hash * 31 + char.charCodeAt(0)) >>> 0), 7);
-        automaticEnabled = Boolean(!recoveryMode && token && session && (session.automaticGameLimit === null || session.automaticGamesUsed < session.automaticGameLimit));
+        automaticEnabled = Boolean(!recoveryMode && (!token || (session && (session.automaticGameLimit === null || session.automaticGamesUsed < session.automaticGameLimit))));
+        if (!token && !recoveryMode) {
+            try {
+                const automatic = await localSaveGet();
+                if (automatic) {
+                    const blobUrl = URL.createObjectURL(new Blob([automatic], { type: 'application/octet-stream' }));
+                    window.EJS_loadStateURL = blobUrl; window.EJS_loadStateOnStart = true;
+                    lastHash = await digest(automatic);
+                }
+            } catch (error) { console.warn('Neo local autosave load:', error); }
+        }
         if (token && !recoveryMode) {
             try {
                 const automatic = await download('auto');
@@ -305,7 +347,7 @@
             if (typeof previousStart === 'function') previousStart.apply(this, arguments);
             clearInterval(timer);
             clearTimeout(initialAutosaveTimer);
-            if (token && automaticEnabled) {
+            if (automaticEnabled) {
                 // Register a newly played game promptly in the account library.
                 // Previously it appeared only after a full minute of gameplay.
                 initialAutosaveTimer = setTimeout(scheduleAutosave, 10000);
@@ -313,7 +355,7 @@
             }
         };
         addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'hidden' && token && automaticEnabled) void autosave();
+            if (document.visibilityState === 'hidden' && automaticEnabled) void autosave();
         });
         addEventListener('pagehide', () => { clearTimeout(initialAutosaveTimer); clearInterval(timer); });
     }

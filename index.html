@@ -731,6 +731,11 @@
     const incomingReferral = new URLSearchParams(location.search).get('ref');
     if (/^[a-f0-9]{12}$/.test(incomingReferral || '')) localStorage.setItem('neo_referral_code', incomingReferral);
     const PENDING_HISTORY_KEY = 'neo_pending_history';
+    const LOCAL_HISTORY_KEY = 'neo_local_game_history_v1';
+    const readLocalGameHistory = () => {
+        try { const value = JSON.parse(localStorage.getItem(LOCAL_HISTORY_KEY) || '[]'); return Array.isArray(value) ? value : []; }
+        catch (_) { return []; }
+    };
     const AVATARS = Array.from({ length: 40 }, (_, index) => `avatar-${String(index + 1).padStart(2, '0')}`);
     let accountProfile = null;
     let refreshPersonalHero = () => {};
@@ -971,11 +976,13 @@
         await loadHistory();
     }
     async function recordPlayedGame(game, playUrl) {
-        if (!accountProfile || (!auth.currentUser && !discordAccountToken)) return;
         const coverName = game.capa ? game.capa.split('/').pop() : '';
         const cover = game.cover || catalogCoverUrl(game);
         const historyId = String(game.id || `${game.sysId}-${String(game.rom || '').split('/').pop()}`).toLowerCase().replace(/\.[a-z0-9]+$/i, '').replace(/[^a-z0-9._,-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 120);
-        const pending = { id: historyId, name: game.nomeOriginal || game.nome, system: game.sysId, cover, playUrl };
+        const pending = { id: historyId, name: game.nomeOriginal || game.nome, system: game.sysId, cover, playUrl, playedAt:Date.now() };
+        const localHistory = [pending, ...readLocalGameHistory().filter(item => item?.id !== pending.id)].slice(0, 10);
+        try { localStorage.setItem(LOCAL_HISTORY_KEY, JSON.stringify(localHistory)); } catch (_) {}
+        if (!accountProfile || (!auth.currentUser && !discordAccountToken)) return;
         sessionStorage.setItem(PENDING_HISTORY_KEY, JSON.stringify(pending));
         try {
             await historyRequest('POST', pending);
@@ -1349,7 +1356,7 @@
 
     top10Games.forEach((game, index) => {
         const slide = document.createElement('div');
-        slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
+        slide.className = `hero-slide promotional ${index === 0 ? 'active' : ''}`;
         const coreToUse = coreMap[game.sysId] || 'snes';
         const playerFile = 'player-universal.html';
         const playUrl = publicGameUrl(game.sysId, game.nome);
@@ -1367,19 +1374,23 @@
         `;
         slide.querySelector('.hero-play-btn').onclick = () => playAndRemember({ ...game, cover: wallpaperPath }, playUrl);
         heroSlider.appendChild(slide);
-        const dot = document.createElement('div'); dot.className = `indicator ${index === 0 ? 'active' : ''}`;
+        const dot = document.createElement('div'); dot.className = `indicator promotional-indicator ${index === 0 ? 'active' : ''}`;
         dot.onclick = () => goToSlide(index); heroIndicators.appendChild(dot);
     });
 
     function goToSlide(index) {
+        const visibleSlides = [...document.querySelectorAll('.hero-slide:not([hidden])')];
+        const visibleIndicators = [...document.querySelectorAll('.indicator:not([hidden])')];
+        if (!visibleSlides.length) return;
+        index = Math.max(0, Math.min(index, visibleSlides.length - 1));
         document.querySelectorAll('.hero-slide').forEach(s => s.classList.remove('active'));
         document.querySelectorAll('.indicator').forEach(d => d.classList.remove('active'));
-        document.querySelectorAll('.hero-slide')[index].classList.add('active');
-        document.querySelectorAll('.indicator')[index].classList.add('active');
+        visibleSlides[index].classList.add('active');
+        visibleIndicators[index]?.classList.add('active');
         currentHeroIndex = index; resetHeroTimer();
         updateGamepadFocusList();
     }
-    function heroSlideCount() { return document.querySelectorAll('.hero-slide').length; }
+    function heroSlideCount() { return document.querySelectorAll('.hero-slide:not([hidden])').length; }
     function nextSlide() { goToSlide((currentHeroIndex + 1) % heroSlideCount()); }
     function prevSlide() { goToSlide((currentHeroIndex - 1 + heroSlideCount()) % heroSlideCount()); }
     function resetHeroTimer() { clearInterval(heroTimer); heroTimer = setInterval(nextSlide, 5000); }
@@ -1545,7 +1556,11 @@
         return normalizedSaveCatalogKey(saved.name) === normalizedSaveCatalogKey(game.nomeOriginal || game.nome);
     }
     function rebindHeroIndicators() {
-        [...heroIndicators.children].forEach((dot, index) => { dot.onclick = () => goToSlide(index); });
+        [...heroIndicators.querySelectorAll('.indicator:not([hidden])')].forEach((dot, index) => { dot.onclick = () => goToSlide(index); });
+    }
+    function showOnlyPlayedHeroes(enabled) {
+        document.querySelectorAll('.hero-slide.promotional').forEach(slide => { slide.hidden = enabled; });
+        document.querySelectorAll('.indicator.promotional-indicator').forEach(dot => { dot.hidden = enabled; });
     }
     async function autosaveHeroImage(gameId) {
         const token = auth.currentUser ? await auth.currentUser.getIdToken() : discordAccountToken;
@@ -1568,7 +1583,7 @@
             const catalogCover = catalogCoverUrl(catalogGame);
             const featured = top10Games.find(game => game.id === recent.id);
             const savedFrame = await autosaveHeroImage(recent.id).catch(() => '');
-            const media = savedFrame || (featured ? `assets/wallpapers_hero/${featured.id}.jpg` : (recent.cover || catalogCover || 'assets/imagens-videos/logo-discord.gif'));
+            const media = savedFrame || recent.cover || catalogCover || 'assets/imagens-videos/logo-discord.gif';
             const previousHero = document.getElementById('personalized-hero');
             if (previousHero?.dataset.objectUrl) URL.revokeObjectURL(previousHero.dataset.objectUrl);
             previousHero?.remove();
@@ -1586,8 +1601,8 @@
             const eyebrow = document.createElement('div'); eyebrow.className = 'hero-eyebrow'; eyebrow.textContent = `OLÁ, ${accountProfile.name}`;
             const title = document.createElement('h1'); title.className = 'hero-title'; title.textContent = recent.name;
             const meta = document.createElement('div'); meta.className = 'hero-categories'; meta.textContent = `${String(recent.system || '').toUpperCase()} · SEU ÚLTIMO JOGO`;
-            const note = document.createElement('div'); note.className = 'hero-resume-note'; note.textContent = hasAutoSave ? 'Continue sua partida de onde parou.' : 'Jogue novamente desde o início.';
-            const button = document.createElement('button'); button.type = 'button'; button.className = 'hero-play-btn selectable-item'; button.innerHTML = hasAutoSave ? '<span>▶</span> CONTINUAR' : '<span>▶</span> JOGAR NOVAMENTE';
+            const note = document.createElement('div'); note.className = 'hero-resume-note'; note.textContent = 'Continue sua partida de onde parou.';
+            const button = document.createElement('button'); button.type = 'button'; button.className = 'hero-play-btn selectable-item'; button.innerHTML = '<span>▶</span> CONTINUE';
             button.onclick = () => {
                 void historyRequest('POST', { id:recent.id, name:recent.name, system:recent.system, cover:recent.cover || media, playUrl:recent.playUrl }).catch(() => {});
                 window.startGame(recent.playUrl);
@@ -1599,11 +1614,15 @@
         } catch (error) { console.warn('Neo hero personalizado:', error); }
     };
     refreshPersonalHero = async function () {
-        if (!accountProfile) return;
         try {
-            const [historyData, saveLibrary] = await Promise.all([historyRequest(), cloudRequest('/club/library').catch(() => ({ games:[] })), Promise.allSettled(fetchPromises)]);
+            const [historyData, saveLibrary] = await Promise.all([
+                accountProfile ? historyRequest() : Promise.resolve({ games:readLocalGameHistory() }),
+                accountProfile ? cloudRequest('/club/library').catch(() => ({ games:[] })) : Promise.resolve({ games:[] }),
+                Promise.allSettled(fetchPromises)
+            ]);
             const recentGames = (historyData.games || []).slice(0, 3);
-            if (!recentGames.length) return;
+            if (!recentGames.length) { showOnlyPlayedHeroes(false); return; }
+            showOnlyPlayedHeroes(true);
 
             document.querySelectorAll('.hero-slide.personalized').forEach(previous => {
                 if (previous.dataset.objectUrl) URL.revokeObjectURL(previous.dataset.objectUrl);
@@ -1621,7 +1640,7 @@
                 const catalogCover = catalogCoverUrl(catalogGame);
                 const featured = top10Games.find(game => game.id === recent.id);
                 const savedFrame = savedFrames[recentIndex];
-                const media = savedFrame || (featured ? `assets/wallpapers_hero/${featured.id}.jpg` : (recent.cover || catalogCover || 'assets/imagens-videos/logo-discord.gif'));
+                const media = savedFrame || recent.cover || catalogCover || 'assets/imagens-videos/logo-discord.gif';
                 const slide = document.createElement('div');
                 slide.id = `personalized-hero-${recentIndex}`;
                 slide.className = 'hero-slide personalized';
@@ -1631,11 +1650,11 @@
                 art.onerror = () => { art.onerror = null; blur.src = art.src = 'assets/imagens-videos/logo-discord.gif'; };
                 const overlay = document.createElement('div'); overlay.className = 'hero-overlay';
                 const content = document.createElement('div'); content.className = 'hero-content';
-                const eyebrow = document.createElement('div'); eyebrow.className = 'hero-eyebrow'; eyebrow.textContent = `OLÁ, ${accountProfile.name}`;
+                const eyebrow = document.createElement('div'); eyebrow.className = 'hero-eyebrow'; eyebrow.textContent = accountProfile ? `OLÁ, ${accountProfile.name}` : 'CONTINUE JOGANDO';
                 const title = document.createElement('h1'); title.className = 'hero-title'; title.textContent = recent.name;
                 const meta = document.createElement('div'); meta.className = 'hero-categories'; meta.textContent = `${String(recent.system || '').toUpperCase()} · RECENTE ${recentIndex + 1} DE ${recentGames.length}`;
-                const note = document.createElement('div'); note.className = 'hero-resume-note'; note.textContent = hasAutoSave ? 'Continue sua partida de onde parou.' : 'Jogue novamente desde o início.';
-                const button = document.createElement('button'); button.type = 'button'; button.className = 'hero-play-btn selectable-item'; button.innerHTML = hasAutoSave ? '<span>▶</span> CONTINUAR' : '<span>▶</span> JOGAR NOVAMENTE';
+                const note = document.createElement('div'); note.className = 'hero-resume-note'; note.textContent = 'Continue sua partida de onde parou.';
+                const button = document.createElement('button'); button.type = 'button'; button.className = 'hero-play-btn selectable-item'; button.innerHTML = '<span>▶</span> CONTINUE';
                 button.onclick = () => {
                     void historyRequest('POST', { id:recent.id, name:recent.name, system:recent.system, cover:recent.cover || media, playUrl:recent.playUrl }).catch(() => {});
                     window.startGame(recent.playUrl);
@@ -1654,7 +1673,7 @@
             goToSlide(0);
         } catch (error) { console.warn('Neo heróis recentes:', error); }
     };
-    Promise.allSettled(fetchPromises).then(() => { if (accountProfile) void refreshPersonalHero(); });
+    Promise.allSettled(fetchPromises).then(() => { void refreshPersonalHero(); });
 
     const searchInput = document.getElementById('global-search');
     const searchResults = document.getElementById('search-results');
