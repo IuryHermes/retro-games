@@ -17,7 +17,8 @@ const sitemap = [];
 let generated = 0;
 for (const system of systems) {
   const raw = JSON.parse(await readFile(join(root, 'systems', system, 'games.json'), 'utf8'));
-  const unique = [...new Map(raw.map(game => [String(game.rom || '').toLowerCase(), game])).values()].filter(game => game.rom && game.nome);
+  const isRawPs1Disc = game => system === 'ps1' && /([._\-\s](cd|disc|disco)\s*0*[1-9])/i.test(String(game.rom || ''));
+  const unique = [...new Map(raw.map(game => [String(game.rom || '').toLowerCase(), game])).values()].filter(game => game.rom && game.nome && !isRawPs1Disc(game));
   const usedSlugs = new Set();
   for (const game of unique) {
     const gameName = normalizeGameName(game.nome);

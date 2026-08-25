@@ -49,16 +49,17 @@
         "descricao": "Você está pronto para enfrentar o terror dos alienígenas? Neste jogo de tiro em terceira pessoa, você assume o papel de um soldado que deve sobreviver em um planeta infestado de criaturas hostis. Com gráficos impressionantes para a época e uma trilha sonora intensa, Alien Trilogy é um desafio emocionante que não deixará você respirar."
     },
     {
-        "nome": "Alone in the Dark: The New Nightmare",
-        "rom": "roms/alone_in_the_dark.chd",
+        "nome": "Alone in the Dark: The New Nightmare Dublado PT-BR",
+        "rom": "roms/alone_in_the_dark_new_nightmare_pt_br.m3u",
+        "discs": ["roms/alone_in_the_dark_new_nightmare_pt_br_cd1.chd", "roms/alone_in_the_dark_new_nightmare_pt_br_cd2.chd"],
         "capa": "alone-in-the-dark.jpg",
         "preview": "alone-in-the-dark.gif",
         "nota": "7.1",
         "descricao": "Alone in the Dark: The New Nightmare, um clássico do survival horror no PlayStation 1, mergulha os jogadores em uma atmosfera de suspense e terror na enigmática Ilha das Sombras. A história segue o detetive paranormal Edward Carnby ou a professora Aline Cedrac, cada um investigando o mistério por trás da morte de um amigo e a busca por poderosas tábuas antigas. Enfrentando criaturas grotescas e desvendando segredos ancestrais em mansões escuras e ambientes góticos, os protagonistas devem usar a luz como sua principal arma contra as sombras que espreitam a cada esquina, numa jornada angustiante que combina exploração, quebra-cabeças e combate.\n\nUma curiosidade marcante sobre a franquia Alone in the Dark é que o jogo original, lançado em 1992, é frequentemente creditado como um dos precursores do gênero survival horror em 3D, estabelecendo muitas das mecânicas de câmera fixa e exploração que mais tarde seriam popularizadas por outros grandes títulos. A versão de PS1, \"The New Nightmare\", de 2001, buscou resgatar essa essência, modernizando a experiência com gráficos aprimorados e um foco ainda maior na tensão psicológica e no gerenciamento de recursos, solidificando seu lugar como um marco para os fãs de terror da era 32-bit.\n\n🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
-        "nome": "Alone In The Dark",
-        "rom": "roms/alone_in_the_dark.chd",
+        "nome": "Alone in the Dark: The New Nightmare — Disco 1",
+        "rom": "roms/alone_in_the_dark_new_nightmare_pt_br_cd1.chd",
         "capa": "alone-in-the-dark.jpg",
         "preview": "alone-in-the-dark.gif",
         "nota": "8.0",
