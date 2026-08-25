@@ -36,7 +36,7 @@ assert.doesNotMatch(player, /localStorage\.removeItem\(/);
 assert.match(player, /"mupen64plus-ThreadedRenderer": "True"/);
 assert.match(player, /"mupen64plus-MultiSampling": "0"/);
 assert.match(player, /"mupen64plus-EnableNativeResFactor": "0"/);
-assert.doesNotMatch(player, /EJS_VirtualGamepadSettings\s*=/);
+assert.match(player, /if \(core === 'psx' \|\| core === 'pcsx_rearmed'\)[\s\S]*EJS_VirtualGamepadSettings\s*=/);
 assert.match(cloudSaves, /const INTERVAL_MS = 60000/);
 assert.match(cloudSaves, /const IMAGE_INTERVAL_MS = 10 \* 60000/);
 assert.match(cloudSaves, /setInterval\(scheduleAutosave, INTERVAL_MS\)/);

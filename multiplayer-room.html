@@ -133,6 +133,8 @@
       .md-extra { display: none; }
       .controls.megadrive .actions { grid-template-columns: repeat(3, 58px); }
       .controls.megadrive .md-extra { display: block; }
+      .controls.ps1 .actions .control{border-radius:50%;font-size:25px}.controls.ps1 .actions .control:nth-child(1){color:#f28cff}.controls.ps1 .actions .control:nth-child(2){color:#68e8a0}.controls.ps1 .actions .control:nth-child(3){color:#72aaff}.controls.ps1 .actions .control:nth-child(4){color:#ff7777}
+      .controls.nes .actions .control:nth-child(-n+2),.controls.gba .actions .control:nth-child(-n+2){display:none}.controls.nes .meta .control:first-child,.controls.nes .meta .control:last-child{display:none}
       .control:active,
       .control.pressed {
         background: #00cc44;
@@ -528,12 +530,34 @@
           ? [["ANALÓGICO CIMA",19],["ANALÓGICO BAIXO",18],["ANALÓGICO ESQUERDA",17],["ANALÓGICO DIREITA",16],["D-PAD CIMA",4],["D-PAD BAIXO",5],["D-PAD ESQUERDA",6],["D-PAD DIREITA",7],["A",0],["B",1],["START",3],["Z",12],["L",10],["R",11],["C CIMA",23],["C BAIXO",22],["C ESQUERDA",21],["C DIREITA",20]]
           : roomSystem === "megadrive"
             ? [["CIMA",4],["BAIXO",5],["ESQUERDA",6],["DIREITA",7],["A",1],["B",0],["C",8],["X",10],["Y",9],["Z",11],["START",3]]
+          : roomSystem === "ps1"
+            ? [["CIMA",4],["BAIXO",5],["ESQUERDA",6],["DIREITA",7],["CRUZ",0],["CÍRCULO",8],["TRIÂNGULO",9],["QUADRADO",1],["START",3],["SELECT",2],["L1",10],["R1",11],["L2",12],["R2",13]]
+          : roomSystem === "nes"
+            ? [["CIMA",4],["BAIXO",5],["ESQUERDA",6],["DIREITA",7],["A",8],["B",0],["START",3],["SELECT",2]]
+          : roomSystem === "gba"
+            ? [["CIMA",4],["BAIXO",5],["ESQUERDA",6],["DIREITA",7],["A",8],["B",0],["START",3],["SELECT",2],["L",10],["R",11]]
             : [["CIMA",4],["BAIXO",5],["ESQUERDA",6],["DIREITA",7],["A",8],["B",0],["X",9],["Y",1],["START",3],["SELECT",2],["L",10],["R",11]];
         const bindingStorageKey = () => `neo_multiplayer_bindings_v2_${roomSystem || "default"}`;
         function defaultBindings() {
           if (roomSystem === "n64") return {
             keyboardMap: { ...defaultKeyboardMap, ArrowUp:19, ArrowDown:18, ArrowLeft:17, ArrowRight:16, z:0, x:1, a:12, s:23, d:22, c:21, v:20 },
             gamepadButtons: { ...defaultGamepadButtons, 0:0, 1:1, 2:12, 3:23, 4:10, 5:11, 8:12, 9:3, 12:19, 13:18, 14:17, 15:16 },
+          };
+          if (roomSystem === "ps1") return {
+            keyboardMap:{ ...defaultKeyboardMap },
+            gamepadButtons:{ ...defaultGamepadButtons, 0:0, 1:8, 2:1, 3:9, 4:10, 5:11, 6:12, 7:13 },
+          };
+          if (roomSystem === "megadrive") return {
+            keyboardMap:{ ...defaultKeyboardMap, z:1, x:0, a:8, s:10, d:9, c:11 },
+            gamepadButtons:{ ...defaultGamepadButtons, 0:1, 1:0, 2:8, 3:10, 4:9, 5:11 },
+          };
+          if (roomSystem === "nes") return {
+            keyboardMap:{ ArrowUp:4, ArrowDown:5, ArrowLeft:6, ArrowRight:7, z:0, x:8, Enter:3, Shift:2 },
+            gamepadButtons:{ 0:8, 1:0, 8:2, 9:3, 12:4, 13:5, 14:6, 15:7 },
+          };
+          if (roomSystem === "gba") return {
+            keyboardMap:{ ArrowUp:4, ArrowDown:5, ArrowLeft:6, ArrowRight:7, z:0, x:8, Enter:3, Shift:2, q:10, e:11 },
+            gamepadButtons:{ 0:8, 1:0, 4:10, 5:11, 8:2, 9:3, 12:4, 13:5, 14:6, 15:7 },
           };
           return { keyboardMap:{ ...defaultKeyboardMap }, gamepadButtons:{ ...defaultGamepadButtons } };
         }
@@ -835,6 +859,14 @@
               [["A",1],["B",0],["C",8],["X",10],["Y",9],["Z",11]].forEach(([label,index],position) => { actions[position].textContent = label; actions[position].dataset.index = String(index); });
               const meta = controller.querySelectorAll(".meta .control");
               meta[0].hidden = true; meta[1].hidden = true; meta[3].hidden = true;
+            } else if (roomSystem === "ps1") {
+              controller.classList.add("ps1");
+              const actions = controller.querySelectorAll(".actions .control");
+              [["□",1],["△",9],["×",0],["○",8]].forEach(([label,index],position) => { actions[position].textContent = label; actions[position].dataset.index = String(index); });
+              const meta = controller.querySelectorAll(".meta .control");
+              meta[0].textContent = "L1"; meta[1].textContent = "SELECT"; meta[2].textContent = "START"; meta[3].textContent = "R1";
+            } else if (roomSystem === "nes" || roomSystem === "gba") {
+              controller.classList.add(roomSystem);
             }
             document.getElementById("room-title").textContent = spectatorMode ? `ASSISTINDO · ${data.room.title}` : data.room.title;
             if (spectatorMode) {

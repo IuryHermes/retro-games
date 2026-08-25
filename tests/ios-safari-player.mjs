@@ -22,5 +22,7 @@ assert.match(universal, /getCurrentDisk/, 'disc changes must be confirmed by the
 assert.match(universal, /window\.EJS_biosUrl = ''/, 'PS1 must use HLE instead of the invalid 4 MiB BIOS object');
 assert.doesNotMatch(universal, /EJS_biosUrl = 'https:[^']+scph5501\.bin'/, 'the invalid renamed BIOS must never be loaded');
 assert.match(universal, /getElementById\('game'\)\.appendChild\(panel\)/, 'disc controls must remain inside the emulator in fullscreen');
+assert.match(universal, /EJS_controlScheme = controlSchemes/, 'each system must select its native virtual controller scheme');
+assert.match(universal, /text:'△'[\s\S]*text:'□'[\s\S]*text:'○'[\s\S]*text:'×'/, 'PS1 must expose PlayStation face-button symbols');
 
-console.log('iOS Safari player: 15 checks passed');
+console.log('iOS Safari player: 17 checks passed');

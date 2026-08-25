@@ -292,6 +292,8 @@
             window.EJS_startOnLoaded = true;
             window.EJS_language = "pt-BR";
             window.EJS_loadStateOnStart = false;    
+            const controlSchemes = { nes:'nes', snes:'snes', n64:'n64', gba:'gba', megadrive:'segaMD' };
+            window.EJS_controlScheme = controlSchemes[params.get('system')] || controlSchemes[core] || undefined;
             // Use the threaded N64 build only when the browser confirms that
             // cross-origin isolation and SharedArrayBuffer are available.
             const mobileN64 = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
@@ -341,8 +343,21 @@
                 // deliberately selects the core's built-in HLE BIOS.
                 window.EJS_biosUrl = '';
                 
-                // Força nas duas variáveis conhecidas do EmulatorJS
-                window.EJS_gamepadStyle = "playstation";
+                // EmulatorJS does not publish a PlayStation controlScheme, so
+                // define its native symbols and shoulder buttons explicitly.
+                window.EJS_VirtualGamepadSettings = [
+                    { type:'dpad', location:'left', left:'50%', top:'50%', joystickInput:false, inputValues:[4,5,6,7] },
+                    { type:'button', text:'△', id:'ps-triangle', location:'right', left:42, input_value:9 },
+                    { type:'button', text:'□', id:'ps-square', location:'right', left:2, top:42, input_value:1 },
+                    { type:'button', text:'○', id:'ps-circle', location:'right', left:82, top:42, input_value:8 },
+                    { type:'button', text:'×', id:'ps-cross', location:'right', left:42, top:82, input_value:0 },
+                    { type:'button', text:'L1', id:'ps-l1', location:'top', left:18, fontSize:14, input_value:10 },
+                    { type:'button', text:'L2', id:'ps-l2', location:'top', left:78, fontSize:14, input_value:12 },
+                    { type:'button', text:'R1', id:'ps-r1', location:'top', right:18, fontSize:14, input_value:11 },
+                    { type:'button', text:'R2', id:'ps-r2', location:'top', right:78, fontSize:14, input_value:13 },
+                    { type:'button', text:'SELECT', id:'ps-select', location:'center', left:-12, fontSize:12, block:true, input_value:2 },
+                    { type:'button', text:'START', id:'ps-start', location:'center', left:58, fontSize:12, block:true, input_value:3 }
+                ];
             }
             window.EJS_onLoadError = error => showCompatibilityError(`Falha ao carregar o emulador: ${String(error?.message || error || 'erro desconhecido')}`);
             const cacheRepairKey = 'neo_n64_emulator_cache_repair_v1';
