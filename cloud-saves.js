@@ -262,7 +262,8 @@
         createControls(session);
         window.EJS_gameID = Array.from(gameId).reduce((hash, char) => ((hash * 31 + char.charCodeAt(0)) >>> 0), 7);
         automaticEnabled = Boolean(token && session && (session.automaticGameLimit === null || session.automaticGamesUsed < session.automaticGameLimit));
-        if (token) {
+        const migratedPs1Multidisc = options.system === 'ps1' && options.multidisc;
+        if (token && !migratedPs1Multidisc) {
             try {
                 const automatic = await download('auto');
                 if (automatic) {
