@@ -6,6 +6,8 @@
     const PENDING_HISTORY_KEY = 'neo_pending_history';
     const INTERVAL_MS = 60000;
     const IMAGE_INTERVAL_MS = 10 * 60000;
+    const LOCAL_SAVE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+    const LOCAL_SAVE_STARTED_KEY = 'neo_anonymous_save_started_at';
     let token = sessionStorage.getItem(TOKEN_KEY) || '';
     let gameId = '';
     let gameName = '';
@@ -60,8 +62,17 @@
     async function localSaveGet() {
         const database = await localSaveDatabase();
         return new Promise((resolve, reject) => {
+            const startedAt = Number(localStorage.getItem(LOCAL_SAVE_STARTED_KEY) || 0);
+            if (startedAt && Date.now() - startedAt >= LOCAL_SAVE_TTL_MS) {
+                const cleanup = database.transaction('states', 'readwrite').objectStore('states').clear();
+                cleanup.onsuccess = () => { localStorage.removeItem(LOCAL_SAVE_STARTED_KEY); localStorage.removeItem('neo_local_game_history_v1'); resolve(null); };
+                cleanup.onerror = () => resolve(null); return;
+            }
             const request = database.transaction('states').objectStore('states').get(gameId);
-            request.onsuccess = () => resolve(stateBytes(request.result));
+            request.onsuccess = () => {
+                const record = request.result;
+                resolve(stateBytes(record?.bytes || record));
+            };
             request.onerror = () => reject(request.error);
         }).finally(() => database.close());
     }
@@ -69,7 +80,10 @@
     async function localSavePut(bytes) {
         const database = await localSaveDatabase();
         return new Promise((resolve, reject) => {
-            const request = database.transaction('states', 'readwrite').objectStore('states').put(bytes, gameId);
+            let startedAt = Number(localStorage.getItem(LOCAL_SAVE_STARTED_KEY) || 0);
+            if (!startedAt) { startedAt = Date.now(); localStorage.setItem(LOCAL_SAVE_STARTED_KEY, String(startedAt)); }
+            const storedBytes = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+            const request = database.transaction('states', 'readwrite').objectStore('states').put({ bytes:storedBytes, createdAt:startedAt, savedAt:Date.now(), gameName, gameSystem }, gameId);
             request.onsuccess = () => resolve(true);
             request.onerror = () => reject(request.error);
         }).finally(() => database.close());
@@ -240,7 +254,7 @@
         if (!element) return;
         element.textContent = message;
         clearTimeout(element._clearTimer);
-        element._clearTimer = setTimeout(() => { element.textContent = token ? 'Nuvem conectada' : 'Autosave neste aparelho'; }, 2500);
+        element._clearTimer = setTimeout(() => { element.textContent = token ? 'Nuvem conectada' : 'Autosave local · validade de 30 dias'; }, 2500);
     }
 
     async function sessionInfo() {
@@ -255,7 +269,7 @@
         panel.id = 'neo-cloud-panel';
         const planLimit = session ? session.manualSaveLimit : 0;
         const autoText = session ? (session.automaticGameLimit === null ? 'autosaves ilimitados' : `${session.automaticGamesUsed}/${session.automaticGameLimit} jogos com autosave`) : '';
-        const planText = session ? `${planLimit === null ? 'Slots manuais ilimitados' : `${planLimit} slots manuais`} · ${autoText}` : 'Autosave protegido neste aparelho';
+        const planText = session ? `${planLimit === null ? 'Slots manuais ilimitados' : `${planLimit} slots manuais`} · ${autoText}` : 'Autosave neste aparelho · expira após 30 dias sem cadastro';
         panel.innerHTML = `<button id="neo-cloud-toggle" type="button">☁ SAVES</button><div id="neo-cloud-menu"><div id="neo-cloud-status">${planText}</div><div class="neo-cloud-grid"></div></div>`;
         document.body.appendChild(panel);
         const grid = panel.querySelector('.neo-cloud-grid');
@@ -322,7 +336,7 @@
         }
         if (token && !recoveryMode) {
             try {
-                const automatic = await download('auto');
+                const automatic = await download('auto') || await download('manual-1');
                 if (automatic) {
                     if (await automaticChoice(session)) {
                         automaticEnabled = true;

@@ -732,10 +732,32 @@
     if (/^[a-f0-9]{12}$/.test(incomingReferral || '')) localStorage.setItem('neo_referral_code', incomingReferral);
     const PENDING_HISTORY_KEY = 'neo_pending_history';
     const LOCAL_HISTORY_KEY = 'neo_local_game_history_v1';
+    const LOCAL_HISTORY_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+    const LOCAL_SAVE_STARTED_KEY = 'neo_anonymous_save_started_at';
     const readLocalGameHistory = () => {
-        try { const value = JSON.parse(localStorage.getItem(LOCAL_HISTORY_KEY) || '[]'); return Array.isArray(value) ? value : []; }
+        try {
+            const value = JSON.parse(localStorage.getItem(LOCAL_HISTORY_KEY) || '[]');
+            const history = Array.isArray(value) ? value : [];
+            let startedAt = Number(localStorage.getItem(LOCAL_SAVE_STARTED_KEY) || 0);
+            if (!startedAt && history.length) { startedAt = Math.min(...history.map(item => Number(item?.playedAt) || Date.now())); localStorage.setItem(LOCAL_SAVE_STARTED_KEY, String(startedAt)); }
+            const valid = startedAt && Date.now() - startedAt < LOCAL_HISTORY_TTL_MS ? history : [];
+            if (valid.length) localStorage.setItem(LOCAL_HISTORY_KEY, JSON.stringify(valid)); else localStorage.removeItem(LOCAL_HISTORY_KEY);
+            return valid;
+        }
         catch (_) { return []; }
     };
+    async function purgeExpiredAnonymousProgress() {
+        const startedAt = Number(localStorage.getItem(LOCAL_SAVE_STARTED_KEY) || 0);
+        if (!startedAt || Date.now() - startedAt < LOCAL_HISTORY_TTL_MS) return false;
+        localStorage.removeItem(LOCAL_HISTORY_KEY); localStorage.removeItem(LOCAL_SAVE_STARTED_KEY);
+        try {
+            const database = await new Promise((resolve, reject) => { const request = indexedDB.open('neo-local-saves', 1); request.onupgradeneeded = () => request.result.createObjectStore('states'); request.onsuccess = () => resolve(request.result); request.onerror = () => reject(request.error); });
+            await new Promise(resolve => { const request = database.transaction('states','readwrite').objectStore('states').clear(); request.onsuccess = request.onerror = () => resolve(); });
+            database.close();
+        } catch (_) {}
+        return true;
+    }
+    void purgeExpiredAnonymousProgress();
     const AVATARS = Array.from({ length: 40 }, (_, index) => `avatar-${String(index + 1).padStart(2, '0')}`);
     let accountProfile = null;
     let refreshPersonalHero = () => {};
@@ -980,6 +1002,7 @@
         const cover = game.cover || catalogCoverUrl(game);
         const historyId = String(game.id || `${game.sysId}-${String(game.rom || '').split('/').pop()}`).toLowerCase().replace(/\.[a-z0-9]+$/i, '').replace(/[^a-z0-9._,-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 120);
         const pending = { id: historyId, name: game.nomeOriginal || game.nome, system: game.sysId, cover, playUrl, playedAt:Date.now() };
+        if (!localStorage.getItem(LOCAL_SAVE_STARTED_KEY)) localStorage.setItem(LOCAL_SAVE_STARTED_KEY, String(Date.now()));
         const localHistory = [pending, ...readLocalGameHistory().filter(item => item?.id !== pending.id)].slice(0, 10);
         try { localStorage.setItem(LOCAL_HISTORY_KEY, JSON.stringify(localHistory)); } catch (_) {}
         if (!accountProfile || (!auth.currentUser && !discordAccountToken)) return;
@@ -1005,12 +1028,66 @@
         if (!response.ok) throw new Error(data.erro || 'Não foi possível carregar o perfil.');
         return data;
     }
+    let localMigrationRunning = false;
+    async function migrateLocalProgressToProfile() {
+        if (localMigrationRunning || !accountProfile || (!auth.currentUser && !discordAccountToken)) return;
+        localMigrationRunning = true;
+        try {
+            const token = auth.currentUser ? await auth.currentUser.getIdToken() : discordAccountToken;
+            const database = await new Promise((resolve, reject) => {
+                const request = indexedDB.open('neo-local-saves', 1);
+                request.onupgradeneeded = () => request.result.createObjectStore('states');
+                request.onsuccess = () => resolve(request.result); request.onerror = () => reject(request.error);
+            });
+            const entries = await new Promise((resolve, reject) => {
+                const store = database.transaction('states').objectStore('states');
+                const keysRequest = store.getAllKeys(); const valuesRequest = store.getAll();
+                let keys, values; const finish = () => { if (keys && values) resolve(keys.map((key, index) => [String(key), values[index]])); };
+                keysRequest.onsuccess = () => { keys = keysRequest.result; finish(); }; valuesRequest.onsuccess = () => { values = valuesRequest.result; finish(); };
+                keysRequest.onerror = valuesRequest.onerror = () => reject(keysRequest.error || valuesRequest.error);
+            });
+            const localHistory = readLocalGameHistory();
+            let failed = 0;
+            for (const [id, record] of entries) {
+                const source = record?.bytes || record;
+                const bytes = source instanceof ArrayBuffer ? new Uint8Array(source) : (ArrayBuffer.isView(source) ? new Uint8Array(source.buffer, source.byteOffset, source.byteLength) : null);
+                if (!bytes?.byteLength) { failed += 1; continue; }
+                const catalogGame = indexData.find(game => catalogMatchesSave(game, { id, system:record?.gameSystem || '', name:record?.gameName || '' }));
+                const historyGame = localHistory.find(item => item.id === catalogHistoryId(catalogGame || {}) || normalizedSaveCatalogKey(item.id) === normalizedSaveCatalogKey(id));
+                const gameName = record?.gameName || historyGame?.name || catalogGame?.nomeOriginal || catalogGame?.nome || id;
+                const gameSystem = record?.gameSystem || historyGame?.system || catalogGame?.sysId || '';
+                const headers = { Authorization:`Bearer ${token}`, 'Content-Type':'application/octet-stream', 'X-Save-Name':'Save migrado do navegador', 'X-Game-Name':encodeURIComponent(String(gameName).slice(0,100)), 'X-Game-System':String(gameSystem).slice(0,20) };
+                let imported = false;
+                const autoUrl = `${ACCOUNT_API}/club/save?game=${encodeURIComponent(id)}&slot=auto`;
+                const existingAuto = await fetch(autoUrl, { headers:{ Authorization:`Bearer ${token}` }, cache:'no-store' });
+                if (existingAuto.status === 404) imported = (await fetch(autoUrl, { method:'PUT', headers, body:bytes })).ok;
+                if (!imported && existingAuto.ok) imported = false;
+                if (!imported) {
+                    for (let slot = 1; slot <= 20; slot += 1) {
+                        const slotUrl = `${ACCOUNT_API}/club/save?game=${encodeURIComponent(id)}&slot=manual-${slot}`;
+                        const existing = await fetch(slotUrl, { headers:{ Authorization:`Bearer ${token}` }, cache:'no-store' });
+                        if (existing.status === 403) break;
+                        if (existing.status !== 404) continue;
+                        imported = (await fetch(slotUrl, { method:'PUT', headers, body:bytes })).ok; break;
+                    }
+                }
+                if (imported) await new Promise(resolve => { const request = database.transaction('states','readwrite').objectStore('states').delete(id); request.onsuccess = request.onerror = () => resolve(); });
+                else failed += 1;
+            }
+            database.close();
+            if (!failed) {
+                for (const item of [...localHistory].reverse()) await historyRequest('POST', item).catch(() => {});
+                localStorage.removeItem(LOCAL_HISTORY_KEY); localStorage.removeItem(LOCAL_SAVE_STARTED_KEY);
+            }
+        } catch (error) { console.warn('Neo migração de saves locais:', error); }
+        finally { localMigrationRunning = false; }
+    }
     async function saveProfile() {
         const name = document.getElementById('auth-name').value.trim();
         const body = { name, avatar: selectedAvatar, birthDate: document.getElementById('auth-birth-date').value, locality: document.getElementById('auth-locality').value.trim(), bio: document.getElementById('auth-bio').value.trim(), phone: document.getElementById('auth-phone').value.trim(), referralCode: localStorage.getItem('neo_referral_code') || '' };
         ['instagram','youtube','facebook','tiktok'].forEach(key => { body[key] = document.getElementById(`auth-${key}`).value.trim(); });
         setAuthStatus('Salvando perfil...');
-        try { const data = await profileRequest('PUT', body); if (data.created) localStorage.removeItem('neo_referral_code'); accountProfile = data.profile; applyProfile(); void refreshPersonalHero(); setAuthStatus(data.created ? `Bem-vindo(a), ${accountProfile.name}!` : 'Perfil atualizado.'); setTimeout(closeAuth, 900); }
+        try { const data = await profileRequest('PUT', body); if (data.created) localStorage.removeItem('neo_referral_code'); accountProfile = data.profile; applyProfile(); await migrateLocalProgressToProfile(); void refreshPersonalHero(); setAuthStatus(data.created ? `Bem-vindo(a), ${accountProfile.name}! Seus saves locais foram migrados.` : 'Perfil atualizado.'); setTimeout(closeAuth, 900); }
         catch (error) { setAuthStatus(error.message); }
     }
     function applyProfile() {
@@ -1050,7 +1127,7 @@
         document.getElementById('auth-save-profile').style.display = user || discordAccountToken ? 'block' : 'none';
         if (!user && !discordAccountToken) { accountProfile = null; sessionStorage.removeItem('neo_club_access'); applyProfile(); return; }
         try {
-            const data = await profileRequest('GET'); accountProfile = data.profile; applyProfile();
+            const data = await profileRequest('GET'); accountProfile = data.profile; applyProfile(); await migrateLocalProgressToProfile();
             if (accountProfile && (!accountProfile.birthDate || !accountProfile.locality)) { document.getElementById('auth-copy').textContent = 'Atualize seu perfil para continuar usando a área social.'; openAuth(); }
             else closeAuth();
             startSocialPresence();
@@ -1653,7 +1730,7 @@
                 const eyebrow = document.createElement('div'); eyebrow.className = 'hero-eyebrow'; eyebrow.textContent = accountProfile ? `OLÁ, ${accountProfile.name}` : 'CONTINUE JOGANDO';
                 const title = document.createElement('h1'); title.className = 'hero-title'; title.textContent = recent.name;
                 const meta = document.createElement('div'); meta.className = 'hero-categories'; meta.textContent = `${String(recent.system || '').toUpperCase()} · RECENTE ${recentIndex + 1} DE ${recentGames.length}`;
-                const note = document.createElement('div'); note.className = 'hero-resume-note'; note.textContent = 'Continue sua partida de onde parou.';
+                const note = document.createElement('div'); note.className = 'hero-resume-note'; note.textContent = accountProfile ? 'Continue sua partida de onde parou.' : 'Continue neste aparelho. Sem cadastro, este save expira em 30 dias.';
                 const button = document.createElement('button'); button.type = 'button'; button.className = 'hero-play-btn selectable-item'; button.innerHTML = '<span>▶</span> CONTINUE';
                 button.onclick = () => {
                     void historyRequest('POST', { id:recent.id, name:recent.name, system:recent.system, cover:recent.cover || media, playUrl:recent.playUrl }).catch(() => {});

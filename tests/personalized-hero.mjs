@@ -14,6 +14,10 @@ assert.match(index, /Promise\.allSettled\(fetchPromises\)/);
 assert.match(index, /recent\.cover \|\| catalogCover/);
 assert.match(index, /showOnlyPlayedHeroes\(true\)/);
 assert.match(index, /LOCAL_HISTORY_KEY = 'neo_local_game_history_v1'/);
+assert.match(index, /LOCAL_SAVE_STARTED_KEY = 'neo_anonymous_save_started_at'/);
+assert.match(index, /purgeExpiredAnonymousProgress/);
+assert.match(index, /migrateLocalProgressToProfile/);
+assert.match(index, /slot=manual-\$\{slot\}/);
 assert.match(index, /hero-slide:not\(\[hidden\]\)/);
 assert.match(index, /historyRequest\('POST', \{ id:recent\.id/);
 assert.match(index, /window\.startGame\(recent\.playUrl\)/);
@@ -28,4 +32,4 @@ assert.match(index, /id="hero-prev"/);
 assert.match(index, /id="hero-next"/);
 assert.doesNotMatch(index, /imagem da partida aparecerá aqui depois do próximo autosave/);
 
-console.log('personalized hero: 22 checks passed');
+console.log('personalized hero: 28 checks passed');

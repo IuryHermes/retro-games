@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 
 const player = await readFile(new URL('../player-universal.html', import.meta.url), 'utf8');
 const cloudSaves = await readFile(new URL('../cloud-saves.js', import.meta.url), 'utf8');
-assert.match(player, /src="cloud-saves\.js\?v=12"/);
+assert.match(player, /src="cloud-saves\.js\?v=13"/);
 
 assert.match(player, /src="coi-serviceworker\.js\?v=3"/);
 const coiWorker = await readFile(new URL('../coi-serviceworker.js', import.meta.url), 'utf8');
@@ -57,6 +57,9 @@ assert.match(cloudSaves, /CARREGAR CHECKPOINT ANTERIOR/);
 assert.match(cloudSaves, /indexedDB\.open\('neo-local-saves', 1\)/);
 assert.match(cloudSaves, /localSaveGet/);
 assert.match(cloudSaves, /localSavePut/);
+assert.match(cloudSaves, /LOCAL_SAVE_TTL_MS = 30 \* 24 \* 60 \* 60 \* 1000/);
+assert.match(cloudSaves, /LOCAL_SAVE_STARTED_KEY = 'neo_anonymous_save_started_at'/);
+assert.match(cloudSaves, /expira após 30 dias sem cadastro/);
 assert.match(player, /INICIAR EM MODO SEGURO/);
 assert.match(player, /safeRecoveryMode/);
 assert.match(player, /shouldRepairEmulatorCache/);
@@ -64,4 +67,4 @@ assert.match(player, /Neo safe recovery settings/);
 assert.match(cloudSaves, /scheduleAutosaveImage\(\)/);
 assert.match(cloudSaves, /document\.visibilityState === 'hidden'/);
 
-console.log('n64 performance/autosave: 41 checks passed');
+console.log('n64 performance/autosave: 44 checks passed');
