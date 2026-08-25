@@ -628,11 +628,11 @@ var src_default = {
     }
     if (request.method === "GET" && url.pathname === "/catalog/overrides") {
       const system = String(url.searchParams.get("system") || "").toLowerCase();
-      if (!/^(nes|snes|n64|gba|megadrive|ps1)$/.test(system)) return json({ erro: "Sistema invalido." }, 400);
+      if (!/^(nes|snes|n64|gba|megadrive|ps1|atari2600)$/.test(system)) return json({ erro: "Sistema invalido." }, 400);
       const records = await readJsonDirectory(env, `catalog/overrides/${system}/`, 2e3);
       return json({ system, overrides: Object.fromEntries(records.map((record) => [record.value.id, record.value])) });
     }
-    const adminCoverMatch = url.pathname.match(/^\/catalog\/admin-cover\/(nes|snes|n64|gba|megadrive|ps1)\/([a-z0-9._-]+)\.(avif|gif|jpe?g|png|webp)$/i);
+    const adminCoverMatch = url.pathname.match(/^\/catalog\/admin-cover\/(nes|snes|n64|gba|megadrive|ps1|atari2600)\/([a-z0-9._-]+)\.(avif|gif|jpe?g|png|webp)$/i);
     if (request.method === "GET" && adminCoverMatch) {
       const key = `catalog/admin-covers/${adminCoverMatch[1].toLowerCase()}/${adminCoverMatch[2].toLowerCase()}.${adminCoverMatch[3].toLowerCase()}`;
       const object = await env.GAMES.get(key);
@@ -652,7 +652,7 @@ var src_default = {
       const contentType = String(request.headers.get("Content-Type") || "").split(";")[0].toLowerCase();
       const extensions = { "image/avif": "avif", "image/gif": "gif", "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
       const length = Number(request.headers.get("Content-Length") || 0);
-      if (!/^(nes|snes|n64|gba|megadrive|ps1)$/.test(system) || !rom || rom.length > 300) return json({ erro: "Jogo invalido." }, 400);
+      if (!/^(nes|snes|n64|gba|megadrive|ps1|atari2600)$/.test(system) || !rom || rom.length > 300) return json({ erro: "Jogo invalido." }, 400);
       if (!extensions[contentType]) return json({ erro: "Use uma imagem AVIF, GIF, JPG, PNG ou WEBP." }, 415);
       if (!Number.isSafeInteger(length) || length < 1 || length > MAX_SAVE_IMAGE_BYTES) return json({ erro: "A capa deve ter no maximo 4 MB." }, 413);
       const bytes = await request.arrayBuffer();
@@ -886,7 +886,7 @@ var src_default = {
       }
       if (action === "games") {
         const system = String(body.system || "snes").toLowerCase();
-        if (!/^(nes|snes|n64|gba|megadrive|ps1)$/.test(system)) return json({ erro: "Sistema invalido." }, 400);
+        if (!/^(nes|snes|n64|gba|megadrive|ps1|atari2600)$/.test(system)) return json({ erro: "Sistema invalido." }, 400);
         const [catalogResponse, overrides] = await Promise.all([fetch(`${SITE}/systems/${system}/games.json`, { cf: { cacheTtl: 300 } }), readJsonDirectory(env, `catalog/overrides/${system}/`, 2e3)]);
         if (!catalogResponse.ok) return json({ erro: "Catalogo indisponivel." }, 502);
         const overrideMap = new Map(overrides.map((record) => [record.value.id, record.value]));
@@ -895,7 +895,7 @@ var src_default = {
       }
       if (action === "game-override") {
         const system = String(body.system || "").toLowerCase(); const rom = String(body.rom || "");
-        if (!/^(nes|snes|n64|gba|megadrive|ps1)$/.test(system) || !rom || rom.length > 300) return json({ erro: "Jogo invalido." }, 400);
+        if (!/^(nes|snes|n64|gba|megadrive|ps1|atari2600)$/.test(system) || !rom || rom.length > 300) return json({ erro: "Jogo invalido." }, 400);
         const id = catalogOverrideId(system, rom); const input = body.override || {};
         const capa = cleanProfileText(input.capa, 500);
         const ownUpload = capa.startsWith(`${WORKER}/catalog/admin-cover/${system}/${id}.`);
@@ -1304,7 +1304,7 @@ var src_default = {
       const system = String(body.system || "").trim().toLowerCase().slice(0, 20);
       const cover = String(body.cover || "").trim().slice(0, 1e3);
       const playUrl = String(body.playUrl || "").trim().slice(0, 2e3);
-      const validPlayUrl = /^player-(universal|ps1)\.html\?/.test(playUrl) || /^\/?jogos\/(nes|snes|n64|gba|megadrive|ps1)\/[a-z0-9][a-z0-9-]{0,89}\/$/.test(playUrl);
+      const validPlayUrl = /^player-(universal|ps1)\.html\?/.test(playUrl) || /^\/?jogos\/(nes|snes|n64|gba|megadrive|ps1|atari2600)\/[a-z0-9][a-z0-9-]{0,89}\/$/.test(playUrl);
       if (!/^[a-z0-9][a-z0-9._,-]{0,119}$/.test(id) || !name || !/^[a-z0-9-]{2,20}$/.test(system) || !validPlayUrl || cover && !/^(https:\/\/pub-[a-z0-9]+\.r2\.dev\/|systems\/|assets\/)/.test(cover))
         return json({ erro: "Jogo invalido." }, 400);
       const game = { id, name, system, cover, playUrl: playUrl.replace(/([?&])nocache=[^&]*&?/, "$1").replace(/[?&]$/, ""), playedAt: Date.now() };

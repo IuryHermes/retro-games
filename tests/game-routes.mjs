@@ -18,5 +18,5 @@ assert.match(generator, /VIII:'8'/);
 assert.match(generator, /FireRed/);
 assert.match(index, /publicGameUrl/);
 assert.match(index, /`\/jogos\/\$\{system\}/);
-assert.match(worker, /jogos\\\/\(nes\|snes\|n64\|gba\|megadrive\|ps1\)/);
+assert.match(worker, /jogos\\\/\(nes\|snes\|n64\|gba\|megadrive\|ps1\|atari2600\)/);
 console.log('game routes: 14 checks passed');

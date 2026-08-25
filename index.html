@@ -703,11 +703,13 @@
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
     const R2_URL = "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/";
+    const catalogAssetBase = systemPath => systemPath === 'systems/atari2600/' ? '' : R2_URL;
     const catalogCoverUrl = (game, systemPath = '') => {
         const value = String(game?.capa || '').trim();
         if (/^https:\/\//i.test(value)) return value;
         const name = value ? value.split('/').pop() : '';
-        return name ? `${R2_URL}${systemPath || game?.sysPath || game?.path || ''}capas/${encodeURIComponent(name)}` : '';
+        const path = systemPath || game?.sysPath || game?.path || '';
+        return name ? `${catalogAssetBase(path)}${path}capas/${encodeURIComponent(name)}` : '';
     };
     const blockRegex = /([._\-\s](cd|disc|disco)\s*[0-9]+)/i;
     const hiddenPs1Disc = game => game?.sysId === 'ps1' && blockRegex.test(game.rom);
@@ -1343,7 +1345,7 @@
         let capaNome = gameObj.capa ? gameObj.capa.split('/').pop() : '';
 
         const localCoverPath = capaNome ? `${gameObj.sysPath}capas/${encodeURIComponent(capaNome)}` : 'assets/imagens-videos/logo-discord.gif';
-        const mediaPath = gifNome ? `${R2_URL}${gameObj.sysPath}previews/${encodeURIComponent(gifNome)}` : (catalogCoverUrl(gameObj) || 'assets/imagens-videos/logo-discord.gif');
+        const mediaPath = gifNome ? `${catalogAssetBase(gameObj.sysPath)}${gameObj.sysPath}previews/${encodeURIComponent(gifNome)}` : (catalogCoverUrl(gameObj) || 'assets/imagens-videos/logo-discord.gif');
 
         const modalImage = document.getElementById('modal-game-img');
         modalImage.onerror = () => { modalImage.onerror = () => { modalImage.src = 'assets/imagens-videos/logo-discord.gif'; }; modalImage.src = localCoverPath; };
@@ -1404,7 +1406,7 @@
     // =======================================================================
     // LÓGICA DO CHAT (COM CORREÇÃO DE AUTO-SCROLL)
     // =======================================================================
-    const coreMap = { 'nes': 'nes', 'snes': 'snes', 'gba': 'gba', 'n64': 'n64', 'megadrive': 'segaMD', 'ps1': 'psx' };
+    const coreMap = { 'nes': 'nes', 'snes': 'snes', 'gba': 'gba', 'n64': 'n64', 'megadrive': 'segaMD', 'ps1': 'psx', 'atari2600': 'atari2600' };
     const playerUrl = (playerFile, gameUrl, core, title, system) => `${playerFile}?${new URLSearchParams({ nocache:Date.now(), game:gameUrl, core, title:title || '', system:system || '' })}`;
     const romanGameNumbers = { XV:'15', XIV:'14', XIII:'13', XII:'12', XI:'11', IX:'9', VIII:'8', VII:'7', VI:'6', IV:'4', III:'3', II:'2' };
     const normalizeGameName = (value, system = '') => String(value || 'Jogo')
@@ -1481,7 +1483,8 @@
         { id: 'n64', name: 'NINTENDO 64', icon: 'assets/imagens-videos/imagens do menu/n64.png', path: 'systems/n64/' },
         { id: 'gba', name: 'GAME BOY ADV', icon: 'assets/imagens-videos/imagens do menu/gba.png', path: 'systems/gba/' },
         { id: 'megadrive', name: 'MEGA DRIVE', icon: 'assets/imagens-videos/imagens do menu/megadrive.png', path: 'systems/megadrive/' },
-        { id: 'ps1', name: 'PLAYSTATION 1', icon: 'assets/imagens-videos/imagens do menu/ps1.png', path: 'systems/ps1/' }
+        { id: 'ps1', name: 'PLAYSTATION 1', icon: 'assets/imagens-videos/imagens do menu/ps1.png', path: 'systems/ps1/' },
+        { id: 'atari2600', name: 'ATARI 2600', icon: 'assets/imagens-videos/imagens do menu/atari2600.png', path: 'systems/atari2600/' }
     ];
 
     const catalog = document.getElementById("catalog-area");
@@ -1552,7 +1555,7 @@
 
                 const imgPath = catalogCoverUrl(g, sys.path);
                 const localCoverPath = capaNome ? `${sys.path}capas/${encodeURIComponent(capaNome)}` : 'assets/imagens-videos/logo-discord.gif';
-                const gifPath = gifNome ? `${R2_URL}${sys.path}previews/${encodeURIComponent(gifNome)}` : '';
+                const gifPath = gifNome ? `${catalogAssetBase(sys.path)}${sys.path}previews/${encodeURIComponent(gifNome)}` : '';
 
                 const coreToUse = coreMap[sys.id] || 'snes';
                 const playerFile = 'player-universal.html';
@@ -1620,12 +1623,12 @@
     function catalogMatchesSave(game, saved) {
         const savedId = normalizedSaveCatalogKey(saved.id);
         if (normalizedSaveCatalogKey(catalogHistoryId(game)) === savedId) return true;
-        const systemAliases = { segamd:'megadrive', megadrive:'megadrive', n64:'n64', nes:'nes', snes:'snes', gba:'gba', psx:'ps1', ps1:'ps1' };
+        const systemAliases = { segamd:'megadrive', megadrive:'megadrive', n64:'n64', nes:'nes', snes:'snes', gba:'gba', psx:'ps1', ps1:'ps1', atari2600:'atari2600' };
         const savedSystem = systemAliases[String(saved.system || '').toLowerCase()]
             || systemAliases[String(saved.id || '').split('-')[0]] || '';
         const catalogSystem = systemAliases[String(game.sysId || '').toLowerCase()] || '';
         if (!savedSystem || savedSystem !== catalogSystem) return false;
-        const savedRom = savedId.replace(/^(?:segamd|megadrive|n64|nes|snes|gba|psx|ps1)-/, '');
+        const savedRom = savedId.replace(/^(?:segamd|megadrive|n64|nes|snes|gba|psx|ps1|atari2600)-/, '');
         const catalogRom = normalizedSaveCatalogKey(String(game.rom || '').split('/').pop());
         if (savedRom === catalogRom) return true;
         const withoutDisc = value => value.replace(/-(?:cd|disc|disco)-?\d+$/i, '');

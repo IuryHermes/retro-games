@@ -3,9 +3,9 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const systems = ['nes', 'snes', 'n64', 'gba', 'megadrive', 'ps1'];
-const cores = { nes:'nes', snes:'snes', n64:'n64', gba:'gba', megadrive:'segaMD', ps1:'psx' };
-const platformLabels = { nes:'NES', snes:'SNES', n64:'Nintendo 64', gba:'GBA', megadrive:'Mega Drive', ps1:'PS1' };
+const systems = ['nes', 'snes', 'n64', 'gba', 'megadrive', 'ps1', 'atari2600'];
+const cores = { nes:'nes', snes:'snes', n64:'n64', gba:'gba', megadrive:'segaMD', ps1:'psx', atari2600:'atari2600' };
+const platformLabels = { nes:'NES', snes:'SNES', n64:'Nintendo 64', gba:'GBA', megadrive:'Mega Drive', ps1:'PS1', atari2600:'Atari 2600' };
 const r2 = 'https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/';
 const site = 'https://neoterminalroom.com.br';
 const romanGameNumbers = { XV:'15', XIV:'14', XIII:'13', XII:'12', XI:'11', IX:'9', VIII:'8', VII:'7', VI:'6', IV:'4', III:'3', II:'2' };
@@ -36,12 +36,13 @@ for (const system of systems) {
     // Boot directly from Disc 1. Browser PCSX-ReARMed does not reliably accept
     // M3Us whose later large CHDs are intentionally loaded on demand.
     const bootRom = multidisc ? game.discs[0] : game.rom;
-    const rom = `${r2}systems/${system}/${bootRom}`;
+    const assetBase = system === 'atari2600' ? `${site}/` : r2;
+    const rom = `${assetBase}systems/${system}/${bootRom}`;
     const playerParams = { game:rom, core:cores[system], title:gameName, system, embedded:'1' };
-    if (multidisc) playerParams.discs = JSON.stringify(game.discs.map(disc => `${r2}systems/${system}/${disc}`));
+    if (multidisc) playerParams.discs = JSON.stringify(game.discs.map(disc => `${assetBase}systems/${system}/${disc}`));
     const player = `/player-universal.html?${new URLSearchParams(playerParams)}`;
     const coverName = String(game.capa || '').split('/').pop();
-    const cover = coverName ? `${r2}systems/${system}/capas/${encodeURIComponent(coverName)}` : `${site}/assets/imagens-videos/logo-discord.gif`;
+    const cover = coverName ? `${assetBase}systems/${system}/capas/${encodeURIComponent(coverName)}` : `${site}/assets/imagens-videos/logo-discord.gif`;
     const description = String(game.descricao || `Jogue ${gameName} online no NeoTerminalRoom.`).replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim().slice(0, 500);
     const languageText = `${gameName} ${game.rom} ${description}`;
     const alreadyLocalizedName = /pt[-_ ]?br|traduz|dublad|portugu[eê]s/i.test(gameName);

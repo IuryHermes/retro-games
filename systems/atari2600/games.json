@@ -1,0 +1,1162 @@
+[
+  {
+    "nome": "Adventure",
+    "rom": "roms/adventure.bin",
+    "capa": "adventure.png",
+    "preview": "adventure.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Adventure online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Air-Sea Battle",
+    "rom": "roms/air-sea-battle.bin",
+    "capa": "air-sea-battle.png",
+    "preview": "air-sea-battle.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Air-Sea Battle online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Alien",
+    "rom": "roms/alien.bin",
+    "capa": "alien.png",
+    "preview": "alien.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Alien online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Amidar",
+    "rom": "roms/amidar.bin",
+    "capa": "amidar.png",
+    "preview": "amidar.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Amidar online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Armor Ambush",
+    "rom": "roms/armor-ambush.bin",
+    "capa": "armor-ambush.png",
+    "preview": "armor-ambush.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Armor Ambush online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Asteroids",
+    "rom": "roms/asteroids.bin",
+    "capa": "asteroids.png",
+    "preview": "asteroids.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Asteroids online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Atlantis",
+    "rom": "roms/atlantis.bin",
+    "capa": "atlantis.png",
+    "preview": "atlantis.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Atlantis online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Barnstorming",
+    "rom": "roms/barnstorming.bin",
+    "capa": "barnstorming.png",
+    "preview": "barnstorming.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Barnstorming online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Battlezone",
+    "rom": "roms/battlezone.bin",
+    "capa": "battlezone.png",
+    "preview": "battlezone.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Battlezone online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Beamrider",
+    "rom": "roms/beamrider.bin",
+    "capa": "beamrider.png",
+    "preview": "beamrider.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Beamrider online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Berzerk",
+    "rom": "roms/berzerk.bin",
+    "capa": "berzerk.png",
+    "preview": "berzerk.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Berzerk online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Blackjack",
+    "rom": "roms/blackjack.bin",
+    "capa": "blackjack.png",
+    "preview": "blackjack.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Blackjack online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Blueprint",
+    "rom": "roms/blueprint.bin",
+    "capa": "blueprint.png",
+    "preview": "blueprint.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Blueprint online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Bowling",
+    "rom": "roms/bowling.bin",
+    "capa": "bowling.png",
+    "preview": "bowling.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Bowling online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Boxing",
+    "rom": "roms/boxing.bin",
+    "capa": "boxing.png",
+    "preview": "boxing.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Boxing online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Breakout",
+    "rom": "roms/breakout.bin",
+    "capa": "breakout.png",
+    "preview": "breakout.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Breakout online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Bridge",
+    "rom": "roms/bridge.bin",
+    "capa": "bridge.png",
+    "preview": "bridge.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Bridge online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Buck Rogers - Planet of Zoom",
+    "rom": "roms/buck-rogers-planet-of-zoom.bin",
+    "capa": "buck-rogers-planet-of-zoom.png",
+    "preview": "buck-rogers-planet-of-zoom.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Buck Rogers - Planet of Zoom online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Bump 'n' Jump",
+    "rom": "roms/bump-n-jump.bin",
+    "capa": "bump-n-jump.png",
+    "preview": "bump-n-jump.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Bump 'n' Jump online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Burgertime",
+    "rom": "roms/burgertime.bin",
+    "capa": "burgertime.png",
+    "preview": "burgertime.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Burgertime online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "California Games",
+    "rom": "roms/california-games.bin",
+    "capa": "california-games.png",
+    "preview": "california-games.gif",
+    "nota": "8.0",
+    "descricao": "Jogue California Games online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Canyon Bomber",
+    "rom": "roms/canyon-bomber.bin",
+    "capa": "canyon-bomber.png",
+    "preview": "canyon-bomber.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Canyon Bomber online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Carnival",
+    "rom": "roms/carnival.bin",
+    "capa": "carnival.png",
+    "preview": "carnival.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Carnival online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Centipede",
+    "rom": "roms/centipede.bin",
+    "capa": "centipede.png",
+    "preview": "centipede.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Centipede online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Chopper Command",
+    "rom": "roms/chopper-command.bin",
+    "capa": "chopper-command.png",
+    "preview": "chopper-command.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Chopper Command online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Circus Atari",
+    "rom": "roms/circus-atari.bin",
+    "capa": "circus-atari.png",
+    "preview": "circus-atari.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Circus Atari online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Combat",
+    "rom": "roms/combat.bin",
+    "capa": "combat.png",
+    "preview": "combat.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Combat online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Commando",
+    "rom": "roms/commando.bin",
+    "capa": "commando.png",
+    "preview": "commando.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Commando online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Cosmic Ark",
+    "rom": "roms/cosmic-ark.bin",
+    "capa": "cosmic-ark.png",
+    "preview": "cosmic-ark.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Cosmic Ark online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Crackpots",
+    "rom": "roms/crackpots.bin",
+    "capa": "crackpots.png",
+    "preview": "crackpots.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Crackpots online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Crystal Castles",
+    "rom": "roms/crystal-castles.bin",
+    "capa": "crystal-castles.png",
+    "preview": "crystal-castles.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Crystal Castles online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Dark Cavern",
+    "rom": "roms/dark-cavern.bin",
+    "capa": "dark-cavern.png",
+    "preview": "dark-cavern.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Dark Cavern online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Defender",
+    "rom": "roms/defender.bin",
+    "capa": "defender.png",
+    "preview": "defender.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Defender online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Defender II",
+    "rom": "roms/defender-ii.bin",
+    "capa": "defender-ii.png",
+    "preview": "defender-ii.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Defender II online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Demon Attack",
+    "rom": "roms/demon-attack.bin",
+    "capa": "demon-attack.png",
+    "preview": "demon-attack.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Demon Attack online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Demons to Diamonds",
+    "rom": "roms/demons-to-diamonds.bin",
+    "capa": "demons-to-diamonds.png",
+    "preview": "demons-to-diamonds.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Demons to Diamonds online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Desert Falcon",
+    "rom": "roms/desert-falcon.bin",
+    "capa": "desert-falcon.png",
+    "preview": "desert-falcon.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Desert Falcon online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Dig Dug",
+    "rom": "roms/dig-dug.bin",
+    "capa": "dig-dug.png",
+    "preview": "dig-dug.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Dig Dug online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Dodge 'Em",
+    "rom": "roms/dodge-em.bin",
+    "capa": "dodge-em.png",
+    "preview": "dodge-em.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Dodge 'Em online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Donkey Kong",
+    "rom": "roms/donkey-kong.bin",
+    "capa": "donkey-kong.png",
+    "preview": "donkey-kong.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Donkey Kong online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Donkey Kong Junior",
+    "rom": "roms/donkey-kong-junior.bin",
+    "capa": "donkey-kong-junior.png",
+    "preview": "donkey-kong-junior.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Donkey Kong Junior online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Double Dragon",
+    "rom": "roms/double-dragon.bin",
+    "capa": "double-dragon.png",
+    "preview": "double-dragon.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Double Dragon online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Dragonfire",
+    "rom": "roms/dragonfire.bin",
+    "capa": "dragonfire.png",
+    "preview": "dragonfire.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Dragonfire online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Dragster",
+    "rom": "roms/dragster.bin",
+    "capa": "dragster.png",
+    "preview": "dragster.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Dragster online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Enduro",
+    "rom": "roms/enduro.bin",
+    "capa": "enduro.png",
+    "preview": "enduro.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Enduro online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "E.T. - The Extra-Terrestrial",
+    "rom": "roms/e-t-the-extra-terrestrial.bin",
+    "capa": "e-t-the-extra-terrestrial.png",
+    "preview": "e-t-the-extra-terrestrial.gif",
+    "nota": "8.0",
+    "descricao": "Jogue E.T. - The Extra-Terrestrial online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Fathom",
+    "rom": "roms/fathom.bin",
+    "capa": "fathom.png",
+    "preview": "fathom.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Fathom online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Fast Food",
+    "rom": "roms/fast-food.bin",
+    "capa": "fast-food.png",
+    "preview": "fast-food.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Fast Food online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Fishing Derby",
+    "rom": "roms/fishing-derby.bin",
+    "capa": "fishing-derby.png",
+    "preview": "fishing-derby.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Fishing Derby online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Football",
+    "rom": "roms/football.bin",
+    "capa": "football.png",
+    "preview": "football.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Football online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Freeway",
+    "rom": "roms/freeway.bin",
+    "capa": "freeway.png",
+    "preview": "freeway.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Freeway online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Frogger",
+    "rom": "roms/frogger.bin",
+    "capa": "frogger.png",
+    "preview": "frogger.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Frogger online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Frogger II - ThreeeDeep!",
+    "rom": "roms/frogger-ii-threeedeep.bin",
+    "capa": "frogger-ii-threeedeep.png",
+    "preview": "frogger-ii-threeedeep.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Frogger II - ThreeeDeep! online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Front Line",
+    "rom": "roms/front-line.bin",
+    "capa": "front-line.png",
+    "preview": "front-line.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Front Line online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Frostbite",
+    "rom": "roms/frostbite.bin",
+    "capa": "frostbite.png",
+    "preview": "frostbite.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Frostbite online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Galaxian",
+    "rom": "roms/galaxian.bin",
+    "capa": "galaxian.png",
+    "preview": "galaxian.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Galaxian online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Golf",
+    "rom": "roms/golf.bin",
+    "capa": "golf.png",
+    "preview": "golf.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Golf online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Gorf",
+    "rom": "roms/gorf.bin",
+    "capa": "gorf.png",
+    "preview": "gorf.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Gorf online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Gravitar",
+    "rom": "roms/gravitar.bin",
+    "capa": "gravitar.png",
+    "preview": "gravitar.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Gravitar online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "H.E.R.O.",
+    "rom": "roms/h-e-r-o.bin",
+    "capa": "h-e-r-o.png",
+    "preview": "h-e-r-o.gif",
+    "nota": "8.0",
+    "descricao": "Jogue H.E.R.O. online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Haunted House",
+    "rom": "roms/haunted-house.bin",
+    "capa": "haunted-house.png",
+    "preview": "haunted-house.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Haunted House online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Home Run",
+    "rom": "roms/home-run.bin",
+    "capa": "home-run.png",
+    "preview": "home-run.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Home Run online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Ice Hockey",
+    "rom": "roms/ice-hockey.bin",
+    "capa": "ice-hockey.png",
+    "preview": "ice-hockey.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Ice Hockey online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Ikari Warriors",
+    "rom": "roms/ikari-warriors.bin",
+    "capa": "ikari-warriors.png",
+    "preview": "ikari-warriors.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Ikari Warriors online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Indy 500",
+    "rom": "roms/indy-500.bin",
+    "capa": "indy-500.png",
+    "preview": "indy-500.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Indy 500 online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Joust",
+    "rom": "roms/joust.bin",
+    "capa": "joust.png",
+    "preview": "joust.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Joust online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Jungle Hunt",
+    "rom": "roms/jungle-hunt.bin",
+    "capa": "jungle-hunt.png",
+    "preview": "jungle-hunt.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Jungle Hunt online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Kaboom!",
+    "rom": "roms/kaboom.bin",
+    "capa": "kaboom.png",
+    "preview": "kaboom.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Kaboom! online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Kangaroo",
+    "rom": "roms/kangaroo.bin",
+    "capa": "kangaroo.png",
+    "preview": "kangaroo.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Kangaroo online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Keystone Kapers",
+    "rom": "roms/keystone-kapers.bin",
+    "capa": "keystone-kapers.png",
+    "preview": "keystone-kapers.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Keystone Kapers online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "King Kong",
+    "rom": "roms/king-kong.bin",
+    "capa": "king-kong.png",
+    "preview": "king-kong.gif",
+    "nota": "8.0",
+    "descricao": "Jogue King Kong online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Kung-Fu Master",
+    "rom": "roms/kung-fu-master.bin",
+    "capa": "kung-fu-master.png",
+    "preview": "kung-fu-master.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Kung-Fu Master online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Laser Blast",
+    "rom": "roms/laser-blast.bin",
+    "capa": "laser-blast.png",
+    "preview": "laser-blast.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Laser Blast online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Lock 'n' Chase",
+    "rom": "roms/lock-n-chase.bin",
+    "capa": "lock-n-chase.png",
+    "preview": "lock-n-chase.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Lock 'n' Chase online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Mario Bros.",
+    "rom": "roms/mario-bros.bin",
+    "capa": "mario-bros.png",
+    "preview": "mario-bros.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Mario Bros. online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Maze Craze",
+    "rom": "roms/maze-craze.bin",
+    "capa": "maze-craze.png",
+    "preview": "maze-craze.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Maze Craze online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Megamania",
+    "rom": "roms/megamania.bin",
+    "capa": "megamania.png",
+    "preview": "megamania.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Megamania online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Midnight Magic",
+    "rom": "roms/midnight-magic.bin",
+    "capa": "midnight-magic.png",
+    "preview": "midnight-magic.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Midnight Magic online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Millipede",
+    "rom": "roms/millipede.bin",
+    "capa": "millipede.png",
+    "preview": "millipede.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Millipede online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Miner 2049er",
+    "rom": "roms/miner-2049er.bin",
+    "capa": "miner-2049er.png",
+    "preview": "miner-2049er.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Miner 2049er online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Missile Command",
+    "rom": "roms/missile-command.bin",
+    "capa": "missile-command.png",
+    "preview": "missile-command.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Missile Command online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Montezuma's Revenge",
+    "rom": "roms/montezuma-s-revenge.bin",
+    "capa": "montezuma-s-revenge.png",
+    "preview": "montezuma-s-revenge.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Montezuma's Revenge online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Moon Patrol",
+    "rom": "roms/moon-patrol.bin",
+    "capa": "moon-patrol.png",
+    "preview": "moon-patrol.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Moon Patrol online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Mouse Trap",
+    "rom": "roms/mouse-trap.bin",
+    "capa": "mouse-trap.png",
+    "preview": "mouse-trap.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Mouse Trap online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Ms. Pac-Man",
+    "rom": "roms/ms-pac-man.bin",
+    "capa": "ms-pac-man.png",
+    "preview": "ms-pac-man.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Ms. Pac-Man online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Night Driver",
+    "rom": "roms/night-driver.bin",
+    "capa": "night-driver.png",
+    "preview": "night-driver.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Night Driver online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Oink!",
+    "rom": "roms/oink.bin",
+    "capa": "oink.png",
+    "preview": "oink.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Oink! online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Omega Race",
+    "rom": "roms/omega-race.bin",
+    "capa": "omega-race.png",
+    "preview": "omega-race.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Omega Race online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Outlaw",
+    "rom": "roms/outlaw.bin",
+    "capa": "outlaw.png",
+    "preview": "outlaw.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Outlaw online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Pac-Man",
+    "rom": "roms/pac-man.bin",
+    "capa": "pac-man.png",
+    "preview": "pac-man.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Pac-Man online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Phoenix",
+    "rom": "roms/phoenix.bin",
+    "capa": "phoenix.png",
+    "preview": "phoenix.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Phoenix online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Pitfall!",
+    "rom": "roms/pitfall.bin",
+    "capa": "pitfall.png",
+    "preview": "pitfall.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Pitfall! online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Pitfall II - Lost Caverns",
+    "rom": "roms/pitfall-ii-lost-caverns.bin",
+    "capa": "pitfall-ii-lost-caverns.png",
+    "preview": "pitfall-ii-lost-caverns.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Pitfall II - Lost Caverns online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Pole Position",
+    "rom": "roms/pole-position.bin",
+    "capa": "pole-position.png",
+    "preview": "pole-position.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Pole Position online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Popeye",
+    "rom": "roms/popeye.bin",
+    "capa": "popeye.png",
+    "preview": "popeye.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Popeye online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Pressure Cooker",
+    "rom": "roms/pressure-cooker.bin",
+    "capa": "pressure-cooker.png",
+    "preview": "pressure-cooker.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Pressure Cooker online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Q*bert",
+    "rom": "roms/q-bert.bin",
+    "capa": "q-bert.png",
+    "preview": "q-bert.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Q*bert online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Q*bert's Qubes",
+    "rom": "roms/q-bert-s-qubes.bin",
+    "capa": "q-bert-s-qubes.png",
+    "preview": "q-bert-s-qubes.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Q*bert's Qubes online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Raiders of the Lost Ark",
+    "rom": "roms/raiders-of-the-lost-ark.bin",
+    "capa": "raiders-of-the-lost-ark.png",
+    "preview": "raiders-of-the-lost-ark.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Raiders of the Lost Ark online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Reactor",
+    "rom": "roms/reactor.bin",
+    "capa": "reactor.png",
+    "preview": "reactor.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Reactor online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "RealSports Baseball",
+    "rom": "roms/realsports-baseball.bin",
+    "capa": "realsports-baseball.png",
+    "preview": "realsports-baseball.gif",
+    "nota": "8.0",
+    "descricao": "Jogue RealSports Baseball online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "RealSports Boxing",
+    "rom": "roms/realsports-boxing.bin",
+    "capa": "realsports-boxing.png",
+    "preview": "realsports-boxing.gif",
+    "nota": "8.0",
+    "descricao": "Jogue RealSports Boxing online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "RealSports Football",
+    "rom": "roms/realsports-football.bin",
+    "capa": "realsports-football.png",
+    "preview": "realsports-football.gif",
+    "nota": "8.0",
+    "descricao": "Jogue RealSports Football online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "RealSports Soccer",
+    "rom": "roms/realsports-soccer.bin",
+    "capa": "realsports-soccer.png",
+    "preview": "realsports-soccer.gif",
+    "nota": "8.0",
+    "descricao": "Jogue RealSports Soccer online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "RealSports Tennis",
+    "rom": "roms/realsports-tennis.bin",
+    "capa": "realsports-tennis.png",
+    "preview": "realsports-tennis.gif",
+    "nota": "8.0",
+    "descricao": "Jogue RealSports Tennis online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "River Raid",
+    "rom": "roms/river-raid.bin",
+    "capa": "river-raid.png",
+    "preview": "river-raid.gif",
+    "nota": "8.0",
+    "descricao": "Jogue River Raid online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "River Raid II",
+    "rom": "roms/river-raid-ii.bin",
+    "capa": "river-raid-ii.png",
+    "preview": "river-raid-ii.gif",
+    "nota": "8.0",
+    "descricao": "Jogue River Raid II online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Robot Tank",
+    "rom": "roms/robot-tank.bin",
+    "capa": "robot-tank.png",
+    "preview": "robot-tank.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Robot Tank online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Seaquest",
+    "rom": "roms/seaquest.bin",
+    "capa": "seaquest.png",
+    "preview": "seaquest.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Seaquest online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Secret Quest",
+    "rom": "roms/secret-quest.bin",
+    "capa": "secret-quest.png",
+    "preview": "secret-quest.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Secret Quest online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Skiing",
+    "rom": "roms/skiing.bin",
+    "capa": "skiing.png",
+    "preview": "skiing.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Skiing online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Sky Diver",
+    "rom": "roms/sky-diver.bin",
+    "capa": "sky-diver.png",
+    "preview": "sky-diver.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Sky Diver online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Sky Jinks",
+    "rom": "roms/sky-jinks.bin",
+    "capa": "sky-jinks.png",
+    "preview": "sky-jinks.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Sky Jinks online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Solar Fox",
+    "rom": "roms/solar-fox.bin",
+    "capa": "solar-fox.png",
+    "preview": "solar-fox.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Solar Fox online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Solaris",
+    "rom": "roms/solaris.bin",
+    "capa": "solaris.png",
+    "preview": "solaris.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Solaris online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Space Attack",
+    "rom": "roms/space-attack.bin",
+    "capa": "space-attack.png",
+    "preview": "space-attack.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Space Attack online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Space Invaders",
+    "rom": "roms/space-invaders.bin",
+    "capa": "space-invaders.png",
+    "preview": "space-invaders.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Space Invaders online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Space Shuttle",
+    "rom": "roms/space-shuttle.bin",
+    "capa": "space-shuttle.png",
+    "preview": "space-shuttle.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Space Shuttle online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Spider Fighter",
+    "rom": "roms/spider-fighter.bin",
+    "capa": "spider-fighter.png",
+    "preview": "spider-fighter.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Spider Fighter online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Spider-Man",
+    "rom": "roms/spider-man.bin",
+    "capa": "spider-man.png",
+    "preview": "spider-man.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Spider-Man online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Stampede",
+    "rom": "roms/stampede.bin",
+    "capa": "stampede.png",
+    "preview": "stampede.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Stampede online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Star Raiders",
+    "rom": "roms/star-raiders.bin",
+    "capa": "star-raiders.png",
+    "preview": "star-raiders.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Star Raiders online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Star Wars - The Arcade Game",
+    "rom": "roms/star-wars-the-arcade-game.bin",
+    "capa": "star-wars-the-arcade-game.png",
+    "preview": "star-wars-the-arcade-game.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Star Wars - The Arcade Game online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Star Wars - The Empire Strikes Back",
+    "rom": "roms/star-wars-the-empire-strikes-back.bin",
+    "capa": "star-wars-the-empire-strikes-back.png",
+    "preview": "star-wars-the-empire-strikes-back.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Star Wars - The Empire Strikes Back online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Starmaster",
+    "rom": "roms/starmaster.bin",
+    "capa": "starmaster.png",
+    "preview": "starmaster.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Starmaster online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Strategy X",
+    "rom": "roms/strategy-x.bin",
+    "capa": "strategy-x.png",
+    "preview": "strategy-x.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Strategy X online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Street Racer",
+    "rom": "roms/street-racer.bin",
+    "capa": "street-racer.png",
+    "preview": "street-racer.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Street Racer online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Super Breakout",
+    "rom": "roms/super-breakout.bin",
+    "capa": "super-breakout.png",
+    "preview": "super-breakout.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Super Breakout online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Super Cobra",
+    "rom": "roms/super-cobra.bin",
+    "capa": "super-cobra.png",
+    "preview": "super-cobra.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Super Cobra online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Superman",
+    "rom": "roms/superman.bin",
+    "capa": "superman.png",
+    "preview": "superman.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Superman online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Surround",
+    "rom": "roms/surround.bin",
+    "capa": "surround.png",
+    "preview": "surround.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Surround online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "SwordQuest - EarthWorld",
+    "rom": "roms/swordquest-earthworld.bin",
+    "capa": "swordquest-earthworld.png",
+    "preview": "swordquest-earthworld.gif",
+    "nota": "8.0",
+    "descricao": "Jogue SwordQuest - EarthWorld online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "SwordQuest - FireWorld",
+    "rom": "roms/swordquest-fireworld.bin",
+    "capa": "swordquest-fireworld.png",
+    "preview": "swordquest-fireworld.gif",
+    "nota": "8.0",
+    "descricao": "Jogue SwordQuest - FireWorld online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Tapper",
+    "rom": "roms/tapper.bin",
+    "capa": "tapper.png",
+    "preview": "tapper.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Tapper online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Tennis",
+    "rom": "roms/tennis.bin",
+    "capa": "tennis.png",
+    "preview": "tennis.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Tennis online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Turmoil",
+    "rom": "roms/turmoil.bin",
+    "capa": "turmoil.png",
+    "preview": "turmoil.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Turmoil online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Tutankham",
+    "rom": "roms/tutankham.bin",
+    "capa": "tutankham.png",
+    "preview": "tutankham.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Tutankham online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Vanguard",
+    "rom": "roms/vanguard.bin",
+    "capa": "vanguard.png",
+    "preview": "vanguard.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Vanguard online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Video Checkers",
+    "rom": "roms/video-checkers.bin",
+    "capa": "video-checkers.png",
+    "preview": "video-checkers.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Video Checkers online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Video Chess",
+    "rom": "roms/video-chess.bin",
+    "capa": "video-chess.png",
+    "preview": "video-chess.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Video Chess online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Video Olympics",
+    "rom": "roms/video-olympics.bin",
+    "capa": "video-olympics.png",
+    "preview": "video-olympics.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Video Olympics online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Warlords",
+    "rom": "roms/warlords.bin",
+    "capa": "warlords.png",
+    "preview": "warlords.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Warlords online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Wizard of Wor",
+    "rom": "roms/wizard-of-wor.bin",
+    "capa": "wizard-of-wor.png",
+    "preview": "wizard-of-wor.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Wizard of Wor online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Yars' Revenge",
+    "rom": "roms/yars-revenge.bin",
+    "capa": "yars-revenge.png",
+    "preview": "yars-revenge.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Yars' Revenge online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  },
+  {
+    "nome": "Zaxxon",
+    "rom": "roms/zaxxon.bin",
+    "capa": "zaxxon.png",
+    "preview": "zaxxon.gif",
+    "nota": "8.0",
+    "descricao": "Jogue Zaxxon online no Atari 2600 com salvamento automático no NeoTerminalRoom."
+  }
+]
