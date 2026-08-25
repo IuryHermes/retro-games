@@ -8,7 +8,11 @@ const cores = { nes:'nes', snes:'snes', n64:'n64', gba:'gba', megadrive:'segaMD'
 const platformLabels = { nes:'NES', snes:'SNES', n64:'Nintendo 64', gba:'GBA', megadrive:'Mega Drive', ps1:'PS1' };
 const r2 = 'https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/';
 const site = 'https://neoterminalroom.com.br';
-const normalizeGameName = value => String(value || 'Jogo').replace(/\bII\b/gi, '2').replace(/\bI(?=\s*&\s*2\b)/gi, '1').replace(/\bFirered\b/gi, 'FireRed');
+const romanGameNumbers = { XV:'15', XIV:'14', XIII:'13', XII:'12', XI:'11', IX:'9', VIII:'8', VII:'7', VI:'6', IV:'4', III:'3', II:'2' };
+const normalizeGameName = (value, system = '') => String(value || 'Jogo')
+  .replace(/\b(?:XV|XIV|XIII|XII|XI|IX|VIII|VII|VI|IV|III|II)\b/gi, numeral => system === 'ps1' ? romanGameNumbers[numeral.toUpperCase()] : (numeral.toUpperCase() === 'II' ? '2' : numeral))
+  .replace(/\bI(?=\s*&\s*2\b)/gi, '1')
+  .replace(/\bFirered\b/gi, 'FireRed');
 const slugify = value => String(value || 'jogo').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80) || 'jogo';
 const escape = value => String(value || '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 
@@ -21,7 +25,7 @@ for (const system of systems) {
   const unique = [...new Map(raw.map(game => [String(game.rom || '').toLowerCase(), game])).values()].filter(game => game.rom && game.nome && !isRawPs1Disc(game));
   const usedSlugs = new Set();
   for (const game of unique) {
-    const gameName = normalizeGameName(game.nome);
+    const gameName = normalizeGameName(game.nome, system);
     const base = slugify(gameName);
     let slug = base;
     let suffix = 2;

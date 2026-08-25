@@ -285,6 +285,11 @@
             };
 
             window.EJS_gameUrl = game.trim().startsWith("http") ? game.trim() : baseUrl + game.trim();
+            // Multidisc playlists are tiny and may otherwise remain stale in
+            // browser/CDN cache after their disk paths are corrected.
+            if (/\.m3u(?:$|\?)/i.test(window.EJS_gameUrl)) {
+                window.EJS_gameUrl += `${window.EJS_gameUrl.includes('?') ? '&' : '?'}v=20260824-ps1m3u3`;
+            }
             if ((core === 'psx' || core === 'pcsx_rearmed') && params.get('discs')) {
                 try {
                     ps1DiscUrls = JSON.parse(params.get('discs'));
