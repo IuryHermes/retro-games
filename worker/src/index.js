@@ -274,7 +274,7 @@ __name(clubAccess, "clubAccess");
 function saveTarget(url, discordId) {
   const game = (url.searchParams.get("game") || "").trim().toLowerCase();
   const slot = (url.searchParams.get("slot") || "auto").trim().toLowerCase();
-  if (!/^[a-z0-9][a-z0-9._-]{0,119}$/.test(game) || slot !== "auto" && !/^manual-[1-9]\d{0,8}$/.test(slot))
+  if (!/^[a-z0-9][a-z0-9._-]{0,119}$/.test(game) || slot !== "auto" && slot !== "previous" && !/^manual-[1-9]\d{0,8}$/.test(slot))
     return null;
   return { game, slot, key: `saves/v1/${discordId}/${game}/${slot}.state` };
 }
@@ -367,7 +367,7 @@ async function adminAudit(env, action, target, detail = {}) {
 }
 __name(adminAudit, "adminAudit");
 function slotAllowed(slot, plan) {
-  if (slot === "auto")
+  if (slot === "auto" || slot === "previous")
     return true;
   const number = Number(slot.slice("manual-".length));
   const limit = manualSaveLimit(plan);
@@ -1381,6 +1381,8 @@ var src_default = {
           await env.GAMES.delete(`save-images/v1/${access.discordId}/${target.game}.png`);
         return json({ removido: true, game: target.game, slot: target.slot });
       }
+      if (target.slot === "previous")
+        return json({ erro: "Checkpoint anterior e somente leitura." }, 405);
       const limited = await enforceRateLimit(env, access.discordId, "save-upload", 30, 10 * 60 * 1e3);
       if (limited)
         return limited;
@@ -1408,6 +1410,15 @@ var src_default = {
           const limit = automaticGameLimit(access.plan) === null ? null : automaticGameLimit(access.plan) + rewards.bonusAutoGames;
           if (limit !== null && automaticGames.size >= limit)
             return json({ erro: "Limite de jogos com autosave atingido.", automaticGameLimit: limit, automaticGamesUsed: automaticGames.size }, 409);
+        }
+      }
+      if (target.slot === "auto") {
+        const current = await env.GAMES.get(target.key);
+        if (current) {
+          await env.GAMES.put(`saves/v1/${access.discordId}/${target.game}/previous.state`, current.body, {
+            httpMetadata: { contentType: "application/octet-stream" },
+            customMetadata: { ...(current.customMetadata || {}), slot: "previous", name: "Checkpoint anterior" }
+          });
         }
       }
       const object = await env.GAMES.put(target.key, data, { httpMetadata: { contentType: "application/octet-stream" }, customMetadata: { game: target.game, slot: target.slot, name, gameName, gameSystem, updatedAt } });

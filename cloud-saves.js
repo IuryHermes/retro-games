@@ -251,13 +251,24 @@
             if (confirm('O jogo será reiniciado sem carregar o autosave. Seu progresso anterior ficará guardado e não será apagado. Continuar?')) startRecovery();
         };
         panel.querySelector('#neo-cloud-menu').appendChild(recovery);
+        if (recoveryMode && token) {
+            const previous = document.createElement('button');
+            previous.type = 'button'; previous.textContent = 'CARREGAR CHECKPOINT ANTERIOR';
+            previous.style.cssText = 'width:100%;margin-top:8px;border-color:#e9b949;color:#ffe29a';
+            previous.onclick = () => loadSlot('previous');
+            panel.querySelector('#neo-cloud-menu').appendChild(previous);
+        }
     }
 
     async function prepare(options) {
         rememberToken();
         gameId = stableGameId(options.game, options.core);
-        const doom64SaveGeneration = gameId === 'n64-doom_64';
-        if (doom64SaveGeneration) gameId = `${gameId}-v2`;
+        // Save states are snapshots of a specific emulator-core layout. The
+        // August 2026 N64 renderer migration and the PS1 multidisc migration
+        // changed that layout, so never inject their legacy snapshots into the
+        // current cores. Old objects remain untouched for support/recovery.
+        if (options.core === 'n64') gameId = `${gameId}-core2`;
+        if (options.system === 'ps1' && options.multidisc) gameId = `${gameId}-disc2`;
         gameName = String(options.name || gameId).slice(0, 100);
         gameSystem = String(options.system || options.core || '').toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 20);
         await flushPendingHistory();

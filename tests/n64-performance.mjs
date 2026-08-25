@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 
 const player = await readFile(new URL('../player-universal.html', import.meta.url), 'utf8');
 const cloudSaves = await readFile(new URL('../cloud-saves.js', import.meta.url), 'utf8');
-assert.match(player, /src="cloud-saves\.js\?v=9"/);
+assert.match(player, /src="cloud-saves\.js\?v=11"/);
 
 assert.match(player, /src="coi-serviceworker\.js\?v=3"/);
 const coiWorker = await readFile(new URL('../coi-serviceworker.js', import.meta.url), 'utf8');
@@ -47,12 +47,13 @@ assert.match(cloudSaves, /setTimeout\(scheduleAutosave, 10000\)/);
 assert.match(cloudSaves, /requestIdleCallback\(run, \{ timeout: 4000 \}\)/);
 assert.match(cloudSaves, /autosavePending/);
 assert.match(cloudSaves, /token && !recoveryMode/);
-assert.match(cloudSaves, /gameId === 'n64-doom_64'/);
-assert.match(cloudSaves, /gameId = `\$\{gameId\}-v2`/);
+assert.match(cloudSaves, /options\.core === 'n64'[\s\S]*gameId = `\$\{gameId\}-core2`/);
+assert.match(cloudSaves, /options\.system === 'ps1' && options\.multidisc[\s\S]*gameId = `\$\{gameId\}-disc2`/);
 assert.match(cloudSaves, /async function automaticChoice\(\)[\s\S]*return true/);
 assert.match(cloudSaves, /window\.EJS_loadStateOnStart = true/);
 assert.match(cloudSaves, /recoveryMode/);
 assert.match(cloudSaves, /JOGO TRAVOU\? RECUPERAR/);
+assert.match(cloudSaves, /CARREGAR CHECKPOINT ANTERIOR/);
 assert.match(player, /INICIAR EM MODO SEGURO/);
 assert.match(player, /safeRecoveryMode/);
 assert.match(player, /shouldRepairEmulatorCache/);
@@ -60,4 +61,4 @@ assert.match(player, /Neo safe recovery settings/);
 assert.match(cloudSaves, /scheduleAutosaveImage\(\)/);
 assert.match(cloudSaves, /document\.visibilityState === 'hidden'/);
 
-console.log('n64 performance/autosave: 37 checks passed');
+console.log('n64 performance/autosave: 38 checks passed');
