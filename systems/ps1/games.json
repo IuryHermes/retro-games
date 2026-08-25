@@ -320,8 +320,9 @@
         "descricao": "Você está prestes a entrar em um mundo de mistério e terror. O hotel abandonado de Echo Night é um lugar onde a realidade e a fantasia se confundem. Prepare-se para enfrentar os seus medos mais profundos e descobrir os segredos que o hotel esconde.\n\nVocê é um hacker experiente que foi contratado para investigar um caso de desaparecimento no hotel. Ao chegar lá, você descobre que o hotel está cheio de mistérios e perigos. Você terá que usar todas as suas habilidades e recursos para sobreviver e descobrir o que está acontecendo."
     },
     {
-        "nome": "Final Fantasy Ix Em Portugu S Pt Br.M3U",
-        "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br.chd",
+        "nome": "Final Fantasy IX em Português PT-BR",
+        "rom": "roms/final_fantasy_ix_em_portugu_s_pt_br.m3u",
+        "discs": ["roms/final_fantasy_ix_em_portugu_s_pt_br_cd1.chd", "roms/final_fantasy_ix_em_portugu_s_pt_br_cd2.chd", "roms/final_fantasy_ix_em_portugu_s_pt_br_cd3.chd", "roms/final_fantasy_ix_em_portugu_s_pt_br_cd4.chd"],
         "capa": "final-fantasy-ix-em-portugu-s-pt-br.jpg",
         "preview": "final-fantasy-ix-em-portugu-s-pt-br.gif",
         "nota": "8.7",
@@ -360,8 +361,9 @@
         "descricao": "Final Fantasy IX no PlayStation 1 transporta os jogadores para o vibrante mundo de Gaia, onde a jovem ladra Zidane Tribal se vê envolvida em uma trama para sequestrar a princesa Garnet e, sem saber, impedir uma guerra iminente. Com uma atmosfera de fantasia clássica, personagens carismáticos como Vivi e Steiner, e uma narrativa que explora temas de identidade, destino e a busca por sentido, o jogo se destaca por seu charme e profundidade emocional. A aventura é repleta de momentos memoráveis, humor e reviravoltas que cativam os fãs de RPG.\n\nUma curiosidade interessante sobre Final Fantasy IX é que a equipe de desenvolvimento intencionalmente buscou um retorno às raízes da série, com um estilo visual e temático mais próximo aos primeiros jogos, como uma resposta ao tom mais maduro e futurista de Final Fantasy VII e VIII. Isso resultou em um mundo mais colorido e com criaturas adoráveis, mas sem perder a capacidade de abordar questões complexas. 🎮 DESTAQUE: JOGUE AGORA A VERSÃO 100% TRADUZIDA/DUBLADA EM PT-BR!"
     },
     {
-        "nome": "Final Fantasy Vii Pt Br.M3U",
-        "rom": "roms/final_fantasy_vii_pt_br.chd",
+        "nome": "Final Fantasy VII em Português PT-BR",
+        "rom": "roms/final_fantasy_vii_pt_br.m3u",
+        "discs": ["roms/final_fantasy_vii_pt_br_cd1.chd", "roms/final_fantasy_vii_pt_br_cd2.chd", "roms/final_fantasy_vii_pt_br_cd3.chd"],
         "capa": "final-fantasy-vii-pt-br.jpg",
         "preview": "final-fantasy-vii-pt-br.gif",
         "nota": "8.7"
@@ -390,8 +392,9 @@
         "nota": "8.7"
     },
     {
-        "nome": "Final Fantasy Viii.M3U",
-        "rom": "roms/final_fantasy_viii.chd",
+        "nome": "Final Fantasy VIII",
+        "rom": "roms/final_fantasy_viii.m3u",
+        "discs": ["roms/final_fantasy_viii_cd1.chd", "roms/final_fantasy_viii_cd2.chd", "roms/final_fantasy_viii_cd3.chd", "roms/final_fantasy_viii_cd4.chd"],
         "capa": "final-fantasy-viii.png",
         "preview": "final-fantasy-viii.gif",
         "nota": "8.7"

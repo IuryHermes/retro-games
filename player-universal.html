@@ -55,6 +55,7 @@
         #neo-cloud-panel{position:fixed;left:8px;top:8px;z-index:9999999;color:#dfffe8;font:12px monospace}#neo-cloud-toggle,#neo-cloud-menu button{border:1px solid #00cc44;background:#061109;color:#55ff88;padding:8px;cursor:pointer}#neo-cloud-menu{display:none;width:210px;margin-top:5px;padding:8px;border:1px solid #00cc44;background:rgba(0,0,0,.94)}#neo-cloud-panel.open #neo-cloud-menu{display:block}.neo-cloud-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:8px}#neo-cloud-status{padding:5px 0}.neo-cloud-login{display:block;color:#55ff88;margin:7px 0}
         #compat-error{position:fixed;inset:0;z-index:10000001;display:none;place-items:center;padding:22px;background:#020503;color:#fff;text-align:center}#compat-error.show{display:grid}#compat-error>div{max-width:520px;border:1px solid #00cc44;background:#07120b;padding:24px}#compat-error button{border:1px solid #00cc44;background:#123d20;color:#fff;padding:12px 18px;font:700 14px monospace}
         #ps1-disc-manager{position:fixed;right:10px;top:10px;z-index:10000000;display:none;color:#fff;font:700 13px monospace}#ps1-disc-toggle{border:1px solid #66ff8a;border-radius:8px;background:#07170c;color:#8dffa7;padding:10px 13px;box-shadow:0 0 14px #00cc4455;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none}#ps1-disc-menu{display:none;margin-top:7px;width:min(300px,calc(100vw - 20px));padding:12px;border:1px solid #36d65d;border-radius:8px;background:rgba(3,12,6,.97);box-shadow:0 8px 30px #000}#ps1-disc-manager.open #ps1-disc-menu{display:block}.ps1-disc-title{color:#8dffa7;margin-bottom:8px}.ps1-disc-help{color:#b8c9bd;font-weight:400;line-height:1.35;margin-bottom:10px}.ps1-disc-option{display:block;width:100%;margin:6px 0;padding:11px;border:1px solid #42634b;border-radius:6px;background:#101b13;color:#fff;text-align:left;font:700 13px monospace;cursor:pointer;touch-action:manipulation}.ps1-disc-option.current{border-color:#5cff80;background:#164522}.ps1-disc-option:disabled{opacity:.55;cursor:wait}#ps1-disc-status{min-height:34px;margin-top:9px;color:#d7ffe0;font-weight:400;line-height:1.35}.ps1-disc-progress{height:7px;margin-top:7px;border:1px solid #3fa755;background:#020503}.ps1-disc-progress>span{display:block;width:0;height:100%;background:#4cff72;transition:width .15s}
+        #ps1-disc-manager{z-index:2147483646}
     </style>
     <script src="privacy-consent-v2.js" defer></script>
 </head>
@@ -164,6 +165,7 @@
             const panel = document.getElementById('ps1-disc-manager');
             const toggle = document.getElementById('ps1-disc-toggle');
             const options = document.getElementById('ps1-disc-options');
+            document.getElementById('game').appendChild(panel);
             panel.style.display = 'block';
             toggle.onclick = event => { event.stopPropagation(); panel.classList.toggle('open'); toggle.setAttribute('aria-expanded', String(panel.classList.contains('open'))); };
             options.replaceChildren(...ps1DiscUrls.map((url, index) => {
