@@ -9,7 +9,8 @@
     },
     {
         "nome": "A I T D 2024 Ch1N Com Br.M3U",
-        "rom": "roms/a_i_t_d_2024_ch1n_com_br.chd",
+        "rom": "roms/a_i_t_d_2024_ch1n_com_br.m3u",
+        "discs": ["roms/a_i_t_d_2024_ch1n_com_br_cd1.chd", "roms/a_i_t_d_2024_ch1n_com_br_cd2.chd"],
         "capa": "alone-in-the-dark.jpg",
         "preview": "alone-in-the-dark.gif",
         "nota": "5.8",
@@ -48,7 +49,7 @@
         "descricao": "Você está pronto para enfrentar o terror dos alienígenas? Neste jogo de tiro em terceira pessoa, você assume o papel de um soldado que deve sobreviver em um planeta infestado de criaturas hostis. Com gráficos impressionantes para a época e uma trilha sonora intensa, Alien Trilogy é um desafio emocionante que não deixará você respirar."
     },
     {
-        "nome": "Alone In The Dark.M3U",
+        "nome": "Alone in the Dark: The New Nightmare",
         "rom": "roms/alone_in_the_dark.chd",
         "capa": "alone-in-the-dark.jpg",
         "preview": "alone-in-the-dark.gif",
@@ -65,7 +66,8 @@
     },
     {
         "nome": "Amerzone The Explorer S Legacy.M3U",
-        "rom": "roms/amerzone_the_explorer_s_legacy.chd",
+        "rom": "roms/amerzone_the_explorer_s_legacy.m3u",
+        "discs": ["roms/amerzone_the_explorer_s_legacy_cd1.chd", "roms/amerzone_the_explorer_s_legacy_cd2.chd"],
         "capa": "amerzone-the-explorer-s-legacy.jpg",
         "preview": "amerzone-the-explorer-s-legacy.gif",
         "nota": "4.9",
@@ -97,7 +99,8 @@
     },
     {
         "nome": "Asterix The Gallic War Dublado Ch1N Com Br.M3U",
-        "rom": "roms/asterix_the_gallic_war_dublado_ch1n_com_br.chd",
+        "rom": "roms/asterix_the_gallic_war_dublado_ch1n_com_br.m3u",
+        "discs": ["roms/asterix_the_gallic_war_dublado_ch1n_com_br_cd01.chd", "roms/asterix_the_gallic_war_dublado_ch1n_com_br_cd02.chd"],
         "capa": "asterix-the-gallic-war-dublado-ch1n-com-br.jpg",
         "preview": "asterix-the-gallic-war-dublado-ch1n-com-br.gif",
         "nota": "5.8",
@@ -161,7 +164,8 @@
     },
     {
         "nome": "Chrono Cross Pt Br Ps1.M3U",
-        "rom": "roms/chrono_cross_pt_br_ps1.chd",
+        "rom": "roms/chrono_cross_pt_br_ps1.m3u",
+        "discs": ["roms/chrono_cross_pt_br_ps1_cd1.chd", "roms/chrono_cross_pt_br_ps1_cd2.chd"],
         "capa": "chrono-cross-pt-br-ps1.jpg",
         "preview": "chrono-cross-pt-br-ps1.gif",
         "nota": "8.8",
@@ -265,7 +269,8 @@
     },
     {
         "nome": "Dracula A Ressurreicao.M3U",
-        "rom": "roms/dracula_a_ressurreicao.chd",
+        "rom": "roms/dracula_a_ressurreicao.m3u",
+        "discs": ["roms/dracula_a_ressurreicao_cd1.chd", "roms/dracula_a_ressurreicao_cd2.chd"],
         "capa": "dracula-a-ressurreicao.png",
         "preview": "dracula-a-ressurreicao.gif",
         "nota": "5.3",
@@ -304,7 +309,7 @@
         "descricao": "Você está pronto para enfrentar a cidade de New York em seu melhor carro? Driver 2 é um jogo de corrida e ação que desafia você a provar sua habilidade atrás do volante. Com gráficos realistas e uma trilha sonora eletrizante, você não pode perder essa oportunidade de se tornar o melhor motorista da cidade.\n\nMas lembre-se, a cidade não é um lugar seguro. Você precisará lidar com criminosos perigosos e obstáculos inesperados. Sua habilidade e reflexos serão testados em cada curva e em cada confronto. Você está pronto para se tornar o Driver 2?"
     },
     {
-        "nome": "Driver 2 Pt.M3U",
+        "nome": "Driver 2 PT-BR",
         "rom": "roms/driver_2_pt.chd",
         "capa": "driver-2-pt.jpg",
         "preview": "driver-2-pt.gif",
@@ -447,7 +452,8 @@
     },
     {
         "nome": "Grandia Pt Br.M3U",
-        "rom": "roms/grandia_pt_br.chd",
+        "rom": "roms/grandia_pt_br.m3u",
+        "discs": ["roms/grandia_pt_br_cd01.chd", "roms/grandia_pt_br_cd2.chd"],
         "capa": "grandia-pt-br.jpg",
         "preview": "grandia-pt-br.gif",
         "nota": "8.4"
@@ -703,7 +709,8 @@
     },
     {
         "nome": "Necronomicon The Dawning Of Darkness.M3U",
-        "rom": "roms/necronomicon_the_dawning_of_darkness.chd",
+        "rom": "roms/necronomicon_the_dawning_of_darkness.m3u",
+        "discs": ["roms/necronomicon_the_dawning_of_darkness_cd1.chd", "roms/necronomicon_the_dawning_of_darkness_cd2.chd"],
         "capa": "necronomicon-the-dawning-of-darkness.jpg",
         "preview": "necronomicon-the-dawning-of-darkness.gif",
         "nota": "7.1"
@@ -741,7 +748,8 @@
     },
     {
         "nome": "Parasite Eve 2 Pt Br.M3U",
-        "rom": "roms/parasite_eve_2_pt_br.chd",
+        "rom": "roms/parasite_eve_2_pt_br.m3u",
+        "discs": ["roms/parasite_eve_2_pt_br_cd1.chd", "roms/parasite_eve_2_pt_br_cd2.chd"],
         "capa": "parasite-eve-2-pt-br.jpg",
         "preview": "parasite-eve-2-pt-br.gif",
         "nota": "8.6"
@@ -770,8 +778,9 @@
         "descricao": "Você está prestes a entrar em um mundo de terror e mistério. O Dr. Elena, uma cientista renomada, descobre que um vírus está se espalhando pelo planeta, transformando as pessoas em criaturas grotescas. Você precisa encontrar uma cura antes que seja tarde demais.\n\nPrepare-se para uma jornada épica através de labirintos de corredores, fóruns de discussão e armadilhas mortais. O seu destino está ligado à descoberta de um segredo que pode mudar o curso da humanidade."
     },
     {
-        "nome": "Parasite Eve Pt Br.M3U",
-        "rom": "roms/parasite_eve_pt_br.chd",
+        "nome": "Parasite Eve PT-BR",
+        "rom": "roms/parasite_eve_pt_br.m3u",
+        "discs": ["roms/parasite_eve_pt_br.chd", "roms/parasite_eve_pt_br_cd2.chd"],
         "capa": "parasite-eve-pt-br.jpg",
         "preview": "parasite-eve-pt-br.gif",
         "nota": "8.7"
@@ -793,7 +802,8 @@
     },
     {
         "nome": "Resident Evil 2.M3U",
-        "rom": "roms/resident_evil_2.chd",
+        "rom": "roms/resident_evil_2.m3u",
+        "discs": ["roms/resident_evil_2_cd1.chd", "roms/resident_evil_2_cd2.chd"],
         "capa": "resident-evil-2.jpg",
         "preview": "resident-evil-2.gif",
         "nota": "9.0"
@@ -999,7 +1009,8 @@
     },
     {
         "nome": "Xenogears Pt Br Playstation 1.M3U",
-        "rom": "roms/xenogears_pt_br_playstation_1.chd",
+        "rom": "roms/xenogears_pt_br_playstation_1.m3u",
+        "discs": ["roms/xenogears_pt_br_playstation_1_cd1.chd", "roms/xenogears_pt_br_playstation_1_cd2.chd"],
         "capa": "xenogears-pt-br-playstation-1.jpg",
         "preview": "xenogears-pt-br-playstation-1.gif",
         "nota": "S/N"
