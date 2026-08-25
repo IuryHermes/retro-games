@@ -99,9 +99,9 @@
         const core = params.get("core");   
         const game = params.get("game");
         let ps1DiscUrls = [];
-        const ps1LoadedDiscs = new Set([0]);
+        let ps1CurrentDisc = Math.max(0, Number.parseInt(params.get('disc') || '0', 10) || 0);
+        const ps1LoadedDiscs = new Set([ps1CurrentDisc]);
         let ps1DiscBusy = false;
-        let ps1CurrentDisc = 0;
         const ps1DiscPath = url => `/${new URL(url).pathname.split('/').pop()}`;
         const ps1DiscUI = (message, percent) => {
             const status = document.getElementById('ps1-disc-status');
@@ -123,6 +123,16 @@
             const manager = window.EJS_emulator?.gameManager;
             if (!manager?.FS || typeof manager.setCurrentDisk !== 'function') throw new Error('O gerenciador de discos ainda não está pronto.');
             if (ps1CurrentDisc === index) { ps1DiscUI(`Disco ${index + 1} já está inserido.`, 100); return true; }
+            if (!(manager.getDiskCount?.() > 1)) {
+                ps1DiscBusy = true; refreshPs1DiscUI(ps1CurrentDisc);
+                ps1DiscUI(`Preparando Disco ${index + 1}…`, 35);
+                try { manager.saveSaveFiles?.(); } catch (error) { console.warn('Neo PS1 save before disc reload:', error); }
+                const next = new URL(window.location.href);
+                next.searchParams.set('game', ps1DiscUrls[index]);
+                next.searchParams.set('disc', String(index));
+                setTimeout(() => window.location.replace(next.href), 450);
+                return true;
+            }
             ps1DiscBusy = true; refreshPs1DiscUI(ps1CurrentDisc);
             try {
                 if (!ps1LoadedDiscs.has(index)) {
@@ -294,7 +304,9 @@
                 try {
                     ps1DiscUrls = JSON.parse(params.get('discs'));
                     if (!Array.isArray(ps1DiscUrls) || ps1DiscUrls.length < 2 || ps1DiscUrls.some(url => !/^https:\/\//.test(url))) throw new Error('Lista de discos inválida.');
-                    window.EJS_externalFiles = { [ps1DiscPath(ps1DiscUrls[0])]: ps1DiscUrls[0] };
+                    if (/\.m3u(?:$|\?)/i.test(window.EJS_gameUrl)) {
+                        window.EJS_externalFiles = { [ps1DiscPath(ps1DiscUrls[0])]: ps1DiscUrls[0] };
+                    }
                     if (textEl) textEl.innerHTML = `PREPARANDO DISCO 1<span id="loading-dots"></span><br><span class="blink" style="font-size:12px">[ OS OUTROS DISCOS SERÃO BAIXADOS SOMENTE NA TROCA ]</span>`;
                 } catch (error) { showCompatibilityError(`Falha na lista multidisco: ${error.message}`); }
             }
