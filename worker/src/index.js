@@ -1773,6 +1773,9 @@ var src_default = {
       if (state.ultimoTerminalRoomDigest !== digestKey) {
         const index = Number(state.terminalRoomDigestIndex || 0) % TERMINALROOM_DIGESTS.length;
         const content = `${TERMINALROOM_DIGESTS[index]}\n\n🌐 Site: ${SITE}\n☁️ Saves e planos: ${SITE}/apoie.html#planos\n💬 Comunidade: programação, IA, segurança e hacktivismo no NeoTerminalSec.`;
+        const [profileRecords, offerRecords] = await Promise.all([readJsonDirectory(env, "profiles/v1/", 1e3), readJsonDirectory(env, "affiliate/products/", 500)]);
+        const activeOffers = offerRecords.filter((item) => isCompleteAffiliateProduct(item.value)).length;
+        content += `\n📊 ${profileRecords.length} perfis e ${activeOffers} achados ativos no catálogo.`;
         const sent = await discordMessage(env, state.terminalRoomChannelId || DISCORD_CHANNELS.terminalroom, { content }).catch(() => null);
         if (sent?.ok) {
           state.ultimoTerminalRoomDigest = digestKey;
