@@ -1248,6 +1248,16 @@ var src_default = {
       const channel = await response.json();
       return json({ id: channel.id, name: channel.name, type: channel.type, permissionOverwrites: channel.permission_overwrites || [] });
     }
+    if (request.method === "GET" && url.pathname === "/admin/discord-bots-audit") {
+      const authorization = request.headers.get("Authorization") || "";
+      const authorized = env.ADMIN_PANEL_KEY && await timingSafeStringEqual(authorization, `Bearer ${env.ADMIN_PANEL_KEY}`) || env.HERMES_PUBLISH_KEY && await timingSafeStringEqual(authorization, `Bearer ${env.HERMES_PUBLISH_KEY}`);
+      if (!authorized) return json({ erro: "Nao autorizado." }, 401);
+      const response = await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/members?limit=1000`, { headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` } });
+      if (!response.ok) return json({ erro: "Nao foi possivel listar os membros do Discord.", detalhe: await response.text() }, 502);
+      const members = await response.json();
+      const bots = members.filter((member) => member.user?.bot).map((member) => ({ id: member.user.id, username: member.user.username, globalName: member.user.global_name || "", roles: member.roles || [], joinedAt: member.joined_at || "" }));
+      return json({ guildId: DISCORD_GUILD_ID, bots, expected: { terminalroom: DISCORD_APP_ID, concursos: "hermes-discord-concursos", jornalista: "hermes-discord-jornalista" }, note: "A lista mostra os bots instalados; a substituicao de Carlbot, Dyno ou Disboard so deve ocorrer depois de validar cada capacidade e permissao." });
+    }
     if (request.method === "POST" && url.pathname === "/admin/ensure-terminalroom-public") {
       const authorization = request.headers.get("Authorization") || "";
       const authorized = env.ADMIN_PANEL_KEY && await timingSafeStringEqual(authorization, `Bearer ${env.ADMIN_PANEL_KEY}`) || env.HERMES_PUBLISH_KEY && await timingSafeStringEqual(authorization, `Bearer ${env.HERMES_PUBLISH_KEY}`);
