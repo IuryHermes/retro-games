@@ -97,6 +97,14 @@ async function serve(req,res,path) {
   if (!/^(index\.html|app\.js|styles\.css)$/.test(file)) return send(res,404,{erro:'Não encontrado.'});
   let data=await readFile(join(root,'public',file));
   if(file==='index.html') data=Buffer.from(data.toString('utf8').replace('</header>','<a href="/bots">BOTS E RÁDIO</a></header>'));
+  if(file==='app.js') {
+    let source=data.toString('utf8');
+    source=source.replace("'Pagamentos','Jogos'", "'Pagamentos','Bots','Jogos'");
+    const botLoader="async function bots(){const d=await fetch('/api/bots').then(r=>r.json());const root=node('div');root.append(node('h2','Bots e automações'),node('p',`Gateway: ${d.gateway} · Jornalista: ${d.journalist} · Rádio: ${d.radioEnabled?'ligada':'desligada'}`,'muted'));const url=node('input');url.type='url';url.placeholder='https://www.youtube.com/watch?v=...';const run=(a,v='')=>actionButton(a,async()=>{await fetch('/api/bots',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':state.csrf},body:JSON.stringify({action:a,value:typeof v==='function'?v():v})});status('Comando executado.');await load()});root.append(node('label','Novo link da rádio (opcional)'),url,run('radio-restart',()=>url.value),run('gateway-restart'),run('journalista-restart'),run('jornalista-atualizar'));return root}\nconst loaders={";
+    source=source.replace('const loaders={',botLoader);
+    source=source.replace("'Pagamentos':payments", "'Pagamentos':payments,'Bots':bots");
+    data=Buffer.from(source);
+  }
   res.writeHead(200,{...securityHeaders,'Content-Type':mime[extname(file)]||'application/octet-stream'}); res.end(data);
 }
 
