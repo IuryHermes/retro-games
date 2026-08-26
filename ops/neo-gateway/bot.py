@@ -15,6 +15,7 @@ LOG_CHANNEL_ID = int(os.environ.get("LOG_CHANNEL_ID", "0") or 0)
 MOD_ROLE_ID = int(os.environ.get("MOD_ROLE_ID", "0") or 0)
 RULES_MESSAGE_ID = int(os.environ.get("RULES_MESSAGE_ID", "1407859513113182300") or 0)
 MEMBER_ROLE_ID = int(os.environ.get("MEMBER_ROLE_ID", "1407835148199919840") or 0)
+ROLE_MESSAGE_ID = int(os.environ.get("ROLE_MESSAGE_ID", "1407869883504525443") or 0)
 DRY_RUN = os.environ.get("DISCORD_GATEWAY_DRY_RUN", "1") != "0"
 try:
     REACTION_ROLE_MAP = json.loads(os.environ.get("REACTION_ROLE_MAP", "{}"))
@@ -97,7 +98,7 @@ async def on_raw_reaction_add(payload: discord.RawReactionActionEvent):
             await log_event(f"regras aceitas: {member.id}")
         return
     role_id = REACTION_ROLE_MAP.get(str(payload.emoji))
-    if not role_id or payload.guild_id != GUILD_ID or payload.user_id == bot.user.id:
+    if not role_id or payload.guild_id != GUILD_ID or payload.user_id == bot.user.id or payload.message_id != ROLE_MESSAGE_ID:
         return
     guild = bot.get_guild(payload.guild_id)
     member = guild.get_member(payload.user_id) if guild else None
@@ -108,6 +109,14 @@ async def on_raw_reaction_add(payload: discord.RawReactionActionEvent):
 
 @bot.event
 async def on_raw_reaction_remove(payload: discord.RawReactionActionEvent):
+    role_id = REACTION_ROLE_MAP.get(str(payload.emoji))
+    if role_id and payload.guild_id == GUILD_ID and payload.message_id == ROLE_MESSAGE_ID:
+        guild = bot.get_guild(payload.guild_id)
+        member = guild.get_member(payload.user_id) if guild else None
+        role = guild.get_role(int(role_id)) if guild else None
+        if member and role and not member.bot and not DRY_RUN:
+            await member.remove_roles(role, reason="NeoTerminalRoom reaction role removida")
+        return
     if payload.guild_id != GUILD_ID or payload.message_id != RULES_MESSAGE_ID or str(payload.emoji) != "✅":
         return
     guild = bot.get_guild(payload.guild_id)
