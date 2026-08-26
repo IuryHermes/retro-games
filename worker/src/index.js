@@ -1775,8 +1775,8 @@ var src_default = {
         const content = `${TERMINALROOM_DIGESTS[index]}\n\n🌐 Site: ${SITE}\n☁️ Saves e planos: ${SITE}/apoie.html#planos\n💬 Comunidade: programação, IA, segurança e hacktivismo no NeoTerminalSec.`;
         const [profileRecords, offerRecords] = await Promise.all([readJsonDirectory(env, "profiles/v1/", 1e3), readJsonDirectory(env, "affiliate/products/", 500)]);
         const activeOffers = offerRecords.filter((item) => isCompleteAffiliateProduct(item.value)).length;
-        content += `\n📊 ${profileRecords.length} perfis e ${activeOffers} achados ativos no catálogo.`;
-        const sent = await discordMessage(env, state.terminalRoomChannelId || DISCORD_CHANNELS.terminalroom, { content }).catch(() => null);
+        const contentWithStats = `${content}\n📊 ${profileRecords.length} perfis e ${activeOffers} achados ativos no catálogo.`;
+        const sent = await discordMessage(env, state.terminalRoomChannelId || DISCORD_CHANNELS.terminalroom, { content: contentWithStats }).catch(() => null);
         if (sent?.ok) {
           state.ultimoTerminalRoomDigest = digestKey;
           state.terminalRoomDigestIndex = (index + 1) % TERMINALROOM_DIGESTS.length;
