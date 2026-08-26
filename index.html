@@ -97,6 +97,13 @@
         .affiliate-btn { color: #fff; cursor: pointer; text-decoration: none; padding: 8px 15px; border-radius: 4px; font-weight: bold; font-size: 11px; transition: 0.3s; border: none; }
         .affiliate-btn.shopee { background: #ee4d2d; } .affiliate-btn.ml { background: #ffe600; color: #333; }
         .affiliate-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+        .modal-offer-card { display:grid; grid-template-columns:74px 1fr auto; align-items:center; gap:10px; width:100%; padding:8px; border:1px solid var(--border-color); border-radius:6px; background:var(--input-bg); text-align:left; }
+        .modal-offer-card img { width:74px; height:64px; object-fit:contain; background:#fff; border-radius:4px; }
+        .modal-offer-info { min-width:0; display:flex; flex-direction:column; gap:4px; }
+        .modal-offer-title { color:var(--text-color); font:bold 11px monospace; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .modal-offer-price { color:var(--accent-color); font:bold 14px monospace; }
+        .modal-offer-discount { color:#20c96b; font:bold 10px monospace; }
+        .modal-offer-buy { color:#fff; background:var(--accent-color); text-decoration:none; padding:8px 10px; border-radius:4px; font:bold 10px monospace; white-space:nowrap; }
         .game-info-play-btn { background: var(--accent-color); color: #fff; border: none; padding: 15px; width: 100%; font-family: 'Press Start 2P', monospace; font-size: 14px; cursor: pointer; border-radius: 4px; transition: 0.3s; }
         .game-info-play-btn:hover { background: #fff; color: #000; box-shadow: 0 0 15px #fff; }
 
@@ -1427,7 +1434,8 @@
             const loading = document.createElement('span'); loading.textContent = 'Carregando ofertas...'; offersList.append(loading);
             fetch(`${ACCOUNT_API}/affiliate/public-products`, { cache:'no-store' }).then(response => response.ok ? response.json() : { products:[] }).then(data => {
                 offersList.replaceChildren();
-                (data.products || []).forEach(product => { const link = document.createElement('a'); link.className = 'affiliate-btn ' + (/controle|gamepad|joystick/i.test(product.title) ? 'ml' : 'shopee'); link.href = product.url; link.target = '_blank'; link.rel = 'sponsored noopener'; link.textContent = `${product.title}${product.price ? ` · R$ ${product.price.toFixed(2).replace('.', ',')}` : ''}`; offersList.append(link); });
+                const product = (data.products || [])[0];
+                if (product) { const card = document.createElement('div'); card.className = 'modal-offer-card'; const image = document.createElement('img'); image.src = product.image || 'assets/imagens-videos/logo-discord.gif'; image.alt = ''; image.loading = 'lazy'; const info = document.createElement('div'); info.className = 'modal-offer-info'; const title = document.createElement('span'); title.className = 'modal-offer-title'; title.textContent = product.title || 'Oferta gamer'; const price = document.createElement('span'); price.className = 'modal-offer-price'; price.textContent = product.price ? `R$ ${Number(product.price).toFixed(2).replace('.', ',')}` : 'Ver preço'; const discount = document.createElement('span'); discount.className = 'modal-offer-discount'; const off = Number(product.originalPrice) > Number(product.price) ? Math.round((1 - Number(product.price) / Number(product.originalPrice)) * 100) : Number(product.discount || 0); discount.textContent = off > 0 ? `-${off}% de desconto` : 'Oferta verificada'; info.append(title, price, discount); const buy = document.createElement('a'); buy.className = 'modal-offer-buy'; buy.href = product.url; buy.target = '_blank'; buy.rel = 'sponsored nofollow noopener'; buy.textContent = 'VER OFERTA'; card.append(image, info, buy); offersList.append(card); }
                 if (!offersList.children.length) { const empty = document.createElement('span'); empty.textContent = 'Confira os achados gamer disponíveis'; offersList.append(empty); }
             }).catch(() => { offersList.replaceChildren(); });
         }
