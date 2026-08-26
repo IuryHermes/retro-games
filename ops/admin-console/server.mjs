@@ -95,7 +95,8 @@ async function proxyAdminCover(data,{system,rom,contentType,actor}) {
 async function serve(req,res,path) {
   const file=path==='/'?'index.html':path.slice(1);
   if (!/^(index\.html|app\.js|styles\.css)$/.test(file)) return send(res,404,{erro:'Não encontrado.'});
-  const data=await readFile(join(root,'public',file));
+  let data=await readFile(join(root,'public',file));
+  if(file==='index.html') data=Buffer.from(data.toString('utf8').replace('</header>','<a href="/bots">BOTS E RÁDIO</a></header>'));
   res.writeHead(200,{...securityHeaders,'Content-Type':mime[extname(file)]||'application/octet-stream'}); res.end(data);
 }
 
