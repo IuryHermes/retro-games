@@ -4,8 +4,10 @@ import { randomBytes, scrypt as scryptCallback, timingSafeEqual } from 'node:cry
 import { promisify } from 'node:util';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, extname } from 'node:path';
+import { execFile as execFileCallback } from 'node:child_process';
 
 const scrypt = promisify(scryptCallback);
+const execFile = promisify(execFileCallback);
 const root = dirname(fileURLToPath(import.meta.url));
 const port = Number(process.env.ADMIN_PORT || 8790);
 const workerUrl = String(process.env.WORKER_URL || 'https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev').replace(/\/$/, '');
@@ -21,6 +23,17 @@ const securityHeaders = {
   'Referrer-Policy':'no-referrer', 'Permissions-Policy':'camera=(), microphone=(), geolocation=()',
   'Content-Security-Policy':"default-src 'self'; connect-src 'self'; img-src 'self' https: data: blob:; style-src 'self'; script-src 'self'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
 };
+const gatewayEnv = '/home/vndx404/hermes-discord/neo-terminalroom-gateway/.env';
+const journalistDir = '/home/vndx404/hermes-discord/boot_jornalista';
+async function serviceState(name) { try { const { stdout } = await execFile('systemctl', ['--user', 'is-active', name], { timeout: 5000 }); return stdout.trim(); } catch (_) { return 'inactive'; } }
+async function botStatus() { const [gateway, journalist] = await Promise.all([serviceState('neo-terminalroom-gateway.service'), serviceState('hermes-discord-jornalista.service')]); let env=''; try { env=await readFile(gatewayEnv,'utf8'); } catch (_) {} const radioUrl=(env.match(/^RADIO_URL=(.*)$/m)||[])[1] || ''; return { gateway, journalist, radioEnabled:/^RADIO_ENABLED=1$/m.test(env), radioUrl, radioChannelId:(env.match(/^RADIO_CHANNEL_ID=(.*)$/m)||[])[1]||'' }; }
+async function botAction(action, value='') {
+  if (action === 'jornalista-atualizar') { await writeFile(join(journalistDir,'publish_request.txt'),'geek\n'); return; }
+  if (!['gateway-restart','journalista-restart','radio-restart'].includes(action)) throw new Error('Ação de bot inválida.');
+  const service = action === 'journalista-restart' ? 'hermes-discord-jornalista.service' : 'neo-terminalroom-gateway.service';
+  if (action === 'radio-restart' && value) { const parsed=new URL(value); if(parsed.protocol !== 'https:' || !/youtube\.com|youtu\.be$/i.test(parsed.hostname)) throw new Error('Use um link HTTPS do YouTube.'); let env=await readFile(gatewayEnv,'utf8'); if(/^RADIO_URL=/m.test(env)) env=env.replace(/^RADIO_URL=.*$/m,`RADIO_URL=${value}`); else env += `\nRADIO_URL=${value}\n`; await writeFile(gatewayEnv,env,{mode:0o600}); }
+  await execFile('systemctl',['--user','restart',service],{timeout:15000});
+}
 
 function send(res, status, body, headers={}) {
   const data = typeof body === 'string' ? body : JSON.stringify(body);
@@ -114,6 +127,8 @@ const server=http.createServer(async (req,res)=>{
       const temp=`${usernameFile}.new`; await writeFile(temp,`${username}\n`,{mode:0o600}); await rename(temp,usernameFile); sessions.clear();
       return send(res,200,{ok:true,username,mensagem:'Usuário alterado. Entre novamente.'},{'Set-Cookie':'neo_admin=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0'});
     }
+    if (req.method==='GET' && url.pathname==='/api/bots') { if(!requireSession(req,res))return; return send(res,200,await botStatus()); }
+    if (req.method==='POST' && url.pathname==='/api/bots') { if(!requireSession(req,res,true))return; const input=await body(req); await botAction(String(input.action||''),String(input.value||'')); return send(res,200,{ok:true,status:await botStatus()}); }
     if (req.method==='POST' && url.pathname==='/api/admin') { if(!requireSession(req,res,true))return; const payload=await body(req); const result=await proxyAdmin({...payload,adminActor:await adminUsername()}); return send(res,result.status,result.data); }
     if (req.method==='POST' && url.pathname==='/api/admin-cover') {
       if(!requireSession(req,res,true))return;
@@ -125,6 +140,8 @@ const server=http.createServer(async (req,res)=>{
       const result=await proxyAdminCover(data,{system,rom,contentType,actor:await adminUsername()}); return send(res,result.status,result.data);
     }
     if (req.method==='GET' && url.pathname==='/api/health') { if(!requireSession(req,res))return; const result=await proxyAdmin({action:'overview'}); return send(res,result.status,{...result.data,console:{up:true,startedAt:started}}); }
+    if (req.method==='GET' && url.pathname==='/bots') { const data=await readFile(join(root,'public','bots.html')); res.writeHead(200,{...securityHeaders,'Content-Type':'text/html; charset=utf-8'}); return res.end(data); }
+    if (req.method==='GET' && url.pathname==='/bots.js') { const data=await readFile(join(root,'public','bots.js')); res.writeHead(200,{...securityHeaders,'Content-Type':'text/javascript; charset=utf-8'}); return res.end(data); }
     if (req.method==='GET') return serve(req,res,url.pathname);
     send(res,405,{erro:'Método não permitido.'});
   } catch(error) { send(res,error.message==='BODY_TOO_LARGE'?413:500,{erro:'Falha interna do painel.'}); }
