@@ -6,7 +6,7 @@ const social = await readFile(new URL('../social.html', import.meta.url), 'utf8'
 const script = await readFile(new URL('../social.js', import.meta.url), 'utf8');
 
 assert.doesNotMatch(index, /id="chat-container"/);
-assert.match(index, /href="social\.html#global-chat"/);
+assert.match(index, /href="social\.html"/);
 assert.match(social, /id="global-chat"/);
 assert.match(social, /id="global-messages"/);
 assert.match(script, /ref\(getDatabase\(app\), 'mensagens'\)/);
