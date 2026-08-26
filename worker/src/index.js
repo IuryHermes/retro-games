@@ -832,6 +832,15 @@ var src_default = {
         await audit(action, paymentId, { before: { plano: record.plano, status: record.status, validoAte: record.validoAte }, after: patch, discordId });
         return json({ updated: true, paymentId, plan, payment: { ...record, ...patch } });
       }
+      if (action === "payment-delete") {
+        const paymentId = String(body.paymentId || "");
+        if (!/^MSG-[0-9]{10,}$/.test(paymentId) || body.confirm !== paymentId) return json({ erro: "Confirmação de pagamento inválida." }, 400);
+        const record = await getPayment(env, paymentId);
+        if (!record) return json({ erro: "Pagamento não encontrado." }, 404);
+        await env.GAMES.delete(paymentKey(paymentId));
+        await audit(action, paymentId, { before: record });
+        return json({ deleted: true, paymentId });
+      }
       if (action === "affiliate-products") {
         const saved = await readJsonDirectory(env, "affiliate/products/", 500);
         const merged = new Map(DEFAULT_AFFILIATE_PRODUCTS.map((product) => [product.id, product]));
