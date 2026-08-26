@@ -7,7 +7,6 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const pages = [
   "index.html",
   "apoie.html",
-  "antecipado.html",
   "player-ps1.html",
   "player-universal.html",
   "multiplayer-room.html",

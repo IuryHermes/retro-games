@@ -99,22 +99,13 @@
         grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
         gap: 12px;
       }
-      .live-zone {
+      .referral-zone {
         margin: 0 0 28px;
         padding: 18px;
         border: 1px solid #ff5368;
         border-radius: 12px;
         background: linear-gradient(145deg, rgba(91, 8, 22, 0.5), rgba(7, 18, 11, 0.96));
       }
-      .live-zone h2 { margin: 0 0 5px; color: #ff7182; }
-      .live-zone > p { margin: 0 0 14px; color: var(--muted); line-height: 1.5; }
-      .live-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
-      .live-card { display: grid; grid-template-columns: 48px 1fr; gap: 11px; padding: 13px; border: 1px solid #8c2636; border-radius: 9px; background: #12070a; }
-      .live-card img { width: 48px; height: 48px; border-radius: 7px; object-fit: cover; image-rendering: pixelated; }
-      .live-card strong { color: #fff; }
-      .live-card small { display: block; margin-top: 5px; color: #ff9aa7; }
-      .live-actions { grid-column: 1/-1; display: flex; gap: 7px; }
-      .live-actions .watch-live { flex: 1; border-color: #ff5368; color: #fff; background: #741526; }
       .player {
         display: grid;
         grid-template-columns: 52px 1fr;
@@ -300,7 +291,7 @@
         <div class="global-messages" id="global-messages" aria-live="polite"></div>
         <form class="global-composer" id="global-composer"><input id="global-message" maxlength="240" autocomplete="off" placeholder="Entre na sua conta para conversar..." disabled><button type="submit">ENVIAR</button></form>
       </section>
-      <section class="live-zone" aria-labelledby="share-title">
+      <section class="referral-zone" aria-labelledby="share-title">
         <h2 id="share-title">🏆 FORTALEÇA A COMUNIDADE</h2>
         <p>Compartilhe seu link pessoal, traga novos jogadores e ganhe bônus de saves.</p>
         <a class="button" href="apoie.html#indicacoes">CRIAR MEU LINK DE INDICAÇÃO</a>

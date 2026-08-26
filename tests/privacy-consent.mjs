@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
-const pages = ['index.html', 'apoie.html', 'antecipado.html', 'social.html', 'multiplayer-room.html', 'player-universal.html', 'player-ps1.html'];
+const pages = ['index.html', 'apoie.html', 'social.html', 'multiplayer-room.html', 'player-universal.html', 'player-ps1.html'];
 const consent = await readFile(new URL('../privacy-consent-v2.js', import.meta.url), 'utf8');
 const privacy = await readFile(new URL('../politica-de-privacidade.html', import.meta.url), 'utf8');
 const cookies = await readFile(new URL('../politica-de-cookies.html', import.meta.url), 'utf8');

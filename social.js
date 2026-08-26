@@ -171,13 +171,6 @@ async function loadPlayers() {
         : "Jogador offline";
       invite.onclick = () => invitePlayer(player);
       buttons.append(chat, invite);
-      if (player.watchRoomId) {
-        const watch = document.createElement("button");
-        watch.textContent = player.streaming ? "🔴 ASSISTIR LIVE" : "ASSISTIR";
-        watch.title = player.watchTitle ? `Assistir ${player.watchTitle}` : "Assistir gameplay";
-        watch.onclick = () => { window.location.href = `multiplayer-room.html?room=${encodeURIComponent(player.watchRoomId)}&spectator=1`; };
-        buttons.appendChild(watch);
-      }
       card.append(image, info, buttons);
       el("players").appendChild(card);
     }

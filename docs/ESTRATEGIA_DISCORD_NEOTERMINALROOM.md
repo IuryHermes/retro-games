@@ -74,3 +74,7 @@ https://neoterminalroom.com.br/apoie.html#planos
 - Não anunciar Shopee/API como ativa antes da liberação oficial.
 - Toda oferta deve usar link afiliado válido e mostrar preço, imagem e validade.
 - Usar o Discord para comunidade e suporte; o site continua sendo o local de jogar, salvar e pagar.
+
+## Atualização de escopo
+
+Não utilizar canais, anúncios ou recompensas de lives/transmissões. O multiplayer permanece apenas para partidas compartilhadas. A página antiga de conteúdo antecipado foi removida.
