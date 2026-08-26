@@ -1673,6 +1673,7 @@
         if (!response.ok) return '';
         return URL.createObjectURL(await response.blob());
     }
+    const isAtariHistoryGame = (recent, catalogGame = null) => String(catalogGame?.sysId || recent?.system || '').toLowerCase() === 'atari2600';
     async function refreshSinglePersonalHero() {
         if (!accountProfile) return;
         try {
@@ -1684,8 +1685,11 @@
             const coverName = catalogGame?.capa ? catalogGame.capa.split('/').pop() : '';
             const catalogCover = catalogCoverUrl(catalogGame);
             const featured = top10Games.find(game => game.id === recent.id);
-            const savedFrame = await autosaveHeroImage(recent.id).catch(() => '');
-            const media = savedFrame || recent.cover || catalogCover || 'assets/imagens-videos/logo-discord.gif';
+            const atariCoverOnly = isAtariHistoryGame(recent, catalogGame);
+            const savedFrame = atariCoverOnly ? '' : await autosaveHeroImage(recent.id).catch(() => '');
+            const media = atariCoverOnly
+                ? (catalogCover || recent.cover || 'assets/imagens-videos/logo-discord.gif')
+                : (savedFrame || recent.cover || catalogCover || 'assets/imagens-videos/logo-discord.gif');
             const previousHero = document.getElementById('personalized-hero');
             if (previousHero?.dataset.objectUrl) URL.revokeObjectURL(previousHero.dataset.objectUrl);
             previousHero?.remove();
@@ -1732,7 +1736,7 @@
             });
             document.querySelectorAll('.indicator.personalized-indicator, #personalized-hero-dot').forEach(dot => dot.remove());
 
-            const savedFrames = await Promise.all(recentGames.map(game => autosaveHeroImage(game.id).catch(() => '')));
+            const savedFrames = await Promise.all(recentGames.map(game => isAtariHistoryGame(game) ? '' : autosaveHeroImage(game.id).catch(() => '')));
             const slides = document.createDocumentFragment();
             const dots = document.createDocumentFragment();
             recentGames.forEach((recent, recentIndex) => {
@@ -1742,7 +1746,10 @@
                 const catalogCover = catalogCoverUrl(catalogGame);
                 const featured = top10Games.find(game => game.id === recent.id);
                 const savedFrame = savedFrames[recentIndex];
-                const media = savedFrame || recent.cover || catalogCover || 'assets/imagens-videos/logo-discord.gif';
+                const atariCoverOnly = isAtariHistoryGame(recent, catalogGame);
+                const media = atariCoverOnly
+                    ? (catalogCover || recent.cover || 'assets/imagens-videos/logo-discord.gif')
+                    : (savedFrame || recent.cover || catalogCover || 'assets/imagens-videos/logo-discord.gif');
                 const slide = document.createElement('div');
                 slide.id = `personalized-hero-${recentIndex}`;
                 slide.className = 'hero-slide personalized';
