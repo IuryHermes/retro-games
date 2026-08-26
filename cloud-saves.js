@@ -257,6 +257,17 @@
         }
     }
 
+    function activateAutosaveSession() {
+        clearInterval(timer);
+        clearTimeout(initialAutosaveTimer);
+        clearTimeout(startupRestoreTimer);
+        startupRestoreTimer = setTimeout(() => restoreStartupState(), 500);
+        if (automaticEnabled) {
+            initialAutosaveTimer = setTimeout(scheduleAutosave, 10000);
+            timer = setInterval(scheduleAutosave, INTERVAL_MS);
+        }
+    }
+
     async function loadSlot(slot) {
         try {
             const state = await download(slot);
@@ -380,17 +391,13 @@
         const previousStart = window.EJS_onGameStart;
         window.EJS_onGameStart = function () {
             if (typeof previousStart === 'function') previousStart.apply(this, arguments);
-            clearInterval(timer);
-            clearTimeout(initialAutosaveTimer);
-            clearTimeout(startupRestoreTimer);
-            startupRestoreTimer = setTimeout(() => restoreStartupState(), 500);
-            if (automaticEnabled) {
-                // Register a newly played game promptly in the account library.
-                // Previously it appeared only after a full minute of gameplay.
-                initialAutosaveTimer = setTimeout(scheduleAutosave, 10000);
-                timer = setInterval(scheduleAutosave, INTERVAL_MS);
-            }
+            activateAutosaveSession();
         };
+        // The player intentionally stops waiting for the account API after five
+        // seconds so a temporary network delay never blocks the game. If prepare()
+        // finishes after the core has already started, onGameStart has passed; run
+        // the same activation path now so late SNES/Mega Drive saves still resume.
+        if (window.EJS_emulator?.gameManager) activateAutosaveSession();
         addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'hidden' && automaticEnabled) void autosave();
         });
