@@ -33,11 +33,11 @@
     <style>
         /* VARIÁVEIS GLOBAIS */
         :root {
-            --bg-color: #f4f4f9; --sidebar-bg: #ffffff; --accent-color: #009933;
-            --text-color: #1a1a1a; --text-muted: #555; --border-color: #cccccc;
-            --card-bg: #e6e6e6; --input-bg: #f0f0f0; --top-bar-bg: rgba(255, 255, 255, 0.85);
-            --grid-glow: rgba(0, 153, 51, 0.15); --grid-line: rgba(0, 153, 51, 0.1);
-            --scroll-btn-bg: rgba(255,255,255,0.7);
+            --bg-color: #0a0a0c; --sidebar-bg: #000000; --accent-color: #00cc44;
+            --text-color: #e0e0e0; --text-muted: #aaa; --border-color: #333;
+            --card-bg: #111; --input-bg: #222; --top-bar-bg: rgba(10, 10, 12, 0.85);
+            --grid-glow: rgba(0, 204, 68, 0.08); --grid-line: rgba(0, 204, 68, 0.05);
+            --scroll-btn-bg: rgba(0,0,0,0.7);
             --sidebar-collapsed-width: 65px; --sidebar-expanded-width: 300px;
             --card-width-desktop: 260px; --card-height-desktop: 180px;
         }
@@ -49,6 +49,7 @@
             --grid-glow: rgba(0, 204, 68, 0.08); --grid-line: rgba(0, 204, 68, 0.05);
             --scroll-btn-bg: rgba(0,0,0,0.7);
         }
+        body.light-theme { --bg-color:#f4f4f9; --sidebar-bg:#fff; --accent-color:#009933; --text-color:#1a1a1a; --text-muted:#4d5a50; --border-color:#ccc; --card-bg:#e6e6e6; --input-bg:#f0f0f0; --top-bar-bg:rgba(255,255,255,.85); --grid-glow:rgba(0,153,51,.15); --grid-line:rgba(0,153,51,.1); --scroll-btn-bg:rgba(255,255,255,.7); }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -235,6 +236,8 @@
         .hero-slide.guest-promo .hero-bg-blur { filter:blur(30px) brightness(.35); }
         .hero-slide.guest-promo .hero-bg-media { object-fit:cover; object-position:center; width:100%; left:0; right:auto; filter:none; }
         .hero-slide.guest-promo .hero-overlay { background:linear-gradient(to right,rgba(0,0,0,.97) 0%,rgba(0,0,0,.76) 42%,rgba(0,0,0,.12) 78%),linear-gradient(to top,var(--bg-color) 0%,transparent 36%); }
+        body.light-theme .hero-slide.guest-promo .hero-overlay { background:linear-gradient(to right,rgba(255,255,255,.97) 0%,rgba(255,255,255,.82) 42%,rgba(255,255,255,.18) 78%),linear-gradient(to top,var(--bg-color) 0%,transparent 36%); }
+        body.light-theme .hero-slide.guest-promo .hero-title, body.light-theme .hero-slide.guest-promo .hero-resume-note, body.light-theme .hero-slide.guest-promo .hero-categories { color:#172019; text-shadow:0 1px 4px rgba(255,255,255,.8); }
         .hero-eyebrow { color:var(--accent-color); font:10px 'Press Start 2P',cursive; letter-spacing:1px; text-shadow:0 2px 8px #000; }
         .hero-resume-note { color:#eee; font:bold 13px monospace; max-width:520px; line-height:1.5; text-shadow:0 2px 8px #000; }
         .hero-indicators { position:absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; pointer-events: auto; }
@@ -719,10 +722,11 @@
     const escapeHTML = (value) => String(value ?? '').replace(/[&<>\"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[char]));
 
     const themeToggle = document.getElementById('theme-toggle');
-    if (localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-theme'); themeToggle.checked = true; }
+    if (localStorage.getItem('theme') !== 'light') { document.body.classList.add('dark-theme'); themeToggle.checked = true; }
+    else { document.body.classList.add('light-theme'); }
     themeToggle.addEventListener('change', () => {
-        if (themeToggle.checked) { document.body.classList.add('dark-theme'); localStorage.setItem('theme', 'dark'); }
-        else { document.body.classList.remove('dark-theme'); localStorage.setItem('theme', 'light'); }
+        if (themeToggle.checked) { document.body.classList.add('dark-theme'); document.body.classList.remove('light-theme'); localStorage.setItem('theme', 'dark'); }
+        else { document.body.classList.remove('dark-theme'); document.body.classList.add('light-theme'); localStorage.setItem('theme', 'light'); }
     });
 
     const firebaseConfig = { apiKey: "AIzaSyCx_OllbDYkua9BbMOj2oJP5V1UcbxmnbI", authDomain: "neoterminalroom.firebaseapp.com", databaseURL: "https://neoterminalroom-default-rtdb.firebaseio.com", projectId: "neoterminalroom" };
@@ -1484,7 +1488,7 @@
     function heroSlideCount() { return document.querySelectorAll('.hero-slide:not([hidden])').length; }
     function nextSlide() { goToSlide((currentHeroIndex + 1) % heroSlideCount()); }
     function prevSlide() { goToSlide((currentHeroIndex - 1 + heroSlideCount()) % heroSlideCount()); }
-    function resetHeroTimer() { clearInterval(heroTimer); heroTimer = setInterval(nextSlide, 5000); }
+    function resetHeroTimer() { clearInterval(heroTimer); heroTimer = setInterval(nextSlide, 10000); }
     document.getElementById('hero-prev').onclick = prevSlide;
     document.getElementById('hero-next').onclick = nextSlide;
     resetHeroTimer();
