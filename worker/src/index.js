@@ -53,7 +53,8 @@ var TERMINALROOM_DIGESTS = [
   "🎮 **NeoTerminalRoom na prática** — jogue clássicos no navegador, crie seu perfil e proteja seu progresso. O projeto é mantido dentro do NeoTerminalSec para unir preservação digital, código e cultura retrô.",
   "🧠 **Laboratório aberto** — o TerminalRoom conecta emulação, saves na nuvem e multiplayer. Teste um jogo, encontre um problema e traga a evidência para a comunidade técnica.",
   "🔐 **Privacidade e autonomia** — cadastro e saves existem para você continuar sua partida em outros dispositivos. Não envie senhas ou códigos no Discord; use os fluxos oficiais do site.",
-  "🛠️ **Atualização da semana** — confira o catálogo, experimente um sistema diferente e compartilhe sua sugestão. O NeoTerminalSec ajuda a transformar testes da comunidade em melhorias reais."
+  "🛠️ **Atualização da semana** — confira o catálogo, experimente um sistema diferente e compartilhe sua sugestão. O NeoTerminalSec ajuda a transformar testes da comunidade em melhorias reais.",
+  "☁️ **Seu progresso continua** — jogue primeiro sem burocracia. Depois do primeiro jogo, o site convida você a criar uma conta grátis; os planos Continue, Cartucho e Arcade só entram quando você quiser mais espaço e continuidade."
 ];
 var PLANS = { cafe: { title: "Cafe", amount: 5 }, cartucho: { title: "Cartucho", amount: 12 }, arcade: { title: "Arcade", amount: 25 } };
 var AFFILIATE_CATEGORIES = ["cupons", "destaques", "console-ps5", "console-xbox", "console-nintendo", "controles", "ps5", "xbox", "nintendo", "pc-gamer", "monitores", "audio", "armazenamento", "celulares", "smart-home", "streaming", "retro", "gadgets"];
@@ -1172,7 +1173,7 @@ var src_default = {
       const stateObject = await env.GAMES.get("club/bot-state.json");
       const state = stateObject ? await stateObject.json().catch(() => ({})) : {};
       const index = Number(state.terminalRoomDigestIndex || 0) % TERMINALROOM_DIGESTS.length;
-      const content = `${TERMINALROOM_DIGESTS[index]}\n\n🌐 Site: ${SITE}\n💬 Comunidade: programação, IA, segurança e hacktivismo no NeoTerminalSec.`;
+      const content = `${TERMINALROOM_DIGESTS[index]}\n\n🌐 Site: ${SITE}\n☁️ Saves e planos: ${SITE}/apoie.html#planos\n💬 Comunidade: programação, IA, segurança e hacktivismo no NeoTerminalSec.`;
       const result = await discordMessage(env, state.terminalRoomChannelId || DISCORD_CHANNELS.terminalroom, { content });
       if (!result.ok) return json({ erro: "O Discord recusou o aviso.", detalhe: await result.text() }, 502);
       const now = new Date();
@@ -1721,7 +1722,7 @@ var src_default = {
       const digestKey = `terminalroom-${now.getUTCFullYear()}-${Math.floor((now.getTime() - Date.UTC(now.getUTCFullYear(), 0, 1)) / 6048e5)}`;
       if (state.ultimoTerminalRoomDigest !== digestKey) {
         const index = Number(state.terminalRoomDigestIndex || 0) % TERMINALROOM_DIGESTS.length;
-        const content = `${TERMINALROOM_DIGESTS[index]}\n\n🌐 Site: ${SITE}\n💬 Comunidade: programação, IA, segurança e hacktivismo no NeoTerminalSec.`;
+        const content = `${TERMINALROOM_DIGESTS[index]}\n\n🌐 Site: ${SITE}\n☁️ Saves e planos: ${SITE}/apoie.html#planos\n💬 Comunidade: programação, IA, segurança e hacktivismo no NeoTerminalSec.`;
         const sent = await discordMessage(env, state.terminalRoomChannelId || DISCORD_CHANNELS.terminalroom, { content }).catch(() => null);
         if (sent?.ok) {
           state.ultimoTerminalRoomDigest = digestKey;
