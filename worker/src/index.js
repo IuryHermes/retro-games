@@ -1173,14 +1173,50 @@ var src_default = {
       const state = stateObject ? await stateObject.json().catch(() => ({})) : {};
       const index = Number(state.terminalRoomDigestIndex || 0) % TERMINALROOM_DIGESTS.length;
       const content = `${TERMINALROOM_DIGESTS[index]}\n\n🌐 Site: ${SITE}\n💬 Comunidade: programação, IA, segurança e hacktivismo no NeoTerminalSec.`;
-      const result = await discordMessage(env, DISCORD_CHANNELS.terminalroom, { content });
+      const result = await discordMessage(env, state.terminalRoomChannelId || DISCORD_CHANNELS.terminalroom, { content });
       if (!result.ok) return json({ erro: "O Discord recusou o aviso.", detalhe: await result.text() }, 502);
       const now = new Date();
       const digestKey = `terminalroom-${now.getUTCFullYear()}-${Math.floor((now.getTime() - Date.UTC(now.getUTCFullYear(), 0, 1)) / 6048e5)}`;
       state.ultimoTerminalRoomDigest = digestKey;
       state.terminalRoomDigestIndex = (index + 1) % TERMINALROOM_DIGESTS.length;
       await env.GAMES.put("club/bot-state.json", JSON.stringify(state), { httpMetadata: { contentType: "application/json" } });
-      return json({ publicado: true, canal: DISCORD_CHANNELS.terminalroom });
+      return json({ publicado: true, canal: state.terminalRoomChannelId || DISCORD_CHANNELS.terminalroom });
+    }
+    if (request.method === "POST" && url.pathname === "/admin/cleanup-discord") {
+      const authorization = request.headers.get("Authorization") || "";
+      const authorized = env.ADMIN_PANEL_KEY && await timingSafeStringEqual(authorization, `Bearer ${env.ADMIN_PANEL_KEY}`) || env.HERMES_PUBLISH_KEY && await timingSafeStringEqual(authorization, `Bearer ${env.HERMES_PUBLISH_KEY}`);
+      if (!authorized) return json({ erro: "Nao autorizado." }, 401);
+      const channelsResponse = await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/channels`, { headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` } });
+      if (!channelsResponse.ok) return json({ erro: "Nao foi possivel ler os canais do Discord." }, 502);
+      const channels = await channelsResponse.json();
+      const normalize = (value) => String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
+      const obsolete = channels.filter((channel) => ["conteudo-antecipado", "live-arcade"].map(normalize).includes(normalize(channel.name)));
+      const removed = [];
+      for (const channel of obsolete) {
+        const response = await fetch(`https://discord.com/api/v10/channels/${channel.id}`, { method: "DELETE", headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` } });
+        if (response.ok) removed.push(channel.name);
+      }
+      let announcement = channels.find((channel) => normalize(channel.name) === "avisosterminalroom" && channel.type === 0);
+      if (!announcement) {
+        const category = channels.find((channel) => channel.type === 4 && normalize(channel.name) === "neoterminalroom");
+        const created = await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/channels`, { method: "POST", headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}`, "Content-Type": "application/json" }, body: JSON.stringify({ name: "avisos-terminalroom", type: 0, parent_id: category?.id || null, topic: "Atualizações automáticas do NeoTerminalRoom, projeto do NeoTerminalSec." }) });
+        if (!created.ok) return json({ erro: "Nao foi possivel criar o canal de avisos.", removidos: removed }, 502);
+        announcement = await created.json();
+      }
+      const stateObject = await env.GAMES.get("club/bot-state.json");
+      const state = stateObject ? await stateObject.json().catch(() => ({})) : {};
+      state.terminalRoomChannelId = announcement.id;
+      await env.GAMES.put("club/bot-state.json", JSON.stringify(state), { httpMetadata: { contentType: "application/json" } });
+      return json({ removidos: removed, canalAvisos: { id: announcement.id, name: announcement.name } });
+    }
+    if (request.method === "GET" && url.pathname === "/admin/discord-audit") {
+      const authorization = request.headers.get("Authorization") || "";
+      const authorized = env.ADMIN_PANEL_KEY && await timingSafeStringEqual(authorization, `Bearer ${env.ADMIN_PANEL_KEY}`) || env.HERMES_PUBLISH_KEY && await timingSafeStringEqual(authorization, `Bearer ${env.HERMES_PUBLISH_KEY}`);
+      if (!authorized) return json({ erro: "Nao autorizado." }, 401);
+      const response = await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/channels`, { headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` } });
+      if (!response.ok) return json({ erro: "Nao foi possivel ler os canais do Discord." }, 502);
+      const channels = await response.json();
+      return json({ channels: channels.map((channel) => ({ id: channel.id, name: channel.name, type: channel.type, parentId: channel.parent_id || "" })) });
     }
     if (request.method === "GET" && url.pathname === "/discord/callback") {
       const state = await readToken(url.searchParams.get("state") || "", env.DISCORD_CLIENT_SECRET);
@@ -1686,7 +1722,7 @@ var src_default = {
       if (state.ultimoTerminalRoomDigest !== digestKey) {
         const index = Number(state.terminalRoomDigestIndex || 0) % TERMINALROOM_DIGESTS.length;
         const content = `${TERMINALROOM_DIGESTS[index]}\n\n🌐 Site: ${SITE}\n💬 Comunidade: programação, IA, segurança e hacktivismo no NeoTerminalSec.`;
-        const sent = await discordMessage(env, DISCORD_CHANNELS.terminalroom, { content }).catch(() => null);
+        const sent = await discordMessage(env, state.terminalRoomChannelId || DISCORD_CHANNELS.terminalroom, { content }).catch(() => null);
         if (sent?.ok) {
           state.ultimoTerminalRoomDigest = digestKey;
           state.terminalRoomDigestIndex = (index + 1) % TERMINALROOM_DIGESTS.length;
