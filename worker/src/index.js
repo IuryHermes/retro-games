@@ -1740,10 +1740,10 @@ var src_default = {
     }
     // Aviso semanal automático no canal público reservado ao TerminalRoom.
     // O índice gira as mensagens para não repetir sempre o mesmo texto.
+    // Reaplica diariamente a visibilidade pÃºblica para evitar bloqueios herdados de categoria/cargo.
+    const publicChannel = state.terminalRoomChannelId || DISCORD_CHANNELS.terminalroom;
+    await fetch(`https://discord.com/api/v10/channels/${publicChannel}/permissions/${DISCORD_GUILD_ID}`, { method: "PUT", headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}`, "Content-Type": "application/json" }, body: JSON.stringify({ type: 0, allow: "67584", deny: "2048" }) }).catch(() => null);
     if (now.getUTCDay() === 4) {
-      // Reaplica a visibilidade pÃºblica para evitar bloqueios herdados de categoria/cargo.
-      const publicChannel = state.terminalRoomChannelId || DISCORD_CHANNELS.terminalroom;
-      await fetch(`https://discord.com/api/v10/channels/${publicChannel}/permissions/${DISCORD_GUILD_ID}`, { method: "PUT", headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}`, "Content-Type": "application/json" }, body: JSON.stringify({ type: 0, allow: "67584", deny: "2048" }) }).catch(() => null);
       const digestKey = `terminalroom-${now.getUTCFullYear()}-${Math.floor((now.getTime() - Date.UTC(now.getUTCFullYear(), 0, 1)) / 6048e5)}`;
       if (state.ultimoTerminalRoomDigest !== digestKey) {
         const index = Number(state.terminalRoomDigestIndex || 0) % TERMINALROOM_DIGESTS.length;
