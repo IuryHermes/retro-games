@@ -8,7 +8,7 @@ var WORKER = "https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev";
 var DISCORD_APP_ID = "1537269100114350182";
 var DISCORD_GUILD_ID = "1206797125854167110";
 var DISCORD_ROLES = { cafe: "1537272991585534093", cartucho: "1537273232665612418", arcade: "1537273467026673674" };
-var DISCORD_CHANNELS = { agradecimentos: "1537275305717272706", enquetes: "1537275369160319027", sugestoes: "1537275481122938981" };
+var DISCORD_CHANNELS = { agradecimentos: "1537275305717272706", enquetes: "1537275369160319027", sugestoes: "1537275481122938981", terminalroom: "1537280728922849332" };
 var CLUB_PLANS = ["registered", "owner", "cafe", "cartucho", "arcade"];
 var FIREBASE_PROJECT_ID = "neoterminalroom";
 var FIREBASE_ISSUER = `https://securetoken.google.com/${FIREBASE_PROJECT_ID}`;
@@ -48,6 +48,12 @@ var WEEKLY_POLLS = [
   { question: "Que tipo de jogo combina mais com a pr\xF3xima sele\xE7\xE3o?", answers: ["Plataforma", "RPG", "Corrida", "A\xE7\xE3o"] },
   { question: "Qual estilo visual voc\xEA quer ver em destaque?", answers: ["Pixel art 8-bit", "Pixel art 16-bit", "3D retr\xF4", "Arcade cl\xE1ssico"] },
   { question: "Qual formato de novidade interessa mais?", answers: ["Jogo homebrew", "Lista tem\xE1tica", "Curiosidade retr\xF4", "Desafio da comunidade"] }
+];
+var TERMINALROOM_DIGESTS = [
+  "🎮 **NeoTerminalRoom na prática** — jogue clássicos no navegador, crie seu perfil e proteja seu progresso. O projeto é mantido dentro do NeoTerminalSec para unir preservação digital, código e cultura retrô.",
+  "🧠 **Laboratório aberto** — o TerminalRoom conecta emulação, saves na nuvem e multiplayer. Teste um jogo, encontre um problema e traga a evidência para a comunidade técnica.",
+  "🔐 **Privacidade e autonomia** — cadastro e saves existem para você continuar sua partida em outros dispositivos. Não envie senhas ou códigos no Discord; use os fluxos oficiais do site.",
+  "🛠️ **Atualização da semana** — confira o catálogo, experimente um sistema diferente e compartilhe sua sugestão. O NeoTerminalSec ajuda a transformar testes da comunidade em melhorias reais."
 ];
 var PLANS = { cafe: { title: "Cafe", amount: 5 }, cartucho: { title: "Cartucho", amount: 12 }, arcade: { title: "Arcade", amount: 25 } };
 var AFFILIATE_CATEGORIES = ["cupons", "destaques", "console-ps5", "console-xbox", "console-nintendo", "controles", "ps5", "xbox", "nintendo", "pc-gamer", "monitores", "audio", "armazenamento", "celulares", "smart-home", "streaming", "retro", "gadgets"];
@@ -1653,6 +1659,21 @@ var src_default = {
       if (poll.ok) {
         state.ultimaEnquete = dayKey;
         await env.GAMES.put("club/bot-state.json", JSON.stringify(state), { httpMetadata: { contentType: "application/json" } });
+      }
+    }
+    // Aviso semanal automático no canal público reservado ao TerminalRoom.
+    // O índice gira as mensagens para não repetir sempre o mesmo texto.
+    if (now.getUTCDay() === 4) {
+      const digestKey = `terminalroom-${now.getUTCFullYear()}-${Math.floor((now.getTime() - Date.UTC(now.getUTCFullYear(), 0, 1)) / 6048e5)}`;
+      if (state.ultimoTerminalRoomDigest !== digestKey) {
+        const index = Number(state.terminalRoomDigestIndex || 0) % TERMINALROOM_DIGESTS.length;
+        const content = `${TERMINALROOM_DIGESTS[index]}\n\n🌐 Site: ${SITE}\n💬 Comunidade: programação, IA, segurança e hacktivismo no NeoTerminalSec.`;
+        const sent = await discordMessage(env, DISCORD_CHANNELS.terminalroom, { content }).catch(() => null);
+        if (sent?.ok) {
+          state.ultimoTerminalRoomDigest = digestKey;
+          state.terminalRoomDigestIndex = (index + 1) % TERMINALROOM_DIGESTS.length;
+          await env.GAMES.put("club/bot-state.json", JSON.stringify(state), { httpMetadata: { contentType: "application/json" } });
+        }
       }
     }
     await runAffiliateBot(env);

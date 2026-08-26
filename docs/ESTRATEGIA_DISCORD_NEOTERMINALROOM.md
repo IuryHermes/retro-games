@@ -87,6 +87,7 @@ O NeoTerminalSec é a comunidade principal: programação, IA, segurança e hack
 
 - O site mostra um lembrete contextual após o primeiro período de jogo convidando o visitante a criar uma conta e proteger o progresso.
 - O Worker mantém cargos, validade, remoção de acesso, confirmação de pagamento e enquete semanal automaticamente.
+- O Worker publica um resumo rotativo semanal do NeoTerminalRoom no canal técnico reservado, sem intervenção manual.
 - O Discord deve receber apenas resumos programados: novidade do catálogo, atualização técnica, enquete e chamada para jogar.
 - Mensagens de ofertas só entram quando preço, imagem, validade e link afiliado estiverem validados.
 - Nunca enviar DM promocional sem opt-in; limitar avisos para evitar spam.
