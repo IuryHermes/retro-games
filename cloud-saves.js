@@ -20,6 +20,8 @@
     let autosavePending = false;
     let autosaveImagePending = false;
     let lastAutosaveImageAt = 0;
+    let startupState = null;
+    let startupRestoreTimer = 0;
     const recoveryMode = new URLSearchParams(location.search).get('recovery') === '1';
 
     function startRecovery() {
@@ -238,6 +240,23 @@
         return true;
     }
 
+    function restoreStartupState(attempt = 0) {
+        if (!startupState || recoveryMode) return;
+        const manager = window.EJS_emulator && window.EJS_emulator.gameManager;
+        if (!manager || typeof manager.loadState !== 'function') {
+            if (attempt < 24) startupRestoreTimer = setTimeout(() => restoreStartupState(attempt + 1), 250);
+            return;
+        }
+        try {
+            manager.loadState(startupState);
+            startupState = null;
+            setStatus('Partida retomada do autosave');
+        } catch (error) {
+            if (attempt < 24) startupRestoreTimer = setTimeout(() => restoreStartupState(attempt + 1), 250);
+            else console.warn('Neo startup autosave restore:', error);
+        }
+    }
+
     async function loadSlot(slot) {
         try {
             const state = await download(slot);
@@ -328,6 +347,7 @@
             try {
                 const automatic = await localSaveGet();
                 if (automatic) {
+                    startupState = automatic;
                     const blobUrl = URL.createObjectURL(new Blob([automatic], { type: 'application/octet-stream' }));
                     window.EJS_loadStateURL = blobUrl; window.EJS_loadStateOnStart = true;
                     lastHash = await digest(automatic);
@@ -340,6 +360,7 @@
                 if (automatic) {
                     if (await automaticChoice(session)) {
                         automaticEnabled = true;
+                        startupState = automatic;
                         const blobUrl = URL.createObjectURL(new Blob([automatic], { type: 'application/octet-stream' }));
                         window.EJS_loadStateURL = blobUrl;
                         window.EJS_loadStateOnStart = true;
@@ -361,6 +382,8 @@
             if (typeof previousStart === 'function') previousStart.apply(this, arguments);
             clearInterval(timer);
             clearTimeout(initialAutosaveTimer);
+            clearTimeout(startupRestoreTimer);
+            startupRestoreTimer = setTimeout(() => restoreStartupState(), 500);
             if (automaticEnabled) {
                 // Register a newly played game promptly in the account library.
                 // Previously it appeared only after a full minute of gameplay.
@@ -371,7 +394,7 @@
         addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'hidden' && automaticEnabled) void autosave();
         });
-        addEventListener('pagehide', () => { clearTimeout(initialAutosaveTimer); clearInterval(timer); });
+        addEventListener('pagehide', () => { clearTimeout(initialAutosaveTimer); clearTimeout(startupRestoreTimer); clearInterval(timer); });
     }
 
     window.NeoCloudSaves = { prepare, autosave, loadSlot };

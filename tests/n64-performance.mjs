@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 
 const player = await readFile(new URL('../player-universal.html', import.meta.url), 'utf8');
 const cloudSaves = await readFile(new URL('../cloud-saves.js', import.meta.url), 'utf8');
-assert.match(player, /src="cloud-saves\.js\?v=13"/);
+assert.match(player, /src="cloud-saves\.js\?v=14"/);
 
 assert.match(player, /src="coi-serviceworker\.js\?v=3"/);
 const coiWorker = await readFile(new URL('../coi-serviceworker.js', import.meta.url), 'utf8');
@@ -51,6 +51,9 @@ assert.match(cloudSaves, /options\.core === 'n64'[\s\S]*gameId = `\$\{gameId\}-c
 assert.match(cloudSaves, /options\.system === 'ps1' && options\.multidisc[\s\S]*gameId = `\$\{gameId\}-disc2`/);
 assert.match(cloudSaves, /async function automaticChoice\(\)[\s\S]*return true/);
 assert.match(cloudSaves, /window\.EJS_loadStateOnStart = true/);
+assert.match(cloudSaves, /function restoreStartupState\(attempt = 0\)/);
+assert.match(cloudSaves, /manager\.loadState\(startupState\)/);
+assert.match(cloudSaves, /setStatus\('Partida retomada do autosave'\)/);
 assert.match(cloudSaves, /recoveryMode/);
 assert.match(cloudSaves, /JOGO TRAVOU\? RECUPERAR/);
 assert.match(cloudSaves, /CARREGAR CHECKPOINT ANTERIOR/);
