@@ -26,11 +26,12 @@ const securityHeaders = {
 const gatewayEnv = '/home/vndx404/hermes-discord/neo-terminalroom-gateway/.env';
 const journalistDir = '/home/vndx404/hermes-discord/boot_jornalista';
 async function serviceState(name) { try { const { stdout } = await execFile('systemctl', ['--user', 'is-active', name], { timeout: 5000 }); return stdout.trim(); } catch (_) { return 'inactive'; } }
-async function botStatus() { const [gateway, journalist] = await Promise.all([serviceState('neo-terminalroom-gateway.service'), serviceState('hermes-discord-jornalista.service')]); let env=''; try { env=await readFile(gatewayEnv,'utf8'); } catch (_) {} const radioUrl=(env.match(/^RADIO_URL=(.*)$/m)||[])[1] || ''; return { gateway, journalist, radioEnabled:/^RADIO_ENABLED=1$/m.test(env), radioUrl, radioChannelId:(env.match(/^RADIO_CHANNEL_ID=(.*)$/m)||[])[1]||'' }; }
+async function botStatus() { const [gateway, journalist, concursos] = await Promise.all([serviceState('neo-terminalroom-gateway.service'), serviceState('hermes-discord-jornalista.service'), serviceState('hermes-discord-concursos.service')]); let env=''; try { env=await readFile(gatewayEnv,'utf8'); } catch (_) {} const radioUrl=(env.match(/^RADIO_URL=(.*)$/m)||[])[1] || ''; return { gateway, journalist, concursos, radioEnabled:/^RADIO_ENABLED=1$/m.test(env), radioUrl, radioChannelId:(env.match(/^RADIO_CHANNEL_ID=(.*)$/m)||[])[1]||'' }; }
 async function botAction(action, value='') {
   if (action === 'jornalista-atualizar') { await writeFile(join(journalistDir,'publish_request.txt'),'geek\n'); return; }
-  if (!['gateway-restart','journalista-restart','radio-restart'].includes(action)) throw new Error('Ação de bot inválida.');
-  const service = action === 'journalista-restart' ? 'hermes-discord-jornalista.service' : 'neo-terminalroom-gateway.service';
+  if (action === 'concursos-atualizar') { await writeFile('/home/vndx404/hermes-discord/boot_concursos/publish_request.txt','concursos\n'); return; }
+  if (!['gateway-restart','journalista-restart','concursos-restart','radio-restart'].includes(action)) throw new Error('Ação de bot inválida.');
+  const service = action === 'journalista-restart' ? 'hermes-discord-jornalista.service' : action === 'concursos-restart' ? 'hermes-discord-concursos.service' : 'neo-terminalroom-gateway.service';
   if (action === 'radio-restart' && value) { const parsed=new URL(value); if(parsed.protocol !== 'https:' || !/youtube\.com|youtu\.be$/i.test(parsed.hostname)) throw new Error('Use um link HTTPS do YouTube.'); let env=await readFile(gatewayEnv,'utf8'); if(/^RADIO_URL=/m.test(env)) env=env.replace(/^RADIO_URL=.*$/m,`RADIO_URL=${value}`); else env += `\nRADIO_URL=${value}\n`; await writeFile(gatewayEnv,env,{mode:0o600}); }
   await execFile('systemctl',['--user','restart',service],{timeout:15000});
 }
