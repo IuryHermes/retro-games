@@ -1435,8 +1435,10 @@
             fetch(`${ACCOUNT_API}/affiliate/public-products`, { cache:'no-store' }).then(response => response.ok ? response.json() : { products:[] }).then(data => {
                 offersList.replaceChildren();
                 const products = data.products || [];
-                const visits = Number(localStorage.getItem('neo_modal_offer_views') || 0);
+                const storedViews = Number(localStorage.getItem('neo_modal_offer_views') || 0);
+                const visits = Math.max(Number(window.__neoOfferViewCount || 0), storedViews);
                 const product = products.length ? (visits === 0 ? products[0] : products[1 + ((visits - 1) % Math.max(1, products.length - 1))] || products[0]) : null;
+                window.__neoOfferViewCount = visits + 1;
                 localStorage.setItem('neo_modal_offer_views', String(visits + 1));
                 if (product) { const card = document.createElement('div'); card.className = 'modal-offer-card'; const image = document.createElement('img'); image.src = product.image || 'assets/imagens-videos/logo-discord.gif'; image.alt = ''; image.loading = 'lazy'; const info = document.createElement('div'); info.className = 'modal-offer-info'; const title = document.createElement('span'); title.className = 'modal-offer-title'; title.textContent = product.title || 'Oferta gamer'; const price = document.createElement('span'); price.className = 'modal-offer-price'; price.textContent = product.price ? `R$ ${Number(product.price).toFixed(2).replace('.', ',')}` : 'Ver preço'; const discount = document.createElement('span'); discount.className = 'modal-offer-discount'; const off = Number(product.originalPrice) > Number(product.price) ? Math.round((1 - Number(product.price) / Number(product.originalPrice)) * 100) : Number(product.discount || 0); discount.textContent = off > 0 ? `-${off}% de desconto` : 'Oferta verificada'; info.append(title, price, discount); const buy = document.createElement('a'); buy.className = 'modal-offer-buy'; buy.href = product.url; buy.target = '_blank'; buy.rel = 'sponsored nofollow noopener'; buy.textContent = 'VER OFERTA'; card.append(image, info, buy); offersList.append(card); }
                 if (!offersList.children.length) { const empty = document.createElement('span'); empty.textContent = 'Confira os achados gamer disponíveis'; offersList.append(empty); }
