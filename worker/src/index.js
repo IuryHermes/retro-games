@@ -1219,6 +1219,28 @@ var src_default = {
       const channels = await response.json();
       return json({ channels: channels.map((channel) => ({ id: channel.id, name: channel.name, type: channel.type, parentId: channel.parent_id || "" })) });
     }
+    if (request.method === "GET" && url.pathname === "/admin/discord-channel-permissions") {
+      const authorization = request.headers.get("Authorization") || "";
+      const authorized = env.ADMIN_PANEL_KEY && await timingSafeStringEqual(authorization, `Bearer ${env.ADMIN_PANEL_KEY}`) || env.HERMES_PUBLISH_KEY && await timingSafeStringEqual(authorization, `Bearer ${env.HERMES_PUBLISH_KEY}`);
+      if (!authorized) return json({ erro: "Nao autorizado." }, 401);
+      const stateObject = await env.GAMES.get("club/bot-state.json");
+      const state = stateObject ? await stateObject.json().catch(() => ({})) : {};
+      const response = await fetch(`https://discord.com/api/v10/channels/${state.terminalRoomChannelId || DISCORD_CHANNELS.terminalroom}`, { headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` } });
+      if (!response.ok) return json({ erro: "Nao foi possivel ler o canal." }, 502);
+      const channel = await response.json();
+      return json({ id: channel.id, name: channel.name, type: channel.type, permissionOverwrites: channel.permission_overwrites || [] });
+    }
+    if (request.method === "POST" && url.pathname === "/admin/ensure-terminalroom-public") {
+      const authorization = request.headers.get("Authorization") || "";
+      const authorized = env.ADMIN_PANEL_KEY && await timingSafeStringEqual(authorization, `Bearer ${env.ADMIN_PANEL_KEY}`) || env.HERMES_PUBLISH_KEY && await timingSafeStringEqual(authorization, `Bearer ${env.HERMES_PUBLISH_KEY}`);
+      if (!authorized) return json({ erro: "Nao autorizado." }, 401);
+      const stateObject = await env.GAMES.get("club/bot-state.json");
+      const state = stateObject ? await stateObject.json().catch(() => ({})) : {};
+      const channelId = state.terminalRoomChannelId || DISCORD_CHANNELS.terminalroom;
+      const everyone = await fetch(`https://discord.com/api/v10/channels/${channelId}/permissions/${DISCORD_GUILD_ID}`, { method: "PUT", headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}`, "Content-Type": "application/json" }, body: JSON.stringify({ type: 0, allow: "67584", deny: "2048" }) });
+      if (!everyone.ok) return json({ erro: "Nao foi possivel liberar a visibilidade do canal.", detalhe: await everyone.text() }, 502);
+      return json({ corrigido: true, canal: channelId, publico: true, podeEnviar: false });
+    }
     if (request.method === "GET" && url.pathname === "/discord/callback") {
       const state = await readToken(url.searchParams.get("state") || "", env.DISCORD_CLIENT_SECRET);
       const code = url.searchParams.get("code");
@@ -1719,6 +1741,9 @@ var src_default = {
     // Aviso semanal automático no canal público reservado ao TerminalRoom.
     // O índice gira as mensagens para não repetir sempre o mesmo texto.
     if (now.getUTCDay() === 4) {
+      // Reaplica a visibilidade pÃºblica para evitar bloqueios herdados de categoria/cargo.
+      const publicChannel = state.terminalRoomChannelId || DISCORD_CHANNELS.terminalroom;
+      await fetch(`https://discord.com/api/v10/channels/${publicChannel}/permissions/${DISCORD_GUILD_ID}`, { method: "PUT", headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}`, "Content-Type": "application/json" }, body: JSON.stringify({ type: 0, allow: "67584", deny: "2048" }) }).catch(() => null);
       const digestKey = `terminalroom-${now.getUTCFullYear()}-${Math.floor((now.getTime() - Date.UTC(now.getUTCFullYear(), 0, 1)) / 6048e5)}`;
       if (state.ultimoTerminalRoomDigest !== digestKey) {
         const index = Number(state.terminalRoomDigestIndex || 0) % TERMINALROOM_DIGESTS.length;
