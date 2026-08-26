@@ -78,3 +78,19 @@ https://neoterminalroom.com.br/apoie.html#planos
 ## Atualização de escopo
 
 Não utilizar canais, anúncios ou recompensas de lives/transmissões. O multiplayer permanece apenas para partidas compartilhadas. A página antiga de conteúdo antecipado foi removida.
+
+## Integração com o NeoTerminalSec
+
+O NeoTerminalSec é a comunidade principal: programação, IA, segurança e hacktivismo. O NeoTerminalRoom entra como um produto/projeto da comunidade, não como uma marca separada que tenta substituir sua identidade.
+
+### Automação sem trabalho manual
+
+- O site mostra um lembrete contextual após o primeiro período de jogo convidando o visitante a criar uma conta e proteger o progresso.
+- O Worker mantém cargos, validade, remoção de acesso, confirmação de pagamento e enquete semanal automaticamente.
+- O Discord deve receber apenas resumos programados: novidade do catálogo, atualização técnica, enquete e chamada para jogar.
+- Mensagens de ofertas só entram quando preço, imagem, validade e link afiliado estiverem validados.
+- Nunca enviar DM promocional sem opt-in; limitar avisos para evitar spam.
+
+### Posição editorial
+
+Falar com a linguagem da comunidade: tecnologia aberta, preservação digital, segurança, autonomia e jogos retrô. O CTA principal é **testar, contribuir e construir junto**; o apoio financeiro vem depois da experiência, sem prometer acesso antecipado ou lives.

@@ -229,6 +229,10 @@
         .hero-categories span { color: var(--accent-color); margin: 0 5px; }
         .hero-play-btn { display: inline-flex; align-items: center; justify-content: center; background: #fff; color: #000; font-family: 'Roboto', sans-serif; font-weight: bold; font-size: 18px; padding: 12px 30px; border-radius: 4px; border: none; cursor: pointer; width: fit-content; margin-top: 10px; transition: 0.3s; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); position: relative; pointer-events: auto; }
         .hero-play-btn:hover { background: var(--accent-color); color: #fff; transform: scale(1.05); }
+        .retention-nudge { position:fixed; right:18px; bottom:86px; z-index:100000; width:min(360px,calc(100vw - 36px)); padding:16px; border:1px solid var(--accent-color); border-radius:10px; background:var(--sidebar-bg); color:var(--text-color); box-shadow:0 10px 30px rgba(0,0,0,.35); font:12px/1.5 monospace; }
+        .retention-nudge strong { display:block; color:var(--accent-color); margin-bottom:5px; }
+        .retention-nudge button { margin-top:10px; padding:9px 12px; border:0; border-radius:5px; background:var(--accent-color); color:#031108; font-weight:bold; cursor:pointer; }
+        .retention-nudge .dismiss { float:right; margin:0; padding:0 4px; background:transparent; color:var(--text-muted); }
         .hero-play-btn.gamepad-focus { background: var(--accent-color); color: #fff; outline: 3px solid #fff; box-shadow: 0 0 20px var(--accent-color); transform: scale(1.05); }
         .hero-slide.personalized { background: radial-gradient(circle at 72% 45%, rgba(0,204,68,.22), #020504 58%, #000); }
         .hero-slide.personalized .hero-bg-blur { filter: blur(38px) saturate(1.25) brightness(.42); transform:scale(1.08); }
@@ -1022,7 +1026,22 @@
     }
     function playAndRemember(game, playUrl) {
         void recordPlayedGame(game, playUrl);
+        scheduleGuestRetentionNudge(game);
         window.startGame(playUrl);
+    }
+    function scheduleGuestRetentionNudge(game) {
+        if (accountProfile || auth.currentUser || discordAccountToken || sessionStorage.getItem('neo_retention_nudge_shown')) return;
+        sessionStorage.setItem('neo_retention_nudge_scheduled', '1');
+        setTimeout(() => {
+            if (accountProfile || auth.currentUser || discordAccountToken || document.querySelector('.retention-nudge') || document.hidden) return;
+            sessionStorage.setItem('neo_retention_nudge_shown', '1');
+            const nudge = document.createElement('aside'); nudge.className = 'retention-nudge';
+            const title = String(game?.nomeOriginal || game?.nome || 'sua partida');
+            nudge.innerHTML = `<button class="dismiss" type="button" aria-label="Fechar">×</button><strong>PROGRESSO DE ${escapeHTML(title).toUpperCase()} PROTEGIDO NO APARELHO</strong><div>Crie sua conta grátis para não perder o save e continuar em outro dispositivo.</div><button class="retention-signup" type="button">CRIAR CONTA GRÁTIS</button>`;
+            nudge.querySelector('.dismiss').onclick = () => nudge.remove();
+            nudge.querySelector('.retention-signup').onclick = () => { nudge.remove(); document.getElementById('auth-copy').textContent = 'Crie sua conta grátis e mantenha seu progresso protegido.'; openAuth(); };
+            document.body.appendChild(nudge); setTimeout(() => nudge.remove(), 20000);
+        }, 90000);
     }
 
     async function profileRequest(method, body) {
