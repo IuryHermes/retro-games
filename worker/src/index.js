@@ -8,7 +8,7 @@ var WORKER = "https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev";
 var DISCORD_APP_ID = "1537269100114350182";
 var DISCORD_GUILD_ID = "1206797125854167110";
 var DISCORD_ROLES = { cafe: "1537272991585534093", cartucho: "1537273232665612418", arcade: "1537273467026673674" };
-var DISCORD_CHANNELS = { agradecimentos: "1537275305717272706", enquetes: "1537275369160319027", sugestoes: "1537275481122938981", terminalroom: "1537280728922849332" };
+var DISCORD_CHANNELS = { agradecimentos: "1537275305717272706", enquetes: "1537275369160319027", sugestoes: "1537275481122938981", terminalroom: "1542234608907845662" };
 var CLUB_PLANS = ["registered", "owner", "cafe", "cartucho", "arcade"];
 var FIREBASE_PROJECT_ID = "neoterminalroom";
 var FIREBASE_ISSUER = `https://securetoken.google.com/${FIREBASE_PROJECT_ID}`;
@@ -191,6 +191,14 @@ async function discordMessage(env, channelId, body) {
   return fetch(`https://discord.com/api/v10/channels/${channelId}/messages`, { method: "POST", headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}`, "Content-Type": "application/json" }, body: JSON.stringify({ allowed_mentions: { parse: ["roles", "users"] }, ...body }) });
 }
 __name(discordMessage, "discordMessage");
+async function discordDirectMessage(env, userId, content) {
+  const channel = await fetch("https://discord.com/api/v10/users/@me/channels", { method: "POST", headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}`, "Content-Type": "application/json" }, body: JSON.stringify({ recipient_id: userId }) });
+  if (!channel.ok) return false;
+  const data = await channel.json().catch(() => ({}));
+  const sent = await discordMessage(env, data.id, { content });
+  return sent.ok;
+}
+__name(discordDirectMessage, "discordDirectMessage");
 var encoder = new TextEncoder();
 var b64url = /* @__PURE__ */ __name((bytes) => btoa(String.fromCharCode(...bytes)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, ""), "b64url");
 var fromB64url = /* @__PURE__ */ __name((value) => Uint8Array.from(atob(value.replace(/-/g, "+").replace(/_/g, "/") + "=".repeat((4 - value.length % 4) % 4)), (char) => char.charCodeAt(0)), "fromB64url");
@@ -697,7 +705,9 @@ var src_default = {
         const online = presence.filter((record) => now - Number(record.value.updatedAt || 0) < 9e4).length;
         const payments = await allPayments(env);
         const approved = Object.values(payments).filter((record) => record?.status === "aprovado").length;
-        return json({ counts: { ...Object.fromEntries(prefixes.map((prefix, index) => [prefix, directories[index].length])), "multiplayer/rooms/": activeRooms.length }, online, approvedPayments: approved, generatedAt: now });
+        const affiliateProducts = await readJsonDirectory(env, "affiliate/products/", 500);
+        const referralClaims = await readJsonDirectory(env, "referrals/claims/", 1e3);
+        return json({ counts: { ...Object.fromEntries(prefixes.map((prefix, index) => [prefix, directories[index].length])), "multiplayer/rooms/": activeRooms.length, "affiliate/products/": affiliateProducts.length, "referrals/claims/": referralClaims.length }, online, approvedPayments: approved, funnel: { registered: directories[0].length, withSaves: new Set(directories[2].map((item) => item.key.slice("saves/v1/".length).split("/")[0])).size, referrals: referralClaims.length, activeOffers: affiliateProducts.filter((item) => isCompleteAffiliateProduct(item.value)).length }, generatedAt: now });
       }
       if (action === "accounts") {
         const [profiles, presence, rewards, saveObjects] = await Promise.all([readJsonDirectory(env, "profiles/v1/", 500), readJsonDirectory(env, "social/presence/", 500), readJsonDirectory(env, "referrals/rewards/", 500), listAll(env, "saves/v1/")]);
@@ -1356,10 +1366,11 @@ var src_default = {
         const codeRecord = codeObject ? await codeObject.json().catch(() => null) : null;
         if (codeRecord?.uid && codeRecord.uid !== account.uid && await env.GAMES.head(`profiles/v1/${encodeURIComponent(codeRecord.uid)}.json`)) referrerUid = codeRecord.uid;
       }
-      const profile = { uid: account.uid, name, avatar, birthDate, locality, bio, phone, instagram, youtube, facebook, tiktok, provider: account.provider, ...(referrerUid ? { referrerUid } : {}), createdAt: current?.createdAt || Date.now(), updatedAt: Date.now() };
+      const profile = { uid: account.uid, name, avatar, birthDate, locality, bio, phone, instagram, youtube, facebook, tiktok, provider: account.provider, discordNotifications: Boolean(body.discordNotifications ?? current?.discordNotifications), ...(referrerUid ? { referrerUid } : {}), createdAt: current?.createdAt || Date.now(), updatedAt: Date.now() };
       await env.GAMES.put(key, JSON.stringify(profile), { httpMetadata: { contentType: "application/json" } });
       if (!current) {
         await env.GAMES.put(`hall/registrations/${encodeURIComponent(account.uid)}.json`, JSON.stringify({ nome: name, avatar, mensagem: `Bem-vindo(a), ${name}! Um novo jogador entrou na sala.`, timestamp: Date.now() }), { httpMetadata: { contentType: "application/json" } });
+        await discordMessage(env, DISCORD_CHANNELS.terminalroom, { content: `🎮 Bem-vindo(a) ao NeoTerminalRoom, **${name}**! Seu perfil foi criado. Jogue, salve seu progresso e traga sugestões para o NeoTerminalSec.` }).catch(() => null);
         if (referrerUid) {
           const referrerKey = `referrals/rewards/${encodeURIComponent(referrerUid)}.json`;
           const claimKey = `referrals/claims/${encodeURIComponent(account.uid)}.json`;
@@ -1371,6 +1382,20 @@ var src_default = {
         }
       }
       return json({ profile, created: !current });
+    }
+    if (url.pathname === "/account/notifications" && ["GET", "PUT"].includes(request.method)) {
+      const account = await accountAccess(request, env);
+      if (!account) return json({ erro: "Login expirado." }, 401);
+      const key = `profiles/v1/${account.uid}.json`;
+      const object = await env.GAMES.get(key);
+      const profile = object ? await object.json().catch(() => null) : null;
+      if (!profile) return json({ erro: "Complete seu perfil primeiro." }, 403);
+      if (request.method === "GET") return json({ discordNotifications: profile.discordNotifications === true, canReceiveDiscord: /^discord-\d{10,25}$/.test(account.uid) });
+      const body = await request.json().catch(() => ({}));
+      const enabled = body.discordNotifications === true;
+      const next = { ...profile, discordNotifications: enabled, updatedAt: Date.now() };
+      await env.GAMES.put(key, JSON.stringify(next), { httpMetadata: { contentType: "application/json" } });
+      return json({ discordNotifications: enabled, canReceiveDiscord: /^discord-\d{10,25}$/.test(account.uid) });
     }
     if (url.pathname === "/account/history" && ["GET", "POST"].includes(request.method)) {
       const account = await accountAccess(request, env);
@@ -1755,6 +1780,16 @@ var src_default = {
           await env.GAMES.put("club/bot-state.json", JSON.stringify(state), { httpMetadata: { contentType: "application/json" } });
         }
       }
+    }
+    if (now.getUTCDay() === 4 && state.ultimoTerminalRoomReminder !== dayKey) {
+      const profiles = await readJsonDirectory(env, "profiles/v1/", 500);
+      const optedIn = profiles.filter((record) => record.value?.discordNotifications === true && /^discord-\d{10,25}$/.test(String(record.value?.uid || ""))).slice(0, 25);
+      for (const record of optedIn) {
+        const discordId = String(record.value.uid).slice("discord-".length);
+        await discordDirectMessage(env, discordId, `🎮 ${record.value.name || "Jogador"}, seu lembrete semanal do NeoTerminalRoom: continue sua partida e proteja seu progresso com um save. ${SITE}`).catch(() => false);
+      }
+      state.ultimoTerminalRoomReminder = dayKey;
+      await env.GAMES.put("club/bot-state.json", JSON.stringify(state), { httpMetadata: { contentType: "application/json" } });
     }
     await runAffiliateBot(env);
   }
