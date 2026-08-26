@@ -1418,7 +1418,10 @@
             typeTarget.innerHTML = formatarDestaque(fullText);
         };
 
-        const offersList = document.getElementById('modal-offers-list') || document.querySelector('#modal-affiliate-banner .affiliate-links');
+        const offersBanner = document.querySelector('.affiliate-banner');
+        const offersTitle = offersBanner?.querySelector('span');
+        if (offersTitle) offersTitle.textContent = 'ACHAMOS QUE VOCÊ PODE TER INTERESSE NESTES ITENS';
+        const offersList = document.getElementById('modal-offers-list') || offersBanner?.querySelector('.affiliate-links');
         if (offersList) {
             offersList.replaceChildren();
             const loading = document.createElement('span'); loading.textContent = 'Carregando ofertas...'; offersList.append(loading);
