@@ -1164,6 +1164,24 @@ var src_default = {
         return json({ erro: "O Discord recusou a enquete.", detalhe: await result.text() }, 502);
       return json({ publicado: true });
     }
+    if (request.method === "POST" && url.pathname === "/admin/publish-terminalroom-digest") {
+      const authorization = request.headers.get("Authorization") || "";
+      const authorized = env.HERMES_PUBLISH_KEY && await timingSafeStringEqual(authorization, `Bearer ${env.HERMES_PUBLISH_KEY}`) || env.ADMIN_PANEL_KEY && await timingSafeStringEqual(authorization, `Bearer ${env.ADMIN_PANEL_KEY}`);
+      if (!authorized)
+        return json({ erro: "Nao autorizado." }, 401);
+      const stateObject = await env.GAMES.get("club/bot-state.json");
+      const state = stateObject ? await stateObject.json().catch(() => ({})) : {};
+      const index = Number(state.terminalRoomDigestIndex || 0) % TERMINALROOM_DIGESTS.length;
+      const content = `${TERMINALROOM_DIGESTS[index]}\n\n🌐 Site: ${SITE}\n💬 Comunidade: programação, IA, segurança e hacktivismo no NeoTerminalSec.`;
+      const result = await discordMessage(env, DISCORD_CHANNELS.terminalroom, { content });
+      if (!result.ok) return json({ erro: "O Discord recusou o aviso.", detalhe: await result.text() }, 502);
+      const now = new Date();
+      const digestKey = `terminalroom-${now.getUTCFullYear()}-${Math.floor((now.getTime() - Date.UTC(now.getUTCFullYear(), 0, 1)) / 6048e5)}`;
+      state.ultimoTerminalRoomDigest = digestKey;
+      state.terminalRoomDigestIndex = (index + 1) % TERMINALROOM_DIGESTS.length;
+      await env.GAMES.put("club/bot-state.json", JSON.stringify(state), { httpMetadata: { contentType: "application/json" } });
+      return json({ publicado: true, canal: DISCORD_CHANNELS.terminalroom });
+    }
     if (request.method === "GET" && url.pathname === "/discord/callback") {
       const state = await readToken(url.searchParams.get("state") || "", env.DISCORD_CLIENT_SECRET);
       const code = url.searchParams.get("code");
