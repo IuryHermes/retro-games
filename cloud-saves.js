@@ -133,8 +133,14 @@
         if (slot === 'auto' && hash === lastHash) return true;
         saving = true;
         try {
+            // Keep a same-device checkpoint for every player, including signed-in
+            // accounts. Cloud quotas and temporary upload failures must never turn
+            // "Continue jogando" into a history-only entry with no resumable state.
+            if (slot === 'auto') {
+                try { await localSavePut(bytes); }
+                catch (error) { console.warn('Neo local autosave:', error); }
+            }
             if (!token && slot === 'auto') {
-                await localSavePut(bytes);
                 lastHash = hash; setStatus('Autosave salvo neste aparelho'); return true;
             }
             if (!token) return false;
@@ -145,9 +151,9 @@
             });
             if (response.status === 401) sessionStorage.removeItem(TOKEN_KEY);
             if (slot === 'auto' && response.status === 409) {
-                automaticEnabled = false;
-                setStatus('Limite de autosaves atingido');
-                return false;
+                lastHash = hash;
+                setStatus('Autosave local salvo · nuvem no limite');
+                return true;
             }
             if (!response.ok) throw new Error(`Cloud save HTTP ${response.status}`);
             if (slot === 'auto') lastHash = hash;
@@ -353,7 +359,9 @@
         if (token && !session) { sessionStorage.removeItem(TOKEN_KEY); token = ''; }
         createControls(session);
         window.EJS_gameID = Array.from(gameId).reduce((hash, char) => ((hash * 31 + char.charCodeAt(0)) >>> 0), 7);
-        automaticEnabled = Boolean(!recoveryMode && (!token || (session && (session.automaticGameLimit === null || session.automaticGamesUsed < session.automaticGameLimit))));
+        // Cloud capacity controls only the remote copy. A local checkpoint remains
+        // active so every played game can resume on this device.
+        automaticEnabled = !recoveryMode;
         if (!token && !recoveryMode) {
             try {
                 const automatic = await localSaveGet();
@@ -367,7 +375,7 @@
         }
         if (token && !recoveryMode) {
             try {
-                const automatic = await download('auto') || await download('manual-1');
+                const automatic = await download('auto') || await localSaveGet() || await download('manual-1');
                 if (automatic) {
                     if (await automaticChoice(session)) {
                         automaticEnabled = true;
@@ -401,7 +409,10 @@
         addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'hidden' && automaticEnabled) void autosave();
         });
-        addEventListener('pagehide', () => { clearTimeout(initialAutosaveTimer); clearTimeout(startupRestoreTimer); clearInterval(timer); });
+        addEventListener('pagehide', () => {
+            if (automaticEnabled) void autosave();
+            clearTimeout(initialAutosaveTimer); clearTimeout(startupRestoreTimer); clearInterval(timer);
+        });
     }
 
     window.NeoCloudSaves = { prepare, autosave, loadSlot };
