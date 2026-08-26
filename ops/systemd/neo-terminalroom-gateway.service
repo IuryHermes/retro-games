@@ -10,6 +10,7 @@ ExecStart=/home/vndx404/hermes-discord/venv/bin/python bot.py
 Restart=always
 RestartSec=10
 Environment=PYTHONUNBUFFERED=1
+EnvironmentFile=-/home/vndx404/hermes-discord/neo-terminalroom-gateway/.env
 
 [Install]
 WantedBy=default.target
