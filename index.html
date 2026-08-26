@@ -232,6 +232,9 @@
         .hero-slide.personalized { background: radial-gradient(circle at 72% 45%, rgba(0,204,68,.22), #020504 58%, #000); }
         .hero-slide.personalized .hero-bg-blur { filter: blur(38px) saturate(1.25) brightness(.42); transform:scale(1.08); }
         .hero-slide.personalized .hero-bg-media { object-fit:contain; object-position:76% center; width:58%; left:auto; right:5%; filter:drop-shadow(0 20px 34px rgba(0,0,0,.8)); }
+        .hero-slide.guest-promo .hero-bg-blur { filter:blur(30px) brightness(.35); }
+        .hero-slide.guest-promo .hero-bg-media { object-fit:cover; object-position:center; width:100%; left:0; right:auto; filter:none; }
+        .hero-slide.guest-promo .hero-overlay { background:linear-gradient(to right,rgba(0,0,0,.97) 0%,rgba(0,0,0,.76) 42%,rgba(0,0,0,.12) 78%),linear-gradient(to top,var(--bg-color) 0%,transparent 36%); }
         .hero-eyebrow { color:var(--accent-color); font:10px 'Press Start 2P',cursive; letter-spacing:1px; text-shadow:0 2px 8px #000; }
         .hero-resume-note { color:#eee; font:bold 13px monospace; max-width:520px; line-height:1.5; text-shadow:0 2px 8px #000; }
         .hero-indicators { position:absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; pointer-events: auto; }
@@ -1664,6 +1667,40 @@
         document.querySelectorAll('.hero-slide.promotional').forEach(slide => { slide.hidden = enabled; });
         document.querySelectorAll('.indicator.promotional-indicator').forEach(dot => { dot.hidden = enabled; });
     }
+    function appendGuestPromoSlides(slides, dots) {
+        const promos = [
+            {
+                image:'assets/wallpapers_hero/cadastro-saves-v1.png',
+                eyebrow:'VOCÊ JÁ DEU O PRIMEIRO PASSO',
+                title:'SEU PROGRESSO MERECE CONTINUAR',
+                meta:'CONTA GRÁTIS · MAIS SAVES · PROGRESSO PROTEGIDO',
+                note:'Crie sua conta grátis para proteger suas conquistas, liberar mais saves e continuar jogando em outros aparelhos.',
+                action:'CRIAR CONTA GRÁTIS',
+                click:() => { document.getElementById('auth-copy').textContent = 'Crie sua conta grátis e mantenha seu progresso protegido.'; openAuth(); }
+            },
+            {
+                image:'assets/wallpapers_hero/apoie-projeto-v1.png',
+                eyebrow:'A COMUNIDADE MANTÉM O TERMINAL LIGADO',
+                title:'AJUDE A PRESERVAR ESSA HISTÓRIA',
+                meta:'SERVIDORES · NOVOS RECURSOS · JOGOS RETRÔ',
+                note:'Você joga gratuitamente. Ao apoiar, ajuda a manter os servidores, preservar os clássicos e desenvolver novos recursos para todos.',
+                action:'CONHECER FORMAS DE APOIAR',
+                click:() => { location.href = 'apoie.html#planos'; }
+            }
+        ];
+        promos.forEach((promo, promoIndex) => {
+            const slide = document.createElement('div');
+            slide.id = `guest-promo-${promoIndex}`;
+            slide.className = 'hero-slide personalized guest-promo';
+            slide.innerHTML = `<img class="hero-bg-blur" src="${promo.image}" alt=""><img class="hero-bg-media" src="${promo.image}" alt=""><div class="hero-overlay"></div><div class="hero-content"><div class="hero-eyebrow">${promo.eyebrow}</div><h1 class="hero-title">${promo.title}</h1><div class="hero-categories">${promo.meta}</div><div class="hero-resume-note">${promo.note}</div><button class="hero-play-btn selectable-item" type="button"><span>▶</span> ${promo.action}</button></div>`;
+            slide.querySelector('button').onclick = promo.click;
+            slides.appendChild(slide);
+            const dot = document.createElement('div');
+            dot.id = `guest-promo-dot-${promoIndex}`;
+            dot.className = 'indicator personalized-indicator guest-promo-indicator';
+            dots.appendChild(dot);
+        });
+    }
     async function autosaveHeroImage(gameId) {
         const token = auth.currentUser ? await auth.currentUser.getIdToken() : discordAccountToken;
         if (!token) return '';
@@ -1726,7 +1763,7 @@
                 accountProfile ? cloudRequest('/club/library').catch(() => ({ games:[] })) : Promise.resolve({ games:[] }),
                 Promise.allSettled(fetchPromises)
             ]);
-            const recentGames = (historyData.games || []).slice(0, 3);
+            const recentGames = (historyData.games || []).slice(0, accountProfile ? 3 : 1);
             if (!recentGames.length) { showOnlyPlayedHeroes(false); return; }
             showOnlyPlayedHeroes(true);
 
@@ -1776,6 +1813,7 @@
                 dot.className = 'indicator personalized-indicator';
                 dots.appendChild(dot);
             });
+            if (!accountProfile) appendGuestPromoSlides(slides, dots);
             heroSlider.insertBefore(slides, heroSlider.querySelector('.hero-slide'));
             heroIndicators.insertBefore(dots, heroIndicators.firstChild);
             rebindHeroIndicators();
