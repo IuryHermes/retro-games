@@ -1371,6 +1371,7 @@ var src_default = {
       if (!current) {
         await env.GAMES.put(`hall/registrations/${encodeURIComponent(account.uid)}.json`, JSON.stringify({ nome: name, avatar, mensagem: `Bem-vindo(a), ${name}! Um novo jogador entrou na sala.`, timestamp: Date.now() }), { httpMetadata: { contentType: "application/json" } });
         await discordMessage(env, DISCORD_CHANNELS.terminalroom, { content: `🎮 Bem-vindo(a) ao NeoTerminalRoom, **${name}**! Seu perfil foi criado. Jogue, salve seu progresso e traga sugestões para o NeoTerminalSec.` }).catch(() => null);
+        if (/^discord-\d{10,25}$/.test(account.uid)) await discordDirectMessage(env, account.uid.slice("discord-".length), `🎮 Bem-vindo(a), ${name}! Seu perfil NeoTerminalRoom está pronto. Ative os lembretes no cadastro quando quiser e nunca compartilhe senhas ou códigos.`).catch(() => false);
         if (referrerUid) {
           const referrerKey = `referrals/rewards/${encodeURIComponent(referrerUid)}.json`;
           const claimKey = `referrals/claims/${encodeURIComponent(account.uid)}.json`;
@@ -1789,7 +1790,11 @@ var src_default = {
       const optedIn = profiles.filter((record) => record.value?.discordNotifications === true && /^discord-\d{10,25}$/.test(String(record.value?.uid || ""))).slice(0, 25);
       for (const record of optedIn) {
         const discordId = String(record.value.uid).slice("discord-".length);
-        await discordDirectMessage(env, discordId, `🎮 ${record.value.name || "Jogador"}, seu lembrete semanal do NeoTerminalRoom: continue sua partida e proteja seu progresso com um save. ${SITE}`).catch(() => false);
+        const historyObject = await env.GAMES.get(`history/v1/${encodeURIComponent(record.value.uid)}.json`);
+        const history = historyObject ? await historyObject.json().catch(() => []) : [];
+        const recent = Array.isArray(history) ? history[0] : null;
+        const target = recent?.name ? `continue **${String(recent.name).slice(0, 80)}**` : "continue sua partida";
+        await discordDirectMessage(env, discordId, `🎮 ${record.value.name || "Jogador"}, seu lembrete semanal do NeoTerminalRoom: ${target} e proteja seu progresso com um save. ${SITE}`).catch(() => false);
       }
       state.ultimoTerminalRoomReminder = dayKey;
       await env.GAMES.put("club/bot-state.json", JSON.stringify(state), { httpMetadata: { contentType: "application/json" } });

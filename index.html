@@ -502,6 +502,7 @@
                 <input id="auth-youtube" type="url" maxlength="300" placeholder="YouTube (link opcional)">
                 <input id="auth-facebook" type="url" maxlength="300" placeholder="Facebook (link opcional)">
                 <input id="auth-tiktok" type="url" maxlength="300" placeholder="TikTok (link opcional)">
+                <label class="notification-optin"><input id="auth-discord-notifications" type="checkbox"> Receber lembretes do NeoTerminalRoom no Discord (opcional)</label>
             </div>
             <div class="avatar-grid" id="avatar-grid" aria-label="Escolha seu avatar"></div>
             <button class="auth-social google" id="auth-google" type="button">Continuar com Google</button>
@@ -1109,7 +1110,7 @@
     }
     async function saveProfile() {
         const name = document.getElementById('auth-name').value.trim();
-        const body = { name, avatar: selectedAvatar, birthDate: document.getElementById('auth-birth-date').value, locality: document.getElementById('auth-locality').value.trim(), bio: document.getElementById('auth-bio').value.trim(), phone: document.getElementById('auth-phone').value.trim(), referralCode: localStorage.getItem('neo_referral_code') || '' };
+        const body = { name, avatar: selectedAvatar, birthDate: document.getElementById('auth-birth-date').value, locality: document.getElementById('auth-locality').value.trim(), bio: document.getElementById('auth-bio').value.trim(), phone: document.getElementById('auth-phone').value.trim(), discordNotifications: document.getElementById('auth-discord-notifications').checked, referralCode: localStorage.getItem('neo_referral_code') || '' };
         ['instagram','youtube','facebook','tiktok'].forEach(key => { body[key] = document.getElementById(`auth-${key}`).value.trim(); });
         setAuthStatus('Salvando perfil...');
         try { const data = await profileRequest('PUT', body); if (data.created) localStorage.removeItem('neo_referral_code'); accountProfile = data.profile; applyProfile(); await migrateLocalProgressToProfile(); void refreshPersonalHero(); setAuthStatus(data.created ? `Bem-vindo(a), ${accountProfile.name}! Seus saves locais foram migrados.` : 'Perfil atualizado.'); setTimeout(closeAuth, 900); }
