@@ -13,6 +13,8 @@ GUILD_ID = int(os.environ.get("DISCORD_GUILD_ID", "0") or 0)
 WELCOME_CHANNEL_ID = int(os.environ.get("WELCOME_CHANNEL_ID", "0") or 0)
 LOG_CHANNEL_ID = int(os.environ.get("LOG_CHANNEL_ID", "0") or 0)
 MOD_ROLE_ID = int(os.environ.get("MOD_ROLE_ID", "0") or 0)
+RULES_MESSAGE_ID = int(os.environ.get("RULES_MESSAGE_ID", "1407859513113182300") or 0)
+MEMBER_ROLE_ID = int(os.environ.get("MEMBER_ROLE_ID", "1407835148199919840") or 0)
 DRY_RUN = os.environ.get("DISCORD_GATEWAY_DRY_RUN", "1") != "0"
 try:
     REACTION_ROLE_MAP = json.loads(os.environ.get("REACTION_ROLE_MAP", "{}"))
@@ -86,6 +88,14 @@ async def neo_help(interaction: discord.Interaction):
 
 @bot.event
 async def on_raw_reaction_add(payload: discord.RawReactionActionEvent):
+    if payload.guild_id == GUILD_ID and payload.message_id == RULES_MESSAGE_ID and str(payload.emoji) == "✅":
+        guild = bot.get_guild(payload.guild_id)
+        member = guild.get_member(payload.user_id) if guild else None
+        role = guild.get_role(MEMBER_ROLE_ID) if guild else None
+        if member and role and not member.bot and not DRY_RUN:
+            await member.add_roles(role, reason="Aceite das regras do NeoTerminalSec")
+            await log_event(f"regras aceitas: {member.id}")
+        return
     role_id = REACTION_ROLE_MAP.get(str(payload.emoji))
     if not role_id or payload.guild_id != GUILD_ID or payload.user_id == bot.user.id:
         return
@@ -94,6 +104,18 @@ async def on_raw_reaction_add(payload: discord.RawReactionActionEvent):
     role = guild.get_role(int(role_id)) if guild else None
     if member and role and not DRY_RUN:
         await member.add_roles(role, reason="NeoTerminalRoom reaction role")
+
+
+@bot.event
+async def on_raw_reaction_remove(payload: discord.RawReactionActionEvent):
+    if payload.guild_id != GUILD_ID or payload.message_id != RULES_MESSAGE_ID or str(payload.emoji) != "✅":
+        return
+    guild = bot.get_guild(payload.guild_id)
+    member = guild.get_member(payload.user_id) if guild else None
+    role = guild.get_role(MEMBER_ROLE_ID) if guild else None
+    if member and role and not member.bot and not DRY_RUN:
+        await member.remove_roles(role, reason="Reacao das regras removida")
+        await log_event(f"reacao de regras removida: {member.id}")
 
 
 if not TOKEN:
