@@ -626,6 +626,14 @@ var src_default = {
       const activeCategories = AFFILIATE_CATEGORIES.filter((category) => products.some((product) => product.category === category));
       return json({ products, categories: activeCategories, disclosure: "Alguns links sao afiliados. O NeoTerminalRoom pode receber comissao, sem custo adicional para voce." });
     }
+    if (request.method === "GET" && url.pathname === "/affiliate/public-products") {
+      const saved = await readJsonDirectory(env, "affiliate/products/", 500);
+      const now = Date.now();
+      const products = saved.map((record) => record.value).filter((product) => isCompleteAffiliateProduct(product, now));
+      const controls = products.filter((product) => /controle|gamepad|joystick|volante|arcade stick/i.test(`${product.title || ""} ${product.description || ""} ${product.category || ""} ${(product.tags || []).join(" ")}`));
+      const selected = [...controls, ...products.filter((product) => !controls.includes(product))].slice(0, 4).map((product) => ({ id: product.id, title: String(product.title || "Oferta gamer").slice(0, 100), price: Number(product.price || 0), originalPrice: Number(product.originalPrice || 0), discount: Number(product.discount || 0), image: String(product.image || ""), url: String(product.url || ""), source: String(product.source || product.store || "Oferta") }));
+      return json({ products: selected, disclosure: "Alguns links sao afiliados. O NeoTerminalRoom pode receber comissao, sem custo adicional para voce." });
+    }
     if (request.method === "GET" && url.pathname === "/public/hall") {
       const now = Date.now();
       const [payments, registrations, migration] = await Promise.all([allPayments(env), readJsonDirectory(env, "hall/registrations/", 200), env.GAMES.get("hall/registrations-backup.json")]);

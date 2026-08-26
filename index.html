@@ -1418,12 +1418,16 @@
             typeTarget.innerHTML = formatarDestaque(fullText);
         };
 
-        const btnShopee = document.getElementById('btn-shopee-modal');
-        const btnMl = document.getElementById('btn-ml-modal');
-        btnShopee.href = shopeeLinks[Math.floor(Math.random() * shopeeLinks.length)];
-        btnMl.href = mlLinks[Math.floor(Math.random() * mlLinks.length)];
-        btnShopee.onclick = (e) => { e.target.href = shopeeLinks[Math.floor(Math.random() * shopeeLinks.length)]; };
-        btnMl.onclick = (e) => { e.target.href = mlLinks[Math.floor(Math.random() * mlLinks.length)]; };
+        const offersList = document.getElementById('modal-offers-list') || document.querySelector('#modal-affiliate-banner .affiliate-links');
+        if (offersList) {
+            offersList.replaceChildren();
+            const loading = document.createElement('span'); loading.textContent = 'Carregando ofertas...'; offersList.append(loading);
+            fetch(`${ACCOUNT_API}/affiliate/public-products`, { cache:'no-store' }).then(response => response.ok ? response.json() : { products:[] }).then(data => {
+                offersList.replaceChildren();
+                (data.products || []).forEach(product => { const link = document.createElement('a'); link.className = 'affiliate-btn ' + (/controle|gamepad|joystick/i.test(product.title) ? 'ml' : 'shopee'); link.href = product.url; link.target = '_blank'; link.rel = 'sponsored noopener'; link.textContent = `${product.title}${product.price ? ` · R$ ${product.price.toFixed(2).replace('.', ',')}` : ''}`; offersList.append(link); });
+                if (!offersList.children.length) { const empty = document.createElement('span'); empty.textContent = 'Confira os achados gamer disponíveis'; offersList.append(empty); }
+            }).catch(() => { offersList.replaceChildren(); });
+        }
 
         const playButton = document.getElementById('modal-play-btn');
         playButton.innerHTML = '▶ JOGAR AGORA';
