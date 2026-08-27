@@ -121,6 +121,11 @@ function supportRecognition(payments, identity, plan = "", context = null) {
   if (supportMonths >= 12) badges.push("12 MESES"); else if (supportMonths >= 6) badges.push("6 MESES"); else if (supportMonths >= 3) badges.push("3 MESES");
   return { founder: rank > 0 && rank <= 100, founderRank: rank || null, supportMonths, contributions: records.length, memberSince: records[0]?.aprovadoEm || null, badges };
 }
+var GRANTABLE_BADGES = ["FUNDADOR", "APOIADOR", "GUARDIÃO", "PATRONO", "3 MESES", "6 MESES", "12 MESES"];
+function applyBadgeGrants(recognition, grants) {
+  const granted = Array.isArray(grants) ? grants.filter((badge) => GRANTABLE_BADGES.includes(badge)) : [];
+  return { ...recognition, grantedBadges: granted, badges: [...new Set([...(recognition?.badges || []), ...granted])] };
+}
 function activeSupportPlan(payments, accountUid, discordId, now = Date.now()) {
   const priority = { cafe: 1, cartucho: 2, arcade: 3 };
   return Object.values(payments).filter((record) => record?.status === "aprovado" && (!record.validoAte || Number(record.validoAte) > now) && (accountUid && String(record.accountUid || "") === accountUid || discordId && String(record.discordId || "") === discordId)).sort((a, b) => Number(priority[b.plano] || 0) - Number(priority[a.plano] || 0) || Number(b.aprovadoEm || 0) - Number(a.aprovadoEm || 0))[0]?.plano || "registered";
@@ -830,6 +835,19 @@ var src_default = {
         await audit(action, uid, { before: current, after: next, earned: tiered.earned });
         return json({ rewards: next });
       }
+      if (action === "badge-grants-update") {
+        const uid = String(body.uid || "");
+        if (!validUid(uid)) return json({ erro: "Conta invalida." }, 400);
+        const key = `profiles/v1/${encodeURIComponent(uid)}.json`;
+        const object = await env.GAMES.get(key);
+        if (!object) return json({ erro: "Perfil nao encontrado." }, 404);
+        const current = await object.json();
+        const badges = [...new Set((Array.isArray(body.badges) ? body.badges : []).map((badge) => String(badge).toUpperCase()).filter((badge) => GRANTABLE_BADGES.includes(badge)))];
+        const next = { ...current, badgeGrants: badges, badgeGrantsUpdatedAt: Date.now(), updatedAt: Date.now() };
+        await env.GAMES.put(key, JSON.stringify(next), { httpMetadata: { contentType: "application/json" } });
+        await audit(action, uid, { before: current.badgeGrants || [], after: badges });
+        return json({ uid, badges });
+      }
       if (action === "account-saves") {
         const uid = String(body.uid || "");
         if (!validUid(uid)) return json({ erro: "Conta invalida." }, 400);
@@ -1143,9 +1161,9 @@ var src_default = {
             return null;
           const live = presenceByUid.get(candidate.uid);
           const online = Boolean(live && now - live.updatedAt < 9e4);
-          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, recognition: recognitionFor(candidate.uid), age: profileAge(candidate.birthDate), locality: candidate.locality || "", bio: candidate.bio || "", instagram: candidate.instagram || "", youtube: candidate.youtube || "", facebook: candidate.facebook || "", tiktok: candidate.tiktok || "", watchRoomId: online && live?.page === "game" ? live.roomId || "" : "", watchTitle: online && live?.page === "game" ? live.roomTitle || "" : "", online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
+          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, recognition: applyBadgeGrants(recognitionFor(candidate.uid), candidate.badgeGrants), age: profileAge(candidate.birthDate), locality: candidate.locality || "", bio: candidate.bio || "", instagram: candidate.instagram || "", youtube: candidate.youtube || "", facebook: candidate.facebook || "", tiktok: candidate.tiktok || "", watchRoomId: online && live?.page === "game" ? live.roomId || "" : "", watchTitle: online && live?.page === "game" ? live.roomTitle || "" : "", online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
         }))).filter(Boolean).sort((a, b) => Number(b.online) - Number(a.online) || a.name.localeCompare(b.name, "pt-BR")).slice(0, 500);
-        return json({ self: { uid: account.uid, name: profile.name, avatar: profile.avatar, recognition: recognitionFor(account.uid) }, players });
+        return json({ self: { uid: account.uid, name: profile.name, avatar: profile.avatar, recognition: applyBadgeGrants(recognitionFor(account.uid), profile.badgeGrants) }, players });
       }
       if (request.method === "GET" && url.pathname === "/social/events")
         return own.fetch(new Request(`https://social/events?since=${encodeURIComponent(url.searchParams.get("since") || "0")}`));
@@ -1470,7 +1488,7 @@ var src_default = {
       const rewards = await referralRewards(env, access.accountUid || access.firebaseUid || access.discordId);
       const payments = await allPayments(env);
       const identity = access.accountUid ? `account:${access.accountUid}` : access.rawDiscordId || /^\d{10,25}$/.test(String(access.discordId || "")) ? `discord:${access.rawDiscordId || access.discordId}` : "";
-      return json({ conectado: true, username: profile?.name || access.username || "", avatar: profile?.avatar || "", plan: access.plan, recognition: supportRecognition(payments, identity, access.plan), manualSaveLimit: manualSaveLimit(access.plan) === null ? null : manualSaveLimit(access.plan) + rewards.bonusManualSlots, automaticGameLimit: automaticGameLimit(access.plan) === null ? null : automaticGameLimit(access.plan) + rewards.bonusAutoGames, automaticGamesUsed: automaticGames.size, referralPoints: rewards.points, referralRewards: rewards, expiresAt: access.exp });
+      return json({ conectado: true, username: profile?.name || access.username || "", avatar: profile?.avatar || "", plan: access.plan, recognition: applyBadgeGrants(supportRecognition(payments, identity, access.plan), profile?.badgeGrants), manualSaveLimit: manualSaveLimit(access.plan) === null ? null : manualSaveLimit(access.plan) + rewards.bonusManualSlots, automaticGameLimit: automaticGameLimit(access.plan) === null ? null : automaticGameLimit(access.plan) + rewards.bonusAutoGames, automaticGamesUsed: automaticGames.size, referralPoints: rewards.points, referralRewards: rewards, expiresAt: access.exp });
     }
     if (url.pathname === "/account/referrals" && ["GET", "POST"].includes(request.method)) {
       const account = await accountAccess(request, env);

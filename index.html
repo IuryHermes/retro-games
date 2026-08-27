@@ -442,6 +442,22 @@
         .profile-tabs { display:flex; gap:8px; margin:14px 0; }
         .profile-tab { flex:1; min-height:38px; border:1px solid var(--border-color); background:var(--input-bg); color:var(--text-muted); border-radius:5px; cursor:pointer; font:bold 10px monospace; }
         .profile-tab.active { border-color:var(--accent-color); background:rgba(0,204,68,.15); color:var(--text-color); }
+        .badge-collection-summary { grid-column:1/-1; padding:16px; border:1px solid #806c21; border-radius:8px; background:linear-gradient(145deg,rgba(255,209,102,.13),rgba(0,204,68,.06)); color:var(--text-color); font:11px/1.6 monospace; }
+        .badge-collection-summary strong { display:block; margin-bottom:5px; color:#ffd166; font-size:13px; }
+        .badge-progress-track { height:9px; margin:10px 0 5px; overflow:hidden; border:1px solid #806c21; border-radius:999px; background:#050a06; }
+        .badge-progress-fill { height:100%; border-radius:inherit; background:linear-gradient(90deg,var(--accent-color),#ffd166); }
+        .profile-badge-card { position:relative; display:grid; grid-template-columns:92px 1fr; gap:13px; align-items:center; min-height:126px; padding:14px; overflow:hidden; border:1px solid #806c21; border-radius:9px; background:linear-gradient(145deg,rgba(19,29,21,.98),rgba(5,11,7,.98)); }
+        .profile-badge-card.locked { border-color:#354038; }
+        .profile-badge-card.locked .club-badge-art { filter:grayscale(1) brightness(.32); opacity:.62; box-shadow:none; }
+        .profile-badge-card.locked .profile-badge-state { color:#849087; }
+        .profile-badge-card .club-badge-list { justify-content:center; }
+        .profile-badge-card .club-badge { padding:0; border:0; background:transparent; box-shadow:none; }
+        .profile-badge-card .club-badge-art { width:86px; height:86px; flex-basis:86px; border:1px solid rgba(255,209,102,.45); }
+        .profile-badge-card .club-badge-label { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+        .profile-badge-name { display:block; color:#ffd166; font:10px 'Press Start 2P',cursive; line-height:1.5; }
+        .profile-badge-rule { display:block; margin-top:7px; color:var(--text-muted); font:10px/1.5 monospace; }
+        .profile-badge-state { display:block; margin-top:8px; color:#55ff88; font:bold 9px monospace; text-transform:uppercase; }
+        @media(max-width:600px){.profile-tabs{display:grid;grid-template-columns:1fr 1fr}.profile-badge-card{grid-template-columns:76px 1fr}.profile-badge-card .club-badge-art{width:70px;height:70px;flex-basis:70px}}
         .cloud-summary { grid-column:1/-1; padding:12px; border:1px solid var(--accent-color); background:rgba(0,204,68,.08); border-radius:6px; color:var(--text-color); font:11px monospace; line-height:1.6; }
         .cloud-plan-promo { grid-column:1/-1; padding:15px; border:1px solid #ffd166; background:linear-gradient(135deg,rgba(255,209,102,.13),rgba(0,204,68,.07)); border-radius:7px; color:var(--text-color); font:11px/1.65 monospace; }
         .cloud-plan-promo strong { display:block; color:#ffd166; font-size:12px; }
@@ -552,6 +568,7 @@
                 <button class="profile-tab active" id="profile-history-tab" type="button" role="tab" aria-selected="true">JOGOS RECENTES</button>
                 <button class="profile-tab" id="profile-cloud-tab" type="button" role="tab" aria-selected="false">SAVES NA NUVEM</button>
                 <button class="profile-tab" id="profile-auto-tab" type="button" role="tab" aria-selected="false">SAVES AUTOMÁTICOS</button>
+                <button class="profile-tab" id="profile-badges-tab" type="button" role="tab" aria-selected="false">MEUS SELOS</button>
             </div>
             <div class="history-list" id="history-list"></div>
             <button class="auth-action" id="profile-logout" type="button" style="width:100%;margin-top:14px;border-color:#ff4f61;color:#ff8390">SAIR DA CONTA</button>
@@ -937,8 +954,10 @@
     const historyTab = document.getElementById('profile-history-tab');
     const cloudTab = document.getElementById('profile-cloud-tab');
     const autoTab = document.getElementById('profile-auto-tab');
+    const badgesTab = document.getElementById('profile-badges-tab');
     const profileSubtitle = document.getElementById('profile-subtitle');
     const profileSearch = document.getElementById('profile-search');
+    const profileTools = document.querySelector('.profile-tools');
     const normalizeProfileSearch = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
     const applyProfileSearch = () => {
         const query = normalizeProfileSearch(profileSearch.value).trim();
@@ -958,9 +977,10 @@
         return data;
     }
     function selectProfileTab(tab) {
-        [[historyTab,'history'],[cloudTab,'cloud'],[autoTab,'auto']].forEach(([button,name]) => {
+        [[historyTab,'history'],[cloudTab,'cloud'],[autoTab,'auto'],[badgesTab,'badges']].forEach(([button,name]) => {
             const active = tab === name; button.classList.toggle('active', active); button.setAttribute('aria-selected', String(active));
         });
+        profileTools.hidden = tab === 'badges';
     }
     async function loadHistory() {
         selectProfileTab('history');
@@ -1030,7 +1050,48 @@
             historyList.appendChild(promo); applyProfileSearch();
         } catch (error) { historyList.innerHTML = ''; const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = error.message; historyList.appendChild(empty); }
     }
-    historyTab.onclick = loadHistory; cloudTab.onclick = () => loadCloudLibrary('cloud'); autoTab.onclick = () => loadCloudLibrary('auto');
+    async function loadBadgeCollection() {
+        selectProfileTab('badges'); profileSubtitle.textContent = 'Sua coleção permanente de reconhecimento no Clube NeoTerminalRoom.';
+        historyList.innerHTML = '<div class="history-empty">CARREGANDO SELOS...</div>';
+        try {
+            const session = await cloudRequest('/club/session');
+            const recognition = session.recognition || {};
+            const earnedBadges = new Set(recognition.badges || []);
+            const months = Math.max(0, Number(recognition.supportMonths || 0));
+            const activePlan = String(session.plan || 'registered');
+            const plans = { cafe:'APOIADOR', cartucho:'GUARDIÃO', arcade:'PATRONO' };
+            const definitions = [
+                { label:'FUNDADOR', name:'Fundador', rule:'Entre as primeiras 100 pessoas com um apoio aprovado.', unlocked:earnedBadges.has('FUNDADOR'), state:recognition.grantedBadges?.includes('FUNDADOR') ? 'Concedido pela administração' : recognition.founderRank ? `Conquistado · fundador nº ${recognition.founderRank}` : 'Bloqueado · reservado aos 100 primeiros' },
+                { label:'APOIADOR', name:'Apoiador', rule:'Ative o plano Apoiador de R$ 5 por 30 dias.', unlocked:earnedBadges.has('APOIADOR'), state:recognition.grantedBadges?.includes('APOIADOR') ? 'Concedido pela administração' : plans[activePlan]==='APOIADOR' ? 'Ativo agora' : 'Bloqueado' },
+                { label:'GUARDIÃO', name:'Guardião', rule:'Ative o plano Guardião de R$ 12 por 30 dias.', unlocked:earnedBadges.has('GUARDIÃO'), state:recognition.grantedBadges?.includes('GUARDIÃO') ? 'Concedido pela administração' : plans[activePlan]==='GUARDIÃO' ? 'Ativo agora' : 'Bloqueado' },
+                { label:'PATRONO', name:'Patrono', rule:'Ative o plano Patrono de R$ 25 por 30 dias.', unlocked:earnedBadges.has('PATRONO'), state:recognition.grantedBadges?.includes('PATRONO') ? 'Concedido pela administração' : plans[activePlan]==='PATRONO' ? 'Ativo agora' : 'Bloqueado' },
+                { label:'3 MESES', name:'3 Meses', rule:'Some apoios aprovados em 3 meses diferentes.', unlocked:earnedBadges.has('3 MESES')||months>=3, state:recognition.grantedBadges?.includes('3 MESES') ? 'Concedido pela administração' : months>=3 ? `Conquistado · ${months} meses contabilizados` : `${months} de 3 meses` },
+                { label:'6 MESES', name:'6 Meses', rule:'Some apoios aprovados em 6 meses diferentes.', unlocked:earnedBadges.has('6 MESES')||months>=6, state:recognition.grantedBadges?.includes('6 MESES') ? 'Concedido pela administração' : months>=6 ? `Conquistado · ${months} meses contabilizados` : `${months} de 6 meses` },
+                { label:'12 MESES', name:'12 Meses', rule:'Some apoios aprovados em 12 meses diferentes.', unlocked:earnedBadges.has('12 MESES')||months>=12, state:recognition.grantedBadges?.includes('12 MESES') ? 'Concedido pela administração' : months>=12 ? `Conquistado · ${months} meses contabilizados` : `${months} de 12 meses` }
+            ];
+            historyList.replaceChildren();
+            const unlockedCount = definitions.filter(item=>item.unlocked).length;
+            const collectionComplete = unlockedCount === definitions.length;
+            const nextTarget = months < 3 ? 3 : months < 6 ? 6 : 12;
+            const summary = document.createElement('section'); summary.className = 'badge-collection-summary';
+            const title = document.createElement('strong'); title.textContent = `${unlockedCount} DE 7 SELOS VISÍVEIS`;
+            const copy = document.createElement('span'); copy.textContent = collectionComplete ? 'Coleção completa. Seus sete selos aparecem para a comunidade.' : months >= 12 ? 'Marco máximo de permanência conquistado. Seus selos aparecem para a comunidade.' : `Próximo marco de permanência: ${nextTarget} meses. Progresso atual: ${months}/${nextTarget}.`;
+            const progressMax = collectionComplete ? 7 : nextTarget;
+            const progressNow = collectionComplete ? 7 : Math.min(months,nextTarget);
+            const track = document.createElement('div'); track.className = 'badge-progress-track'; track.setAttribute('role','progressbar'); track.setAttribute('aria-valuemin','0'); track.setAttribute('aria-valuemax',String(progressMax)); track.setAttribute('aria-valuenow',String(progressNow));
+            const fill = document.createElement('div'); fill.className = 'badge-progress-fill'; fill.style.width = `${Math.min(100, progressNow / progressMax * 100)}%`; track.append(fill); summary.append(title,copy,track); historyList.append(summary);
+            definitions.forEach(definition => {
+                const card = document.createElement('article'); card.className = `profile-badge-card ${definition.unlocked?'unlocked':'locked'}`; card.dataset.profileSearch = `${definition.name} ${definition.rule} ${definition.state}`;
+                const art = NeoClubBadges.create([definition.label]);
+                const info = document.createElement('div'); const name = document.createElement('span'); name.className='profile-badge-name'; name.textContent=definition.name;
+                const rule = document.createElement('span'); rule.className='profile-badge-rule'; rule.textContent=definition.rule;
+                const state = document.createElement('span'); state.className='profile-badge-state'; state.textContent=definition.state;
+                info.append(name,rule,state); card.append(art,info); historyList.append(card);
+            });
+            const action = document.createElement('aside'); action.className='cloud-plan-promo'; action.innerHTML='<strong>COMECE SUA COLEÇÃO</strong>Mesmo sem apoio, todos os sete selos ficam visíveis aqui como objetivos. Quando um critério for confirmado, o emblema é colorido automaticamente e passa a aparecer junto ao seu avatar.<br><a href="apoie.html#planos">CONHECER O CLUBE</a>'; historyList.append(action);
+        } catch (error) { historyList.innerHTML=''; const empty=document.createElement('div'); empty.className='history-empty'; empty.textContent=error.message; historyList.append(empty); }
+    }
+    historyTab.onclick = loadHistory; cloudTab.onclick = () => loadCloudLibrary('cloud'); autoTab.onclick = () => loadCloudLibrary('auto'); badgesTab.onclick = loadBadgeCollection;
     document.getElementById('profile-diagnostic').onclick = async () => {
         const button = document.getElementById('profile-diagnostic'); button.disabled = true; button.textContent = 'VERIFICANDO...';
         try {
