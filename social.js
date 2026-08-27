@@ -100,7 +100,9 @@ function toast(event) {
   text.textContent =
     event.type === "invite"
       ? `${event.fromName} convidou você para ${event.title}.`
-      : `Nova mensagem de ${event.fromName}: ${event.preview}`;
+      : event.type === "support-anniversary"
+        ? event.preview
+        : `Nova mensagem de ${event.fromName}: ${event.preview}`;
   box.appendChild(text);
   if (event.type === "invite") {
     const link = document.createElement("a");
@@ -110,8 +112,8 @@ function toast(event) {
   }
   box.classList.remove("hidden");
   setTimeout(() => box.classList.add("hidden"), 12000);
-  if ("Notification" in window && Notification.permission === "granted")
-    new Notification("NeoTerminalRoom", { body: text.textContent, icon: avatar(event.fromAvatar), tag: event.type === "invite" ? `neo-invite-${event.roomId}` : `neo-message-${event.fromUid}` });
+  if (["invite", "support-anniversary"].includes(event.type) && "Notification" in window && Notification.permission === "granted")
+    new Notification(event.type === "support-anniversary" ? "Aniversário de apoio" : "NeoTerminalRoom", { body: text.textContent, icon: avatar(event.fromAvatar), tag: event.type === "support-anniversary" ? `neo-support-anniversary-${event.years}` : `neo-invite-${event.roomId}` });
 }
 async function pollEvents() {
   try {

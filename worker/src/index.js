@@ -683,10 +683,11 @@ var src_default = {
     }
     if (request.method === "GET" && url.pathname === "/public/hall") {
       const now = Date.now();
-      const [payments, registrations, migration, achievementRecords] = await Promise.all([allPayments(env), readJsonDirectory(env, "hall/registrations/", 200), env.GAMES.get("hall/registrations-backup.json"), readJsonDirectory(env, "support/achievements/", 100)]);
+      const [payments, registrations, migration, achievementRecords, profileRecords] = await Promise.all([allPayments(env), readJsonDirectory(env, "hall/registrations/", 200), env.GAMES.get("hall/registrations-backup.json"), readJsonDirectory(env, "support/achievements/", 100), readJsonDirectory(env, "profiles/v1/", 500)]);
       const legacyRegistrations = migration ? await migration.json().catch(() => ({})) : {};
+      const profilesByUid = new Map(profileRecords.map((record) => [String(record.value?.uid || ""), record.value]));
       const recognitionIndex = supportRecognitionContext(payments);
-      const supporters = Object.values(payments).filter((record) => record?.status === "aprovado" && record.exibirMural !== false && (!record.validoAte || Number(record.validoAte) > now)).map((record) => ({ nome: cleanProfileText(record.anonimo ? "Anonimo" : record.nome, 40), mensagem: cleanProfileText(record.mensagem, 240), valor: record.exibirValor === false ? null : Number(record.valor || 0), validoAte: Number(record.validoAte || 0), recognition: supportRecognition(payments, paymentIdentity(record), record.plano, recognitionIndex) })).slice(-10).reverse();
+      const supporters = Object.values(payments).filter((record) => record?.status === "aprovado" && record.exibirMural !== false && (!record.validoAte || Number(record.validoAte) > now)).map((record) => ({ nome: cleanProfileText(record.anonimo ? "Anonimo" : record.nome, 40), mensagem: cleanProfileText(record.mensagem, 240), valor: record.exibirValor === false ? null : Number(record.valor || 0), validoAte: Number(record.validoAte || 0), recognition: applyBadgeGrants(supportRecognition(payments, paymentIdentity(record), record.plano, recognitionIndex), profilesByUid.get(String(record.accountUid || ""))?.badgeGrants) })).slice(-10).reverse();
       const monthPartsFormatter = new Intl.DateTimeFormat("en-US", { timeZone: "America/Sao_Paulo", year: "numeric", month: "2-digit" });
       const monthKeyFor = (timestamp) => {
         const parts = Object.fromEntries(monthPartsFormatter.formatToParts(timestamp).map((part) => [part.type, part.value]));
@@ -714,7 +715,7 @@ var src_default = {
       const members = [...Object.values(legacyRegistrations), ...storedRegistrations].sort((a, b) => Number(b.timestamp || 0) - Number(a.timestamp || 0)).slice(0, 5).map((record) => {
         const identity = record.uid ? `account:${record.uid}` : "";
         const plan = record.uid ? activeSupportPlan(payments, record.uid, "", now) : "registered";
-        return { nome: cleanProfileText(record.nome, 40), mensagem: cleanProfileText(record.mensagem, 100), avatar: PROFILE_AVATARS.includes(record.avatar) ? record.avatar : "avatar-01", recognition: identity ? supportRecognition(payments, identity, plan, recognitionIndex) : { badges: [] } };
+        return { nome: cleanProfileText(record.nome, 40), mensagem: cleanProfileText(record.mensagem, 100), avatar: PROFILE_AVATARS.includes(record.avatar) ? record.avatar : "avatar-01", recognition: identity ? applyBadgeGrants(supportRecognition(payments, identity, plan, recognitionIndex), profilesByUid.get(String(record.uid || ""))?.badgeGrants) : { badges: [] } };
       });
       const achievements = achievementRecords.map((record) => record.value).filter((item) => item?.active !== false).sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")) || Number(b.updatedAt || 0) - Number(a.updatedAt || 0)).slice(0, 6).map((item) => ({ id: String(item.id || ""), title: cleanProfileText(item.title, 100), description: cleanProfileText(item.description, 300), category: cleanProfileText(item.category, 30), date: String(item.date || "").slice(0, 10) }));
       return json({ supporters, members, supportGoal, achievements, updatedAt: now });
@@ -1939,6 +1940,30 @@ var src_default = {
     const dayKey = now.toISOString().slice(0, 10);
     const stateObject = await env.GAMES.get("club/bot-state.json");
     const state = stateObject ? await stateObject.json().catch(() => ({})) : {};
+    const saoPauloParts = (timestamp) => Object.fromEntries(new Intl.DateTimeFormat("en-US", { timeZone: "America/Sao_Paulo", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(timestamp).map((part) => [part.type, part.value]));
+    const today = saoPauloParts(Date.now());
+    const firstSupportByUid = new Map();
+    for (const record of Object.values(records || {})) {
+      const uid = String(record?.accountUid || "");
+      const approvedAt = Number(record?.aprovadoEm || 0);
+      if (!uid || !approvedAt || !["aprovado", "expirado"].includes(record?.status)) continue;
+      const current = firstSupportByUid.get(uid);
+      if (!current || approvedAt < current.approvedAt) firstSupportByUid.set(uid, { approvedAt, discordId: String(record.discordId || "") });
+    }
+    for (const [uid, support] of firstSupportByUid) {
+      const started = saoPauloParts(support.approvedAt);
+      const years = Number(today.year) - Number(started.year);
+      if (years < 1 || today.month !== started.month || today.day !== started.day) continue;
+      const anniversaryKey = `support/anniversaries/${encodeURIComponent(uid)}/${today.year}.json`;
+      if (await env.GAMES.head(anniversaryKey)) continue;
+      const profileObject = await env.GAMES.get(`profiles/v1/${encodeURIComponent(uid)}.json`);
+      const profile = profileObject ? await profileObject.json().catch(() => ({})) : {};
+      const name = cleanProfileText(profile.name, 20) || "Jogador";
+      const message = `${name}, hoje seu apoio ao NeoTerminalRoom completa ${years} ${years === 1 ? "ano" : "anos"}. Obrigado por ajudar a preservar essa história conosco.`;
+      await env.SOCIAL_PLAYERS.getByName(uid).fetch(new Request("https://social/event", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "support-anniversary", fromUid: "neo-club", fromName: "Clube NeoTerminalRoom", fromAvatar: "avatar-01", preview: message, years }) }));
+      if (/^\d{10,25}$/.test(support.discordId)) await discordDirectMessage(env, support.discordId, `🎂 ${message} ${SITE}/apoie.html`).catch(() => false);
+      await env.GAMES.put(anniversaryKey, JSON.stringify({ uid, years, sentAt: Date.now() }), { httpMetadata: { contentType: "application/json" } });
+    }
     if (now.getUTCDay() === 1 && state.ultimaEnquete !== dayKey) {
       const start = Date.UTC(now.getUTCFullYear(), 0, 1);
       const week = Math.floor((now.getTime() - start) / 6048e5);

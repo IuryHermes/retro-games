@@ -848,10 +848,10 @@
     function showSocialEvent(event) {
         const toast = document.createElement('aside');
         toast.style.cssText = 'position:fixed;right:15px;bottom:85px;z-index:100000;max-width:340px;padding:14px;background:#061109;color:#fff;border:1px solid #00cc44;border-radius:8px;font:12px monospace;box-shadow:0 0 24px #00cc4466';
-        const text = document.createElement('div'); text.textContent = event.type === 'invite' ? `${event.fromName} convidou você para ${event.title}.` : `Mensagem privada de ${event.fromName}: ${event.preview}`; toast.appendChild(text);
+        const text = document.createElement('div'); text.textContent = event.type === 'invite' ? `${event.fromName} convidou você para ${event.title}.` : event.type === 'support-anniversary' ? event.preview : `Mensagem privada de ${event.fromName}: ${event.preview}`; toast.appendChild(text);
         if (event.type === 'invite') { const link = document.createElement('a'); link.href = `multiplayer-room.html?room=${encodeURIComponent(event.roomId)}`; link.textContent = ' ENTRAR NA PARTIDA'; link.style.cssText='display:block;color:#55ff88;margin-top:9px'; toast.appendChild(link); }
         document.body.appendChild(toast); setTimeout(() => toast.remove(), 15000);
-        if (event.type === 'invite' && 'Notification' in window && Notification.permission === 'granted') new Notification('Convite para jogar online', { body:`${event.fromName} convidou você para ${event.title}.`, icon:`assets/avatars/${event.fromAvatar || 'avatar-01'}.png`, tag:`neo-invite-${event.roomId}` });
+        if (['invite','support-anniversary'].includes(event.type) && 'Notification' in window && Notification.permission === 'granted') new Notification(event.type === 'support-anniversary' ? 'Aniversário de apoio' : 'Convite para jogar online', { body:text.textContent, icon:`assets/avatars/${event.fromAvatar || 'avatar-01'}.png`, tag:event.type === 'support-anniversary' ? `neo-support-anniversary-${event.years}` : `neo-invite-${event.roomId}` });
     }
     async function socialPulse() {
         try {
