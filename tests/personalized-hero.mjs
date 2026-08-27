@@ -24,7 +24,9 @@ assert.match(index, /window\.startGame\(recent\.playUrl\)/);
 assert.match(index, /heroSlideCount\(\)/);
 assert.match(index, /autosaveHeroImage\(recent\.id\)/);
 assert.match(index, /URL\.createObjectURL\(await response\.blob\(\)\)/);
-assert.match(index, /historyData\.games \|\| \[\]\)\.slice\(0, accountProfile \? 3 : 1\)/);
+assert.match(index, /saveLibrary\.manualSaveLimit === null \? 5/);
+assert.match(index, /Math\.min\(5, Math\.max\(3, availableManualSlots\)\)/);
+assert.match(index, /historyData\.games \|\| \[\]\)\.slice\(0, personalizedHeroLimit\)/);
 assert.match(index, /function appendGuestPromoSlides\(slides, dots\)/);
 assert.match(index, /CRIAR CONTA GRÁTIS/);
 assert.match(index, /CONHECER FORMAS DE APOIAR/);
@@ -37,4 +39,4 @@ assert.match(index, /id="hero-prev"/);
 assert.match(index, /id="hero-next"/);
 assert.doesNotMatch(index, /imagem da partida aparecerá aqui depois do próximo autosave/);
 
-console.log('personalized hero: 31 checks passed');
+console.log('personalized hero: 33 checks passed');

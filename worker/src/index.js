@@ -54,9 +54,9 @@ var TERMINALROOM_DIGESTS = [
   "🧠 **Laboratório aberto** — o TerminalRoom conecta emulação, saves na nuvem e multiplayer. Teste um jogo, encontre um problema e traga a evidência para a comunidade técnica.",
   "🔐 **Privacidade e autonomia** — cadastro e saves existem para você continuar sua partida em outros dispositivos. Não envie senhas ou códigos no Discord; use os fluxos oficiais do site.",
   "🛠️ **Atualização da semana** — confira o catálogo, experimente um sistema diferente e compartilhe sua sugestão. O NeoTerminalSec ajuda a transformar testes da comunidade em melhorias reais.",
-  "☁️ **Seu progresso continua** — jogue primeiro sem burocracia. Depois do primeiro jogo, o site convida você a criar uma conta grátis; os planos Continue, Cartucho e Arcade só entram quando você quiser mais espaço e continuidade."
+  "☁️ **Seu progresso continua** — jogue primeiro sem burocracia. Depois do primeiro jogo, o site convida você a criar uma conta grátis; os níveis Apoiador, Guardião e Patrono só entram quando você quiser fortalecer o projeto e receber mais espaço como agradecimento."
 ];
-var PLANS = { cafe: { title: "Cafe", amount: 5 }, cartucho: { title: "Cartucho", amount: 12 }, arcade: { title: "Arcade", amount: 25 } };
+var PLANS = { cafe: { title: "Apoiador", amount: 5 }, cartucho: { title: "Guardião", amount: 12 }, arcade: { title: "Patrono", amount: 25 } };
 var AFFILIATE_CATEGORIES = ["cupons", "destaques", "console-ps5", "console-xbox", "console-nintendo", "controles", "ps5", "xbox", "nintendo", "pc-gamer", "monitores", "audio", "armazenamento", "celulares", "smart-home", "streaming", "retro", "gadgets"];
 var AFFILIATE_BOT_SEARCHES = [
   { query: "jogos midia fisica ps5", category: "ps5" }, { query: "jogos midia fisica xbox", category: "xbox" },
@@ -87,6 +87,43 @@ async function allPayments(env) {
   const [records, migration] = await Promise.all([readJsonDirectory(env, "payments/v1/", 1e3), env.GAMES.get("payments/migration-backup.json")]);
   const legacy = migration ? await migration.json().catch(() => ({})) : {};
   return { ...legacy, ...Object.fromEntries(records.map(({ key, value }) => [decodeURIComponent(key.slice("payments/v1/".length).replace(/\.json$/, "")), value])) };
+}
+function paymentIdentity(record) {
+  if (record?.accountUid) return `account:${record.accountUid}`;
+  if (record?.discordId) return `discord:${record.discordId}`;
+  return "";
+}
+function supportRecognitionContext(payments) {
+  const monthFormatter = new Intl.DateTimeFormat("en-US", { timeZone: "America/Sao_Paulo", year: "numeric", month: "2-digit" });
+  const recordsByIdentity = /* @__PURE__ */ new Map();
+  const rankByIdentity = /* @__PURE__ */ new Map();
+  const monthsByIdentity = /* @__PURE__ */ new Map();
+  const approved = Object.values(payments).filter((record) => paymentIdentity(record) && Number(record?.aprovadoEm || 0) > 0).sort((a, b) => Number(a.aprovadoEm) - Number(b.aprovadoEm));
+  for (const record of approved) {
+    const identity = paymentIdentity(record);
+    if (!rankByIdentity.has(identity)) rankByIdentity.set(identity, rankByIdentity.size + 1);
+    if (!recordsByIdentity.has(identity)) recordsByIdentity.set(identity, []);
+    if (!monthsByIdentity.has(identity)) monthsByIdentity.set(identity, /* @__PURE__ */ new Set());
+    recordsByIdentity.get(identity).push(record);
+    monthsByIdentity.get(identity).add(monthFormatter.format(Number(record.aprovadoEm)));
+  }
+  return { recordsByIdentity, rankByIdentity, monthsByIdentity };
+}
+function supportRecognition(payments, identity, plan = "", context = null) {
+  const index = context || supportRecognitionContext(payments);
+  const records = index.recordsByIdentity.get(identity) || [];
+  const rank = index.rankByIdentity.get(identity) || 0;
+  const supportMonths = index.monthsByIdentity.get(identity)?.size || 0;
+  const levelLabels = { cafe: "APOIADOR", cartucho: "GUARDIÃO", arcade: "PATRONO", owner: "ADMIN" };
+  const badges = [];
+  if (rank > 0 && rank <= 100) badges.push("FUNDADOR");
+  if (levelLabels[plan]) badges.push(levelLabels[plan]);
+  if (supportMonths >= 12) badges.push("12 MESES"); else if (supportMonths >= 6) badges.push("6 MESES"); else if (supportMonths >= 3) badges.push("3 MESES");
+  return { founder: rank > 0 && rank <= 100, founderRank: rank || null, supportMonths, contributions: records.length, memberSince: records[0]?.aprovadoEm || null, badges };
+}
+function activeSupportPlan(payments, accountUid, discordId, now = Date.now()) {
+  const priority = { cafe: 1, cartucho: 2, arcade: 3 };
+  return Object.values(payments).filter((record) => record?.status === "aprovado" && (!record.validoAte || Number(record.validoAte) > now) && (accountUid && String(record.accountUid || "") === accountUid || discordId && String(record.discordId || "") === discordId)).sort((a, b) => Number(priority[b.plano] || 0) - Number(priority[a.plano] || 0) || Number(b.aprovadoEm || 0) - Number(a.aprovadoEm || 0))[0]?.plano || "registered";
 }
 function isCompleteAffiliateProduct(product, now = Date.now()) {
   const image = String(product?.image || "");
@@ -280,10 +317,15 @@ async function clubAccess(request, url, env) {
   const access = await readToken(token, env.DISCORD_CLIENT_SECRET);
   if (access?.purpose === "club" && CLUB_PLANS.includes(access.plan) && /^\d{10,25}$/.test(access.discordId))
     return access;
-  if (access?.purpose === "account" && /^discord-\d{10,25}$/.test(access.accountId))
-    return { discordId: access.accountId, accountUid: access.accountId, username: access.username || "", plan: "registered", purpose: "club", exp: access.exp };
+  if (access?.purpose === "account" && /^discord-\d{10,25}$/.test(access.accountId)) {
+    const rawDiscordId = access.accountId.slice("discord-".length);
+    const plan = activeSupportPlan(await allPayments(env), access.accountId, rawDiscordId);
+    return { discordId: access.accountId, rawDiscordId, accountUid: access.accountId, username: access.username || "", plan, purpose: "club", exp: access.exp };
+  }
   const firebase = await firebaseAccess(token);
-  return firebase ? { discordId: `firebase-${firebase.uid}`, firebaseUid: firebase.uid, username: firebase.email.split("@")[0], plan: "registered", purpose: "club", exp: Date.now() + 55 * 60 * 1e3 } : null;
+  if (!firebase) return null;
+  const plan = activeSupportPlan(await allPayments(env), firebase.uid, "");
+  return { discordId: `firebase-${firebase.uid}`, firebaseUid: firebase.uid, accountUid: firebase.uid, username: firebase.email.split("@")[0], plan, purpose: "club", exp: Date.now() + 55 * 60 * 1e3 };
 }
 __name(clubAccess, "clubAccess");
 function saveTarget(url, discordId) {
@@ -636,11 +678,41 @@ var src_default = {
     }
     if (request.method === "GET" && url.pathname === "/public/hall") {
       const now = Date.now();
-      const [payments, registrations, migration] = await Promise.all([allPayments(env), readJsonDirectory(env, "hall/registrations/", 200), env.GAMES.get("hall/registrations-backup.json")]);
+      const [payments, registrations, migration, achievementRecords] = await Promise.all([allPayments(env), readJsonDirectory(env, "hall/registrations/", 200), env.GAMES.get("hall/registrations-backup.json"), readJsonDirectory(env, "support/achievements/", 100)]);
       const legacyRegistrations = migration ? await migration.json().catch(() => ({})) : {};
-      const supporters = Object.values(payments).filter((record) => record?.status === "aprovado" && (!record.validoAte || Number(record.validoAte) > now)).map((record) => ({ nome: cleanProfileText(record.anonimo ? "Anonimo" : record.nome, 40), mensagem: cleanProfileText(record.mensagem, 240), valor: Number(record.valor || 0), validoAte: Number(record.validoAte || 0) })).slice(-10).reverse();
-      const members = [...Object.values(legacyRegistrations), ...registrations.map((record) => record.value)].sort((a, b) => Number(b.timestamp || 0) - Number(a.timestamp || 0)).slice(0, 5).map((record) => ({ nome: cleanProfileText(record.nome, 40), mensagem: cleanProfileText(record.mensagem, 100), avatar: PROFILE_AVATARS.includes(record.avatar) ? record.avatar : "avatar-01" }));
-      return json({ supporters, members, updatedAt: now });
+      const recognitionIndex = supportRecognitionContext(payments);
+      const supporters = Object.values(payments).filter((record) => record?.status === "aprovado" && record.exibirMural !== false && (!record.validoAte || Number(record.validoAte) > now)).map((record) => ({ nome: cleanProfileText(record.anonimo ? "Anonimo" : record.nome, 40), mensagem: cleanProfileText(record.mensagem, 240), valor: record.exibirValor === false ? null : Number(record.valor || 0), validoAte: Number(record.validoAte || 0), recognition: supportRecognition(payments, paymentIdentity(record), record.plano, recognitionIndex) })).slice(-10).reverse();
+      const monthPartsFormatter = new Intl.DateTimeFormat("en-US", { timeZone: "America/Sao_Paulo", year: "numeric", month: "2-digit" });
+      const monthKeyFor = (timestamp) => {
+        const parts = Object.fromEntries(monthPartsFormatter.formatToParts(timestamp).map((part) => [part.type, part.value]));
+        return `${parts.year}-${parts.month}`;
+      };
+      const monthKey = monthKeyFor(now);
+      const currentParts = Object.fromEntries(monthPartsFormatter.formatToParts(now).map((part) => [part.type, part.value]));
+      const previousMonthKey = monthKeyFor(Date.UTC(Number(currentParts.year), Number(currentParts.month) - 2, 15, 12));
+      const approvedPayments = Object.values(payments).filter((record) => ["aprovado", "doacao_aprovada"].includes(record?.status) && Number(record?.aprovadoEm || 0) > 0);
+      const monthlyPayments = approvedPayments.filter((record) => {
+        const approvedAt = Number(record?.aprovadoEm || 0);
+        return monthKeyFor(approvedAt) === monthKey;
+      });
+      const previousMonthRaised = approvedPayments.filter((record) => monthKeyFor(Number(record.aprovadoEm)) === previousMonthKey).reduce((total, record) => total + Number(record.valor || 0), 0);
+      const hasEarlierHistory = approvedPayments.some((record) => monthKeyFor(Number(record.aprovadoEm)) < monthKey);
+      const automaticGoalValue = hasEarlierHistory ? Math.min(1000, Math.max(100, Math.ceil(previousMonthRaised * 1.1 / 50) * 50)) : 300;
+      const goalOverrideObject = await env.GAMES.get(`support/goals/${monthKey}.json`);
+      const goalOverride = goalOverrideObject ? await goalOverrideObject.json().catch(() => null) : null;
+      const manualGoalValue = Number(goalOverride?.goal || 0);
+      const hasManualGoal = Number.isFinite(manualGoalValue) && manualGoalValue >= 1;
+      const monthlyGoalValue = hasManualGoal ? manualGoalValue : automaticGoalValue;
+      const monthlyRaised = monthlyPayments.reduce((total, record) => total + Number(record.valor || 0), 0);
+      const supportGoal = { month: new Intl.DateTimeFormat("pt-BR", { timeZone: "America/Sao_Paulo", month: "long", year: "numeric" }).format(now), monthKey, goal: monthlyGoalValue, raised: Number(monthlyRaised.toFixed(2)), percentage: Math.round(monthlyRaised / monthlyGoalValue * 100), contributions: monthlyPayments.length, automatic: !hasManualGoal, automaticGoal: automaticGoalValue, previousMonthRaised: Number(previousMonthRaised.toFixed(2)) };
+      const storedRegistrations = registrations.map((record) => ({ ...record.value, uid: record.value.uid || decodeURIComponent(record.key.slice("hall/registrations/".length).replace(/\.json$/, "")) }));
+      const members = [...Object.values(legacyRegistrations), ...storedRegistrations].sort((a, b) => Number(b.timestamp || 0) - Number(a.timestamp || 0)).slice(0, 5).map((record) => {
+        const identity = record.uid ? `account:${record.uid}` : "";
+        const plan = record.uid ? activeSupportPlan(payments, record.uid, "", now) : "registered";
+        return { nome: cleanProfileText(record.nome, 40), mensagem: cleanProfileText(record.mensagem, 100), avatar: PROFILE_AVATARS.includes(record.avatar) ? record.avatar : "avatar-01", recognition: identity ? supportRecognition(payments, identity, plan, recognitionIndex) : { badges: [] } };
+      });
+      const achievements = achievementRecords.map((record) => record.value).filter((item) => item?.active !== false).sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")) || Number(b.updatedAt || 0) - Number(a.updatedAt || 0)).slice(0, 6).map((item) => ({ id: String(item.id || ""), title: cleanProfileText(item.title, 100), description: cleanProfileText(item.description, 300), category: cleanProfileText(item.category, 30), date: String(item.date || "").slice(0, 10) }));
+      return json({ supporters, members, supportGoal, achievements, updatedAt: now });
     }
     const affiliateImageMatch = url.pathname.match(/^\/affiliate\/image\/([a-z0-9._-]{3,80})\.(avif|jpe?g|png|webp)$/i);
     if (request.method === "GET" && affiliateImageMatch) {
@@ -807,6 +879,68 @@ var src_default = {
         const values = await allPayments(env);
         const payments = Object.entries(values).map(([id, record]) => ({ id, plano: record?.plano || "", valor: Number(record?.valor || record?.valorEsperado || 0), status: record?.status || "", nome: record?.anonimo ? "Anonimo" : cleanProfileText(record?.nome, 40), discordId: record?.discordId || "", criadoEm: record?.criadoEm || 0, aprovadoEm: record?.aprovadoEm || 0, validoAte: record?.validoAte || 0, discordStatus: record?.discordStatus || "" })).sort((a, b) => Number(b.criadoEm) - Number(a.criadoEm)).slice(0, 500);
         return json({ payments });
+      }
+      if (action === "support-goal-get") {
+        const month = String(body.month || "");
+        if (!/^20\d{2}-(?:0[1-9]|1[0-2])$/.test(month)) return json({ erro: "Mes invalido." }, 400);
+        const object = await env.GAMES.get(`support/goals/${month}.json`);
+        const override = object ? await object.json().catch(() => null) : null;
+        return json({ month, override: override && Number(override.goal) >= 1 ? override : null });
+      }
+      if (action === "support-goal-set") {
+        const month = String(body.month || "");
+        const goal = Number(body.goal);
+        if (!/^20\d{2}-(?:0[1-9]|1[0-2])$/.test(month)) return json({ erro: "Mes invalido." }, 400);
+        if (!Number.isFinite(goal) || goal < 1 || goal > 1e5) return json({ erro: "Informe uma meta entre R$ 1 e R$ 100.000." }, 400);
+        const key = `support/goals/${month}.json`;
+        const beforeObject = await env.GAMES.get(key);
+        const before = beforeObject ? await beforeObject.json().catch(() => null) : null;
+        const override = { month, goal: Number(goal.toFixed(2)), updatedAt: Date.now(), updatedBy: actor };
+        await env.GAMES.put(key, JSON.stringify(override), { httpMetadata: { contentType: "application/json" } });
+        await audit(action, month, { before, after: override });
+        return json({ month, override });
+      }
+      if (action === "support-goal-clear") {
+        const month = String(body.month || "");
+        if (!/^20\d{2}-(?:0[1-9]|1[0-2])$/.test(month)) return json({ erro: "Mes invalido." }, 400);
+        const key = `support/goals/${month}.json`;
+        const beforeObject = await env.GAMES.get(key);
+        const before = beforeObject ? await beforeObject.json().catch(() => null) : null;
+        await env.GAMES.delete(key);
+        await audit(action, month, { before });
+        return json({ month, override: null });
+      }
+      if (action === "support-achievements") {
+        const records = await readJsonDirectory(env, "support/achievements/", 200);
+        return json({ achievements: records.map((record) => record.value).sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")) || Number(b.updatedAt || 0) - Number(a.updatedAt || 0)) });
+      }
+      if (action === "support-achievement-upsert") {
+        const input = body.achievement || {};
+        const id = String(input.id || crypto.randomUUID()).toLowerCase();
+        const title = cleanProfileText(input.title, 100);
+        const description = cleanProfileText(input.description, 300);
+        const category = String(input.category || "melhoria").toLowerCase();
+        const date = String(input.date || "");
+        if (!/^[a-f0-9-]{8,40}$/.test(id)) return json({ erro: "Resultado invalido." }, 400);
+        if (!title || !description || !/^(servidores|acervo|emuladores|recursos|correcoes|comunidade)$/.test(category) || !/^20\d{2}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01])$/.test(date)) return json({ erro: "Preencha titulo, descricao, categoria e data validos." }, 400);
+        const key = `support/achievements/${id}.json`;
+        const beforeObject = await env.GAMES.get(key);
+        const before = beforeObject ? await beforeObject.json().catch(() => null) : null;
+        const achievement = { id, title, description, category, date, active: input.active !== false, createdAt: Number(before?.createdAt || Date.now()), updatedAt: Date.now(), updatedBy: actor };
+        await env.GAMES.put(key, JSON.stringify(achievement), { httpMetadata: { contentType: "application/json" } });
+        await audit(action, id, { before, after: achievement });
+        return json({ achievement });
+      }
+      if (action === "support-achievement-delete") {
+        const id = String(body.id || "").toLowerCase();
+        if (!/^[a-f0-9-]{8,40}$/.test(id) || body.confirm !== id) return json({ erro: "Confirmacao invalida." }, 400);
+        const key = `support/achievements/${id}.json`;
+        const beforeObject = await env.GAMES.get(key);
+        const before = beforeObject ? await beforeObject.json().catch(() => null) : null;
+        if (!before) return json({ erro: "Resultado nao encontrado." }, 404);
+        await env.GAMES.delete(key);
+        await audit(action, id, { before });
+        return json({ deleted: true, id });
       }
       if (action === "discord-plan") {
         const discordId = String(body.discordId || ""); const plan = String(body.plan || "none");
@@ -993,7 +1127,10 @@ var src_default = {
         return json({ presence });
       }
       if (request.method === "GET" && url.pathname === "/social/players") {
-        const [profileDirectory, presenceDirectory] = await Promise.all([listAll(env, "profiles/v1/"), listAll(env, "social/presence/")]);
+        const [profileDirectory, presenceDirectory, payments] = await Promise.all([listAll(env, "profiles/v1/"), listAll(env, "social/presence/"), allPayments(env)]);
+        const now = Date.now();
+        const recognitionIndex = supportRecognitionContext(payments);
+        const recognitionFor = (uid) => supportRecognition(payments, `account:${uid}`, activeSupportPlan(payments, uid, "", now), recognitionIndex);
         const presence = (await Promise.all(presenceDirectory.slice(-500).map(async (object) => {
           const record = await env.GAMES.get(object.key);
           return record ? await record.json().catch(() => null) : null;
@@ -1005,10 +1142,10 @@ var src_default = {
           if (!candidate || candidate.uid === account.uid)
             return null;
           const live = presenceByUid.get(candidate.uid);
-          const online = Boolean(live && Date.now() - live.updatedAt < 9e4);
-          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, age: profileAge(candidate.birthDate), locality: candidate.locality || "", bio: candidate.bio || "", instagram: candidate.instagram || "", youtube: candidate.youtube || "", facebook: candidate.facebook || "", tiktok: candidate.tiktok || "", watchRoomId: online && live?.page === "game" ? live.roomId || "" : "", watchTitle: online && live?.page === "game" ? live.roomTitle || "" : "", online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
+          const online = Boolean(live && now - live.updatedAt < 9e4);
+          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, recognition: recognitionFor(candidate.uid), age: profileAge(candidate.birthDate), locality: candidate.locality || "", bio: candidate.bio || "", instagram: candidate.instagram || "", youtube: candidate.youtube || "", facebook: candidate.facebook || "", tiktok: candidate.tiktok || "", watchRoomId: online && live?.page === "game" ? live.roomId || "" : "", watchTitle: online && live?.page === "game" ? live.roomTitle || "" : "", online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
         }))).filter(Boolean).sort((a, b) => Number(b.online) - Number(a.online) || a.name.localeCompare(b.name, "pt-BR")).slice(0, 500);
-        return json({ self: { uid: account.uid, name: profile.name, avatar: profile.avatar }, players });
+        return json({ self: { uid: account.uid, name: profile.name, avatar: profile.avatar, recognition: recognitionFor(account.uid) }, players });
       }
       if (request.method === "GET" && url.pathname === "/social/events")
         return own.fetch(new Request(`https://social/events?since=${encodeURIComponent(url.searchParams.get("since") || "0")}`));
@@ -1331,7 +1468,9 @@ var src_default = {
       const savedObjects = await listAll(env, savePrefix, ["customMetadata"]);
       const automaticGames = new Set(savedObjects.filter((object) => object.key.endsWith("/auto.state")).map((object) => object.key.slice(savePrefix.length).split("/")[0]));
       const rewards = await referralRewards(env, access.accountUid || access.firebaseUid || access.discordId);
-      return json({ conectado: true, username: profile?.name || access.username || "", avatar: profile?.avatar || "", plan: access.plan, manualSaveLimit: manualSaveLimit(access.plan) === null ? null : manualSaveLimit(access.plan) + rewards.bonusManualSlots, automaticGameLimit: automaticGameLimit(access.plan) === null ? null : automaticGameLimit(access.plan) + rewards.bonusAutoGames, automaticGamesUsed: automaticGames.size, referralPoints: rewards.points, referralRewards: rewards, expiresAt: access.exp });
+      const payments = await allPayments(env);
+      const identity = access.accountUid ? `account:${access.accountUid}` : access.rawDiscordId || /^\d{10,25}$/.test(String(access.discordId || "")) ? `discord:${access.rawDiscordId || access.discordId}` : "";
+      return json({ conectado: true, username: profile?.name || access.username || "", avatar: profile?.avatar || "", plan: access.plan, recognition: supportRecognition(payments, identity, access.plan), manualSaveLimit: manualSaveLimit(access.plan) === null ? null : manualSaveLimit(access.plan) + rewards.bonusManualSlots, automaticGameLimit: automaticGameLimit(access.plan) === null ? null : automaticGameLimit(access.plan) + rewards.bonusAutoGames, automaticGamesUsed: automaticGames.size, referralPoints: rewards.points, referralRewards: rewards, expiresAt: access.exp });
     }
     if (url.pathname === "/account/referrals" && ["GET", "POST"].includes(request.method)) {
       const account = await accountAccess(request, env);
@@ -1396,7 +1535,7 @@ var src_default = {
       const profile = { uid: account.uid, name, avatar, birthDate, locality, bio, phone, instagram, youtube, facebook, tiktok, provider: account.provider, discordNotifications: Boolean(body.discordNotifications ?? current?.discordNotifications), ...(referrerUid ? { referrerUid } : {}), createdAt: current?.createdAt || Date.now(), updatedAt: Date.now() };
       await env.GAMES.put(key, JSON.stringify(profile), { httpMetadata: { contentType: "application/json" } });
       if (!current) {
-        await env.GAMES.put(`hall/registrations/${encodeURIComponent(account.uid)}.json`, JSON.stringify({ nome: name, avatar, mensagem: `Bem-vindo(a), ${name}! Um novo jogador entrou na sala.`, timestamp: Date.now() }), { httpMetadata: { contentType: "application/json" } });
+        await env.GAMES.put(`hall/registrations/${encodeURIComponent(account.uid)}.json`, JSON.stringify({ uid: account.uid, nome: name, avatar, mensagem: `Bem-vindo(a), ${name}! Um novo jogador entrou na sala.`, timestamp: Date.now() }), { httpMetadata: { contentType: "application/json" } });
         await discordMessage(env, DISCORD_CHANNELS.terminalroom, { content: `🎮 Bem-vindo(a) ao NeoTerminalRoom, **${name}**! Seu perfil foi criado. Jogue, salve seu progresso e traga sugestões para o NeoTerminalSec.` }).catch(() => null);
         if (/^discord-\d{10,25}$/.test(account.uid)) await discordDirectMessage(env, account.uid.slice("discord-".length), `🎮 Bem-vindo(a), ${name}! Seu perfil NeoTerminalRoom está pronto. Ative os lembretes no cadastro quando quiser e nunca compartilhe senhas ou códigos.`).catch(() => false);
         if (referrerUid) {
@@ -1711,8 +1850,9 @@ var src_default = {
         const name = anonymous ? "Anonimo" : String(body.nome || "").trim().slice(0, 15);
         const message = String(body.mensagem || "").trim().slice(0, 100);
         const discord = isFree ? null : await readToken(String(body.discordToken || ""), env.DISCORD_CLIENT_SECRET);
-        if (!plan && !isFree || !amount || amount < 1 || amount > 1e4 || !/^MSG-[0-9]{10,}$/.test(id) || !isFree && (!anonymous && !name) || !isFree && !discord?.discordId)
-          return json({ erro: isFree ? "Informe um valor entre R$ 1 e R$ 10.000." : "Conecte uma conta Discord valida antes de apoiar." }, 400);
+        const account = isFree ? null : await accountAccess(request, env);
+        if (!plan && !isFree || !amount || amount < 1 || amount > 1e4 || !/^MSG-[0-9]{10,}$/.test(id) || !isFree && (!anonymous && !name) || !isFree && !account?.uid && !discord?.discordId)
+          return json({ erro: isFree ? "Informe um valor entre R$ 1 e R$ 10.000." : "Entre na sua conta NeoTerminalRoom antes de apoiar." }, 400);
         const mpResponse = await fetch("https://api.mercadopago.com/checkout/preferences", {
           method: "POST",
           headers: { Authorization: `Bearer ${env.MP_TOKEN}`, "Content-Type": "application/json" },
@@ -1721,7 +1861,7 @@ var src_default = {
         const preference = await mpResponse.json();
         if (!mpResponse.ok || !preference.init_point)
           return json({ erro: "Mercado Pago recusou a preferencia." }, 502);
-        const pendingRecord = isFree ? { valor: amount, plano: "livre", status: "pendente", timestamp: Date.now(), exibirMural: false } : { nome: name, mensagem: message, valor: amount, plano: planKey, status: "pendente", timestamp: Date.now(), discordId: discord.discordId, discordUsuario: discord.username, exibirMural: true };
+        const pendingRecord = isFree ? { valor: amount, plano: "livre", status: "pendente", timestamp: Date.now(), exibirMural: false } : { nome: name, mensagem: message, valor: amount, plano: planKey, status: "pendente", timestamp: Date.now(), ...(account?.uid ? { accountUid:account.uid } : {}), ...(discord?.discordId ? { discordId:discord.discordId, discordUsuario:discord.username } : {}), exibirMural: body.exibirMural !== false, exibirValor: body.exibirValor !== false };
         await putPayment(env, id, pendingRecord);
         return json({ link: preference.init_point });
       } catch {
@@ -1751,16 +1891,16 @@ var src_default = {
         }
         if (!Object.values(PLANS).some((p) => p.amount === amount))
           return json({ erro: "Valor de plano invalido." }, 409);
-        if (!record?.plano || !record.discordId || !DISCORD_ROLES[record.plano])
-          return json({ erro: "Apoio sem vinculacao Discord." }, 409);
-        for (const roleId of Object.values(DISCORD_ROLES))
-          if (roleId !== DISCORD_ROLES[record.plano])
-            await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/members/${record.discordId}/roles/${roleId}`, { method: "DELETE", headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` } });
-        const roleResponse = await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/members/${record.discordId}/roles/${DISCORD_ROLES[record.plano]}`, { method: "PUT", headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` } });
+        if (!record?.plano || !DISCORD_ROLES[record.plano] || !record.accountUid && !record.discordId)
+          return json({ erro: "Apoio sem vinculacao a uma conta." }, 409);
         const approvedAt = Date.now();
-        const discordStatus = roleResponse.ok ? "cargo_liberado" : "falha_ao_liberar";
-        if (roleResponse.ok)
-          await discordMessage(env, DISCORD_CHANNELS.agradecimentos, { content: `\u{1F3AE} Obrigado, <@${record.discordId}>! Seu apoio **${record.plano === "cafe" ? "Continue" : record.plano === "cartucho" ? "Cartucho" : "Arcade"}** foi confirmado. O cargo e os benef\xEDcios est\xE3o ativos por 30 dias.` });
+        let discordStatus = record.discordId ? "falha_ao_liberar" : "nao_conectado";
+        if (record.discordId) {
+          for (const roleId of Object.values(DISCORD_ROLES)) if (roleId !== DISCORD_ROLES[record.plano]) await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/members/${record.discordId}/roles/${roleId}`, { method: "DELETE", headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` } });
+          const roleResponse = await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/members/${record.discordId}/roles/${DISCORD_ROLES[record.plano]}`, { method: "PUT", headers: { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}` } });
+          discordStatus = roleResponse.ok ? "cargo_liberado" : "falha_ao_liberar";
+          if (roleResponse.ok) await discordMessage(env, DISCORD_CHANNELS.agradecimentos, { content: `\u{1F3AE} Obrigado, <@${record.discordId}>! Seu apoio **${record.plano === "cafe" ? "Apoiador" : record.plano === "cartucho" ? "Guardião" : "Patrono"}** foi confirmado. O cargo e os benef\xEDcios est\xE3o ativos por 30 dias.` });
+        }
         await patchPayment(env, id, { status: "aprovado", valor: amount, aprovadoEm: approvedAt, validoAte: approvedAt + 30 * 24 * 60 * 60 * 1e3, discordStatus });
         return json({ recebido: true });
       } catch {

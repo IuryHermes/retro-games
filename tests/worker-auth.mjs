@@ -19,6 +19,7 @@ const objects = new Map();
 const multiplayerRooms = new Map();
 const rateBuckets = new Map();
 const env = {
+  ADMIN_PANEL_KEY: 'admin-test-key',
   DISCORD_CLIENT_SECRET: 'test-secret',
   TURN_KEY_ID: 'turn-test-id',
   TURN_KEY_API_TOKEN: 'turn-test-token',
@@ -63,10 +64,13 @@ const env = {
 };
 
 const originalFetch = globalThis.fetch;
+let paymentExternalReference = '';
 globalThis.fetch = async (input, init) => {
   const url = String(input);
   if (url.includes('/service_accounts/v1/jwk/')) return Response.json({ keys: [jwk] });
   if (url.includes('firebaseio.com/hall_cadastros/')) return Response.json({ ok: true });
+  if (url.includes('api.mercadopago.com/checkout/preferences')) { paymentExternalReference = JSON.parse(init.body).external_reference; return Response.json({ init_point:'https://mercadopago.test/checkout' }); }
+  if (url.includes('api.mercadopago.com/v1/payments/')) return Response.json({ id:123456, status:'approved', external_reference:paymentExternalReference, transaction_amount:5 });
   if (url.includes('/credentials/generate-ice-servers')) {
     assert.equal(init.headers.Authorization, 'Bearer turn-test-token');
     assert.equal(JSON.parse(init.body).ttl, 14400);
@@ -163,4 +167,76 @@ for (let attempt = 0; attempt < 13; attempt++) response = await worker.fetch(new
 assert.equal(response.status, 429);
 assert.ok(Number(response.headers.get('Retry-After')) > 0);
 
-console.log('worker auth/history/discord/cloud/multiplayer: 42 checks passed');
+const monthParts = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone:'America/Sao_Paulo', year:'numeric', month:'2-digit' }).formatToParts(new Date()).map(part => [part.type, part.value]));
+const currentMonth = `${monthParts.year}-${monthParts.month}`;
+const adminRequest = (payload, key = 'admin-test-key') => worker.fetch(new Request('https://worker/internal/admin-console', { method:'POST', headers:{ 'Content-Type':'application/json', 'X-Admin-Key':key }, body:JSON.stringify({ ...payload, adminActor:'teste' }) }), env);
+response = await adminRequest({ action:'support-goal-get', month:currentMonth }, 'wrong-key');
+assert.equal(response.status, 401);
+response = await adminRequest({ action:'support-goal-get', month:'2026-13' });
+assert.equal(response.status, 400);
+response = await adminRequest({ action:'support-goal-get', month:currentMonth });
+assert.equal(response.status, 200);
+assert.equal((await response.json()).override, null);
+response = await adminRequest({ action:'support-goal-set', month:currentMonth, goal:0 });
+assert.equal(response.status, 400);
+response = await adminRequest({ action:'support-goal-set', month:currentMonth, goal:450.5 });
+assert.equal(response.status, 200);
+assert.equal((await response.json()).override.goal, 450.5);
+response = await worker.fetch(new Request('https://worker/public/hall'), env);
+let publicGoal = (await response.json()).supportGoal;
+assert.equal(publicGoal.goal, 450.5);
+assert.equal(publicGoal.automatic, false);
+response = await adminRequest({ action:'support-goal-clear', month:currentMonth });
+assert.equal(response.status, 200);
+response = await worker.fetch(new Request('https://worker/public/hall'), env);
+publicGoal = (await response.json()).supportGoal;
+assert.equal(publicGoal.goal, 300);
+assert.equal(publicGoal.automatic, true);
+
+response = await adminRequest({ action:'support-achievement-upsert', achievement:{ title:'Sem dados' } });
+assert.equal(response.status, 400);
+response = await adminRequest({ action:'support-achievement-upsert', achievement:{ title:'Servidor ampliado', description:'A comunidade viabilizou mais capacidade para saves.', category:'servidores', date:'2026-08-27', active:true } });
+assert.equal(response.status, 200);
+const achievement = (await response.json()).achievement;
+assert.match(achievement.id, /^[a-f0-9-]{8,40}$/);
+response = await adminRequest({ action:'support-achievements' });
+assert.equal((await response.json()).achievements.length, 1);
+response = await worker.fetch(new Request('https://worker/public/hall'), env);
+let publicAchievements = (await response.json()).achievements;
+assert.equal(publicAchievements.length, 1);
+assert.equal(publicAchievements[0].title, 'Servidor ampliado');
+response = await adminRequest({ action:'support-achievement-upsert', achievement:{ ...achievement, active:false } });
+assert.equal(response.status, 200);
+response = await worker.fetch(new Request('https://worker/public/hall'), env);
+publicAchievements = (await response.json()).achievements;
+assert.equal(publicAchievements.length, 0);
+response = await adminRequest({ action:'support-achievement-delete', id:achievement.id, confirm:'errado' });
+assert.equal(response.status, 400);
+response = await adminRequest({ action:'support-achievement-delete', id:achievement.id, confirm:achievement.id });
+assert.equal(response.status, 200);
+response = await adminRequest({ action:'support-achievement-delete', id:achievement.id, confirm:achievement.id });
+assert.equal(response.status, 404);
+
+const siteOnlyToken = tokenFor({ sub:'site-supporter-1', email:'sem-discord@example.com' });
+response = await worker.fetch(new Request('https://worker/gerar-link', { method:'POST', headers:{ ...auth(siteOnlyToken), 'Content-Type':'application/json' }, body:JSON.stringify({ plano:'cafe', nome:'Sem Discord', mensagem:'Preservando junto', anonimo:false, exibirMural:true, exibirValor:false, idMensagem:`MSG-${Date.now()}`, discordToken:'' }) }), env);
+assert.equal(response.status, 200);
+assert.equal((await response.json()).link, 'https://mercadopago.test/checkout');
+const siteOnlyPayment = JSON.parse(objects.get(`payments/v1/${paymentExternalReference}.json`).value.toString());
+assert.equal(siteOnlyPayment.accountUid, 'site-supporter-1');
+assert.equal(siteOnlyPayment.discordId, undefined);
+assert.equal(siteOnlyPayment.exibirValor, false);
+response = await worker.fetch(new Request('https://worker/webhook', { method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify({ data:{ id:'123456' } }) }), env);
+assert.equal(response.status, 200);
+response = await worker.fetch(new Request('https://worker/club/session', { headers:auth(siteOnlyToken) }), env);
+const supportedSession = await response.json();
+assert.equal(supportedSession.plan, 'cafe');
+assert.equal(supportedSession.manualSaveLimit, 7);
+assert.ok(supportedSession.recognition.badges.includes('FUNDADOR'));
+assert.ok(supportedSession.recognition.badges.includes('APOIADOR'));
+response = await worker.fetch(new Request('https://worker/public/hall'), env);
+const privateValueSupporter = (await response.json()).supporters.find(item => item.nome === 'Sem Discord');
+assert.ok(privateValueSupporter);
+assert.equal(privateValueSupporter.valor, null);
+assert.ok(privateValueSupporter.recognition.badges.includes('FUNDADOR'));
+
+console.log('worker auth/history/discord/cloud/multiplayer/admin support: 79 checks passed');

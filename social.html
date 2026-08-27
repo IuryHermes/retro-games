@@ -108,7 +108,7 @@
       }
       .player {
         display: grid;
-        grid-template-columns: 52px 1fr;
+        grid-template-columns: 70px 1fr;
         gap: 12px;
         padding: 14px;
         background: rgba(7, 18, 11, 0.94);
@@ -162,13 +162,17 @@
         text-align: center;
         color: var(--muted);
       }
+      .club-avatar-frame.community-avatar-badges{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:5px;height:auto!important}
+      .club-avatar-frame.community-avatar-badges>.club-badge-list{position:static;right:auto;bottom:auto;max-width:none;justify-content:center}
+      .player>.club-avatar-frame{width:70px;min-height:78px}.player>.club-avatar-frame>img{display:block}
       .global-chat { margin:0 0 28px; border:1px solid var(--green); border-radius:12px; overflow:hidden; background:rgba(7,18,11,.96); }
       .global-chat-head { padding:15px 16px; border-bottom:1px solid #255630; }
       .global-chat-head h2 { margin:0 0 5px; color:var(--bright); }
       .global-chat-head p { margin:0; color:var(--muted); }
       .global-messages { height:min(42dvh,380px); overflow:auto; padding:14px; display:flex; flex-direction:column; gap:8px; }
-      .global-message { display:grid; grid-template-columns:34px 1fr; gap:9px; align-items:start; padding:9px; border-radius:8px; background:#101c14; }
+      .global-message { display:grid; grid-template-columns:54px 1fr; gap:9px; align-items:start; padding:9px; border-radius:8px; background:#101c14; }
       .global-message img { width:34px; height:34px; border-radius:6px; object-fit:cover; image-rendering:pixelated; }
+      .global-message>.club-avatar-frame{width:54px;min-height:54px}
       .global-message strong { color:var(--bright); margin-right:8px; }
       .global-message small { color:var(--muted); }
       .global-message p { margin:4px 0 0; overflow-wrap:anywhere; line-height:1.45; }
@@ -209,6 +213,7 @@
       .message-row { display:flex; align-items:flex-end; gap:10px; width:100%; }
       .message-row.mine { flex-direction:row-reverse; }
       .message-avatar { width:46px; height:46px; flex:0 0 46px; border-radius:10px; object-fit:cover; border:1px solid #2d7340; image-rendering:pixelated; }
+      .message-row>.club-avatar-frame{width:54px;min-height:66px;flex:0 0 54px}
       .message-row.mine .message {
         background: #104b24;
       }
@@ -259,6 +264,7 @@
       }
     </style>
     <link rel="stylesheet" href="standalone-theme.css?v=20260821">
+    <link rel="stylesheet" href="club-badges.css?v=20260827">
 <script src="privacy-consent-v2.js" defer></script>
 </head>
   <body class="neo-page neo-social">
@@ -314,6 +320,7 @@
       </form>
     </dialog>
     <aside class="toast hidden" id="toast"></aside>
+    <script src="club-badges.js?v=20260827"></script>
     <script type="module" src="social.js"></script>
   </body>
 </html>

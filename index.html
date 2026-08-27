@@ -21,8 +21,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>NeoTerminalRoom - Jogos Retrô e Emuladores Dublados Online</title>
-    <meta name="description" content="O maior site de jogos retrô dublados do Brasil. Jogue PS1, SNES, GBA e Mega Drive direto no navegador do seu PC ou celular, sem baixar nada.">
+    <meta name="description" content="Jogue grandes clássicos retrô em português no navegador: Atari 2600, NES, SNES, Nintendo 64, GBA, Mega Drive e PS1, no PC ou celular, sem baixar nada.">
     <meta name="keywords" content="emulador online, jogos dublados, ps1 online, snes online, jogos retro pt-br, neoterminalroom">
+    <link rel="canonical" href="https://neoterminalroom.com.br/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="NeoTerminalRoom - Jogos Retrô em Português">
+    <meta property="og:description" content="Clássicos de Atari 2600, NES, SNES, Nintendo 64, GBA, Mega Drive e PS1 para jogar no navegador, no PC ou celular.">
+    <meta property="og:url" content="https://neoterminalroom.com.br/">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebSite","name":"NeoTerminalRoom","alternateName":"Neo Terminal Room","url":"https://neoterminalroom.com.br/","description":"Jogos retrô em português para jogar no navegador, com Atari 2600, NES, SNES, Nintendo 64, GBA, Mega Drive e PS1.","inLanguage":"pt-BR"}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"ItemList","name":"Jogos retrô mais aclamados do NeoTerminalRoom","itemListOrder":"https://schema.org/ItemListOrderDescending","itemListElement":[{"@type":"ListItem","position":1,"name":"Super Mario World","url":"https://neoterminalroom.com.br/jogos/snes/super-mario-world/"},{"@type":"ListItem","position":2,"name":"The Legend of Zelda: A Link to the Past","url":"https://neoterminalroom.com.br/jogos/snes/the-legend-of-zelda-a-link-to-the-past/"},{"@type":"ListItem","position":3,"name":"Chrono Trigger","url":"https://neoterminalroom.com.br/jogos/snes/chrono-trigger/"},{"@type":"ListItem","position":4,"name":"The Legend of Zelda: Ocarina of Time","url":"https://neoterminalroom.com.br/jogos/n64/the-legend-of-zelda-ocarina-of-time/"},{"@type":"ListItem","position":5,"name":"Castlevania: Symphony of the Night","url":"https://neoterminalroom.com.br/jogos/ps1/castlevania-symphony-of-the-night/"},{"@type":"ListItem","position":6,"name":"Metal Gear Solid em português","url":"https://neoterminalroom.com.br/jogos/ps1/metal-gear-solid-em-portugues-pt-br/"}]}
+    </script>
 
     <link rel="icon" type="image/gif" href="assets/imagens-videos/logo-discord.gif?v=2">
 
@@ -123,6 +134,8 @@
         .hall-nick { font-family: 'Press Start 2P', cursive; font-size: 6px; color: var(--text-color); }
         .hall-valor { font-family: monospace; font-size: 9px; color: var(--accent-color); font-weight: bold; }
         .hall-msg { font-size: 11px; color: var(--text-muted); font-style: italic; line-height: 1.2; word-wrap: break-word; }
+        .hall-badges { display:flex; flex-wrap:wrap; gap:3px; margin:4px 0; }
+        .hall-badge { padding:2px 4px; border:1px solid #806c21; border-radius:3px; color:#ffd166; font:6px 'Press Start 2P',cursive; }
 
         /* SPLASH SCREEN */
         #splash-screen { position: fixed; inset: 0; background-color: var(--bg-color); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000000; transition: opacity 0.8s ease-out, visibility 0.8s; }
@@ -194,6 +207,12 @@
         #chat-mobile-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 99998; backdrop-filter: blur(3px); }
 
         .main-content { margin-left: var(--sidebar-collapsed-width); padding: 0 0 50px 0; position: relative; z-index: 1; transition: margin-left 0.3s ease; }
+        .acclaimed-games { padding:28px 40px 10px; }
+        .acclaimed-games h1 { color:var(--accent-color); font:clamp(13px,2vw,18px)/1.5 'Press Start 2P',cursive; }
+        .acclaimed-games p { max-width:900px; margin:8px 0 16px; color:var(--text-muted); line-height:1.6; }
+        .acclaimed-links { display:flex; flex-wrap:wrap; gap:10px; }
+        .acclaimed-links a { padding:10px 12px; border:1px solid var(--border-color); border-radius:5px; background:var(--card-bg); color:var(--text-color); text-decoration:none; font:700 11px/1.4 monospace; }
+        .acclaimed-links a:hover,.acclaimed-links a:focus-visible { border-color:var(--accent-color); color:var(--accent-color); }
 
         .top-bar { position: sticky; top: 0; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 8000; background: var(--top-bar-bg); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 204, 68, 0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: background 0.4s; }
         @keyframes brand-glow { 0% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } 50% { text-shadow: 0 0 2px var(--accent-color), 0 0 5px var(--accent-color); transform: scale(1.02); } 100% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } }
@@ -479,6 +498,8 @@
             .discord-float { bottom: 70px; }
         }
     </style>
+    <link rel="stylesheet" href="club-badges.css?v=20260827">
+    <script src="club-badges.js?v=20260827"></script>
     <script src="privacy-consent-v2.js" defer></script>
 </head>
 <body>
@@ -590,15 +611,17 @@
 
             <div style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px;">
                 <select id="sup-plan" class="sup-input" aria-label="Plano de apoio">
-                    <option value="cafe">Café — R$ 5</option>
-                    <option value="cartucho">Cartucho — R$ 12</option>
-                    <option value="arcade">Arcade — R$ 25</option>
+                    <option value="cafe">Apoiador — R$ 5</option>
+                    <option value="cartucho">Guardião — R$ 12</option>
+                    <option value="arcade">Patrono — R$ 25</option>
                     <option value="livre">Apoio livre — escolha o valor</option>
                 </select>
                 <input type="number" id="sup-free-amount" class="sup-input" placeholder="Valor livre (mínimo R$ 1)" min="1" max="10000" step="0.01" style="display:none;">
                 <a id="discord-connect" class="btn-pay" href="#" style="text-align:center;text-decoration:none;background:#5865f2;">CONECTAR DISCORD</a>
-                <div id="discord-status" style="font:11px monospace;color:var(--text-muted);text-align:center;">Obrigatório: entre no servidor e aceite as regras primeiro.</div>
+                <div id="discord-status" style="font:11px monospace;color:var(--text-muted);text-align:center;">Opcional: conecte o Discord para receber também cargo e canais do Clube.</div>
                 <label style="font: 11px monospace; color: var(--text-color);"><input type="checkbox" id="sup-anonymous"> Apoiar como anônimo</label>
+                <label style="font: 11px monospace; color: var(--text-color);"><input type="checkbox" id="sup-show-hall" checked> Aparecer no Hall da comunidade</label>
+                <label style="font: 11px monospace; color: var(--text-color);"><input type="checkbox" id="sup-show-value" checked> Mostrar o valor do apoio</label>
                 <input type="text" id="sup-name" class="sup-input" placeholder="Seu Nick (Máx 15)" maxlength="15">
                 <textarea id="sup-msg" class="sup-input" placeholder="Sua mensagem (Máx 100 caracteres)..." maxlength="100" rows="3" style="resize: none;"></textarea>
             </div>
@@ -693,6 +716,19 @@
                 <div class="hero-indicators" id="hero-indicators"></div>
                 <button class="hero-nav prev" id="hero-prev" type="button" aria-label="Jogo anterior">&#8249;</button>
                 <button class="hero-nav next" id="hero-next" type="button" aria-label="Próximo jogo">&#8250;</button>
+            </section>
+
+            <section class="acclaimed-games" aria-labelledby="acclaimed-title">
+                <h1 id="acclaimed-title">JOGOS RETRÔ MAIS ACLAMADOS</h1>
+                <p>Clássicos em destaque no NeoTerminalRoom, selecionados pelas melhores avaliações do catálogo.</p>
+                <nav class="acclaimed-links" aria-label="Jogos retrô mais bem avaliados">
+                    <a href="/jogos/snes/super-mario-world/">Jogar Super Mario World</a>
+                    <a href="/jogos/snes/the-legend-of-zelda-a-link-to-the-past/">Jogar Zelda: A Link to the Past</a>
+                    <a href="/jogos/snes/chrono-trigger/">Jogar Chrono Trigger</a>
+                    <a href="/jogos/n64/the-legend-of-zelda-ocarina-of-time/">Jogar Zelda: Ocarina of Time</a>
+                    <a href="/jogos/ps1/castlevania-symphony-of-the-night/">Jogar Castlevania: Symphony of the Night</a>
+                    <a href="/jogos/ps1/metal-gear-solid-em-portugues-pt-br/">Jogar Metal Gear Solid em português</a>
+                </nav>
             </section>
 
             <section class="catalog" id="catalog-area"></section>
@@ -843,7 +879,8 @@
     multiplayerModal.onclick = event => { if (event.target === multiplayerModal) closeMultiplayerHub(); };
     function renderMultiplayerGames(query = '') {
         const term = query.trim().toLowerCase();
-        const games = indexData.filter(game => game.playUrl && !hiddenPs1Disc(game) && (!term || game.nome.toLowerCase().includes(term))).slice(0, 120);
+        const supportsMultiplayer = game => /(?:até|ate)\s+(?:[2-9]|\d{2,})\s+jogadores|modo\s+(?:cooperativo|multiplayer)|multijogador/i.test(String(game.descricao || ''));
+        const games = indexData.filter(game => game.playUrl && supportsMultiplayer(game) && !hiddenPs1Disc(game) && (!term || game.nome.toLowerCase().includes(term))).slice(0, 120);
         multiplayerGameGrid.replaceChildren();
         if (!games.length) { multiplayerGameGrid.innerHTML = '<div class="history-empty">Nenhum jogo encontrado.</div>'; return; }
         games.forEach(game => {
@@ -965,7 +1002,7 @@
             summary.textContent = data.automaticGameLimit === null ? `Autosaves: ${data.automaticGamesUsed} jogos · ilimitados no seu plano. Saves manuais: ilimitados por jogo. ${referralText}` : `Autosaves: ${data.automaticGamesUsed} de ${data.automaticGameLimit} jogos · ${Math.max(0, data.automaticGameLimit - data.automaticGamesUsed)} vagas livres. Saves manuais: ${data.manualSaveLimit} por jogo. ${referralText}`;
             historyList.appendChild(summary);
             const promo = document.createElement('aside'); promo.className = 'cloud-plan-promo';
-            promo.innerHTML = '<strong>PRECISA DE MAIS ESPAÇO?</strong>Os planos Continue e Cartucho aumentam seus slots manuais e jogos com autosave. O plano Arcade deixa saves manuais e automáticos ilimitados.<br><a href="apoie.html#planos">VER PLANOS E AUMENTAR MEUS SAVES</a>';
+            promo.innerHTML = '<strong>QUER FORTALECER O PROJETO?</strong>Os níveis Apoiador e Guardião ampliam seus saves como agradecimento. O nível Patrono oferece saves manuais e automáticos ilimitados.<br><a href="apoie.html#planos">CONHECER FORMAS DE APOIAR</a>';
             const games = (data.games || []).map(game => ({ ...game, slots: (game.slots || []).filter(slot => automaticOnly ? slot.slot === 'auto' : slot.slot !== 'auto') })).filter(game => game.slots.length);
             if (!games.length) { const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = automaticOnly ? 'Você ainda não possui saves automáticos na nuvem.' : 'Você ainda não possui saves manuais na nuvem.'; historyList.appendChild(empty); }
             games.forEach(game => {
@@ -1279,12 +1316,13 @@
                 const item=document.createElement('div'); item.className='hall-item-sidebar';
                 const header=document.createElement('div'); header.className='hall-item-header';
                 const nick=document.createElement('span'); nick.className='hall-nick'; nick.textContent=String(d.nome||'Anonimo').slice(0,40);
-                const amount=document.createElement('span'); amount.className='hall-valor'; amount.textContent=Number(d.valor||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+                const amount=document.createElement('span'); amount.className='hall-valor'; amount.textContent=d.valor==null?'APOIO CONFIRMADO':Number(d.valor||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
                 const message=document.createElement('div'); message.className='hall-msg'; message.textContent=`"${String(d.mensagem||'').slice(0,240)}"`;
-                header.append(nick,amount); item.append(header,message); hallSidebar.append(item);
+                const badges=NeoClubBadges.create(d.recognition?.badges||[],{variant:'tiny',className:'hall-badges'});
+                header.append(nick,amount); item.append(header,badges,message); hallSidebar.append(item);
             });
-            hallMarquee.textContent=supporters.length?supporters.map(d=>`⭐ ${d.nome} (${Number(d.valor||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}): "${d.mensagem||''}"`).join('   •   '):'Aguardando heróis da resistência...';
-            members.forEach(member => { const item=document.createElement('div'); item.className='hall-member'; const image=document.createElement('img'); image.className='hall-member-avatar'; image.src=avatarUrl(member.avatar); image.alt=''; const text=document.createElement('span'); text.textContent=String(member.mensagem||`Bem-vindo(a), ${member.nome||'jogador'}!`).slice(0,100); item.append(image,text); hallMembers.append(item); });
+            hallMarquee.textContent=supporters.length?supporters.map(d=>`⭐ ${d.nome} (${d.valor==null?'apoio confirmado':Number(d.valor||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}) ${(d.recognition?.badges||[]).join(' · ')}: "${d.mensagem||''}"`).join('   •   '):'Aguardando heróis da resistência...';
+            members.forEach(member => { const item=document.createElement('div'); item.className='hall-member'; const image=document.createElement('img'); image.className='hall-member-avatar'; image.src=avatarUrl(member.avatar); image.alt=''; const text=document.createElement('span'); text.textContent=String(member.mensagem||`Bem-vindo(a), ${member.nome||'jogador'}!`).slice(0,100); item.append(NeoClubBadges.avatar(image,member.recognition?.badges||[],{variant:'tiny'}),text); hallMembers.append(item); });
             container.classList.toggle('ativo', supporters.length>0||members.length>0);
         } catch (_) {}
     };
@@ -1292,6 +1330,8 @@
 
     window.processarApoio = async () => {
         const anonimo = document.getElementById('sup-anonymous').checked;
+        const exibirMural = document.getElementById('sup-show-hall').checked;
+        const exibirValor = document.getElementById('sup-show-value').checked;
         const nome = anonimo ? 'Anonimo' : document.getElementById('sup-name').value.trim();
         const msg = document.getElementById('sup-msg').value.trim();
         const plano = document.getElementById('sup-plan').value;
@@ -1300,7 +1340,7 @@
         const livre = plano === 'livre';
 
         if(!livre && (!nome || !msg)) { alert("⚠️ Preencha seu Nick e sua Mensagem!"); return; }
-        if(!livre && !discordToken) { alert("⚠️ Conecte sua conta do Discord antes de pagar."); return; }
+        if(!livre && !auth.currentUser && !accountProfile && !discordToken) { alert("⚠️ Entre na sua conta NeoTerminalRoom antes de apoiar."); return; }
         if(livre && (!Number.isFinite(valorLivre) || valorLivre < 1 || valorLivre > 10000)) { alert("⚠️ Informe um valor entre R$ 1 e R$ 10.000."); return; }
         if(nome.length > 40 || msg.length > 240) { alert("⚠️ Nick: até 40 caracteres. Mensagem: até 240 caracteres."); return; }
 
@@ -1312,11 +1352,12 @@
         const idMensagem = "MSG-" + Date.now();
 
         try {
+            const accountToken = auth.currentUser ? await auth.currentUser.getIdToken() : sessionStorage.getItem('neo_account_access') || '';
             // O Worker valida o plano, registra o apoio e só libera o Hall após confirmar o pagamento.
             const resp = await fetch("https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev/gerar-link", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ plano, nome, mensagem: msg, anonimo, idMensagem, discordToken, valorLivre })
+                headers: { "Content-Type": "application/json", ...(accountToken ? { Authorization:`Bearer ${accountToken}` } : {}) },
+                body: JSON.stringify({ plano, nome, mensagem: msg, anonimo, exibirMural, exibirValor, idMensagem, discordToken, valorLivre })
             });
 
             const dados = await resp.json();
@@ -1712,6 +1753,7 @@
         const promos = [
             {
                 image:'assets/wallpapers_hero/cadastro-saves-v1.png',
+                guestOnly:true,
                 eyebrow:'VOCÊ JÁ DEU O PRIMEIRO PASSO',
                 title:'SEU PROGRESSO MERECE CONTINUAR',
                 meta:'CONTA GRÁTIS · MAIS SAVES · PROGRESSO PROTEGIDO',
@@ -1729,7 +1771,7 @@
                 click:() => { location.href = 'apoie.html#planos'; }
             }
         ];
-        promos.forEach((promo, promoIndex) => {
+        promos.filter(promo => !promo.guestOnly || !accountProfile).forEach((promo, promoIndex) => {
             const slide = document.createElement('div');
             slide.id = `guest-promo-${promoIndex}`;
             slide.className = 'hero-slide personalized guest-promo';
@@ -1804,15 +1846,27 @@
                 accountProfile ? cloudRequest('/club/library').catch(() => ({ games:[] })) : Promise.resolve({ games:[] }),
                 Promise.allSettled(fetchPromises)
             ]);
-            const recentGames = (historyData.games || []).slice(0, accountProfile ? 3 : 1);
-            if (!recentGames.length) { showOnlyPlayedHeroes(false); return; }
-            showOnlyPlayedHeroes(true);
-
+            const availableManualSlots = saveLibrary.manualSaveLimit === null ? 5 : Number(saveLibrary.manualSaveLimit || 0);
+            const personalizedHeroLimit = accountProfile ? Math.min(5, Math.max(3, availableManualSlots)) : 1;
+            const recentGames = (historyData.games || []).slice(0, personalizedHeroLimit);
             document.querySelectorAll('.hero-slide.personalized').forEach(previous => {
                 if (previous.dataset.objectUrl) URL.revokeObjectURL(previous.dataset.objectUrl);
                 previous.remove();
             });
             document.querySelectorAll('.indicator.personalized-indicator, #personalized-hero-dot').forEach(dot => dot.remove());
+
+            if (!recentGames.length) {
+                showOnlyPlayedHeroes(false);
+                const promoSlides = document.createDocumentFragment();
+                const promoDots = document.createDocumentFragment();
+                appendGuestPromoSlides(promoSlides, promoDots);
+                heroSlider.insertBefore(promoSlides, heroSlider.querySelector('.hero-slide'));
+                heroIndicators.insertBefore(promoDots, heroIndicators.firstChild);
+                rebindHeroIndicators();
+                goToSlide(0);
+                return;
+            }
+            showOnlyPlayedHeroes(true);
 
             const savedFrames = await Promise.all(recentGames.map(game => isAtariHistoryGame(game) ? '' : autosaveHeroImage(game.id).catch(() => '')));
             const slides = document.createDocumentFragment();
@@ -1854,7 +1908,7 @@
                 dot.className = 'indicator personalized-indicator';
                 dots.appendChild(dot);
             });
-            if (!accountProfile) appendGuestPromoSlides(slides, dots);
+            appendGuestPromoSlides(slides, dots);
             heroSlider.insertBefore(slides, heroSlider.querySelector('.hero-slide'));
             heroIndicators.insertBefore(dots, heroIndicators.firstChild);
             rebindHeroIndicators();
@@ -1951,8 +2005,9 @@
             const response = await fetch(`${worker}/club/session`, { headers: { Authorization: `Bearer ${access}` }, cache: 'no-store' });
             if (!response.ok) throw new Error('expired');
             const session = await response.json();
-            const labels = { owner: 'ADMIN', cafe: 'CONTINUE', cartucho: 'CARTUCHO', arcade: 'ARCADE' };
-            if (buttonText) buttonText.innerHTML = `Conectado como ${session.username || 'Discord'}<br><strong>${labels[session.plan] || session.plan}</strong>`;
+            const labels = { owner: 'ADMIN', cafe: 'APOIADOR', cartucho: 'GUARDIÃO', arcade: 'PATRONO' };
+            const recognition = session.recognition?.badges?.length ? ` · ${session.recognition.badges.join(' · ')}` : '';
+            if (buttonText) buttonText.innerHTML = `Conectado como ${session.username || 'jogador'}<br><strong>${labels[session.plan] || session.plan}${recognition}</strong>`;
             button.removeAttribute('href');
             button.title = 'Clique para sair';
             button.onclick = () => { sessionStorage.removeItem('neo_club_access'); location.reload(); };

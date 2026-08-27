@@ -26,15 +26,28 @@ const state = {
 const el = (id) => document.getElementById(id);
 const avatar = (value) =>
   `assets/avatars/${/^avatar-\d{2}$/.test(value || "") ? value : "avatar-01"}.png`;
+const recognitionBadges = (value) => value?.recognition?.badges || [];
+const avatarWithBadges = (image, value, variant = "icons") =>
+  window.NeoClubBadges.avatar(image, recognitionBadges(value), { variant, className: "community-avatar-badges" });
+function refreshGlobalMessageBadges() {
+  const people = new Map([state.self, ...state.players].filter(Boolean).map(person => [person.uid, person]));
+  document.querySelectorAll('.global-message[data-uid]').forEach(row => {
+    const person = people.get(row.dataset.uid);
+    const frame = row.querySelector('.club-avatar-frame');
+    if (!person || !frame) return;
+    frame.querySelector('.club-badge-list')?.replaceWith(window.NeoClubBadges.create(recognitionBadges(person), { variant:'tiny' }));
+  });
+}
 onChildAdded(query(globalChat, limitToLast(100)), snapshot => {
   const message = snapshot.val() || {};
-  const row = document.createElement('article'); row.className = 'global-message';
+  const row = document.createElement('article'); row.className = 'global-message'; row.dataset.uid = String(message.uid || '');
   const image = document.createElement('img'); image.src = avatar(message.avatar); image.alt = '';
   const content = document.createElement('div');
   const name = document.createElement('strong'); name.textContent = String(message.user || 'Jogador').slice(0, 40);
   const time = document.createElement('small'); time.textContent = String(message.time || '').slice(0, 40);
   const text = document.createElement('p'); text.textContent = String(message.text || '').slice(0, 240);
-  content.append(name, time, text); row.append(image, content); el('global-messages').appendChild(row);
+  const person = [state.self, ...state.players].find(candidate => candidate?.uid === message.uid);
+  content.append(name, time, text); row.append(avatarWithBadges(image, person, 'tiny'), content); el('global-messages').appendChild(row);
   el('global-messages').scrollTop = el('global-messages').scrollHeight;
 });
 
@@ -117,6 +130,7 @@ async function loadPlayers() {
     el('global-message').disabled = !state.firebase;
     el('global-message').placeholder = state.firebase ? 'Mensagem para toda a comunidade...' : 'Entre com Google na página inicial para conversar...';
     state.players = data.players || [];
+    refreshGlobalMessageBadges();
     el("players").replaceChildren();
     const onlineCount = state.players.filter((player) => player.online).length;
     el("status").textContent =
@@ -171,7 +185,7 @@ async function loadPlayers() {
         : "Jogador offline";
       invite.onclick = () => invitePlayer(player);
       buttons.append(chat, invite);
-      card.append(image, info, buttons);
+      card.append(avatarWithBadges(image, player), info, buttons);
       el("players").appendChild(card);
     }
   } catch (error) {
@@ -226,7 +240,8 @@ async function loadMessages() {
     const time = document.createElement("small");
     time.textContent = `${message.fromName} · ${new Date(message.createdAt).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
     bubble.appendChild(time);
-    row.append(image, bubble);
+    const sender = mine ? state.self : state.chat;
+    row.append(avatarWithBadges(image, sender, 'tiny'), bubble);
     el("messages").appendChild(row);
   }
   el("messages").scrollTop = el("messages").scrollHeight;
