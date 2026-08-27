@@ -686,6 +686,13 @@ var src_default = {
       const [payments, registrations, migration, achievementRecords, profileRecords] = await Promise.all([allPayments(env), readJsonDirectory(env, "hall/registrations/", 200), env.GAMES.get("hall/registrations-backup.json"), readJsonDirectory(env, "support/achievements/", 100), readJsonDirectory(env, "profiles/v1/", 500)]);
       const legacyRegistrations = migration ? await migration.json().catch(() => ({})) : {};
       const profilesByUid = new Map(profileRecords.map((record) => [String(record.value?.uid || ""), record.value]));
+      const profilesByName = new Map();
+      for (const record of profileRecords) {
+        const key = cleanProfileText(record.value?.name, 40).toLocaleLowerCase("pt-BR");
+        if (!key) continue;
+        const matches = profilesByName.get(key) || [];
+        matches.push(record.value); profilesByName.set(key, matches);
+      }
       const recognitionIndex = supportRecognitionContext(payments);
       const supporters = Object.values(payments).filter((record) => record?.status === "aprovado" && record.exibirMural !== false && (!record.validoAte || Number(record.validoAte) > now)).map((record) => ({ nome: cleanProfileText(record.anonimo ? "Anonimo" : record.nome, 40), mensagem: cleanProfileText(record.mensagem, 240), valor: record.exibirValor === false ? null : Number(record.valor || 0), validoAte: Number(record.validoAte || 0), recognition: applyBadgeGrants(supportRecognition(payments, paymentIdentity(record), record.plano, recognitionIndex), profilesByUid.get(String(record.accountUid || ""))?.badgeGrants) })).slice(-10).reverse();
       const monthPartsFormatter = new Intl.DateTimeFormat("en-US", { timeZone: "America/Sao_Paulo", year: "numeric", month: "2-digit" });
@@ -713,9 +720,13 @@ var src_default = {
       const supportGoal = { month: new Intl.DateTimeFormat("pt-BR", { timeZone: "America/Sao_Paulo", month: "long", year: "numeric" }).format(now), monthKey, goal: monthlyGoalValue, raised: Number(monthlyRaised.toFixed(2)), percentage: Math.round(monthlyRaised / monthlyGoalValue * 100), contributions: monthlyPayments.length, automatic: !hasManualGoal, automaticGoal: automaticGoalValue, previousMonthRaised: Number(previousMonthRaised.toFixed(2)) };
       const storedRegistrations = registrations.map((record) => ({ ...record.value, uid: record.value.uid || decodeURIComponent(record.key.slice("hall/registrations/".length).replace(/\.json$/, "")) }));
       const members = [...Object.values(legacyRegistrations), ...storedRegistrations].sort((a, b) => Number(b.timestamp || 0) - Number(a.timestamp || 0)).slice(0, 5).map((record) => {
-        const identity = record.uid ? `account:${record.uid}` : "";
-        const plan = record.uid ? activeSupportPlan(payments, record.uid, "", now) : "registered";
-        return { nome: cleanProfileText(record.nome, 40), mensagem: cleanProfileText(record.mensagem, 100), avatar: PROFILE_AVATARS.includes(record.avatar) ? record.avatar : "avatar-01", recognition: identity ? applyBadgeGrants(supportRecognition(payments, identity, plan, recognitionIndex), profilesByUid.get(String(record.uid || ""))?.badgeGrants) : { badges: [] } };
+        const nameKey = cleanProfileText(record.nome, 40).toLocaleLowerCase("pt-BR");
+        const nameMatches = profilesByName.get(nameKey) || [];
+        const profile = profilesByUid.get(String(record.uid || "")) || profilesByUid.get(String(record.uid || "").replace(/^firebase-/, "")) || (nameMatches.length === 1 ? nameMatches[0] : null);
+        const uid = String(profile?.uid || record.uid || "");
+        const identity = uid ? `account:${uid}` : "";
+        const plan = uid ? activeSupportPlan(payments, uid, "", now) : "registered";
+        return { nome: cleanProfileText(record.nome, 40), mensagem: cleanProfileText(record.mensagem, 100), avatar: PROFILE_AVATARS.includes(record.avatar) ? record.avatar : "avatar-01", recognition: identity ? applyBadgeGrants(supportRecognition(payments, identity, plan, recognitionIndex), profile?.badgeGrants) : { badges: [] } };
       });
       const achievements = achievementRecords.map((record) => record.value).filter((item) => item?.active !== false).sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")) || Number(b.updatedAt || 0) - Number(a.updatedAt || 0)).slice(0, 6).map((item) => ({ id: String(item.id || ""), title: cleanProfileText(item.title, 100), description: cleanProfileText(item.description, 300), category: cleanProfileText(item.category, 30), date: String(item.date || "").slice(0, 10) }));
       return json({ supporters, members, supportGoal, achievements, updatedAt: now });

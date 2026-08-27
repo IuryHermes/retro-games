@@ -38,6 +38,7 @@ assert.match(worker, /recognition: applyBadgeGrants\(recognitionFor\(account\.ui
 assert.match(worker, /badge-grants-update/);
 assert.match(worker, /applyBadgeGrants/);
 assert.match(worker, /profilesByUid/);
+assert.match(worker, /nameMatches\.length === 1/);
 assert.match(worker, /support\/anniversaries\//);
 assert.match(worker, /support-anniversary/);
 assert.match(worker, /uid: account\.uid, nome: name, avatar/);
@@ -53,4 +54,4 @@ assert.match(socialScript, /refreshGlobalMessageBadges/);
 assert.match(badgeScript, /GUARDIÃO/);
 assert.match(badgeStyle, /club-badges-v2\.png/);
 
-console.log('account-native visual support recognition: 39 checks passed');
+console.log('account-native visual support recognition: 40 checks passed');
