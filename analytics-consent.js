@@ -3,7 +3,7 @@
 
     // Preencha com o ID da propriedade GA4 (formato G-XXXXXXXXXX).
     // Enquanto estiver vazio, nenhum pedido ao Google Analytics será feito.
-    const GA4_MEASUREMENT_ID = '';
+    const GA4_MEASUREMENT_ID = 'G-CJNYR5QTZX';
     const queue = [];
     let loaded = false;
 
