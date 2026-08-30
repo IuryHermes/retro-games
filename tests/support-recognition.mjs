@@ -52,6 +52,7 @@ assert.match(social, /club-badges\.css/);
 assert.match(socialScript, /avatarWithBadges/);
 assert.match(socialScript, /refreshGlobalMessageBadges/);
 assert.match(badgeScript, /GUARDIÃO/);
-assert.match(badgeStyle, /club-badges-v2\.png/);
+assert.match(badgeStyle, /club-badges-v3\.png/);
+assert.match(badgeStyle, /background-size:400% auto/);
 
-console.log('account-native visual support recognition: 40 checks passed');
+console.log('account-native visual support recognition: 41 checks passed');
