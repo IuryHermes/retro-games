@@ -43,9 +43,9 @@
         modal = document.createElement('div'); modal.id = 'neo-privacy-modal'; modal.setAttribute('role', 'dialog'); modal.setAttribute('aria-modal', 'true'); modal.setAttribute('aria-labelledby', 'neo-privacy-title');
         modal.innerHTML = `<section class="neo-privacy-card"><h2 id="neo-privacy-title" tabindex="-1">PREFERÊNCIAS DE PRIVACIDADE</h2><p>Você decide quais tecnologias opcionais podem ser usadas. As necessárias permanecem ativas para o site funcionar.</p>
           <label class="neo-privacy-option"><span><strong>Necessários</strong><small>Login, segurança, tema, saves, emulador, chat e multiplayer.</small></span><input type="checkbox" checked disabled aria-label="Armazenamento necessário sempre ativo"></label>
-          <label class="neo-privacy-option"><span><strong>Análise de desempenho</strong><small>Medição agregada de uso e erros. Atualmente não há ferramenta de analytics ativa.</small></span><input id="neo-consent-analytics" type="checkbox"></label>
+          <label class="neo-privacy-option"><span><strong>Análise de desempenho</strong><small>Medição agregada de uso, jogos iniciados e erros. O analytics só é carregado depois da sua autorização.</small></span><input id="neo-consent-analytics" type="checkbox"></label>
           <label class="neo-privacy-option"><span><strong>Publicidade e personalização</strong><small>Anúncios personalizados ou rastreamento entre sites. Atualmente não são utilizados.</small></span><input id="neo-consent-marketing" type="checkbox"></label>
-          <div class="neo-privacy-links"><a href="politica-de-privacidade.html">Política de Privacidade</a> · <a href="politica-de-cookies.html">Política de Cookies</a></div>
+          <div class="neo-privacy-links"><a href="/politica-de-privacidade.html">Política de Privacidade</a> · <a href="/politica-de-cookies.html">Política de Cookies</a></div>
           <div class="neo-consent-actions"><button class="neo-consent-btn" data-close>Cancelar</button><button class="neo-consent-btn neo-consent-primary" data-save>Salvar preferências</button></div></section>`;
         modal.querySelector('[data-close]').onclick = closeSettings;
         modal.querySelector('[data-save]').onclick = () => { save({ analytics:modal.querySelector('#neo-consent-analytics').checked, marketing:modal.querySelector('#neo-consent-marketing').checked }); closeSettings(); removeBanner(); };
@@ -55,7 +55,7 @@
     function removeBanner() { document.getElementById('neo-consent')?.remove(); }
     function buildBanner() {
         const banner = document.createElement('aside'); banner.id = 'neo-consent'; banner.setAttribute('role', 'dialog'); banner.setAttribute('aria-label', 'Preferências de privacidade');
-        banner.innerHTML = `<strong>PRIVACIDADE E ARMAZENAMENTO</strong><p>Usamos armazenamento necessário para login, saves, configurações, chat e multiplayer. Tecnologias opcionais só serão ativadas com sua escolha. <a href="politica-de-cookies.html">Saiba mais</a>.</p><div class="neo-consent-actions"><button class="neo-consent-btn neo-consent-primary" data-necessary>Somente necessários</button><button class="neo-consent-btn" data-settings>Configurar</button><button class="neo-consent-btn neo-consent-primary" data-accept>Aceitar opcionais</button></div>`;
+        banner.innerHTML = `<strong>PRIVACIDADE E ARMAZENAMENTO</strong><p>Usamos armazenamento necessário para login, saves, configurações, chat e multiplayer. Tecnologias opcionais só serão ativadas com sua escolha. <a href="/politica-de-cookies.html">Saiba mais</a>.</p><div class="neo-consent-actions"><button class="neo-consent-btn neo-consent-primary" data-necessary>Somente necessários</button><button class="neo-consent-btn" data-settings>Configurar</button><button class="neo-consent-btn neo-consent-primary" data-accept>Aceitar opcionais</button></div>`;
         banner.querySelector('[data-necessary]').onclick = () => { save({ analytics:false, marketing:false }); removeBanner(); };
         banner.querySelector('[data-accept]').onclick = () => { save({ analytics:true, marketing:true }); removeBanner(); };
         banner.querySelector('[data-settings]').onclick = openSettings;

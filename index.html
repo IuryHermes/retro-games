@@ -24,6 +24,7 @@
     <meta name="description" content="Jogue grandes clássicos retrô em português no navegador: Atari 2600, NES, SNES, Nintendo 64, GBA, Mega Drive e PS1, no PC ou celular, sem baixar nada.">
     <meta name="keywords" content="emulador online, jogos dublados, ps1 online, snes online, jogos retro pt-br, neoterminalroom">
     <link rel="canonical" href="https://neoterminalroom.com.br/">
+    <link rel="preload" as="image" href="assets/wallpapers_hero/super_mario_world.jpg" fetchpriority="high">
     <meta property="og:type" content="website">
     <meta property="og:title" content="NeoTerminalRoom - Jogos Retrô em Português">
     <meta property="og:description" content="Clássicos de Atari 2600, NES, SNES, Nintendo 64, GBA, Mega Drive e PS1 para jogar no navegador, no PC ou celular.">
@@ -210,9 +211,20 @@
         .acclaimed-games { padding:28px 40px 10px; }
         .acclaimed-games h1 { color:var(--accent-color); font:clamp(13px,2vw,18px)/1.5 'Press Start 2P',cursive; }
         .acclaimed-games p { max-width:900px; margin:8px 0 16px; color:var(--text-muted); line-height:1.6; }
-        .acclaimed-links { display:flex; flex-wrap:wrap; gap:10px; }
-        .acclaimed-links a { padding:10px 12px; border:1px solid var(--border-color); border-radius:5px; background:var(--card-bg); color:var(--text-color); text-decoration:none; font:700 11px/1.4 monospace; }
-        .acclaimed-links a:hover,.acclaimed-links a:focus-visible { border-color:var(--accent-color); color:var(--accent-color); }
+        .acclaimed-links { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:12px; }
+        .acclaimed-card { min-width:0; overflow:hidden; border:1px solid var(--border-color); border-radius:7px; background:var(--card-bg); color:var(--text-color); text-decoration:none; transition:transform .25s,border-color .25s,box-shadow .25s; }
+        .acclaimed-card:hover,.acclaimed-card:focus-visible { transform:translateY(-4px); border-color:var(--accent-color); box-shadow:0 8px 22px rgba(0,204,68,.22); outline:none; }
+        .acclaimed-media { position:relative; display:block; width:100%; aspect-ratio:4/3; overflow:hidden; background:#050505; }
+        .acclaimed-media img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:opacity .45s ease; }
+        .acclaimed-preview { opacity:0; }
+        .acclaimed-card:hover .acclaimed-preview,.acclaimed-card:focus-visible .acclaimed-preview,.acclaimed-card.preview-active .acclaimed-preview { opacity:1; }
+        .acclaimed-card:hover .acclaimed-cover,.acclaimed-card:focus-visible .acclaimed-cover,.acclaimed-card.preview-active .acclaimed-cover { opacity:0; }
+        .acclaimed-name { display:flex; align-items:center; min-height:46px; padding:8px; font:700 10px/1.4 monospace; }
+        .seo-about { margin:34px 40px 10px; padding:24px; border:1px solid var(--border-color); border-left:4px solid var(--accent-color); border-radius:8px; background:rgba(0,0,0,.18); }
+        .seo-about h2 { margin-bottom:12px; color:var(--accent-color); font:clamp(12px,1.7vw,16px)/1.5 'Press Start 2P',cursive; }
+        .seo-about p { max-width:1050px; color:var(--text-muted); font-size:15px; line-height:1.75; }
+        .seo-about p + p { margin-top:10px; }
+        .seo-about a { color:var(--accent-color); font-weight:700; }
 
         .top-bar { position: sticky; top: 0; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 8000; background: var(--top-bar-bg); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 204, 68, 0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: background 0.4s; }
         @keyframes brand-glow { 0% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } 50% { text-shadow: 0 0 2px var(--accent-color), 0 0 5px var(--accent-color); transform: scale(1.02); } 100% { text-shadow: 0 0 5px var(--accent-color), 0 0 15px var(--accent-color); transform: scale(1); } }
@@ -311,6 +323,7 @@
 
         /* RESPONSIVIDADE PARA MOBILE */
         @media (max-width: 1024px) {
+            .acclaimed-links { grid-template-columns:repeat(3,minmax(0,1fr)); }
             .sidebar { top: auto; bottom: 0; left: 0; width: 100% !important; height: 65px; flex-direction: row; border-right: none; border-top: 1px solid var(--accent-color); padding: 5px 0; transform: none !important; z-index: 9000; background: var(--top-bar-bg); backdrop-filter: blur(10px); box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
             .sidebar-header { display: none !important; }
             .nav-list { flex-direction: row; margin-top: 0; gap: 0; overflow-x: hidden; justify-content: space-around; padding: 0 5px; width: 100%; align-items: center; }
@@ -333,6 +346,15 @@
         }
 
         @media (max-width: 768px) {
+            .acclaimed-games { padding:20px 10px 4px; }
+            .seo-about { margin:24px 10px 8px; padding:18px 15px; }
+            .seo-about p { font-size:13px; line-height:1.65; }
+            .acclaimed-games p { font-size:13px; margin-bottom:12px; }
+            .acclaimed-links { display:flex; overflow-x:auto; gap:10px; padding:2px 2px 12px; scroll-snap-type:x mandatory; scrollbar-width:none; }
+            .acclaimed-links::-webkit-scrollbar { display:none; }
+            .acclaimed-card { flex:0 0 clamp(132px,42vw,170px); scroll-snap-align:start; }
+            .acclaimed-card .acclaimed-cover { animation:acclaimedCoverSwap 8s infinite; }
+            .acclaimed-card .acclaimed-preview { animation:acclaimedPreviewSwap 8s infinite; }
             .sidebar { height:calc(72px + env(safe-area-inset-bottom)); padding:5px 0 env(safe-area-inset-bottom); }
             .nav-list { justify-content:flex-start; overflow-x:auto; scrollbar-width:none; scroll-snap-type:x proximity; }
             .nav-list::-webkit-scrollbar { display:none; }
@@ -513,10 +535,29 @@
             .main-content { padding-bottom: 70px !important; }
             .discord-float { bottom: 70px; }
         }
+        @keyframes acclaimedCoverSwap { 0%,42%,100%{opacity:1} 50%,92%{opacity:0} }
+        @keyframes acclaimedPreviewSwap { 0%,42%,100%{opacity:0} 50%,92%{opacity:1} }
+
+        @media (max-width: 420px) {
+            .top-bar { padding-inline:6px; }
+            .top-bar-controls { gap:5px; }
+            .mobile-quick-scroll { gap:5px; }
+            .top-account-mobile, .mobile-community-actions .multiplayer-hub-trigger, .pix-trigger-mobile, .chat-trigger-mobile { flex-basis:58px !important; width:58px !important; }
+            .search-container { flex-basis:calc(100% - 59px); min-width:0; }
+            .hero-section { height:300px; }
+            .hero-content { padding:0 46px 0 14px; margin-bottom:34px; gap:8px; }
+            .hero-title { font-size:clamp(17px,6vw,22px); overflow-wrap:anywhere; }
+            .hero-categories,.hero-resume-note { font-size:10px; }
+            .hero-play-btn { font-size:13px; padding:9px 16px; }
+            .hero-indicators { bottom:12px; max-width:70%; flex-wrap:wrap; justify-content:center; }
+            .catalog { padding-inline:6px; }
+            .row-title-text { font-size:9px; line-height:1.4; }
+        }
     </style>
     <link rel="stylesheet" href="club-badges.css?v=20260827">
     <script src="club-badges.js?v=20260827"></script>
     <script src="privacy-consent-v2.js" defer></script>
+    <script src="analytics-consent.js" defer></script>
 </head>
 <body>
 
@@ -582,7 +623,7 @@
 
     <a href="https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev/club/login" class="discord-float" id="discord-club-login">
         <div class="discord-text">Junte-se a nós<br><strong>DISCORD</strong></div>
-        <img src="assets/imagens-videos/discord.gif?v=3" alt="Discord">
+        <img src="assets/imagens-videos/logo-discord" alt="Discord" width="45" height="45">
     </a>
 
     <div id="loader-overlay">
@@ -738,17 +779,23 @@
             <section class="acclaimed-games" aria-labelledby="acclaimed-title">
                 <h1 id="acclaimed-title">JOGOS RETRÔ MAIS ACLAMADOS</h1>
                 <p>Clássicos em destaque no NeoTerminalRoom, selecionados pelas melhores avaliações do catálogo.</p>
-                <nav class="acclaimed-links" aria-label="Jogos retrô mais bem avaliados">
-                    <a href="/jogos/snes/super-mario-world/">Jogar Super Mario World</a>
-                    <a href="/jogos/snes/the-legend-of-zelda-a-link-to-the-past/">Jogar Zelda: A Link to the Past</a>
-                    <a href="/jogos/snes/chrono-trigger/">Jogar Chrono Trigger</a>
-                    <a href="/jogos/n64/the-legend-of-zelda-ocarina-of-time/">Jogar Zelda: Ocarina of Time</a>
-                    <a href="/jogos/ps1/castlevania-symphony-of-the-night/">Jogar Castlevania: Symphony of the Night</a>
-                    <a href="/jogos/ps1/metal-gear-solid-em-portugues-pt-br/">Jogar Metal Gear Solid em português</a>
+                <nav class="acclaimed-links" id="acclaimed-links" aria-label="Jogos retrô mais bem avaliados" aria-live="polite">
+                    <a class="acclaimed-card" href="/jogos/snes/super-mario-world/"><span class="acclaimed-media"><img class="acclaimed-cover" src="https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/snes/capas/super_mario_world.jpg" alt="Capa de Super Mario World" width="260" height="195"></span><span class="acclaimed-name">Super Mario World</span></a>
+                    <a class="acclaimed-card" href="/jogos/snes/the-legend-of-zelda-a-link-to-the-past/"><span class="acclaimed-media"><img class="acclaimed-cover" src="https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/snes/capas/legend_of_zelda%2C_the_-_a_link_to_the_past.jpg" alt="Capa de Zelda: A Link to the Past" width="260" height="195"></span><span class="acclaimed-name">Zelda: A Link to the Past</span></a>
+                    <a class="acclaimed-card" href="/jogos/snes/chrono-trigger/"><span class="acclaimed-media"><img class="acclaimed-cover" src="https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/snes/capas/chrono_trigger.jpg" alt="Capa de Chrono Trigger" width="260" height="195" loading="lazy"></span><span class="acclaimed-name">Chrono Trigger</span></a>
+                    <a class="acclaimed-card" href="/jogos/n64/the-legend-of-zelda-ocarina-of-time/"><span class="acclaimed-media"><img class="acclaimed-cover" src="https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/the_legend_of_zelda_-_ocarina_of_time.jpg" alt="Capa de Zelda: Ocarina of Time" width="260" height="195" loading="lazy"></span><span class="acclaimed-name">Zelda: Ocarina of Time</span></a>
+                    <a class="acclaimed-card" href="/jogos/ps1/castlevania-symphony-of-the-night/"><span class="acclaimed-media"><img class="acclaimed-cover" src="https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/ps1/capas/castlevania-symphony-of-the-night.jpg" alt="Capa de Castlevania: Symphony of the Night" width="260" height="195" loading="lazy"></span><span class="acclaimed-name">Castlevania: Symphony of the Night</span></a>
+                    <a class="acclaimed-card" href="/jogos/ps1/metal-gear-solid-em-portugues-pt-br/"><span class="acclaimed-media"><img class="acclaimed-cover" src="https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/ps1/capas/metal-gear-solid-em-portugu-s-pt-br.jpg" alt="Capa de Metal Gear Solid em português" width="260" height="195" loading="lazy"></span><span class="acclaimed-name">Metal Gear Solid em português</span></a>
                 </nav>
             </section>
 
             <section class="catalog" id="catalog-area"></section>
+
+            <section class="seo-about" aria-labelledby="about-library-title">
+                <h2 id="about-library-title">JOGOS RETRÔ ONLINE DIRETO NO NAVEGADOR</h2>
+                <p>O NeoTerminalRoom reúne uma biblioteca de jogos clássicos de <a href="#section-snes">Super Nintendo</a>, <a href="#section-nes">Nintendo</a>, <a href="#section-megadrive">Mega Drive</a>, <a href="#section-n64">Nintendo 64</a>, <a href="#section-gba">Game Boy Advance</a>, <a href="#section-ps1">PlayStation 1</a> e <a href="#section-atari2600">Atari 2600</a>. Os jogos funcionam online no navegador, no computador ou celular, sem instalar um emulador separado.</p>
+                <p>Encontre aventuras, RPGs, jogos de luta, corrida e plataforma, incluindo clássicos traduzidos, dublados e adaptados para português do Brasil. Escolha um sistema, abra a página do jogo e use o botão Jogar agora para carregar somente os arquivos necessários para aquela partida.</p>
+            </section>
 
         </main>
     </div>
@@ -1133,6 +1180,7 @@
     function playAndRemember(game, playUrl) {
         void recordPlayedGame(game, playUrl);
         scheduleGuestRetentionNudge(game);
+        window.neoTrack?.('game_start', { game_name:game.nome || game.name, game_system:game.sysId || game.system, source:'catalog' });
         window.startGame(playUrl);
     }
     function scheduleGuestRetentionNudge(game) {
@@ -1443,7 +1491,11 @@
         const overlay = document.getElementById('loader-overlay');
         if (overlay) overlay.style.display = 'flex';
         // Evita empilhar aberturas de jogos diferentes no celular.
-        window.setTimeout(() => window.location.assign(url), 120);
+        window.setTimeout(() => {
+            const destination = new URL(url, location.href);
+            if (destination.pathname.startsWith('/jogos/')) destination.searchParams.set('autoplay', '1');
+            window.location.assign(destination.href);
+        }, 120);
     };
     window.addEventListener('pageshow', () => { gameNavigationPending = false; });
 
@@ -1597,8 +1649,8 @@
         const wallpaperPath = `assets/wallpapers_hero/${game.id}.jpg`;
 
         slide.innerHTML = `
-            <img src="${wallpaperPath}" class="hero-bg-blur">
-            <img src="${wallpaperPath}" class="hero-bg-media">
+            <img src="${wallpaperPath}" class="hero-bg-blur" alt="" ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}>
+            <img src="${wallpaperPath}" class="hero-bg-media" alt="" ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}>
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1 class="hero-title">${game.nome}</h1>
@@ -1845,6 +1897,17 @@
             dots.appendChild(dot);
         });
     }
+    function placeGuestPromosAfterLibraryOpening() {
+        document.querySelectorAll('.hero-slide.guest-promo').forEach(slide => slide.remove());
+        document.querySelectorAll('.indicator.guest-promo-indicator').forEach(dot => dot.remove());
+        const slides = document.createDocumentFragment();
+        const dots = document.createDocumentFragment();
+        appendGuestPromoSlides(slides, dots);
+        const librarySlides = [...heroSlider.querySelectorAll('.hero-slide:not(.guest-promo):not([hidden])')];
+        const libraryDots = [...heroIndicators.querySelectorAll('.indicator:not(.guest-promo-indicator):not([hidden])')];
+        heroSlider.insertBefore(slides, librarySlides[2] || null);
+        heroIndicators.insertBefore(dots, libraryDots[2] || null);
+    }
     async function autosaveHeroImage(gameId) {
         const token = auth.currentUser ? await auth.currentUser.getIdToken() : discordAccountToken;
         if (!token) return '';
@@ -1918,16 +1981,12 @@
 
             if (!recentGames.length) {
                 showOnlyPlayedHeroes(false);
-                const promoSlides = document.createDocumentFragment();
-                const promoDots = document.createDocumentFragment();
-                appendGuestPromoSlides(promoSlides, promoDots);
-                heroSlider.insertBefore(promoSlides, heroSlider.querySelector('.hero-slide'));
-                heroIndicators.insertBefore(promoDots, heroIndicators.firstChild);
+                placeGuestPromosAfterLibraryOpening();
                 rebindHeroIndicators();
                 goToSlide(0);
                 return;
             }
-            showOnlyPlayedHeroes(true);
+            showOnlyPlayedHeroes(false);
 
             const savedFrames = await Promise.all(recentGames.map(game => isAtariHistoryGame(game) ? '' : autosaveHeroImage(game.id).catch(() => '')));
             const slides = document.createDocumentFragment();
@@ -1969,14 +2028,52 @@
                 dot.className = 'indicator personalized-indicator';
                 dots.appendChild(dot);
             });
-            appendGuestPromoSlides(slides, dots);
             heroSlider.insertBefore(slides, heroSlider.querySelector('.hero-slide'));
             heroIndicators.insertBefore(dots, heroIndicators.firstChild);
+            placeGuestPromosAfterLibraryOpening();
             rebindHeroIndicators();
             goToSlide(0);
         } catch (error) { console.warn('Neo heróis recentes:', error); }
     };
-    Promise.allSettled(fetchPromises).then(() => { void refreshPersonalHero(); });
+    function renderAcclaimedGames() {
+        const root = document.getElementById('acclaimed-links');
+        const wanted = [
+            ['snes','super mario world'], ['snes','zelda a link to the past'], ['snes','chrono trigger'],
+            ['n64','zelda ocarina of time'], ['ps1','castlevania symphony of the night'], ['ps1','metal gear solid']
+        ];
+        const normalized = value => normalizedSaveCatalogKey(value).replace(/-/g, ' ');
+        const chosen = [];
+        wanted.forEach(([system, title]) => {
+            const terms = normalized(title);
+            const game = indexData.find(item => item.sysId === system && normalized(item.nomeOriginal || item.nome).includes(terms));
+            if (game && !chosen.includes(game)) chosen.push(game);
+        });
+        indexData.filter(game => Number(game.popularidade || 0) > 0).sort((a,b) => Number(b.popularidade || 0) - Number(a.popularidade || 0)).forEach(game => {
+            if (chosen.length < 6 && !chosen.includes(game)) chosen.push(game);
+        });
+        root.replaceChildren();
+        chosen.slice(0, 6).forEach(game => {
+            const card = document.createElement('a');
+            card.className = 'acclaimed-card';
+            card.href = game.playUrl;
+            card.setAttribute('aria-label', `Jogar ${game.nomeOriginal || game.nome}`);
+            const media = document.createElement('span'); media.className = 'acclaimed-media';
+            const cover = document.createElement('img'); cover.className = 'acclaimed-cover'; cover.loading = 'eager'; cover.alt = `Capa de ${game.nomeOriginal || game.nome}`;
+            const coverName = game.capa ? game.capa.split('/').pop() : '';
+            cover.src = catalogCoverUrl(game) || (coverName ? `${game.sysPath}capas/${encodeURIComponent(coverName)}` : 'assets/imagens-videos/logo-discord.gif');
+            cover.onerror = () => { cover.onerror = null; cover.src = 'assets/imagens-videos/logo-discord.gif'; };
+            const previewName = game.preview ? game.preview.split('/').pop() : '';
+            if (previewName && game.sysId !== 'atari2600') {
+                const preview = document.createElement('img'); preview.className = 'acclaimed-preview'; preview.loading = 'lazy'; preview.alt = '';
+                preview.src = `${catalogAssetBase(game.sysPath)}${game.sysPath}previews/${encodeURIComponent(previewName)}`;
+                preview.onerror = () => preview.remove();
+                media.append(cover, preview);
+            } else media.append(cover);
+            const name = document.createElement('span'); name.className = 'acclaimed-name'; name.textContent = game.nomeOriginal || game.nome;
+            card.append(media, name); root.append(card);
+        });
+    }
+    Promise.allSettled(fetchPromises).then(() => { renderAcclaimedGames(); void refreshPersonalHero(); });
 
     const searchInput = document.getElementById('global-search');
     const searchResults = document.getElementById('search-results');

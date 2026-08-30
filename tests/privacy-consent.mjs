@@ -17,6 +17,7 @@ assert.doesNotMatch(consent, /neo-privacy-settings/);
 assert.match(privacy, /Direitos do titular/);
 assert.match(privacy, /Crianças e adolescentes/);
 assert.match(cookies, /IndexedDB/);
-assert.match(cookies, /Atualmente não existe ferramenta de analytics ativa/);
+assert.match(cookies, /analytics só é carregado após consentimento/);
+assert.match(consent, /analytics só é carregado depois da sua autorização/);
 
 console.log(`privacy consent: ${pages.length + 11} checks passed`);
