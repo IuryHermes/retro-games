@@ -51,6 +51,7 @@
   const cover=(game,system)=>{const name=String(game.capa||'').split('/').pop();if(!name)return 'assets/imagens-videos/logo-discord.gif';return system==='atari2600'?`systems/${system}/capas/${encodeURIComponent(name)}`:`${R2}systems/${system}/capas/${encodeURIComponent(name)}`};
   Promise.all(systems.map(async ([id,label])=>{const response=await fetch(`systems/${id}/games.json`);if(!response.ok)throw new Error(id);const raw=await response.json();const unique=[...new Map(raw.map(game=>[String(game.rom||'').toLowerCase(),game])).values()].filter(game=>game.rom&&game.nome&&!(id==='ps1'&&/([._\-\s](cd|disc|disco)\s*0*[1-9])/i.test(String(game.rom))));const used=new Set();return unique.map(game=>{const base=slug(game.nome,id);let route=base,suffix=2;while(used.has(route))route=`${base}-${suffix++}`;used.add(route);return {...game,system:id,systemLabel:label,route}})})).then(groups=>{
     const all=groups.flat();const nav=document.querySelector('.collection-nav');const root=document.getElementById('collections');root.replaceChildren();
+    const allLink=document.createElement('a');allLink.href='coletaneas.html';allLink.textContent='Todas';nav.appendChild(allLink);
     definitions.forEach(def=>{
       const games=all.filter(game=>def.match.test(String(game.nome||''))).sort((a,b)=>String(a.nome).localeCompare(String(b.nome),'pt-BR',{numeric:true}));
       const section=document.createElement('section');section.className='collection';section.id=def.id;
@@ -60,6 +61,8 @@
       if(def.pending&&!games.length){const note=document.createElement('div');note.className='pending';note.innerHTML='<strong>COLEÇÃO EM PREPARAÇÃO</strong><br>Os arquivos encontrados são pacotes de Nintendo 3DS. Eles não serão misturados com a tradução de PS1; serão convertidos ou substituídos por ROM sets Neo Geo validados no FBNeo antes da publicação.';list.appendChild(note)}
       root.appendChild(section);const anchor=document.createElement('a');anchor.href=`#${def.id}`;anchor.textContent=def.title;nav.appendChild(anchor);
     });
+    const filterCollection=()=>{const selected=location.hash.slice(1);document.querySelectorAll('.collection').forEach(section=>{section.hidden=Boolean(selected)&&section.id!==selected});const target=selected&&document.getElementById(selected);if(target)requestAnimationFrame(()=>scrollTo({top:0,left:0,behavior:'auto'}));};
+    addEventListener('hashchange',filterCollection);filterCollection();
   }).catch(()=>{document.getElementById('collections').innerHTML='<p class="pending"><strong>Não foi possível carregar as coletâneas.</strong><br>Atualize a página para tentar novamente.</p>'});
 })();
 </script>

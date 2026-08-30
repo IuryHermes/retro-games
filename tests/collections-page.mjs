@@ -26,4 +26,5 @@ if (counts.some(count => count === 0)) throw new Error(`coletânea vazia inesper
 
 await access(join(root, 'assets', 'imagens-videos', 'imagens do menu', 'coletaneas.svg'));
 if (!html.includes('COLEÇÃO EM PREPARAÇÃO') || !html.includes('The King of Fighters')) throw new Error('estado da coletânea KOF ausente');
+if (!html.includes('filterCollection') || !html.includes('location.hash')) throw new Error('filtro por coletânea ausente');
 console.log(`coletâneas validadas; jogos por série: ${counts.join(', ')}`);

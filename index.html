@@ -290,6 +290,20 @@
         .indicator.active { background: var(--accent-color); transform: scale(1.3); }
 
         .catalog { padding: 0 40px; }
+        .collections-showcase { padding:22px 40px 2px; position:relative; z-index:5; }
+        .collections-heading { display:flex; align-items:end; justify-content:space-between; gap:16px; margin-bottom:12px; }
+        .collections-heading h2 { margin:0; color:var(--text-color); font:13px 'Press Start 2P',cursive; }
+        .collections-heading a { color:var(--accent-color); font:bold 11px monospace; text-decoration:none; }
+        .collections-row { display:flex; gap:12px; overflow-x:auto; padding:5px 3px 18px; scroll-snap-type:x proximity; scrollbar-width:none; }
+        .collections-row::-webkit-scrollbar { display:none; }
+        .collection-tile { --collection-image:none; position:relative; flex:0 0 clamp(210px,25vw,330px); aspect-ratio:16/8.8; overflow:hidden; border:1px solid var(--border-color); border-radius:9px; scroll-snap-align:start; text-decoration:none; background:#030504; box-shadow:0 12px 25px rgba(0,0,0,.35); transition:transform .25s,border-color .25s; }
+        .collection-tile::before { content:''; position:absolute; inset:0; background-image:linear-gradient(to top,rgba(0,0,0,.94),rgba(0,0,0,.05) 72%),var(--collection-image); background-size:cover; background-position:center; transition:transform .35s,filter .35s; }
+        .collection-tile:hover,.collection-tile:focus-visible { transform:scale(1.045); border-color:var(--accent-color); outline:none; z-index:2; }
+        .collection-tile:hover::before,.collection-tile:focus-visible::before { transform:scale(1.07); filter:saturate(1.2); }
+        .collection-tile-copy { position:absolute; z-index:1; inset:auto 13px 11px; color:#fff; text-shadow:0 2px 8px #000; }
+        .collection-tile-copy strong { display:block; font:clamp(13px,1.5vw,18px) 'Press Start 2P',cursive; line-height:1.25; }
+        .collection-tile-copy small { display:block; margin-top:6px; color:#c7d7ca; font:bold 11px monospace; }
+        .collection-tile.kof { --collection-image:linear-gradient(135deg,#4c0909,#050505 55%,#756019); }
         .row-wrapper { margin-top: 30px; margin-bottom: 25px; position: relative; z-index: 5; }
         .row-header { display: flex; align-items: center; justify-content: flex-start; gap: 20px; margin-bottom: 10px; border-left: 3px solid var(--accent-color); padding-left: 10px; }
         .row-title-text { font-family: 'Press Start 2P'; font-size: 12px; color: var(--text-color); }
@@ -346,6 +360,9 @@
         }
 
         @media (max-width: 768px) {
+            .collections-showcase { padding:20px 10px 0; }
+            .collections-heading h2 { font-size:11px; }
+            .collection-tile { flex-basis:clamp(190px,68vw,280px); }
             .acclaimed-games { padding:20px 10px 4px; }
             .seo-about { margin:24px 10px 8px; padding:18px 15px; }
             .seo-about p { font-size:13px; line-height:1.65; }
@@ -737,10 +754,6 @@
                     <img src="assets/imagens-videos/imagens do menu/on-transparent.png" alt="">
                     <span class="community-shortcut-copy"><strong>COMUNIDADE</strong><small>Jogadores, convites e chat</small></span>
                 </a>
-                <a class="community-shortcut" href="coletaneas.html" title="Explorar séries e sagas">
-                    <img src="assets/imagens-videos/imagens do menu/coletaneas.svg" alt="">
-                    <span class="community-shortcut-copy"><strong>COLETÂNEAS</strong><small>Séries reunidas em um só lugar</small></span>
-                </a>
                 <a class="community-shortcut" href="ofertas.html" title="Ofertas gamer e tecnologia">
                     <img src="assets/imagens-videos/imagens do menu/achados-neoterminal.png" alt="">
                     <span class="community-shortcut-copy"><strong>ACHADOS NEOTERMINAL</strong><small>Ofertas exclusivas para membros</small></span>
@@ -772,7 +785,6 @@
                     <div class="mobile-quick-scroll" aria-label="Atalhos principais">
                     <button class="account-button top-account-mobile" id="account-button-mobile" type="button" aria-label="Entrar ou criar cadastro"><img class="account-avatar" src="assets/imagens-videos/logo-discord.gif?v=2" alt=""><span class="account-copy"><span class="account-name">LOGIN / CADASTRO</span></span></button>
                     <div class="mobile-community-actions">
-                        <a class="multiplayer-hub-trigger" href="coletaneas.html" title="Coletâneas de jogos" aria-label="Coletâneas"><img src="assets/imagens-videos/imagens do menu/coletaneas.svg" alt=""><span class="mobile-action-label">Coletâneas</span></a>
                         <a class="multiplayer-hub-trigger" href="ofertas.html" title="Achados NeoTerminal" aria-label="Achados NeoTerminal"><img src="assets/imagens-videos/imagens do menu/achados-neoterminal.png" alt=""><span class="mobile-action-label">Achados</span></a>
                         <button class="multiplayer-hub-trigger" id="multiplayer-hub-trigger" type="button" title="Encontrar partida" aria-label="Jogar online"><img src="assets/imagens-videos/imagens do menu/jogar-online.png" alt=""><span class="mobile-action-label">Jogar online</span></button>
                         <a class="multiplayer-hub-trigger" href="social.html" title="Jogadores online" aria-label="Comunidade"><img src="assets/imagens-videos/imagens do menu/on-transparent.png" alt=""><span class="mobile-action-label">Comunidade</span></a>
@@ -813,6 +825,18 @@
                     <a class="acclaimed-card" href="/jogos/n64/the-legend-of-zelda-ocarina-of-time/"><span class="acclaimed-media"><img class="acclaimed-cover" src="https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/the_legend_of_zelda_-_ocarina_of_time.jpg" alt="Capa de Zelda: Ocarina of Time" width="260" height="195" loading="lazy"></span><span class="acclaimed-name">Zelda: Ocarina of Time</span></a>
                     <a class="acclaimed-card" href="/jogos/ps1/castlevania-symphony-of-the-night/"><span class="acclaimed-media"><img class="acclaimed-cover" src="https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/ps1/capas/castlevania-symphony-of-the-night.jpg" alt="Capa de Castlevania: Symphony of the Night" width="260" height="195" loading="lazy"></span><span class="acclaimed-name">Castlevania: Symphony of the Night</span></a>
                     <a class="acclaimed-card" href="/jogos/ps1/metal-gear-solid-em-portugues-pt-br/"><span class="acclaimed-media"><img class="acclaimed-cover" src="https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/ps1/capas/metal-gear-solid-em-portugu-s-pt-br.jpg" alt="Capa de Metal Gear Solid em português" width="260" height="195" loading="lazy"></span><span class="acclaimed-name">Metal Gear Solid em português</span></a>
+                </nav>
+            </section>
+
+            <section class="collections-showcase" aria-labelledby="collections-home-title">
+                <div class="collections-heading"><h2 id="collections-home-title">COLETÂNEAS</h2><a href="coletaneas.html">VER TODAS →</a></div>
+                <nav class="collections-row" aria-label="Coletâneas de jogos">
+                    <a class="collection-tile kof" href="coletaneas.html#kof"><span class="collection-tile-copy"><strong>THE KING OF FIGHTERS</strong><small>Coleção em preparação</small></span></a>
+                    <a class="collection-tile" href="coletaneas.html#mario" style="--collection-image:url('https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/snes/capas/super_mario_world.jpg')"><span class="collection-tile-copy"><strong>SUPER MARIO</strong><small>26 jogos encontrados</small></span></a>
+                    <a class="collection-tile" href="coletaneas.html#zelda" style="--collection-image:url('https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/n64/capas/the_legend_of_zelda_-_ocarina_of_time.jpg')"><span class="collection-tile-copy"><strong>THE LEGEND OF ZELDA</strong><small>8 jogos encontrados</small></span></a>
+                    <a class="collection-tile" href="coletaneas.html#metal-gear" style="--collection-image:url('https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/ps1/capas/metal-gear-solid-em-portugu-s-pt-br.jpg')"><span class="collection-tile-copy"><strong>METAL GEAR</strong><small>5 jogos encontrados</small></span></a>
+                    <a class="collection-tile" href="coletaneas.html#sonic" style="--collection-image:url('https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/megadrive/capas/sonic-the-hedgehog.jpg')"><span class="collection-tile-copy"><strong>SONIC</strong><small>5 jogos encontrados</small></span></a>
+                    <a class="collection-tile" href="coletaneas.html#final-fantasy" style="--collection-image:url('https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/ps1/capas/final-fantasy-vii-pt-br.jpg')"><span class="collection-tile-copy"><strong>FINAL FANTASY</strong><small>26 jogos encontrados</small></span></a>
                 </nav>
             </section>
 
