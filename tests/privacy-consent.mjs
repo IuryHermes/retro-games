@@ -9,8 +9,9 @@ const cookies = await readFile(new URL('../politica-de-cookies.html', import.met
 for (const page of pages) assert.match(await readFile(new URL(`../${page}`, import.meta.url), 'utf8'), /privacy-consent-v2\.js/);
 assert.match(consent, /neo_privacy_consent_v1/);
 assert.match(consent, /analytics: false, marketing: false/);
-assert.match(consent, /Somente necessários/);
-assert.match(consent, /Aceitar opcionais/);
+assert.doesNotMatch(consent, /Somente necessários/);
+assert.match(consent, /Aceitar todos/);
+assert.match(consent, /Configurações/);
 assert.match(consent, /Salvar preferências/);
 assert.match(consent, /neo:consent-changed/);
 assert.doesNotMatch(consent, /neo-privacy-settings/);
@@ -20,4 +21,4 @@ assert.match(cookies, /IndexedDB/);
 assert.match(cookies, /analytics só é carregado após consentimento/);
 assert.match(consent, /analytics só é carregado depois da sua autorização/);
 
-console.log(`privacy consent: ${pages.length + 11} checks passed`);
+console.log(`privacy consent: ${pages.length + 12} checks passed`);

@@ -55,8 +55,7 @@
     function removeBanner() { document.getElementById('neo-consent')?.remove(); }
     function buildBanner() {
         const banner = document.createElement('aside'); banner.id = 'neo-consent'; banner.setAttribute('role', 'dialog'); banner.setAttribute('aria-label', 'Preferências de privacidade');
-        banner.innerHTML = `<strong>PRIVACIDADE E ARMAZENAMENTO</strong><p>Usamos armazenamento necessário para login, saves, configurações, chat e multiplayer. Tecnologias opcionais só serão ativadas com sua escolha. <a href="/politica-de-cookies.html">Saiba mais</a>.</p><div class="neo-consent-actions"><button class="neo-consent-btn neo-consent-primary" data-necessary>Somente necessários</button><button class="neo-consent-btn" data-settings>Configurar</button><button class="neo-consent-btn neo-consent-primary" data-accept>Aceitar opcionais</button></div>`;
-        banner.querySelector('[data-necessary]').onclick = () => { save({ analytics:false, marketing:false }); removeBanner(); };
+        banner.innerHTML = `<strong>PRIVACIDADE E ARMAZENAMENTO</strong><p>Usamos armazenamento necessário para login, saves, configurações, chat e multiplayer. Tecnologias opcionais só serão ativadas com sua escolha. <a href="/politica-de-cookies.html">Saiba mais</a>.</p><div class="neo-consent-actions"><button class="neo-consent-btn" data-settings>Configurações</button><button class="neo-consent-btn neo-consent-primary" data-accept>Aceitar todos</button></div>`;
         banner.querySelector('[data-accept]').onclick = () => { save({ analytics:true, marketing:true }); removeBanner(); };
         banner.querySelector('[data-settings]').onclick = openSettings;
         document.body.appendChild(banner);
