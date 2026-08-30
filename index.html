@@ -291,9 +291,9 @@
 
         .catalog { padding: 0 40px; }
         .collections-showcase { padding:22px 40px 2px; position:relative; z-index:5; }
-        .collections-heading { display:flex; align-items:end; justify-content:space-between; gap:16px; margin-bottom:12px; }
+        .collections-heading { display:flex; align-items:center; justify-content:flex-start; gap:20px; margin-bottom:12px; border-left:3px solid var(--accent-color); padding-left:10px; }
         .collections-heading h2 { margin:0; color:var(--text-color); font:13px 'Press Start 2P',cursive; }
-        .collections-heading button { color:var(--accent-color); font:bold 11px monospace; border:0; background:none; cursor:pointer; }
+        .collections-heading .view-all-btn { color:var(--accent-color); font:8px 'Press Start 2P',cursive; border:1px solid var(--accent-color); background:rgba(0,204,68,.1); cursor:pointer; padding:6px 12px; }
         .collections-carousel { position:relative; }
         .collections-row { display:flex; gap:12px; overflow-x:auto; padding:5px 3px 18px; scroll-snap-type:x proximity; scrollbar-width:none; cursor:grab; user-select:none; touch-action:pan-y; }
         .collections-row.dragging { cursor:grabbing; scroll-snap-type:none; }
@@ -593,6 +593,7 @@
     <script src="club-badges.js?v=20260830-simple1"></script>
     <script src="privacy-consent-v2.js" defer></script>
     <script src="analytics-consent.js" defer></script>
+    <script src="collections-home.js" defer></script>
 </head>
 <body>
 
@@ -835,7 +836,7 @@
             </section>
 
             <section class="collections-showcase" aria-labelledby="collections-home-title">
-                <div class="collections-heading"><h2 id="collections-home-title">COLETÂNEAS</h2><button id="collections-show-all" type="button">VER TODAS →</button></div>
+                <div class="collections-heading"><h2 id="collections-home-title">COLETÂNEAS</h2><button class="view-all-btn selectable-item" id="collections-show-all" type="button">⊞ VER TODOS</button></div>
                 <div class="collections-carousel"><button class="collection-scroll prev" type="button" aria-label="Coletâneas anteriores">‹</button><nav class="collections-row" id="collections-row" aria-label="Coletâneas de jogos">
                     <button class="collection-tile kof" type="button" data-collection="kof"><span class="collection-tile-copy"><strong>THE KING OF FIGHTERS</strong><small>10 jogos disponíveis</small></span></button>
                     <button class="collection-tile" type="button" data-collection="mario" style="--collection-image:url('https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/systems/snes/capas/super_mario_world.jpg')"><span class="collection-tile-copy"><strong>SUPER MARIO</strong><small>26 jogos encontrados</small></span></button>
@@ -2182,6 +2183,10 @@
 
     document.addEventListener('click', (e) => { if (!e.target.closest('.search-container')) searchResults.style.display = 'none'; });
 
+    // Implementação anterior mantida temporariamente como referência; o
+    // controlador independente collections-home.js evita que erros de outros
+    // módulos da Home interrompam as coletâneas.
+    if (false) {
     // COLETÂNEAS NA PRÓPRIA HOME
     const collectionDefinitions = [
         { id:'kof', title:'THE KING OF FIGHTERS', match:/\b(the king of fighters|kof)\b/i },
@@ -2259,6 +2264,7 @@
     collectionsRow.addEventListener('pointermove', event => { if (!collectionsRow.classList.contains('dragging')) return; const delta = event.clientX - collectionDragStart; if (Math.abs(delta) > 6) collectionsRow.dataset.dragged = '1'; collectionsRow.scrollLeft = collectionScrollStart - delta; });
     const stopCollectionDrag = event => { collectionsRow.classList.remove('dragging'); try { collectionsRow.releasePointerCapture(event.pointerId); } catch (_) {} setTimeout(() => { collectionsRow.dataset.dragged = ''; }, 0); };
     collectionsRow.addEventListener('pointerup', stopCollectionDrag); collectionsRow.addEventListener('pointercancel', stopCollectionDrag);
+    }
 
     // GAMEPAD
     let selectableItems = []; let currentFocusIndex = -1; let gamepadConnected = false; let axisCooldown = false;
