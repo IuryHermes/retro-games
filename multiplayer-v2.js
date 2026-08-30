@@ -18,6 +18,7 @@
     let toastTimer = 0;
     let autoStartTimer = 0;
     let matchStarted = false;
+    const playSessionStartedAt = Date.now();
 
     const token = () => sessionStorage.getItem(TOKEN_KEY) || sessionStorage.getItem('neo_account_access') || '';
     const params = new URLSearchParams(location.search);
@@ -351,7 +352,7 @@
         if (!list || !room) return;
         list.textContent = 'Consultando jogadores online...';
         try {
-            await request('/social/heartbeat', { method:'POST', body:JSON.stringify({ page:'game', roomId:room?.id || '', roomTitle:room?.title || gameName }) });
+            await request('/social/heartbeat', { method:'POST', body:JSON.stringify({ page:'game', roomId:room?.id || '', roomTitle:room?.title || gameName, startedAt:playSessionStartedAt }) });
             const data = await request('/social/players');
             list.replaceChildren();
             const onlinePlayers = (data.players || []).filter(player => player.online);
@@ -374,7 +375,7 @@
     async function socialPulse() {
         if (!token()) return;
         try {
-            await request('/social/heartbeat', { method:'POST', body:JSON.stringify({ page:'game', roomId:room?.id || '', roomTitle:room?.title || gameName }) });
+            await request('/social/heartbeat', { method:'POST', body:JSON.stringify({ page:'game', roomId:room?.id || '', roomTitle:room?.title || gameName, startedAt:playSessionStartedAt }) });
             const data = await request(`/social/events?since=${socialSince}`);
             for (const event of data.events || []) {
                 socialSince = Math.max(socialSince, event.createdAt);

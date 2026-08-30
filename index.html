@@ -430,9 +430,21 @@
         .account-name { display:block; max-width:175px; overflow:hidden; text-overflow:ellipsis; color:var(--text-color); font:bold 10px monospace; white-space:nowrap; }
         .account-hint { display:block; color:var(--text-muted); font:8px monospace; white-space:nowrap; }
         @media(min-width:1025px){ .sidebar:hover .account-button{width:245px;justify-content:flex-start;padding:7px}.sidebar:hover .account-copy{display:block}.top-account-mobile{display:none!important} }
-        .auth-panel { width: min(430px, 94vw); max-height:calc(100dvh - 40px); overflow-y:auto; overscroll-behavior:contain; position:relative; margin:auto 0; background: var(--top-bar-bg); border: 2px solid var(--accent-color); border-radius: 8px; padding: 24px; box-shadow: 0 0 35px rgba(0,204,68,.25); scrollbar-color:var(--accent-color) var(--input-bg); }
+        .auth-panel { width: min(520px, 94vw); max-height:calc(100dvh - 40px); overflow-y:auto; overscroll-behavior:contain; position:relative; margin:auto 0; background:linear-gradient(160deg,var(--top-bar-bg),#06150b); border: 2px solid var(--accent-color); border-radius: 14px; padding: clamp(20px,4vw,30px); box-shadow: 0 22px 70px rgba(0,0,0,.7),0 0 35px rgba(0,204,68,.25); scrollbar-color:var(--accent-color) var(--input-bg); }
         .auth-panel h2 { color: var(--accent-color); font: 14px 'Press Start 2P', cursive; text-align: center; line-height: 1.6; }
         .auth-panel p { color: var(--text-muted); font: 12px monospace; text-align: center; line-height: 1.5; }
+        .auth-benefits { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:18px 0; }
+        .auth-benefit { padding:12px 8px; border:1px solid var(--border-color); border-radius:8px; background:rgba(0,204,68,.07); color:var(--text-color); text-align:center; font:10px/1.45 monospace; }
+        .auth-benefit strong { display:block; margin-bottom:5px; color:var(--accent-color); font-size:16px; }
+        .auth-profile-form[hidden],.auth-provider-actions[hidden] { display:none!important; }
+        .auth-section-label { display:block; margin:14px 0 7px; color:var(--accent-color); font:bold 10px monospace; }
+        .auth-optional { margin:12px 0; border:1px solid var(--border-color); border-radius:7px; background:rgba(0,0,0,.16); }
+        .auth-optional summary { padding:11px; color:var(--text-color); cursor:pointer; font:bold 10px monospace; }
+        .auth-optional .auth-fields { padding:0 11px 11px; }
+        .presence-options { display:grid; gap:8px; margin:12px 0; padding:12px; border:1px solid var(--border-color); border-radius:7px; background:rgba(0,204,68,.06); }
+        .presence-options strong { color:var(--accent-color); font:10px monospace; }
+        .presence-options label { display:flex; align-items:flex-start; gap:9px; color:var(--text-color); font:10px/1.4 monospace; }
+        .presence-options input { width:18px; height:18px; flex:0 0 auto; accent-color:var(--accent-color); }
         .auth-fields { display: grid; gap: 9px; }
         .auth-fields input, .auth-fields textarea { width: 100%; box-sizing: border-box; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 11px; border-radius: 4px; font: inherit; }
         .auth-fields label { display:grid; gap:4px; color:var(--text-muted); font:10px monospace; }
@@ -519,7 +531,7 @@
         .multiplayer-game-choice span,.multiplayer-game-choice small { display:block; padding:8px 10px 0; }
         .multiplayer-game-choice small { padding:4px 10px 10px; color:var(--accent-color); font:bold 10px monospace; }
         @media(max-width:1024px){ .top-account-mobile{display:flex;width:38px;min-height:38px;height:38px}.top-account-mobile .account-avatar{width:28px;height:28px;flex-basis:28px}.top-account-mobile .account-copy{display:none} }
-        @media(max-width:768px){ .avatar-grid{grid-template-columns:repeat(2,1fr);max-height:360px} }
+        @media(max-width:768px){ .avatar-grid{grid-template-columns:repeat(4,1fr);max-height:220px}.auth-benefits{grid-template-columns:1fr}.auth-benefit{display:flex;align-items:center;gap:9px;text-align:left;padding:8px 10px}.auth-benefit strong{margin:0} }
         @media (orientation: landscape) and (max-width: 1366px) and (pointer: coarse), (max-height: 700px) {
             .modal-bg { align-items: flex-start; padding: max(10px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); overflow-y: auto; }
             .auth-panel { width: min(760px, 96vw); max-height: calc(100dvh - 20px); padding: 16px 20px; overflow-y: auto; overscroll-behavior: contain; }
@@ -575,23 +587,33 @@
     <div id="auth-modal" class="modal-bg" role="dialog" aria-modal="true" aria-labelledby="auth-title">
         <div class="auth-panel">
             <button class="game-info-close" id="auth-close" type="button">X</button>
-            <h2 id="auth-title">IDENTIFICAÇÃO DO JOGADOR</h2>
-            <p id="auth-copy">Crie sua conta e ganhe 3 slots de save por jogo.</p>
-            <div class="auth-fields">
-                <input id="auth-name" maxlength="20" autocomplete="nickname" placeholder="Nome no chat (2 a 20)">
-                <label>Data de nascimento <input id="auth-birth-date" type="date" autocomplete="bday" required></label>
-                <input id="auth-locality" maxlength="80" autocomplete="address-level2" placeholder="Cidade/estado ou país">
-                <textarea id="auth-bio" maxlength="280" rows="3" placeholder="Bio (até 280 caracteres)"></textarea>
-                <input id="auth-phone" maxlength="30" autocomplete="tel" placeholder="Telefone (opcional)">
-                <input id="auth-instagram" type="url" maxlength="300" placeholder="Instagram (link opcional)">
-                <input id="auth-youtube" type="url" maxlength="300" placeholder="YouTube (link opcional)">
-                <input id="auth-facebook" type="url" maxlength="300" placeholder="Facebook (link opcional)">
-                <input id="auth-tiktok" type="url" maxlength="300" placeholder="TikTok (link opcional)">
-                <label class="notification-optin"><input id="auth-discord-notifications" type="checkbox"> Receber lembretes do NeoTerminalRoom no Discord (opcional)</label>
+            <h2 id="auth-title">SUA CONTA NEOTERMINAL</h2>
+            <p id="auth-copy">Entre uma vez para salvar seu progresso e participar da comunidade.</p>
+            <div class="auth-benefits" aria-label="Benefícios da conta"><div class="auth-benefit"><strong>☁</strong> Saves protegidos</div><div class="auth-benefit"><strong>●</strong> Presença online</div><div class="auth-benefit"><strong>⚔</strong> Convites para jogar</div></div>
+            <div class="auth-provider-actions" id="auth-provider-actions">
+                <button class="auth-social google" id="auth-google" type="button">CONTINUAR COM GOOGLE</button>
+                <button class="auth-social discord" id="auth-discord" type="button">CONTINUAR COM DISCORD</button>
             </div>
-            <div class="avatar-grid" id="avatar-grid" aria-label="Escolha seu avatar"></div>
-            <button class="auth-social google" id="auth-google" type="button">Continuar com Google</button>
-            <button class="auth-social discord" id="auth-discord" type="button">Continuar com Discord</button>
+            <div class="auth-profile-form" id="auth-profile-form" hidden>
+                <span class="auth-section-label">INFORMAÇÕES ESSENCIAIS</span>
+                <div class="auth-fields">
+                    <input id="auth-name" maxlength="20" autocomplete="nickname" placeholder="Nome de jogador (2 a 20)">
+                    <label>Data de nascimento <input id="auth-birth-date" type="date" autocomplete="bday" required></label>
+                    <input id="auth-locality" maxlength="80" autocomplete="address-level2" placeholder="Cidade/estado ou país">
+                </div>
+                <span class="auth-section-label">ESCOLHA SEU AVATAR</span>
+                <div class="avatar-grid" id="avatar-grid" aria-label="Escolha seu avatar"></div>
+                <div class="presence-options"><strong>PRIVACIDADE NA COMUNIDADE</strong><label><input id="auth-show-online" type="checkbox" checked> Mostrar quando estou online</label><label><input id="auth-show-game" type="checkbox" checked> Mostrar qual jogo estou jogando</label><label><input id="auth-show-duration" type="checkbox" checked> Mostrar há quanto tempo estou jogando</label></div>
+                <details class="auth-optional"><summary>Informações opcionais</summary><div class="auth-fields">
+                    <textarea id="auth-bio" maxlength="280" rows="3" placeholder="Bio (até 280 caracteres)"></textarea>
+                    <input id="auth-phone" maxlength="30" autocomplete="tel" placeholder="Telefone (opcional)">
+                    <input id="auth-instagram" type="url" maxlength="300" placeholder="Instagram (link opcional)">
+                    <input id="auth-youtube" type="url" maxlength="300" placeholder="YouTube (link opcional)">
+                    <input id="auth-facebook" type="url" maxlength="300" placeholder="Facebook (link opcional)">
+                    <input id="auth-tiktok" type="url" maxlength="300" placeholder="TikTok (link opcional)">
+                    <label class="notification-optin"><input id="auth-discord-notifications" type="checkbox"> Receber lembretes no Discord</label>
+                </div></details>
+            </div>
             <button class="auth-action auth-action-primary" id="auth-save-profile" type="button" style="display:none;width:100%;margin-top:10px">FINALIZAR CADASTRO</button>
             <button class="auth-action" id="auth-logout" type="button" style="display:none;width:100%;margin-top:10px;border-color:#ff4f61">SAIR DA CONTA</button>
             <div id="auth-status" aria-live="polite"></div>
@@ -975,6 +997,10 @@
     const authModal = document.getElementById('auth-modal');
     const authStatus = document.getElementById('auth-status');
     const avatarGrid = document.getElementById('avatar-grid');
+    const authParams = new URLSearchParams(location.search);
+    const requestedAuthReturn = authParams.get('return');
+    const safeAuthReturn = /^(ofertas|social)\.html$/.test(requestedAuthReturn || '') ? requestedAuthReturn : '';
+    if (safeAuthReturn) sessionStorage.setItem('neo_auth_return', safeAuthReturn);
     const setAuthStatus = message => { authStatus.textContent = message || ''; };
     const chooseAvatar = avatar => { selectedAvatar = avatar; avatarGrid.querySelectorAll('.avatar-choice').forEach(button => button.classList.toggle('selected', button.dataset.avatar === avatar)); };
     AVATARS.forEach(avatar => { const button = document.createElement('button'); button.type = 'button'; button.className = 'avatar-choice'; button.dataset.avatar = avatar; button.setAttribute('aria-label', `Avatar ${avatar}`); const image = document.createElement('img'); image.src = avatarUrl(avatar); image.alt = ''; button.appendChild(image); button.onclick = () => chooseAvatar(avatar); avatarGrid.appendChild(button); });
@@ -989,6 +1015,9 @@
             document.getElementById('auth-bio').value = accountProfile.bio || '';
             document.getElementById('auth-phone').value = accountProfile.phone || '';
             ['instagram','youtube','facebook','tiktok'].forEach(key => { document.getElementById(`auth-${key}`).value = accountProfile[key] || ''; });
+            document.getElementById('auth-show-online').checked = accountProfile.showOnlineStatus !== false;
+            document.getElementById('auth-show-game').checked = accountProfile.showCurrentGame !== false;
+            document.getElementById('auth-show-duration').checked = accountProfile.showPlayDuration !== false;
         }
     };
     const closeAuth = () => { authModal.style.display = 'none'; };
@@ -1263,10 +1292,10 @@
     }
     async function saveProfile() {
         const name = document.getElementById('auth-name').value.trim();
-        const body = { name, avatar: selectedAvatar, birthDate: document.getElementById('auth-birth-date').value, locality: document.getElementById('auth-locality').value.trim(), bio: document.getElementById('auth-bio').value.trim(), phone: document.getElementById('auth-phone').value.trim(), discordNotifications: document.getElementById('auth-discord-notifications').checked, referralCode: localStorage.getItem('neo_referral_code') || '' };
+        const body = { name, avatar: selectedAvatar, birthDate: document.getElementById('auth-birth-date').value, locality: document.getElementById('auth-locality').value.trim(), bio: document.getElementById('auth-bio').value.trim(), phone: document.getElementById('auth-phone').value.trim(), discordNotifications: document.getElementById('auth-discord-notifications').checked, showOnlineStatus:document.getElementById('auth-show-online').checked, showCurrentGame:document.getElementById('auth-show-game').checked, showPlayDuration:document.getElementById('auth-show-duration').checked, referralCode: localStorage.getItem('neo_referral_code') || '' };
         ['instagram','youtube','facebook','tiktok'].forEach(key => { body[key] = document.getElementById(`auth-${key}`).value.trim(); });
         setAuthStatus('Salvando perfil...');
-        try { const data = await profileRequest('PUT', body); if (data.created) localStorage.removeItem('neo_referral_code'); accountProfile = data.profile; applyProfile(); await migrateLocalProgressToProfile(); void refreshPersonalHero(); setAuthStatus(data.created ? `Bem-vindo(a), ${accountProfile.name}! Seus saves locais foram migrados.` : 'Perfil atualizado.'); setTimeout(closeAuth, 900); }
+        try { const data = await profileRequest('PUT', body); if (data.created) localStorage.removeItem('neo_referral_code'); accountProfile = data.profile; applyProfile(); await migrateLocalProgressToProfile(); void refreshPersonalHero(); setAuthStatus(data.created ? `Bem-vindo(a), ${accountProfile.name}! Seus saves locais foram migrados.` : 'Perfil atualizado.'); const destination = sessionStorage.getItem('neo_auth_return') || ''; if (destination) { sessionStorage.removeItem('neo_auth_return'); setTimeout(() => { location.href = destination; }, 650); } else setTimeout(closeAuth, 900); }
         catch (error) { setAuthStatus(error.message); }
     }
     function applyProfile() {
@@ -1304,6 +1333,8 @@
     onAuthStateChanged(auth, async user => {
         document.getElementById('auth-logout').style.display = user || discordAccountToken ? 'block' : 'none';
         document.getElementById('auth-save-profile').style.display = user || discordAccountToken ? 'block' : 'none';
+        document.getElementById('auth-provider-actions').hidden = Boolean(user || discordAccountToken);
+        document.getElementById('auth-profile-form').hidden = !user && !discordAccountToken;
         if (!user && !discordAccountToken) { accountProfile = null; sessionStorage.removeItem('neo_club_access'); applyProfile(); return; }
         try {
             const data = await profileRequest('GET'); accountProfile = data.profile; applyProfile(); await migrateLocalProgressToProfile();
@@ -1311,6 +1342,8 @@
             else closeAuth();
             startSocialPresence();
             void refreshPersonalHero();
+            const authDestination = sessionStorage.getItem('neo_auth_return') || '';
+            if (authDestination && accountProfile) { sessionStorage.removeItem('neo_auth_return'); location.href = authDestination; return; }
             const pendingRoom = sessionStorage.getItem('neo_pending_multiplayer_room');
             if (/^[a-f0-9]{12}$/.test(pendingRoom || '')) { sessionStorage.removeItem('neo_pending_multiplayer_room'); location.href = `multiplayer-room.html?room=${encodeURIComponent(pendingRoom)}`; }
         }
@@ -1410,6 +1443,11 @@
         });
         if (members.length) container.classList.add('ativo');
     });
+
+    if (authParams.get('cadastro') === '1') {
+        document.getElementById('auth-copy').textContent = 'Entre ou crie sua conta para continuar.';
+        openAuth();
+    }
 
     const refreshSecureHall = async () => {
         try {

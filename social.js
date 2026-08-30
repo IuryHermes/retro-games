@@ -156,9 +156,11 @@ async function loadPlayers() {
       dot.className = "presence-dot";
       name.append(dot, document.createTextNode(player.name));
       const page = document.createElement("small");
+      const minutesPlaying = player.playStartedAt ? Math.max(1, Math.floor((Date.now() - player.playStartedAt) / 60000)) : 0;
+      const duration = minutesPlaying >= 60 ? `${Math.floor(minutesPlaying / 60)}h ${minutesPlaying % 60}min` : `${minutesPlaying} min`;
       const presence = player.online
         ? player.page === "game"
-          ? "Online · jogando agora"
+          ? [`Online · jogando ${player.currentGame || "agora"}`, minutesPlaying ? `Há ${duration}` : ""].filter(Boolean).join("\n")
           : "Online · navegando no site"
           : "Offline";
       page.textContent = [presence, player.age ? `${player.age} anos` : "", player.locality ? `Cidade: ${player.locality}` : ""].filter(Boolean).join("\n");
@@ -193,7 +195,7 @@ async function loadPlayers() {
   } catch (error) {
     el("status").textContent = error.message;
     el("players").innerHTML =
-      '<div class="empty"><a href="index.html">Entre ou conclua seu perfil na página inicial.</a></div>';
+      '<div class="empty"><a href="index.html?cadastro=1&return=social.html">Entre ou conclua seu perfil para acessar a comunidade.</a></div>';
   }
 }
 async function invitePlayer(player) {

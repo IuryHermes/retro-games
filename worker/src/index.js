@@ -1151,8 +1151,16 @@ var src_default = {
       const own = env.SOCIAL_PLAYERS.getByName(account.uid);
       if (request.method === "POST" && url.pathname === "/social/heartbeat") {
         const body = await request.json().catch(() => ({}));
+        if (profile.showOnlineStatus === false) {
+          await env.GAMES.delete(`social/presence/${encodeURIComponent(account.uid)}.json`);
+          return json({ presence: null, hidden: true });
+        }
         const roomId = /^[a-f0-9]{12}$/.test(String(body.roomId || "")) ? String(body.roomId) : "";
-        const presence = { uid: account.uid, name: profile.name, avatar: profile.avatar, page: String(body.page || "site").slice(0, 30), roomId, roomTitle: cleanProfileText(body.roomTitle, 100), updatedAt: Date.now() };
+        const now = Date.now();
+        const page = ["site", "social", "game", "multiplayer"].includes(String(body.page || "")) ? String(body.page) : "site";
+        const requestedStartedAt = Number(body.startedAt || 0);
+        const playStartedAt = page === "game" && profile.showPlayDuration !== false && requestedStartedAt <= now && requestedStartedAt >= now - 24 * 60 * 60 * 1e3 ? requestedStartedAt : null;
+        const presence = { uid: account.uid, name: profile.name, avatar: profile.avatar, page, roomId: profile.showCurrentGame !== false ? roomId : "", roomTitle: page === "game" && profile.showCurrentGame !== false ? cleanProfileText(body.roomTitle, 100) : "", playStartedAt, updatedAt: now };
         await env.GAMES.put(`social/presence/${encodeURIComponent(account.uid)}.json`, JSON.stringify(presence), { httpMetadata: { contentType: "application/json" } });
         return json({ presence });
       }
@@ -1173,7 +1181,7 @@ var src_default = {
             return null;
           const live = presenceByUid.get(candidate.uid);
           const online = Boolean(live && now - live.updatedAt < 9e4);
-          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, recognition: applyBadgeGrants(recognitionFor(candidate.uid), candidate.badgeGrants), age: profileAge(candidate.birthDate), locality: candidate.locality || "", bio: candidate.bio || "", instagram: candidate.instagram || "", youtube: candidate.youtube || "", facebook: candidate.facebook || "", tiktok: candidate.tiktok || "", watchRoomId: online && live?.page === "game" ? live.roomId || "" : "", watchTitle: online && live?.page === "game" ? live.roomTitle || "" : "", online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
+          return { uid: candidate.uid, name: candidate.name, avatar: candidate.avatar, recognition: applyBadgeGrants(recognitionFor(candidate.uid), candidate.badgeGrants), age: profileAge(candidate.birthDate), locality: candidate.locality || "", bio: candidate.bio || "", instagram: candidate.instagram || "", youtube: candidate.youtube || "", facebook: candidate.facebook || "", tiktok: candidate.tiktok || "", watchRoomId: online && live?.page === "game" ? live.roomId || "" : "", watchTitle: online && live?.page === "game" ? live.roomTitle || "" : "", currentGame: online && live?.page === "game" ? live.roomTitle || "" : "", playStartedAt: online && live?.page === "game" ? live.playStartedAt || null : null, online, page: online ? live.page : "offline", lastSeenAt: live?.updatedAt || null };
         }))).filter(Boolean).sort((a, b) => Number(b.online) - Number(a.online) || a.name.localeCompare(b.name, "pt-BR")).slice(0, 500);
         return json({ self: { uid: account.uid, name: profile.name, avatar: profile.avatar, recognition: applyBadgeGrants(recognitionFor(account.uid), profile.badgeGrants) }, players });
       }
@@ -1562,7 +1570,7 @@ var src_default = {
         const codeRecord = codeObject ? await codeObject.json().catch(() => null) : null;
         if (codeRecord?.uid && codeRecord.uid !== account.uid && await env.GAMES.head(`profiles/v1/${encodeURIComponent(codeRecord.uid)}.json`)) referrerUid = codeRecord.uid;
       }
-      const profile = { uid: account.uid, name, avatar, birthDate, locality, bio, phone, instagram, youtube, facebook, tiktok, provider: account.provider, discordNotifications: Boolean(body.discordNotifications ?? current?.discordNotifications), ...(referrerUid ? { referrerUid } : {}), createdAt: current?.createdAt || Date.now(), updatedAt: Date.now() };
+      const profile = { uid: account.uid, name, avatar, birthDate, locality, bio, phone, instagram, youtube, facebook, tiktok, provider: account.provider, discordNotifications: Boolean(body.discordNotifications ?? current?.discordNotifications), showOnlineStatus: Boolean(body.showOnlineStatus ?? current?.showOnlineStatus ?? true), showCurrentGame: Boolean(body.showCurrentGame ?? current?.showCurrentGame ?? true), showPlayDuration: Boolean(body.showPlayDuration ?? current?.showPlayDuration ?? true), ...(referrerUid ? { referrerUid } : {}), createdAt: current?.createdAt || Date.now(), updatedAt: Date.now() };
       await env.GAMES.put(key, JSON.stringify(profile), { httpMetadata: { contentType: "application/json" } });
       if (!current) {
         await env.GAMES.put(`hall/registrations/${encodeURIComponent(account.uid)}.json`, JSON.stringify({ uid: account.uid, nome: name, avatar, mensagem: `Bem-vindo(a), ${name}! Um novo jogador entrou na sala.`, timestamp: Date.now() }), { httpMetadata: { contentType: "application/json" } });
