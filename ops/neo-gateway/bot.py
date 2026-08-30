@@ -50,6 +50,7 @@ intents.messages = True
 bot = commands.Bot(command_prefix="!neo ", intents=intents)
 radio_task = None
 radio_voice = None
+radio_last_state = None
 
 
 async def log_event(text: str):
@@ -91,7 +92,7 @@ async def resolve_radio_url():
 
 
 async def radio_loop():
-    global radio_voice
+    global radio_voice, radio_last_state
     await bot.wait_until_ready()
     while not bot.is_closed():
         try:
@@ -103,14 +104,20 @@ async def radio_loop():
                 voice = await channel.connect(reconnect=True)
             radio_voice = voice
             state = channel.guild.me.voice
-            log.info("Estado da rádio: conectado=%s self_mute=%s self_deaf=%s", voice.is_connected(),
-                     getattr(state, "self_mute", None), getattr(state, "self_deaf", None))
+            current_state = (voice.is_connected(), getattr(state, "self_mute", None),
+                             getattr(state, "self_deaf", None))
+            if current_state != radio_last_state:
+                log.info("Estado da rádio: conectado=%s self_mute=%s self_deaf=%s", *current_state)
+                radio_last_state = current_state
             if not voice.is_playing():
                 stream = await resolve_radio_url()
-                source = discord.FFmpegPCMAudio(
+                # Entrega pacotes Opus prontos ao Discord. Isso evita codificar
+                # PCM dentro do processo Python, que causava atrasos e cortes
+                # quando o servidor estava sob carga.
+                source = discord.FFmpegOpusAudio(
                     stream, executable=FFMPEG_PATH,
-                    before_options="-reconnect 1 -reconnect_streamed 1 -reconnect_on_network_error 1 -reconnect_on_http_error 4xx,5xx -reconnect_delay_max 5",
-                    options="-vn")
+                    before_options="-reconnect 1 -reconnect_streamed 1 -reconnect_on_network_error 1 -reconnect_on_http_error 4xx,5xx -reconnect_delay_max 5 -thread_queue_size 4096",
+                    options="-vn -application audio -frame_duration 20")
                 def radio_finished(error):
                     if error:
                         log.error("Rádio encerrou com erro: %s", error)
@@ -120,7 +127,7 @@ async def radio_loop():
                 log.info("Rádio reproduzindo em #%s", channel.name)
             # Streams HLS podem cair sem aviso; detectar rapidamente evita
             # deixar a sala silenciosa durante o intervalo de recuperação.
-            await asyncio.sleep(5)
+            await asyncio.sleep(2)
         except asyncio.CancelledError:
             return
         except Exception as exc:
