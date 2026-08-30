@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Coletâneas de Jogos Retrô — NeoTerminalRoom</title>
+  <meta name="description" content="Explore séries completas de jogos retrô no NeoTerminalRoom: Mario, Zelda, Metal Gear, The King of Fighters e outras coletâneas.">
+  <link rel="canonical" href="https://neoterminalroom.com.br/coletaneas.html">
+  <link rel="icon" href="assets/imagens-videos/logo-discord.gif?v=2">
+  <script src="theme-sync.js"></script>
+  <script src="privacy-consent-v2.js" defer></script>
+  <script src="analytics-consent.js" defer></script>
+  <style>
+    :root{color-scheme:dark;--green:#00cc44;--bright:#55ff88;--gold:#ffd54a;--panel:#07120b;--muted:#9ab9a2;--line:#1b6331}
+    *{box-sizing:border-box}body{margin:0;min-height:100dvh;background:radial-gradient(circle at top,#12331c,#020503 56%);color:#effff2;font:15px/1.5 Roboto,Arial,sans-serif}
+    a{color:inherit}header{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px clamp(14px,4vw,48px);background:#020603ed;border-bottom:1px solid var(--green);backdrop-filter:blur(12px)}
+    .brand{font:clamp(12px,2vw,17px) monospace;color:var(--bright);text-decoration:none}.back{border:1px solid var(--green);border-radius:7px;padding:8px 12px;text-decoration:none;background:#07130a}
+    main{width:min(1180px,94vw);margin:0 auto;padding:clamp(26px,5vw,58px) 0 60px}.hero{margin-bottom:30px}.eyebrow{color:var(--gold);font:700 12px monospace;letter-spacing:.12em}.hero h1{font-size:clamp(28px,7vw,58px);line-height:1.05;margin:8px 0}.hero p{color:var(--muted);max-width:760px;font-size:clamp(15px,2.3vw,19px)}
+    .collection-nav{display:flex;gap:9px;overflow:auto;padding:4px 0 18px;scrollbar-width:thin}.collection-nav a{flex:none;border:1px solid var(--line);border-radius:999px;padding:9px 14px;text-decoration:none;background:#07120b}
+    .collection{scroll-margin-top:82px;margin:28px 0 42px;padding:clamp(16px,3vw,27px);border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,#08170dcc,#030805e8);box-shadow:0 18px 55px #0008}
+    .collection-head{display:flex;justify-content:space-between;align-items:start;gap:20px;margin-bottom:17px}.collection h2{margin:0;color:var(--bright);font-size:clamp(21px,4vw,34px)}.collection-head p{margin:6px 0 0;color:var(--muted);max-width:720px}.count{flex:none;color:var(--gold);font:12px monospace;border:1px solid #725f22;border-radius:999px;padding:6px 9px}
+    .games{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:14px}.game{min-width:0;border:1px solid #174d28;border-radius:10px;overflow:hidden;background:#050b07;text-decoration:none;transition:.18s}.game:hover,.game:focus-visible{transform:translateY(-3px);border-color:var(--bright);outline:none}.game img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;background:#000}.game-copy{display:block;padding:11px}.game strong{display:block;line-height:1.25}.system{display:block;margin-top:6px;color:var(--muted);font:11px monospace;text-transform:uppercase}
+    .pending{grid-column:1/-1;border:1px dashed #826c25;border-radius:10px;padding:18px;color:#e9d994;background:#241d071f}.pending strong{color:var(--gold)}
+    .loading{color:var(--muted);padding:18px 0}@media(max-width:560px){header{padding-top:max(11px,env(safe-area-inset-top))}.back{font-size:12px}.collection-head{display:block}.count{display:inline-block;margin-top:10px}.games{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.game-copy{padding:9px}.game strong{font-size:13px}}
+  </style>
+</head>
+<body>
+<header><a class="brand" href="/">NEOTERMINALROOM / COLETÂNEAS</a><a class="back" href="/">← BIBLIOTECA</a></header>
+<main>
+  <section class="hero"><div class="eyebrow">SÉRIES, SAGAS E UNIVERSOS</div><h1>Coletâneas</h1><p>Encontre jogos da mesma série reunidos em um só lugar, mesmo quando foram lançados para consoles diferentes.</p></section>
+  <nav class="collection-nav" aria-label="Escolher coletânea"></nav>
+  <div id="collections"><p class="loading">Organizando a biblioteca…</p></div>
+</main>
+<script>
+(() => {
+  const R2='https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/';
+  const systems=[['nes','Nintendinho'],['snes','Super Nintendo'],['n64','Nintendo 64'],['gba','Game Boy Advance'],['megadrive','Mega Drive'],['ps1','PlayStation 1'],['atari2600','Atari 2600']];
+  const definitions=[
+    {id:'kof',title:'The King of Fighters',description:'A saga de luta da SNK. As edições de Nintendo 3DS estão em validação para receber uma versão web leve e compatível com celulares.',match:/\b(the king of fighters|kof)\b/i,pending:true},
+    {id:'mario',title:'Super Mario',description:'Plataformas, corridas, RPGs e aventuras do universo Mario.',match:/\b(mario|yoshi|luigi|wario)\b/i},
+    {id:'zelda',title:'The Legend of Zelda',description:'As aventuras de Link e Zelda através de diferentes gerações da Nintendo.',match:/\b(zelda|ocarina of time|majora.?s mask)\b/i},
+    {id:'metal-gear',title:'Metal Gear',description:'Infiltração, espionagem e ação na série criada pela Konami.',match:/\bmetal gear\b/i},
+    {id:'sonic',title:'Sonic',description:'A série de velocidade da Sega e suas principais variações.',match:/\bsonic\b/i},
+    {id:'final-fantasy',title:'Final Fantasy',description:'RPGs clássicos e histórias independentes da série Final Fantasy.',match:/\bfinal fantasy\b/i}
+  ];
+  const roman={XV:'15',XIV:'14',XIII:'13',XII:'12',XI:'11',IX:'9',VIII:'8',VII:'7',VI:'6',IV:'4',III:'3',II:'2'};
+  const normalizedName=(value,system)=>String(value||'Jogo').replace(/\b(?:XV|XIV|XIII|XII|XI|IX|VIII|VII|VI|IV|III|II)\b/gi,n=>system==='ps1'?roman[n.toUpperCase()]:(n.toUpperCase()==='II'?'2':n)).replace(/\bI(?=\s*&\s*2\b)/gi,'1').replace(/\bFirered\b/gi,'FireRed');
+  const slug=(value,system)=>normalizedName(value,system).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,80)||'jogo';
+  const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const cover=(game,system)=>{const name=String(game.capa||'').split('/').pop();if(!name)return 'assets/imagens-videos/logo-discord.gif';return system==='atari2600'?`systems/${system}/capas/${encodeURIComponent(name)}`:`${R2}systems/${system}/capas/${encodeURIComponent(name)}`};
+  Promise.all(systems.map(async ([id,label])=>{const response=await fetch(`systems/${id}/games.json`);if(!response.ok)throw new Error(id);const raw=await response.json();const unique=[...new Map(raw.map(game=>[String(game.rom||'').toLowerCase(),game])).values()].filter(game=>game.rom&&game.nome&&!(id==='ps1'&&/([._\-\s](cd|disc|disco)\s*0*[1-9])/i.test(String(game.rom))));const used=new Set();return unique.map(game=>{const base=slug(game.nome,id);let route=base,suffix=2;while(used.has(route))route=`${base}-${suffix++}`;used.add(route);return {...game,system:id,systemLabel:label,route}})})).then(groups=>{
+    const all=groups.flat();const nav=document.querySelector('.collection-nav');const root=document.getElementById('collections');root.replaceChildren();
+    definitions.forEach(def=>{
+      const games=all.filter(game=>def.match.test(String(game.nome||''))).sort((a,b)=>String(a.nome).localeCompare(String(b.nome),'pt-BR',{numeric:true}));
+      const section=document.createElement('section');section.className='collection';section.id=def.id;
+      section.innerHTML=`<div class="collection-head"><div><h2>${esc(def.title)}</h2><p>${esc(def.description)}</p></div><span class="count">${games.length} JOGO${games.length===1?'':'S'}</span></div><div class="games"></div>`;
+      const list=section.querySelector('.games');
+      games.forEach(game=>{const link=document.createElement('a');link.className='game';link.href=`/jogos/${game.system}/${game.route}/`;link.innerHTML=`<img src="${cover(game,game.system)}" alt="Capa de ${esc(game.nome)}" loading="lazy"><span class="game-copy"><strong>${esc(normalizedName(game.nome,game.system))}</strong><small class="system">${esc(game.systemLabel)}</small></span>`;list.appendChild(link)});
+      if(def.pending&&!games.length){const note=document.createElement('div');note.className='pending';note.innerHTML='<strong>COLEÇÃO EM PREPARAÇÃO</strong><br>Os arquivos encontrados são pacotes de Nintendo 3DS. Eles não serão misturados com a tradução de PS1; serão convertidos ou substituídos por ROM sets Neo Geo validados no FBNeo antes da publicação.';list.appendChild(note)}
+      root.appendChild(section);const anchor=document.createElement('a');anchor.href=`#${def.id}`;anchor.textContent=def.title;nav.appendChild(anchor);
+    });
+  }).catch(()=>{document.getElementById('collections').innerHTML='<p class="pending"><strong>Não foi possível carregar as coletâneas.</strong><br>Atualize a página para tentar novamente.</p>'});
+})();
+</script>
+</body>
+</html>
