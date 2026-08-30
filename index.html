@@ -2194,7 +2194,7 @@
     const collectionsRow = document.getElementById('collections-row');
     const collectionsExpanded = document.getElementById('collections-expanded');
     let neoGeoCollectionPromise;
-    const loadNeoGeoCollection = () => neoGeoCollectionPromise ||= fetch('systems/neogeo/games.json').then(response => {
+    const loadNeoGeoCollection = () => neoGeoCollectionPromise ||= fetch('systems/neogeo/games.json?v=20260830-kof10').then(response => {
         if (!response.ok) throw new Error(`Neo Geo HTTP ${response.status}`);
         return response.json();
     }).then(games => games.map(game => ({
