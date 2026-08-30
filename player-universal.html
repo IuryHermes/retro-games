@@ -361,6 +361,8 @@
             };
 
             window.EJS_gameUrl = game.trim().startsWith("http") ? game.trim() : baseUrl + game.trim();
+            const requestedBios = params.get('bios');
+            if (requestedBios) window.EJS_biosUrl = requestedBios;
             // Multidisc playlists are tiny and may otherwise remain stale in
             // browser/CDN cache after their disk paths are corrected.
             if (/\.m3u(?:$|\?)/i.test(window.EJS_gameUrl)) {

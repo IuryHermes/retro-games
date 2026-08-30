@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">The King of Fighters</title><desc id="desc">Arte da coletânea Neo Geo de The King of Fighters</desc>
+  <defs><radialGradient id="bg"><stop stop-color="#8b1515"/><stop offset=".52" stop-color="#210707"/><stop offset="1" stop-color="#020202"/></radialGradient><linearGradient id="gold" x2="0" y2="1"><stop stop-color="#fff2a1"/><stop offset=".45" stop-color="#e8a928"/><stop offset="1" stop-color="#7c3b00"/></linearGradient></defs>
+  <rect width="800" height="600" fill="url(#bg)"/><path d="M90 510 224 84l68 184L401 49l63 198 93-142 148 405z" fill="#dc3c10" opacity=".3"/><path d="M0 510h800v90H0z" fill="#030303"/>
+  <text x="400" y="210" text-anchor="middle" fill="#fff" font-family="Arial Black,Arial" font-size="58" font-style="italic">THE KING OF</text><text x="400" y="315" text-anchor="middle" fill="url(#gold)" stroke="#421000" stroke-width="4" font-family="Arial Black,Arial" font-size="102" font-style="italic">FIGHTERS</text>
+  <text x="400" y="390" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="28" letter-spacing="9">NEO GEO COLLECTION</text><text x="400" y="560" text-anchor="middle" fill="#ffd85a" font-family="monospace" font-size="24">NEOTERMINALROOM</text>
+</svg>
