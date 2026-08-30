@@ -11,7 +11,7 @@ const source = html.slice(moduleStart, moduleEnd).replace(/^\s*import\s+.*?;\s*$
 new Function(source);
 new Function(controller);
 
-for (const marker of ['id="collections-row"', 'id="collections-show-all"', 'id="collections-expanded"', 'collections-home.js', '⊞ VER TODOS']) {
+for (const marker of ['id="collections-row"', 'id="collections-show-all"', 'id="collections-expanded"', 'collections-home.js', '>VER TODOS</button>']) {
   if (!html.includes(marker)) throw new Error(`interação de coletâneas ausente: ${marker}`);
 }
 for (const marker of ['mortal-kombat', 'mega-man', 'showAll.onclick', 'row.onpointermove', 'panel.scrollIntoView']) {
