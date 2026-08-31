@@ -429,6 +429,11 @@
                 "mupen64plus-EnableLegacyBlending": "True",
                 "mupen64plus-EnableCopyColorToRDRAM": isDoom64 ? "Sync" : "Async",
                 "mupen64plus-Framerate": "Original"
+            } : params.get('system') === 'neogeo' ? {
+                "vsync": false,
+                // AES Europe exposes the cartridge's home-mode language
+                // selection, including Portuguese in supported KOF releases.
+                "fbneo-neogeo-mode": "AES_EUR"
             } : { "vsync": false };
 
             // ==========================================

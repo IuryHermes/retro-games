@@ -9,6 +9,7 @@ assert.match(preflight, /'fbneo'/);
 assert.match(preflight, /fbneo:\s*\['zip'\]/);
 assert.match(player, /window\.EJS_gameParentUrl\s*=\s*requestedBios/);
 assert.match(player, /params\.get\('system'\)\s*===\s*'neogeo'/);
+assert.match(player, /params\.get\('system'\) === 'neogeo' \? \{[\s\S]*"fbneo-neogeo-mode": "AES_EUR"/);
 assert.match(player, /neo_fbneo_rom_cache_repair_v1/);
 assert.match(player, /repairFbneoCache/);
 assert.equal(catalog.length, 9);
