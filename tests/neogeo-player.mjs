@@ -17,5 +17,8 @@ assert.ok(catalog.every(game => /^roms\/kof.+\.zip\?v=(?:fbneo-standalone1|ptbr-
 const kof2002 = catalog.find(game => /fighters 2002$/i.test(game.nome));
 assert.equal(kof2002?.rom, 'roms/kof2k2br.zip?v=ptbr-v3');
 assert.match(kof2002?.descricao || '', /português/i);
+assert.equal(catalog.find(game => /fighters '97$/i.test(game.nome))?.capa, 'kof97-user.webp');
+assert.equal(catalog.find(game => /fighters 2001$/i.test(game.nome))?.capa, 'kof2001-user.jfif');
+assert.equal(kof2002?.capa, 'kof2002-user.jfif');
 
 console.log('Neo Geo player: FBNeo, parent BIOS, KOF 2002 PT-BR e 9 KOF únicos validados');

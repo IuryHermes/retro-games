@@ -274,7 +274,7 @@
         .hero-play-btn.gamepad-focus { background: var(--accent-color); color: #fff; outline: 3px solid #fff; box-shadow: 0 0 20px var(--accent-color); transform: scale(1.05); }
         .hero-slide.personalized { background: radial-gradient(circle at 72% 45%, rgba(0,204,68,.22), #020504 58%, #000); }
         .hero-slide.personalized .hero-bg-blur { filter: blur(38px) saturate(1.25) brightness(.42); transform:scale(1.08); }
-        .hero-slide.personalized .hero-bg-media { object-fit:fill; object-position:center; width:100%; left:0; right:0; filter:none; opacity:1; }
+        .hero-slide.personalized .hero-bg-media { object-fit:contain; object-position:76% center; width:58%; left:auto; right:5%; filter:drop-shadow(0 20px 34px rgba(0,0,0,.8)); }
         .hero-slide.guest-promo .hero-bg-blur { filter:blur(30px) brightness(.35); }
         .hero-slide.guest-promo .hero-bg-media { object-fit:cover; object-position:center; width:100%; left:0; right:auto; filter:none; }
         .hero-slide.guest-promo .hero-overlay { background:linear-gradient(to right,rgba(0,0,0,.97) 0%,rgba(0,0,0,.76) 42%,rgba(0,0,0,.12) 78%),linear-gradient(to top,var(--bg-color) 0%,transparent 36%); }
@@ -1932,7 +1932,7 @@
             .replace(/^-+|-+$/g, '').slice(0, 120);
     }
     function normalizedSaveCatalogKey(value) {
-        return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+        return String(value || '').split(/[?#]/)[0].normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
             .replace(/\.(zip|7z|chd|bin|cue|gba|gbc|gb|nes|sfc|smc|z64|n64|v64|md|gen)$/i, '')
             .replace(/-(?:core|disc)\d+$/i, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
     }
@@ -1980,7 +1980,8 @@
                 click:() => { location.href = 'apoie.html#planos'; }
             }
         ];
-        promos.filter(promo => !promo.guestOnly || !accountProfile).forEach((promo, promoIndex) => {
+        const authenticated = Boolean(accountProfile || auth.currentUser || discordAccountToken);
+        promos.filter(promo => !promo.guestOnly || !authenticated).forEach((promo, promoIndex) => {
             const slide = document.createElement('div');
             slide.id = `guest-promo-${promoIndex}`;
             slide.className = 'hero-slide personalized guest-promo';
@@ -1996,7 +1997,7 @@
     function placeGuestPromosAfterLibraryOpening() {
         document.querySelectorAll('.hero-slide.guest-promo').forEach(slide => slide.remove());
         document.querySelectorAll('.indicator.guest-promo-indicator').forEach(dot => dot.remove());
-        if (accountProfile) return;
+        if (accountProfile || auth.currentUser || discordAccountToken) return;
         const slides = document.createDocumentFragment();
         const dots = document.createDocumentFragment();
         appendGuestPromoSlides(slides, dots);
@@ -2074,7 +2075,22 @@
             if (refreshVersion !== personalHeroRefreshVersion || profileAtStart !== accountProfile) return;
             const availableManualSlots = saveLibrary.manualSaveLimit === null ? 5 : Number(saveLibrary.manualSaveLimit || 0);
             const personalizedHeroLimit = profileAtStart ? Math.min(5, Math.max(3, availableManualSlots)) : 1;
-            const recentGames = (historyData.games || []).slice(0, personalizedHeroLimit);
+            const historyGames = historyData.games || [];
+            // Contas autenticadas usam a biblioteca de saves como fonte do
+            // carrossel. O histórico serve apenas para recuperar a URL de jogo.
+            const savedLibraryGames = (saveLibrary.games || []).map(saved => {
+                const historyGame = historyGames.find(item => normalizedSaveCatalogKey(item.id) === normalizedSaveCatalogKey(saved.id));
+                const catalogGame = indexData.find(game => catalogMatchesSave(game, saved));
+                return {
+                    ...historyGame,
+                    ...saved,
+                    name:saved.name || historyGame?.name || catalogGame?.nomeOriginal || catalogGame?.nome || saved.id,
+                    system:saved.system || historyGame?.system || catalogGame?.sysId || '',
+                    cover:historyGame?.cover || catalogCoverUrl(catalogGame) || '',
+                    playUrl:historyGame?.playUrl || catalogGame?.playUrl || ''
+                };
+            }).filter(game => game.id && game.playUrl);
+            const recentGames = (profileAtStart ? savedLibraryGames : historyGames).slice(0, personalizedHeroLimit);
             document.querySelectorAll('.hero-slide.personalized').forEach(previous => {
                 if (previous.dataset.objectUrl) URL.revokeObjectURL(previous.dataset.objectUrl);
                 previous.remove();
