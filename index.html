@@ -593,7 +593,7 @@
     <script src="club-badges.js?v=20260830-simple1"></script>
     <script src="privacy-consent-v2.js" defer></script>
     <script src="analytics-consent.js" defer></script>
-    <script src="collections-home.js?v=20260830-5" defer></script>
+    <script src="collections-home.js?v=20260830-6" defer></script>
 </head>
 <body>
 
@@ -877,7 +877,7 @@
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
     const R2_URL = "https://pub-44d40f83db2141efb7e8a7658c74557e.r2.dev/";
-    const catalogAssetBase = systemPath => systemPath === 'systems/atari2600/' ? '' : R2_URL;
+    const catalogAssetBase = systemPath => ['systems/atari2600/', 'systems/neogeo/'].includes(systemPath) ? '' : R2_URL;
     const catalogCoverUrl = (game, systemPath = '') => {
         const value = String(game?.capa || '').trim();
         if (/^https:\/\//i.test(value)) return value;
@@ -1905,6 +1905,26 @@
         fetchPromises.push(p);
     });
 
+    // O Neo Geo participa das coletâneas, mas não deve criar uma categoria na
+    // lateral. Seu catálogo oculto liga o histórico e os saves às capas certas.
+    const neoGeoCatalogPromise = fetch('systems/neogeo/games.json?v=20260830-history1')
+        .then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); })
+        .then(games => {
+            const usedPublicSlugs = new Set();
+            games.forEach(game => {
+                const publicName = normalizeGameName(game.nome, 'neogeo');
+                const baseSlug = publicGameSlug(publicName);
+                let publicSlug = baseSlug; let suffix = 2;
+                while (usedPublicSlugs.has(publicSlug)) publicSlug = `${baseSlug}-${suffix++}`;
+                usedPublicSlugs.add(publicSlug);
+                indexData.push({ ...game, nomeOriginal:publicName, nome:publicName,
+                    sysPath:'systems/neogeo/', sysName:'NEO GEO', sysId:'neogeo',
+                    playUrl:`/jogos/neogeo/${publicSlug}/` });
+            });
+        })
+        .catch(error => console.error('Falha ao carregar catálogo oculto do Neo Geo:', error));
+    fetchPromises.push(neoGeoCatalogPromise);
+
     function catalogHistoryId(game) {
         return String(game.id || `${game.sysId}-${String(game.rom || '').split('/').pop()}`)
             .toLowerCase().replace(/\.[a-z0-9]+$/i, '').replace(/[^a-z0-9._,-]+/g, '-')
@@ -1918,12 +1938,12 @@
     function catalogMatchesSave(game, saved) {
         const savedId = normalizedSaveCatalogKey(saved.id);
         if (normalizedSaveCatalogKey(catalogHistoryId(game)) === savedId) return true;
-        const systemAliases = { segamd:'megadrive', megadrive:'megadrive', n64:'n64', nes:'nes', snes:'snes', gba:'gba', psx:'ps1', ps1:'ps1', atari2600:'atari2600' };
+        const systemAliases = { segamd:'megadrive', megadrive:'megadrive', n64:'n64', nes:'nes', snes:'snes', gba:'gba', psx:'ps1', ps1:'ps1', atari2600:'atari2600', neogeo:'neogeo', arcade:'neogeo', fbneo:'neogeo' };
         const savedSystem = systemAliases[String(saved.system || '').toLowerCase()]
             || systemAliases[String(saved.id || '').split('-')[0]] || '';
         const catalogSystem = systemAliases[String(game.sysId || '').toLowerCase()] || '';
         if (!savedSystem || savedSystem !== catalogSystem) return false;
-        const savedRom = savedId.replace(/^(?:segamd|megadrive|n64|nes|snes|gba|psx|ps1|atari2600)-/, '');
+        const savedRom = savedId.replace(/^(?:segamd|megadrive|n64|nes|snes|gba|psx|ps1|atari2600|neogeo|arcade|fbneo)-/, '');
         const catalogRom = normalizedSaveCatalogKey(String(game.rom || '').split('/').pop());
         if (savedRom === catalogRom) return true;
         const withoutDisc = value => value.replace(/-(?:cd|disc|disco)-?\d+$/i, '');
@@ -2000,7 +2020,7 @@
             const recent = historyData.games?.[0];
             if (!recent) return;
             const hasAutoSave = (saveLibrary.games || []).some(game => game.id === recent.id && (game.slots || []).some(slot => slot.slot === 'auto'));
-            const catalogGame = indexData.find(game => catalogHistoryId(game) === recent.id);
+            const catalogGame = indexData.find(game => catalogMatchesSave(game, recent));
             const coverName = catalogGame?.capa ? catalogGame.capa.split('/').pop() : '';
             const catalogCover = catalogCoverUrl(catalogGame);
             const featured = top10Games.find(game => game.id === recent.id);
@@ -2008,7 +2028,7 @@
             const savedFrame = atariCoverOnly ? '' : await autosaveHeroImage(recent.id).catch(() => '');
             const media = atariCoverOnly
                 ? (catalogCover || recent.cover || 'assets/imagens-videos/logo-discord.gif')
-                : (savedFrame || recent.cover || catalogCover || 'assets/imagens-videos/logo-discord.gif');
+                : (catalogCover || savedFrame || recent.cover || 'assets/imagens-videos/logo-discord.gif');
             const previousHero = document.getElementById('personalized-hero');
             if (previousHero?.dataset.objectUrl) URL.revokeObjectURL(previousHero.dataset.objectUrl);
             previousHero?.remove();
@@ -2068,7 +2088,7 @@
             const dots = document.createDocumentFragment();
             recentGames.forEach((recent, recentIndex) => {
                 const hasAutoSave = (saveLibrary.games || []).some(game => game.id === recent.id && (game.slots || []).some(slot => slot.slot === 'auto'));
-                const catalogGame = indexData.find(game => catalogHistoryId(game) === recent.id);
+                const catalogGame = indexData.find(game => catalogMatchesSave(game, recent));
                 const coverName = catalogGame?.capa ? catalogGame.capa.split('/').pop() : '';
                 const catalogCover = catalogCoverUrl(catalogGame);
                 const featured = top10Games.find(game => game.id === recent.id);
@@ -2076,7 +2096,7 @@
                 const atariCoverOnly = isAtariHistoryGame(recent, catalogGame);
                 const media = atariCoverOnly
                     ? (catalogCover || recent.cover || 'assets/imagens-videos/logo-discord.gif')
-                    : (savedFrame || recent.cover || catalogCover || 'assets/imagens-videos/logo-discord.gif');
+                    : (catalogCover || savedFrame || recent.cover || 'assets/imagens-videos/logo-discord.gif');
                 const slide = document.createElement('div');
                 slide.id = `personalized-hero-${recentIndex}`;
                 slide.className = 'hero-slide personalized';

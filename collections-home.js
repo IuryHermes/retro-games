@@ -39,7 +39,7 @@
   };
   let catalogPromise;
   const loadCatalog = () => catalogPromise ||= Promise.allSettled(systems.map(async ([sysId,sysName]) => {
-    const response = await fetch(`systems/${sysId}/games.json?v=20260830-collections3`);
+    const response = await fetch(`systems/${sysId}/games.json?v=20260830-collections4`);
     if (!response.ok) throw new Error(`${sysId}: HTTP ${response.status}`);
     const raw = await response.json();
     const unique = [...new Map(raw.map(game => [String(game.rom || '').toLowerCase(), game])).values()]
@@ -118,7 +118,10 @@
         const games = catalog.filter(game => definition.match.test(game.nome));
         if (!games.length) return;
         const tile = document.createElement('button'); tile.type = 'button'; tile.className = `collection-tile${definition.id === 'kof' ? ' kof' : ''}`; tile.dataset.collection = definition.id;
-        const artwork = definition.id === 'kof' ? 'assets/imagens-videos/colecoes/the-king-of-fighters-v2.png' : coverUrl(games[0]);
+        const artworkGame = definition.id === 'kof'
+          ? (games.find(game => /(?:'98|\b98\b)/.test(game.nome)) || games[0])
+          : games[0];
+        const artwork = coverUrl(artworkGame);
         tile.style.setProperty('--collection-image', `url("${artwork}")`);
         tile.innerHTML = `<span class="collection-tile-copy"><strong>${esc(definition.title)}</strong><small>${games.length} jogos disponíveis</small></span>`;
         row.append(tile);
