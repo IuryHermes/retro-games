@@ -339,7 +339,7 @@
 
         .discord-float { position:fixed; bottom:20px; right:20px; display:flex; align-items:center; gap:12px; max-width:230px; background:rgba(0,0,0,.8); padding:8px 16px; border-radius:50px; border:1px solid #5865f2; text-decoration:none; z-index:9999; backdrop-filter:blur(5px); transition:bottom .3s ease; }
         .discord-text { min-width:0; max-width:150px; overflow:hidden; font-family:monospace; color:#fff; font-size:12px; text-align:right; white-space:nowrap; text-overflow:ellipsis; }
-        .discord-float img { width: 45px; height: 45px; border-radius: 50%; }
+        .discord-float img { width:45px; height:45px; border-radius:50%; object-fit:cover; flex:0 0 45px; display:block; }
 
         /* RESPONSIVIDADE PARA MOBILE */
         @media (max-width: 1024px) {
@@ -669,7 +669,7 @@
 
     <a href="https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev/club/login" class="discord-float" id="discord-club-login">
         <div class="discord-text">Junte-se a nós<br><strong>DISCORD</strong></div>
-        <img src="assets/imagens-videos/logo-discord.gif?v=2" alt="Discord" width="45" height="45">
+        <img src="assets/imagens-videos/discord-icon.png?v=1" alt="Discord" width="45" height="45" onerror="this.onerror=null;this.src='assets/imagens-videos/logo-discord.gif?v=2'">
     </a>
 
     <div id="loader-overlay">
@@ -883,7 +883,7 @@
         if (/^https:\/\//i.test(value)) return value;
         const name = value ? value.split('/').pop() : '';
         const path = systemPath || game?.sysPath || game?.path || '';
-        return name ? `${catalogAssetBase(path)}${path}capas/${encodeURIComponent(name)}` : '';
+        return name ? `${catalogAssetBase(path)}${path}capas/${encodeURIComponent(name)}${path === 'systems/neogeo/' ? '?v=20260831-covers2' : ''}` : '';
     };
     const blockRegex = /([._\-\s](cd|disc|disco)\s*[0-9]+)/i;
     const hiddenPs1Disc = game => game?.sysId === 'ps1' && blockRegex.test(game.rom);

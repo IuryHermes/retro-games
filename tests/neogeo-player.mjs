@@ -13,9 +13,9 @@ assert.match(player, /neo_fbneo_rom_cache_repair_v1/);
 assert.match(player, /repairFbneoCache/);
 assert.equal(catalog.length, 9);
 assert.equal(catalog.filter(game => /fighters '96(?:\s|$)/i.test(game.nome)).length, 1);
-assert.ok(catalog.every(game => /^roms\/kof.+\.zip\?v=(?:fbneo-standalone1|ptbr-v2)$/i.test(game.rom)));
+assert.ok(catalog.every(game => /^roms\/kof.+\.zip\?v=(?:fbneo-standalone1|ptbr-v3)$/i.test(game.rom)));
 const kof2002 = catalog.find(game => /fighters 2002$/i.test(game.nome));
-assert.equal(kof2002?.rom, 'roms/kof2k2br-v2.zip?v=ptbr-v2');
+assert.equal(kof2002?.rom, 'roms/kof2k2br.zip?v=ptbr-v3');
 assert.match(kof2002?.descricao || '', /português/i);
 
 console.log('Neo Geo player: FBNeo, parent BIOS, KOF 2002 PT-BR e 9 KOF únicos validados');

@@ -44,7 +44,7 @@ for (const system of systems) {
     const player = `/player-universal.html?${new URLSearchParams(playerParams)}`;
     const coverName = String(game.capa || '').split('/').pop();
     const coverBase = system === 'neogeo' ? `${site}/` : assetBase;
-    const cover = coverName ? `${coverBase}systems/${system}/capas/${encodeURIComponent(coverName)}` : `${site}/assets/imagens-videos/logo-discord.gif`;
+    const cover = coverName ? `${coverBase}systems/${system}/capas/${encodeURIComponent(coverName)}${system === 'neogeo' ? '?v=20260831-covers2' : ''}` : `${site}/assets/imagens-videos/logo-discord.gif`;
     const description = String(game.descricao || `Jogue ${gameName} online no NeoTerminalRoom.`).replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim().slice(0, 500);
     const languageText = `${gameName} ${game.rom} ${description}`;
     const alreadyLocalizedName = /pt[-_ ]?br|traduz|dublad|portugu[eê]s/i.test(gameName);

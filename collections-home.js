@@ -35,7 +35,7 @@
     if (/^https:\/\//i.test(value)) return value;
     const name = value.split('/').pop();
     if (!name) return 'assets/imagens-videos/logo-discord.gif';
-    return game.sysId === 'atari2600' || game.sysId === 'neogeo' ? `systems/${game.sysId}/capas/${encodeURIComponent(name)}` : `${R2}systems/${game.sysId}/capas/${encodeURIComponent(name)}`;
+    return game.sysId === 'atari2600' || game.sysId === 'neogeo' ? `systems/${game.sysId}/capas/${encodeURIComponent(name)}${game.sysId === 'neogeo' ? '?v=20260831-covers2' : ''}` : `${R2}systems/${game.sysId}/capas/${encodeURIComponent(name)}`;
   };
   let catalogPromise;
   const loadCatalog = () => catalogPromise ||= Promise.allSettled(systems.map(async ([sysId,sysName]) => {
