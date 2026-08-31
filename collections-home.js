@@ -38,7 +38,7 @@
     return game.sysId === 'atari2600' ? `systems/atari2600/capas/${encodeURIComponent(name)}` : `${R2}systems/${game.sysId}/capas/${encodeURIComponent(name)}`;
   };
   let catalogPromise;
-  const loadCatalog = () => catalogPromise ||= Promise.all(systems.map(async ([sysId,sysName]) => {
+  const loadCatalog = () => catalogPromise ||= Promise.allSettled(systems.map(async ([sysId,sysName]) => {
     const response = await fetch(`systems/${sysId}/games.json?v=20260830-collections2`);
     if (!response.ok) throw new Error(`${sysId}: HTTP ${response.status}`);
     const raw = await response.json();
@@ -51,7 +51,11 @@
       used.add(route);
       return {...game, sysId, sysName, sysPath:`systems/${sysId}/`, nomeOriginal:game.nome, playUrl:`/jogos/${sysId}/${route}/`};
     });
-  })).then(groups => groups.flat());
+  })).then(results => {
+    const groups = results.filter(result => result.status === 'fulfilled').map(result => result.value);
+    if (!groups.length) throw new Error('Nenhum catálogo pôde ser carregado');
+    return groups.flat();
+  });
   const createCard = game => {
     const card = document.createElement('div'); card.className = 'game-card selectable-item';
     card.innerHTML = `<div class="card-media"><img src="${coverUrl(game)}" class="static-thumb" loading="lazy" alt="Capa de ${esc(game.nome)}"></div><div class="card-title"><span>${esc(game.nome)}</span></div>`;
@@ -78,22 +82,16 @@
     const panel = document.getElementById('collections-expanded');
     const showAll = document.getElementById('collections-show-all');
     if (!row || !panel || !showAll) return;
-    try {
-      const catalog = await loadCatalog();
-      row.replaceChildren();
-      definitions.forEach(definition => {
-        const games = catalog.filter(game => definition.match.test(game.nome));
-        if (!games.length) return;
-        const tile = document.createElement('button'); tile.type = 'button'; tile.className = `collection-tile${definition.id === 'kof' ? ' kof' : ''}`; tile.dataset.collection = definition.id;
-        const artwork = definition.id === 'kof' ? `${R2}systems/neogeo/capas/kof-collection.svg` : coverUrl(games[0]);
-        tile.style.setProperty('--collection-image', `url("${artwork}")`);
-        tile.innerHTML = `<span class="collection-tile-copy"><strong>${esc(definition.title)}</strong><small>${games.length} jogos disponíveis</small></span>`;
-        tile.onclick = () => { if (performance.now() < suppressClickUntil) return; render(definition.id); };
-        row.append(tile);
-      });
-      const render = selectedId => {
+    let catalog = [];
+    let suppressClickUntil = 0;
+    const render = async selectedId => {
+      panel.hidden = false;
+      panel.innerHTML = '<p class="loading-text">ORGANIZANDO COLETÂNEA...</p>';
+      panel.scrollIntoView({behavior:'smooth',block:'start'});
+      try {
+        catalog = catalog.length ? catalog : await loadCatalog();
         const selected = selectedId ? definitions.filter(item => item.id === selectedId) : definitions;
-        panel.hidden = false; panel.replaceChildren();
+        panel.replaceChildren();
         const heading = document.createElement('div'); heading.className = 'collections-expanded-title';
         heading.innerHTML = `<span>${selectedId ? esc(selected[0]?.title || 'COLETÂNEA') : 'TODAS AS COLETÂNEAS'}</span>`;
         const close = document.createElement('button'); close.type = 'button'; close.className = 'collections-close'; close.textContent = 'FECHAR ×'; close.onclick = () => { panel.hidden = true; panel.replaceChildren(); };
@@ -102,10 +100,29 @@
           const games = catalog.filter(game => definition.match.test(game.nome)).sort((a,b) => a.nome.localeCompare(b.nome,'pt-BR',{numeric:true}));
           if (games.length) panel.append(createShelf(definition,games,Boolean(selectedId)));
         });
-        panel.scrollIntoView({behavior:'smooth',block:'start'});
-      };
-      showAll.onclick = () => render('');
-      let startX = 0, startScroll = 0, dragging = false, suppressClickUntil = 0;
+      } catch (error) {
+        console.error('Falha ao abrir coletânea:', error);
+        panel.innerHTML = '<p class="loading-text">NÃO FOI POSSÍVEL ABRIR. TENTE NOVAMENTE.</p>';
+      }
+    };
+    row.onclick = event => {
+      const tile = event.target.closest('[data-collection]');
+      if (tile && performance.now() >= suppressClickUntil) render(tile.dataset.collection);
+    };
+    showAll.onclick = () => render('');
+    try {
+      catalog = await loadCatalog();
+      row.replaceChildren();
+      definitions.forEach(definition => {
+        const games = catalog.filter(game => definition.match.test(game.nome));
+        if (!games.length) return;
+        const tile = document.createElement('button'); tile.type = 'button'; tile.className = `collection-tile${definition.id === 'kof' ? ' kof' : ''}`; tile.dataset.collection = definition.id;
+        const artwork = definition.id === 'kof' ? 'assets/imagens-videos/colecoes/the-king-of-fighters-v2.png' : coverUrl(games[0]);
+        tile.style.setProperty('--collection-image', `url("${artwork}")`);
+        tile.innerHTML = `<span class="collection-tile-copy"><strong>${esc(definition.title)}</strong><small>${games.length} jogos disponíveis</small></span>`;
+        row.append(tile);
+      });
+      let startX = 0, startScroll = 0, dragging = false;
       row.onpointerdown = event => { startX = event.clientX; startScroll = row.scrollLeft; dragging = false; row.classList.add('dragging'); row.setPointerCapture(event.pointerId); };
       row.onpointermove = event => { if (!row.classList.contains('dragging')) return; const delta = event.clientX - startX; if (Math.abs(delta) > 7) dragging = true; row.scrollLeft = startScroll - delta; };
       const stop = event => { row.classList.remove('dragging'); if (dragging) suppressClickUntil = performance.now() + 250; try { row.releasePointerCapture(event.pointerId); } catch (_) {} };
