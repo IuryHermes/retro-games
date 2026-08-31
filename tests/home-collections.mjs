@@ -14,8 +14,9 @@ new Function(controller);
 for (const marker of ['id="collections-row"', 'id="collections-show-all"', 'id="collections-expanded"', 'collections-home.js', '>VER TODOS</button>']) {
   if (!html.includes(marker)) throw new Error(`interação de coletâneas ausente: ${marker}`);
 }
-for (const marker of ['mortal-kombat', 'mega-man', 'showAll.onclick', 'row.onpointermove', 'panel.scrollIntoView']) {
+for (const marker of ['mortal-kombat', 'mega-man', 'showAll.onclick', 'row.onpointermove', 'pressedTile.dataset.collection', 'panel.scrollIntoView']) {
   if (!controller.includes(marker)) throw new Error(`controlador de coletâneas incompleto: ${marker}`);
 }
+if (!html.includes('object-fit:fill')) throw new Error('capas ainda deixam faixas vazias na caixa');
 if (/collection-tile[^>]+href=/i.test(html)) throw new Error('coletânea ainda navega para outra página');
 console.log('coletâneas da Home validadas: arrastar, selecionar e mostrar todas sem navegação');

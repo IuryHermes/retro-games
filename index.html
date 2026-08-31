@@ -299,7 +299,7 @@
         .collections-row.dragging { cursor:grabbing; scroll-snap-type:none; }
         .collections-row::-webkit-scrollbar { display:none; }
         .collection-tile { --collection-image:none; position:relative; flex:0 0 clamp(210px,25vw,330px); aspect-ratio:16/8.8; overflow:hidden; border:1px solid var(--border-color); border-radius:9px; scroll-snap-align:start; text-align:left; padding:0; background:#030504; box-shadow:0 12px 25px rgba(0,0,0,.35); transition:transform .25s,border-color .25s; cursor:pointer; }
-        .collection-tile::before { content:''; position:absolute; inset:0; background-image:linear-gradient(to top,rgba(0,0,0,.94),rgba(0,0,0,.05) 72%),var(--collection-image); background-size:100% 100%,contain; background-repeat:no-repeat; background-position:center; transition:transform .35s,filter .35s; }
+        .collection-tile::before { content:''; position:absolute; inset:0; background-image:linear-gradient(to top,rgba(0,0,0,.94),rgba(0,0,0,.05) 72%),var(--collection-image); background-size:100% 100%,100% 100%; background-repeat:no-repeat; background-position:center; transition:transform .35s,filter .35s; }
         .collection-tile:hover,.collection-tile:focus-visible { transform:scale(1.045); border-color:var(--accent-color); outline:none; z-index:2; }
         .collection-tile:hover::before,.collection-tile:focus-visible::before { transform:none; filter:saturate(1.2) brightness(1.08); }
         .collection-tile-copy { position:absolute; z-index:1; inset:auto 13px 11px; color:#fff; text-shadow:0 2px 8px #000; }
@@ -329,7 +329,7 @@
         .game-card:hover, .game-card.mobile-active, .game-card.gamepad-focus { transform: scale(1.3); border-color: var(--accent-color); box-shadow: 0 0 25px rgba(0, 204, 68, 0.4); z-index: 100; }
         .game-card.gamepad-focus { outline: 3px solid var(--accent-color); outline-offset: 2px; }
         .card-media { width: 100%; height: 140px; position: relative; background: var(--card-bg); overflow: hidden; border-radius: 5px 5px 0 0; }
-        .card-media img { width:100%; height:100%; object-fit:contain; object-position:center; position:absolute; top:0; left:0; transition:opacity .8s ease-in-out; background:#030504; }
+        .card-media img { width:100%; height:100%; object-fit:fill; object-position:center; position:absolute; top:0; left:0; transition:opacity .8s ease-in-out; background:#030504; }
         .static-thumb { z-index: 2; opacity: 1; }
         .active-gif { z-index: 3; opacity: 0; display: none; }
         .card-title { position: absolute; top: 140px; left: 0; width: 100%; min-height: 40px; background: var(--card-bg); color: var(--text-color); display: flex; align-items: center; justify-content: center; padding: 5px; transition: background 0.3s, color 0.3s; border-radius: 0 0 5px 5px; z-index: 5; border-top: 1px solid var(--border-color); }
@@ -593,7 +593,7 @@
     <script src="club-badges.js?v=20260830-simple1"></script>
     <script src="privacy-consent-v2.js" defer></script>
     <script src="analytics-consent.js" defer></script>
-    <script src="collections-home.js?v=20260830-3" defer></script>
+    <script src="collections-home.js?v=20260830-4" defer></script>
 </head>
 <body>
 
