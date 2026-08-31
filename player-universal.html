@@ -362,7 +362,14 @@
 
             window.EJS_gameUrl = game.trim().startsWith("http") ? game.trim() : baseUrl + game.trim();
             const requestedBios = params.get('bios');
-            if (requestedBios) window.EJS_biosUrl = requestedBios;
+            if (requestedBios && (core === 'fbneo' || core === 'arcade' || params.get('system') === 'neogeo')) {
+                // Arcade/FBNeo expects the machine archive (neogeo.zip) as
+                // parent data so it can resolve BIOS files alongside the
+                // selected game romset. EJS_biosUrl does not merge ZIP sets.
+                window.EJS_gameParentUrl = requestedBios;
+            } else if (requestedBios) {
+                window.EJS_biosUrl = requestedBios;
+            }
             // Multidisc playlists are tiny and may otherwise remain stale in
             // browser/CDN cache after their disk paths are corrected.
             if (/\.m3u(?:$|\?)/i.test(window.EJS_gameUrl)) {
