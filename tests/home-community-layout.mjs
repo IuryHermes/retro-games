@@ -28,5 +28,8 @@ assert.match(index, /\.community-shortcut \{[^}]*width:100%;[^}]*text-align:left
 assert.match(index, /apoiar-projeto-v2\.png/);
 assert.doesNotMatch(index, /<a class="chat-trigger-mobile"/);
 assert.match(index, /href="social\.html"[^>]*aria-label="Comunidade"/);
+assert.match(index, /logo-discord\.gif\?v=2/);
+assert.match(index, /\.discord-float \{[^}]*max-width:230px/);
+assert.doesNotMatch(index, /session\.recognition\.badges\.join/);
 
-console.log('home community layout: 21 checks passed');
+console.log('home community layout: 24 checks passed');

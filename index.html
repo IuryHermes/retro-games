@@ -337,8 +337,8 @@
         .game-card:hover .card-title, .game-card.mobile-active .card-title, .game-card.gamepad-focus .card-title { background: var(--sidebar-bg); color: var(--accent-color); height: auto; border: 1px solid var(--accent-color); border-top: none; left: -1px; width: calc(100% + 2px); border-radius: 0 0 6px 6px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
         .game-card:hover .card-title span, .game-card.mobile-active .card-title span, .game-card.gamepad-focus .card-title span { display: block; overflow: visible; }
 
-        .discord-float { position: fixed; bottom: 20px; right: 20px; display: flex; align-items: center; gap: 12px; background: rgba(0,0,0,0.8); padding: 8px 16px; border-radius: 50px; border: 1px solid #5865f2; text-decoration: none; z-index: 9999; backdrop-filter: blur(5px); transition: bottom 0.3s ease; }
-        .discord-text { font-family: monospace; color: #fff; font-size: 12px; text-align: right; }
+        .discord-float { position:fixed; bottom:20px; right:20px; display:flex; align-items:center; gap:12px; max-width:230px; background:rgba(0,0,0,.8); padding:8px 16px; border-radius:50px; border:1px solid #5865f2; text-decoration:none; z-index:9999; backdrop-filter:blur(5px); transition:bottom .3s ease; }
+        .discord-text { min-width:0; max-width:150px; overflow:hidden; font-family:monospace; color:#fff; font-size:12px; text-align:right; white-space:nowrap; text-overflow:ellipsis; }
         .discord-float img { width: 45px; height: 45px; border-radius: 50%; }
 
         /* RESPONSIVIDADE PARA MOBILE */
@@ -669,7 +669,7 @@
 
     <a href="https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev/club/login" class="discord-float" id="discord-club-login">
         <div class="discord-text">Junte-se a nós<br><strong>DISCORD</strong></div>
-        <img src="assets/imagens-videos/logo-discord" alt="Discord" width="45" height="45">
+        <img src="assets/imagens-videos/logo-discord.gif?v=2" alt="Discord" width="45" height="45">
     </a>
 
     <div id="loader-overlay">
@@ -2322,8 +2322,7 @@
             if (!response.ok) throw new Error('expired');
             const session = await response.json();
             const labels = { owner: 'ADMIN', cafe: 'APOIADOR', cartucho: 'GUARDIÃO', arcade: 'PATRONO' };
-            const recognition = session.recognition?.badges?.length ? ` · ${session.recognition.badges.join(' · ')}` : '';
-            if (buttonText) buttonText.innerHTML = `Conectado como ${session.username || 'jogador'}<br><strong>${labels[session.plan] || session.plan}${recognition}</strong>`;
+            if (buttonText) buttonText.innerHTML = `Conectado como ${session.username || 'jogador'}<br><strong>${labels[session.plan] || session.plan}</strong>`;
             button.removeAttribute('href');
             button.title = 'Clique para sair';
             button.onclick = () => { sessionStorage.removeItem('neo_club_access'); location.reload(); };
