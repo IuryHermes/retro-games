@@ -10,6 +10,6 @@ assert.match(preflight, /fbneo:\s*\['zip'\]/);
 assert.match(player, /window\.EJS_gameParentUrl\s*=\s*requestedBios/);
 assert.match(player, /params\.get\('system'\)\s*===\s*'neogeo'/);
 assert.equal(catalog.length, 10);
-assert.ok(catalog.every(game => /^roms\/kof.+\.zip$/i.test(game.rom)));
+assert.ok(catalog.every(game => /^roms\/kof.+\.zip\?v=fbneo-standalone1$/i.test(game.rom)));
 
 console.log('Neo Geo player: FBNeo, parent BIOS and 10 KOF entries validated');
