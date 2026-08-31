@@ -48,5 +48,7 @@ assert.match(home, /refreshVersion !== personalHeroRefreshVersion \|\| profileAt
 assert.match(home, /function placeGuestPromosAfterLibraryOpening\(\)[\s\S]*?if \(accountProfile\) return;/);
 assert.match(home, /indexData\.find\(game => catalogMatchesSave\(game, recent\)\)/);
 assert.match(home, /systems\/neogeo\/games\.json\?v=20260830-history1/);
+assert.match(home, /\.hero-slide\.personalized \.hero-bg-media \{ object-fit:fill;[\s\S]*?width:100%; left:0; right:0;/);
+assert.match(home, /assets\/imagens-videos\/discord-icon\.svg\?v=2/);
 
 console.log('wallpapers personalizados: corrida de login e promoções de visitante protegidas');
