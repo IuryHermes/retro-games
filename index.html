@@ -1997,10 +1997,23 @@
     function placeGuestPromosAfterLibraryOpening() {
         document.querySelectorAll('.hero-slide.guest-promo').forEach(slide => slide.remove());
         document.querySelectorAll('.indicator.guest-promo-indicator').forEach(dot => dot.remove());
-        if (accountProfile || auth.currentUser || discordAccountToken) return;
+        const authenticated = Boolean(accountProfile || auth.currentUser || discordAccountToken);
         const slides = document.createDocumentFragment();
         const dots = document.createDocumentFragment();
         appendGuestPromoSlides(slides, dots);
+        // Para contas cadastradas, o único slide que não representa um jogo
+        // do histórico é o apoio ao projeto, sempre colocado por último.
+        if (authenticated) {
+            heroSlider.appendChild(slides);
+            heroIndicators.appendChild(dots);
+            return;
+        }
+        const guestPlayedSlides = [...heroSlider.querySelectorAll('.hero-slide.personalized:not(.guest-promo):not([hidden])')];
+        if (guestPlayedSlides.length >= 3) {
+            heroSlider.appendChild(slides);
+            heroIndicators.appendChild(dots);
+            return;
+        }
         const librarySlides = [...heroSlider.querySelectorAll('.hero-slide:not(.guest-promo):not([hidden])')];
         const libraryDots = [...heroIndicators.querySelectorAll('.indicator:not(.guest-promo-indicator):not([hidden])')];
         heroSlider.insertBefore(slides, librarySlides[2] || null);
@@ -2074,23 +2087,18 @@
             // o carrossel autenticado quando terminar depois dele.
             if (refreshVersion !== personalHeroRefreshVersion || profileAtStart !== accountProfile) return;
             const availableManualSlots = saveLibrary.manualSaveLimit === null ? 5 : Number(saveLibrary.manualSaveLimit || 0);
-            const personalizedHeroLimit = profileAtStart ? Math.min(5, Math.max(3, availableManualSlots)) : 1;
+            const personalizedHeroLimit = profileAtStart ? Math.min(5, Math.max(3, availableManualSlots)) : 3;
             const historyGames = historyData.games || [];
-            // Contas autenticadas usam a biblioteca de saves como fonte do
-            // carrossel. O histórico serve apenas para recuperar a URL de jogo.
-            const savedLibraryGames = (saveLibrary.games || []).map(saved => {
-                const historyGame = historyGames.find(item => normalizedSaveCatalogKey(item.id) === normalizedSaveCatalogKey(saved.id));
-                const catalogGame = indexData.find(game => catalogMatchesSave(game, saved));
+            const playedGames = historyGames.map(recent => {
+                const catalogGame = indexData.find(game => catalogMatchesSave(game, recent));
                 return {
-                    ...historyGame,
-                    ...saved,
-                    name:saved.name || historyGame?.name || catalogGame?.nomeOriginal || catalogGame?.nome || saved.id,
-                    system:saved.system || historyGame?.system || catalogGame?.sysId || '',
-                    cover:historyGame?.cover || catalogCoverUrl(catalogGame) || '',
-                    playUrl:historyGame?.playUrl || catalogGame?.playUrl || ''
+                    ...recent,
+                    playUrl:recent.playUrl || catalogGame?.playUrl || '',
+                    cover:recent.cover || catalogCoverUrl(catalogGame) || '',
+                    system:recent.system || catalogGame?.sysId || ''
                 };
-            }).filter(game => game.id && game.playUrl);
-            const recentGames = (profileAtStart ? savedLibraryGames : historyGames).slice(0, personalizedHeroLimit);
+            });
+            const recentGames = playedGames.filter(game => game.id && game.playUrl).slice(0, personalizedHeroLimit);
             document.querySelectorAll('.hero-slide.personalized').forEach(previous => {
                 if (previous.dataset.objectUrl) URL.revokeObjectURL(previous.dataset.objectUrl);
                 previous.remove();
@@ -2098,13 +2106,13 @@
             document.querySelectorAll('.indicator.personalized-indicator, #personalized-hero-dot').forEach(dot => dot.remove());
 
             if (!recentGames.length) {
-                showOnlyPlayedHeroes(false);
+                showOnlyPlayedHeroes(Boolean(profileAtStart));
                 placeGuestPromosAfterLibraryOpening();
                 rebindHeroIndicators();
                 goToSlide(0);
                 return;
             }
-            showOnlyPlayedHeroes(false);
+            showOnlyPlayedHeroes(Boolean(profileAtStart) || (!profileAtStart && recentGames.length >= 3));
 
             const savedFrames = await Promise.all(recentGames.map(game => isAtariHistoryGame(game) ? '' : autosaveHeroImage(game.id).catch(() => '')));
             const slides = document.createDocumentFragment();
