@@ -39,7 +39,7 @@
   };
   let catalogPromise;
   const loadCatalog = () => catalogPromise ||= Promise.allSettled(systems.map(async ([sysId,sysName]) => {
-    const response = await fetch(`systems/${sysId}/games.json?v=20260830-collections4`);
+    const response = await fetch(`systems/${sysId}/games.json?v=20260831-collections5`);
     if (!response.ok) throw new Error(`${sysId}: HTTP ${response.status}`);
     const raw = await response.json();
     const unique = [...new Map(raw.map(game => [String(game.rom || '').toLowerCase(), game])).values()]

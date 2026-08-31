@@ -593,7 +593,7 @@
     <script src="club-badges.js?v=20260830-simple1"></script>
     <script src="privacy-consent-v2.js" defer></script>
     <script src="analytics-consent.js" defer></script>
-    <script src="collections-home.js?v=20260830-6" defer></script>
+    <script src="collections-home.js?v=20260831-7" defer></script>
 </head>
 <body>
 
@@ -1908,7 +1908,7 @@
 
     // O Neo Geo participa das coletâneas, mas não deve criar uma categoria na
     // lateral. Seu catálogo oculto liga o histórico e os saves às capas certas.
-    const neoGeoCatalogPromise = fetch('systems/neogeo/games.json?v=20260830-history1')
+    const neoGeoCatalogPromise = fetch('systems/neogeo/games.json?v=20260831-history2')
         .then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); })
         .then(games => {
             const usedPublicSlugs = new Set();
@@ -2242,7 +2242,7 @@
     const collectionsRow = document.getElementById('collections-row');
     const collectionsExpanded = document.getElementById('collections-expanded');
     let neoGeoCollectionPromise;
-    const loadNeoGeoCollection = () => neoGeoCollectionPromise ||= fetch('systems/neogeo/games.json?v=20260830-kof10').then(response => {
+    const loadNeoGeoCollection = () => neoGeoCollectionPromise ||= fetch('systems/neogeo/games.json?v=20260831-kof11').then(response => {
         if (!response.ok) throw new Error(`Neo Geo HTTP ${response.status}`);
         return response.json();
     }).then(games => games.map(game => ({

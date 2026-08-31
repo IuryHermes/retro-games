@@ -48,7 +48,7 @@ assert.match(home, /refreshVersion !== personalHeroRefreshVersion \|\| profileAt
 assert.match(home, /function placeGuestPromosAfterLibraryOpening\(\)[\s\S]*?if \(accountProfile \|\| auth\.currentUser \|\| discordAccountToken\) return;/);
 assert.match(home, /const authenticated = Boolean\(accountProfile \|\| auth\.currentUser \|\| discordAccountToken\)/);
 assert.match(home, /indexData\.find\(game => catalogMatchesSave\(game, recent\)\)/);
-assert.match(home, /systems\/neogeo\/games\.json\?v=20260830-history1/);
+assert.match(home, /systems\/neogeo\/games\.json\?v=20260831-history2/);
 assert.match(home, /assets\/imagens-videos\/discord-icon\.svg\?v=2/);
 assert.match(home, /String\(value \|\| ''\)\.split\(\/\[\?#\]\//);
 assert.match(home, /const savedLibraryGames = \(saveLibrary\.games \|\| \[\]\)\.map/);
