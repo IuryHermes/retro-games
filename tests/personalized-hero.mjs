@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
-const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+const home = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+const index = home;
 
 assert.match(index, /refreshPersonalHero = async function/);
 assert.match(index, /const recent = historyData\.games\?\.\[0\]/);
@@ -11,7 +12,7 @@ assert.match(index, /cloudRequest\('\/club\/library'\)/);
 assert.match(index, /slot\.slot === 'auto'/);
 assert.match(index, /SEU ÚLTIMO JOGO/);
 assert.match(index, /Promise\.allSettled\(fetchPromises\)/);
-assert.match(index, /recent\.cover \|\| catalogCover/);
+assert.match(index, /catalogCover \|\| savedFrame \|\| recent\.cover/);
 assert.match(index, /showOnlyPlayedHeroes\(false\)/);
 assert.match(index, /placeGuestPromosAfterLibraryOpening/);
 assert.match(index, /LOCAL_HISTORY_KEY = 'neo_local_game_history_v1'/);
@@ -40,4 +41,12 @@ assert.match(index, /id="hero-prev"/);
 assert.match(index, /id="hero-next"/);
 assert.doesNotMatch(index, /imagem da partida aparecerá aqui depois do próximo autosave/);
 
-console.log('personalized hero: 33 checks passed');
+assert.match(home, /let personalHeroRefreshVersion = 0/);
+assert.match(home, /const refreshVersion = \+\+personalHeroRefreshVersion/);
+assert.match(home, /const profileAtStart = accountProfile/);
+assert.match(home, /refreshVersion !== personalHeroRefreshVersion \|\| profileAtStart !== accountProfile/);
+assert.match(home, /function placeGuestPromosAfterLibraryOpening\(\)[\s\S]*?if \(accountProfile\) return;/);
+assert.match(home, /indexData\.find\(game => catalogMatchesSave\(game, recent\)\)/);
+assert.match(home, /systems\/neogeo\/games\.json\?v=20260830-history1/);
+
+console.log('wallpapers personalizados: corrida de login e promoções de visitante protegidas');

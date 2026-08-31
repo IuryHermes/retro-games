@@ -938,6 +938,7 @@
     const AVATARS = Array.from({ length: 40 }, (_, index) => `avatar-${String(index + 1).padStart(2, '0')}`);
     let accountProfile = null;
     let refreshPersonalHero = () => {};
+    let personalHeroRefreshVersion = 0;
     let selectedAvatar = 'avatar-01';
     const accountFragment = new URLSearchParams(location.hash.slice(1));
     const receivedAccountToken = accountFragment.get('account_token');
@@ -1995,6 +1996,7 @@
     function placeGuestPromosAfterLibraryOpening() {
         document.querySelectorAll('.hero-slide.guest-promo').forEach(slide => slide.remove());
         document.querySelectorAll('.indicator.guest-promo-indicator').forEach(dot => dot.remove());
+        if (accountProfile) return;
         const slides = document.createDocumentFragment();
         const dots = document.createDocumentFragment();
         appendGuestPromoSlides(slides, dots);
@@ -2059,14 +2061,19 @@
         } catch (error) { console.warn('Neo hero personalizado:', error); }
     };
     refreshPersonalHero = async function () {
+        const refreshVersion = ++personalHeroRefreshVersion;
+        const profileAtStart = accountProfile;
         try {
             const [historyData, saveLibrary] = await Promise.all([
-                accountProfile ? historyRequest() : Promise.resolve({ games:readLocalGameHistory() }),
-                accountProfile ? cloudRequest('/club/library').catch(() => ({ games:[] })) : Promise.resolve({ games:[] }),
+                profileAtStart ? historyRequest() : Promise.resolve({ games:readLocalGameHistory() }),
+                profileAtStart ? cloudRequest('/club/library').catch(() => ({ games:[] })) : Promise.resolve({ games:[] }),
                 Promise.allSettled(fetchPromises)
             ]);
+            // Uma leitura anônima iniciada antes do login não pode sobrescrever
+            // o carrossel autenticado quando terminar depois dele.
+            if (refreshVersion !== personalHeroRefreshVersion || profileAtStart !== accountProfile) return;
             const availableManualSlots = saveLibrary.manualSaveLimit === null ? 5 : Number(saveLibrary.manualSaveLimit || 0);
-            const personalizedHeroLimit = accountProfile ? Math.min(5, Math.max(3, availableManualSlots)) : 1;
+            const personalizedHeroLimit = profileAtStart ? Math.min(5, Math.max(3, availableManualSlots)) : 1;
             const recentGames = (historyData.games || []).slice(0, personalizedHeroLimit);
             document.querySelectorAll('.hero-slide.personalized').forEach(previous => {
                 if (previous.dataset.objectUrl) URL.revokeObjectURL(previous.dataset.objectUrl);
