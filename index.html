@@ -593,7 +593,7 @@
     <script src="club-badges.js?v=20260830-simple1"></script>
     <script src="privacy-consent-v2.js" defer></script>
     <script src="analytics-consent.js" defer></script>
-    <script src="collections-home.js?v=20260830-4" defer></script>
+    <script src="collections-home.js?v=20260830-5" defer></script>
 </head>
 <body>
 
@@ -1688,7 +1688,7 @@
     // =======================================================================
     // LÓGICA DO CHAT (COM CORREÇÃO DE AUTO-SCROLL)
     // =======================================================================
-    const coreMap = { 'nes': 'nes', 'snes': 'snes', 'gba': 'gba', 'n64': 'n64', 'megadrive': 'segaMD', 'ps1': 'psx', 'atari2600': 'atari2600' };
+    const coreMap = { 'nes': 'nes', 'snes': 'snes', 'gba': 'gba', 'n64': 'n64', 'megadrive': 'segaMD', 'ps1': 'psx', 'atari2600': 'atari2600', 'neogeo': 'fbneo' };
     const playerUrl = (playerFile, gameUrl, core, title, system) => `${playerFile}?${new URLSearchParams({ nocache:Date.now(), game:gameUrl, core, title:title || '', system:system || '' })}`;
     const romanGameNumbers = { XV:'15', XIV:'14', XIII:'13', XII:'12', XI:'11', IX:'9', VIII:'8', VII:'7', VI:'6', IV:'4', III:'3', II:'2' };
     const normalizeGameName = (value, system = '') => String(value || 'Jogo')

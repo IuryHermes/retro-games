@@ -35,11 +35,11 @@
     if (/^https:\/\//i.test(value)) return value;
     const name = value.split('/').pop();
     if (!name) return 'assets/imagens-videos/logo-discord.gif';
-    return game.sysId === 'atari2600' ? `systems/atari2600/capas/${encodeURIComponent(name)}` : `${R2}systems/${game.sysId}/capas/${encodeURIComponent(name)}`;
+    return game.sysId === 'atari2600' || game.sysId === 'neogeo' ? `systems/${game.sysId}/capas/${encodeURIComponent(name)}` : `${R2}systems/${game.sysId}/capas/${encodeURIComponent(name)}`;
   };
   let catalogPromise;
   const loadCatalog = () => catalogPromise ||= Promise.allSettled(systems.map(async ([sysId,sysName]) => {
-    const response = await fetch(`systems/${sysId}/games.json?v=20260830-collections2`);
+    const response = await fetch(`systems/${sysId}/games.json?v=20260830-collections3`);
     if (!response.ok) throw new Error(`${sysId}: HTTP ${response.status}`);
     const raw = await response.json();
     const unique = [...new Map(raw.map(game => [String(game.rom || '').toLowerCase(), game])).values()]

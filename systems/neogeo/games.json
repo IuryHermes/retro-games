@@ -1,12 +1,12 @@
 [
-  {"nome":"The King of Fighters '94 — Português","rom":"roms/kof94br.zip","capa":"kof-collection.svg","nota":"8.5","descricao":"O início da saga KOF, com frases de vitória, história e finais traduzidos para português do Brasil pelo NeoGeo BR Team."},
-  {"nome":"The King of Fighters '95","rom":"roms/kof95.zip","capa":"kof-collection.svg","nota":"8.6","descricao":"O segundo torneio King of Fighters e o começo da saga Orochi, na versão original de Neo Geo."},
-  {"nome":"The King of Fighters '96","rom":"roms/kof96.zip","capa":"kof-collection.svg","nota":"9.0","descricao":"KOF '96 introduz uma jogabilidade renovada e avança a saga Orochi na versão original de Neo Geo."},
-  {"nome":"The King of Fighters '96 Anniversary Edition","rom":"roms/kof96ae.zip","capa":"kof-collection.svg","nota":"8.8","descricao":"Edição comemorativa de KOF '96 preparada como romset Neo Geo completo para funcionar diretamente no navegador."},
-  {"nome":"The King of Fighters '97","rom":"roms/kof97.zip","capa":"kof-collection.svg","nota":"9.2","descricao":"O encerramento da saga Orochi, executado diretamente pelo FBNeo no navegador."},
-  {"nome":"The King of Fighters '98","rom":"roms/kof98.zip","capa":"kof-collection.svg","nota":"9.4","descricao":"O clássico Dream Match reúne grande parte do elenco da série em uma das edições mais celebradas de KOF."},
-  {"nome":"The King of Fighters '99","rom":"roms/kof99.zip","capa":"kof-collection.svg","nota":"8.7","descricao":"O início da saga NESTS e a estreia do sistema Striker, na versão original de Neo Geo."},
-  {"nome":"The King of Fighters 2000","rom":"roms/kof2000.zip","capa":"kof-collection.svg","nota":"8.9","descricao":"A continuação da saga NESTS com uma ampla seleção de Strikers e combates rápidos."},
-  {"nome":"The King of Fighters 2001","rom":"roms/kof2001.zip","capa":"kof-collection.svg","nota":"8.2","descricao":"O desfecho da saga NESTS, preservado em seu romset original de Neo Geo."},
-  {"nome":"The King of Fighters 2002","rom":"roms/kof2002.zip","capa":"kof-collection.svg","nota":"9.1","descricao":"Challenge to Ultimate Battle retorna ao formato Dream Match com um dos sistemas de luta mais populares da série."}
+  {"nome":"The King of Fighters '94 — Português","rom":"roms/kof94br.zip","capa":"kof94.png","nota":"8.5","descricao":"O início da saga KOF, com frases de vitória, história e finais traduzidos para português do Brasil pelo NeoGeo BR Team."},
+  {"nome":"The King of Fighters '95","rom":"roms/kof95.zip","capa":"kof95.png","nota":"8.6","descricao":"O segundo torneio King of Fighters e o começo da saga Orochi, na versão original de Neo Geo."},
+  {"nome":"The King of Fighters '96","rom":"roms/kof96.zip","capa":"kof96.png","nota":"9.0","descricao":"KOF '96 introduz uma jogabilidade renovada e avança a saga Orochi na versão original de Neo Geo."},
+  {"nome":"The King of Fighters '96 Anniversary Edition","rom":"roms/kof96ae.zip","capa":"kof96.png","nota":"8.8","descricao":"Edição comemorativa de KOF '96 preparada como romset Neo Geo completo para funcionar diretamente no navegador."},
+  {"nome":"The King of Fighters '97","rom":"roms/kof97.zip","capa":"kof97.png","nota":"9.2","descricao":"O encerramento da saga Orochi, executado diretamente pelo FBNeo no navegador."},
+  {"nome":"The King of Fighters '98","rom":"roms/kof98.zip","capa":"kof98.png","nota":"9.4","descricao":"O clássico Dream Match reúne grande parte do elenco da série em uma das edições mais celebradas de KOF."},
+  {"nome":"The King of Fighters '99","rom":"roms/kof99.zip","capa":"kof99.png","nota":"8.7","descricao":"O início da saga NESTS e a estreia do sistema Striker, na versão original de Neo Geo."},
+  {"nome":"The King of Fighters 2000","rom":"roms/kof2000.zip","capa":"kof2000.png","nota":"8.9","descricao":"A continuação da saga NESTS com uma ampla seleção de Strikers e combates rápidos."},
+  {"nome":"The King of Fighters 2001","rom":"roms/kof2001.zip","capa":"kof2001.png","nota":"8.2","descricao":"O desfecho da saga NESTS, preservado em seu romset original de Neo Geo."},
+  {"nome":"The King of Fighters 2002","rom":"roms/kof2002.zip","capa":"kof2002.png","nota":"9.1","descricao":"Challenge to Ultimate Battle retorna ao formato Dream Match com um dos sistemas de luta mais populares da série."}
 ]

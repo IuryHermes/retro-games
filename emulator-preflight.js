@@ -2,12 +2,12 @@
     'use strict';
 
     const CACHE_TTL = 10 * 60 * 1000;
-    const cores = new Set(['nes', 'snes', 'n64', 'gba', 'gb', 'gbc', 'segaMD', 'psx', 'pcsx_rearmed', 'atari2600']);
+    const cores = new Set(['nes', 'snes', 'n64', 'gba', 'gb', 'gbc', 'segaMD', 'psx', 'pcsx_rearmed', 'atari2600', 'fbneo', 'arcade']);
     const extensions = {
         nes: ['nes', 'zip'], snes: ['sfc', 'smc', 'zip'], n64: ['z64', 'n64', 'v64', 'zip'],
         gba: ['gba', 'zip'], gb: ['gb', 'zip'], gbc: ['gbc', 'zip'], segaMD: ['md', 'gen', 'bin', 'zip'],
         psx: ['chd', 'bin', 'cue', 'm3u'], pcsx_rearmed: ['chd', 'bin', 'cue', 'm3u'],
-        atari2600: ['a26', 'bin', 'zip']
+        atari2600: ['a26', 'bin', 'zip'], fbneo: ['zip'], arcade: ['zip']
     };
 
     function cached(key) {
