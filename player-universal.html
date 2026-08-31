@@ -458,18 +458,25 @@
                 ];
             }
             window.EJS_onLoadError = error => showCompatibilityError(`Falha ao carregar o emulador: ${String(error?.message || error || 'erro desconhecido')}`);
-            const cacheRepairKey = 'neo_n64_emulator_cache_repair_v1';
-            const shouldRepairEmulatorCache = safeRecoveryMode || (core === 'n64' && !localStorage.getItem(cacheRepairKey));
+            const n64CacheRepairKey = 'neo_n64_emulator_cache_repair_v1';
+            const fbneoCacheRepairKey = 'neo_fbneo_rom_cache_repair_v1';
+            const repairN64Cache = core === 'n64' && !localStorage.getItem(n64CacheRepairKey);
+            const repairFbneoCache = (core === 'fbneo' || core === 'arcade') && !localStorage.getItem(fbneoCacheRepairKey);
+            const shouldRepairEmulatorCache = safeRecoveryMode || repairN64Cache || repairFbneoCache;
+            const cacheDatabases = safeRecoveryMode || repairN64Cache ? ['EmulatorJS-core', 'EmulatorJS-roms'] : ['EmulatorJS-roms'];
             const emulatorCacheRepair = !shouldRepairEmulatorCache
                 ? Promise.resolve()
-                : Promise.all(['EmulatorJS-core', 'EmulatorJS-roms'].map(name => new Promise(resolve => {
+                : Promise.all(cacheDatabases.map(name => new Promise(resolve => {
                     const request = indexedDB.deleteDatabase(name);
                     const finish = () => resolve();
                     request.onsuccess = finish;
                     request.onerror = finish;
                     request.onblocked = finish;
                     setTimeout(finish, 3000);
-                }))).finally(() => { if (core === 'n64') localStorage.setItem(cacheRepairKey, '1'); });
+                }))).finally(() => {
+                    if (repairN64Cache) localStorage.setItem(n64CacheRepairKey, '1');
+                    if (repairFbneoCache) localStorage.setItem(fbneoCacheRepairKey, '1');
+                });
             const cloudPreparation = Promise.race([
                 window.NeoCloudSaves.prepare({ game: window.EJS_gameUrl, core: window.EJS_core, name: params.get('title'), system: params.get('system'), multidisc: ps1DiscUrls.length > 1 }),
                 new Promise(resolve => setTimeout(resolve, 5000))
