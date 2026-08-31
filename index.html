@@ -908,7 +908,9 @@
     const incomingReferral = new URLSearchParams(location.search).get('ref');
     if (/^[a-f0-9]{12}$/.test(incomingReferral || '')) localStorage.setItem('neo_referral_code', incomingReferral);
     const PENDING_HISTORY_KEY = 'neo_pending_history';
-    const LOCAL_HISTORY_KEY = 'neo_local_game_history_v1';
+    // v2 separates anonymous play from account history. The previous key was
+    // also written while signed in, making account games reappear after logout.
+    const LOCAL_HISTORY_KEY = 'neo_local_game_history_v2';
     const LOCAL_HISTORY_TTL_MS = 30 * 24 * 60 * 60 * 1000;
     const LOCAL_SAVE_STARTED_KEY = 'neo_anonymous_save_started_at';
     const readLocalGameHistory = () => {
@@ -1232,10 +1234,13 @@
         const cover = game.cover || catalogCoverUrl(game);
         const historyId = String(game.id || `${game.sysId}-${String(game.rom || '').split('/').pop()}`).toLowerCase().replace(/\.[a-z0-9]+$/i, '').replace(/[^a-z0-9._,-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 120);
         const pending = { id: historyId, name: game.nomeOriginal || game.nome, system: game.sysId, cover, playUrl, playedAt:Date.now() };
-        if (!localStorage.getItem(LOCAL_SAVE_STARTED_KEY)) localStorage.setItem(LOCAL_SAVE_STARTED_KEY, String(Date.now()));
-        const localHistory = [pending, ...readLocalGameHistory().filter(item => item?.id !== pending.id)].slice(0, 10);
-        try { localStorage.setItem(LOCAL_HISTORY_KEY, JSON.stringify(localHistory)); } catch (_) {}
-        if (!accountProfile || (!auth.currentUser && !discordAccountToken)) return;
+        const authenticated = Boolean(accountProfile && (auth.currentUser || discordAccountToken));
+        if (!authenticated) {
+            if (!localStorage.getItem(LOCAL_SAVE_STARTED_KEY)) localStorage.setItem(LOCAL_SAVE_STARTED_KEY, String(Date.now()));
+            const localHistory = [pending, ...readLocalGameHistory().filter(item => item?.id !== pending.id)].slice(0, 10);
+            try { localStorage.setItem(LOCAL_HISTORY_KEY, JSON.stringify(localHistory)); } catch (_) {}
+            return;
+        }
         sessionStorage.setItem(PENDING_HISTORY_KEY, JSON.stringify(pending));
         try {
             await historyRequest('POST', pending);
