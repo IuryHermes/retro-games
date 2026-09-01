@@ -116,8 +116,11 @@
         .modal-offer-price { color:var(--accent-color); font:bold 14px monospace; }
         .modal-offer-discount { color:#20c96b; font:bold 10px monospace; }
         .modal-offer-buy { color:#fff; background:var(--accent-color); text-decoration:none; padding:8px 10px; border-radius:4px; font:bold 10px monospace; white-space:nowrap; }
-        .game-info-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-        .game-info-online-btn { min-height:52px; border:1px solid #39a9ff; border-radius:5px; background:#08213a; color:#8fd0ff; font:bold 12px monospace; cursor:pointer; }
+        .game-info-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:11px; border:1px solid var(--border-color); border-radius:7px; background:var(--input-bg); }
+        .game-info-action-hint { grid-column:1/-1; margin:0 2px 2px; color:var(--text-muted); font:11px/1.45 monospace; text-align:center; }
+        .game-info-actions .game-info-play-btn,.game-info-online-btn { min-height:56px; padding:10px 12px; white-space:normal; line-height:1.45; }
+        .game-info-actions .game-info-play-btn { font-size:10px; }
+        .game-info-online-btn { border:1px solid #39a9ff; border-radius:5px; background:#08213a; color:#8fd0ff; font:bold 10px monospace; cursor:pointer; }
         .game-info-online-btn:hover,.game-info-online-btn:focus-visible { background:#0d355a; color:#fff; outline:2px solid #8fd0ff; outline-offset:2px; }
         @media(max-width:520px){ .game-info-actions { grid-template-columns:1fr; } }
         .game-info-play-btn { background: var(--accent-color); color: #fff; border: none; padding: 15px; width: 100%; font-family: 'Press Start 2P', monospace; font-size: 14px; cursor: pointer; border-radius: 4px; transition: 0.3s; }
@@ -729,6 +732,7 @@
                     </div>
                 </div>
                 <div class="game-info-actions">
+                    <p class="game-info-action-hint" id="modal-action-hint">Escolha como deseja iniciar.</p>
                     <button class="game-info-play-btn" id="modal-play-btn">▶ JOGAR AGORA</button>
                     <button class="game-info-online-btn" id="modal-online-btn" type="button" hidden>⚔ JOGAR ONLINE</button>
                 </div>
@@ -1082,7 +1086,7 @@
             sessionStorage.removeItem('neo_multiplayer_game_after_auth');
             try {
                 const specific = JSON.parse(specificRaw);
-                if (specific.expiresAt > Date.now() && specific.game?.maxPlayers > 1 && /^\/jogos\//.test(specific.playUrl || '')) {
+                if (specific.expiresAt > Date.now() && specific.game && /^\/jogos\//.test(specific.playUrl || '')) {
                     closeAuth();
                     startSpecificMultiplayerGame(specific.game, specific.playUrl);
                     return true;
@@ -1799,17 +1803,22 @@
         playButton.onclick = () => { window.closeGameModal(); playAndRemember(gameObj, playUrl); };
         const onlineButton = document.getElementById('modal-online-btn');
         const maxPlayers = Number(gameObj.maxPlayers || 0);
-        onlineButton.hidden = maxPlayers < 2;
-        if (maxPlayers > 1) {
-            onlineButton.textContent = `⚔ JOGAR ONLINE · ATÉ ${maxPlayers} JOGADORES`;
-            onlineButton.onclick = () => {
-                window.neoTrack?.('multiplayer_hub_open', { source:'game_details', game_name:gameObj.nome, game_system:gameObj.sysId, auth_state:accountProfile ? 'signed_in' : 'guest' });
-                if (accountProfile) { startSpecificMultiplayerGame(gameObj, playUrl); return; }
-                sessionStorage.setItem('neo_multiplayer_game_after_auth', JSON.stringify({ game:gameObj, playUrl, expiresAt:Date.now() + 5 * 60 * 1000 }));
-                window.closeGameModal();
-                requestMultiplayerAccount(`Para jogar ${gameObj.nome} online, entre ou crie uma conta gratuita. Depois do cadastro a partida continuará automaticamente.`, 'game_details');
-            };
-        } else onlineButton.onclick = null;
+        const multiplayerGame = maxPlayers > 1;
+        onlineButton.hidden = false;
+        onlineButton.textContent = multiplayerGame
+            ? `⚔ JOGAR ONLINE · ATÉ ${maxPlayers} JOGADORES`
+            : '◉ ABRIR SALA · JOGAR E ASSISTIR';
+        document.getElementById('modal-action-hint').textContent = multiplayerGame
+            ? 'Jogue normalmente ou crie uma sala para convidar outros jogadores.'
+            : 'Jogue normalmente ou abra uma transmissão para outras pessoas assistirem.';
+        onlineButton.onclick = () => {
+            window.neoTrack?.('multiplayer_hub_open', { source:'game_details', game_name:gameObj.nome, game_system:gameObj.sysId, mode:multiplayerGame ? 'multiplayer' : 'spectator', auth_state:accountProfile ? 'signed_in' : 'guest' });
+            if (accountProfile) { startSpecificMultiplayerGame(gameObj, playUrl); return; }
+            sessionStorage.setItem('neo_multiplayer_game_after_auth', JSON.stringify({ game:gameObj, playUrl, expiresAt:Date.now() + 5 * 60 * 1000 }));
+            window.closeGameModal();
+            const purpose = multiplayerGame ? `jogar ${gameObj.nome} online` : `abrir uma sala de ${gameObj.nome} para outras pessoas assistirem`;
+            requestMultiplayerAccount(`Para ${purpose}, entre ou crie uma conta gratuita. Depois do cadastro a partida continuará automaticamente.`, 'game_details');
+        };
         document.getElementById('game-info-modal').style.display = 'flex';
     };
 
