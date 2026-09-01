@@ -398,19 +398,21 @@
             .discord-float { bottom:calc(84px + env(safe-area-inset-bottom)); }
             .top-bar { flex-direction:column; align-items:stretch; padding:10px; margin:0; text-align:left; gap:7px; }
             .brand { width:100%; box-sizing:border-box; padding-right:48px; text-align:left; display:block !important; font-size:15px !important; margin:0; }
-            .mobile-marquee-wrapper { margin:0; padding:2px 0; }
-            .top-bar-controls { display:flex; flex-flow:row wrap !important; width:100%; justify-content:center; align-items:center; gap:7px; margin:0; padding:2px 1px 4px; }
+            .mobile-marquee-wrapper { display:none !important; }
+            .top-bar-controls { display:grid !important; grid-template-columns:minmax(0,1fr) 52px; width:100%; align-items:center; gap:7px; margin:0; padding:2px 1px 4px; }
             .mobile-quick-scroll { display:block; position:absolute; top:5px; right:8px; width:40px; padding:0; }
             .mobile-quick-scroll::-webkit-scrollbar { display:none; }
             .mobile-community-actions,.pix-trigger-mobile { display:none !important; }
-            .top-account-mobile { display:flex !important; width:40px !important; height:40px !important; min-height:40px; padding:4px !important; border:1px solid var(--accent-color) !important; border-radius:50% !important; align-items:center; justify-content:center; background:rgba(0,153,51,.08) !important; }
-            .top-account-mobile .account-avatar, .mobile-community-actions .multiplayer-hub-trigger img, .pix-trigger-mobile img, .chat-trigger-mobile img { width:25px !important; height:25px !important; flex-basis:25px; object-fit:contain; margin:0; border-radius:3px; image-rendering:auto; }
+            .top-account-mobile { display:flex !important; width:40px !important; height:40px !important; min-height:40px; padding:4px !important; overflow:hidden; border:1px solid var(--accent-color) !important; border-radius:50% !important; align-items:center; justify-content:center; background:rgba(0,153,51,.08) !important; }
+            .top-account-mobile .account-avatar { width:30px !important; height:30px !important; flex-basis:30px; object-fit:cover; margin:0; border-radius:50% !important; image-rendering:auto; }
+            .mobile-community-actions .multiplayer-hub-trigger img, .pix-trigger-mobile img, .chat-trigger-mobile img { width:25px !important; height:25px !important; flex-basis:25px; object-fit:contain; margin:0; border-radius:3px; image-rendering:auto; }
             .mobile-action-label { display:block; max-width:100%; color:var(--text-muted); font:700 7px/1.1 monospace; text-transform:uppercase; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
             .top-account-mobile .account-copy { display:none; }
             .top-account-mobile .account-name { display:block; max-width:58px; overflow:hidden; text-overflow:ellipsis; color:var(--text-muted); font:700 7px/1.1 monospace; text-transform:uppercase; white-space:nowrap; }
             .top-account-mobile .account-kicker, .top-account-mobile .account-hint { display:none; }
-            .search-container { flex:1 1 230px; box-sizing:border-box; width:auto; max-width:none; order:10; height:40px; }
-            .theme-container { flex:0 0 52px; order:10; display:flex !important; align-items:center; justify-content:center; }
+            .search-container { box-sizing:border-box; width:100%; min-width:0; max-width:none; height:40px; grid-column:1; }
+            .theme-container { width:52px; min-width:52px; display:flex !important; align-items:center; justify-content:center; grid-column:2; }
+            .theme-label { display:none; }
             .discovery-nav { padding:10px 10px 4px; }
             .row-header { justify-content: space-between; padding-right: 15px; }
             .view-all-btn { font-size: 8px; padding: 6px 10px; }
@@ -830,9 +832,12 @@
 
             <nav class="discovery-nav" aria-label="Descobrir jogos">
                 <a class="active" href="#hero-slider">PARA VOCÊ</a>
-                <a href="#collections-home-title">COLEÇÕES</a>
                 <button id="discovery-online" type="button">ONLINE</button>
+                <a href="social.html">COMUNIDADE</a>
+                <a href="#collections-home-title">COLEÇÕES</a>
+                <a href="ofertas.html">ACHADOS</a>
                 <a href="#catalog-area">CONSOLES</a>
+                <a href="apoie.html">APOIAR</a>
             </nav>
 
             <section class="hero-section" id="hero-slider">
