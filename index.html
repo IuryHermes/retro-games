@@ -168,7 +168,6 @@
             .sidebar:hover .sidebar-chat { display: flex; }
             .sidebar:hover .pix-text-pc { display: inline-block; opacity: 1; transition: 0.3s; }
             .sidebar:hover .community-shortcuts-title, .sidebar:hover .community-shortcut-copy, .sidebar:hover .emulators-title { display: block; opacity: 1; }
-            .sidebar:hover #sidebar-hall-container.ativo { display: flex; }
         }
 
         .sidebar-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; flex-shrink: 0; width: 100%; }
@@ -256,7 +255,19 @@
         /* MARQUEE DO MOBILE (LETREIRO ROLANDO) LIMPO E VERDE */
         .mobile-marquee-wrapper { display: none; width: 100%; overflow: hidden; background: transparent; border: none; padding: 5px 0; margin: 5px 0; white-space: nowrap; position: relative; }
         .mobile-marquee-content { display: inline-block; animation: marquee 20s linear infinite; font-family: 'Press Start 2P', cursive; font-size: 8px; color: var(--accent-color); text-shadow: 0 0 5px rgba(0, 204, 68, 0.4); }
-        .mobile-hall-section { display:none; }
+        .hall-footer-section { display:block; margin:32px 40px 14px; padding:16px 0; border:1px solid var(--border-color); border-radius:9px; background:var(--card-bg); overflow:hidden; }
+        .hall-footer-section h2 { margin:0 14px 10px; color:#ffd166; font:10px 'Press Start 2P',cursive; }
+        .hall-footer-section .mobile-marquee-wrapper { display:block; margin:0; }
+        .welcome-card { display:none; margin:12px 40px 4px; padding:16px; border:1px solid var(--accent-color); border-radius:9px; background:linear-gradient(120deg,var(--sidebar-bg),var(--input-bg)); box-shadow:0 10px 28px rgba(0,0,0,.18); }
+        .welcome-card.visible { display:grid; grid-template-columns:minmax(180px,.8fr) minmax(360px,1.6fr) auto; align-items:center; gap:18px; }
+        .welcome-card h1 { margin:0 0 6px; color:var(--accent-color); font:12px/1.5 'Press Start 2P',cursive; }
+        .welcome-card p { margin:0; color:var(--text-muted); font:12px/1.5 monospace; }
+        .welcome-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+        .welcome-step { padding:9px; border:1px solid var(--border-color); border-radius:6px; color:var(--text-color); font:11px/1.4 monospace; }
+        .welcome-step strong { display:block; margin-bottom:3px; color:#ffd166; }
+        .welcome-actions { display:flex; flex-direction:column; gap:7px; }
+        .welcome-actions button { min-height:38px; padding:8px 12px; border:1px solid var(--accent-color); border-radius:5px; background:var(--accent-color); color:#041108; font:bold 10px monospace; cursor:pointer; }
+        .welcome-actions .welcome-dismiss { background:transparent; color:var(--text-color); border-color:var(--border-color); }
         .marquee-item { display: inline-block; margin-right: 50px; }
         @keyframes marquee { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
@@ -300,8 +311,7 @@
         .collections-heading h2 { margin:0; color:var(--text-color); font:13px 'Press Start 2P',cursive; }
         .collections-heading .view-all-btn { color:var(--accent-color); font:8px 'Press Start 2P',cursive; cursor:pointer; }
         .collections-carousel { position:relative; }
-        .collections-row { display:flex; gap:12px; overflow-x:auto; padding:5px 3px 18px; scroll-snap-type:x proximity; scrollbar-width:none; cursor:grab; user-select:none; touch-action:pan-y; -webkit-overflow-scrolling:touch; overscroll-behavior-inline:contain; }
-        .collections-row.dragging { cursor:grabbing; scroll-snap-type:none; }
+        .collections-row { display:flex; gap:12px; overflow-x:auto; scroll-behavior:smooth; padding:5px 3px 18px; scroll-snap-type:x proximity; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
         .collections-row::-webkit-scrollbar { display:none; }
         .collection-tile { --collection-image:none; position:relative; flex:0 0 clamp(180px,19vw,260px); aspect-ratio:16/9; overflow:hidden; border:1px solid var(--border-color); border-radius:9px; scroll-snap-align:start; text-align:left; padding:0; background:#030504; box-shadow:0 12px 25px rgba(0,0,0,.35); transition:transform .25s,border-color .25s; cursor:pointer; }
         .collection-tile::before { content:''; position:absolute; inset:0; background-image:linear-gradient(to top,rgba(0,0,0,.94),rgba(0,0,0,.05) 72%),var(--collection-image); background-size:100% 100%,100% 100%; background-repeat:no-repeat; background-position:center; transition:transform .35s,filter .35s; }
@@ -377,12 +387,18 @@
             .close-chat-btn:hover { background: #ff3333; color: #fff; }
 
             .mobile-marquee-wrapper { display: block; }
-            .mobile-hall-section { display:block; margin:26px 12px 10px; padding:14px 0; border:1px solid var(--border-color); border-radius:8px; background:var(--card-bg); overflow:hidden; }
-            .mobile-hall-section h2 { margin:0 12px 8px; color:#ffd166; font:9px 'Press Start 2P',cursive; }
+            .hall-footer-section { margin:26px 12px 10px; padding:14px 0; }
+            .hall-footer-section h2 { margin:0 12px 8px; font-size:9px; }
+            .welcome-card { margin:10px; }
+            .welcome-card.visible { grid-template-columns:1fr; gap:12px; }
+            .welcome-steps { grid-template-columns:repeat(3,1fr); }
+            .welcome-actions { flex-direction:row; }
+            .welcome-actions button { flex:1; }
             .pix-trigger-pc, .community-shortcuts-pc { display:none !important; }
         }
 
         @media (max-width: 768px) {
+            .welcome-steps { grid-template-columns:1fr; }
             .collections-showcase { padding:20px 10px 0; }
             .collections-heading h2 { font-size:11px; }
             .collection-tile { flex-basis:clamp(112px,31vw,132px); aspect-ratio:1/1; box-shadow:none; }
@@ -622,7 +638,7 @@
     <script src="club-badges.js?v=20260830-simple1"></script>
     <script src="privacy-consent-v2.js" defer></script>
     <script src="analytics-consent.js" defer></script>
-    <script src="collections-home.js?v=20260901-9" defer></script>
+    <script src="collections-home.js?v=20260901-10" defer></script>
 </head>
 <body>
 
@@ -854,6 +870,16 @@
                 <a href="apoie.html">APOIAR</a>
             </nav>
 
+            <section class="welcome-card" id="welcome-card" aria-labelledby="welcome-title" hidden>
+                <div><h1 id="welcome-title">BEM-VINDO AO NEOTERMINALROOM</h1><p>Sua biblioteca retrô já está pronta. Não é necessário cadastro para começar.</p></div>
+                <div class="welcome-steps" aria-label="Como começar">
+                    <div class="welcome-step"><strong>1 · ESCOLHA</strong>Toque numa capa para ver a prévia e os detalhes.</div>
+                    <div class="welcome-step"><strong>2 · JOGUE</strong>Use Jogar agora ou abra uma sala online.</div>
+                    <div class="welcome-step"><strong>3 · SALVE</strong>Crie uma conta gratuita quando quiser proteger seus saves.</div>
+                </div>
+                <div class="welcome-actions"><button id="welcome-explore" type="button">EXPLORAR JOGOS</button><button class="welcome-dismiss" id="welcome-dismiss" type="button">ENTENDI</button></div>
+            </section>
+
             <section class="hero-section" id="hero-slider">
                 <div class="hero-indicators" id="hero-indicators"></div>
                 <button class="hero-nav prev" id="hero-prev" type="button" aria-label="Jogo anterior">&#8249;</button>
@@ -894,8 +920,8 @@
                 <p>Encontre aventuras, RPGs, jogos de luta, corrida e plataforma, incluindo clássicos traduzidos, dublados e adaptados para português do Brasil. Escolha um sistema, abra a página do jogo e use o botão Jogar agora para carregar somente os arquivos necessários para aquela partida.</p>
             </section>
 
-            <section class="mobile-hall-section" aria-labelledby="mobile-hall-title">
-                <h2 id="mobile-hall-title">HALL DA FAMA</h2>
+            <section class="hall-footer-section" aria-labelledby="hall-footer-title">
+                <h2 id="hall-footer-title">HALL DA FAMA</h2>
                 <div class="mobile-marquee-wrapper">
                     <div class="mobile-marquee-content" id="mobile-marquee-content">Carregando Hall da Fama...</div>
                 </div>
@@ -923,6 +949,16 @@
             document.body.style.overflow = "auto";
             setTimeout(() => splash.remove(), 800);
         }, 3800);
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        const card = document.getElementById('welcome-card');
+        const key = 'neo_welcome_seen_v1';
+        if (!card || localStorage.getItem(key) === '1') return;
+        card.hidden = false;
+        card.classList.add('visible');
+        const dismiss = () => { localStorage.setItem(key, '1'); card.classList.remove('visible'); card.hidden = true; };
+        document.getElementById('welcome-dismiss').onclick = dismiss;
+        document.getElementById('welcome-explore').onclick = () => { dismiss(); document.getElementById('acclaimed-title')?.scrollIntoView({ behavior:'smooth', block:'start' }); };
     });
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";

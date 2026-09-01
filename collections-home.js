@@ -83,7 +83,6 @@
     const showAll = document.getElementById('collections-show-all');
     if (!row || !panel || !showAll) return;
     let catalog = [];
-    let suppressClickUntil = 0;
     const render = async selectedId => {
       panel.hidden = false;
       panel.innerHTML = '<p class="loading-text">ORGANIZANDO COLETÂNEA...</p>';
@@ -107,7 +106,7 @@
     };
     row.onclick = event => {
       const tile = event.target.closest('[data-collection]');
-      if (tile && performance.now() >= suppressClickUntil) render(tile.dataset.collection);
+      if (tile) render(tile.dataset.collection);
     };
     showAll.onclick = () => render('');
     try {
@@ -125,37 +124,6 @@
         tile.innerHTML = `<span class="collection-tile-copy"><strong>${esc(definition.title)}</strong><small>${games.length} jogos disponíveis</small></span>`;
         row.append(tile);
       });
-      let startX = 0, startScroll = 0, dragging = false, pressedTile = null;
-      row.onpointerdown = event => { if (event.pointerType === 'touch') return; startX = event.clientX; startScroll = row.scrollLeft; dragging = false; pressedTile = event.target.closest('[data-collection]'); row.classList.add('dragging'); row.setPointerCapture?.(event.pointerId); };
-      row.onpointermove = event => { if (event.pointerType === 'touch' || !row.classList.contains('dragging')) return; const delta = event.clientX - startX; if (Math.abs(delta) > 7) dragging = true; row.scrollLeft = startScroll - delta; };
-      const stop = () => {
-        if (!row.classList.contains('dragging')) return;
-        row.classList.remove('dragging');
-        suppressClickUntil = performance.now() + 250;
-        if (!dragging && pressedTile) render(pressedTile.dataset.collection);
-        pressedTile = null;
-      };
-      row.onpointerup = stop; row.onpointercancel = stop;
-      let touchX = 0, touchY = 0, touchScroll = 0, touchDragging = false;
-      row.addEventListener('touchstart', event => {
-        const touch = event.touches[0];
-        if (!touch) return;
-        touchX = touch.clientX; touchY = touch.clientY; touchScroll = row.scrollLeft; touchDragging = false;
-      }, { passive:true });
-      row.addEventListener('touchmove', event => {
-        const touch = event.touches[0];
-        if (!touch) return;
-        const deltaX = touch.clientX - touchX;
-        const deltaY = touch.clientY - touchY;
-        if (Math.abs(deltaX) <= Math.abs(deltaY) || Math.abs(deltaX) < 5) return;
-        touchDragging = true;
-        event.preventDefault();
-        row.scrollLeft = touchScroll - deltaX;
-      }, { passive:false });
-      row.addEventListener('touchend', () => {
-        if (touchDragging) suppressClickUntil = performance.now() + 350;
-        touchDragging = false;
-      }, { passive:true });
       document.querySelector('.collection-scroll.prev').onclick = () => row.scrollBy({left:-520,behavior:'smooth'});
       document.querySelector('.collection-scroll.next').onclick = () => row.scrollBy({left:520,behavior:'smooth'});
     } catch (error) {

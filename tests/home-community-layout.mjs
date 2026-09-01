@@ -37,8 +37,13 @@ assert.match(index, /logo-discord\.gif\?v=2/);
 assert.match(index, /\.discord-float \{[^}]*max-width:230px/);
 assert.doesNotMatch(index, /session\.recognition\.badges\.join/);
 assert.match(index, /@media \(hover: none\), \(pointer: coarse\)[\s\S]*\.row-container > \.scroll-btn,[\s\S]*\.collections-carousel > \.collection-scroll \{ display:none !important; \}/);
-assert.match(index, /class="mobile-hall-section" aria-labelledby="mobile-hall-title"/);
-assert.match(index, /\.mobile-hall-section \{ display:block; margin:26px 12px 10px/);
+assert.match(index, /class="hall-footer-section" aria-labelledby="hall-footer-title"/);
+assert.match(index, /\.hall-footer-section \{ display:block; margin:32px 40px 14px/);
 assert.doesNotMatch(index, /\.mobile-marquee-wrapper \{ order:3/);
+assert.doesNotMatch(index, /sidebar:hover #sidebar-hall-container\.ativo/);
+assert.match(index, /id="welcome-card"[^>]*hidden/);
+assert.match(index, /neo_welcome_seen_v1/);
+assert.match(index, /Não é necessário cadastro para começar/);
+assert.match(index, /\.welcome-card\.visible \{ display:grid/);
 
-console.log('home community layout: 27 checks passed');
+console.log('home community layout: 32 checks passed');
