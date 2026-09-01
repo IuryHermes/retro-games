@@ -18,6 +18,7 @@
   const screen = document.getElementById('screen'), ctx = screen.getContext('2d', { alpha:false });
   const connection = document.getElementById('connection'), action = document.getElementById('create-room');
   const testSaveButton = document.getElementById('test-save');
+  const findSaveButton = document.getElementById('find-save'), importSaveButton=document.getElementById('import-save'), exportSaveButton=document.getElementById('export-save'), saveFileInput=document.getElementById('save-file');
   const token = () => sessionStorage.getItem('neo_club_access') || sessionStorage.getItem('neo_account_access') || '';
   const waitForAuth = async () => {
     if (token()) return true;
@@ -45,17 +46,52 @@
     document.getElementById('game-title').textContent = config.title;
     document.getElementById('instructions').textContent = config.room;
   }
-  function saveDb(mode, bytes) {
+  function saveDb(mode, bytes, forcePersonal=false) {
     return new Promise((resolve, reject) => {
       const open = indexedDB.open('neo-pokemon-link', 1);
       open.onupgradeneeded = () => open.result.createObjectStore('saves');
       open.onerror = () => reject(open.error);
       open.onsuccess = () => {
         const tx = open.result.transaction('saves', mode === 'read' ? 'readonly' : 'readwrite');
-        const req = mode === 'read' ? tx.objectStore('saves').get(config.id) : tx.objectStore('saves').put(bytes, config.id);
+        const key=forcePersonal?config.id:(testSaveSelected?`${config.id}-test-room`:config.id);
+        const req = mode === 'read' ? tx.objectStore('saves').get(key) : tx.objectStore('saves').put(bytes, key);
         req.onsuccess = () => resolve(req.result); req.onerror = () => reject(req.error);
       };
     });
+  }
+  async function legacyEmulatorSave() {
+    const names={
+      'pokemon-fire-red':['pokemon-fire-red','pokemon_fire_red','firered'],
+      'pokemon-leaf-green':['pokemon-leaf-green','pokemon_leaf_green','leaf-green','leafgreen'],
+      'pokemon-ruby':['pokemon-ruby','pokemon_ruby'],
+      'pokemon-sapphire':['pokemon-sapphire','pokemon_sapphire'],
+      'pokemon-emerald':['pokemon-emerald','pokemon_emerald']
+    }[config.id]||[];
+    const databases=typeof indexedDB.databases==='function'?await indexedDB.databases():[{name:'/data/saves'}];
+    for(const info of databases){
+      if(!info.name)continue;
+      const db=await new Promise(resolve=>{const open=indexedDB.open(info.name);open.onerror=()=>resolve(null);open.onsuccess=()=>resolve(open.result);});
+      if(!db)continue;
+      for(const storeName of Array.from(db.objectStoreNames)){
+        let rows;
+        try{rows=await new Promise((resolve,reject)=>{const store=db.transaction(storeName).objectStore(storeName),keys=store.getAllKeys(),values=store.getAll();let k,v;const done=()=>k&&v&&resolve(k.map((key,index)=>[String(key),v[index]]));keys.onsuccess=()=>{k=keys.result;done();};values.onsuccess=()=>{v=values.result;done();};keys.onerror=values.onerror=()=>reject(keys.error||values.error);});}catch(_){continue;}
+        for(const [key,value] of rows){
+          const normalized=key.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+          if(!names.some(name=>normalized.includes(name.replace(/[^a-z0-9]+/g,'-'))))continue;
+          const source=value?.contents||value?.data||value;
+          const bytes=source instanceof ArrayBuffer?new Uint8Array(source):ArrayBuffer.isView(source)?new Uint8Array(source.buffer,source.byteOffset,source.byteLength):null;
+          if(bytes?.byteLength===131072){db.close();return bytes.slice().buffer;}
+        }
+      }
+      db.close();
+    }
+    return null;
+  }
+  async function installPersonalSave(bytes,message) {
+    const data=bytes instanceof ArrayBuffer?bytes:bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength);
+    if(data.byteLength!==131072)throw new Error('O save precisa ter 128 KB. Estados rápidos do emulador não são compatíveis.');
+    await saveDb('write',data,true);testSaveSelected=false;
+    document.getElementById('save-status').textContent=message;
   }
   async function battleTestSave() {
     const response=await fetch('pokemon-link/saves/pokemon-fire-red-battle-ready.sav?v=2');
@@ -148,6 +184,10 @@
   addEventListener('keydown',e=>{const map={z:8,x:0,Enter:3,Shift:2,ArrowUp:4,ArrowDown:5,ArrowLeft:6,ArrowRight:7,a:10,s:11};if(map[e.key]!=null){e.preventDefault();inputMask|=1<<map[e.key];}});
   addEventListener('keyup',e=>{const map={z:8,x:0,Enter:3,Shift:2,ArrowUp:4,ArrowDown:5,ArrowLeft:6,ArrowRight:7,a:10,s:11};if(map[e.key]!=null)inputMask&=~(1<<map[e.key]);});
   document.getElementById('copy').onclick=async()=>{await navigator.clipboard.writeText(document.getElementById('invite-link').value);document.getElementById('room-status').textContent='Convite copiado.';};
+  findSaveButton.onclick=async()=>{findSaveButton.disabled=true;document.getElementById('save-status').textContent='Procurando save compatível neste navegador...';try{const save=await legacyEmulatorSave();if(!save)throw new Error('Não encontrei um save de 128 KB deste jogo. Use IMPORTAR .SAV/.SRM.');await installPersonalSave(save,'✓ Save do jogo normal copiado para o modo de batalha.');}catch(error){document.getElementById('save-status').textContent=error.message;}finally{findSaveButton.disabled=false;}};
+  importSaveButton.onclick=()=>saveFileInput.click();
+  saveFileInput.onchange=async()=>{const file=saveFileInput.files?.[0];if(!file)return;try{await installPersonalSave(await file.arrayBuffer(),'✓ Save importado. Ele será usado nesta sala.');}catch(error){document.getElementById('save-status').textContent=error.message;}saveFileInput.value='';};
+  exportSaveButton.onclick=async()=>{if(core&&running&&!testSaveSelected)persistSave();await new Promise(resolve=>setTimeout(resolve,80));const save=await saveDb('read',null,true).catch(()=>null);if(!save){document.getElementById('save-status').textContent='Ainda não existe um save pessoal para baixar.';return;}const url=URL.createObjectURL(new Blob([save],{type:'application/octet-stream'})),link=document.createElement('a');link.href=url;link.download=`${config.id}.sav`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
   testSaveButton.onclick=async()=>{
     if (!config || config.id !== 'pokemon-fire-red') return;
     if (testSaveSelected) {
