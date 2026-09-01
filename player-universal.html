@@ -402,10 +402,11 @@
             };
             const requestedBios = params.get('bios');
             if (requestedBios && (core === 'fbneo' || core === 'arcade' || params.get('system') === 'neogeo')) {
-                // Arcade/FBNeo expects the machine archive (neogeo.zip) as
-                // parent data so it can resolve BIOS files alongside the
-                // selected game romset. EJS_biosUrl does not merge ZIP sets.
-                window.EJS_gameParentUrl = requestedBios;
+                // FBNeo resolves the machine BIOS by the archive name. The
+                // generic parent/BIOS loaders extract ZIP contents into loose
+                // files, which makes the core report every Neo Geo BIOS ROM as
+                // missing. externalFiles preserves the complete neogeo.zip.
+                window.EJS_externalFiles = { ...(window.EJS_externalFiles || {}), '/neogeo.zip': requestedBios };
             } else if (requestedBios) {
                 window.EJS_biosUrl = requestedBios;
             }
@@ -419,7 +420,7 @@
                     ps1DiscUrls = JSON.parse(params.get('discs'));
                     if (!Array.isArray(ps1DiscUrls) || ps1DiscUrls.length < 2 || ps1DiscUrls.some(url => !/^https:\/\//.test(url))) throw new Error('Lista de discos inválida.');
                     if (/\.m3u(?:$|\?)/i.test(window.EJS_gameUrl)) {
-                        window.EJS_externalFiles = { [ps1DiscPath(ps1DiscUrls[0])]: ps1DiscUrls[0] };
+                        window.EJS_externalFiles = { ...(window.EJS_externalFiles || {}), [ps1DiscPath(ps1DiscUrls[0])]: ps1DiscUrls[0] };
                     }
                     if (textEl) textEl.innerHTML = `PREPARANDO DISCO 1<span id="loading-dots"></span><br><span class="blink" style="font-size:12px">[ OS OUTROS DISCOS SERÃO BAIXADOS SOMENTE NA TROCA ]</span>`;
                 } catch (error) { showCompatibilityError(`Falha na lista multidisco: ${error.message}`); }

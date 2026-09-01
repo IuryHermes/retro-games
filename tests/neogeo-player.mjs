@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, stat } from 'node:fs/promises';
 
 const player = await readFile(new URL('../player-universal.html', import.meta.url), 'utf8');
 const preflight = await readFile(new URL('../emulator-preflight.js', import.meta.url), 'utf8');
@@ -7,7 +7,8 @@ const catalog = JSON.parse(await readFile(new URL('../systems/neogeo/games.json'
 
 assert.match(preflight, /'fbneo'/);
 assert.match(preflight, /fbneo:\s*\['zip'\]/);
-assert.match(player, /window\.EJS_gameParentUrl\s*=\s*requestedBios/);
+assert.match(player, /window\.EJS_externalFiles\s*=\s*\{[\s\S]*'\/neogeo\.zip': requestedBios/);
+assert.doesNotMatch(player, /window\.EJS_gameParentUrl\s*=\s*requestedBios/);
 assert.match(player, /params\.get\('system'\)\s*===\s*'neogeo'/);
 assert.match(player, /params\.get\('system'\) === 'neogeo' \? \{[\s\S]*"fbneo-neogeo-mode": "MVS_EUR"/);
 assert.match(player, /neoGeoPortuguesePresetGames = new Set\(\['kof95', 'kof96', 'kof97', 'kof99', 'kof2000', 'kof2001'\]\)/);
@@ -16,6 +17,14 @@ assert.match(player, /\/data\/saves\/\$\{neoGeoPortugueseGame\}\.srm/);
 assert.match(player, /neo_fbneo_rom_cache_repair_v1/);
 assert.match(player, /repairFbneoCache/);
 assert.equal(catalog.length, 9);
+for (const save of ['kof95','kof96','kof97','kof99','kof2000','kof2001']) {
+  assert.match(player, new RegExp(`'${save}'`));
+  assert.equal((await stat(new URL(`../assets/emulator/neogeo-ptbr-saves/${save}.srm`, import.meta.url))).size, 65536);
+}
+for (const slug of ['94-portugues','95','96','97','98','99','2000','2001','2002']) {
+  const route = await readFile(new URL(`../jogos/neogeo/the-king-of-fighters-${slug}/index.html`, import.meta.url), 'utf8');
+  assert.match(route, /neogeo-fbneo-2026\.zip/);
+}
 assert.equal(catalog.filter(game => /fighters '96(?:\s|$)/i.test(game.nome)).length, 1);
 assert.ok(catalog.every(game => /^roms\/kof.+\.zip\?v=(?:fbneo-standalone1|ptbr-story1|ptbr-v3)$/i.test(game.rom)));
 const kof2002 = catalog.find(game => /fighters 2002$/i.test(game.nome));

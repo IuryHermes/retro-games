@@ -39,7 +39,7 @@ for (const system of systems) {
     const assetBase = system === 'atari2600' ? `${site}/` : r2;
     const rom = `${assetBase}systems/${system}/${bootRom}`;
     const playerParams = { game:rom, core:cores[system], title:gameName, system, embedded:'1' };
-    if (system === 'neogeo') playerParams.bios = `${r2}systems/neogeo/roms/neogeo.zip`;
+    if (system === 'neogeo') playerParams.bios = `${r2}systems/neogeo/roms/neogeo-fbneo-2026.zip`;
     if (multidisc) playerParams.discs = JSON.stringify(game.discs.map(disc => `${assetBase}systems/${system}/${disc}`));
     const player = `/player-universal.html?${new URLSearchParams(playerParams)}`;
     const coverName = String(game.capa || '').split('/').pop();
