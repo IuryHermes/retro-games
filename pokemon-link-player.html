@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#07140c">
   <title>Batalha Pokémon Online - NeoTerminalRoom</title>
   <link rel="stylesheet" href="pokemon-link/pokemon-link.css?v=1">
-  <link rel="stylesheet" href="pokemon-link/pokemon-link-fixes.css?v=2">
+  <link rel="stylesheet" href="pokemon-link/pokemon-link-fixes.css?v=3">
 </head>
 <body>
   <header><a href="index.html" aria-label="Voltar">← BIBLIOTECA</a><strong>BATALHA POKÉMON ONLINE</strong><button id="toggle-lobby" type="button">INSTRUÇÕES</button><span id="connection">OFFLINE</span></header>
@@ -20,7 +20,14 @@
       <p id="instructions"></p>
       <ol><li>Os dois jogadores devem abrir a mesma versão em português.</li><li>Entre ou crie uma conta gratuita.</li><li>Crie a sala e envie o QR Code ao adversário.</li><li>Quando aparecer “CONECTADO”, os dois entram no local indicado acima.</li><li>Escolham batalha ou troca dentro do próprio jogo.</li></ol>
       <div id="auth-warning" hidden><strong>CADASTRO GRATUITO NECESSÁRIO</strong><p>A conta identifica cada lado da conexão e protege a sala.</p><a id="login-link" href="index.html?cadastro=1">ENTRAR OU CRIAR CADASTRO</a></div>
-      <button id="create-room" type="button">CRIAR SALA DE BATALHA</button>
+      <label class="intent-label" for="room-intent">O que você procura?</label>
+      <select id="room-intent"><option value="batalha">Batalha</option><option value="troca">Troca de Pokémon</option><option value="ambos">Batalha ou troca</option></select>
+      <button id="create-room" type="button">CRIAR SALA PÚBLICA</button>
+      <section id="public-lobby" aria-labelledby="public-lobby-title">
+        <div class="public-lobby-heading"><h2 id="public-lobby-title">CENTRO POKÉMON ONLINE</h2><button id="refresh-rooms" type="button">ATUALIZAR</button></div>
+        <p>Jogadores aguardando adversário agora.</p>
+        <div id="public-rooms" role="list"><span>Procurando jogadores...</span></div>
+      </section>
       <button id="test-save" type="button" hidden>USAR SAVE PRONTO PARA TESTE</button>
       <button id="find-save" type="button">PROCURAR MEU SAVE DO JOGO NORMAL</button>
       <button id="import-save" type="button">IMPORTAR ARQUIVO .SAV/.SRM</button>
@@ -41,6 +48,6 @@
   <script src="pokemon-link/vendor/qrcode.min.js?v=1"></script>
   <script type="module" src="pokemon-link/auth-bridge.js?v=1"></script>
   <script src="pokemon-link/gpsp.js?v=2"></script>
-  <script src="pokemon-link/pokemon-link.js?v=2"></script>
+  <script src="pokemon-link/pokemon-link.js?v=3"></script>
 </body>
 </html>

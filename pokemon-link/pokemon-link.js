@@ -14,11 +14,14 @@
   let config = window.NeoPokemonLink.byId(params.get('game'));
   let core, socket, room, ticket, clientId, peer, channel, running = false, localNetId = 0;
   let pendingIceCandidates=[];
+  let peerCreation=null;
+  let signalChain=Promise.resolve();
   let testSaveSelected = false;
   let inputMask = 0, audioContext, audioTime = 0, lastSave = 0;
   const screen = document.getElementById('screen'), ctx = screen.getContext('2d', { alpha:false });
   const connection = document.getElementById('connection'), action = document.getElementById('create-room');
   const toggleLobbyButton=document.getElementById('toggle-lobby');
+  const roomIntent=document.getElementById('room-intent'), publicRooms=document.getElementById('public-rooms'), refreshRoomsButton=document.getElementById('refresh-rooms');
   const testSaveButton = document.getElementById('test-save');
   const findSaveButton = document.getElementById('find-save'), importSaveButton=document.getElementById('import-save'), exportSaveButton=document.getElementById('export-save'), saveFileInput=document.getElementById('save-file');
   const token = () => sessionStorage.getItem('neo_club_access') || sessionStorage.getItem('neo_account_access') || '';
@@ -171,10 +174,16 @@
   }
   async function hostPeer(person) {
     if(peer||!person||person.host)return;
-    peer=new RTCPeerConnection({iceServers:await iceServers()}); bindChannel(peer.createDataChannel('pokemon-link',{ordered:true}));
-    pendingIceCandidates=[];watchPeer();connection.textContent='CONECTANDO...';
-    peer.onicecandidate=e=>e.candidate&&sendSignal(person.clientId,{candidate:e.candidate});
-    const offer=await peer.createOffer();await peer.setLocalDescription(offer);sendSignal(person.clientId,{description:peer.localDescription});
+    if(peerCreation)return peerCreation;
+    peerCreation=(async()=>{
+      const servers=await iceServers();
+      if(peer)return;
+      peer=new RTCPeerConnection({iceServers:servers}); bindChannel(peer.createDataChannel('pokemon-link',{ordered:true}));
+      pendingIceCandidates=[];watchPeer();connection.textContent='CONECTANDO...';
+      peer.onicecandidate=e=>e.candidate&&sendSignal(person.clientId,{candidate:e.candidate});
+      const offer=await peer.createOffer();await peer.setLocalDescription(offer);sendSignal(person.clientId,{description:peer.localDescription});
+    })();
+    try{return await peerCreation;}finally{peerCreation=null;}
   }
   async function guestSignal(message) {
     if(!peer){peer=new RTCPeerConnection({iceServers:await iceServers()});pendingIceCandidates=[];watchPeer();connection.textContent='CONECTANDO...';peer.ondatachannel=e=>bindChannel(e.channel);peer.onicecandidate=e=>e.candidate&&sendSignal(message.from,{candidate:e.candidate});}
@@ -184,10 +193,21 @@
   async function hostSignal(message){if(message.data?.description){await peer.setRemoteDescription(message.data.description);await flushIceCandidates();}if(message.data?.candidate)await addOrQueueCandidate(message.data.candidate).catch(()=>{});}
   function connectSocket(){
     socket=new WebSocket(`${API.replace('https:','wss:')}/multiplayer/rooms/${room.id}/ws?ticket=${encodeURIComponent(ticket)}`);
-    socket.onmessage=e=>{const message=JSON.parse(e.data);if(message.type==='welcome')clientId=message.clientId;if(message.type==='state'&&!localNetId){const guest=message.participants.find(p=>!p.host);if(guest)document.body.classList.add('guest-arrived');void hostPeer(guest);}if(message.type==='signal')void(localNetId?guestSignal(message):hostSignal(message));};
+    socket.onmessage=e=>{const message=JSON.parse(e.data);if(message.type==='welcome')clientId=message.clientId;if(message.type==='state'&&!localNetId){const guest=message.participants.find(p=>!p.host);if(guest)document.body.classList.add('guest-arrived');void hostPeer(guest).catch(showConnectionError);}if(message.type==='signal'){signalChain=signalChain.then(()=>localNetId?guestSignal(message):hostSignal(message)).catch(showConnectionError);}};
+  }
+  function showConnectionError(error){console.error('[Pokemon Link] Falha na negociação:',error);connection.textContent='ERRO NA CONEXÃO';connection.classList.remove('online');const loading=document.getElementById('loading');loading.hidden=false;loading.innerHTML='<strong>NÃO FOI POSSÍVEL CONECTAR OS APARELHOS</strong><span>Feche esta sala e crie um novo convite. Não reutilize o convite anterior.</span>';}
+  async function refreshPublicRooms(){
+    refreshRoomsButton.disabled=true;
+    try{
+      const data=await request('/multiplayer/rooms');
+      const rooms=(data.rooms||[]).filter(item=>item.system==='gba-link'&&window.NeoPokemonLink.byId(String(item.gameId||'').replace(/-test$/,'')));
+      publicRooms.replaceChildren();
+      if(!rooms.length){const empty=document.createElement('span');empty.textContent='Nenhum jogador aguardando agora. Crie a primeira sala.';publicRooms.append(empty);return;}
+      rooms.forEach(item=>{const card=document.createElement('article');card.className='public-room';card.setAttribute('role','listitem');const name=document.createElement('strong');name.textContent=item.hostName||'Treinador';const detail=document.createElement('small');detail.textContent=item.title;const join=document.createElement('a');join.href=`pokemon-link-player.html?room=${encodeURIComponent(item.id)}`;join.textContent='ENTRAR';card.append(name,detail,join);publicRooms.append(card);});
+    }catch(_){publicRooms.textContent='Não foi possível atualizar os jogadores agora.';}finally{refreshRoomsButton.disabled=false;}
   }
   function renderQr(link){const target=document.getElementById('qr');target.replaceChildren();try{if(!window.QRCode)throw new Error('QR indisponível');new QRCode(target,{text:link,width:156,height:156,colorDark:'#061109',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});requestAnimationFrame(()=>{if(!target.querySelector('canvas,img'))target.textContent='Use COPIAR CONVITE';});}catch(_){target.textContent='Use COPIAR CONVITE';}}
-  async function createRoom(){await startCore();const roomGameId=testSaveSelected?`${config.id}-test`:config.id;const data=await request('/multiplayer/rooms',{method:'POST',body:JSON.stringify({gameId:roomGameId,title:`${config.title} · batalha GBA${testSaveSelected?' · save pronto':''}`,system:'gba-link',maxPlayers:2,isPublic:true})});room=data.room;ticket=data.ticket;localNetId=0;connectSocket();const link=`${location.origin}/pokemon-link-player.html?room=${room.id}`;document.getElementById('invite').hidden=false;document.getElementById('invite-link').value=link;renderQr(link);action.hidden=true;}
+  async function createRoom(){await startCore();const roomGameId=testSaveSelected?`${config.id}-test`:config.id;const intent={batalha:'batalha',troca:'troca',ambos:'batalha ou troca'}[roomIntent.value]||'batalha';const data=await request('/multiplayer/rooms',{method:'POST',body:JSON.stringify({gameId:roomGameId,title:`${config.title} · ${intent}${testSaveSelected?' · save pronto':''}`,system:'gba-link',maxPlayers:2,isPublic:true})});room=data.room;ticket=data.ticket;localNetId=0;connectSocket();const link=`${location.origin}/pokemon-link-player.html?room=${room.id}`;document.getElementById('invite').hidden=false;document.getElementById('invite-link').value=link;renderQr(link);action.hidden=true;void refreshPublicRooms();}
   async function joinRoom(){action.disabled=true;action.textContent='ENTRANDO NA SALA...';const loading=document.getElementById('loading');loading.hidden=false;loading.innerHTML='<strong>ENTRANDO NA SALA...</strong><span>Validando o convite.</span>';const data=await request(`/multiplayer/rooms/${roomId}/join`,{method:'POST'});room=data.room;ticket=data.ticket;testSaveSelected=/-test$/.test(room.gameId);config=window.NeoPokemonLink.byId(room.gameId.replace(/-test$/,''));if(!config)throw new Error('Esta sala não usa uma versão Pokémon compatível.');updateInfo();await startCore();document.body.classList.add('guest-game');localNetId=1;connectSocket();document.getElementById('invite').hidden=false;document.getElementById('room-status').textContent=testSaveSelected?'Save pronto aplicado nos dois aparelhos. Entrando na conexão...':'Entrando na conexão do anfitrião...';action.hidden=true;}
   const keyIds={b:0,a:8,select:2,start:3,up:4,down:5,left:6,right:7,l:10,r:11};
   document.querySelectorAll('[data-key]').forEach(button=>{const bit=1<<keyIds[button.dataset.key];const down=e=>{e.preventDefault();inputMask|=bit;};const up=e=>{e.preventDefault();inputMask&=~bit;};button.addEventListener('pointerdown',down);button.addEventListener('pointerup',up);button.addEventListener('pointercancel',up);button.addEventListener('pointerleave',up);});
@@ -220,7 +240,9 @@
       document.getElementById('save-status').textContent='Save de teste ativo somente para esta sala. Clique novamente para usar o seu.';
     } catch (_) { testSaveButton.disabled=false;testSaveButton.textContent='TENTAR INSTALAR SAVE NOVAMENTE'; }
   };
+  refreshRoomsButton.onclick=()=>void refreshPublicRooms();
+  setInterval(()=>void refreshPublicRooms(),15000);
   addEventListener('pagehide',persistSave);
   action.onclick=()=>void(roomId?joinRoom():createRoom()).catch(error=>{action.disabled=false;action.textContent=roomId?'TENTAR ENTRAR NOVAMENTE':'TENTAR CRIAR SALA';loadingError(error);});
-  (async()=>{localStorage.removeItem('neo_pokemon_fire_red_test_save');if(!await waitForAuth()){loginRequired();return;}if(roomId){action.textContent='ENTRAR NA BATALHA';return;}if(!config){action.disabled=true;action.textContent='VERSÃO NÃO COMPATÍVEL';return;}updateInfo();testSaveSelected=false;testSaveButton.hidden=config.id!=='pokemon-fire-red';document.getElementById('save-status').textContent=config.id==='pokemon-fire-red'?'Por padrão, esta sala usa o seu próprio save.':'';})();
+  (async()=>{localStorage.removeItem('neo_pokemon_fire_red_test_save');void refreshPublicRooms();if(!await waitForAuth()){loginRequired();return;}if(roomId){action.textContent='ENTRAR NA BATALHA';return;}if(!config){action.disabled=true;action.textContent='VERSÃO NÃO COMPATÍVEL';return;}updateInfo();testSaveSelected=config.id==='pokemon-fire-red';testSaveButton.hidden=config.id!=='pokemon-fire-red';if(testSaveSelected){testSaveButton.textContent='USAR MEU SAVE PESSOAL';document.getElementById('save-status').textContent='Save online pronto: você começará no ponto de batalha e troca.';}})();
 })();

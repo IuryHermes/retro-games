@@ -21,3 +21,15 @@ header button { min-height: 34px; padding: 5px 8px; border: 1px solid var(--gree
 @media (max-height: 700px) and (orientation: landscape) {
   body { padding-bottom: 0; }
 }
+
+.intent-label { display:block; margin:14px 0 5px; color:#bfffcf; font-size:12px; font-weight:800; }
+.lobby select { width:100%; min-height:42px; padding:8px; border:1px solid #42604b; border-radius:5px; background:#020503; color:#fff; }
+#public-lobby { margin:14px 0; padding:12px; border:1px solid #28643a; border-radius:8px; background:#061009; }
+.public-lobby-heading { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.public-lobby-heading h2 { margin:0; color:var(--green); font-size:14px; }
+.public-lobby-heading button { min-height:32px; padding:4px 8px; font-size:10px; }
+#public-rooms { display:grid; gap:7px; }
+.public-room { display:grid; grid-template-columns:1fr auto; gap:4px 8px; align-items:center; padding:9px; border:1px solid #21492e; border-radius:6px; background:#09170e; }
+.public-room strong { font-size:12px; }
+.public-room small { color:#b9c5bc; }
+.public-room a { grid-column:2; grid-row:1/3; min-height:36px; padding:7px; display:grid; place-items:center; text-decoration:none; font-size:11px; }
