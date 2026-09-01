@@ -37,5 +37,8 @@ assert.match(index, /logo-discord\.gif\?v=2/);
 assert.match(index, /\.discord-float \{[^}]*max-width:230px/);
 assert.doesNotMatch(index, /session\.recognition\.badges\.join/);
 assert.match(index, /@media \(hover: none\), \(pointer: coarse\)[\s\S]*\.row-container > \.scroll-btn,[\s\S]*\.collections-carousel > \.collection-scroll \{ display:none !important; \}/);
+assert.match(index, /class="mobile-hall-section" aria-labelledby="mobile-hall-title"/);
+assert.match(index, /\.mobile-hall-section \{ display:block; margin:26px 12px 10px/);
+assert.doesNotMatch(index, /\.mobile-marquee-wrapper \{ order:3/);
 
-console.log('home community layout: 25 checks passed');
+console.log('home community layout: 27 checks passed');

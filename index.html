@@ -253,6 +253,7 @@
         /* MARQUEE DO MOBILE (LETREIRO ROLANDO) LIMPO E VERDE */
         .mobile-marquee-wrapper { display: none; width: 100%; overflow: hidden; background: transparent; border: none; padding: 5px 0; margin: 5px 0; white-space: nowrap; position: relative; }
         .mobile-marquee-content { display: inline-block; animation: marquee 20s linear infinite; font-family: 'Press Start 2P', cursive; font-size: 8px; color: var(--accent-color); text-shadow: 0 0 5px rgba(0, 204, 68, 0.4); }
+        .mobile-hall-section { display:none; }
         .marquee-item { display: inline-block; margin-right: 50px; }
         @keyframes marquee { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
@@ -373,6 +374,8 @@
             .close-chat-btn:hover { background: #ff3333; color: #fff; }
 
             .mobile-marquee-wrapper { display: block; }
+            .mobile-hall-section { display:block; margin:26px 12px 10px; padding:14px 0; border:1px solid var(--border-color); border-radius:8px; background:var(--card-bg); overflow:hidden; }
+            .mobile-hall-section h2 { margin:0 12px 8px; color:#ffd166; font:9px 'Press Start 2P',cursive; }
             .pix-trigger-pc, .community-shortcuts-pc { display:none !important; }
         }
 
@@ -404,7 +407,8 @@
             .discord-float { bottom:calc(84px + env(safe-area-inset-bottom)); }
             .top-bar { flex-direction:column; align-items:stretch; padding:10px; margin:0; text-align:left; gap:7px; }
             .brand { width:100%; min-height:40px; box-sizing:border-box; padding-right:48px; text-align:left; display:flex !important; align-items:center; font-size:15px !important; margin:0; }
-            .mobile-marquee-wrapper { display:none !important; }
+            .mobile-marquee-wrapper { display:block !important; height:25px; padding:6px 0 4px; margin:0; border-top:1px solid var(--border-color); border-bottom:1px solid var(--border-color); background:var(--input-bg); }
+            .mobile-marquee-content { font-size:7px; }
             .top-bar-controls { display:grid !important; grid-template-columns:minmax(0,1fr) 72px; width:100%; align-items:center; gap:7px; margin:8px 0 0; padding:2px 1px 4px; }
             .mobile-quick-scroll { display:block; position:absolute; top:8px; right:8px; width:40px; padding:0; }
             .mobile-quick-scroll::-webkit-scrollbar { display:none; }
@@ -808,12 +812,6 @@
         <main class="main-content">
             <header class="top-bar">
                 <div class="brand" onclick="window.scrollTo(0,0);">NEOTERMINALROOM</div>
-                <div class="mobile-marquee-wrapper">
-                    <div class="mobile-marquee-content" id="mobile-marquee-content">
-                        Carregando banco de dados...
-                    </div>
-                </div>
-
                 <div class="top-bar-controls">
                     <div class="mobile-quick-scroll" aria-label="Atalhos principais">
                     <button class="account-button top-account-mobile" id="account-button-mobile" type="button" aria-label="Entrar ou criar cadastro"><img class="account-avatar" src="assets/imagens-videos/logo-discord.gif?v=2" alt=""><span class="account-copy"><span class="account-name">LOGIN / CADASTRO</span></span></button>
@@ -890,6 +888,13 @@
                 <h2 id="about-library-title">JOGOS RETRÔ ONLINE DIRETO NO NAVEGADOR</h2>
                 <p>O NeoTerminalRoom reúne uma biblioteca de jogos clássicos de <a href="#section-snes">Super Nintendo</a>, <a href="#section-nes">Nintendo</a>, <a href="#section-megadrive">Mega Drive</a>, <a href="#section-n64">Nintendo 64</a>, <a href="#section-gba">Game Boy Advance</a>, <a href="#section-ps1">PlayStation 1</a> e <a href="#section-atari2600">Atari 2600</a>. Os jogos funcionam online no navegador, no computador ou celular, sem instalar um emulador separado.</p>
                 <p>Encontre aventuras, RPGs, jogos de luta, corrida e plataforma, incluindo clássicos traduzidos, dublados e adaptados para português do Brasil. Escolha um sistema, abra a página do jogo e use o botão Jogar agora para carregar somente os arquivos necessários para aquela partida.</p>
+            </section>
+
+            <section class="mobile-hall-section" aria-labelledby="mobile-hall-title">
+                <h2 id="mobile-hall-title">HALL DA FAMA</h2>
+                <div class="mobile-marquee-wrapper">
+                    <div class="mobile-marquee-content" id="mobile-marquee-content">Carregando Hall da Fama...</div>
+                </div>
             </section>
 
         </main>
