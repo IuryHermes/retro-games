@@ -1,11 +1,11 @@
 [
   {"nome":"The King of Fighters '94 — Português","rom":"roms/kof94br.zip?v=fbneo-standalone1","capa":"kof94.png","nota":"8.5","descricao":"O início da saga KOF, com frases de vitória, história e finais traduzidos para português do Brasil pelo NeoGeo BR Team."},
-  {"nome":"The King of Fighters '95","rom":"roms/kof95.zip?v=fbneo-standalone1","capa":"kof95.png","nota":"8.6","descricao":"O segundo torneio King of Fighters e o começo da saga Orochi, na versão original de Neo Geo."},
-  {"nome":"The King of Fighters '96","rom":"roms/kof96.zip?v=fbneo-standalone1","capa":"kof96.png","nota":"9.0","descricao":"KOF '96 introduz uma jogabilidade renovada e avança a saga Orochi na versão original de Neo Geo."},
-  {"nome":"The King of Fighters '97","rom":"roms/kof97.zip?v=fbneo-standalone1","capa":"kof97-user.webp","nota":"9.2","descricao":"O encerramento da saga Orochi, executado diretamente pelo FBNeo no navegador."},
+  {"nome":"The King of Fighters '95","rom":"roms/kof95.zip?v=ptbr-story1","capa":"kof95.png","nota":"8.6","descricao":"O começo da saga Orochi, com textos de história e finais em português na versão Neo Geo."},
+  {"nome":"The King of Fighters '96","rom":"roms/kof96.zip?v=ptbr-story1","capa":"kof96.png","nota":"9.0","descricao":"A saga Orochi avança com textos de história, diálogos e finais em português."},
+  {"nome":"The King of Fighters '97","rom":"roms/kof97.zip?v=ptbr-story1","capa":"kof97-user.webp","nota":"9.2","descricao":"O encerramento da saga Orochi com história, diálogos narrativos e finais em português."},
   {"nome":"The King of Fighters '98","rom":"roms/kof98.zip?v=fbneo-standalone1","capa":"kof98.png","nota":"9.4","descricao":"O clássico Dream Match reúne grande parte do elenco da série em uma das edições mais celebradas de KOF."},
-  {"nome":"The King of Fighters '99","rom":"roms/kof99.zip?v=fbneo-standalone1","capa":"kof99.png","nota":"8.7","descricao":"O início da saga NESTS e a estreia do sistema Striker, na versão original de Neo Geo."},
-  {"nome":"The King of Fighters 2000","rom":"roms/kof2000.zip?v=fbneo-standalone1","capa":"kof2000.png","nota":"8.9","descricao":"A continuação da saga NESTS com uma ampla seleção de Strikers e combates rápidos."},
-  {"nome":"The King of Fighters 2001","rom":"roms/kof2001.zip?v=fbneo-standalone1","capa":"kof2001-user.jfif","nota":"8.2","descricao":"O desfecho da saga NESTS, preservado em seu romset original de Neo Geo."},
+  {"nome":"The King of Fighters '99","rom":"roms/kof99.zip?v=ptbr-story1","capa":"kof99.png","nota":"8.7","descricao":"O início da saga NESTS e a estreia dos Strikers, com os textos narrativos em português."},
+  {"nome":"The King of Fighters 2000","rom":"roms/kof2000.zip?v=ptbr-story1","capa":"kof2000.png","nota":"8.9","descricao":"A continuação da saga NESTS, com história, diálogos e finais configurados em português."},
+  {"nome":"The King of Fighters 2001","rom":"roms/kof2001.zip?v=ptbr-story1","capa":"kof2001-user.jfif","nota":"8.2","descricao":"O desfecho da saga NESTS com história, diálogos narrativos e finais em português."},
   {"nome":"The King of Fighters 2002","rom":"roms/kof2k2br.zip?v=ptbr-v3","capa":"kof2002-user.jfif","nota":"9.1","descricao":"Edição brasileira v2.0 do clássico Dream Match, traduzida para português pelo NeoGeo BR Team e compatível com FBNeo."}
 ]

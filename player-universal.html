@@ -361,6 +361,45 @@
             };
 
             window.EJS_gameUrl = game.trim().startsWith("http") ? game.trim() : baseUrl + game.trim();
+            const neoGeoPortuguesePresetGames = new Set(['kof95', 'kof96', 'kof97', 'kof99', 'kof2000', 'kof2001']);
+            let neoGeoPortugueseGame = '';
+            let neoGeoPortugueseSave = Promise.resolve(null);
+            if (params.get('system') === 'neogeo') {
+                try {
+                    neoGeoPortugueseGame = new URL(window.EJS_gameUrl, location.href).pathname.split('/').pop().replace(/\.zip$/i, '').toLowerCase();
+                } catch (_) {}
+                if (neoGeoPortuguesePresetGames.has(neoGeoPortugueseGame)) {
+                    neoGeoPortugueseSave = fetch(`/assets/emulator/neogeo-ptbr-saves/${neoGeoPortugueseGame}.srm?v=20260831-ptbr1`, { cache: 'force-cache' })
+                        .then(response => response.ok ? response.arrayBuffer() : null)
+                        .catch(error => { console.warn('Neo Geo PT-BR preset:', error); return null; });
+                }
+            }
+            const attachNeoGeoPortugueseSave = () => {
+                if (!neoGeoPortuguesePresetGames.has(neoGeoPortugueseGame)) return;
+                const migrationKey = `neo_neogeo_ptbr_save_v1_${neoGeoPortugueseGame}`;
+                if (localStorage.getItem(migrationKey)) return;
+                const startedAt = Date.now();
+                const timer = setInterval(() => {
+                    const emulator = window.EJS_emulator;
+                    if (!emulator?.on) {
+                        if (Date.now() - startedAt > 30000) clearInterval(timer);
+                        return;
+                    }
+                    clearInterval(timer);
+                    emulator.on('saveDatabaseLoaded', fileSystem => {
+                        void neoGeoPortugueseSave.then(save => {
+                            if (!save || localStorage.getItem(migrationKey)) return;
+                            try {
+                                fileSystem.writeFile(`/data/saves/${neoGeoPortugueseGame}.srm`, new Uint8Array(save));
+                                fileSystem.syncfs(false, error => {
+                                    if (error) return console.warn('Neo Geo PT-BR sync:', error);
+                                    localStorage.setItem(migrationKey, '1');
+                                });
+                            } catch (error) { console.warn('Neo Geo PT-BR install:', error); }
+                        });
+                    });
+                }, 10);
+            };
             const requestedBios = params.get('bios');
             if (requestedBios && (core === 'fbneo' || core === 'arcade' || params.get('system') === 'neogeo')) {
                 // Arcade/FBNeo expects the machine archive (neogeo.zip) as
@@ -431,9 +470,9 @@
                 "mupen64plus-Framerate": "Original"
             } : params.get('system') === 'neogeo' ? {
                 "vsync": false,
-                // AES Europe exposes the cartridge's home-mode language
-                // selection, including Portuguese in supported KOF releases.
-                "fbneo-neogeo-mode": "AES_EUR"
+                // European MVS exposes each cartridge's official LANGUAGE
+                // soft-DIP. The KOF migration above selects Portuguese once.
+                "fbneo-neogeo-mode": "MVS_EUR"
             } : { "vsync": false };
 
             // ==========================================
@@ -492,6 +531,7 @@
                 loaderScript.src = 'https://cdn.emulatorjs.org/stable/data/loader.js';
                 loaderScript.onerror = () => showCompatibilityError('Não foi possível baixar o emulador. Verifique a conexão, desative bloqueadores para este site e tente novamente.');
                 document.body.appendChild(loaderScript);
+                attachNeoGeoPortugueseSave();
             }).catch(error => showCompatibilityError(`Verificação preventiva: ${String(error?.message || error)}`));
             setTimeout(() => { if (!window.EJS_emulator) showCompatibilityError('O Safari demorou demais para iniciar o jogo. Atualize o iOS, feche outras abas e tente novamente.'); }, 45000);
         } else {

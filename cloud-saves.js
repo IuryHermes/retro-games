@@ -351,6 +351,9 @@
         // current cores. Old objects remain untouched for support/recovery.
         if (options.core === 'n64') gameId = `${gameId}-core2`;
         if (options.system === 'ps1' && options.multidisc) gameId = `${gameId}-disc2`;
+        if (options.system === 'neogeo' && /\/(?:kof95|kof96|kof97|kof99|kof2000|kof2001)\.zip(?:\?|$)/i.test(options.game)) {
+            gameId = `${gameId}-ptbr2`;
+        }
         gameName = String(options.name || gameId).slice(0, 100);
         gameSystem = String(options.system || options.core || '').toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 20);
         await flushPendingHistory();
