@@ -150,19 +150,26 @@
   document.getElementById('copy').onclick=async()=>{await navigator.clipboard.writeText(document.getElementById('invite-link').value);document.getElementById('room-status').textContent='Convite copiado.';};
   testSaveButton.onclick=async()=>{
     if (!config || config.id !== 'pokemon-fire-red') return;
+    if (testSaveSelected) {
+      testSaveSelected=false;
+      testSaveButton.disabled=false;
+      testSaveButton.textContent='USAR SAVE PRONTO PARA TESTE';
+      document.getElementById('save-status').textContent='Seu próprio save será usado nesta sala.';
+      return;
+    }
     const confirmed = confirm('Este save pronto substituirá somente o save do modo de batalha FireRed neste aparelho. Seu save normal do site não será alterado. Continuar?');
     if (!confirmed) return;
     testSaveButton.disabled=true; testSaveButton.textContent='PREPARANDO SAVE...';
     try {
       const bytes=await battleTestSave();
-      await saveDb('write',bytes);
+      if(bytes.byteLength!==131072)throw new Error('save inválido');
       testSaveSelected=true;
-      localStorage.setItem('neo_pokemon_fire_red_test_save','1');
       testSaveButton.textContent='✓ SAVE PRONTO INSTALADO';
-      document.getElementById('save-status').textContent='Save instalado. Inicie a sala, continue o jogo e vá ao 2º andar de qualquer Centro Pokémon.';
+      testSaveButton.disabled=false;
+      document.getElementById('save-status').textContent='Save de teste ativo somente para esta sala. Clique novamente para usar o seu.';
     } catch (_) { testSaveButton.disabled=false;testSaveButton.textContent='TENTAR INSTALAR SAVE NOVAMENTE'; }
   };
   addEventListener('pagehide',persistSave);
   action.onclick=()=>void(roomId?joinRoom():createRoom()).catch(error=>{action.disabled=false;action.textContent=roomId?'TENTAR ENTRAR NOVAMENTE':'TENTAR CRIAR SALA';loadingError(error);});
-  (async()=>{if(!await waitForAuth()){loginRequired();return;}if(roomId){action.textContent='ENTRAR NA BATALHA';return;}if(!config){action.disabled=true;action.textContent='VERSÃO NÃO COMPATÍVEL';return;}updateInfo();testSaveSelected=config.id==='pokemon-fire-red'&&localStorage.getItem('neo_pokemon_fire_red_test_save')==='1';testSaveButton.hidden=config.id!=='pokemon-fire-red';if(testSaveSelected){testSaveButton.textContent='✓ SAVE PRONTO ATIVO';document.getElementById('save-status').textContent='Este save será aplicado automaticamente nos dois aparelhos.';}})();
+  (async()=>{localStorage.removeItem('neo_pokemon_fire_red_test_save');if(!await waitForAuth()){loginRequired();return;}if(roomId){action.textContent='ENTRAR NA BATALHA';return;}if(!config){action.disabled=true;action.textContent='VERSÃO NÃO COMPATÍVEL';return;}updateInfo();testSaveSelected=false;testSaveButton.hidden=config.id!=='pokemon-fire-red';document.getElementById('save-status').textContent=config.id==='pokemon-fire-red'?'Por padrão, esta sala usa o seu próprio save.':'';})();
 })();
