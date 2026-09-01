@@ -16,3 +16,7 @@ Modos expostos:
 
 ROMs modificadas só podem conversar quando os dois jogadores usam os mesmos
 bytes. Hacks ficam desativados até validação individual.
+
+O save opcional de teste do FireRed vem do projeto público
+[`ReignOfComputer/RoCs-PC`](https://github.com/ReignOfComputer/RoCs-PC) e é
+armazenado separadamente dos saves normais do usuário.

@@ -27,6 +27,11 @@ else {
 }
 core.FS.writeFile('/game.gba', romBytes);
 if (!core.ccall('neo_init','number',['string','string'],['/game.gba',mode])) throw new Error(`${id}: falha ao carregar ROM`);
+if (process.argv.includes('--battle-save')) {
+  const save = fs.readFileSync(path.join(root,'pokemon-link/saves/pokemon-fire-red-battle-ready.sav'));
+  if (save.byteLength !== core._neo_save_size()) throw new Error(`${id}: tamanho do save incompatível`);
+  core.HEAPU8.set(save, core._neo_save_ptr());
+}
 for (let frame=0; frame<180; frame++) core._neo_run();
 const result = { id, width:core._neo_frame_width(), height:core._neo_frame_height(), audioFrames:core._neo_audio_frames(), saveSize:core._neo_save_size() };
 if (result.width !== 240 || result.height !== 160 || !result.audioFrames || !result.saveSize) throw new Error(`${id}: saída inválida ${JSON.stringify(result)}`);

@@ -16,6 +16,7 @@
   let inputMask = 0, audioContext, audioTime = 0, lastSave = 0;
   const screen = document.getElementById('screen'), ctx = screen.getContext('2d', { alpha:false });
   const connection = document.getElementById('connection'), action = document.getElementById('create-room');
+  const testSaveButton = document.getElementById('test-save');
   const token = () => sessionStorage.getItem('neo_club_access') || sessionStorage.getItem('neo_account_access') || '';
   const request = async (path, options={}) => {
     const response = await fetch(API + path, { ...options, headers:{ Authorization:`Bearer ${token()}`, ...(options.body ? {'Content-Type':'application/json'} : {}), ...options.headers } });
@@ -125,7 +126,21 @@
   addEventListener('keydown',e=>{const map={z:8,x:0,Enter:3,Shift:2,ArrowUp:4,ArrowDown:5,ArrowLeft:6,ArrowRight:7,a:10,s:11};if(map[e.key]!=null){e.preventDefault();inputMask|=1<<map[e.key];}});
   addEventListener('keyup',e=>{const map={z:8,x:0,Enter:3,Shift:2,ArrowUp:4,ArrowDown:5,ArrowLeft:6,ArrowRight:7,a:10,s:11};if(map[e.key]!=null)inputMask&=~(1<<map[e.key]);});
   document.getElementById('copy').onclick=async()=>{await navigator.clipboard.writeText(document.getElementById('invite-link').value);document.getElementById('room-status').textContent='Convite copiado.';};
+  testSaveButton.onclick=async()=>{
+    if (!config || config.id !== 'pokemon-fire-red') return;
+    const confirmed = confirm('Este save pronto substituirá somente o save do modo de batalha FireRed neste aparelho. Seu save normal do site não será alterado. Continuar?');
+    if (!confirmed) return;
+    testSaveButton.disabled=true; testSaveButton.textContent='PREPARANDO SAVE...';
+    try {
+      const response=await fetch('pokemon-link/saves/pokemon-fire-red-battle-ready.sav');
+      const bytes=await response.arrayBuffer();
+      if(!response.ok||bytes.byteLength!==131072)throw new Error('save inválido');
+      await saveDb('write',bytes);
+      testSaveButton.textContent='✓ SAVE PRONTO INSTALADO';
+      document.getElementById('save-status').textContent='Save instalado. Inicie a sala, continue o jogo e vá ao 2º andar de qualquer Centro Pokémon.';
+    } catch (_) { testSaveButton.disabled=false;testSaveButton.textContent='TENTAR INSTALAR SAVE NOVAMENTE'; }
+  };
   addEventListener('pagehide',persistSave);
   action.onclick=()=>void(roomId?joinRoom():createRoom()).catch(error=>{action.disabled=false;action.textContent=roomId?'TENTAR ENTRAR NOVAMENTE':'TENTAR CRIAR SALA';document.getElementById('room-status').textContent=error.message;document.getElementById('invite').hidden=false;});
-  (async()=>{if(!token()){loginRequired();return;}if(roomId){action.textContent='ENTRAR NA BATALHA';return;}if(!config){action.disabled=true;action.textContent='VERSÃO NÃO COMPATÍVEL';return;}updateInfo();})();
+  (async()=>{if(!token()){loginRequired();return;}if(roomId){action.textContent='ENTRAR NA BATALHA';return;}if(!config){action.disabled=true;action.textContent='VERSÃO NÃO COMPATÍVEL';return;}updateInfo();testSaveButton.hidden=config.id!=='pokemon-fire-red';})();
 })();
