@@ -51,6 +51,14 @@
     document.getElementById('game-title').textContent = config.title;
     document.getElementById('instructions').textContent = config.room;
   }
+  function updateSaveControls(){
+    const preparedOnly=config?.id==='pokemon-fire-red';
+    testSaveButton.hidden=true;
+    findSaveButton.hidden=preparedOnly;
+    importSaveButton.hidden=preparedOnly;
+    exportSaveButton.hidden=preparedOnly;
+    if(preparedOnly)document.getElementById('save-status').textContent='Save online validado: os dois jogadores começarão no ponto correto para batalha e troca.';
+  }
   function saveDb(mode, bytes, forcePersonal=false) {
     return new Promise((resolve, reject) => {
       const open = indexedDB.open('neo-pokemon-link', 1);
@@ -208,7 +216,7 @@
   }
   function renderQr(link){const target=document.getElementById('qr');target.replaceChildren();try{if(!window.QRCode)throw new Error('QR indisponível');new QRCode(target,{text:link,width:156,height:156,colorDark:'#061109',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});requestAnimationFrame(()=>{if(!target.querySelector('canvas,img'))target.textContent='Use COPIAR CONVITE';});}catch(_){target.textContent='Use COPIAR CONVITE';}}
   async function createRoom(){await startCore();const roomGameId=testSaveSelected?`${config.id}-test`:config.id;const intent={batalha:'batalha',troca:'troca',ambos:'batalha ou troca'}[roomIntent.value]||'batalha';const data=await request('/multiplayer/rooms',{method:'POST',body:JSON.stringify({gameId:roomGameId,title:`${config.title} · ${intent}${testSaveSelected?' · save pronto':''}`,system:'gba-link',maxPlayers:2,isPublic:true})});room=data.room;ticket=data.ticket;localNetId=0;connectSocket();const link=`${location.origin}/pokemon-link-player.html?room=${room.id}`;document.getElementById('invite').hidden=false;document.getElementById('invite-link').value=link;renderQr(link);action.hidden=true;void refreshPublicRooms();}
-  async function joinRoom(){action.disabled=true;action.textContent='ENTRANDO NA SALA...';const loading=document.getElementById('loading');loading.hidden=false;loading.innerHTML='<strong>ENTRANDO NA SALA...</strong><span>Validando o convite.</span>';const data=await request(`/multiplayer/rooms/${roomId}/join`,{method:'POST'});room=data.room;ticket=data.ticket;testSaveSelected=/-test$/.test(room.gameId);config=window.NeoPokemonLink.byId(room.gameId.replace(/-test$/,''));if(!config)throw new Error('Esta sala não usa uma versão Pokémon compatível.');updateInfo();await startCore();document.body.classList.add('guest-game');localNetId=1;connectSocket();document.getElementById('invite').hidden=false;document.getElementById('room-status').textContent=testSaveSelected?'Save pronto aplicado nos dois aparelhos. Entrando na conexão...':'Entrando na conexão do anfitrião...';action.hidden=true;}
+  async function joinRoom(){action.disabled=true;action.textContent='ENTRANDO NA SALA...';const loading=document.getElementById('loading');loading.hidden=false;loading.innerHTML='<strong>ENTRANDO NA SALA...</strong><span>Validando o convite.</span>';const data=await request(`/multiplayer/rooms/${roomId}/join`,{method:'POST'});room=data.room;ticket=data.ticket;config=window.NeoPokemonLink.byId(room.gameId.replace(/-test$/,''));if(!config)throw new Error('Esta sala não usa uma versão Pokémon compatível.');testSaveSelected=config.id==='pokemon-fire-red'||/-test$/.test(room.gameId);updateInfo();updateSaveControls();await startCore();document.body.classList.add('guest-game');localNetId=1;connectSocket();document.getElementById('invite').hidden=false;document.getElementById('room-status').textContent=testSaveSelected?'Save pronto aplicado nos dois aparelhos. Entrando na conexão...':'Entrando na conexão do anfitrião...';action.hidden=true;}
   const keyIds={b:0,a:8,select:2,start:3,up:4,down:5,left:6,right:7,l:10,r:11};
   document.querySelectorAll('[data-key]').forEach(button=>{const bit=1<<keyIds[button.dataset.key];const down=e=>{e.preventDefault();inputMask|=bit;};const up=e=>{e.preventDefault();inputMask&=~bit;};button.addEventListener('pointerdown',down);button.addEventListener('pointerup',up);button.addEventListener('pointercancel',up);button.addEventListener('pointerleave',up);});
   addEventListener('keydown',e=>{const map={z:8,x:0,Enter:3,Shift:2,ArrowUp:4,ArrowDown:5,ArrowLeft:6,ArrowRight:7,a:10,s:11};if(map[e.key]!=null){e.preventDefault();inputMask|=1<<map[e.key];}});
@@ -244,5 +252,5 @@
   setInterval(()=>void refreshPublicRooms(),15000);
   addEventListener('pagehide',persistSave);
   action.onclick=()=>void(roomId?joinRoom():createRoom()).catch(error=>{action.disabled=false;action.textContent=roomId?'TENTAR ENTRAR NOVAMENTE':'TENTAR CRIAR SALA';loadingError(error);});
-  (async()=>{localStorage.removeItem('neo_pokemon_fire_red_test_save');void refreshPublicRooms();if(!await waitForAuth()){loginRequired();return;}if(roomId){action.disabled=false;action.textContent='ENTRAR NA BATALHA';return;}if(!config){action.disabled=true;action.textContent='VERSÃO NÃO COMPATÍVEL';return;}updateInfo();testSaveSelected=config.id==='pokemon-fire-red';testSaveButton.hidden=config.id!=='pokemon-fire-red';action.disabled=false;action.textContent='CRIAR SALA PÚBLICA';if(testSaveSelected){testSaveButton.textContent='USAR MEU SAVE PESSOAL';document.getElementById('save-status').textContent='Save online pronto: você começará no ponto de batalha e troca.';}})();
+  (async()=>{localStorage.removeItem('neo_pokemon_fire_red_test_save');void refreshPublicRooms();if(!await waitForAuth()){loginRequired();return;}if(roomId){action.disabled=false;action.textContent='ENTRAR NA BATALHA';return;}if(!config){action.disabled=true;action.textContent='VERSÃO NÃO COMPATÍVEL';return;}updateInfo();testSaveSelected=config.id==='pokemon-fire-red';updateSaveControls();action.disabled=false;action.textContent='CRIAR SALA PÚBLICA';})();
 })();
