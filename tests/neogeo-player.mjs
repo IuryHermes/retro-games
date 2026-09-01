@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile, stat } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 
 const player = await readFile(new URL('../player-universal.html', import.meta.url), 'utf8');
 const preflight = await readFile(new URL('../emulator-preflight.js', import.meta.url), 'utf8');
@@ -16,22 +16,6 @@ assert.match(player, /saveDatabaseLoaded/);
 assert.match(player, /\/data\/saves\/\$\{neoGeoPortugueseGame\}\.srm/);
 assert.match(player, /neo_fbneo_rom_cache_repair_v1/);
 assert.match(player, /repairFbneoCache/);
-assert.equal(catalog.length, 9);
-for (const save of ['kof95','kof96','kof97','kof99','kof2000','kof2001']) {
-  assert.match(player, new RegExp(`'${save}'`));
-  assert.equal((await stat(new URL(`../assets/emulator/neogeo-ptbr-saves/${save}.srm`, import.meta.url))).size, 65536);
-}
-for (const slug of ['94-portugues','95','96','97','98','99','2000','2001','2002']) {
-  const route = await readFile(new URL(`../jogos/neogeo/the-king-of-fighters-${slug}/index.html`, import.meta.url), 'utf8');
-  assert.match(route, /neogeo-fbneo-2026\.zip/);
-}
-assert.equal(catalog.filter(game => /fighters '96(?:\s|$)/i.test(game.nome)).length, 1);
-assert.ok(catalog.every(game => /^roms\/kof.+\.zip\?v=(?:fbneo-standalone1|ptbr-story1|ptbr-v3)$/i.test(game.rom)));
-const kof2002 = catalog.find(game => /fighters 2002$/i.test(game.nome));
-assert.equal(kof2002?.rom, 'roms/kof2k2br.zip?v=ptbr-v3');
-assert.match(kof2002?.descricao || '', /português/i);
-assert.equal(catalog.find(game => /fighters '97$/i.test(game.nome))?.capa, 'kof97-user.webp');
-assert.equal(catalog.find(game => /fighters 2001$/i.test(game.nome))?.capa, 'kof2001-user.jfif');
-assert.equal(kof2002?.capa, 'kof2002-user.jfif');
+assert.equal(catalog.length, 0, 'KOF deve ficar fora do catálogo durante a estabilização');
 
-console.log('Neo Geo player: FBNeo, parent BIOS, KOF 2002 PT-BR e 9 KOF únicos validados');
+console.log('Neo Geo player preservado e catálogo KOF em quarentena');

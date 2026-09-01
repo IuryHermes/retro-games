@@ -5,7 +5,7 @@ const preflight = await readFile(new URL('../emulator-preflight.js', import.meta
 const player = await readFile(new URL('../player-universal.html', import.meta.url), 'utf8');
 const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 
-assert.match(player, /emulator-preflight\.js\?v=1/);
+assert.match(player, /emulator-preflight\.js\?v=2/);
 assert.match(player, /NeoEmulatorPreflight\.check/);
 assert.match(player, /Verificação preventiva/);
 assert.match(preflight, /typeof WebAssembly/);

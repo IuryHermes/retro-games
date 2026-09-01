@@ -55,6 +55,7 @@
     const allLink=document.createElement('a');allLink.href='coletaneas.html';allLink.textContent='Todas';nav.appendChild(allLink);
     definitions.forEach(def=>{
       const games=all.filter(game=>def.match.test(String(game.nome||''))).sort((a,b)=>String(a.nome).localeCompare(String(b.nome),'pt-BR',{numeric:true}));
+      if(!games.length)return;
       const section=document.createElement('section');section.className='collection';section.id=def.id;
       section.innerHTML=`<div class="collection-head"><div><h2>${esc(def.title)}</h2><p>${esc(def.description)}</p></div><span class="count">${games.length} JOGO${games.length===1?'':'S'}</span></div><div class="games"></div>`;
       const list=section.querySelector('.games');

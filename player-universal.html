@@ -3,13 +3,6 @@
 <head>
     <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob:; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data: blob:; media-src 'self' https: blob:; connect-src 'self' https: wss: blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self' https://discord.com https://www.mercadopago.com; upgrade-insecure-requests">
     <title>NeoTerminal Room - Player</title>
-    <script>
-        // GitHub Pages cannot set COOP/COEP response headers. This service worker
-        // applies them in-browser and reloads only on the first compatible visit.
-        window.coi = { quiet: true, coepCredentialless: () => true };
-    </script>
-    <script src="coi-serviceworker.js?v=3"></script>
-    
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-touch-fullscreen" content="yes">
@@ -419,9 +412,6 @@
                 try {
                     ps1DiscUrls = JSON.parse(params.get('discs'));
                     if (!Array.isArray(ps1DiscUrls) || ps1DiscUrls.length < 2 || ps1DiscUrls.some(url => !/^https:\/\//.test(url))) throw new Error('Lista de discos inválida.');
-                    if (/\.m3u(?:$|\?)/i.test(window.EJS_gameUrl)) {
-                        window.EJS_externalFiles = { ...(window.EJS_externalFiles || {}), [ps1DiscPath(ps1DiscUrls[0])]: ps1DiscUrls[0] };
-                    }
                     if (textEl) textEl.innerHTML = `PREPARANDO DISCO 1<span id="loading-dots"></span><br><span class="blink" style="font-size:12px">[ OS OUTROS DISCOS SERÃO BAIXADOS SOMENTE NA TROCA ]</span>`;
                 } catch (error) { showCompatibilityError(`Falha na lista multidisco: ${error.message}`); }
             }
@@ -456,7 +446,7 @@
                 "mupen64plus-43screensize": "320x240",
                 "mupen64plus-169screensize": "640x360",
                 "mupen64plus-EnableNativeResFactor": "0",
-                "mupen64plus-ThreadedRenderer": isDoom64 ? "False" : "True",
+                "mupen64plus-ThreadedRenderer": window.EJS_threads ? "True" : "False",
                 "mupen64plus-MultiSampling": "0",
                 "mupen64plus-FXAA": "0",
                 "mupen64plus-EnableHWLighting": "False",

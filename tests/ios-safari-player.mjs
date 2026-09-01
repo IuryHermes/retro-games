@@ -14,7 +14,9 @@ assert.match(universal, /Promise\.race\(\[/, 'cloud startup must have a timeout'
 assert.match(universal, /loaderScript\.onerror/, 'loader download failures must be visible');
 assert.match(universal, /id="compat-error"/, 'player must provide a visible compatibility error');
 assert.match(universal, /name="viewport"/, 'player must set the mobile viewport');
-assert.match(universal, /EJS_externalFiles = \{ \[ps1DiscPath\(ps1DiscUrls\[0\]\)\]: ps1DiscUrls\[0\] \}/, 'multi-disc PS1 games must preload only disc 1');
+assert.match(universal, /const ps1CoreSlotPath = game \? ps1DiscPath\(game\) : ''/, 'multi-disc PS1 must boot directly from the route Disc 1 URL');
+assert.doesNotMatch(universal, /\[ps1DiscPath\(ps1DiscUrls\[0\]\)\]: ps1DiscUrls\[0\]/, 'Disc 1 must not be duplicated in iPhone memory');
+assert.doesNotMatch(universal, /coi-serviceworker/, 'PS1 must not install the N64 isolation worker in Safari');
 assert.match(universal, /params\.get\('discs'\)/, 'multi-disc metadata must come from the game route');
 assert.match(universal, /manager\.FS\.writeFile/, 'the requested next disc must be loaded into the running emulator filesystem');
 assert.match(universal, /manager\.setCurrentDisk\(0\)/, 'disc selection must reinsert the replaced reader slot without restarting the console');

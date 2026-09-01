@@ -23,10 +23,11 @@ const games = (await Promise.all(systems.map(async system => {
   return data.map(game => ({ ...game, system }));
 }))).flat();
 const counts = definitions.map(pattern => games.filter(game => pattern.test(String(game.nome || ''))).length);
-if (counts.some(count => count === 0)) throw new Error(`coletânea vazia inesperada: ${counts.join(',')}`);
+if (counts.slice(1).some(count => count === 0)) throw new Error(`coletânea vazia inesperada: ${counts.join(',')}`);
 
 await access(join(root, 'assets', 'imagens-videos', 'imagens do menu', 'coletaneas.svg'));
-if (counts[0] !== 9 || !html.includes('The King of Fighters')) throw new Error(`coletânea KOF incompleta ou duplicada: ${counts[0]}`);
+if (counts[0] !== 0) throw new Error(`KOF deveria estar em quarentena: ${counts[0]}`);
+if (!html.includes('if(!games.length)return')) throw new Error('coletâneas vazias não são ocultadas');
 if (/EM PREPARAÇÃO/i.test(html)) throw new Error('estado antigo de preparação ainda presente');
 if (!html.includes('filterCollection') || !html.includes('location.hash')) throw new Error('filtro por coletânea ausente');
 console.log(`coletâneas validadas; jogos por série: ${counts.join(', ')}`);

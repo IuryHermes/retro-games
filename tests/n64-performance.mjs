@@ -5,10 +5,7 @@ const player = await readFile(new URL('../player-universal.html', import.meta.ur
 const cloudSaves = await readFile(new URL('../cloud-saves.js', import.meta.url), 'utf8');
 assert.match(player, /src="cloud-saves\.js\?v=16"/);
 
-assert.match(player, /src="coi-serviceworker\.js\?v=3"/);
-const coiWorker = await readFile(new URL('../coi-serviceworker.js', import.meta.url), 'utf8');
-assert.match(coiWorker, /scope: "\/player-universal\.html"/);
-assert.match(coiWorker, /let coepCredentialless = true/);
+assert.doesNotMatch(player, /coi-serviceworker/, 'o player não deve instalar service worker no Safari/iPhone');
 assert.match(player, /window\.crossOriginIsolated/);
 assert.match(player, /typeof window\.SharedArrayBuffer === 'function'/);
 assert.match(player, /mobileN64/);
@@ -34,7 +31,7 @@ assert.match(player, /rendererKeys\.has\(option\)/);
 assert.match(player, /saved\?\.settings\?\.\['mupen64plus-aspect'\] === '16:9'/);
 assert.match(player, /delete saved\.settings\['mupen64plus-aspect'\]/);
 assert.doesNotMatch(player, /localStorage\.removeItem\(/);
-assert.match(player, /"mupen64plus-ThreadedRenderer": isDoom64 \? "False" : "True"/);
+assert.match(player, /"mupen64plus-ThreadedRenderer": window\.EJS_threads \? "True" : "False"/);
 assert.match(player, /"mupen64plus-EnableCopyColorToRDRAM": isDoom64 \? "Sync" : "Async"/);
 assert.match(player, /Neo Doom 64 renderer repair/);
 assert.match(player, /"mupen64plus-MultiSampling": "0"/);

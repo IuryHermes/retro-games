@@ -125,13 +125,15 @@
         tile.innerHTML = `<span class="collection-tile-copy"><strong>${esc(definition.title)}</strong><small>${games.length} jogos disponíveis</small></span>`;
         row.append(tile);
       });
-      let startX = 0, startScroll = 0, dragging = false;
-      row.onpointerdown = event => { if (event.pointerType === 'touch') return; startX = event.clientX; startScroll = row.scrollLeft; dragging = false; row.classList.add('dragging'); row.setPointerCapture?.(event.pointerId); };
+      let startX = 0, startScroll = 0, dragging = false, pressedTile = null;
+      row.onpointerdown = event => { if (event.pointerType === 'touch') return; startX = event.clientX; startScroll = row.scrollLeft; dragging = false; pressedTile = event.target.closest('[data-collection]'); row.classList.add('dragging'); row.setPointerCapture?.(event.pointerId); };
       row.onpointermove = event => { if (event.pointerType === 'touch' || !row.classList.contains('dragging')) return; const delta = event.clientX - startX; if (Math.abs(delta) > 7) dragging = true; row.scrollLeft = startScroll - delta; };
       const stop = () => {
         if (!row.classList.contains('dragging')) return;
         row.classList.remove('dragging');
-        if (dragging) suppressClickUntil = performance.now() + 250;
+        suppressClickUntil = performance.now() + 250;
+        if (!dragging && pressedTile) render(pressedTile.dataset.collection);
+        pressedTile = null;
       };
       row.onpointerup = stop; row.onpointercancel = stop;
       let touchX = 0, touchY = 0, touchScroll = 0, touchDragging = false;
