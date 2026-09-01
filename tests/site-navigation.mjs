@@ -3,7 +3,7 @@ import { access, readFile, readdir } from 'node:fs/promises';
 import { dirname, join, normalize, relative } from 'node:path';
 
 const root = join(import.meta.dirname, '..');
-const mainPages = ['index.html','coletaneas.html','ofertas.html','social.html','apoie.html','multiplayer-room.html','player-universal.html','politica-de-privacidade.html','politica-de-cookies.html','emulator-closed.html'];
+const mainPages = ['index.html','coletaneas.html','ofertas.html','social.html','apoie.html','multiplayer-room.html','multiplayer-diagnostics.html','player-universal.html','politica-de-privacidade.html','politica-de-cookies.html','emulator-closed.html'];
 await Promise.all(mainPages.map(page => access(join(root, page))));
 
 async function gamePages(directory) {

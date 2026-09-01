@@ -350,6 +350,7 @@
     </style>
     <link rel="stylesheet" href="standalone-theme.css?v=20260821">
 <script src="privacy-consent-v2.js" defer></script>
+<script src="analytics-consent.js" defer></script>
 </head>
   <body class="neo-page neo-multiplayer">
     <header>
@@ -846,6 +847,7 @@
             if (!response.ok)
               throw new Error(data.erro || "Sala indisponível.");
             roomSystem = String(data.room.system || "").toLowerCase();
+            window.neoTrack?.('multiplayer_joined', { game_system:roomSystem || 'unknown', join_role:spectatorMode ? 'spectator' : 'player', device_category:matchMedia('(pointer:coarse)').matches ? 'touch' : 'desktop' });
             if (!spectatorMode) loadBindings();
             if (roomSystem === "n64") {
               const directions = [[".up",19],[".down",18],[".left",17],[".right",16]];

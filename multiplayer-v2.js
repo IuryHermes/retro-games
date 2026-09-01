@@ -294,6 +294,7 @@
             const isPublic = true;
             const data = await request('/multiplayer/rooms', { method:'POST', body:JSON.stringify({ gameId, title:gameName, system, maxPlayers, isPublic }) });
             room = data.room; ticket = data.ticket; connect();
+            window.neoTrack?.('multiplayer_room_created', { game_system:system, max_players:maxPlayers, room_visibility:isPublic ? 'public' : 'private', device_category:matchMedia('(pointer:coarse)').matches ? 'touch' : 'desktop' });
             document.getElementById('neo-multi-room').hidden = false;
             document.getElementById('neo-multiplayer-panel')?.classList.add('open', 'lobby');
             const link = `${location.origin}/multiplayer-room.html?room=${encodeURIComponent(room.id)}`;
