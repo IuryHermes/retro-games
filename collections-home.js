@@ -134,6 +134,26 @@
         if (dragging) suppressClickUntil = performance.now() + 250;
       };
       row.onpointerup = stop; row.onpointercancel = stop;
+      let touchX = 0, touchY = 0, touchScroll = 0, touchDragging = false;
+      row.addEventListener('touchstart', event => {
+        const touch = event.touches[0];
+        if (!touch) return;
+        touchX = touch.clientX; touchY = touch.clientY; touchScroll = row.scrollLeft; touchDragging = false;
+      }, { passive:true });
+      row.addEventListener('touchmove', event => {
+        const touch = event.touches[0];
+        if (!touch) return;
+        const deltaX = touch.clientX - touchX;
+        const deltaY = touch.clientY - touchY;
+        if (Math.abs(deltaX) <= Math.abs(deltaY) || Math.abs(deltaX) < 5) return;
+        touchDragging = true;
+        event.preventDefault();
+        row.scrollLeft = touchScroll - deltaX;
+      }, { passive:false });
+      row.addEventListener('touchend', () => {
+        if (touchDragging) suppressClickUntil = performance.now() + 350;
+        touchDragging = false;
+      }, { passive:true });
       document.querySelector('.collection-scroll.prev').onclick = () => row.scrollBy({left:-520,behavior:'smooth'});
       document.querySelector('.collection-scroll.next').onclick = () => row.scrollBy({left:520,behavior:'smooth'});
     } catch (error) {

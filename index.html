@@ -295,7 +295,7 @@
         .collections-heading h2 { margin:0; color:var(--text-color); font:13px 'Press Start 2P',cursive; }
         .collections-heading .view-all-btn { color:var(--accent-color); font:8px 'Press Start 2P',cursive; cursor:pointer; }
         .collections-carousel { position:relative; }
-        .collections-row { display:flex; gap:12px; overflow-x:auto; padding:5px 3px 18px; scroll-snap-type:x proximity; scrollbar-width:none; cursor:grab; user-select:none; touch-action:auto; -webkit-overflow-scrolling:touch; overscroll-behavior-inline:contain; }
+        .collections-row { display:flex; gap:12px; overflow-x:auto; padding:5px 3px 18px; scroll-snap-type:x proximity; scrollbar-width:none; cursor:grab; user-select:none; touch-action:pan-y; -webkit-overflow-scrolling:touch; overscroll-behavior-inline:contain; }
         .collections-row.dragging { cursor:grabbing; scroll-snap-type:none; }
         .collections-row::-webkit-scrollbar { display:none; }
         .collection-tile { --collection-image:none; position:relative; flex:0 0 clamp(180px,19vw,260px); aspect-ratio:16/9; overflow:hidden; border:1px solid var(--border-color); border-radius:9px; scroll-snap-align:start; text-align:left; padding:0; background:#030504; box-shadow:0 12px 25px rgba(0,0,0,.35); transition:transform .25s,border-color .25s; cursor:pointer; }
@@ -399,7 +399,7 @@
             .top-bar { flex-direction:column; align-items:stretch; padding:10px; margin:0; text-align:left; gap:7px; }
             .brand { width:100%; box-sizing:border-box; padding-right:48px; text-align:left; display:block !important; font-size:15px !important; margin:0; }
             .mobile-marquee-wrapper { display:none !important; }
-            .top-bar-controls { display:grid !important; grid-template-columns:minmax(0,1fr) 52px; width:100%; align-items:center; gap:7px; margin:0; padding:2px 1px 4px; }
+            .top-bar-controls { display:grid !important; grid-template-columns:minmax(0,1fr) 72px; width:100%; align-items:center; gap:7px; margin:0; padding:2px 1px 4px; }
             .mobile-quick-scroll { display:block; position:absolute; top:5px; right:8px; width:40px; padding:0; }
             .mobile-quick-scroll::-webkit-scrollbar { display:none; }
             .mobile-community-actions,.pix-trigger-mobile { display:none !important; }
@@ -411,8 +411,11 @@
             .top-account-mobile .account-name { display:block; max-width:58px; overflow:hidden; text-overflow:ellipsis; color:var(--text-muted); font:700 7px/1.1 monospace; text-transform:uppercase; white-space:nowrap; }
             .top-account-mobile .account-kicker, .top-account-mobile .account-hint { display:none; }
             .search-container { box-sizing:border-box; width:100%; min-width:0; max-width:none; height:40px; grid-column:1; }
-            .theme-container { width:52px; min-width:52px; display:flex !important; align-items:center; justify-content:center; grid-column:2; }
-            .theme-label { display:none; }
+            .theme-container { position:static !important; width:72px; min-width:72px; height:40px; display:flex !important; align-items:center; justify-content:center; gap:5px; grid-column:2; border:1px solid var(--border-color); border-radius:7px; background:var(--sidebar-bg); }
+            .theme-label { display:inline; font:700 7px monospace; }
+            .theme-switch { width:34px; height:20px; }
+            .theme-switch .slider:before { width:12px; height:12px; }
+            .theme-switch input:checked + .slider:before { transform:translateX(14px); }
             .discovery-nav { padding:10px 10px 4px; }
             .row-header { justify-content: space-between; padding-right: 15px; }
             .view-all-btn { font-size: 8px; padding: 6px 10px; }
@@ -606,7 +609,7 @@
     <script src="club-badges.js?v=20260830-simple1"></script>
     <script src="privacy-consent-v2.js" defer></script>
     <script src="analytics-consent.js" defer></script>
-    <script src="collections-home.js?v=20260831-7" defer></script>
+    <script src="collections-home.js?v=20260901-8" defer></script>
 </head>
 <body>
 

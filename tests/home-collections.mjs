@@ -19,7 +19,7 @@ if (!/flex-basis:clamp\(112px,31vw,132px\)/.test(html)) throw new Error('coletâ
 for (const marker of ['mortal-kombat', 'mega-man', 'showAll.onclick', 'row.onpointermove', 'panel.scrollIntoView']) {
   if (!controller.includes(marker)) throw new Error(`controlador de coletâneas incompleto: ${marker}`);
 }
-for (const marker of ["event.pointerType === 'touch'", 'touch-action:auto', '-webkit-overflow-scrolling:touch']) {
+for (const marker of ["event.pointerType === 'touch'", 'touch-action:pan-y', '-webkit-overflow-scrolling:touch', "addEventListener('touchmove'", 'passive:false', 'v=20260901-8']) {
   if (!(controller + html).includes(marker)) throw new Error(`rolagem móvel nativa ausente: ${marker}`);
 }
 if (!html.includes('object-fit:fill')) throw new Error('capas ainda deixam faixas vazias na caixa');
