@@ -14,6 +14,8 @@ new Function(controller);
 for (const marker of ['id="collections-row"', 'id="collections-show-all"', 'id="collections-expanded"', 'collections-home.js', '>VER TODOS</button>']) {
   if (!html.includes(marker)) throw new Error(`interação de coletâneas ausente: ${marker}`);
 }
+if (!/\.collection-tile \{[^}]*flex:0 0 clamp\(180px,19vw,260px\)/.test(html)) throw new Error('coletâneas ainda estão desproporcionais no desktop');
+if (!/flex-basis:clamp\(112px,31vw,132px\)/.test(html)) throw new Error('coletâneas ainda estão gigantes no celular');
 for (const marker of ['mortal-kombat', 'mega-man', 'showAll.onclick', 'row.onpointermove', 'pressedTile.dataset.collection', 'panel.scrollIntoView']) {
   if (!controller.includes(marker)) throw new Error(`controlador de coletâneas incompleto: ${marker}`);
 }

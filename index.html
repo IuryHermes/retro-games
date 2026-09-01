@@ -219,7 +219,7 @@
         .acclaimed-preview { opacity:0; }
         .acclaimed-card:hover .acclaimed-preview,.acclaimed-card:focus-visible .acclaimed-preview,.acclaimed-card.preview-active .acclaimed-preview { opacity:1; }
         .acclaimed-card:hover .acclaimed-cover,.acclaimed-card:focus-visible .acclaimed-cover,.acclaimed-card.preview-active .acclaimed-cover { opacity:0; }
-        .acclaimed-name { display:flex; align-items:center; min-height:46px; padding:8px; font:700 10px/1.4 monospace; }
+        .acclaimed-name { display:flex; align-items:center; justify-content:center; min-height:46px; padding:8px; box-sizing:border-box; font:8px/1.4 'Press Start 2P',cursive; text-align:center; }
         .seo-about { margin:34px 40px 10px; padding:24px; border:1px solid var(--border-color); border-left:4px solid var(--accent-color); border-radius:8px; background:rgba(0,0,0,.18); }
         .seo-about h2 { margin-bottom:12px; color:var(--accent-color); font:clamp(12px,1.7vw,16px)/1.5 'Press Start 2P',cursive; }
         .seo-about p { max-width:1050px; color:var(--text-muted); font-size:15px; line-height:1.75; }
@@ -255,7 +255,7 @@
         .marquee-item { display: inline-block; margin-right: 50px; }
         @keyframes marquee { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
 
-        .hero-section { position: relative; width: 100%; height: 800px; background: #000; overflow: hidden; display: flex; align-items: center; }
+        .hero-section { position: relative; width: 100%; height:clamp(500px,62vh,680px); background: #000; overflow: hidden; display: flex; align-items: center; }
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; display: flex; align-items: center; z-index: 1; }
         .hero-slide.active { opacity: 1; z-index: 2; }
         .hero-bg-blur { position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; object-fit: cover; filter: blur(25px) brightness(0.5); z-index: 1; pointer-events: none; }
@@ -298,7 +298,7 @@
         .collections-row { display:flex; gap:12px; overflow-x:auto; padding:5px 3px 18px; scroll-snap-type:x proximity; scrollbar-width:none; cursor:grab; user-select:none; touch-action:pan-y; }
         .collections-row.dragging { cursor:grabbing; scroll-snap-type:none; }
         .collections-row::-webkit-scrollbar { display:none; }
-        .collection-tile { --collection-image:none; position:relative; flex:0 0 clamp(210px,25vw,330px); aspect-ratio:16/8.8; overflow:hidden; border:1px solid var(--border-color); border-radius:9px; scroll-snap-align:start; text-align:left; padding:0; background:#030504; box-shadow:0 12px 25px rgba(0,0,0,.35); transition:transform .25s,border-color .25s; cursor:pointer; }
+        .collection-tile { --collection-image:none; position:relative; flex:0 0 clamp(180px,19vw,260px); aspect-ratio:16/9; overflow:hidden; border:1px solid var(--border-color); border-radius:9px; scroll-snap-align:start; text-align:left; padding:0; background:#030504; box-shadow:0 12px 25px rgba(0,0,0,.35); transition:transform .25s,border-color .25s; cursor:pointer; }
         .collection-tile::before { content:''; position:absolute; inset:0; background-image:linear-gradient(to top,rgba(0,0,0,.94),rgba(0,0,0,.05) 72%),var(--collection-image); background-size:100% 100%,100% 100%; background-repeat:no-repeat; background-position:center; transition:transform .35s,filter .35s; }
         .collection-tile:hover,.collection-tile:focus-visible { transform:scale(1.045); border-color:var(--accent-color); outline:none; z-index:2; }
         .collection-tile:hover::before,.collection-tile:focus-visible::before { transform:none; filter:saturate(1.2) brightness(1.08); }
@@ -336,6 +336,11 @@
         .card-title span { font-family: 'Press Start 2P', cursive; font-size: 8px; line-height: 1.4; text-align: center; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .game-card:hover .card-title, .game-card.mobile-active .card-title, .game-card.gamepad-focus .card-title { background: var(--sidebar-bg); color: var(--accent-color); height: auto; border: 1px solid var(--accent-color); border-top: none; left: -1px; width: calc(100% + 2px); border-radius: 0 0 6px 6px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
         .game-card:hover .card-title span, .game-card.mobile-active .card-title span, .game-card.gamepad-focus .card-title span { display: block; overflow: visible; }
+        .discovery-nav { display:flex; gap:9px; overflow-x:auto; padding:12px 40px 4px; scrollbar-width:none; scroll-snap-type:x proximity; }
+        .discovery-nav::-webkit-scrollbar { display:none; }
+        .discovery-nav a,.discovery-nav button { flex:none; min-height:38px; padding:0 15px; border:1px solid var(--border-color); border-radius:999px; background:var(--sidebar-bg); color:var(--text-color); font:700 10px monospace; text-decoration:none; scroll-snap-align:start; cursor:pointer; }
+        .discovery-nav a { display:flex; align-items:center; }
+        .discovery-nav .active { border-color:var(--accent-color); background:var(--accent-color); color:#031108; }
 
         .discord-float { position:fixed; bottom:20px; right:20px; display:flex; align-items:center; gap:12px; max-width:230px; background:rgba(0,0,0,.8); padding:8px 16px; border-radius:50px; border:1px solid #5865f2; text-decoration:none; z-index:9999; backdrop-filter:blur(5px); transition:bottom .3s ease; }
         .discord-text { min-width:0; max-width:150px; overflow:hidden; font-family:monospace; color:#fff; font-size:12px; text-align:right; white-space:nowrap; text-overflow:ellipsis; }
@@ -368,16 +373,21 @@
         @media (max-width: 768px) {
             .collections-showcase { padding:20px 10px 0; }
             .collections-heading h2 { font-size:11px; }
-            .collection-tile { flex-basis:clamp(190px,68vw,280px); }
+            .collection-tile { flex-basis:clamp(112px,31vw,132px); aspect-ratio:1/1; box-shadow:none; }
+            .collection-tile-copy { inset:auto 8px 8px; }
+            .collection-tile-copy strong { font-size:9px; line-height:1.35; }
+            .collection-tile-copy small { margin-top:4px; font-size:9px; }
+            .collection-scroll { display:none; }
             .acclaimed-games { padding:20px 10px 4px; }
             .seo-about { margin:24px 10px 8px; padding:18px 15px; }
             .seo-about p { font-size:13px; line-height:1.65; }
             .acclaimed-games p { font-size:13px; margin-bottom:12px; }
             .acclaimed-links { display:flex; overflow-x:auto; gap:10px; padding:2px 2px 12px; scroll-snap-type:x mandatory; scrollbar-width:none; }
             .acclaimed-links::-webkit-scrollbar { display:none; }
-            .acclaimed-card { flex:0 0 clamp(132px,42vw,170px); scroll-snap-align:start; }
-            .acclaimed-card .acclaimed-cover { animation:acclaimedCoverSwap 8s infinite; }
-            .acclaimed-card .acclaimed-preview { animation:acclaimedPreviewSwap 8s infinite; }
+            .acclaimed-card { flex:0 0 104px; height:146px; scroll-snap-align:start; border-radius:6px; }
+            .acclaimed-media { height:105px; aspect-ratio:auto; }
+            .acclaimed-name { min-height:41px; height:41px; padding:4px; font:7px/1.35 'Press Start 2P',cursive; }
+            .acclaimed-card:hover,.acclaimed-card:focus-visible { transform:none; box-shadow:none; }
             .sidebar { height:calc(72px + env(safe-area-inset-bottom)); padding:5px 0 env(safe-area-inset-bottom); }
             .nav-list { justify-content:flex-start; overflow-x:auto; scrollbar-width:none; scroll-snap-type:x proximity; }
             .nav-list::-webkit-scrollbar { display:none; }
@@ -386,21 +396,22 @@
             .nav-text { font-size:8px !important; line-height:1.2; }
             .main-content { padding-bottom:calc(86px + env(safe-area-inset-bottom)) !important; }
             .discord-float { bottom:calc(84px + env(safe-area-inset-bottom)); }
-            .top-bar { flex-direction:column; align-items:center; padding:8px 10px 10px; margin:0; text-align:center; gap:7px; }
-            .brand { width:100%; text-align:center; display:block !important; font-size:15px !important; margin:0; }
+            .top-bar { flex-direction:column; align-items:stretch; padding:10px; margin:0; text-align:left; gap:7px; }
+            .brand { width:100%; box-sizing:border-box; padding-right:48px; text-align:left; display:block !important; font-size:15px !important; margin:0; }
             .mobile-marquee-wrapper { margin:0; padding:2px 0; }
             .top-bar-controls { display:flex; flex-flow:row wrap !important; width:100%; justify-content:center; align-items:center; gap:7px; margin:0; padding:2px 1px 4px; }
-            .mobile-quick-scroll { display:flex; order:1; width:100%; gap:7px; overflow-x:auto; scrollbar-width:none; padding:1px 0 4px; }
+            .mobile-quick-scroll { display:block; position:absolute; top:5px; right:8px; width:40px; padding:0; }
             .mobile-quick-scroll::-webkit-scrollbar { display:none; }
-            .mobile-community-actions { display:contents; }
-            .top-account-mobile, .mobile-community-actions .multiplayer-hub-trigger, .pix-trigger-mobile, .chat-trigger-mobile { display:flex !important; flex:0 0 64px !important; width:64px !important; height:54px !important; min-height:54px; padding:5px 3px !important; border:1px solid var(--border-color) !important; border-radius:8px !important; background:rgba(0,153,51,.08) !important; color:var(--text-color); align-items:center; justify-content:center; flex-direction:column; gap:4px; box-shadow:none !important; text-decoration:none; cursor:pointer; }
+            .mobile-community-actions,.pix-trigger-mobile { display:none !important; }
+            .top-account-mobile { display:flex !important; width:40px !important; height:40px !important; min-height:40px; padding:4px !important; border:1px solid var(--accent-color) !important; border-radius:50% !important; align-items:center; justify-content:center; background:rgba(0,153,51,.08) !important; }
             .top-account-mobile .account-avatar, .mobile-community-actions .multiplayer-hub-trigger img, .pix-trigger-mobile img, .chat-trigger-mobile img { width:25px !important; height:25px !important; flex-basis:25px; object-fit:contain; margin:0; border-radius:3px; image-rendering:auto; }
             .mobile-action-label { display:block; max-width:100%; color:var(--text-muted); font:700 7px/1.1 monospace; text-transform:uppercase; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-            .top-account-mobile .account-copy { display:block; }
+            .top-account-mobile .account-copy { display:none; }
             .top-account-mobile .account-name { display:block; max-width:58px; overflow:hidden; text-overflow:ellipsis; color:var(--text-muted); font:700 7px/1.1 monospace; text-transform:uppercase; white-space:nowrap; }
             .top-account-mobile .account-kicker, .top-account-mobile .account-hint { display:none; }
             .search-container { flex:1 1 230px; box-sizing:border-box; width:auto; max-width:none; order:10; height:40px; }
             .theme-container { flex:0 0 52px; order:10; display:flex !important; align-items:center; justify-content:center; }
+            .discovery-nav { padding:10px 10px 4px; }
             .row-header { justify-content: space-between; padding-right: 15px; }
             .view-all-btn { font-size: 8px; padding: 6px 10px; }
             .hero-section { height:330px; min-height:auto; max-height:none; }
@@ -573,18 +584,13 @@
             .main-content { padding-bottom: 70px !important; }
             .discord-float { bottom: 70px; }
         }
-        @keyframes acclaimedCoverSwap { 0%,42%,100%{opacity:1} 50%,92%{opacity:0} }
-        @keyframes acclaimedPreviewSwap { 0%,42%,100%{opacity:0} 50%,92%{opacity:1} }
-
         @media (max-width: 420px) {
             .top-bar { padding-inline:6px; }
             .top-bar-controls { gap:5px; }
-            .mobile-quick-scroll { gap:5px; }
-            .top-account-mobile, .mobile-community-actions .multiplayer-hub-trigger, .pix-trigger-mobile, .chat-trigger-mobile { flex-basis:58px !important; width:58px !important; }
             .multiplayer-account-note { align-items:stretch; flex-direction:column; }
             .multiplayer-account-note button { width:100%; }
             .search-container { flex-basis:calc(100% - 59px); min-width:0; }
-            .hero-section { height:300px; }
+            .hero-section { height:280px; }
             .hero-content { padding:0 46px 0 14px; margin-bottom:34px; gap:8px; }
             .hero-title { font-size:clamp(17px,6vw,22px); overflow-wrap:anywhere; }
             .hero-categories,.hero-resume-note { font-size:10px; }
@@ -822,6 +828,13 @@
                 </div>
             </header>
 
+            <nav class="discovery-nav" aria-label="Descobrir jogos">
+                <a class="active" href="#hero-slider">PARA VOCÊ</a>
+                <a href="#collections-home-title">COLEÇÕES</a>
+                <button id="discovery-online" type="button">ONLINE</button>
+                <a href="#catalog-area">CONSOLES</a>
+            </nav>
+
             <section class="hero-section" id="hero-slider">
                 <div class="hero-indicators" id="hero-indicators"></div>
                 <button class="hero-nav prev" id="hero-prev" type="button" aria-label="Jogo anterior">&#8249;</button>
@@ -866,6 +879,7 @@
     </div>
 
 <script type="module">
+    document.getElementById('discovery-online')?.addEventListener('click', () => document.getElementById('multiplayer-hub-trigger')?.click());
     document.addEventListener("DOMContentLoaded", () => {
         const splash = document.getElementById("splash-screen");
         const logo = document.querySelector(".splash-logo");
@@ -2248,7 +2262,15 @@
                 media.append(cover, preview);
             } else media.append(cover);
             const name = document.createElement('span'); name.className = 'acclaimed-name'; name.textContent = game.nomeOriginal || game.nome;
-            card.append(media, name); root.append(card);
+            card.append(media, name);
+            card.addEventListener('click', event => {
+                if (!matchMedia('(pointer:coarse)').matches || !card.querySelector('.acclaimed-preview')) return;
+                if (card.classList.contains('preview-active')) return;
+                event.preventDefault();
+                root.querySelectorAll('.acclaimed-card.preview-active').forEach(item => item.classList.remove('preview-active'));
+                card.classList.add('preview-active');
+            });
+            root.append(card);
         });
     }
     Promise.allSettled(fetchPromises).then(() => { renderAcclaimedGames(); void refreshPersonalHero(); });
