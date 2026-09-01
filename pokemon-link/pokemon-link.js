@@ -17,6 +17,7 @@
   let inputMask = 0, audioContext, audioTime = 0, lastSave = 0;
   const screen = document.getElementById('screen'), ctx = screen.getContext('2d', { alpha:false });
   const connection = document.getElementById('connection'), action = document.getElementById('create-room');
+  const toggleLobbyButton=document.getElementById('toggle-lobby');
   const testSaveButton = document.getElementById('test-save');
   const findSaveButton = document.getElementById('find-save'), importSaveButton=document.getElementById('import-save'), exportSaveButton=document.getElementById('export-save'), saveFileInput=document.getElementById('save-file');
   const token = () => sessionStorage.getItem('neo_club_access') || sessionStorage.getItem('neo_account_access') || '';
@@ -29,7 +30,7 @@
     return Boolean(token());
   };
   const request = async (path, options={}) => {
-    const response = await fetch(API + path, { ...options, headers:{ Authorization:`Bearer ${token()}`, ...(options.body ? {'Content-Type':'application/json'} : {}), ...options.headers } });
+    const response = await fetch(API + path, { ...options, signal:options.signal || AbortSignal.timeout(20000), headers:{ Authorization:`Bearer ${token()}`, ...(options.body ? {'Content-Type':'application/json'} : {}), ...options.headers } });
     const data = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(data.erro || 'Não foi possível acessar a sala.');
     return data;
@@ -107,14 +108,18 @@
   async function startCore() {
     if (running) return;
     action.disabled = true; action.textContent = 'CARREGANDO JOGO...';
+    const loading=document.getElementById('loading');loading.hidden=false;loading.innerHTML='<strong>1/4 · PREPARANDO ÁUDIO...</strong><span>Não feche esta página.</span>';
     audioContext = new (window.AudioContext || window.webkitAudioContext)({ latencyHint:'interactive', sampleRate:48000 });
     await audioContext.resume();
+    loading.innerHTML='<strong>2/4 · CARREGANDO NÚCLEO GBA...</strong><span>Primeiro acesso pode levar alguns segundos.</span>';
     core = await Promise.race([window.createNeoGpsp({ locateFile:file => `pokemon-link/${file}?v=2` }),new Promise((_,reject)=>setTimeout(()=>reject(new Error('O núcleo GBA demorou demais para carregar.')),30000))]);
+    loading.innerHTML='<strong>3/4 · CARREGANDO ROM EM PORTUGUÊS...</strong><span>Aguarde o download do cartucho.</span>';
     const romResponse=await fetch(ROMS[config.id]);
     if(!romResponse.ok)throw new Error(`A ROM não carregou (${romResponse.status}).`);
     const rom = new Uint8Array(await romResponse.arrayBuffer());
     core.FS.writeFile('/game.gba', rom);
     if (!core.ccall('neo_init', 'number', ['string','string'], ['/game.gba', config.mode === 'cable' ? 'cable' : 'rfu'])) throw new Error('Esta ROM não pôde ser iniciada no modo de batalha.');
+    loading.innerHTML='<strong>4/4 · PREPARANDO SAVE...</strong><span>Quase pronto.</span>';
     const stored = testSaveSelected && config.id==='pokemon-fire-red' ? await battleTestSave() : await saveDb('read').catch(() => null);
     const saveSize = core._neo_save_size(), savePtr = core._neo_save_ptr();
     if (stored && stored.byteLength === saveSize) core.HEAPU8.set(new Uint8Array(stored), savePtr);
@@ -174,16 +179,17 @@
   async function hostSignal(message){if(message.data?.description)await peer.setRemoteDescription(message.data.description);if(message.data?.candidate)await peer.addIceCandidate(message.data.candidate).catch(()=>{});}
   function connectSocket(){
     socket=new WebSocket(`${API.replace('https:','wss:')}/multiplayer/rooms/${room.id}/ws?ticket=${encodeURIComponent(ticket)}`);
-    socket.onmessage=e=>{const message=JSON.parse(e.data);if(message.type==='welcome')clientId=message.clientId;if(message.type==='state'&&!localNetId)void hostPeer(message.participants.find(p=>!p.host));if(message.type==='signal')void(localNetId?guestSignal(message):hostSignal(message));};
+    socket.onmessage=e=>{const message=JSON.parse(e.data);if(message.type==='welcome')clientId=message.clientId;if(message.type==='state'&&!localNetId){const guest=message.participants.find(p=>!p.host);if(guest)document.body.classList.add('guest-arrived');void hostPeer(guest);}if(message.type==='signal')void(localNetId?guestSignal(message):hostSignal(message));};
   }
   function renderQr(link){const target=document.getElementById('qr');target.replaceChildren();try{if(!window.QRCode)throw new Error('QR indisponível');new QRCode(target,{text:link,width:156,height:156,colorDark:'#061109',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});requestAnimationFrame(()=>{if(!target.querySelector('canvas,img'))target.textContent='Use COPIAR CONVITE';});}catch(_){target.textContent='Use COPIAR CONVITE';}}
   async function createRoom(){await startCore();const roomGameId=testSaveSelected?`${config.id}-test`:config.id;const data=await request('/multiplayer/rooms',{method:'POST',body:JSON.stringify({gameId:roomGameId,title:`${config.title} · batalha GBA${testSaveSelected?' · save pronto':''}`,system:'gba-link',maxPlayers:2,isPublic:true})});room=data.room;ticket=data.ticket;localNetId=0;connectSocket();const link=`${location.origin}/pokemon-link-player.html?room=${room.id}`;document.getElementById('invite').hidden=false;document.getElementById('invite-link').value=link;renderQr(link);action.hidden=true;}
-  async function joinRoom(){const data=await request(`/multiplayer/rooms/${roomId}/join`,{method:'POST'});room=data.room;ticket=data.ticket;testSaveSelected=/-test$/.test(room.gameId);config=window.NeoPokemonLink.byId(room.gameId.replace(/-test$/,''));if(!config)throw new Error('Esta sala não usa uma versão Pokémon compatível.');updateInfo();await startCore();document.body.classList.add('guest-game');localNetId=1;connectSocket();document.getElementById('invite').hidden=false;document.getElementById('room-status').textContent=testSaveSelected?'Save pronto aplicado nos dois aparelhos. Entrando na conexão...':'Entrando na conexão do anfitrião...';action.hidden=true;}
+  async function joinRoom(){action.disabled=true;action.textContent='ENTRANDO NA SALA...';const loading=document.getElementById('loading');loading.hidden=false;loading.innerHTML='<strong>ENTRANDO NA SALA...</strong><span>Validando o convite.</span>';const data=await request(`/multiplayer/rooms/${roomId}/join`,{method:'POST'});room=data.room;ticket=data.ticket;testSaveSelected=/-test$/.test(room.gameId);config=window.NeoPokemonLink.byId(room.gameId.replace(/-test$/,''));if(!config)throw new Error('Esta sala não usa uma versão Pokémon compatível.');updateInfo();await startCore();document.body.classList.add('guest-game');localNetId=1;connectSocket();document.getElementById('invite').hidden=false;document.getElementById('room-status').textContent=testSaveSelected?'Save pronto aplicado nos dois aparelhos. Entrando na conexão...':'Entrando na conexão do anfitrião...';action.hidden=true;}
   const keyIds={b:0,a:8,select:2,start:3,up:4,down:5,left:6,right:7,l:10,r:11};
   document.querySelectorAll('[data-key]').forEach(button=>{const bit=1<<keyIds[button.dataset.key];const down=e=>{e.preventDefault();inputMask|=bit;};const up=e=>{e.preventDefault();inputMask&=~bit;};button.addEventListener('pointerdown',down);button.addEventListener('pointerup',up);button.addEventListener('pointercancel',up);button.addEventListener('pointerleave',up);});
   addEventListener('keydown',e=>{const map={z:8,x:0,Enter:3,Shift:2,ArrowUp:4,ArrowDown:5,ArrowLeft:6,ArrowRight:7,a:10,s:11};if(map[e.key]!=null){e.preventDefault();inputMask|=1<<map[e.key];}});
   addEventListener('keyup',e=>{const map={z:8,x:0,Enter:3,Shift:2,ArrowUp:4,ArrowDown:5,ArrowLeft:6,ArrowRight:7,a:10,s:11};if(map[e.key]!=null)inputMask&=~(1<<map[e.key]);});
   document.getElementById('copy').onclick=async()=>{await navigator.clipboard.writeText(document.getElementById('invite-link').value);document.getElementById('room-status').textContent='Convite copiado.';};
+  toggleLobbyButton.onclick=()=>{const hidden=document.body.classList.contains('lobby-collapsed')||(document.body.classList.contains('guest-arrived')&&!document.body.classList.contains('lobby-manual-open'))||(document.body.classList.contains('guest-game')&&!document.body.classList.contains('lobby-manual-open'));if(hidden){document.body.classList.remove('lobby-collapsed');document.body.classList.add('lobby-manual-open');toggleLobbyButton.textContent='OCULTAR INSTRUÇÕES';}else{document.body.classList.remove('lobby-manual-open');document.body.classList.add('lobby-collapsed');toggleLobbyButton.textContent='MOSTRAR INSTRUÇÕES';}};
   findSaveButton.onclick=async()=>{findSaveButton.disabled=true;document.getElementById('save-status').textContent='Procurando save compatível neste navegador...';try{const save=await legacyEmulatorSave();if(!save)throw new Error('Não encontrei um save de 128 KB deste jogo. Use IMPORTAR .SAV/.SRM.');await installPersonalSave(save,'✓ Save do jogo normal copiado para o modo de batalha.');}catch(error){document.getElementById('save-status').textContent=error.message;}finally{findSaveButton.disabled=false;}};
   importSaveButton.onclick=()=>saveFileInput.click();
   saveFileInput.onchange=async()=>{const file=saveFileInput.files?.[0];if(!file)return;try{await installPersonalSave(await file.arrayBuffer(),'✓ Save importado. Ele será usado nesta sala.');}catch(error){document.getElementById('save-status').textContent=error.message;}saveFileInput.value='';};

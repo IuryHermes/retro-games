@@ -1,4 +1,7 @@
 [hidden] { display: none !important; }
+header button { min-height: 34px; padding: 5px 8px; border: 1px solid var(--green); border-radius: 5px; background: #0d2916; color: #fff; font: 700 10px ui-monospace, monospace; }
+.lobby-collapsed .lobby, .guest-arrived:not(.lobby-manual-open) .lobby { display: none; }
+.lobby-collapsed main, .guest-arrived:not(.lobby-manual-open) main { grid-template-columns: 1fr; }
 
 @media (pointer: coarse), (max-width: 800px) {
   body { padding-bottom: 205px; }
@@ -11,7 +14,7 @@
   .dpad button:nth-child(4) { top: 126px; }
   .ab button:first-child { top: 100px; }
   .ab button:last-child { top: 60px; }
-  .guest-game .lobby, .game-active .lobby { display: none; }
+  .guest-game:not(.lobby-manual-open) .lobby, .game-active:not(.lobby-manual-open) .lobby { display: none; }
   .guest-game main, .game-active main { grid-template-columns: 1fr; }
 }
 
