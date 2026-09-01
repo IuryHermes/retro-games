@@ -22,7 +22,7 @@
       <div id="auth-warning" hidden><strong>CADASTRO GRATUITO NECESSÁRIO</strong><p>A conta identifica cada lado da conexão e protege a sala.</p><a id="login-link" href="index.html?cadastro=1">ENTRAR OU CRIAR CADASTRO</a></div>
       <label class="intent-label" for="room-intent">O que você procura?</label>
       <select id="room-intent"><option value="batalha">Batalha</option><option value="troca">Troca de Pokémon</option><option value="ambos">Batalha ou troca</option></select>
-      <button id="create-room" type="button">CRIAR SALA PÚBLICA</button>
+      <button id="create-room" type="button" disabled>PREPARANDO MODO ONLINE...</button>
       <section id="public-lobby" aria-labelledby="public-lobby-title">
         <div class="public-lobby-heading"><h2 id="public-lobby-title">CENTRO POKÉMON ONLINE</h2><button id="refresh-rooms" type="button">ATUALIZAR</button></div>
         <p>Jogadores aguardando adversário agora.</p>
@@ -48,6 +48,6 @@
   <script src="pokemon-link/vendor/qrcode.min.js?v=1"></script>
   <script type="module" src="pokemon-link/auth-bridge.js?v=1"></script>
   <script src="pokemon-link/gpsp.js?v=2"></script>
-  <script src="pokemon-link/pokemon-link.js?v=3"></script>
+  <script src="pokemon-link/pokemon-link.js?v=4"></script>
 </body>
 </html>

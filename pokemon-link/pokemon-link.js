@@ -16,7 +16,7 @@
   let pendingIceCandidates=[];
   let peerCreation=null;
   let signalChain=Promise.resolve();
-  let testSaveSelected = false;
+  let testSaveSelected = config?.id === 'pokemon-fire-red';
   let inputMask = 0, audioContext, audioTime = 0, lastSave = 0;
   const screen = document.getElementById('screen'), ctx = screen.getContext('2d', { alpha:false });
   const connection = document.getElementById('connection'), action = document.getElementById('create-room');
@@ -244,5 +244,5 @@
   setInterval(()=>void refreshPublicRooms(),15000);
   addEventListener('pagehide',persistSave);
   action.onclick=()=>void(roomId?joinRoom():createRoom()).catch(error=>{action.disabled=false;action.textContent=roomId?'TENTAR ENTRAR NOVAMENTE':'TENTAR CRIAR SALA';loadingError(error);});
-  (async()=>{localStorage.removeItem('neo_pokemon_fire_red_test_save');void refreshPublicRooms();if(!await waitForAuth()){loginRequired();return;}if(roomId){action.textContent='ENTRAR NA BATALHA';return;}if(!config){action.disabled=true;action.textContent='VERSÃO NÃO COMPATÍVEL';return;}updateInfo();testSaveSelected=config.id==='pokemon-fire-red';testSaveButton.hidden=config.id!=='pokemon-fire-red';if(testSaveSelected){testSaveButton.textContent='USAR MEU SAVE PESSOAL';document.getElementById('save-status').textContent='Save online pronto: você começará no ponto de batalha e troca.';}})();
+  (async()=>{localStorage.removeItem('neo_pokemon_fire_red_test_save');void refreshPublicRooms();if(!await waitForAuth()){loginRequired();return;}if(roomId){action.disabled=false;action.textContent='ENTRAR NA BATALHA';return;}if(!config){action.disabled=true;action.textContent='VERSÃO NÃO COMPATÍVEL';return;}updateInfo();testSaveSelected=config.id==='pokemon-fire-red';testSaveButton.hidden=config.id!=='pokemon-fire-red';action.disabled=false;action.textContent='CRIAR SALA PÚBLICA';if(testSaveSelected){testSaveButton.textContent='USAR MEU SAVE PESSOAL';document.getElementById('save-status').textContent='Save online pronto: você começará no ponto de batalha e troca.';}})();
 })();
