@@ -2015,7 +2015,10 @@
     "ano": "2004",
     "genero": "Adventure; Role-Playing",
     "desenvolvedora": "Game Freak",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2,
+    "linkOnline": "rfu"
   },
   {
     "nome": "Pokémon Leaf Green",
@@ -2031,7 +2034,10 @@
     "ano": "2004",
     "genero": "Adventure; Role-Playing",
     "desenvolvedora": "Game Freak",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2,
+    "linkOnline": "rfu"
   },
   {
     "nome": "Pokémon Light Platinum",
@@ -2141,7 +2147,8 @@
     "popularidade": 0,
     "metadataFonte": "sem correspondência confiável",
     "multiplayer": true,
-    "maxPlayers": 4
+    "maxPlayers": 2,
+    "linkOnline": "cable"
   },
   {
     "nome": "Pokémon Sapphire",
@@ -2157,7 +2164,10 @@
     "ano": "2002",
     "genero": "Adventure; Role-Playing",
     "desenvolvedora": "Game Freak",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2,
+    "linkOnline": "cable"
   },
   {
     "nome": "Pokemon Shadow Force.",
@@ -3293,6 +3303,9 @@
     "descricao": "Pokémon Emerald é um jogo para Game Boy Advance. A experiência preserva a estrutura e as limitações técnicas características de sua plataforma original. Ainda não há quantidade suficiente de avaliações públicas confiáveis para atribuir uma nota numérica sem inventar dados.",
     "nota": "S/N",
     "popularidade": 0,
-    "metadataFonte": "sem correspondência confiável"
+    "metadataFonte": "sem correspondência confiável",
+    "multiplayer": true,
+    "maxPlayers": 2,
+    "linkOnline": "rfu"
   }
 ]

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#07140c">
+  <title>Batalha Pokémon Online - NeoTerminalRoom</title>
+  <link rel="stylesheet" href="pokemon-link/pokemon-link.css?v=1">
+</head>
+<body>
+  <header><a href="index.html" aria-label="Voltar">← BIBLIOTECA</a><strong>BATALHA POKÉMON ONLINE</strong><span id="connection">OFFLINE</span></header>
+  <main>
+    <section class="stage">
+      <canvas id="screen" width="240" height="160" aria-label="Tela do jogo"></canvas>
+      <div id="loading"><strong>PREPARANDO O GBA...</strong><span>O jogo será processado neste aparelho.</span></div>
+    </section>
+    <aside class="lobby">
+      <h1 id="game-title">Pokémon</h1>
+      <p id="instructions"></p>
+      <ol><li>Os dois jogadores devem abrir a mesma versão em português.</li><li>Entre ou crie uma conta gratuita.</li><li>Crie a sala e envie o QR Code ao adversário.</li><li>Quando aparecer “CONECTADO”, os dois entram no local indicado acima.</li><li>Escolham batalha ou troca dentro do próprio jogo.</li></ol>
+      <div id="auth-warning" hidden><strong>CADASTRO GRATUITO NECESSÁRIO</strong><p>A conta identifica cada lado da conexão e protege a sala.</p><a id="login-link" href="index.html?cadastro=1">ENTRAR OU CRIAR CADASTRO</a></div>
+      <button id="create-room" type="button">CRIAR SALA DE BATALHA</button>
+      <div id="invite" hidden><div id="qr"></div><input id="invite-link" readonly><button id="copy" type="button">COPIAR CONVITE</button><p id="room-status">Aguardando o segundo jogador...</p></div>
+      <p class="warning">Seu progresso desta área é salvo automaticamente neste aparelho. Não feche a página durante o ícone de salvamento.</p>
+    </aside>
+  </main>
+  <section class="controls" aria-label="Controles do GBA">
+    <div class="dpad"><button data-key="up">▲</button><button data-key="left">◀</button><button data-key="right">▶</button><button data-key="down">▼</button></div>
+    <div class="middle"><button data-key="select">SELECT</button><button data-key="start">START</button></div>
+    <div class="ab"><button data-key="b">B</button><button data-key="a">A</button></div>
+    <button class="shoulder left" data-key="l">L</button><button class="shoulder right" data-key="r">R</button>
+  </section>
+  <script src="pokemon-link-config.js?v=1"></script>
+  <script src="pokemon-link/gpsp.js?v=1"></script>
+  <script src="pokemon-link/pokemon-link.js?v=1"></script>
+</body>
+</html>

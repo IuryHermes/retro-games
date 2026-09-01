@@ -644,6 +644,7 @@
     <script src="privacy-consent-v2.js" defer></script>
     <script src="analytics-consent.js" defer></script>
     <script src="collections-home.js?v=20260901-10" defer></script>
+    <script src="pokemon-link-config.js?v=1"></script>
 </head>
 <body>
 
@@ -1082,10 +1083,16 @@
                 const card = document.createElement('article'); card.className = 'multiplayer-room-card';
                 const title = document.createElement('strong'); title.textContent = room.title;
                 const meta = document.createElement('small'); meta.textContent = `${room.system.toUpperCase()} · ${room.hostName} · ${room.online}/${room.maxPlayers} online`;
-                const join = document.createElement('a'); join.href = `multiplayer-room.html?room=${encodeURIComponent(room.id)}`; join.textContent = 'SOLICITAR ENTRADA';
+                const join = document.createElement('a'); join.href = room.system === 'gba-link' ? `pokemon-link-player.html?room=${encodeURIComponent(room.id)}` : `multiplayer-room.html?room=${encodeURIComponent(room.id)}`; join.textContent = 'SOLICITAR ENTRADA';
                 join.onclick = event => {
                     if (accountProfile) return;
                     event.preventDefault();
+                    if (room.system === 'gba-link') {
+                        const destination = `pokemon-link-player.html?room=${encodeURIComponent(room.id)}`;
+                        sessionStorage.setItem('neo_auth_return', destination);
+                        requestMultiplayerAccount('Entre ou crie sua conta gratuita para participar desta batalha Pokémon. Depois do cadastro você voltará automaticamente.', 'join_pokemon_link');
+                        return;
+                    }
                     sessionStorage.setItem('neo_pending_multiplayer_room', room.id);
                     requestMultiplayerAccount('Para entrar nesta sala, faça um cadastro gratuito. Depois do login você voltará automaticamente para a partida.', 'join_room');
                 };
@@ -1155,9 +1162,11 @@
             const image = document.createElement('img'); image.src = catalogCoverUrl(game) || 'assets/imagens-videos/logo-discord.gif'; image.alt = ''; image.loading = 'lazy'; image.onerror = () => { image.onerror = null; image.src = 'assets/imagens-videos/logo-discord.gif'; };
             const name = document.createElement('span'); name.textContent = game.nome;
             const players = Number(game.maxPlayers || 0);
-            const systemName = document.createElement('small'); systemName.textContent = players > 1 ? `${game.sysName} · ATÉ ${players} JOGADORES` : `${game.sysName} · SALA E ESPECTADOR`;
+            const pokemonLink = game.sysId === 'gba' ? window.NeoPokemonLink?.find(game) : null;
+            const systemName = document.createElement('small'); systemName.textContent = pokemonLink ? `${game.sysName} · CABO GBA · 2 JOGADORES` : players > 1 ? `${game.sysName} · ATÉ ${players} JOGADORES` : `${game.sysName} · SALA E ESPECTADOR`;
             choice.append(image, name, systemName);
             choice.onclick = () => {
+                if (pokemonLink) { closeMultiplayerHub(); location.href = `pokemon-link-player.html?game=${encodeURIComponent(pokemonLink.id)}`; return; }
                 sessionStorage.setItem('neo_multiplayer_create_pending', JSON.stringify({ expiresAt:Date.now() + 5 * 60 * 1000 }));
                 closeMultiplayerHub();
                 playAndRemember(game, game.playUrl);
@@ -1186,7 +1195,7 @@
     const avatarGrid = document.getElementById('avatar-grid');
     const authParams = new URLSearchParams(location.search);
     const requestedAuthReturn = authParams.get('return');
-    const safeAuthReturn = /^(?:(?:ofertas|social)\.html|multiplayer-room\.html\?room=[a-f0-9]{12}(?:&spectator=1)?)$/.test(requestedAuthReturn || '') ? requestedAuthReturn : '';
+    const safeAuthReturn = /^(?:(?:ofertas|social)\.html|multiplayer-room\.html\?room=[a-f0-9]{12}(?:&spectator=1)?|pokemon-link-player\.html\?(?:room=[a-f0-9]{12}|game=pokemon-(?:fire-red|leaf-green|ruby|sapphire|emerald)))$/.test(requestedAuthReturn || '') ? requestedAuthReturn : '';
     if (safeAuthReturn) sessionStorage.setItem('neo_auth_return', safeAuthReturn);
     const setAuthStatus = message => { authStatus.textContent = message || ''; };
     const chooseAvatar = avatar => { selectedAvatar = avatar; avatarGrid.querySelectorAll('.avatar-choice').forEach(button => button.classList.toggle('selected', button.dataset.avatar === avatar)); };
@@ -1851,14 +1860,32 @@
         const onlineButton = document.getElementById('modal-online-btn');
         const maxPlayers = Number(gameObj.maxPlayers || 0);
         const multiplayerGame = maxPlayers > 1;
+        const pokemonLink = gameObj.sysId === 'gba' ? window.NeoPokemonLink?.find(gameObj) : null;
+        const pokemonGame = gameObj.sysId === 'gba' && /pok[eé]mon/i.test(gameObj.nome || '');
         onlineButton.hidden = false;
-        onlineButton.textContent = multiplayerGame
+        onlineButton.textContent = pokemonLink
+            ? '⚡ BATALHAR OU TROCAR ONLINE'
+            : multiplayerGame
             ? `⚔ JOGAR ONLINE · ATÉ ${maxPlayers} JOGADORES`
             : '◉ ABRIR SALA · JOGAR E ASSISTIR';
-        document.getElementById('modal-action-hint').textContent = multiplayerGame
+        document.getElementById('modal-action-hint').textContent = pokemonLink
+            ? `${pokemonLink.room} Os dois jogadores precisam usar esta mesma versão em português.`
+            : pokemonGame
+            ? 'Esta versão ainda não teve batalha por cabo/adaptador validada. Você pode jogar normalmente ou abrir uma sala para assistir.'
+            : multiplayerGame
             ? 'Jogue normalmente ou crie uma sala para convidar outros jogadores.'
             : 'Jogue normalmente ou abra uma transmissão para outras pessoas assistirem.';
         onlineButton.onclick = () => {
+            if (pokemonLink) {
+                const destination = `pokemon-link-player.html?game=${encodeURIComponent(pokemonLink.id)}`;
+                window.neoTrack?.('pokemon_link_open', { source:'game_details', game_name:gameObj.nome, link_mode:pokemonLink.mode, auth_state:accountProfile ? 'signed_in' : 'guest' });
+                if (accountProfile) { location.href = destination; return; }
+                window.closeGameModal();
+                sessionStorage.setItem('neo_auth_return', destination);
+                document.getElementById('auth-copy').textContent = 'Crie sua conta gratuita para abrir uma batalha Pokémon. Depois do cadastro você voltará automaticamente.';
+                openAuth();
+                return;
+            }
             window.neoTrack?.('multiplayer_hub_open', { source:'game_details', game_name:gameObj.nome, game_system:gameObj.sysId, mode:multiplayerGame ? 'multiplayer' : 'spectator', auth_state:accountProfile ? 'signed_in' : 'guest' });
             if (accountProfile) { startSpecificMultiplayerGame(gameObj, playUrl); return; }
             sessionStorage.setItem('neo_multiplayer_game_after_auth', JSON.stringify({ game:gameObj, playUrl, expiresAt:Date.now() + 5 * 60 * 1000 }));
