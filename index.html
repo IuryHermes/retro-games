@@ -1530,6 +1530,7 @@
     document.getElementById('profile-logout').onclick = logoutAccount;
     document.getElementById('profile-edit').onclick = () => { closeHistory(); openAuth(); };
     onAuthStateChanged(auth, async user => {
+        if (user) sessionStorage.setItem('neo_account_access', await user.getIdToken());
         document.getElementById('auth-logout').style.display = user || discordAccountToken ? 'block' : 'none';
         document.getElementById('auth-save-profile').style.display = user || discordAccountToken ? 'block' : 'none';
         document.getElementById('auth-provider-actions').hidden = Boolean(user || discordAccountToken);

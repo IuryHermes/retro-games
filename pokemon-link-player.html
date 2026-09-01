@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#07140c">
   <title>Batalha Pokémon Online - NeoTerminalRoom</title>
   <link rel="stylesheet" href="pokemon-link/pokemon-link.css?v=1">
+  <link rel="stylesheet" href="pokemon-link/pokemon-link-fixes.css?v=2">
 </head>
 <body>
   <header><a href="index.html" aria-label="Voltar">← BIBLIOTECA</a><strong>BATALHA POKÉMON ONLINE</strong><span id="connection">OFFLINE</span></header>
@@ -32,8 +33,10 @@
     <div class="ab"><button data-key="b">B</button><button data-key="a">A</button></div>
     <button class="shoulder left" data-key="l">L</button><button class="shoulder right" data-key="r">R</button>
   </section>
-  <script src="pokemon-link-config.js?v=1"></script>
-  <script src="pokemon-link/gpsp.js?v=1"></script>
-  <script src="pokemon-link/pokemon-link.js?v=1"></script>
+  <script src="pokemon-link-config.js?v=2"></script>
+  <script src="pokemon-link/vendor/qrcode.min.js?v=1"></script>
+  <script type="module" src="pokemon-link/auth-bridge.js?v=1"></script>
+  <script src="pokemon-link/gpsp.js?v=2"></script>
+  <script src="pokemon-link/pokemon-link.js?v=2"></script>
 </body>
 </html>

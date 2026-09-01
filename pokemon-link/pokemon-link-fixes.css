@@ -1,0 +1,18 @@
+[hidden] { display: none !important; }
+
+@media (pointer: coarse), (max-width: 800px) {
+  body { padding-bottom: 205px; }
+  .controls { height: 198px; }
+  .middle button { width: 58px; height: 30px; top: 4px; bottom: auto; }
+  .middle button:first-child { left: calc(50% - 62px); }
+  .middle button:last-child { left: calc(50% + 4px); }
+  .dpad button:nth-child(1) { top: 38px; }
+  .dpad button:nth-child(2), .dpad button:nth-child(3) { top: 82px; }
+  .dpad button:nth-child(4) { top: 126px; }
+  .ab button:first-child { top: 100px; }
+  .ab button:last-child { top: 60px; }
+}
+
+@media (max-height: 700px) and (orientation: landscape) {
+  body { padding-bottom: 0; }
+}
