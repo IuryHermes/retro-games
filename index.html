@@ -398,6 +398,11 @@
         }
 
         @media (max-width: 768px) {
+            #game-info-modal { align-items:center; padding:max(8px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left)); overflow:hidden; }
+            #game-info-modal .modal-content-box { height:min(94dvh,760px); max-height:94dvh; }
+            #game-info-modal .game-info-header { flex:0 0 clamp(130px,25dvh,180px); height:auto; }
+            #game-info-modal .game-info-body { min-height:0; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; padding:15px; }
+            #game-info-modal .game-info-close { position:absolute; top:8px; right:8px; }
             .welcome-steps { grid-template-columns:1fr; }
             .collections-showcase { padding:20px 10px 0; }
             .collections-heading h2 { font-size:11px; }
@@ -1786,7 +1791,10 @@
 
         const descContainer = document.getElementById('modal-game-desc');
         const fullText = gameObj.descricao || "ACESSANDO BANCO DE DADOS...\n> Uma aventura épica espera por você.";
+        const compactDetails = matchMedia('(max-width:768px), (pointer:coarse)').matches;
+        if (compactDetails) descContainer.innerHTML = escapeHTML(fullText).replace(/\n/g, '<br>');
 
+        if (!compactDetails) {
         descContainer.innerHTML = '<span id="typewriter-text"></span><span class="cursor">_</span>';
         const typeTarget = document.getElementById('typewriter-text');
 
@@ -1813,6 +1821,9 @@
             clearInterval(window.typewriterInterval);
             typeTarget.innerHTML = formatarDestaque(fullText);
         };
+        } else {
+            descContainer.parentElement.onclick = null;
+        }
 
         const offersBanner = document.querySelector('.affiliate-banner');
         const offersTitle = offersBanner?.querySelector('span');
