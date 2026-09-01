@@ -16,8 +16,11 @@ for (const marker of ['id="collections-row"', 'id="collections-show-all"', 'id="
 }
 if (!/\.collection-tile \{[^}]*flex:0 0 clamp\(180px,19vw,260px\)/.test(html)) throw new Error('coletâneas ainda estão desproporcionais no desktop');
 if (!/flex-basis:clamp\(112px,31vw,132px\)/.test(html)) throw new Error('coletâneas ainda estão gigantes no celular');
-for (const marker of ['mortal-kombat', 'mega-man', 'showAll.onclick', 'row.onpointermove', 'pressedTile.dataset.collection', 'panel.scrollIntoView']) {
+for (const marker of ['mortal-kombat', 'mega-man', 'showAll.onclick', 'row.onpointermove', 'panel.scrollIntoView']) {
   if (!controller.includes(marker)) throw new Error(`controlador de coletâneas incompleto: ${marker}`);
+}
+for (const marker of ["event.pointerType === 'touch'", 'touch-action:auto', '-webkit-overflow-scrolling:touch']) {
+  if (!(controller + html).includes(marker)) throw new Error(`rolagem móvel nativa ausente: ${marker}`);
 }
 if (!html.includes('object-fit:fill')) throw new Error('capas ainda deixam faixas vazias na caixa');
 if (/collection-tile[^>]+href=/i.test(html)) throw new Error('coletânea ainda navega para outra página');

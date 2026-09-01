@@ -295,7 +295,7 @@
         .collections-heading h2 { margin:0; color:var(--text-color); font:13px 'Press Start 2P',cursive; }
         .collections-heading .view-all-btn { color:var(--accent-color); font:8px 'Press Start 2P',cursive; cursor:pointer; }
         .collections-carousel { position:relative; }
-        .collections-row { display:flex; gap:12px; overflow-x:auto; padding:5px 3px 18px; scroll-snap-type:x proximity; scrollbar-width:none; cursor:grab; user-select:none; touch-action:pan-y; }
+        .collections-row { display:flex; gap:12px; overflow-x:auto; padding:5px 3px 18px; scroll-snap-type:x proximity; scrollbar-width:none; cursor:grab; user-select:none; touch-action:auto; -webkit-overflow-scrolling:touch; overscroll-behavior-inline:contain; }
         .collections-row.dragging { cursor:grabbing; scroll-snap-type:none; }
         .collections-row::-webkit-scrollbar { display:none; }
         .collection-tile { --collection-image:none; position:relative; flex:0 0 clamp(180px,19vw,260px); aspect-ratio:16/9; overflow:hidden; border:1px solid var(--border-color); border-radius:9px; scroll-snap-align:start; text-align:left; padding:0; background:#030504; box-shadow:0 12px 25px rgba(0,0,0,.35); transition:transform .25s,border-color .25s; cursor:pointer; }
