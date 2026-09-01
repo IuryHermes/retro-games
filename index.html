@@ -116,6 +116,10 @@
         .modal-offer-price { color:var(--accent-color); font:bold 14px monospace; }
         .modal-offer-discount { color:#20c96b; font:bold 10px monospace; }
         .modal-offer-buy { color:#fff; background:var(--accent-color); text-decoration:none; padding:8px 10px; border-radius:4px; font:bold 10px monospace; white-space:nowrap; }
+        .game-info-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+        .game-info-online-btn { min-height:52px; border:1px solid #39a9ff; border-radius:5px; background:#08213a; color:#8fd0ff; font:bold 12px monospace; cursor:pointer; }
+        .game-info-online-btn:hover,.game-info-online-btn:focus-visible { background:#0d355a; color:#fff; outline:2px solid #8fd0ff; outline-offset:2px; }
+        @media(max-width:520px){ .game-info-actions { grid-template-columns:1fr; } }
         .game-info-play-btn { background: var(--accent-color); color: #fff; border: none; padding: 15px; width: 100%; font-family: 'Press Start 2P', monospace; font-size: 14px; cursor: pointer; border-radius: 4px; transition: 0.3s; }
         .game-info-play-btn:hover { background: #fff; color: #000; box-shadow: 0 0 15px #fff; }
 
@@ -720,7 +724,10 @@
                         <a href="#" class="affiliate-btn ml" id="btn-ml-modal" target="_blank">📦 Mercado Livre</a>
                     </div>
                 </div>
-                <button class="game-info-play-btn" id="modal-play-btn">▶ JOGAR AGORA</button>
+                <div class="game-info-actions">
+                    <button class="game-info-play-btn" id="modal-play-btn">▶ JOGAR AGORA</button>
+                    <button class="game-info-online-btn" id="modal-online-btn" type="button" hidden>⚔ JOGAR ONLINE</button>
+                </div>
             </div>
         </div>
     </div>
@@ -1057,8 +1064,27 @@
         document.getElementById('auth-copy').textContent = message;
         openAuth();
     }
+    function startSpecificMultiplayerGame(game, playUrl) {
+        sessionStorage.setItem('neo_multiplayer_create_pending', JSON.stringify({ expiresAt:Date.now() + 5 * 60 * 1000 }));
+        closeMultiplayerHub();
+        window.closeGameModal?.();
+        playAndRemember(game, playUrl);
+    }
     function resumeMultiplayerAfterAuth() {
-        if (!accountProfile || sessionStorage.getItem('neo_multiplayer_resume') !== 'create') return false;
+        if (!accountProfile) return false;
+        const specificRaw = sessionStorage.getItem('neo_multiplayer_game_after_auth');
+        if (specificRaw) {
+            sessionStorage.removeItem('neo_multiplayer_game_after_auth');
+            try {
+                const specific = JSON.parse(specificRaw);
+                if (specific.expiresAt > Date.now() && specific.game?.maxPlayers > 1 && /^\/jogos\//.test(specific.playUrl || '')) {
+                    closeAuth();
+                    startSpecificMultiplayerGame(specific.game, specific.playUrl);
+                    return true;
+                }
+            } catch (_) {}
+        }
+        if (sessionStorage.getItem('neo_multiplayer_resume') !== 'create') return false;
         sessionStorage.removeItem('neo_multiplayer_resume');
         closeAuth();
         openMultiplayerHub();
@@ -1766,6 +1792,19 @@
         const playButton = document.getElementById('modal-play-btn');
         playButton.innerHTML = '▶ JOGAR AGORA';
         playButton.onclick = () => { window.closeGameModal(); playAndRemember(gameObj, playUrl); };
+        const onlineButton = document.getElementById('modal-online-btn');
+        const maxPlayers = Number(gameObj.maxPlayers || 0);
+        onlineButton.hidden = maxPlayers < 2;
+        if (maxPlayers > 1) {
+            onlineButton.textContent = `⚔ JOGAR ONLINE · ATÉ ${maxPlayers} JOGADORES`;
+            onlineButton.onclick = () => {
+                window.neoTrack?.('multiplayer_hub_open', { source:'game_details', game_name:gameObj.nome, game_system:gameObj.sysId, auth_state:accountProfile ? 'signed_in' : 'guest' });
+                if (accountProfile) { startSpecificMultiplayerGame(gameObj, playUrl); return; }
+                sessionStorage.setItem('neo_multiplayer_game_after_auth', JSON.stringify({ game:gameObj, playUrl, expiresAt:Date.now() + 5 * 60 * 1000 }));
+                window.closeGameModal();
+                requestMultiplayerAccount(`Para jogar ${gameObj.nome} online, entre ou crie uma conta gratuita. Depois do cadastro a partida continuará automaticamente.`, 'game_details');
+            };
+        } else onlineButton.onclick = null;
         document.getElementById('game-info-modal').style.display = 'flex';
     };
 
