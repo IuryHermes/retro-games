@@ -6,6 +6,7 @@ const guest = await readFile(new URL('../multiplayer-room.html', import.meta.url
 const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const worker = await readFile(new URL('../worker/src/index.js', import.meta.url), 'utf8');
 const social = await readFile(new URL('../social.js', import.meta.url), 'utf8');
+assert.match(await readFile(new URL('../player-universal.html', import.meta.url), 'utf8'), /multiplayer-v2\.js\?v=20260901-qrfix1/);
 
 assert.match(host, /canvas\.captureStream\(30\)/);
 assert.match(host, /#neo-multiplayer-panel\{top:auto/);
@@ -23,7 +24,9 @@ assert.match(host, /function renderInviteQr/);
 assert.match(host, /neo-multi-qr-code/);
 assert.match(host, /qrcodejs\/1\.0\.0\/qrcode\.min\.js/);
 assert.match(host, /ENTRAR PELO CELULAR/);
-assert.match(host, /neo-multi-qr-code canvas\{display:none!important\}/);
+assert.match(host, /neo-multi-qr-code canvas,#neo-multi-qr-code img\{display:block!important/);
+assert.match(host, /target\.querySelector\('img,canvas'\)/);
+assert.doesNotMatch(host, /neo-multi-qr-code canvas\{display:none!important\}/);
 assert.match(host, /async function autoCreateRoom/);
 assert.match(host, /PREPARANDO SALA ONLINE/);
 assert.match(host, /void autoCreateRoom\(\)/);
