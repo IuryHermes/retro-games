@@ -135,6 +135,12 @@
     const stored = testSaveSelected && config.id==='pokemon-fire-red' ? await battleTestSave() : await saveDb('read').catch(() => null);
     const saveSize = core._neo_save_size(), savePtr = core._neo_save_ptr();
     if (stored && stored.byteLength === saveSize) core.HEAPU8.set(new Uint8Array(stored), savePtr);
+    if(testSaveSelected&&config.id==='pokemon-fire-red'){
+      loading.innerHTML='<strong>ENTRANDO NA UNION ROOM...</strong><span>Carregando diretamente o ponto da batalha.</span>';
+      const wait=frames=>{core._neo_set_input(0);for(let i=0;i<frames;i++)core._neo_run();};
+      const press=(mask)=>{core._neo_set_input(mask);core._neo_run();wait(90);};
+      wait(600);press(1<<3);press(1<<8);press(1<<8);press(1<<8);press(1<<8);press(1<<0);
+    }
     running = true;
     document.getElementById('loading').hidden = true;
     requestAnimationFrame(frameLoop);

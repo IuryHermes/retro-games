@@ -33,6 +33,16 @@ if (process.argv.includes('--battle-save')) {
   core.HEAPU8.set(save, core._neo_save_ptr());
 }
 for (let frame=0; frame<180; frame++) core._neo_run();
+if (process.argv.includes('--screenshot')) {
+  const press=(mask,frames=1)=>{core._neo_set_input(mask);for(let i=0;i<frames;i++)core._neo_run();core._neo_set_input(0);for(let i=0;i<90;i++)core._neo_run();};
+  for(let i=0;i<420;i++)core._neo_run();
+  press(1<<3); press(1<<8); press(1<<8); press(1<<8); press(1<<8); press(1<<0);
+  const width=core._neo_frame_width(),height=core._neo_frame_height(),pitch=core._neo_frame_pitch(),ptr=core._neo_frame_ptr();
+  const rowSize=Math.ceil(width*3/4)*4,pixels=Buffer.alloc(rowSize*height),heap=core.HEAPU8;
+  for(let y=0;y<height;y++)for(let x=0;x<width;x++){const at=ptr+y*pitch+x*2,p=heap[at]|heap[at+1]<<8,dst=(height-1-y)*rowSize+x*3;pixels[dst]=(p&31)*255/31;pixels[dst+1]=((p>>5)&63)*255/63;pixels[dst+2]=((p>>11)&31)*255/31;}
+  const header=Buffer.alloc(54);header.write('BM');header.writeUInt32LE(54+pixels.length,2);header.writeUInt32LE(54,10);header.writeUInt32LE(40,14);header.writeInt32LE(width,18);header.writeInt32LE(height,22);header.writeUInt16LE(1,26);header.writeUInt16LE(24,28);header.writeUInt32LE(pixels.length,34);
+  fs.writeFileSync(path.join(root,'pokemon-link-save-screen.bmp'),Buffer.concat([header,pixels]));
+}
 const result = { id, width:core._neo_frame_width(), height:core._neo_frame_height(), audioFrames:core._neo_audio_frames(), saveSize:core._neo_save_size() };
 if (result.width !== 240 || result.height !== 160 || !result.audioFrames || !result.saveSize) throw new Error(`${id}: saída inválida ${JSON.stringify(result)}`);
 console.log(JSON.stringify(result));
