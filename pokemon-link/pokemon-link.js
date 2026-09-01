@@ -13,6 +13,7 @@
   const roomId = (params.get('room') || '').toLowerCase();
   let config = window.NeoPokemonLink.byId(params.get('game'));
   let core, socket, room, ticket, clientId, peer, channel, running = false, localNetId = 0;
+  let pendingIceCandidates=[];
   let testSaveSelected = false;
   let inputMask = 0, audioContext, audioTime = 0, lastSave = 0;
   const screen = document.getElementById('screen'), ctx = screen.getContext('2d', { alpha:false });
@@ -158,6 +159,9 @@
   }
   async function iceServers() { try{return (await request('/multiplayer/ice-servers')).iceServers;}catch(_){return [{urls:'stun:stun.cloudflare.com:3478'}];} }
   function sendSignal(to,data){if(socket?.readyState===1)socket.send(JSON.stringify({type:'signal',to,data}));}
+  async function addOrQueueCandidate(candidate){if(!candidate||!peer)return;if(peer.remoteDescription)await peer.addIceCandidate(candidate);else pendingIceCandidates.push(candidate);}
+  async function flushIceCandidates(){if(!peer?.remoteDescription)return;for(const candidate of pendingIceCandidates.splice(0))await peer.addIceCandidate(candidate);}
+  function watchPeer(){peer.onconnectionstatechange=()=>{const state=peer.connectionState;connection.textContent=state==='connected'?'CONECTADO':state==='failed'?'FALHA NA CONEXÃO':state==='disconnected'?'DESCONECTADO':'CONECTANDO...';connection.classList.toggle('online',state==='connected');if(state==='failed')document.getElementById('loading').innerHTML='<strong>FALHA NA CONEXÃO ENTRE OS APARELHOS</strong><span>Tente criar outra sala. Se estiverem em redes diferentes, confira se VPN ou economia de dados está desativada.</span>';};}
   function bindChannel(value) {
     channel=value; channel.binaryType='arraybuffer';
     channel.onopen=()=>{core._neo_net_start(localNetId);connection.textContent='CONECTADO';connection.classList.add('online');document.body.classList.add('game-active');document.getElementById('room-status').textContent='Conexão pronta. Agora entrem no local indicado dentro do jogo.';};
@@ -168,15 +172,16 @@
   async function hostPeer(person) {
     if(peer||!person||person.host)return;
     peer=new RTCPeerConnection({iceServers:await iceServers()}); bindChannel(peer.createDataChannel('pokemon-link',{ordered:true}));
+    pendingIceCandidates=[];watchPeer();connection.textContent='CONECTANDO...';
     peer.onicecandidate=e=>e.candidate&&sendSignal(person.clientId,{candidate:e.candidate});
     const offer=await peer.createOffer();await peer.setLocalDescription(offer);sendSignal(person.clientId,{description:peer.localDescription});
   }
   async function guestSignal(message) {
-    if(!peer){peer=new RTCPeerConnection({iceServers:await iceServers()});peer.ondatachannel=e=>bindChannel(e.channel);peer.onicecandidate=e=>e.candidate&&sendSignal(message.from,{candidate:e.candidate});}
-    if(message.data?.description){await peer.setRemoteDescription(message.data.description);const answer=await peer.createAnswer();await peer.setLocalDescription(answer);sendSignal(message.from,{description:peer.localDescription});}
-    if(message.data?.candidate)await peer.addIceCandidate(message.data.candidate).catch(()=>{});
+    if(!peer){peer=new RTCPeerConnection({iceServers:await iceServers()});pendingIceCandidates=[];watchPeer();connection.textContent='CONECTANDO...';peer.ondatachannel=e=>bindChannel(e.channel);peer.onicecandidate=e=>e.candidate&&sendSignal(message.from,{candidate:e.candidate});}
+    if(message.data?.description){await peer.setRemoteDescription(message.data.description);await flushIceCandidates();const answer=await peer.createAnswer();await peer.setLocalDescription(answer);sendSignal(message.from,{description:peer.localDescription});}
+    if(message.data?.candidate)await addOrQueueCandidate(message.data.candidate).catch(()=>{});
   }
-  async function hostSignal(message){if(message.data?.description)await peer.setRemoteDescription(message.data.description);if(message.data?.candidate)await peer.addIceCandidate(message.data.candidate).catch(()=>{});}
+  async function hostSignal(message){if(message.data?.description){await peer.setRemoteDescription(message.data.description);await flushIceCandidates();}if(message.data?.candidate)await addOrQueueCandidate(message.data.candidate).catch(()=>{});}
   function connectSocket(){
     socket=new WebSocket(`${API.replace('https:','wss:')}/multiplayer/rooms/${room.id}/ws?ticket=${encodeURIComponent(ticket)}`);
     socket.onmessage=e=>{const message=JSON.parse(e.data);if(message.type==='welcome')clientId=message.clientId;if(message.type==='state'&&!localNetId){const guest=message.participants.find(p=>!p.host);if(guest)document.body.classList.add('guest-arrived');void hostPeer(guest);}if(message.type==='signal')void(localNetId?guestSignal(message):hostSignal(message));};
