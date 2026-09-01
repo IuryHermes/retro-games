@@ -41,4 +41,4 @@ Sempre que uma rota, gate de autenticação, retorno pós-login, entrada do play
 2. Atualizar `tests/navigation-contract.mjs` e o teste específico da área.
 3. Executar `node tests/site-navigation.mjs`.
 4. Executar `node tests/navigation-contract.mjs`.
-5. Para multiplayer, executar também `node tests/multiplayer-client.mjs` e preencher a matriz de `multiplayer-diagnostics.html` em aparelhos reais.
+5. Para multiplayer, executar também `node tests/multiplayer-client.mjs`, testar em aparelhos reais e acompanhar o evento opcional `multiplayer_session_feedback` no GA4.

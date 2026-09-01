@@ -28,6 +28,8 @@ assert.match(diagnostics, /iPhone\/Safari/);
 assert.match(protocol, /Periodicidade recomendada: mensal/);
 assert.match(flow, /Atualizado em: 2026-09-01/);
 assert.match(flow, /tests\/navigation-contract\.mjs/);
-assert.match(home, /multiplayer-diagnostics\.html/);
+assert.doesNotMatch(home, /multiplayer-diagnostics\.html/, 'o diagnóstico técnico não deve aparecer na navegação pública');
+assert.match(host, /multiplayer_session_feedback/);
+assert.match(host, /neo_multiplayer_feedback_last_at/);
 
 console.log('contrato de navegação: GA4, cabeçalho compartilhado, diagnóstico e fluxograma validados');
