@@ -11,6 +11,8 @@
   .dpad button:nth-child(4) { top: 126px; }
   .ab button:first-child { top: 100px; }
   .ab button:last-child { top: 60px; }
+  .guest-game .lobby, .game-active .lobby { display: none; }
+  .guest-game main, .game-active main { grid-template-columns: 1fr; }
 }
 
 @media (max-height: 700px) and (orientation: landscape) {
