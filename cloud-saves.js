@@ -4,7 +4,11 @@
     const API = 'https://webhook-pix-cafe.neoterminalroom-oficial.workers.dev';
     const TOKEN_KEY = 'neo_club_access';
     const PENDING_HISTORY_KEY = 'neo_pending_history';
-    const INTERVAL_MS = 60000;
+    const MOBILE_PS1_PROFILE = window.NEO_MOBILE_PS1_AUDIO === true;
+    // A full PS1 state snapshot can briefly starve WebAudio on Android.
+    // Mobile PS1 keeps cloud protection, with fewer interruptions.
+    const INTERVAL_MS = MOBILE_PS1_PROFILE ? 3 * 60000 : 60000;
+    const INITIAL_AUTOSAVE_MS = MOBILE_PS1_PROFILE ? 30000 : 10000;
     const IMAGE_INTERVAL_MS = 10 * 60000;
     const LOCAL_SAVE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
     const LOCAL_SAVE_STARTED_KEY = 'neo_anonymous_save_started_at';
@@ -269,7 +273,7 @@
         clearTimeout(startupRestoreTimer);
         startupRestoreTimer = setTimeout(() => restoreStartupState(), 500);
         if (automaticEnabled) {
-            initialAutosaveTimer = setTimeout(scheduleAutosave, 10000);
+            initialAutosaveTimer = setTimeout(scheduleAutosave, INITIAL_AUTOSAVE_MS);
             timer = setInterval(scheduleAutosave, INTERVAL_MS);
         }
     }

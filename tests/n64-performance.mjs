@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 
 const player = await readFile(new URL('../player-universal.html', import.meta.url), 'utf8');
 const cloudSaves = await readFile(new URL('../cloud-saves.js', import.meta.url), 'utf8');
-assert.match(player, /src="cloud-saves\.js\?v=16"/);
+assert.match(player, /src="cloud-saves\.js\?v=17"/);
 
 assert.doesNotMatch(player, /coi-serviceworker/, 'o player não deve instalar service worker no Safari/iPhone');
 assert.match(player, /window\.crossOriginIsolated/);
@@ -37,10 +37,10 @@ assert.match(player, /Neo Doom 64 renderer repair/);
 assert.match(player, /"mupen64plus-MultiSampling": "0"/);
 assert.match(player, /"mupen64plus-EnableNativeResFactor": "0"/);
 assert.match(player, /if \(core === 'psx' \|\| core === 'pcsx_rearmed'\)[\s\S]*EJS_VirtualGamepadSettings\s*=/);
-assert.match(cloudSaves, /const INTERVAL_MS = 60000/);
+assert.match(cloudSaves, /const INTERVAL_MS = MOBILE_PS1_PROFILE \? 3 \* 60000 : 60000/);
 assert.match(cloudSaves, /const IMAGE_INTERVAL_MS = 10 \* 60000/);
 assert.match(cloudSaves, /setInterval\(scheduleAutosave, INTERVAL_MS\)/);
-assert.match(cloudSaves, /setTimeout\(scheduleAutosave, 10000\)/);
+assert.match(cloudSaves, /setTimeout\(scheduleAutosave, INITIAL_AUTOSAVE_MS\)/);
 assert.match(cloudSaves, /requestIdleCallback\(run, \{ timeout: 4000 \}\)/);
 assert.match(cloudSaves, /autosavePending/);
 assert.match(cloudSaves, /token && !recoveryMode/);
