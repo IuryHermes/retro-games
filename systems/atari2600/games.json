@@ -29,7 +29,9 @@
     "ano": "1977",
     "genero": "Shooter",
     "desenvolvedora": "Larry Kaplan",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Alien",
@@ -77,7 +79,9 @@
     "ano": "1982",
     "genero": "Shooter",
     "desenvolvedora": "Hal Finney",
-    "publicadora": "Telegames USA"
+    "publicadora": "Telegames USA",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Asteroids",
@@ -93,7 +97,9 @@
     "ano": "1981",
     "genero": "Shooter",
     "desenvolvedora": "Brad Stewart",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Atlantis",
@@ -109,7 +115,9 @@
     "ano": "1982",
     "genero": "Shooter",
     "desenvolvedora": "Dennis Koble",
-    "publicadora": "Imagic"
+    "publicadora": "Imagic",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Barnstorming",
@@ -221,7 +229,9 @@
     "ano": "1979",
     "genero": "Sports",
     "desenvolvedora": "Larry Kaplan",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Boxing",
@@ -237,7 +247,9 @@
     "ano": "1980",
     "genero": "Fighting; Sports",
     "desenvolvedora": "Bob Whitehead",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Breakout",
@@ -253,7 +265,9 @@
     "ano": "1978",
     "genero": "Action",
     "desenvolvedora": "Brad Stewart",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Bridge",
@@ -317,7 +331,9 @@
     "ano": "1982",
     "genero": "Platform",
     "desenvolvedora": "Mattel Electronics",
-    "publicadora": "Mattel Electronics"
+    "publicadora": "Mattel Electronics",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "California Games",
@@ -333,7 +349,9 @@
     "ano": "1987",
     "genero": "Sports",
     "desenvolvedora": "Epyx",
-    "publicadora": "Epyx"
+    "publicadora": "Epyx",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Canyon Bomber",
@@ -349,7 +367,9 @@
     "ano": "1979",
     "genero": "Shooter",
     "desenvolvedora": "David Crane",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Carnival",
@@ -365,7 +385,9 @@
     "ano": "1982",
     "genero": "Shooter",
     "desenvolvedora": "Steve Kitchen",
-    "publicadora": "CBS Electronics"
+    "publicadora": "CBS Electronics",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Centipede",
@@ -397,7 +419,9 @@
     "ano": "1982",
     "genero": "Shooter",
     "desenvolvedora": "Bob Whitehead",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Circus Atari",
@@ -413,7 +437,9 @@
     "ano": "1980",
     "genero": "Action",
     "desenvolvedora": "Mike Lorenzen",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Combat",
@@ -429,7 +455,9 @@
     "ano": "1977",
     "genero": "Shooter",
     "desenvolvedora": "Atari",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Commando",
@@ -445,7 +473,9 @@
     "ano": "1988",
     "genero": "Shooter",
     "desenvolvedora": "Imagineering",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Cosmic Ark",
@@ -461,7 +491,9 @@
     "ano": "1982",
     "genero": "Shooter",
     "desenvolvedora": "Imagic",
-    "publicadora": "Imagic"
+    "publicadora": "Imagic",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Crackpots",
@@ -477,7 +509,9 @@
     "ano": "1983",
     "genero": "Action",
     "desenvolvedora": "Dan Kitchen",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Crystal Castles",
@@ -493,7 +527,9 @@
     "ano": "1984",
     "genero": "Action",
     "desenvolvedora": "Atari",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Dark Cavern",
@@ -525,7 +561,9 @@
     "ano": "1982",
     "genero": "Shooter",
     "desenvolvedora": "Bob Polaro",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Defender II",
@@ -557,7 +595,9 @@
     "ano": "1982",
     "genero": "Shooter",
     "desenvolvedora": "Imagic",
-    "publicadora": "Imagic"
+    "publicadora": "Imagic",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Demons to Diamonds",
@@ -573,7 +613,9 @@
     "ano": "1982",
     "genero": "Shooter",
     "desenvolvedora": "Nick Turner",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Desert Falcon",
@@ -589,7 +631,9 @@
     "ano": "1987",
     "genero": "Shooter",
     "desenvolvedora": "Bob Polaro",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Dig Dug",
@@ -621,7 +665,9 @@
     "ano": "1980",
     "genero": "Action; Racing",
     "desenvolvedora": "Carla Meninsky",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Donkey Kong",
@@ -653,7 +699,9 @@
     "ano": "1983",
     "genero": "Action; Platform",
     "desenvolvedora": "Coleco Industries",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Double Dragon",
@@ -669,7 +717,9 @@
     "ano": "1988",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Imagineering",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Dragonfire",
@@ -685,7 +735,9 @@
     "ano": "1982",
     "genero": "Action",
     "desenvolvedora": "Bob Smith",
-    "publicadora": "Imagic"
+    "publicadora": "Imagic",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Dragster",
@@ -701,7 +753,9 @@
     "ano": "1980",
     "genero": "Racing",
     "desenvolvedora": "David Crane",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Enduro",
@@ -765,7 +819,9 @@
     "ano": "1982",
     "genero": "Action",
     "desenvolvedora": "Don Ruffcorn",
-    "publicadora": "Telesys"
+    "publicadora": "Telesys",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Fishing Derby",
@@ -781,7 +837,9 @@
     "ano": "1980",
     "genero": "Sports",
     "desenvolvedora": "David Crane",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Football",
@@ -797,7 +855,9 @@
     "ano": "1979",
     "genero": "Sports",
     "desenvolvedora": "Atari",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Freeway",
@@ -813,7 +873,9 @@
     "ano": "1981",
     "genero": "Action",
     "desenvolvedora": "David Crane",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Frogger",
@@ -829,7 +891,9 @@
     "ano": "1981",
     "genero": "Action",
     "desenvolvedora": "Parker Brothers",
-    "publicadora": "Parker Brothers"
+    "publicadora": "Parker Brothers",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Frogger II - ThreeeDeep!",
@@ -861,7 +925,9 @@
     "ano": "1984",
     "genero": "Action; Shooter",
     "desenvolvedora": "Coleco Industries",
-    "publicadora": "Coleco Industries"
+    "publicadora": "Coleco Industries",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Frostbite",
@@ -877,7 +943,9 @@
     "ano": "1983",
     "genero": "Action",
     "desenvolvedora": "Steve Cartwright",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Galaxian",
@@ -909,7 +977,9 @@
     "ano": "1980",
     "genero": "Sports",
     "desenvolvedora": "Mike Lorenzen",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Gorf",
@@ -989,7 +1059,9 @@
     "ano": "1978",
     "genero": "Sports",
     "desenvolvedora": "Bob Whitehead",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Ice Hockey",
@@ -1005,7 +1077,9 @@
     "ano": "1981",
     "genero": "Sports",
     "desenvolvedora": "Alan Miller",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Ikari Warriors",
@@ -1021,7 +1095,9 @@
     "ano": "1989",
     "genero": "Shooter",
     "desenvolvedora": "Dan Kitchen",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Indy 500",
@@ -1037,7 +1113,9 @@
     "ano": "1977",
     "genero": "Racing",
     "desenvolvedora": "Atari",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Joust",
@@ -1053,7 +1131,9 @@
     "ano": "1983",
     "genero": "Action; Platform",
     "desenvolvedora": "General Computer",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Jungle Hunt",
@@ -1085,7 +1165,9 @@
     "ano": "1981",
     "genero": "Action",
     "desenvolvedora": "Larry Kaplan",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Kangaroo",
@@ -1101,7 +1183,9 @@
     "ano": "1982",
     "genero": "Action; Platform",
     "desenvolvedora": "Atari",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Keystone Kapers",
@@ -1133,7 +1217,9 @@
     "ano": "1982",
     "genero": "Action; Platform",
     "desenvolvedora": "Karl T. Olinger",
-    "publicadora": "Tigervision"
+    "publicadora": "Tigervision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Kung-Fu Master",
@@ -1149,7 +1235,9 @@
     "ano": "1987",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Activision",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Laser Blast",
@@ -1181,7 +1269,9 @@
     "ano": "1982",
     "genero": "Action",
     "desenvolvedora": "Mattel Electronics",
-    "publicadora": "M-Network"
+    "publicadora": "M-Network",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Mario Bros.",
@@ -1197,7 +1287,9 @@
     "ano": "1983",
     "genero": "Platform",
     "desenvolvedora": "Atari",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Maze Craze",
@@ -1229,7 +1321,9 @@
     "ano": "1982",
     "genero": "Shooter",
     "desenvolvedora": "Steve Cartwright",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Midnight Magic",
@@ -1245,7 +1339,9 @@
     "ano": "1987",
     "genero": "Pinball",
     "desenvolvedora": "Brøderbund Software",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Millipede",
@@ -1293,7 +1389,9 @@
     "ano": "1981",
     "genero": "Shooter",
     "desenvolvedora": "Atari",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Montezuma's Revenge",
@@ -1325,7 +1423,9 @@
     "ano": "1983",
     "genero": "Shooter",
     "desenvolvedora": "General Computer",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Mouse Trap",
@@ -1341,7 +1441,9 @@
     "ano": "1982",
     "genero": "Action",
     "desenvolvedora": "Exidy",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Ms. Pac-Man",
@@ -1357,7 +1459,9 @@
     "ano": "1983",
     "genero": "Action",
     "desenvolvedora": "General Computer",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Night Driver",
@@ -1389,7 +1493,9 @@
     "ano": "1983",
     "genero": "Action",
     "desenvolvedora": "Mike Lorenzen",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Omega Race",
@@ -1405,7 +1511,9 @@
     "ano": "1983",
     "genero": "Shooter",
     "desenvolvedora": "CBS Electronics",
-    "publicadora": "CBS Electronics"
+    "publicadora": "CBS Electronics",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Outlaw",
@@ -1421,7 +1529,9 @@
     "ano": "1978",
     "genero": "Shooter",
     "desenvolvedora": "David Crane",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Pac-Man",
@@ -1437,7 +1547,9 @@
     "ano": "1982",
     "genero": "Action",
     "desenvolvedora": "Tod Frye",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Phoenix",
@@ -1533,7 +1645,9 @@
     "ano": "1983",
     "genero": "Action",
     "desenvolvedora": "Garry Kitchen",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Q*bert",
@@ -1549,7 +1663,9 @@
     "ano": "1983",
     "genero": "Platform; Puzzle",
     "desenvolvedora": "Western Technologies",
-    "publicadora": "Parker Brothers"
+    "publicadora": "Parker Brothers",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Q*bert's Qubes",
@@ -1597,7 +1713,9 @@
     "ano": "1982",
     "genero": "Action",
     "desenvolvedora": "Parker Brothers",
-    "publicadora": "Parker Brothers"
+    "publicadora": "Parker Brothers",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "RealSports Baseball",
@@ -1613,7 +1731,9 @@
     "ano": "1982",
     "genero": "Sports",
     "desenvolvedora": "Atari",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "RealSports Boxing",
@@ -1629,7 +1749,9 @@
     "ano": "1988",
     "genero": "Fighting; Sports",
     "desenvolvedora": "Atari",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "RealSports Football",
@@ -1645,7 +1767,9 @@
     "ano": "1982",
     "genero": "Sports",
     "desenvolvedora": "Robert Zdybel",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "RealSports Soccer",
@@ -1661,7 +1785,9 @@
     "ano": "1983",
     "genero": "Sports",
     "desenvolvedora": "Atari",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "RealSports Tennis",
@@ -1677,7 +1803,9 @@
     "ano": "1983",
     "genero": "Sports",
     "desenvolvedora": "Atari",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "River Raid",
@@ -1693,7 +1821,9 @@
     "ano": "1982",
     "genero": "Shooter",
     "desenvolvedora": "Carol Shaw",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "River Raid II",
@@ -1709,7 +1839,9 @@
     "ano": "1988",
     "genero": "Shooter",
     "desenvolvedora": "Imagineering",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Robot Tank",
@@ -1741,7 +1873,9 @@
     "ano": "1983",
     "genero": "Shooter",
     "desenvolvedora": "Steve Cartwright",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Secret Quest",
@@ -1789,7 +1923,9 @@
     "ano": "1979",
     "genero": "Action; Sports",
     "desenvolvedora": "Jim Huether",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Sky Jinks",
@@ -1821,7 +1957,9 @@
     "ano": "1983",
     "genero": "Shooter",
     "desenvolvedora": "CBS Electronics",
-    "publicadora": "CBS Electronics"
+    "publicadora": "CBS Electronics",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Solaris",
@@ -1869,7 +2007,9 @@
     "ano": "1980",
     "genero": "Shooter",
     "desenvolvedora": "Atari",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Space Shuttle",
@@ -1981,7 +2121,9 @@
     "ano": "1982",
     "genero": "Shooter",
     "desenvolvedora": "Parker Brothers",
-    "publicadora": "Parker Brothers"
+    "publicadora": "Parker Brothers",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Starmaster",
@@ -2029,7 +2171,9 @@
     "ano": "1977",
     "genero": "Racing",
     "desenvolvedora": "Larry Kaplan",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Super Breakout",
@@ -2045,7 +2189,9 @@
     "ano": "1981",
     "genero": "Action",
     "desenvolvedora": "Atari",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Super Cobra",
@@ -2093,7 +2239,9 @@
     "ano": "1977",
     "genero": "Action",
     "desenvolvedora": "Alan Miller",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "SwordQuest - EarthWorld",
@@ -2141,7 +2289,9 @@
     "ano": "1984",
     "genero": "Action",
     "desenvolvedora": "Beck-Tech",
-    "publicadora": "Sega Enterprises"
+    "publicadora": "Sega Enterprises",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Tennis",
@@ -2157,7 +2307,9 @@
     "ano": "1981",
     "genero": "Sports",
     "desenvolvedora": "Alan Miller",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Turmoil",
@@ -2189,7 +2341,9 @@
     "ano": "1982",
     "genero": "Action",
     "desenvolvedora": "Parker Brothers",
-    "publicadora": "Parker Brothers"
+    "publicadora": "Parker Brothers",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Vanguard",
@@ -2205,7 +2359,9 @@
     "ano": "1982",
     "genero": "Shooter",
     "desenvolvedora": "General Computer",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Video Checkers",
@@ -2221,7 +2377,9 @@
     "ano": "1980",
     "genero": "Board Game; Strategy",
     "desenvolvedora": "Atari",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Video Chess",
@@ -2237,7 +2395,9 @@
     "ano": "1979",
     "genero": "Board Game; Strategy",
     "desenvolvedora": "Bob Whitehead",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Video Olympics",
@@ -2253,7 +2413,9 @@
     "ano": "1977",
     "genero": "Sports",
     "desenvolvedora": "Atari",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Warlords",
@@ -2269,7 +2431,9 @@
     "ano": "1981",
     "genero": "Action",
     "desenvolvedora": "Atari",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Wizard of Wor",
@@ -2285,7 +2449,9 @@
     "ano": "1982",
     "genero": "Shooter",
     "desenvolvedora": "CBS Toys",
-    "publicadora": "CBS Electronics"
+    "publicadora": "CBS Electronics",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Yars' Revenge",
@@ -2301,7 +2467,9 @@
     "ano": "1982",
     "genero": "Shooter",
     "desenvolvedora": "Howard Scott Warshaw",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Zaxxon",
@@ -2317,6 +2485,8 @@
     "ano": "1982",
     "genero": "Shooter",
     "desenvolvedora": "Coleco Industries",
-    "publicadora": "CBS Electronics"
+    "publicadora": "CBS Electronics",
+    "multiplayer": true,
+    "maxPlayers": 2
   }
 ]

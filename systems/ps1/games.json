@@ -249,7 +249,9 @@
     "ano": "1999",
     "genero": "Racing",
     "desenvolvedora": "Graphic Research",
-    "publicadora": "Hudson Soft"
+    "publicadora": "Hudson Soft",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Breath Of Fire Iii",
@@ -353,7 +355,9 @@
     "ano": "1996",
     "genero": "Shooter",
     "desenvolvedora": "Appaloosa Interactive",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Crash Bandicoot 2: Cortex Strikes Back",
@@ -433,7 +437,9 @@
     "ano": "1998",
     "genero": "Action; Role-Playing",
     "desenvolvedora": "Blizzard North",
-    "publicadora": "Electronic Arts"
+    "publicadora": "Electronic Arts",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Digimon World",
@@ -872,7 +878,9 @@
     "ano": "1997",
     "genero": "Racing",
     "desenvolvedora": "Polyphony Digital",
-    "publicadora": "Sony Computer Entertainment"
+    "publicadora": "Sony Computer Entertainment",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Grandia Pt Br.M3U",
@@ -1134,7 +1142,9 @@
     "ano": "2000",
     "genero": "Racing",
     "desenvolvedora": "Circus Freak Studios",
-    "publicadora": "Infogrames"
+    "publicadora": "Infogrames",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Medal Of Honor",
@@ -1150,7 +1160,9 @@
     "ano": "1999",
     "genero": "Shooter",
     "desenvolvedora": "Dreamworks Interactive",
-    "publicadora": "Electronic Arts"
+    "publicadora": "Electronic Arts",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Medievil 2",
@@ -1344,7 +1356,9 @@
     "ano": "1998",
     "genero": "Fighting",
     "desenvolvedora": "Eurocom Developments",
-    "publicadora": "Midway Home Entertainment"
+    "publicadora": "Midway Home Entertainment",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Necronomicon The Dawning Of Darkness.M3U",
@@ -1412,7 +1426,9 @@
     "ano": "2001",
     "genero": "Racing",
     "desenvolvedora": "Software Creations",
-    "publicadora": "Infogrames"
+    "publicadora": "Infogrames",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Nightmare Creatures 2",
@@ -1674,7 +1690,9 @@
     "ano": "2002",
     "genero": "Shooter",
     "desenvolvedora": "Boom",
-    "publicadora": "XS Games"
+    "publicadora": "XS Games",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "South Park Rally",
@@ -1690,7 +1708,9 @@
     "ano": "2000",
     "genero": "Racing",
     "desenvolvedora": "Tantalus Interactive",
-    "publicadora": "Acclaim Entertainment"
+    "publicadora": "Acclaim Entertainment",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Spider Man",
@@ -1780,7 +1800,9 @@
     "ano": "1996",
     "genero": "Fighting",
     "desenvolvedora": "Namco",
-    "publicadora": "Sony Computer Entertainment Europe"
+    "publicadora": "Sony Computer Entertainment Europe",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Tekken 3",
@@ -1796,7 +1818,9 @@
     "ano": "1998",
     "genero": "Fighting",
     "desenvolvedora": "Namco",
-    "publicadora": "Sony Computer Entertainment Europe"
+    "publicadora": "Sony Computer Entertainment Europe",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Tekken",
@@ -1812,7 +1836,9 @@
     "ano": "1995",
     "genero": "Fighting",
     "desenvolvedora": "Namco",
-    "publicadora": "Sony Computer Entertainment Europe"
+    "publicadora": "Sony Computer Entertainment Europe",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Tomb Raider",
@@ -1860,7 +1886,9 @@
     "ano": "1996",
     "genero": "Racing; Shooter",
     "desenvolvedora": "Sony Interactive Studios America",
-    "publicadora": "Sony Computer Entertainment Europe"
+    "publicadora": "Sony Computer Entertainment Europe",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Vagrant Story",
@@ -1908,7 +1936,9 @@
     "ano": "1998",
     "genero": "Action; Shooter",
     "desenvolvedora": "Luxoflux",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Wacky Races",
@@ -1924,7 +1954,9 @@
     "ano": "2001",
     "genero": "Racing",
     "desenvolvedora": "Infogrames Sheffield House",
-    "publicadora": "Infogrames"
+    "publicadora": "Infogrames",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Winning Eleven",
@@ -2018,6 +2050,8 @@
     "ano": "2002",
     "genero": "Strategy",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   }
 ]

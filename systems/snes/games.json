@@ -13,7 +13,9 @@
     "ano": "1994",
     "genero": "Action; Platform",
     "desenvolvedora": "Malibu Interactive",
-    "publicadora": "Sony Imagesoft"
+    "publicadora": "Sony Imagesoft",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "The 7Th Saga",
@@ -141,7 +143,9 @@
     "ano": "1993",
     "genero": "Shooter",
     "desenvolvedora": "Video System",
-    "publicadora": "MC O'River"
+    "publicadora": "MC O'River",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Aerobiz",
@@ -157,7 +161,9 @@
     "ano": "1992",
     "genero": "Construction and Management Simulation",
     "desenvolvedora": "Koei",
-    "publicadora": "Koei"
+    "publicadora": "Koei",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Air Cavalry",
@@ -173,7 +179,9 @@
     "ano": "1995",
     "genero": "Flight Simulator; Shooter",
     "desenvolvedora": "Synergistic Software",
-    "publicadora": "Cybersoft"
+    "publicadora": "Cybersoft",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Aladdin",
@@ -231,7 +239,9 @@
     "ano": "1993",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Jorudan",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Animaniacs",
@@ -279,7 +289,9 @@
     "ano": "1997",
     "genero": "Action",
     "desenvolvedora": "Taito",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Bahamut Lagoon",
@@ -311,7 +323,9 @@
     "ano": "1993",
     "genero": "Racing; Shooter",
     "desenvolvedora": "Malibu Interactive",
-    "publicadora": "Namco Hometek"
+    "publicadora": "Namco Hometek",
+    "multiplayer": true,
+    "maxPlayers": 8
   },
   {
     "nome": "Battle Soccer Field No Hasha",
@@ -327,7 +341,9 @@
     "ano": "1992",
     "genero": "Sports",
     "desenvolvedora": "Pandora Box",
-    "publicadora": "Banpresto"
+    "publicadora": "Banpresto",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Battletoads & Double Dragon",
@@ -343,7 +359,9 @@
     "ano": "1993",
     "genero": "Beat 'em Up; Platform",
     "desenvolvedora": "Rare",
-    "publicadora": "Tradewest"
+    "publicadora": "Tradewest",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Battletoads In Battlemaniacs",
@@ -359,7 +377,9 @@
     "ano": "1993",
     "genero": "Beat 'em Up; Platform",
     "desenvolvedora": "Rare",
-    "publicadora": "Tradewest"
+    "publicadora": "Tradewest",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Biker Mice From Mars",
@@ -375,7 +395,9 @@
     "ano": "1994",
     "genero": "Action; Racing",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Biometal",
@@ -407,7 +429,9 @@
     "ano": "1993",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Angel",
-    "publicadora": "Bandai"
+    "publicadora": "Bandai",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Blackthorne",
@@ -439,7 +463,9 @@
     "ano": "1993",
     "genero": "Action; Platform",
     "desenvolvedora": "Titus Software",
-    "publicadora": "Titus Software"
+    "publicadora": "Titus Software",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Bobby'S World",
@@ -609,7 +635,9 @@
     "ano": "1993",
     "genero": "Platform",
     "desenvolvedora": "Accolade",
-    "publicadora": "Accolade"
+    "publicadora": "Accolade",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Bugs Bunny: Rabbit Rampage",
@@ -641,7 +669,9 @@
     "ano": "1993",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Data East",
-    "publicadora": "Mindscape"
+    "publicadora": "Mindscape",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Captain Commando",
@@ -657,7 +687,9 @@
     "ano": "1995",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Capcom",
-    "publicadora": "Capcom"
+    "publicadora": "Capcom",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Captain Tsubasa V",
@@ -789,7 +821,9 @@
     "ano": "1992",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Technōs Japan",
-    "publicadora": "American Technōs"
+    "publicadora": "American Technōs",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Contra Iii: The Alien Wars",
@@ -805,7 +839,9 @@
     "ano": "1992",
     "genero": "Platform; Shooter",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Cool Spot",
@@ -853,7 +889,9 @@
     "ano": "1996",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Software Creations",
-    "publicadora": "Acclaim Entertainment"
+    "publicadora": "Acclaim Entertainment",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Cybernator",
@@ -917,7 +955,9 @@
     "ano": "1994",
     "genero": "Action; Platform",
     "desenvolvedora": "Funcom Productions",
-    "publicadora": "Sunsoft"
+    "publicadora": "Sunsoft",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Death And Return Of Superman, The",
@@ -997,7 +1037,9 @@
     "ano": "1994",
     "genero": "Platform",
     "desenvolvedora": "Rare",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Donkey Kong Country 2: Diddy'S Kong Quest",
@@ -1013,7 +1055,9 @@
     "ano": "1995",
     "genero": "Platform",
     "desenvolvedora": "Rare",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Donkey Kong Country 3: Dixie Kong'S Double Trouble!",
@@ -1029,7 +1073,9 @@
     "ano": "1996",
     "genero": "Platform",
     "desenvolvedora": "Rare",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Dottie Dreads Nought",
@@ -1061,7 +1107,9 @@
     "ano": "1993",
     "genero": "Action; Platform",
     "desenvolvedora": "MotiveTime",
-    "publicadora": "Data East"
+    "publicadora": "Data East",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Dragon: The Legend Of Bruce Lee",
@@ -1093,7 +1141,9 @@
     "ano": "1996",
     "genero": "Fighting",
     "desenvolvedora": "TOSE",
-    "publicadora": "Bandai"
+    "publicadora": "Bandai",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Dragon Ball Z La Legende Saien",
@@ -1119,7 +1169,9 @@
     "ano": "1993",
     "genero": "Fighting",
     "desenvolvedora": "TOSE",
-    "publicadora": "Bandai"
+    "publicadora": "Bandai",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Dragon Ball Z Super Saiya Densetsu",
@@ -1347,7 +1399,9 @@
     "ano": "1994",
     "genero": "Role-Playing",
     "desenvolvedora": "Square",
-    "publicadora": "Squaresoft"
+    "publicadora": "Squaresoft",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Final Fight",
@@ -1379,7 +1433,9 @@
     "ano": "1993",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Capcom",
-    "publicadora": "Capcom"
+    "publicadora": "Capcom",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Final Fight 3",
@@ -1395,7 +1451,9 @@
     "ano": "1995",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Capcom",
-    "publicadora": "Capcom"
+    "publicadora": "Capcom",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Final Fight",
@@ -1443,7 +1501,9 @@
     "ano": "1992",
     "genero": "Shooter",
     "desenvolvedora": "The Sales Curve",
-    "publicadora": "Sunsoft"
+    "publicadora": "Sunsoft",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Flashback: The Quest For Identity",
@@ -1507,7 +1567,9 @@
     "ano": "1996",
     "genero": "Sports",
     "desenvolvedora": "Twin Eagles Group",
-    "publicadora": "Twin Eagles Group"
+    "publicadora": "Twin Eagles Group",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Ganpuru",
@@ -1533,7 +1595,9 @@
     "ano": "1994",
     "genero": "Shooter",
     "desenvolvedora": "LucasArts",
-    "publicadora": "JVC Musical Industries"
+    "publicadora": "JVC Musical Industries",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Go Go Ackman",
@@ -1607,7 +1671,9 @@
     "ano": "1990",
     "genero": "Shooter",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "The Great Circus Mystery",
@@ -1655,7 +1721,9 @@
     "ano": "1993",
     "genero": "Action; Platform",
     "desenvolvedora": "Visual Concepts Entertainment",
-    "publicadora": "Hi-Tech Expressions"
+    "publicadora": "Hi-Tech Expressions",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Harvest Moon",
@@ -1687,7 +1755,9 @@
     "ano": "1994",
     "genero": "Sports",
     "desenvolvedora": "Video System",
-    "publicadora": "MC O'River"
+    "publicadora": "MC O'River",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "The Ignition Factor",
@@ -1841,7 +1911,9 @@
     "ano": "1995",
     "genero": "Sports",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Iron Commando",
@@ -1937,7 +2009,9 @@
     "ano": "1994",
     "genero": "Action; Platform",
     "desenvolvedora": "Data East",
-    "publicadora": "Data East"
+    "publicadora": "Data East",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "The Jungle Book",
@@ -1995,7 +2069,9 @@
     "ano": "1995",
     "genero": "Fighting",
     "desenvolvedora": "Rare",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "King Arthur'S World",
@@ -2027,7 +2103,9 @@
     "ano": "1994",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Prism Kikaku",
-    "publicadora": "Capcom"
+    "publicadora": "Capcom",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Knights Of The Round",
@@ -2043,7 +2121,9 @@
     "ano": "1994",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Capcom",
-    "publicadora": "Capcom"
+    "publicadora": "Capcom",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Shin Megami Tensei",
@@ -2075,7 +2155,9 @@
     "ano": "1993",
     "genero": "Racing",
     "desenvolvedora": "Titus France",
-    "publicadora": "Titus France"
+    "publicadora": "Titus France",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Laplace No Ma",
@@ -2123,7 +2205,9 @@
     "ano": "1994",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Arcade Zone",
-    "publicadora": "Seika"
+    "publicadora": "Seika",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "The Legend Of Zelda: A Link To The Past",
@@ -2155,7 +2239,9 @@
     "ano": "1991",
     "genero": "Puzzle",
     "desenvolvedora": "Sunsoft",
-    "publicadora": "Sunsoft"
+    "publicadora": "Sunsoft",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "The Lion King",
@@ -2203,7 +2289,9 @@
     "ano": "1995",
     "genero": "Sports",
     "desenvolvedora": "Sculptured Software",
-    "publicadora": "Sunsoft"
+    "publicadora": "Sunsoft",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "The Lost Vikings",
@@ -2219,7 +2307,9 @@
     "ano": "1993",
     "genero": "Platform; Puzzle",
     "desenvolvedora": "Silicon & Synapse",
-    "publicadora": "T&E Soft"
+    "publicadora": "T&E Soft",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "The Lost Vikings 2",
@@ -2235,7 +2325,9 @@
     "ano": "1997",
     "genero": "Platform; Puzzle",
     "desenvolvedora": "Blizzard Entertainment",
-    "publicadora": "Interplay Productions"
+    "publicadora": "Interplay Productions",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Lufia Ii: Rise Of The Sinistrals",
@@ -2309,7 +2401,9 @@
     "ano": "1992",
     "genero": "Platform",
     "desenvolvedora": "Capcom",
-    "publicadora": "Capcom"
+    "publicadora": "Capcom",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Majuu Ou",
@@ -2463,7 +2557,9 @@
     "ano": "1995",
     "genero": "Platform; Shooter",
     "desenvolvedora": "LucasArts Entertainment",
-    "publicadora": "Konami (America)"
+    "publicadora": "Konami (America)",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Mickey Mania: The Timeless Adventures Of Mickey Mouse",
@@ -2511,7 +2607,9 @@
     "ano": "1995",
     "genero": "Platform",
     "desenvolvedora": "Capcom",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Monster World Iv",
@@ -2537,7 +2635,9 @@
     "ano": "1993",
     "genero": "Fighting",
     "desenvolvedora": "Sculptured Software",
-    "publicadora": "Acclaim Entertainment"
+    "publicadora": "Acclaim Entertainment",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Mortal Kombat 3",
@@ -2553,7 +2653,9 @@
     "ano": "1995",
     "genero": "Fighting",
     "desenvolvedora": "Sculptured Software",
-    "publicadora": "Williams Entertainment"
+    "publicadora": "Williams Entertainment",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Mortal Kombat Ii",
@@ -2569,7 +2671,9 @@
     "ano": "1994",
     "genero": "Fighting",
     "desenvolvedora": "Sculptured Software",
-    "publicadora": "Acclaim Entertainment"
+    "publicadora": "Acclaim Entertainment",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Nba Live 95",
@@ -2585,7 +2689,9 @@
     "ano": "1994",
     "genero": "Sports",
     "desenvolvedora": "Hitmen Productions",
-    "publicadora": "Electronic Arts"
+    "publicadora": "Electronic Arts",
+    "multiplayer": true,
+    "maxPlayers": 5
   },
   {
     "nome": "Neugier: Umi To Kaze No Kodō",
@@ -2649,7 +2755,9 @@
     "ano": "1994",
     "genero": "Puzzle",
     "desenvolvedora": "Tom Create",
-    "publicadora": "Bandai"
+    "publicadora": "Bandai",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Paperboy 2",
@@ -2665,7 +2773,9 @@
     "ano": "1991",
     "genero": "Action",
     "desenvolvedora": "Tengen",
-    "publicadora": "Mindscape"
+    "publicadora": "Mindscape",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Pirates Of Dark Water",
@@ -2681,7 +2791,9 @@
     "ano": "1994",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Sunsoft",
-    "publicadora": "Sunsoft"
+    "publicadora": "Sunsoft",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Pitfall: The Mayan Adventure",
@@ -2713,7 +2825,9 @@
     "ano": "1994",
     "genero": "Action; Board Game; Platform",
     "desenvolvedora": "Technōs Japan",
-    "publicadora": "Technōs Japan"
+    "publicadora": "Technōs Japan",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Power Drive",
@@ -2729,7 +2843,9 @@
     "ano": "1994",
     "genero": "Racing",
     "desenvolvedora": "Rage Software",
-    "publicadora": "U.S. Gold"
+    "publicadora": "U.S. Gold",
+    "multiplayer": true,
+    "maxPlayers": 8
   },
   {
     "nome": "Prince Of Persia",
@@ -2787,7 +2903,9 @@
     "ano": "1991",
     "genero": "Shooter",
     "desenvolvedora": "Seibu Kaihatsu",
-    "publicadora": "Electro Brain"
+    "publicadora": "Electro Brain",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Ranma 1/2: Akanekodan Teki Hihou",
@@ -2813,7 +2931,9 @@
     "ano": "1993",
     "genero": "Racing",
     "desenvolvedora": "Silicon & Synapse",
-    "publicadora": "Namco"
+    "publicadora": "Namco",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Rockman & Forte",
@@ -2939,7 +3059,9 @@
     "ano": "1993",
     "genero": "Fighting; Sports",
     "desenvolvedora": "Capcom",
-    "publicadora": "Capcom"
+    "publicadora": "Capcom",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Scooby Doo Mystery",
@@ -2987,7 +3109,9 @@
     "ano": "1993",
     "genero": "Action; Role-Playing",
     "desenvolvedora": "Square",
-    "publicadora": "Squaresoft"
+    "publicadora": "Squaresoft",
+    "multiplayer": true,
+    "maxPlayers": 3
   },
   {
     "nome": "Secret Of The Stars",
@@ -3013,7 +3137,9 @@
     "ano": "1995",
     "genero": "Action; Role-Playing",
     "desenvolvedora": "Square",
-    "publicadora": "Square"
+    "publicadora": "Square",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Shadow The Hedgehog",
@@ -3065,7 +3191,9 @@
     "ano": "1993",
     "genero": "Sports",
     "desenvolvedora": "Iguana Entertainment",
-    "publicadora": "Data East"
+    "publicadora": "Data East",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Simcity",
@@ -3129,7 +3257,9 @@
     "ano": "1993",
     "genero": "Shooter",
     "desenvolvedora": "The Bitmap Brothers",
-    "publicadora": "Spectrum Holobyte"
+    "publicadora": "Spectrum Holobyte",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Sonic The Hedgehog",
@@ -3277,7 +3407,9 @@
     "ano": "2017",
     "genero": "Shooter",
     "desenvolvedora": "Nintendo EAD",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Star Ocean",
@@ -3325,7 +3457,9 @@
     "ano": "1994",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Eurocom Entertainment Software",
-    "publicadora": "Kemco"
+    "publicadora": "Kemco",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Street Fighter Ii",
@@ -3341,7 +3475,9 @@
     "ano": "1992",
     "genero": "Fighting",
     "desenvolvedora": "Capcom",
-    "publicadora": "Capcom"
+    "publicadora": "Capcom",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Street Fighter Ii Turbo Hyper Fighting",
@@ -3383,7 +3519,9 @@
     "ano": "1993",
     "genero": "Shooter",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Super Aleste",
@@ -3415,7 +3553,9 @@
     "ano": "1994",
     "genero": "Action",
     "desenvolvedora": "Hudson Soft",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Castlevania Iv",
@@ -3457,7 +3597,9 @@
     "ano": "1993",
     "genero": "Platform",
     "desenvolvedora": "Nintendo EAD",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Super Mario All Stars + Super Mario World",
@@ -3473,7 +3615,9 @@
     "ano": "1994",
     "genero": "Platform",
     "desenvolvedora": "Nintendo",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Super Mario Kart",
@@ -3489,7 +3633,9 @@
     "ano": "1992",
     "genero": "Racing",
     "desenvolvedora": "Nintendo EAD",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Super Mario Rpg: A Lenda Dos Sete Estrelas",
@@ -3521,7 +3667,9 @@
     "ano": "1990",
     "genero": "Platform",
     "desenvolvedora": "Nintendo EAD",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Super Mario World 2: Yoshi'S Island",
@@ -3617,7 +3765,9 @@
     "ano": "1991",
     "genero": "Sports",
     "desenvolvedora": "Human Entertainment",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Super Street Fighter Ii",
@@ -3633,7 +3783,9 @@
     "ano": "1994",
     "genero": "Fighting",
     "desenvolvedora": "Capcom",
-    "publicadora": "Capcom"
+    "publicadora": "Capcom",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Tales Of Phantasia",
@@ -3681,7 +3833,9 @@
     "ano": "1993",
     "genero": "Fighting",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Teenage Mutant Ninja Turtles Iv Turtles In Time",
@@ -3697,7 +3851,9 @@
     "ano": "1992",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Tenchi Muyo!",
@@ -3771,7 +3927,9 @@
     "ano": "1991",
     "genero": "Action; Platform",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Theme Park",
@@ -3851,7 +4009,9 @@
     "ano": "1994",
     "genero": "Party",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Tom E Jerry",
@@ -3877,7 +4037,9 @@
     "ano": "1992",
     "genero": "Racing",
     "desenvolvedora": "Gremlin Graphics Software",
-    "publicadora": "Kotobuki System"
+    "publicadora": "Kotobuki System",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Top Gear 2",
@@ -3893,7 +4055,9 @@
     "ano": "1993",
     "genero": "Racing",
     "desenvolvedora": "Gremlin Interactive",
-    "publicadora": "Kotobuki System"
+    "publicadora": "Kotobuki System",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Top Gear 3000",
@@ -3909,7 +4073,9 @@
     "ano": "1995",
     "genero": "Racing",
     "desenvolvedora": "Gremlin Interactive",
-    "publicadora": "Kotobuki System"
+    "publicadora": "Kotobuki System",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Treasure Of Rudras",
@@ -3993,7 +4159,9 @@
     "ano": "1995",
     "genero": "Fighting",
     "desenvolvedora": "Sculptured Software",
-    "publicadora": "Williams Entertainment"
+    "publicadora": "Williams Entertainment",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Umihara Kawase",
@@ -4041,7 +4209,9 @@
     "ano": "1994",
     "genero": "Sports",
     "desenvolvedora": "Tiertex",
-    "publicadora": "U.S. Gold"
+    "publicadora": "U.S. Gold",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Wolfchild",
@@ -4121,7 +4291,9 @@
     "ano": "1996",
     "genero": "Strategy",
     "desenvolvedora": "East Point Software",
-    "publicadora": "Ocean Software"
+    "publicadora": "Ocean Software",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "X Men: Mutant Apocalypse",

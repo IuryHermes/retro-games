@@ -539,6 +539,9 @@
         .multiplayer-panel h2 { color:var(--accent-color); font:14px 'Press Start 2P',cursive; line-height:1.5; padding-right:45px; }
         .multiplayer-toolbar { display:flex; justify-content:space-between; align-items:center; gap:10px; margin:14px 0; padding:10px; border:1px solid var(--border-color); background:var(--input-bg); border-radius:6px; font:11px monospace; }
         .multiplayer-toolbar button { border:1px solid var(--accent-color); background:var(--accent-color); color:#001b09; padding:9px 12px; border-radius:4px; cursor:pointer; font-weight:bold; }
+        .multiplayer-account-note { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:12px 0; padding:12px; border:1px solid var(--border-color); border-radius:6px; background:rgba(0,204,68,.08); font:12px monospace; line-height:1.5; }
+        .multiplayer-account-note strong { display:block; color:var(--accent-color); margin-bottom:3px; }
+        .multiplayer-account-note button { flex:0 0 auto; min-height:44px; border:1px solid var(--accent-color); border-radius:5px; background:var(--accent-color); color:#001b09; padding:9px 12px; font-weight:bold; cursor:pointer; }
         .multiplayer-rooms { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:12px; }
         .multiplayer-room-card { border:1px solid var(--border-color); background:var(--input-bg); border-radius:7px; padding:13px; }
         .multiplayer-room-card strong { display:block; font:11px monospace; line-height:1.4; }
@@ -578,6 +581,8 @@
             .top-bar-controls { gap:5px; }
             .mobile-quick-scroll { gap:5px; }
             .top-account-mobile, .mobile-community-actions .multiplayer-hub-trigger, .pix-trigger-mobile, .chat-trigger-mobile { flex-basis:58px !important; width:58px !important; }
+            .multiplayer-account-note { align-items:stretch; flex-direction:column; }
+            .multiplayer-account-note button { width:100%; }
             .search-container { flex-basis:calc(100% - 59px); min-width:0; }
             .hero-section { height:300px; }
             .hero-content { padding:0 46px 0 14px; margin-bottom:34px; gap:8px; }
@@ -603,6 +608,7 @@
             <button class="game-info-close" id="multiplayer-close" type="button">X</button>
             <h2 id="multiplayer-title">JOGAR ONLINE</h2>
             <p class="history-subtitle">Entre como controle remoto de outro jogador ou abra um jogo para criar sua própria sala.</p>
+            <div class="multiplayer-account-note" id="multiplayer-account-note"><div><strong>COMO FUNCIONA</strong><span id="multiplayer-account-copy">Entre gratuitamente para criar uma sala, convidar alguém e proteger sua identidade na partida.</span></div><button id="multiplayer-account-action" type="button">ENTRAR OU CRIAR CADASTRO</button></div>
             <div id="multiplayer-discovery"><div class="multiplayer-toolbar"><span id="multiplayer-online-count">Buscando jogadores...</span><button id="multiplayer-select-game" type="button">CRIAR NOVA PARTIDA</button></div><div class="multiplayer-rooms" id="multiplayer-rooms"></div></div>
             <section id="multiplayer-game-picker" hidden><div class="multiplayer-picker-head"><button id="multiplayer-picker-back" type="button">← SALAS</button><input id="multiplayer-game-search" type="search" placeholder="Buscar jogo para a partida online" autocomplete="off"></div><div class="multiplayer-game-grid" id="multiplayer-game-grid"></div></section>
         </section>
@@ -989,31 +995,58 @@
                 const title = document.createElement('strong'); title.textContent = room.title;
                 const meta = document.createElement('small'); meta.textContent = `${room.system.toUpperCase()} · ${room.hostName} · ${room.online}/${room.maxPlayers} online`;
                 const join = document.createElement('a'); join.href = `multiplayer-room.html?room=${encodeURIComponent(room.id)}`; join.textContent = 'SOLICITAR ENTRADA';
+                join.onclick = event => {
+                    if (accountProfile) return;
+                    event.preventDefault();
+                    sessionStorage.setItem('neo_pending_multiplayer_room', room.id);
+                    requestMultiplayerAccount('Para entrar nesta sala, faça um cadastro gratuito. Depois do login você voltará automaticamente para a partida.');
+                };
                 card.append(title, meta, join); multiplayerRooms.appendChild(card);
             });
         } catch (_) { multiplayerRooms.innerHTML = '<div class="history-empty">Não foi possível consultar as salas agora.</div>'; }
     }
     function openMultiplayerHub() {
         if ('Notification' in window && Notification.permission === 'default') void Notification.requestPermission();
+        const note = document.getElementById('multiplayer-account-note');
+        const action = document.getElementById('multiplayer-account-action');
+        document.getElementById('multiplayer-account-copy').textContent = accountProfile
+            ? `Você está conectado como ${accountProfile.name}. Escolha uma sala ou crie uma nova partida.`
+            : 'Para entrar ou criar uma partida online é necessário um cadastro gratuito. Jogos locais continuam livres, sem cadastro.';
+        note.classList.toggle('authenticated', Boolean(accountProfile));
+        action.hidden = Boolean(accountProfile);
         multiplayerDiscovery.hidden = false; multiplayerGamePicker.hidden = true;
         multiplayerModal.style.display = 'flex'; void loadMultiplayerRooms();
         clearInterval(multiplayerRefreshTimer); multiplayerRefreshTimer = setInterval(loadMultiplayerRooms, 15000);
     }
     function closeMultiplayerHub() { multiplayerModal.style.display = 'none'; clearInterval(multiplayerRefreshTimer); }
+    function requestMultiplayerAccount(message) {
+        closeMultiplayerHub();
+        document.getElementById('auth-copy').textContent = message;
+        openAuth();
+    }
+    function resumeMultiplayerAfterAuth() {
+        if (!accountProfile || sessionStorage.getItem('neo_multiplayer_resume') !== 'create') return false;
+        sessionStorage.removeItem('neo_multiplayer_resume');
+        closeAuth();
+        openMultiplayerHub();
+        document.getElementById('multiplayer-select-game').click();
+        return true;
+    }
     ['multiplayer-hub-trigger', 'multiplayer-hub-trigger-desktop'].forEach(id => { document.getElementById(id).onclick = openMultiplayerHub; });
+    document.getElementById('multiplayer-account-action').onclick = () => requestMultiplayerAccount('Entre ou crie sua conta gratuita para jogar online. Após o cadastro, você voltará à seleção de jogos.');
     document.getElementById('multiplayer-close').onclick = closeMultiplayerHub;
     multiplayerModal.onclick = event => { if (event.target === multiplayerModal) closeMultiplayerHub(); };
     function renderMultiplayerGames(query = '') {
         const term = query.trim().toLowerCase();
-        const supportsMultiplayer = game => /(?:até|ate)\s+(?:[2-9]|\d{2,})\s+jogadores|modo\s+(?:cooperativo|multiplayer)|multijogador/i.test(String(game.descricao || ''));
-        const games = indexData.filter(game => game.playUrl && supportsMultiplayer(game) && !hiddenPs1Disc(game) && (!term || game.nome.toLowerCase().includes(term))).slice(0, 120);
+        const games = indexData.filter(game => game.playUrl && !hiddenPs1Disc(game) && (!term || game.nome.toLowerCase().includes(term))).slice(0, 1200);
         multiplayerGameGrid.replaceChildren();
         if (!games.length) { multiplayerGameGrid.innerHTML = '<div class="history-empty">Nenhum jogo encontrado.</div>'; return; }
         games.forEach(game => {
             const choice = document.createElement('button'); choice.type = 'button'; choice.className = 'multiplayer-game-choice';
             const image = document.createElement('img'); image.src = catalogCoverUrl(game) || 'assets/imagens-videos/logo-discord.gif'; image.alt = ''; image.loading = 'lazy'; image.onerror = () => { image.onerror = null; image.src = 'assets/imagens-videos/logo-discord.gif'; };
             const name = document.createElement('span'); name.textContent = game.nome;
-            const systemName = document.createElement('small'); systemName.textContent = `${game.sysName} · CRIAR SALA`;
+            const players = Number(game.maxPlayers || 0);
+            const systemName = document.createElement('small'); systemName.textContent = players > 1 ? `${game.sysName} · ATÉ ${players} JOGADORES` : `${game.sysName} · SALA E ESPECTADOR`;
             choice.append(image, name, systemName);
             choice.onclick = () => {
                 sessionStorage.setItem('neo_multiplayer_create_pending', JSON.stringify({ expiresAt:Date.now() + 5 * 60 * 1000 }));
@@ -1024,6 +1057,11 @@
         });
     }
     document.getElementById('multiplayer-select-game').onclick = async () => {
+        if (!accountProfile) {
+            sessionStorage.setItem('neo_multiplayer_resume', 'create');
+            requestMultiplayerAccount('Para criar uma partida online, entre ou faça um cadastro gratuito. Depois do login você voltará à seleção de jogos.');
+            return;
+        }
         multiplayerDiscovery.hidden = true; multiplayerGamePicker.hidden = false;
         multiplayerGameGrid.innerHTML = '<div class="history-empty">CARREGANDO JOGOS ONLINE...</div>';
         await Promise.allSettled(fetchPromises);
@@ -1039,7 +1077,7 @@
     const avatarGrid = document.getElementById('avatar-grid');
     const authParams = new URLSearchParams(location.search);
     const requestedAuthReturn = authParams.get('return');
-    const safeAuthReturn = /^(ofertas|social)\.html$/.test(requestedAuthReturn || '') ? requestedAuthReturn : '';
+    const safeAuthReturn = /^(?:(?:ofertas|social)\.html|multiplayer-room\.html\?room=[a-f0-9]{12}(?:&spectator=1)?)$/.test(requestedAuthReturn || '') ? requestedAuthReturn : '';
     if (safeAuthReturn) sessionStorage.setItem('neo_auth_return', safeAuthReturn);
     const setAuthStatus = message => { authStatus.textContent = message || ''; };
     const chooseAvatar = avatar => { selectedAvatar = avatar; avatarGrid.querySelectorAll('.avatar-choice').forEach(button => button.classList.toggle('selected', button.dataset.avatar === avatar)); };
@@ -1338,7 +1376,7 @@
         const body = { name, avatar: selectedAvatar, birthDate: document.getElementById('auth-birth-date').value, locality: document.getElementById('auth-locality').value.trim(), bio: document.getElementById('auth-bio').value.trim(), phone: document.getElementById('auth-phone').value.trim(), discordNotifications: document.getElementById('auth-discord-notifications').checked, showOnlineStatus:document.getElementById('auth-show-online').checked, showCurrentGame:document.getElementById('auth-show-game').checked, showPlayDuration:document.getElementById('auth-show-duration').checked, referralCode: localStorage.getItem('neo_referral_code') || '' };
         ['instagram','youtube','facebook','tiktok'].forEach(key => { body[key] = document.getElementById(`auth-${key}`).value.trim(); });
         setAuthStatus('Salvando perfil...');
-        try { const data = await profileRequest('PUT', body); if (data.created) localStorage.removeItem('neo_referral_code'); accountProfile = data.profile; applyProfile(); await migrateLocalProgressToProfile(); void refreshPersonalHero(); setAuthStatus(data.created ? `Bem-vindo(a), ${accountProfile.name}! Seus saves locais foram migrados.` : 'Perfil atualizado.'); const destination = sessionStorage.getItem('neo_auth_return') || ''; if (destination) { sessionStorage.removeItem('neo_auth_return'); setTimeout(() => { location.href = destination; }, 650); } else setTimeout(closeAuth, 900); }
+        try { const data = await profileRequest('PUT', body); if (data.created) localStorage.removeItem('neo_referral_code'); accountProfile = data.profile; applyProfile(); await migrateLocalProgressToProfile(); void refreshPersonalHero(); setAuthStatus(data.created ? `Bem-vindo(a), ${accountProfile.name}! Seus saves locais foram migrados.` : 'Perfil atualizado.'); const destination = sessionStorage.getItem('neo_auth_return') || ''; if (destination) { sessionStorage.removeItem('neo_auth_return'); setTimeout(() => { location.href = destination; }, 650); } else if (!resumeMultiplayerAfterAuth()) setTimeout(closeAuth, 900); }
         catch (error) { setAuthStatus(error.message); }
     }
     function applyProfile() {
@@ -1388,7 +1426,8 @@
             const authDestination = sessionStorage.getItem('neo_auth_return') || '';
             if (authDestination && accountProfile) { sessionStorage.removeItem('neo_auth_return'); location.href = authDestination; return; }
             const pendingRoom = sessionStorage.getItem('neo_pending_multiplayer_room');
-            if (/^[a-f0-9]{12}$/.test(pendingRoom || '')) { sessionStorage.removeItem('neo_pending_multiplayer_room'); location.href = `multiplayer-room.html?room=${encodeURIComponent(pendingRoom)}`; }
+            if (/^[a-f0-9]{12}$/.test(pendingRoom || '')) { sessionStorage.removeItem('neo_pending_multiplayer_room'); location.href = `multiplayer-room.html?room=${encodeURIComponent(pendingRoom)}`; return; }
+            resumeMultiplayerAfterAuth();
         }
         catch (_) { accountProfile = null; applyProfile(); document.getElementById('auth-copy').textContent = 'Escolha seu nome e avatar para concluir o cadastro e liberar 3 saves.'; openAuth(); }
     });
@@ -1490,6 +1529,12 @@
     if (authParams.get('cadastro') === '1') {
         document.getElementById('auth-copy').textContent = 'Entre ou crie sua conta para continuar.';
         openAuth();
+    }
+    if (authParams.get('multiplayer') === '1') {
+        authParams.delete('multiplayer');
+        const cleanQuery = authParams.toString();
+        history.replaceState(null, '', `${location.pathname}${cleanQuery ? `?${cleanQuery}` : ''}${location.hash}`);
+        openMultiplayerHub();
     }
 
     const refreshSecureHall = async () => {

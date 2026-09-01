@@ -13,7 +13,9 @@
     "ano": "1997",
     "genero": "Compilation",
     "desenvolvedora": "",
-    "publicadora": "Tec Toy Indústria de Brinquedos"
+    "publicadora": "Tec Toy Indústria de Brinquedos",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "A Lenda De Thor: O Sucessor Da Luz",
@@ -61,7 +63,9 @@
     "ano": "1995",
     "genero": "Beat 'em Up; Platform; Shooter",
     "desenvolvedora": "Clockwork Tortoise",
-    "publicadora": "Sega of America"
+    "publicadora": "Sega of America",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Aero The Acro Bat",
@@ -183,7 +187,9 @@
     "ano": "1991",
     "genero": "Beat 'em Up; Shooter",
     "desenvolvedora": "Sega CS1",
-    "publicadora": "Sega of America"
+    "publicadora": "Sega of America",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Altered Beast",
@@ -199,7 +205,9 @@
     "ano": "1988",
     "genero": "Beat 'em Up; Platform",
     "desenvolvedora": "Team Shinobi",
-    "publicadora": "Sega of America"
+    "publicadora": "Sega of America",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Atomic Robo Kid",
@@ -295,7 +303,9 @@
     "ano": "1990",
     "genero": "Shooter",
     "desenvolvedora": "Innerprise Software",
-    "publicadora": "Electronic Arts"
+    "publicadora": "Electronic Arts",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Battletoads",
@@ -311,7 +321,9 @@
     "ano": "1993",
     "genero": "Beat 'em Up; Platform",
     "desenvolvedora": "Arc System Works",
-    "publicadora": "Tradewest"
+    "publicadora": "Tradewest",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Beauty And The Beast: Roar Of The Beast",
@@ -385,7 +397,9 @@
     "ano": "1994",
     "genero": "Shooter",
     "desenvolvedora": "Probe Software",
-    "publicadora": "Sega Enterprises"
+    "publicadora": "Sega Enterprises",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Caliber.50",
@@ -417,7 +431,9 @@
     "ano": "1991",
     "genero": "Sports",
     "desenvolvedora": "Novotrade International",
-    "publicadora": "Sega Enterprises"
+    "publicadora": "Sega Enterprises",
+    "multiplayer": true,
+    "maxPlayers": 9
   },
   {
     "nome": "Captain Planet And The Planeteers",
@@ -561,7 +577,9 @@
     "ano": "1994",
     "genero": "Platform; Shooter",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Crusader Of Centy",
@@ -651,7 +669,9 @@
     "ano": "1990",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Kaneko",
-    "publicadora": "Kaneko"
+    "publicadora": "Kaneko",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Donald Duck: Maui Mallard",
@@ -677,7 +697,9 @@
     "ano": "1994",
     "genero": "Fighting",
     "desenvolvedora": "Virgin Interactive Entertainment",
-    "publicadora": "Acclaim Entertainment"
+    "publicadora": "Acclaim Entertainment",
+    "multiplayer": true,
+    "maxPlayers": 3
   },
   {
     "nome": "Duke Nukem 3D",
@@ -837,7 +859,9 @@
     "ano": "1993",
     "genero": "Sports",
     "desenvolvedora": "Extended Play Productions",
-    "publicadora": "Electronic Arts"
+    "publicadora": "Electronic Arts",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Fifa Soccer 2000",
@@ -869,7 +893,9 @@
     "ano": "1991",
     "genero": "Fighting",
     "desenvolvedora": "Aicom",
-    "publicadora": "Treco"
+    "publicadora": "Treco",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Final Zone",
@@ -1029,7 +1055,9 @@
     "ano": "1989",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Team Shinobi",
-    "publicadora": "Sega of America"
+    "publicadora": "Sega of America",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Golden Axe Ii",
@@ -1045,7 +1073,9 @@
     "ano": "1992",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Sega Enterprises",
-    "publicadora": "Sega of America"
+    "publicadora": "Sega of America",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Golden Axe Iii",
@@ -1061,7 +1091,9 @@
     "ano": "1993",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Sega CS1",
-    "publicadora": "Sega Enterprises"
+    "publicadora": "Sega Enterprises",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Goofy'S Hysterical History Tour",
@@ -1231,7 +1263,9 @@
     "ano": "1994",
     "genero": "Action; Platform",
     "desenvolvedora": "Eden Entertainment Software",
-    "publicadora": "Takara"
+    "publicadora": "Takara",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Journey From Darkness: Strider Returns",
@@ -1283,7 +1317,9 @@
     "ano": "1995",
     "genero": "Fighting",
     "desenvolvedora": "Sunsoft",
-    "publicadora": "Acclaim Entertainment"
+    "publicadora": "Acclaim Entertainment",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Kid Chameleon",
@@ -1299,7 +1335,9 @@
     "ano": "1992",
     "genero": "Platform",
     "desenvolvedora": "Sega Technical Institute",
-    "publicadora": "Sega of America"
+    "publicadora": "Sega of America",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Landstalker",
@@ -1347,7 +1385,9 @@
     "ano": "1992",
     "genero": "Puzzle",
     "desenvolvedora": "Sunsoft",
-    "publicadora": "Sunsoft"
+    "publicadora": "Sunsoft",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Light Crusader",
@@ -1395,7 +1435,9 @@
     "ano": "1997",
     "genero": "Action",
     "desenvolvedora": "Appaloosa Interactive",
-    "publicadora": "Sega of America"
+    "publicadora": "Sega of America",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Super Mario Bros. 2: The New Chance",
@@ -1501,7 +1543,9 @@
     "ano": "1990",
     "genero": "Action; Platform",
     "desenvolvedora": "Sega R&D 2",
-    "publicadora": "Sega of America"
+    "publicadora": "Sega of America",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Micro Machines Military",
@@ -1517,7 +1561,9 @@
     "ano": "1996",
     "genero": "Racing",
     "desenvolvedora": "Supersonic Software",
-    "publicadora": "Codemasters"
+    "publicadora": "Codemasters",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Micro Machines Turbo Tournament 96",
@@ -1533,7 +1579,9 @@
     "ano": "1995",
     "genero": "Racing",
     "desenvolvedora": "Codemasters",
-    "publicadora": "Codemasters"
+    "publicadora": "Codemasters",
+    "multiplayer": true,
+    "maxPlayers": 8
   },
   {
     "nome": "Midnight Resistance",
@@ -1581,7 +1629,9 @@
     "ano": "1993",
     "genero": "Fighting",
     "desenvolvedora": "Probe Software",
-    "publicadora": "Acclaim Entertainment"
+    "publicadora": "Acclaim Entertainment",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Musha Metallic Uniframe Super Hybrid Armor",
@@ -1645,7 +1695,9 @@
     "ano": "1996",
     "genero": "Beat 'em Up; Fighting; Platform",
     "desenvolvedora": "Funcom Oslo",
-    "publicadora": "Sega of America"
+    "publicadora": "Sega of America",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Outrun",
@@ -1693,7 +1745,9 @@
     "ano": "1994",
     "genero": "Racing",
     "desenvolvedora": "Sega",
-    "publicadora": "Data East"
+    "publicadora": "Data East",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Pac Mania",
@@ -1709,7 +1763,9 @@
     "ano": "1991",
     "genero": "Action",
     "desenvolvedora": "Sculptured Software",
-    "publicadora": "Tengen"
+    "publicadora": "Tengen",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Paperboy",
@@ -1725,7 +1781,9 @@
     "ano": "1992",
     "genero": "Action",
     "desenvolvedora": "MotiveTime",
-    "publicadora": "Tengen"
+    "publicadora": "Tengen",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Phantasy Star: The End Of The Millennium",
@@ -1879,7 +1937,9 @@
     "ano": "1991",
     "genero": "Fighting",
     "desenvolvedora": "Sterling Silver Software",
-    "publicadora": "Tengen"
+    "publicadora": "Tengen",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Pocahontas",
@@ -1905,7 +1965,9 @@
     "ano": "1994",
     "genero": "Racing",
     "desenvolvedora": "Rage Software",
-    "publicadora": "U.S. Gold"
+    "publicadora": "U.S. Gold",
+    "multiplayer": true,
+    "maxPlayers": 8
   },
   {
     "nome": "Predator 2",
@@ -1953,7 +2015,9 @@
     "ano": "1995",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Sculptured Software",
-    "publicadora": "Capcom"
+    "publicadora": "Capcom",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Quackshot Starring Donald Duck ~ Quackshot I Love Donald Duck Guruzia Ou No Hihou",
@@ -1989,7 +2053,9 @@
     "ano": "1989",
     "genero": "Shooter",
     "desenvolvedora": "Sega Enterprises",
-    "publicadora": "Sega of America"
+    "publicadora": "Sega of America",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Ranger X",
@@ -2053,7 +2119,9 @@
     "ano": "1991",
     "genero": "Action; Racing",
     "desenvolvedora": "Electronic Arts",
-    "publicadora": "Electronic Arts"
+    "publicadora": "Electronic Arts",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Road Rash Ii",
@@ -2069,7 +2137,9 @@
     "ano": "1992",
     "genero": "Racing",
     "desenvolvedora": "Electronic Arts",
-    "publicadora": "Electronic Arts"
+    "publicadora": "Electronic Arts",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Robocop 3",
@@ -2133,7 +2203,9 @@
     "ano": "1991",
     "genero": "Platform; Shooter",
     "desenvolvedora": "Namco",
-    "publicadora": "Namco"
+    "publicadora": "Namco",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Rolling Thunder 3",
@@ -2213,7 +2285,9 @@
     "ano": "1994",
     "genero": "Action; Platform",
     "desenvolvedora": "Psygnosis",
-    "publicadora": "Psygnosis"
+    "publicadora": "Psygnosis",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Top Five",
@@ -2435,7 +2509,9 @@
     "ano": "1995",
     "genero": "Shooter",
     "desenvolvedora": "Core Design",
-    "publicadora": "Front Street Publishing"
+    "publicadora": "Front Street Publishing",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Sonic 3D Blast",
@@ -2547,7 +2623,9 @@
     "ano": "1998",
     "genero": "Sports",
     "desenvolvedora": "Tec Toy Indústria de Brinquedos",
-    "publicadora": "Tec Toy Indústria de Brinquedos"
+    "publicadora": "Tec Toy Indústria de Brinquedos",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Stargate",
@@ -2595,7 +2673,9 @@
     "ano": "1991",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Sega Enterprises",
-    "publicadora": "Sega of America"
+    "publicadora": "Sega of America",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Streets Of Rage 2",
@@ -2611,7 +2691,9 @@
     "ano": "1993",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Ancient",
-    "publicadora": "Sega of America"
+    "publicadora": "Sega of America",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Streets Of Rage 3",
@@ -2627,7 +2709,9 @@
     "ano": "1994",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Sega AM7",
-    "publicadora": "Sega of America"
+    "publicadora": "Sega of America",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Strider",
@@ -2669,7 +2753,9 @@
     "ano": "1996",
     "genero": "Platform",
     "desenvolvedora": "Gamtec",
-    "publicadora": ""
+    "publicadora": "",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Super Monaco Gp",
@@ -2897,7 +2983,9 @@
     "ano": "1991",
     "genero": "Action",
     "desenvolvedora": "Johnson Voorsanger Productions",
-    "publicadora": "Sega of America"
+    "publicadora": "Sega of America",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Toki: Going Ape Spit",
@@ -2913,7 +3001,9 @@
     "ano": "1992",
     "genero": "Action; Platform",
     "desenvolvedora": "Santos",
-    "publicadora": "Sega of America"
+    "publicadora": "Sega of America",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Toy Story",
@@ -3013,7 +3103,9 @@
     "ano": "1992",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Opera House",
-    "publicadora": "Data East"
+    "publicadora": "Data East",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Valis",
@@ -3189,7 +3281,9 @@
     "ano": "1995",
     "genero": "Action; Platform",
     "desenvolvedora": "Headgames",
-    "publicadora": "Sega of America"
+    "publicadora": "Sega of America",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Yu Yu Hakusho: Sunset Fighters",
@@ -3237,7 +3331,9 @@
     "ano": "1994",
     "genero": "Shooter",
     "desenvolvedora": "Technopop",
-    "publicadora": "Accolade"
+    "publicadora": "Accolade",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Zool: Ninja Of The 'Nth' Dimension",

@@ -39,7 +39,9 @@
     "ano": "2003",
     "genero": "Strategy",
     "desenvolvedora": "Intelligent Systems",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Advance Wars",
@@ -55,7 +57,9 @@
     "ano": "2001",
     "genero": "Strategy",
     "desenvolvedora": "Intelligent Systems",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Agent Hugo: Roborumble",
@@ -119,7 +123,9 @@
     "ano": "2002",
     "genero": "Beat 'em Up",
     "desenvolvedora": "3d6 Games",
-    "publicadora": "Sega"
+    "publicadora": "Sega",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Army Men Advance",
@@ -247,7 +253,9 @@
     "ano": "2004",
     "genero": "Action; Role-Playing",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Boktai: The Sun Is In Your Hand",
@@ -263,7 +271,9 @@
     "ano": "2003",
     "genero": "Action; Role-Playing",
     "desenvolvedora": "Konami Computer Entertainment Japan",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Bomberman Tournament",
@@ -279,7 +289,9 @@
     "ano": "2001",
     "genero": "Action",
     "desenvolvedora": "Hudson Soft",
-    "publicadora": "Activision Publishing"
+    "publicadora": "Activision Publishing",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Breath Of Fire Ii",
@@ -359,7 +371,9 @@
     "ano": "2003",
     "genero": "Racing",
     "desenvolvedora": "DC Studios",
-    "publicadora": "Majesco Sales"
+    "publicadora": "Majesco Sales",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Casper",
@@ -449,7 +463,9 @@
     "ano": "2002",
     "genero": "Action; Platform; Shooter",
     "desenvolvedora": "TOSE",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Crash Bandicoot 2: N-Tranced",
@@ -465,7 +481,9 @@
     "ano": "2003",
     "genero": "Action; Platform",
     "desenvolvedora": "Vicarious Visions",
-    "publicadora": "Universal Interactive"
+    "publicadora": "Universal Interactive",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Crash Bandicoot: Ripto'S Rampage",
@@ -513,7 +531,9 @@
     "ano": "2003",
     "genero": "Racing",
     "desenvolvedora": "Vicarious Visions",
-    "publicadora": "Universal Interactive"
+    "publicadora": "Universal Interactive",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Crazy Chase",
@@ -641,7 +661,9 @@
     "ano": "2003",
     "genero": "Platform",
     "desenvolvedora": "Rare",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Dragon Ball Advanced Adventure",
@@ -657,7 +679,9 @@
     "ano": "2004",
     "genero": "Beat 'em Up; Platform",
     "desenvolvedora": "Dimps",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Dragon Ball Gt: Transformation",
@@ -673,7 +697,9 @@
     "ano": "2005",
     "genero": "Action; Beat 'em Up",
     "desenvolvedora": "Webfoot Technologies",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Dragon Ball Z: Taiketsu",
@@ -689,7 +715,9 @@
     "ano": "2003",
     "genero": "Action; Fighting",
     "desenvolvedora": "Webfoot Technologies",
-    "publicadora": "Atari"
+    "publicadora": "Atari",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Dragon Ball Z: The Legacy Of Goku Ii",
@@ -753,7 +781,9 @@
     "ano": "2001",
     "genero": "Racing",
     "desenvolvedora": "Nintendo R&D1",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "The Fairly Oddparents: Enter The Cleft!",
@@ -817,7 +847,9 @@
     "ano": "2003",
     "genero": "Role-Playing; Strategy",
     "desenvolvedora": "Square",
-    "publicadora": "Square Enix"
+    "publicadora": "Square Enix",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Final Fantasy VI Advance",
@@ -833,7 +865,9 @@
     "ano": "2007",
     "genero": "Role-Playing",
     "desenvolvedora": "TOSE",
-    "publicadora": "Square Enix"
+    "publicadora": "Square Enix",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Fire Emblem 8 Os Pedras Sagradas",
@@ -961,7 +995,9 @@
     "ano": "2002",
     "genero": "Action; Platform; Puzzle",
     "desenvolvedora": "Magic Pockets",
-    "publicadora": "DreamCatcher Interactive"
+    "publicadora": "DreamCatcher Interactive",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "The Grim Adventures Of Billy And Mandy",
@@ -1089,7 +1125,9 @@
     "ano": "2003",
     "genero": "Racing",
     "desenvolvedora": "ITE Media",
-    "publicadora": "ITE Media"
+    "publicadora": "ITE Media",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Hugo The Evil Mirror Advance",
@@ -1115,7 +1153,9 @@
     "ano": "2005",
     "genero": "Shooter",
     "desenvolvedora": "Torus Games",
-    "publicadora": "BAM! Entertainment"
+    "publicadora": "BAM! Entertainment",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Iridion Ii",
@@ -1221,7 +1261,9 @@
     "ano": "2004",
     "genero": "Action; Platform",
     "desenvolvedora": "Capcom",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Koala Brothers Outback Adventures",
@@ -1457,7 +1499,9 @@
     "ano": "2003",
     "genero": "Action; Shooter",
     "desenvolvedora": "Netherock",
-    "publicadora": "Electronic Arts"
+    "publicadora": "Electronic Arts",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Medal Of Honor: Underground",
@@ -1473,7 +1517,9 @@
     "ano": "2002",
     "genero": "Shooter",
     "desenvolvedora": "Rebellion Developments",
-    "publicadora": "Destination Software"
+    "publicadora": "Destination Software",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Mega Man Bass.",
@@ -1505,7 +1551,9 @@
     "ano": "2002",
     "genero": "Action; Role-Playing",
     "desenvolvedora": "Capcom Production Studio 2",
-    "publicadora": "Capcom"
+    "publicadora": "Capcom",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Mega Man Battle Network 3",
@@ -1553,7 +1601,9 @@
     "ano": "2003",
     "genero": "Platform; Shooter",
     "desenvolvedora": "Inti Creates",
-    "publicadora": "Capcom"
+    "publicadora": "Capcom",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Mega Man Zero 3",
@@ -1665,7 +1715,9 @@
     "ano": "2002",
     "genero": "Fighting",
     "desenvolvedora": "Midway Games",
-    "publicadora": "Midway Home Entertainment"
+    "publicadora": "Midway Home Entertainment",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Mother 2",
@@ -1729,7 +1781,9 @@
     "ano": "2006",
     "genero": "Action; Beat 'em Up",
     "desenvolvedora": "Aspect",
-    "publicadora": "Tomy"
+    "publicadora": "Tomy",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Need For Speed: Most Wanted",
@@ -2085,7 +2139,9 @@
     "nota": "S/N",
     "descricao": "Pokémon Ruby Version é um jogo para Game Boy Advance. A experiência preserva a estrutura e as limitações técnicas características de sua plataforma original. Ainda não há quantidade suficiente de avaliações públicas confiáveis para atribuir uma nota numérica sem inventar dados.",
     "popularidade": 0,
-    "metadataFonte": "sem correspondência confiável"
+    "metadataFonte": "sem correspondência confiável",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Pokémon Sapphire",
@@ -2269,7 +2325,9 @@
     "ano": "2002",
     "genero": "Shooter",
     "desenvolvedora": "Lucky Chicken Games",
-    "publicadora": "TDK Mediactive"
+    "publicadora": "TDK Mediactive",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Rocket Power: Dream Scheme",
@@ -2369,7 +2427,9 @@
     "ano": "2004",
     "genero": "Action; Role-Playing",
     "desenvolvedora": "Grasshopper Manufacture",
-    "publicadora": "Sega"
+    "publicadora": "Sega",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Shining Soul",
@@ -2385,7 +2445,9 @@
     "ano": "2003",
     "genero": "Action; Role-Playing",
     "desenvolvedora": "Grasshopper Manufacture",
-    "publicadora": "Sega"
+    "publicadora": "Sega",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Shrek 2 Beg For Mercy",
@@ -2433,7 +2495,9 @@
     "ano": "2004",
     "genero": "Fighting",
     "desenvolvedora": "Sonic Team",
-    "publicadora": "Sega"
+    "publicadora": "Sega",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Spider Man 2",
@@ -2545,7 +2609,9 @@
     "ano": "2004",
     "genero": "Platform",
     "desenvolvedora": "Vicarious Visions",
-    "publicadora": "Vivendi Universal Games"
+    "publicadora": "Vivendi Universal Games",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Star Wars: Episode Ii Attack Of The Clones",
@@ -2657,7 +2723,9 @@
     "ano": "2001",
     "genero": "Action; Platform",
     "desenvolvedora": "Nintendo R&D2",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Super Robot Taisen Original Generation 2",
@@ -2705,7 +2773,9 @@
     "ano": "2002",
     "genero": "Role-Playing; Strategy",
     "desenvolvedora": "Quest",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Tak: The Great Juju Challenge",
@@ -2753,7 +2823,9 @@
     "ano": "2004",
     "genero": "Platform",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Teenage Mutant Ninja Turtles",
@@ -2785,7 +2857,9 @@
     "ano": "2002",
     "genero": "Fighting",
     "desenvolvedora": "Eighting",
-    "publicadora": "Namco"
+    "publicadora": "Namco",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Tennis Masters Series 2003",
@@ -2801,7 +2875,9 @@
     "ano": "2002",
     "genero": "Sports",
     "desenvolvedora": "Kaolink",
-    "publicadora": "Microids"
+    "publicadora": "Microids",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "The Hobbit",
@@ -3077,7 +3153,9 @@
     "ano": "2001",
     "genero": "Action; Beat 'em Up",
     "desenvolvedora": "Digital Eclipse Software",
-    "publicadora": "Activision Publishing"
+    "publicadora": "Activision Publishing",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "X Men: The Official Game",

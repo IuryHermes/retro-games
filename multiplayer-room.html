@@ -829,8 +829,9 @@
           if (!access) {
             sessionStorage.setItem("neo_pending_multiplayer_room", roomId);
             status.textContent = "Login necessário";
+            const loginUrl = `index.html?cadastro=1&return=${encodeURIComponent(`multiplayer-room.html?room=${roomId}${spectatorMode ? "&spectator=1" : ""}`)}`;
             waiting.innerHTML =
-              'Entre pela <a href="index.html" style="color:#55ff88">página inicial</a>. Após o login, você voltará automaticamente para esta sala.';
+              `Para jogar online é necessário um cadastro gratuito. <a href="${loginUrl}" style="color:#55ff88;font-weight:bold">ENTRAR OU CRIAR CADASTRO</a>. Após o login, você voltará automaticamente para esta sala.`;
             return;
           }
           try {

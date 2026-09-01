@@ -29,7 +29,9 @@
     "ano": "1988",
     "genero": "Platform",
     "desenvolvedora": "Thinking Rabbit",
-    "publicadora": "SETA"
+    "publicadora": "SETA",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Abadox The Deadly Inner War",
@@ -77,7 +79,9 @@
     "ano": "1992",
     "genero": "Action; Shooter",
     "desenvolvedora": "Westwood Studios",
-    "publicadora": "FCI"
+    "publicadora": "FCI",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Adventures Of Lolo 3",
@@ -135,7 +139,9 @@
     "ano": "1989",
     "genero": "Board Game; Shooter; Strategy",
     "desenvolvedora": "Bullet-Proof Software",
-    "publicadora": "Activision"
+    "publicadora": "Activision",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Argos No Senshi: Megami Makai",
@@ -161,7 +167,9 @@
     "ano": "1986",
     "genero": "Action",
     "desenvolvedora": "Atlus",
-    "publicadora": "Taito"
+    "publicadora": "Taito",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Armadillo",
@@ -177,7 +185,9 @@
     "ano": "1991",
     "genero": "Platform",
     "desenvolvedora": "AIM",
-    "publicadora": "Information Global Service"
+    "publicadora": "Information Global Service",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Astyanax",
@@ -209,7 +219,9 @@
     "ano": "1985",
     "genero": "Action; Platform",
     "desenvolvedora": "Nintendo R&D1",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Batman: Return Of The Joker",
@@ -273,7 +285,9 @@
     "ano": "1985",
     "genero": "Shooter",
     "desenvolvedora": "Namco",
-    "publicadora": "Namco"
+    "publicadora": "Namco",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Battleship",
@@ -289,7 +303,9 @@
     "ano": "1993",
     "genero": "Board Game",
     "desenvolvedora": "Mindscape",
-    "publicadora": "Mindscape"
+    "publicadora": "Mindscape",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Battletoads",
@@ -305,7 +321,9 @@
     "ano": "1991",
     "genero": "Beat 'em Up; Platform",
     "desenvolvedora": "Rare",
-    "publicadora": "Tradewest"
+    "publicadora": "Tradewest",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Binary Land",
@@ -395,7 +413,9 @@
     "ano": "1991",
     "genero": "Action; Puzzle",
     "desenvolvedora": "Hudson Soft",
-    "publicadora": "Hudson Soft"
+    "publicadora": "Hudson Soft",
+    "multiplayer": true,
+    "maxPlayers": 3
   },
   {
     "nome": "Bram Stoker'S Dracula",
@@ -427,7 +447,9 @@
     "ano": "1993",
     "genero": "Action; Platform",
     "desenvolvedora": "ITL",
-    "publicadora": "Taito"
+    "publicadora": "Taito",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Bucky O'Hare",
@@ -459,7 +481,9 @@
     "ano": "1991",
     "genero": "Action; Platform",
     "desenvolvedora": "Data East",
-    "publicadora": "Data East"
+    "publicadora": "Data East",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Captain Comic: The Adventure",
@@ -581,7 +605,9 @@
     "ano": "1986",
     "genero": "Action",
     "desenvolvedora": "Konami",
-    "publicadora": "Soft Pro International"
+    "publicadora": "Soft Pro International",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Clash At Demonhead",
@@ -613,7 +639,9 @@
     "ano": "1984",
     "genero": "Puzzle; Shooter",
     "desenvolvedora": "Nintendo R&D1",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Code Name: Viper",
@@ -645,7 +673,9 @@
     "ano": "1986",
     "genero": "Shooter",
     "desenvolvedora": "Capcom",
-    "publicadora": "Capcom"
+    "publicadora": "Capcom",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Conquest Of The Crystal Palace",
@@ -677,7 +707,9 @@
     "ano": "1988",
     "genero": "Platform; Shooter",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Contra Force",
@@ -693,7 +725,9 @@
     "ano": "1992",
     "genero": "Platform; Shooter",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Crisis Force",
@@ -709,7 +743,9 @@
     "ano": "1991",
     "genero": "Shooter",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Cross Fire",
@@ -773,7 +809,9 @@
     "ano": "1985",
     "genero": "Action",
     "desenvolvedora": "Namco",
-    "publicadora": "Namco"
+    "publicadora": "Namco",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Donkey Kong",
@@ -789,7 +827,9 @@
     "ano": "1983",
     "genero": "Action; Platform",
     "desenvolvedora": "Nintendo",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Donkey Kong Jr.",
@@ -805,7 +845,9 @@
     "ano": "1983",
     "genero": "Action; Platform",
     "desenvolvedora": "Nintendo",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Double Dragon",
@@ -821,7 +863,9 @@
     "ano": "1988",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Technōs Japan",
-    "publicadora": "Tradewest"
+    "publicadora": "Tradewest",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Double Dragon Ii: The Revenge",
@@ -837,7 +881,9 @@
     "ano": "1989",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Technōs Japan",
-    "publicadora": "Acclaim Entertainment"
+    "publicadora": "Acclaim Entertainment",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Double Dragon Iii: The Sacred Stones",
@@ -863,7 +909,9 @@
     "ano": "1990",
     "genero": "Puzzle",
     "desenvolvedora": "Nintendo",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Dragon Ball Shen Long No Nazo",
@@ -1201,7 +1249,9 @@
     "ano": "1985",
     "genero": "Shooter",
     "desenvolvedora": "Namco",
-    "publicadora": "Namco"
+    "publicadora": "Namco",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Galaxian",
@@ -1217,7 +1267,9 @@
     "ano": "1984",
     "genero": "Shooter",
     "desenvolvedora": "Namco",
-    "publicadora": "Namco"
+    "publicadora": "Namco",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Ghosts 'N Goblins",
@@ -1233,7 +1285,9 @@
     "ano": "1986",
     "genero": "Platform; Shooter",
     "desenvolvedora": "Micronics",
-    "publicadora": "Capcom"
+    "publicadora": "Capcom",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Gradius",
@@ -1249,7 +1303,9 @@
     "ano": "1986",
     "genero": "Shooter",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Gradius Ii: Lost Heroes",
@@ -1329,7 +1385,9 @@
     "ano": "1986",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Shouei System",
-    "publicadora": "Toei Animation"
+    "publicadora": "Toei Animation",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Hokuto No Ken 2: Tenma Ryodan",
@@ -1419,7 +1477,9 @@
     "ano": "1985",
     "genero": "Platform",
     "desenvolvedora": "Nintendo",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Immortal, The",
@@ -1451,7 +1511,9 @@
     "ano": "1994",
     "genero": "Sports",
     "desenvolvedora": "Graphic Research",
-    "publicadora": "Electronic Arts Victor"
+    "publicadora": "Electronic Arts Victor",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Jackal",
@@ -1467,7 +1529,9 @@
     "ano": "1988",
     "genero": "Shooter",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Jackie Chan'S Action Kung Fu",
@@ -1531,7 +1595,9 @@
     "ano": "1993",
     "genero": "Action",
     "desenvolvedora": "Ocean of America",
-    "publicadora": "Ocean Software"
+    "publicadora": "Ocean Software",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Juuouki",
@@ -1669,7 +1735,9 @@
     "ano": "1984",
     "genero": "Action; Platform; Puzzle",
     "desenvolvedora": "Hudson Soft",
-    "publicadora": "Hudson Soft"
+    "publicadora": "Hudson Soft",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Lunar Pool",
@@ -1685,7 +1753,9 @@
     "ano": "1985",
     "genero": "Sports",
     "desenvolvedora": "Compile",
-    "publicadora": "FCI"
+    "publicadora": "FCI",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Mach Rider",
@@ -1717,7 +1787,9 @@
     "ano": "1984",
     "genero": "Platform",
     "desenvolvedora": "Namco",
-    "publicadora": "Namco"
+    "publicadora": "Namco",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Mappy",
@@ -1733,7 +1805,9 @@
     "ano": "1984",
     "genero": "Platform",
     "desenvolvedora": "Namco",
-    "publicadora": "Namco"
+    "publicadora": "Namco",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Super Mario Bros. 2",
@@ -1749,7 +1823,9 @@
     "ano": "1988",
     "genero": "Platform",
     "desenvolvedora": "Nintendo",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Super Mario World",
@@ -1957,7 +2033,9 @@
     "ano": "1992",
     "genero": "Platform",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Moon Crystal",
@@ -1999,7 +2077,9 @@
     "ano": "1990",
     "genero": "Horror; Platform",
     "desenvolvedora": "Rare",
-    "publicadora": "LJN"
+    "publicadora": "LJN",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Nightshade",
@@ -2031,7 +2111,9 @@
     "ano": "1990",
     "genero": "Action; Platform",
     "desenvolvedora": "NMK",
-    "publicadora": "American Sammy"
+    "publicadora": "American Sammy",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Ninja Gaiden",
@@ -2095,7 +2177,9 @@
     "ano": "1984",
     "genero": "Action; Platform; Puzzle",
     "desenvolvedora": "Hudson Soft",
-    "publicadora": "Hudson Soft"
+    "publicadora": "Hudson Soft",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Othello",
@@ -2137,7 +2221,9 @@
     "ano": "1984",
     "genero": "Action",
     "desenvolvedora": "Namco",
-    "publicadora": "Namcot"
+    "publicadora": "Namcot",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Pipe Dream",
@@ -2153,7 +2239,9 @@
     "ano": "1990",
     "genero": "Puzzle",
     "desenvolvedora": "Distinctive Software",
-    "publicadora": "Lucasfilm Games"
+    "publicadora": "Lucasfilm Games",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Pooyan",
@@ -2169,7 +2257,9 @@
     "ano": "1985",
     "genero": "Shooter",
     "desenvolvedora": "Konami",
-    "publicadora": "Hudson Soft"
+    "publicadora": "Hudson Soft",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Power Blade 2",
@@ -2233,7 +2323,9 @@
     "ano": "1989",
     "genero": "Platform; Puzzle",
     "desenvolvedora": "Konami",
-    "publicadora": "Ultra Games"
+    "publicadora": "Ultra Games",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "River City Ransom: Undressed",
@@ -2419,7 +2511,9 @@
     "ano": "1990",
     "genero": "Action; Platform",
     "desenvolvedora": "Natsume",
-    "publicadora": "Taito"
+    "publicadora": "Taito",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Shadowgate",
@@ -2483,7 +2577,9 @@
     "ano": "1985",
     "genero": "Sports",
     "desenvolvedora": "Iwasaki Electronics",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Solstice: The Quest For The Staff Of Demnos",
@@ -2621,7 +2717,9 @@
     "ano": "1985",
     "genero": "Action; Platform",
     "desenvolvedora": "Sunsoft",
-    "publicadora": "Sunsoft"
+    "publicadora": "Sunsoft",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Super C",
@@ -2637,7 +2735,9 @@
     "ano": "1990",
     "genero": "Platform; Shooter",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Super Mario Bros.",
@@ -2653,7 +2753,9 @@
     "ano": "1985",
     "genero": "Platform",
     "desenvolvedora": "Nintendo EAD",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Super Mario Bros. 2",
@@ -2669,7 +2771,9 @@
     "ano": "1988",
     "genero": "Platform",
     "desenvolvedora": "Nintendo",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Super Mario Bros. 3",
@@ -2685,7 +2789,9 @@
     "ano": "1988",
     "genero": "Platform",
     "desenvolvedora": "Nintendo EAD",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Super Mario Kart",
@@ -2791,7 +2897,9 @@
     "ano": "1990",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Konami",
-    "publicadora": "Ultra Games"
+    "publicadora": "Ultra Games",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Teenage Mutant Ninja Turtles Iii The Manhattan Project",
@@ -2807,7 +2915,9 @@
     "ano": "1991",
     "genero": "Beat 'em Up",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Tennis",
@@ -2823,7 +2933,9 @@
     "ano": "1984",
     "genero": "Sports",
     "desenvolvedora": "Nintendo",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Terminator 2 Judgment Day",
@@ -2913,7 +3025,9 @@
     "ano": "1991",
     "genero": "Platform; Shooter",
     "desenvolvedora": "Taito",
-    "publicadora": "Taito"
+    "publicadora": "Taito",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Tokkyuu Shirei Solbrain",
@@ -2971,7 +3085,9 @@
     "ano": "1985",
     "genero": "Sports",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Track & Field Ii",
@@ -2987,7 +3103,9 @@
     "ano": "1988",
     "genero": "Sports",
     "desenvolvedora": "Konami",
-    "publicadora": "Konami"
+    "publicadora": "Konami",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Trojan",
@@ -3003,7 +3121,9 @@
     "ano": "1986",
     "genero": "Action",
     "desenvolvedora": "Capcom",
-    "publicadora": "Capcom"
+    "publicadora": "Capcom",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Volleyball",
@@ -3019,7 +3139,9 @@
     "ano": "1986",
     "genero": "Sports",
     "desenvolvedora": "Nintendo R&D3",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Werewolf: The Last Warrior",
@@ -3067,7 +3189,9 @@
     "ano": "1991",
     "genero": "Action; Platform",
     "desenvolvedora": "Software Creations",
-    "publicadora": "LJN"
+    "publicadora": "LJN",
+    "multiplayer": true,
+    "maxPlayers": 2
   },
   {
     "nome": "Yo! Noid",

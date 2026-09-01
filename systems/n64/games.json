@@ -13,7 +13,9 @@
     "ano": "1997",
     "genero": "Shooter; Stealth",
     "desenvolvedora": "Rare",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Automobili Lamborghini",
@@ -29,7 +31,9 @@
     "ano": "1997",
     "genero": "Racing",
     "desenvolvedora": "Titus Interactive",
-    "publicadora": "Titus Interactive"
+    "publicadora": "Titus Interactive",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Banjo Kazooie",
@@ -77,7 +81,9 @@
     "ano": "1997",
     "genero": "Racing",
     "desenvolvedora": "Rare",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Donald Duck: Goin' Quackers",
@@ -151,7 +157,9 @@
     "ano": "1999",
     "genero": "Adventure; Shooter",
     "desenvolvedora": "Rare",
-    "publicadora": "Rare"
+    "publicadora": "Rare",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Mario Kart 64",
@@ -167,7 +175,9 @@
     "ano": "1996",
     "genero": "Racing",
     "desenvolvedora": "Nintendo EAD",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Paper Mario",
@@ -199,7 +209,9 @@
     "ano": "2000",
     "genero": "Shooter; Stealth",
     "desenvolvedora": "Rare",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Pokémon Stadium",
@@ -215,7 +227,9 @@
     "ano": "1999",
     "genero": "Strategy",
     "desenvolvedora": "Nintendo EAD",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Shadow Man",
@@ -279,7 +293,9 @@
     "ano": "1997",
     "genero": "Shooter",
     "desenvolvedora": "Nintendo EAD",
-    "publicadora": "Nintendo"
+    "publicadora": "Nintendo",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Super Mario 64",
@@ -343,7 +359,9 @@
     "ano": "1998",
     "genero": "Shooter",
     "desenvolvedora": "Iguana Entertainment",
-    "publicadora": "Acclaim Entertainment"
+    "publicadora": "Acclaim Entertainment",
+    "multiplayer": true,
+    "maxPlayers": 4
   },
   {
     "nome": "Turok 3: Shadow Of Oblivion",
@@ -359,6 +377,8 @@
     "ano": "2000",
     "genero": "Shooter",
     "desenvolvedora": "Acclaim Studios Austin",
-    "publicadora": "Acclaim Entertainment"
+    "publicadora": "Acclaim Entertainment",
+    "multiplayer": true,
+    "maxPlayers": 4
   }
 ]
