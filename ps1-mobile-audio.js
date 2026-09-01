@@ -22,7 +22,7 @@
         Manager.prototype.getRetroArchCfg = function () {
             const cfg = original.call(this);
             return cfg
-                .replace(/(^|\n)audio_latency\s*=\s*\d+/m, '$1audio_latency = 128')
+                .replace(/(^|\n)audio_latency\s*=\s*\d+/m, '$1audio_latency = 256')
                 .replace(/(^|\n)video_vsync\s*=\s*(?:false|"false"|0)/m, '$1video_vsync = true');
         };
         Manager.prototype.__neoPs1AudioProfile = true;
