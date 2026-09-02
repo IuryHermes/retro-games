@@ -22,8 +22,34 @@ const state = {
   chat: null,
   since: Date.now() - 60000,
   invited: new Set(),
+  profileStatus: "idle",
+  sendingGlobalMessage: false,
 };
 const el = (id) => document.getElementById(id);
+function updateGlobalComposer() {
+  const input = el('global-message');
+  const button = el('global-composer').querySelector('button[type="submit"]');
+  const signedIn = Boolean(state.firebase);
+  const profileReady = state.profileStatus === 'ready' && Boolean(state.self?.uid && state.self?.name);
+  input.disabled = !profileReady || state.sendingGlobalMessage;
+  button.disabled = state.profileStatus === 'loading' || state.sendingGlobalMessage;
+  if (state.sendingGlobalMessage) {
+    input.placeholder = 'Enviando mensagem...';
+    button.textContent = 'ENVIANDO...';
+  } else if (!signedIn) {
+    input.placeholder = 'Entre com Google para conversar...';
+    button.textContent = 'ENTRAR';
+  } else if (state.profileStatus === 'loading') {
+    input.placeholder = 'Validando seu cadastro...';
+    button.textContent = 'AGUARDE...';
+  } else if (!profileReady) {
+    input.placeholder = 'Conclua seu cadastro para conversar...';
+    button.textContent = 'CONCLUIR CADASTRO';
+  } else {
+    input.placeholder = 'Mensagem para toda a comunidade...';
+    button.textContent = 'ENVIAR';
+  }
+}
 const avatar = (value) =>
   `assets/avatars/${/^avatar-\d{2}$/.test(value || "") ? value : "avatar-01"}.png`;
 const recognitionBadges = (value) => value?.recognition?.badges || [];
@@ -53,13 +79,38 @@ onChildAdded(query(globalChat, limitToLast(100)), snapshot => {
 
 el('global-composer').onsubmit = async event => {
   event.preventDefault();
+  if (!state.firebase) {
+    alert('Entre com Google e conclua seu cadastro para enviar mensagens no chat global.');
+    location.href = 'index.html?cadastro=1&return=social.html';
+    return;
+  }
+  if (state.profileStatus !== 'ready' || !state.self?.uid || !state.self?.name) {
+    alert('Conclua seu cadastro antes de enviar mensagens no chat global.');
+    location.href = 'index.html?cadastro=1&return=social.html';
+    return;
+  }
   const text = el('global-message').value.trim();
-  if (!state.firebase) return alert('Entre com Google na página inicial para enviar mensagens no chat global.');
-  if (!state.self?.name || !text) return;
+  if (!text || state.sendingGlobalMessage) {
+    el('global-message').focus();
+    return;
+  }
   const now = new Date();
   const time = `${now.toLocaleDateString('pt-BR', { day:'2-digit', month:'2-digit', year:'2-digit' })} ${now.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' })}`;
-  await push(globalChat, { user:state.self.name.slice(0,40), text:text.slice(0,240), time, avatar:state.self.avatar || 'avatar-01', uid:state.self.uid });
-  el('global-message').value = '';
+  state.sendingGlobalMessage = true;
+  updateGlobalComposer();
+  try {
+    await push(globalChat, { user:state.self.name.slice(0,40), text:text.slice(0,240), time, avatar:state.self.avatar || 'avatar-01', uid:state.self.uid });
+    el('global-message').value = '';
+    successToast('Mensagem enviada para a comunidade.');
+  } catch (error) {
+    console.error('Falha ao enviar mensagem global:', error);
+    alert(error?.code === 'PERMISSION_DENIED' || error?.code === 'permission-denied'
+      ? 'Sua sessão não tem permissão para enviar. Entre novamente e confirme seu cadastro.'
+      : 'Não foi possível enviar a mensagem agora. Verifique sua conexão e tente novamente.');
+  } finally {
+    state.sendingGlobalMessage = false;
+    updateGlobalComposer();
+  }
 };
 function successToast(message) {
   const box = el("toast");
@@ -129,8 +180,8 @@ async function loadPlayers() {
     await heartbeat();
     const data = await api("/social/players");
     state.self = data.self || state.self;
-    el('global-message').disabled = !state.firebase;
-    el('global-message').placeholder = state.firebase ? 'Mensagem para toda a comunidade...' : 'Entre com Google na página inicial para conversar...';
+    state.profileStatus = state.self?.uid && state.self?.name ? 'ready' : 'missing';
+    updateGlobalComposer();
     state.players = data.players || [];
     refreshGlobalMessageBadges();
     el("players").replaceChildren();
@@ -193,6 +244,8 @@ async function loadPlayers() {
       el("players").appendChild(card);
     }
   } catch (error) {
+    state.profileStatus = state.firebase ? 'missing' : 'signed-out';
+    updateGlobalComposer();
     el("status").textContent = error.message;
     el("players").innerHTML =
       '<div class="empty"><a href="index.html?cadastro=1&return=social.html">Entre ou conclua seu perfil para acessar a comunidade.</a></div>';
@@ -265,6 +318,9 @@ el("chat-close").onclick = () => el("chat").close();
 el("refresh").onclick = loadPlayers;
 onAuthStateChanged(auth, (user) => {
   state.firebase = user;
+  state.profileStatus = user ? 'loading' : 'signed-out';
+  if (!user) state.self = null;
+  updateGlobalComposer();
   if (user || state.discord) {
     void loadPlayers();
     void pollEvents();

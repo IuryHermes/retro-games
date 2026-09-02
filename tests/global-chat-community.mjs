@@ -15,6 +15,11 @@ assert.match(social, /id="global-messages"/);
 assert.match(script, /ref\(getDatabase\(app\), 'mensagens'\)/);
 assert.match(script, /onChildAdded\(query\(globalChat, limitToLast\(100\)\)/);
 assert.match(script, /await push\(globalChat/);
+assert.match(script, /profileStatus/);
+assert.match(script, /CONCLUIR CADASTRO/);
+assert.match(script, /index\.html\?cadastro=1&return=social\.html/);
+assert.match(script, /state\.sendingGlobalMessage/);
+assert.match(script, /permission-denied/);
 assert.match(offers, /index\.html\?cadastro=1&return=ofertas\.html/);
 assert.match(index, /auth-show-online/);
 assert.match(index, /auth-show-game/);
@@ -27,4 +32,4 @@ assert.match(worker, /profile\.showOnlineStatus === false/);
 assert.match(worker, /showCurrentGame/);
 assert.match(worker, /showPlayDuration/);
 
-console.log('global chat community: 18 checks passed');
+console.log('global chat community: 23 checks passed');
