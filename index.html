@@ -935,6 +935,7 @@
         </main>
     </div>
 
+<script src="account-session-ui.js?v=20260907-1"></script>
 <script type="module">
     document.getElementById('discovery-online')?.addEventListener('click', () => document.getElementById('multiplayer-hub-trigger')?.click());
     document.addEventListener("DOMContentLoaded", () => {
@@ -1035,7 +1036,9 @@
     const accountFragment = new URLSearchParams(location.hash.slice(1));
     const receivedAccountToken = accountFragment.get('account_token');
     if (receivedAccountToken) { sessionStorage.setItem('neo_account_access', receivedAccountToken); history.replaceState(null, '', location.pathname + location.search); }
-    let discordAccountToken = sessionStorage.getItem('neo_account_access') || '';
+    const storedAccountToken = sessionStorage.getItem('neo_account_access') || '';
+    let discordAccountToken = storedAccountToken.split('.').length === 2 ? storedAccountToken : '';
+    const accountSessionUI = window.NeoAccountSessionUI;
     let socialTimer = 0, socialSince = Date.now() - 60000;
     async function socialRequest(path, options = {}) {
         const access = auth.currentUser ? await auth.currentUser.getIdToken() : discordAccountToken;
@@ -1206,7 +1209,11 @@
     };
     const closeAuth = () => { authModal.style.display = 'none'; };
     const accountButtons = [document.getElementById('account-button'), document.getElementById('account-button-mobile')].filter(Boolean);
-    accountButtons.forEach(button => { button.onclick = () => accountProfile ? openHistory() : openAuth(); });
+    accountButtons.forEach(button => { button.onclick = () => {
+        if (accountSessionUI.phase === 'restoring') return;
+        if (accountSessionUI.phase === 'error') { void restoreAccountSession(auth.currentUser); return; }
+        accountProfile ? openHistory() : openAuth();
+    }; });
     document.getElementById('auth-close').onclick = closeAuth;
     authModal.onclick = event => { if (event.target === authModal) closeAuth(); };
     const historyModal = document.getElementById('history-modal');
@@ -1415,12 +1422,18 @@
     }
 
     async function profileRequest(method, body) {
-        if (!auth.currentUser && !discordAccountToken) throw new Error('Entre na sua conta primeiro.');
-        const token = auth.currentUser ? await auth.currentUser.getIdToken(true) : discordAccountToken;
-        sessionStorage.setItem('neo_club_access', token);
-        const response = await fetch(`${ACCOUNT_API}/account/profile`, { method, headers: { Authorization: `Bearer ${token}`, ...(body ? {'Content-Type':'application/json'} : {}) }, body: body ? JSON.stringify(body) : undefined, cache: 'no-store' });
+        const user = auth.currentUser;
+        if (!user && !discordAccountToken) throw new Error('Entre na sua conta primeiro.');
+        const send = async forceRefresh => {
+            const token = user ? await user.getIdToken(forceRefresh) : discordAccountToken;
+            sessionStorage.setItem('neo_account_access', token);
+            sessionStorage.setItem('neo_club_access', token);
+            return fetch(`${ACCOUNT_API}/account/profile`, { method, headers: { Authorization: `Bearer ${token}`, ...(body ? {'Content-Type':'application/json'} : {}) }, body: body ? JSON.stringify(body) : undefined, cache: 'no-store', signal: AbortSignal.timeout(15000) });
+        };
+        let response = await send(false);
+        if (response.status === 401 && user) { await response.text(); response = await send(true); }
         const data = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(data.erro || 'Não foi possível carregar o perfil.');
+        if (!response.ok) { const error = new Error(data.erro || 'Não foi possível carregar o perfil.'); error.status = response.status; throw error; }
         return data;
     }
     let localMigrationRunning = false;
@@ -1486,15 +1499,8 @@
         catch (error) { setAuthStatus(error.message); }
     }
     function applyProfile() {
-        accountButtons.forEach(button => {
-            const image = button.querySelector('.account-avatar');
-            const name = button.querySelector('.account-name');
-            const hint = button.querySelector('.account-hint');
-            image.src = accountProfile ? avatarUrl(accountProfile.avatar) : 'assets/imagens-videos/logo-discord.gif?v=2';
-            name.textContent = accountProfile ? accountProfile.name : (auth.currentUser ? 'COMPLETAR PERFIL' : 'LOGIN / CADASTRO');
-            if (hint) hint.textContent = accountProfile ? 'perfil, avatar e saves' : '3 saves grátis por jogo';
-            button.setAttribute('aria-label', accountProfile ? `Abrir perfil de ${accountProfile.name}` : 'Entrar ou criar cadastro');
-        });
+        if (accountProfile) accountSessionUI.show(accountProfile);
+        else accountSessionUI.clear(Boolean(auth.currentUser || discordAccountToken));
         if (accountProfile) { document.getElementById('auth-name').value = accountProfile.name; chooseAvatar(accountProfile.avatar); }
     }
     async function completeSocialLogin(provider) {
@@ -1505,7 +1511,11 @@
     document.getElementById('auth-discord').onclick = () => { location.href = `${ACCOUNT_API}/account/discord/login`; };
     document.getElementById('auth-save-profile').onclick = saveProfile;
     async function logoutAccount() {
+        accountSessionRevision++;
+        accountSessionUI.clear();
+        discordAccountToken = ''; accountProfile = null;
         if (auth.currentUser) await signOut(auth);
+        accountSessionRevision++;
         clearInterval(socialTimer); socialTimer = 0;
         sessionStorage.removeItem('neo_club_access');
         sessionStorage.removeItem('neo_account_access');
@@ -1517,15 +1527,27 @@
     document.getElementById('auth-logout').onclick = logoutAccount;
     document.getElementById('profile-logout').onclick = logoutAccount;
     document.getElementById('profile-edit').onclick = () => { closeHistory(); openAuth(); };
-    onAuthStateChanged(auth, async user => {
-        if (user) sessionStorage.setItem('neo_account_access', await user.getIdToken());
+    let accountSessionRevision = 0;
+    async function restoreAccountSession(user) {
+        const revision = ++accountSessionRevision;
+        const identity = user?.uid || accountSessionUI.tokenIdentity(discordAccountToken);
+        if (accountProfile && accountProfile.uid !== identity) accountProfile = null;
+        accountSessionUI.restore(identity);
         document.getElementById('auth-logout').style.display = user || discordAccountToken ? 'block' : 'none';
         document.getElementById('auth-save-profile').style.display = user || discordAccountToken ? 'block' : 'none';
         document.getElementById('auth-provider-actions').hidden = Boolean(user || discordAccountToken);
         document.getElementById('auth-profile-form').hidden = !user && !discordAccountToken;
-        if (!user && !discordAccountToken) { accountProfile = null; sessionStorage.removeItem('neo_club_access'); applyProfile(); return; }
+        if (!user && !discordAccountToken) {
+            accountProfile = null;
+            sessionStorage.removeItem('neo_club_access'); sessionStorage.removeItem('neo_account_access');
+            accountSessionUI.clear(); return;
+        }
         try {
-            const data = await profileRequest('GET'); accountProfile = data.profile; applyProfile(); await migrateLocalProgressToProfile();
+            const data = await profileRequest('GET');
+            if (revision !== accountSessionRevision) return;
+            accountProfile = data.profile; applyProfile();
+            await migrateLocalProgressToProfile().catch(() => setAuthStatus('Seu perfil está conectado. Não foi possível sincronizar o progresso local agora.'));
+            if (revision !== accountSessionRevision) return;
             if (accountProfile && (!accountProfile.birthDate || !accountProfile.locality)) { document.getElementById('auth-copy').textContent = 'Atualize seu perfil para continuar usando a área social.'; openAuth(); }
             else closeAuth();
             startSocialPresence();
@@ -1535,9 +1557,28 @@
             const pendingRoom = sessionStorage.getItem('neo_pending_multiplayer_room');
             if (/^[a-f0-9]{12}$/.test(pendingRoom || '')) { sessionStorage.removeItem('neo_pending_multiplayer_room'); location.href = `multiplayer-room.html?room=${encodeURIComponent(pendingRoom)}`; return; }
             resumeMultiplayerAfterAuth();
+        } catch (error) {
+            if (revision !== accountSessionRevision) return;
+            if (error.status === 404) {
+                accountProfile = null; applyProfile();
+                document.getElementById('auth-copy').textContent = 'Escolha seu nome e avatar para concluir o cadastro e liberar 3 saves.'; openAuth();
+            } else if (error.status === 401 || ['auth/user-token-expired', 'auth/invalid-user-token', 'auth/user-disabled'].includes(error.code)) {
+                accountProfile = null; discordAccountToken = '';
+                sessionStorage.removeItem('neo_account_access'); sessionStorage.removeItem('neo_club_access');
+                accountSessionUI.clear();
+                document.getElementById('auth-provider-actions').hidden = false;
+                document.getElementById('auth-profile-form').hidden = true;
+                document.getElementById('auth-save-profile').style.display = 'none';
+                document.getElementById('auth-logout').style.display = 'none';
+                setAuthStatus('Sua sessão expirou. Entre novamente.');
+            } else {
+                accountSessionUI.unavailable();
+                setAuthStatus('Não foi possível recuperar sua sessão agora. Tente novamente.');
+            }
         }
-        catch (_) { accountProfile = null; applyProfile(); document.getElementById('auth-copy').textContent = 'Escolha seu nome e avatar para concluir o cadastro e liberar 3 saves.'; openAuth(); }
-    });
+    }
+    onAuthStateChanged(auth, user => { void restoreAccountSession(user); });
+    window.addEventListener('online', () => { if (accountSessionUI.phase === 'error') void restoreAccountSession(auth.currentUser); });
 
     const discordParam = new URLSearchParams(window.location.search).get('discord');
     if (discordParam) {
