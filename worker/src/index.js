@@ -175,6 +175,13 @@ async function publishAffiliateProductToDiscord(env, product, state = null) {
   current.published = current.published && typeof current.published === "object" ? current.published : {};
   const version = String(product.updatedAt || product.publishedAt || "1");
   if (current.published[product.id] === version) return { ok: true, alreadyPublished: true };
+  const receiptKey = `affiliate/discord-receipts/${encodeURIComponent(product.id)}/${encodeURIComponent(version)}.json`;
+  if (await env.GAMES.get(receiptKey)) {
+    current.published[product.id] = version;
+    return { ok: true, alreadyPublished: true };
+  }
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(`${product.id}:${version}`));
+  const nonce = Array.from(new Uint8Array(digest)).map(byte => byte.toString(16).padStart(2, "0")).join("").slice(0, 24);
   const channelId = await ensureAffiliateDiscordChannel(env, current);
   const price = Number(product.price).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
   const originalPrice = Number(product.originalPrice) > Number(product.price) ? Number(product.originalPrice).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) : "";
@@ -189,11 +196,12 @@ async function publishAffiliateProductToDiscord(env, product, state = null) {
     if (product.terms) fields.push({ name: "Regras", value: cleanProfileText(product.terms, 500) });
   }
   fields.push({ name: "Validade", value: expires ? `Até ${expires}, ou enquanto durar o estoque.` : "Consulte a disponibilidade e as condições na loja." });
-  const response = await discordMessage(env, channelId, { allowed_mentions: { parse: [] }, content: "🔥 **NOVO ACHADO NEOTERMINAL**", embeds: [{ title: cleanProfileText(product.title, 120), url: String(product.url), description: cleanProfileText(product.description || "Preço e disponibilidade podem mudar na loja.", 300), color: 3600248, ...(/^https:\/\//i.test(String(product.image || "")) ? { thumbnail: { url: String(product.image) } } : {}), fields, footer: { text: "Link afiliado: o NeoTerminalRoom pode receber comissão, sem custo adicional para você." } }] });
+  const response = await discordMessage(env, channelId, { nonce, enforce_nonce: true, allowed_mentions: { parse: [] }, content: "🔥 **NOVO ACHADO NEOTERMINAL**", embeds: [{ title: cleanProfileText(product.title, 120), url: String(product.url), description: cleanProfileText(product.description || "Preço e disponibilidade podem mudar na loja.", 300), color: 3600248, ...(/^https:\/\//i.test(String(product.image || "")) ? { thumbnail: { url: String(product.image) } } : {}), fields, footer: { text: "Link afiliado: o NeoTerminalRoom pode receber comissão, sem custo adicional para você." } }] });
   if (!response.ok) {
     console.error(JSON.stringify({ event: "affiliate_discord_publish_error", productId: product.id, status: response.status }));
     return { ok: false, reason: "discord", status: response.status };
   }
+  await env.GAMES.put(receiptKey, JSON.stringify({ publishedAt: now, channelId }), { httpMetadata: { contentType: "application/json" } });
   current.published[product.id] = version;
   current.lastPublishedAt = now;
   await env.GAMES.put("affiliate/discord-state.json", JSON.stringify(current), { httpMetadata: { contentType: "application/json" } });

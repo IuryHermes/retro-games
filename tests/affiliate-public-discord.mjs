@@ -25,7 +25,7 @@ products[0] = {...products[0],kind:'coupon',couponCode:'PROMO10',terms:'Valid fo
 products[1] = {...products[1],kind:'link',price:0,image:''};
 products.push({...products[2],id:'expired',expiresAt:1}, {...products[2],id:'inactive',active:false});
 let failNext = false;
-const context = vm.createContext({Date,console,DISCORD_APP_ID:'1537269100114350182',DISCORD_GUILD_ID:'1206797125854167110',__name:()=>{},cleanProfileText:(v,n)=>String(v||'').slice(0,n),readJsonDirectory:async()=>products.map(value=>({value})),discordMessage:async(_env,_channel,payload)=>{if(failNext){failNext=false;return {ok:false,status:429};}sent.push(payload);return {ok:true};},fetch:async()=>({ok:true,json:async()=>[{id:'123456789012345678',name:'achados',type:0}]})});
+const context = vm.createContext({crypto:globalThis.crypto,TextEncoder,Date,console,DISCORD_APP_ID:'1537269100114350182',DISCORD_GUILD_ID:'1206797125854167110',__name:()=>{},cleanProfileText:(v,n)=>String(v||'').slice(0,n),readJsonDirectory:async()=>products.map(value=>({value})),discordMessage:async(_env,_channel,payload)=>{if(failNext){failNext=false;return {ok:false,status:429};}sent.push(payload);return {ok:true};},fetch:async()=>({ok:true,json:async()=>[{id:'123456789012345678',name:'achados',type:0}]})});
 vm.runInContext(worker.slice(worker.indexOf('function isCompleteAffiliateProduct'),worker.indexOf('async function affiliateBotState')),context);
 const env = {GAMES:{get:async key=>stateObjects.has(key)?{json:async()=>JSON.parse(stateObjects.get(key))}:null,put:async(key,value)=>stateObjects.set(key,value)}};
 let result = await context.syncAffiliateProductsToDiscord(env);
@@ -43,3 +43,5 @@ result=await context.syncAffiliateProductsToDiscord(env);
 assert.equal(result.published,1);assert.equal(result.remaining,0);
 assert.ok(sent.every(m=>m.allowed_mentions.parse.length===0));
 console.log('Affiliate delivery behavior: batches, coupons, links, expiry, deduplication and failure recovery passed');
+
+assert.ok(sent.every(m => m.enforce_nonce && m.nonce.length === 24));
