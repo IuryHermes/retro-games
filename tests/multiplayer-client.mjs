@@ -69,7 +69,7 @@ assert.match(index, /neo_multiplayer_resume/);
 assert.match(index, /resumeMultiplayerAfterAuth/);
 assert.match(index, /requestMultiplayerAccount/);
 assert.match(index, /id="modal-online-btn"[^>]*hidden>⚔ JOGAR ONLINE/);
-assert.match(index, /onlineButton\.hidden = false/);
+assert.match(index, /onlineButton\.hidden = pokemonGame/);
 assert.match(index, /JOGAR ONLINE · ATÉ \$\{maxPlayers\} JOGADORES/);
 assert.match(index, /ABRIR SALA · JOGAR E ASSISTIR/);
 assert.match(index, /mode:multiplayerGame \? 'multiplayer' : 'spectator'/);
