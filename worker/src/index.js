@@ -138,6 +138,83 @@ function isCompleteAffiliateProduct(product, now = Date.now()) {
   return product?.active !== false && (couponComplete || linkComplete || productComplete) && (!product.expiresAt || Number(product.expiresAt) > now);
 }
 __name(isCompleteAffiliateProduct, "isCompleteAffiliateProduct");
+function isDiscordAffiliateProduct(product, now = Date.now()) {
+  return isCompleteAffiliateProduct(product, now) && /^https:\/\//i.test(String(product?.url || ""));
+}
+__name(isDiscordAffiliateProduct, "isDiscordAffiliateProduct");
+async function affiliateDiscordState(env) {
+  const object = await env.GAMES.get("affiliate/discord-state.json");
+  return object ? await object.json().catch(() => ({})) : {};
+}
+__name(affiliateDiscordState, "affiliateDiscordState");
+async function ensureAffiliateDiscordChannel(env, state) {
+  if (/^\d{10,25}$/.test(String(state.channelId || ""))) return String(state.channelId);
+  const headers = { Authorization: `Bot ${env.DISCORD_BOT_TOKEN}`, "Content-Type": "application/json" };
+  const channelsResponse = await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/channels`, { headers });
+  if (!channelsResponse.ok) throw new Error(`Discord channels: ${channelsResponse.status}`);
+  const channels = await channelsResponse.json();
+  let channel = channels.find((item) => item.type === 0 && item.name === "achados");
+  if (!channel) {
+    const created = await fetch(`https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/channels`, { method: "POST", headers, body: JSON.stringify({ name: "achados", type: 0, topic: "Ofertas verificadas do Achados NeoTerminal. Links afiliados podem gerar comissao sem custo adicional.", permission_overwrites: [{ id: DISCORD_GUILD_ID, type: 0, allow: "66560", deny: "2048" }] }) });
+    if (!created.ok) throw new Error(`Discord create #achados: ${created.status}`);
+    channel = await created.json();
+  }
+  state.channelId = String(channel.id);
+  const permissions = await fetch(`https://discord.com/api/v10/channels/${state.channelId}/permissions/${DISCORD_GUILD_ID}`, { method: "PUT", headers, body: JSON.stringify({ type: 0, allow: "66560", deny: "2048" }) });
+  if (!permissions.ok) throw new Error(`Discord permissions #achados: ${permissions.status}`);
+  const botPermissions = await fetch(`https://discord.com/api/v10/channels/${state.channelId}/permissions/${DISCORD_APP_ID}`, { method: "PUT", headers, body: JSON.stringify({ type: 1, allow: "117760", deny: "0" }) });
+  if (!botPermissions.ok) throw new Error(`Discord bot permissions #achados: ${botPermissions.status}`);
+  await env.GAMES.put("affiliate/discord-state.json", JSON.stringify(state), { httpMetadata: { contentType: "application/json" } });
+  return state.channelId;
+}
+__name(ensureAffiliateDiscordChannel, "ensureAffiliateDiscordChannel");
+async function publishAffiliateProductToDiscord(env, product, state = null) {
+  const now = Date.now();
+  if (!isDiscordAffiliateProduct(product, now)) return { ok: false, reason: "incomplete" };
+  const current = state || await affiliateDiscordState(env);
+  current.published = current.published && typeof current.published === "object" ? current.published : {};
+  const version = String(product.updatedAt || product.publishedAt || "1");
+  if (current.published[product.id] === version) return { ok: true, alreadyPublished: true };
+  const channelId = await ensureAffiliateDiscordChannel(env, current);
+  const price = Number(product.price).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  const originalPrice = Number(product.originalPrice) > Number(product.price) ? Number(product.originalPrice).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) : "";
+  const discount = Number(product.discount || 0);
+  const expires = product.expiresAt ? new Date(Number(product.expiresAt)).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" }) : "";
+  const fields = [];
+  if (Number(product.price) > 0) fields.push({ name: "Preço", value: price, inline: true });
+  if (originalPrice) fields.push({ name: "Antes", value: originalPrice, inline: true });
+  if (discount > 0) fields.push({ name: "Desconto", value: `${discount}%`, inline: true });
+  if (product.kind === "coupon") {
+    fields.push({ name: "Cupom", value: cleanProfileText(product.couponCode, 30) });
+    if (product.terms) fields.push({ name: "Regras", value: cleanProfileText(product.terms, 500) });
+  }
+  fields.push({ name: "Validade", value: expires ? `Até ${expires}, ou enquanto durar o estoque.` : "Consulte a disponibilidade e as condições na loja." });
+  const response = await discordMessage(env, channelId, { allowed_mentions: { parse: [] }, content: "🔥 **NOVO ACHADO NEOTERMINAL**", embeds: [{ title: cleanProfileText(product.title, 120), url: String(product.url), description: cleanProfileText(product.description || "Preço e disponibilidade podem mudar na loja.", 300), color: 3600248, ...(/^https:\/\//i.test(String(product.image || "")) ? { thumbnail: { url: String(product.image) } } : {}), fields, footer: { text: "Link afiliado: o NeoTerminalRoom pode receber comissão, sem custo adicional para você." } }] });
+  if (!response.ok) {
+    console.error(JSON.stringify({ event: "affiliate_discord_publish_error", productId: product.id, status: response.status }));
+    return { ok: false, reason: "discord", status: response.status };
+  }
+  current.published[product.id] = version;
+  current.lastPublishedAt = now;
+  await env.GAMES.put("affiliate/discord-state.json", JSON.stringify(current), { httpMetadata: { contentType: "application/json" } });
+  return { ok: true, channelId };
+}
+__name(publishAffiliateProductToDiscord, "publishAffiliateProductToDiscord");
+async function syncAffiliateProductsToDiscord(env) {
+  const saved = await readJsonDirectory(env, "affiliate/products/", 500);
+  const state = await affiliateDiscordState(env);
+  const candidates = saved.map((record) => record.value).filter((product) => isDiscordAffiliateProduct(product)).sort((a, b) => Number(a.publishedAt || 0) - Number(b.publishedAt || 0));
+  let published = 0, failed = 0;
+  for (const product of candidates) {
+    if (published >= 10) break;
+    const result = await publishAffiliateProductToDiscord(env, product, state).catch((error) => { console.error(JSON.stringify({ event: "affiliate_discord_sync_error", productId: product.id, error: String(error?.message || error) })); return { ok: false }; });
+    if (!result.ok) { failed++; break; }
+    if (!result.alreadyPublished) published++;
+  }
+  const remaining = candidates.filter(product => state.published?.[product.id] !== String(product.updatedAt || product.publishedAt || "1")).length;
+  return { ok: failed === 0, published, remaining, failed, channelId: state.channelId || "" };
+}
+__name(syncAffiliateProductsToDiscord, "syncAffiliateProductsToDiscord");
 async function affiliateBotState(env) {
   const [state, config] = await Promise.all([env.GAMES.get("affiliate/bot/state.json"), env.GAMES.get("affiliate/bot/config.json")]);
   return { state: state ? await state.json().catch(() => ({})) : {}, config: config ? await config.json().catch(() => ({})) : { active: false, expiresHours: 36, searches: AFFILIATE_BOT_SEARCHES } };
@@ -655,12 +732,7 @@ var src_default = {
       return new Response("<!doctype html><meta charset=utf-8><title>Neo Terminal</title><style>body{background:#030805;color:#55ff88;font:20px Consolas;padding:60px;text-align:center}</style><h1>NEO TERMINAL</h1><p>Mercado Livre conectado. Você pode fechar esta aba.</p>", { headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" } });
     }
     if (request.method === "GET" && url.pathname === "/affiliate/products") {
-      const account = await accountAccess(request, env);
-      if (!account)
-        return json({ erro: "Entre ou cadastre-se para acessar as ofertas." }, 401);
-      const profile = await env.GAMES.head(`profiles/v1/${encodeURIComponent(account.uid)}.json`);
-      if (!profile)
-        return json({ erro: "Complete seu cadastro para acessar as ofertas." }, 403);
+
       const saved = await readJsonDirectory(env, "affiliate/products/", 500);
       const merged = new Map(DEFAULT_AFFILIATE_PRODUCTS.map((product) => [product.id, product]));
       for (const record of saved) merged.set(record.value.id, { ...(merged.get(record.value.id) || {}), ...record.value, image: record.value.image || merged.get(record.value.id)?.image || "" });
@@ -1036,6 +1108,11 @@ var src_default = {
         await audit(action, "affiliate-bot", { ok: result.ok, reason: result.reason || "", candidates: result.candidates?.length || 0 });
         return result.ok ? json(result) : json({ erro: result.reason === "missing_token" ? "Cadastre o segredo ML_ACCESS_TOKEN no Worker." : "Ative o robô nas configurações." }, 409);
       }
+      if (action === "affiliate-discord-sync") {
+        const result = await syncAffiliateProductsToDiscord(env);
+        await audit(action, "affiliate-discord", { published: result.published || 0 });
+        return json(result);
+      }
       if (action === "affiliate-bot-publish") {
         const { state, config } = await affiliateBotState(env); const candidate = (state.candidates || []).find((item) => item.id === String(body.candidateId || ""));
         if (!candidate) return json({ erro: "Achado não encontrado. Execute uma nova busca." }, 404);
@@ -1048,7 +1125,8 @@ var src_default = {
         if (!ownImage) return json({ erro: "Não foi possível validar e armazenar a imagem original do produto." }, 502);
         const product = { id, title: candidate.title, description, url: affiliateUrl.toString(), image: ownImage, category: candidate.category, tags: ["achado-neoterminal", candidate.category], featured: candidate.score >= 50, active: true, position: 1, price: candidate.price, originalPrice: candidate.originalPrice, discount: candidate.discount, freeShipping: candidate.freeShipping, publishedAt: now, expiresAt: now + Math.max(12, Math.min(168, Number(config.expiresHours) || 36)) * 36e5, sourceId: candidate.id, updatedAt: now };
         await env.GAMES.put(`affiliate/products/${id}.json`, JSON.stringify(product), { httpMetadata: { contentType: "application/json" } });
-        await audit(action, id, { sourceId: candidate.id, expiresAt: product.expiresAt }); return json({ product });
+        const discord = await publishAffiliateProductToDiscord(env, product).catch(() => ({ ok: false }));
+        await audit(action, id, { sourceId: candidate.id, expiresAt: product.expiresAt, discord: discord.ok }); return json({ product, discord });
       }
       if (action === "affiliate-upsert") {
         const input = body.product || {};
@@ -1072,8 +1150,9 @@ var src_default = {
         const now = Date.now();
         const product = { id, kind, title, description, url: productUrl.toString(), image: kind === "product" ? image : "", category: kind === "coupon" ? "cupons" : category, couponCode: kind === "coupon" ? couponCode : "", terms: kind === "coupon" ? terms : "", merchant: kind === "coupon" ? merchant : "", tags: Array.isArray(input.tags) ? input.tags.map((tag) => cleanProfileText(tag, 30)).filter(Boolean).slice(0, 12) : [], featured: Boolean(input.featured), active: input.active !== false, position: Math.max(1, Math.min(9999, Math.floor(Number(input.position) || 999))), price: kind === "product" ? price : 0, originalPrice: kind === "product" ? Math.max(0, Number(input.originalPrice) || 0) : 0, discount: Math.max(0, Math.min(100, Number(input.discount) || 0)), publishedAt: Number(input.publishedAt) || now, expiresAt: Number(input.expiresAt) || now + 36 * 36e5, updatedAt: now };
         await env.GAMES.put(`affiliate/products/${id}.json`, JSON.stringify(product), { httpMetadata: { contentType: "application/json" } });
-        await audit(action, id, { title, category, active: product.active });
-        return json({ product });
+        const discord = product.active ? await publishAffiliateProductToDiscord(env, product).catch(() => ({ ok: false })) : { ok: false, reason: "inactive" };
+        await audit(action, id, { title, category, active: product.active, discord: discord.ok });
+        return json({ product, discord });
       }
       if (action === "affiliate-delete") {
         const id = String(body.id || "");
@@ -1948,6 +2027,11 @@ var src_default = {
     return json({ erro: "Nao encontrado." }, 404);
   },
   async scheduled(_event, env) {
+    if (_event.cron === "*/5 * * * *") {
+      const result = await syncAffiliateProductsToDiscord(env);
+      if (!result.ok) throw new Error("Affiliate Discord sync failed");
+      return;
+    }
     const records = await allPayments(env);
     for (const [id, record] of Object.entries(records || {})) {
       if (record.status !== "aprovado" || !record.validoAte || record.validoAte > Date.now() || !record.discordId || !record.plano)
@@ -2029,6 +2113,7 @@ var src_default = {
       await env.GAMES.put("club/bot-state.json", JSON.stringify(state), { httpMetadata: { contentType: "application/json" } });
     }
     await runAffiliateBot(env);
+    await syncAffiliateProductsToDiscord(env);
   }
 };
 export {

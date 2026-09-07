@@ -18,5 +18,5 @@
     { "tag": "social-v1", "new_sqlite_classes": ["SocialPlayer"] }
   ],
   "observability": { "enabled": true, "head_sampling_rate": 1 },
-  "triggers": { "crons": ["15 12 * * *"] }
+  "triggers": { "crons": ["15 12 * * *", "*/5 * * * *"] }
 }
