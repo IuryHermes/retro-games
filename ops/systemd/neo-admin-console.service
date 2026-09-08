@@ -14,7 +14,7 @@ NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=strict
 ProtectHome=read-only
-ReadWritePaths=%h/neo-admin-console
+ReadWritePaths=%h/neo-admin-console %h/hermes-discord/neo-terminalroom-gateway %h/hermes-discord/boot_jornalista %h/hermes-discord/boot_concursos
 
 [Install]
 WantedBy=default.target

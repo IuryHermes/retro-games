@@ -27,13 +27,29 @@ const gatewayEnv = '/home/vndx404/hermes-discord/neo-terminalroom-gateway/.env';
 const journalistDir = '/home/vndx404/hermes-discord/boot_jornalista';
 async function serviceState(name) { try { const { stdout } = await execFile('systemctl', ['--user', 'is-active', name], { timeout: 5000 }); return stdout.trim(); } catch (_) { return 'inactive'; } }
 async function botStatus() { const [gateway, journalist, concursos] = await Promise.all([serviceState('neo-terminalroom-gateway.service'), serviceState('hermes-discord-jornalista.service'), serviceState('hermes-discord-concursos.service')]); let env=''; try { env=await readFile(gatewayEnv,'utf8'); } catch (_) {} const radioUrl=(env.match(/^RADIO_URL=(.*)$/m)||[])[1] || ''; return { gateway, journalist, concursos, radioEnabled:/^RADIO_ENABLED=1$/m.test(env), radioUrl, radioChannelId:(env.match(/^RADIO_CHANNEL_ID=(.*)$/m)||[])[1]||'' }; }
+async function restoreBotServices() {
+  let networkError = '';
+  try { await execFile('curl',['-4fsS','--connect-timeout','6','--max-time','10','-o','/dev/null','https://discord.com/api/v10/gateway'],{timeout:15000}); } catch (error) { networkError = String(error?.stderr || error?.message || error).trim(); }
+  const services = ['neo-terminalroom-gateway.service','hermes-discord-jornalista.service','hermes-discord-concursos.service'];
+  await execFile('systemctl',['--user','daemon-reload'],{timeout:15000});
+  await execFile('systemctl',['--user','enable',...services],{timeout:15000});
+  await execFile('systemctl',['--user','restart',...services],{timeout:30000});
+  const state = await botStatus();
+  const inactive = [['gateway',state.gateway],['journalista',state.journalist],['concursos',state.concursos]].filter(([,status])=>status!=='active').map(([name])=>name);
+  const achados = await proxyAdmin({ action: 'affiliate-discord-sync', adminActor: 'server-restore' });
+  if (achados.status < 200 || achados.status >= 300) throw new Error(achados.data?.erro || 'Falha ao sincronizar Achados.');
+  if (inactive.length || networkError) throw new Error(`Achados sincronizado, mas a recuperação ficou incompleta${networkError ? ' (rede IPv4)' : ''}: ${inactive.join(', ') || 'verifique a rede'}`);
+  return { ...state, achados: achados.data };
+}
 async function botAction(action, value='') {
-  if (action === 'jornalista-atualizar') { await writeFile(join(journalistDir,'publish_request.txt'),'geek\n'); return; }
+  if (action === 'restore-services') return restoreBotServices();
+  if (action === 'jornalista-atualizar') { await writeFile(join(journalistDir,'publish_request.txt'),'geek\n',{encoding:'utf8',mode:0o600}); return; }
   if (action === 'concursos-atualizar') { await writeFile('/home/vndx404/hermes-discord/boot_concursos/publish_request.txt','concursos\n'); return; }
-  if (!['gateway-restart','journalista-restart','concursos-restart','radio-restart'].includes(action)) throw new Error('Ação de bot inválida.');
-  const service = action === 'journalista-restart' ? 'hermes-discord-jornalista.service' : action === 'concursos-restart' ? 'hermes-discord-concursos.service' : 'neo-terminalroom-gateway.service';
-  if (action === 'radio-restart' && value) { const parsed=new URL(value); if(parsed.protocol !== 'https:' || !/youtube\.com|youtu\.be$/i.test(parsed.hostname)) throw new Error('Use um link HTTPS do YouTube.'); let env=await readFile(gatewayEnv,'utf8'); if(/^RADIO_URL=/m.test(env)) env=env.replace(/^RADIO_URL=.*$/m,`RADIO_URL=${value}`); else env += `\nRADIO_URL=${value}\n`; await writeFile(gatewayEnv,env,{mode:0o600}); }
-  await execFile('systemctl',['--user','restart',service],{timeout:15000});
+  if (!/^(gateway|journalista|concursos)-(start|stop|restart)$/.test(action) && action !== 'radio-restart') throw new Error('Ação de bot inválida.');
+  const [target,command] = action === 'radio-restart' ? ['gateway','restart'] : action.split('-');
+  const service = target === 'journalista' ? 'hermes-discord-jornalista.service' : target === 'concursos' ? 'hermes-discord-concursos.service' : 'neo-terminalroom-gateway.service';
+  if (action === 'radio-restart' && value) { const parsed=new URL(value); if(parsed.protocol !== 'https:' || !(parsed.hostname === 'youtu.be' || parsed.hostname === 'youtube.com' || parsed.hostname.endsWith('.youtube.com'))) throw new Error('Use um link HTTPS do YouTube.'); let env=await readFile(gatewayEnv,'utf8'); if(/^RADIO_URL=/m.test(env)) env=env.replace(/^RADIO_URL=.*$/m,`RADIO_URL=${value}`); else env += `\nRADIO_URL=${value}\n`; await writeFile(gatewayEnv,env,{mode:0o600}); }
+  await execFile('systemctl',['--user',command,service],{timeout:15000});
 }
 
 function send(res, status, body, headers={}) {
@@ -96,16 +112,7 @@ async function proxyAdminCover(data,{system,rom,contentType,actor}) {
 async function serve(req,res,path) {
   const file=path==='/'?'index.html':path.slice(1);
   if (!/^(index\.html|app\.js|styles\.css)$/.test(file)) return send(res,404,{erro:'Não encontrado.'});
-  let data=await readFile(join(root,'public',file));
-  if(file==='index.html') data=Buffer.from(data.toString('utf8').replace('</header>','<a href="/bots">BOTS E RÁDIO</a></header>'));
-  if(file==='app.js') {
-    let source=data.toString('utf8');
-    source=source.replace("'Pagamentos','Jogos'", "'Pagamentos','Bots','Jogos'");
-    const botLoader="async function bots(){const d=await fetch('/api/bots').then(r=>r.json());const root=node('div');root.append(node('h2','Bots e automações'),node('p',`Gateway: ${d.gateway} · Jornalista: ${d.journalist} · Rádio: ${d.radioEnabled?'ligada':'desligada'}`,'muted'));const url=node('input');url.type='url';url.placeholder='https://www.youtube.com/watch?v=...';const labels={'radio-restart':'REINICIAR RÁDIO','gateway-restart':'REINICIAR GATEWAY','journalista-restart':'REINICIAR JORNALISTA','jornalista-atualizar':'PUBLICAR NOTÍCIAS AGORA'};const run=(a,v='')=>actionButton(labels[a]||a,async()=>{await fetch('/api/bots',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':state.csrf},body:JSON.stringify({action:a,value:typeof v==='function'?v():v})});status('Comando executado.');await load()});root.append(node('label','Novo link da rádio (opcional)'),url,run('radio-restart',()=>url.value),run('gateway-restart'),run('journalista-restart'),run('jornalista-atualizar'));return root}\nconst loaders={";
-    source=source.replace('const loaders={',botLoader);
-    source=source.replace("'Pagamentos':payments", "'Pagamentos':payments,'Bots':bots");
-    data=Buffer.from(source);
-  }
+  const data=await readFile(join(root,'public',file));
   res.writeHead(200,{...securityHeaders,'Content-Type':mime[extname(file)]||'application/octet-stream'}); res.end(data);
 }
 
@@ -138,7 +145,18 @@ const server=http.createServer(async (req,res)=>{
       return send(res,200,{ok:true,username,mensagem:'Usuário alterado. Entre novamente.'},{'Set-Cookie':'neo_admin=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0'});
     }
     if (req.method==='GET' && url.pathname==='/api/bots') { if(!requireSession(req,res))return; return send(res,200,await botStatus()); }
-    if (req.method==='POST' && url.pathname==='/api/bots') { if(!requireSession(req,res,true))return; const input=await body(req); await botAction(String(input.action||''),String(input.value||'')); return send(res,200,{ok:true,status:await botStatus()}); }
+    if (req.method==='POST' && url.pathname==='/api/bots') {
+      if(!requireSession(req,res,true))return;
+      const input=await body(req), action=String(input.action||'');
+      try {
+        const result = await botAction(action,String(input.value||''));
+        const mensagem = action === 'jornalista-atualizar' ? 'Solicitação enviada ao Jornalista. Processamento em até 1 minuto.' : action === 'restore-services' ? 'Servidor restaurado: Gateway, Jornalista e Concursos ativos; Achados sincronizado.' : 'Comando executado.';
+        return send(res,200,{ok:true,mensagem,status:result || await botStatus()});
+      } catch(error) {
+        console.error(`[bots] Falha em ${action}:`,error);
+        return send(res,500,{erro:`Falha em ${action}: ${error.message}`});
+      }
+    }
     if (req.method==='POST' && url.pathname==='/api/admin') { if(!requireSession(req,res,true))return; const payload=await body(req); const result=await proxyAdmin({...payload,adminActor:await adminUsername()}); return send(res,result.status,result.data); }
     if (req.method==='POST' && url.pathname==='/api/admin-cover') {
       if(!requireSession(req,res,true))return;
@@ -154,7 +172,7 @@ const server=http.createServer(async (req,res)=>{
     if (req.method==='GET' && url.pathname==='/bots.js') { const data=await readFile(join(root,'public','bots.js')); res.writeHead(200,{...securityHeaders,'Content-Type':'text/javascript; charset=utf-8'}); return res.end(data); }
     if (req.method==='GET') return serve(req,res,url.pathname);
     send(res,405,{erro:'Método não permitido.'});
-  } catch(error) { send(res,error.message==='BODY_TOO_LARGE'?413:500,{erro:'Falha interna do painel.'}); }
+  } catch(error) { console.error('[admin] Falha não tratada:',error); send(res,error.message==='BODY_TOO_LARGE'?413:500,{erro:'Falha interna do painel.'}); }
 });
 const started=Date.now();
 server.listen(port,'0.0.0.0',()=>console.log(`Neo admin ativo na porta ${port}`));

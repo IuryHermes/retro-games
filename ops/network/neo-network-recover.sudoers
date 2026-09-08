@@ -1,0 +1,1 @@
+vndx404 ALL=(root) NOPASSWD: /usr/local/sbin/neo-network-recover --force

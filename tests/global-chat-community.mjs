@@ -20,7 +20,10 @@ assert.match(script, /CONCLUIR CADASTRO/);
 assert.match(script, /index\.html\?cadastro=1&return=social\.html/);
 assert.match(script, /state\.sendingGlobalMessage/);
 assert.match(script, /permission-denied/);
-assert.match(offers, /index\.html\?cadastro=1&return=ofertas\.html/);
+assert.match(offers, /affiliate\/products`,\{cache:'no-store'\}/);
+assert.doesNotMatch(offers, /onAuthStateChanged|getAuth\(|Verificando seu cadastro|exclusivas para usuÃ¡rios cadastrados/);
+assert.match(offers, /TENTAR NOVAMENTE/);
+assert.match(index, /Ofertas abertas para todos/);
 assert.match(index, /auth-show-online/);
 assert.match(index, /auth-show-game/);
 assert.match(index, /auth-show-duration/);
@@ -32,4 +35,4 @@ assert.match(worker, /profile\.showOnlineStatus === false/);
 assert.match(worker, /showCurrentGame/);
 assert.match(worker, /showPlayDuration/);
 
-console.log('global chat community: 23 checks passed');
+console.log('global chat community: 26 checks passed');

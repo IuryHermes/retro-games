@@ -1,0 +1,7 @@
+[Unit]
+Description=NeoTerminalRoom automatic IPv4 recovery
+After=NetworkManager.service
+Wants=NetworkManager.service
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/neo-network-recover
