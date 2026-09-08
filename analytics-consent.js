@@ -12,7 +12,8 @@
     const cleanParams = params => Object.fromEntries(Object.entries(params || {}).filter(([, value]) => value !== undefined && value !== null && value !== ''));
 
     function loadAnalytics() {
-        if (loaded || !allowed() || !validId()) return false;
+        if (!allowed() || !validId()) return false;
+        if (loaded) return true;
         loaded = true;
         window.dataLayer = window.dataLayer || [];
         window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };

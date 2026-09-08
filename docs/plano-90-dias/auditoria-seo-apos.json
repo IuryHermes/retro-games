@@ -1,0 +1,183 @@
+{
+  "auditedAt": "2026-09-08T13:50:40.874Z",
+  "scope": "All URLs in local sitemaps; live sample only, not Google indexing proof",
+  "counts": {
+    "urls": 1162,
+    "uniqueUrls": 1162,
+    "games": 1157,
+    "static": 5,
+    "withTitle": 1162,
+    "withDescription": 1162,
+    "oneH1": 1161,
+    "matchingCanonical": 1162,
+    "withOpenGraph": 1158,
+    "withSchema": 1158,
+    "withBreadcrumbs": 0,
+    "withAnalytics": 1162
+  },
+  "systems": {
+    "nes": 202,
+    "snes": 270,
+    "n64": 23,
+    "gba": 212,
+    "megadrive": 211,
+    "ps1": 94,
+    "atari2600": 145
+  },
+  "issueCounts": {
+    "h1Count": 1,
+    "missingOpenGraph": 4
+  },
+  "issues": {
+    "h1Count": [
+      {
+        "url": "https://neoterminalroom.com.br/",
+        "detail": "3"
+      }
+    ],
+    "missingOpenGraph": [
+      {
+        "url": "https://neoterminalroom.com.br/coletaneas.html",
+        "detail": ""
+      },
+      {
+        "url": "https://neoterminalroom.com.br/social.html",
+        "detail": ""
+      },
+      {
+        "url": "https://neoterminalroom.com.br/ofertas.html",
+        "detail": ""
+      },
+      {
+        "url": "https://neoterminalroom.com.br/apoie.html",
+        "detail": ""
+      }
+    ]
+  },
+  "duplicateTitles": [
+    {
+      "text": "Jogar Mappy Online - NES",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/nes/mappy/",
+        "https://neoterminalroom.com.br/jogos/nes/mappy-2/"
+      ]
+    },
+    {
+      "text": "Jogar Super Mario Bros. 2 Online - NES",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/nes/super-mario-bros-2/",
+        "https://neoterminalroom.com.br/jogos/nes/super-mario-bros-2-2/"
+      ]
+    },
+    {
+      "text": "Jogar Final Fight Online - SNES",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/snes/final-fight/",
+        "https://neoterminalroom.com.br/jogos/snes/final-fight-4/"
+      ]
+    },
+    {
+      "text": "Jogar The Ignition Factor Online - SNES",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/snes/the-ignition-factor/",
+        "https://neoterminalroom.com.br/jogos/snes/the-ignition-factor-2/"
+      ]
+    },
+    {
+      "text": "Jogar International Super Star Soccer Deluxe Online - SNES",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/snes/international-super-star-soccer-deluxe/",
+        "https://neoterminalroom.com.br/jogos/snes/international-super-star-soccer-deluxe-2/",
+        "https://neoterminalroom.com.br/jogos/snes/international-super-star-soccer-deluxe-3/"
+      ]
+    },
+    {
+      "text": "Jogar Mortal Kombat 3 Online - SNES",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/snes/mortal-kombat-3/",
+        "https://neoterminalroom.com.br/jogos/snes/mortal-kombat-3-2/"
+      ]
+    },
+    {
+      "text": "Jogar Sonic 3D Blast Online - Mega Drive",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/megadrive/sonic-3d-blast/",
+        "https://neoterminalroom.com.br/jogos/megadrive/sonic-3d-blast-2/"
+      ]
+    },
+    {
+      "text": "Jogar Truxton Online - Mega Drive",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/megadrive/truxton/",
+        "https://neoterminalroom.com.br/jogos/megadrive/truxton-2/"
+      ]
+    }
+  ],
+  "duplicateDescriptions": [
+    {
+      "text": "Mappy é um jogo de plataforma lançado em 1984 para NES. Desenvolvido por Namco e publicado por Namco. A jogabilidade se concentra em percorrer fases, dominar saltos, evitar perigos e descobrir rotas ou itens escondidos. Oferece suporte para até 2 jogadores. A nota é 7.1/10, conversão da média comunitária de 3.56/5 no LaunchBox, baseada em 68 avaliações.",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/nes/mappy/",
+        "https://neoterminalroom.com.br/jogos/nes/mappy-2/"
+      ]
+    },
+    {
+      "text": "Super Mario Bros. 2 é um jogo de plataforma lançado em 1988 para NES. Desenvolvido por Nintendo e publicado por Nintendo. A jogabilidade se concentra em percorrer fases, dominar saltos, evitar perigos e descobrir rotas ou itens escondidos. Oferece suporte para até 1 jogador. A nota é 8.4/10, conversão da média comunitária de 4.19/5 no LaunchBox, baseada em 699 avaliações.",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/nes/super-mario-bros-2/",
+        "https://neoterminalroom.com.br/jogos/nes/super-mario-bros-2-2/"
+      ]
+    },
+    {
+      "text": "Final Fight é um jogo de beat &#39;em up lançado em 1990 para Super Nintendo. Desenvolvido por Capcom e publicado por Capcom. A experiência preserva a estrutura e as limitações técnicas características de sua plataforma original. Oferece suporte para até 1 jogador. A nota é 7.8/10, conversão da média comunitária de 3.89/5 no LaunchBox, baseada em 295 avaliações.",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/snes/final-fight/",
+        "https://neoterminalroom.com.br/jogos/snes/final-fight-4/"
+      ]
+    },
+    {
+      "text": "The Ignition Factor é um jogo de ação lançado em 1994 para Super Nintendo. Desenvolvido por Jaleco e publicado por Jaleco. A jogabilidade prioriza ação imediata, reflexos, movimentação precisa e domínio gradual dos padrões de fases e adversários. Oferece suporte para até 1 jogador. A nota é 6.5/10, conversão da média comunitária de 3.25/5 no LaunchBox, baseada em 65 avaliações.",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/snes/the-ignition-factor/",
+        "https://neoterminalroom.com.br/jogos/snes/the-ignition-factor-2/"
+      ]
+    },
+    {
+      "text": "International Super Star Soccer Deluxe é um jogo de esportes lançado em 1995 para Super Nintendo. Desenvolvido por Konami e publicado por Konami. O jogo adapta regras e fundamentos esportivos para partidas rápidas, com ênfase em posicionamento, tempo de comando e competição. Oferece suporte para até 4 jogadores. Classificação indicativa original: E - Everyone. A nota é 8.2/10, conversão da média comunitária de 4.12/5 no LaunchBox, baseada em 140 avaliações.",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/snes/international-super-star-soccer-deluxe/",
+        "https://neoterminalroom.com.br/jogos/snes/international-super-star-soccer-deluxe-2/",
+        "https://neoterminalroom.com.br/jogos/snes/international-super-star-soccer-deluxe-3/"
+      ]
+    },
+    {
+      "text": "Mortal Kombat 3 é um jogo de luta lançado em 1995 para Super Nintendo. Desenvolvido por Sculptured Software e publicado por Williams Entertainment. O foco está em confrontos diretos, leitura do adversário, domínio de golpes e precisão no tempo de ataque e defesa. Oferece suporte para até 2 jogadores. Classificação indicativa original: M - Mature. A nota é 7.9/10, conversão da média comunitária de 3.96/5 no LaunchBox, baseada em 187 avaliações.",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/snes/mortal-kombat-3/",
+        "https://neoterminalroom.com.br/jogos/snes/mortal-kombat-3-2/"
+      ]
+    },
+    {
+      "text": "Super Mario World 2: Yoshi&#39;S Island é um jogo de plataforma lançado em 1995 para Super Nintendo. Desenvolvido por Nintendo EAD e publicado por Nintendo. A jogabilidade se concentra em percorrer fases, dominar saltos, evitar perigos e descobrir rotas ou itens escondidos. Oferece suporte para até 1 jogador. Classificação indicativa original: E - Everyone. A nota é 9.1/10, conversão da média comunitária de 4.56/5 no LaunchBox, baseada em 710 avaliações.",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/snes/super-mario-world-2-yoshi-s-island/",
+        "https://neoterminalroom.com.br/jogos/snes/super-mario-world-2-yoshi-s-island-2/"
+      ]
+    },
+    {
+      "text": "Sonic 3D Blast é um jogo de ação, plataforma lançado em 1996 para Mega Drive. Desenvolvido por Traveller&#39;s Tales (UK) e publicado por Sega Enterprises. A jogabilidade se concentra em percorrer fases, dominar saltos, evitar perigos e descobrir rotas ou itens escondidos. Oferece suporte para até 1 jogador. Classificação indicativa original: E - Everyone. A nota é 7.4/10, conversão da média comunitária de 3.69/5 no LaunchBox, baseada em 194 avaliações.",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/megadrive/sonic-3d-blast/",
+        "https://neoterminalroom.com.br/jogos/megadrive/sonic-3d-blast-2/"
+      ]
+    },
+    {
+      "text": "Truxton é um jogo de tiro lançado em 1989 para Mega Drive. Desenvolvido por ToaPlan e publicado por Sega of America. A ação exige movimentação constante, mira, reação rápida e uso eficiente de armas ou melhorias contra ondas de inimigos. Oferece suporte para até 1 jogador. A nota é 8.0/10, conversão da média comunitária de 3.98/5 no LaunchBox, baseada em 132 avaliações.",
+      "urls": [
+        "https://neoterminalroom.com.br/jogos/megadrive/truxton/",
+        "https://neoterminalroom.com.br/jogos/megadrive/truxton-2/"
+      ]
+    }
+  ],
+  "live": []
+}

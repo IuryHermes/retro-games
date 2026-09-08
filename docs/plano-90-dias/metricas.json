@@ -1,0 +1,104 @@
+{
+  "inicio": "2026-09-08",
+  "fim": "2026-12-06",
+  "janela": "28 dias completos",
+  "status": "aguardando dados reais",
+  "checkpoints": [
+    {
+      "dia": 1,
+      "data": "2026-09-08",
+      "indexadas": null,
+      "impressoes": null,
+      "cliques": null,
+      "sessoes": null,
+      "usuarios_totais": null,
+      "cadastros": null,
+      "receita_confirmada_brl": null,
+      "custos_brl": null
+    },
+    {
+      "dia": 7,
+      "data": "2026-09-14",
+      "indexadas": null,
+      "impressoes": null,
+      "cliques": null,
+      "sessoes": null,
+      "usuarios_totais": null,
+      "cadastros": null,
+      "receita_confirmada_brl": null,
+      "custos_brl": null
+    },
+    {
+      "dia": 15,
+      "data": "2026-09-22",
+      "indexadas": null,
+      "impressoes": null,
+      "cliques": null,
+      "sessoes": null,
+      "usuarios_totais": null,
+      "cadastros": null,
+      "receita_confirmada_brl": null,
+      "custos_brl": null
+    },
+    {
+      "dia": 30,
+      "data": "2026-10-07",
+      "indexadas": null,
+      "impressoes": null,
+      "cliques": null,
+      "sessoes": null,
+      "usuarios_totais": null,
+      "cadastros": null,
+      "receita_confirmada_brl": null,
+      "custos_brl": null
+    },
+    {
+      "dia": 45,
+      "data": "2026-10-22",
+      "indexadas": null,
+      "impressoes": null,
+      "cliques": null,
+      "sessoes": null,
+      "usuarios_totais": null,
+      "cadastros": null,
+      "receita_confirmada_brl": null,
+      "custos_brl": null
+    },
+    {
+      "dia": 60,
+      "data": "2026-11-06",
+      "indexadas": null,
+      "impressoes": null,
+      "cliques": null,
+      "sessoes": null,
+      "usuarios_totais": null,
+      "cadastros": null,
+      "receita_confirmada_brl": null,
+      "custos_brl": null
+    },
+    {
+      "dia": 75,
+      "data": "2026-11-21",
+      "indexadas": null,
+      "impressoes": null,
+      "cliques": null,
+      "sessoes": null,
+      "usuarios_totais": null,
+      "cadastros": null,
+      "receita_confirmada_brl": null,
+      "custos_brl": null
+    },
+    {
+      "dia": 90,
+      "data": "2026-12-06",
+      "indexadas": null,
+      "impressoes": null,
+      "cliques": null,
+      "sessoes": null,
+      "usuarios_totais": null,
+      "cadastros": null,
+      "receita_confirmada_brl": null,
+      "custos_brl": null
+    }
+  ]
+}
